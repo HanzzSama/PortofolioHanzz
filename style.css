@@ -1,0 +1,415 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    color: #1a1a1a;
+    outline: none;
+    text-decoration: none;
+    box-sizing: border-box;
+    font-family: "Playfair Display", serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.container {
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    position: sticky;
+    justify-content: center;
+    background: #f4f3ef;
+    box-shadow: 0 -15px 40px rgba(0, 0, 0, 0.08);
+}
+
+.main {
+    width: 100%;
+    max-width: 78em;
+}
+
+strong {
+    font-weight: 600;
+}
+
+.container-header {
+    z-index: 1;
+}
+
+.main-header {
+    display: flex;
+    align-items: center;
+}
+
+.wrapper-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    width: 100%;
+}
+
+.hero-title {
+    font-family: "Montserrat", sans-serif;
+    font-size: 7em;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: #111;
+    line-height: 1;
+    z-index: 1;
+}
+
+.hero-line {
+    width: 100%;
+    max-width: 600px;
+    height: 1px;
+    background-color: #a0a0a0;
+    margin: 10px 0 20px 0;
+}
+
+.hero-subtitle {
+    font-family: "Great Vibes", cursive;
+    font-size: 4.5em;
+    color: #b22222;
+    font-weight: 400;
+    position: absolute;
+    right: -20px;
+    bottom: -60px;
+    transform: rotate(-2deg);
+    z-index: 2;
+}
+
+.container-about {
+    z-index: 2;
+}
+
+.main-about {
+    display: flex;
+    align-items: center;
+}
+
+.wrapper-about {
+    display: flex;
+    gap: 50px;
+}
+
+.wrapper-about img {
+    width: 400px;
+    height: 400px;
+    border-radius: 10px;
+    object-fit: cover;
+}
+
+.about-location {
+    width: 100%;
+    margin-top: 2em;
+    display: flex;
+    justify-content: center;
+}
+
+.about-text>h3 {
+    text-transform: capitalize;
+    font-weight: 450;
+    font-size: 29.7px;
+}
+
+.about-text>h4 {
+    font-size: 18px;
+    line-height: 30px;
+    text-align: justify;
+    text-transform: capitalize;
+}
+
+.about-text>div {
+    margin-top: 20px;
+}
+
+.about-text>div>h4 {
+    font-size: 16px;
+    margin-bottom: 15px;
+    line-height: 30px;
+    letter-spacing: .4px;
+    text-align: justify;
+}
+
+.container-skill {
+    z-index: 3;
+}
+
+.main-skill {
+    display: flex;
+    align-items: center;
+}
+
+.wrapper-skill {
+    width: 100%;
+    display: grid;
+    gap: 16px;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+.title-skill {
+    display: flex;
+    align-items: center;
+}
+
+.card-skill {
+    display: flex;
+    align-items: center;
+    min-height: 5em;
+    background: transparent;
+    border-radius: 4px;
+    border: 1px solid #dcdacb;
+    transition: all 0.3s ease;
+}
+
+.card-skill:hover {
+    background: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.03);
+}
+
+.card-skill>div {
+    margin: 0 20px;
+}
+
+.container-project {
+    z-index: 4;
+}
+
+.project-slide {
+    position: sticky;
+    top: 0;
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: #f4f3ef;
+    box-shadow: 0 -15px 40px rgba(0,0,0,0.05);
+    z-index: 4;
+}
+
+.main-project {
+    display: flex;
+    flex-direction: column;
+    gap: 80px;
+    width: 100%;
+}
+
+.section-title {
+    width: 100%;
+    margin-bottom: -40px;
+}
+
+.section-title h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2.5em;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: #111;
+    letter-spacing: 1px;
+}
+
+.new-project-section {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.new-project-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    width: 100%;
+}
+
+.new-project-titles {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.np-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 3em;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: #111;
+}
+
+.np-subtitle {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2em;
+    color: #888;
+    font-weight: 400;
+}
+
+.np-btn {
+    background-color: #1a1a1a;
+    color: #fff;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.np-btn:hover {
+    background-color: #333;
+}
+
+.new-project-banner {
+    width: 100%;
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    height: 500px;
+}
+
+.new-project-banner img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.np-glass-card {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    right: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 15px;
+    padding: 20px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.np-glass-content {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.np-badge {
+    background-color: #fff;
+    color: #111;
+    font-size: 0.7em;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    padding: 4px 10px;
+    border-radius: 20px;
+    align-self: flex-start;
+}
+
+.np-card-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.5em;
+    font-weight: 700;
+    color: #fff !important;
+}
+
+.np-card-desc {
+    font-family: 'Playfair Display', serif;
+    font-size: 1em;
+    color: #ddd !important;
+}
+
+.np-arrow-btn {
+    background: #fff;
+    border: none;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+
+.np-arrow-btn:hover {
+    transform: scale(1.1);
+}
+
+.container-last {
+    z-index: 5;
+}
+
+.main-last {
+    display: flex;
+    align-items: center;
+}
+
+.wrapper-last {
+    width: 100%;
+}
+
+.list-media {
+    width: 100%;
+    display: grid;
+    gap: 16px;
+    margin-top: 2em;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+.card-media {
+    display: flex;
+    align-items: center;
+    min-height: 5em;
+    background: transparent;
+    border-radius: 4px;
+    border: 1px solid #dcdacb;
+    transition: all 0.3s ease;
+}
+
+.card-media:hover {
+    background: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.03);
+}
+
+.card-media>div {
+    margin: 0 20px;
+}
+/* Responsive Media Queries */
+@media screen and (max-width: 1024px) {
+    .main { padding: 0 40px; }
+    .hero-title { font-size: 5em; }
+    .hero-subtitle { font-size: 3.5em; bottom: -40px; }
+    .wrapper-about { gap: 30px; }
+    .wrapper-about img { width: 300px; height: 300px; }
+    .np-title { font-size: 2.5em; }
+}
+
+@media screen and (max-width: 768px) {
+    .main { padding: 0 20px; }
+    .hero-title { font-size: 3.5em; }
+    .hero-subtitle { font-size: 2.5em; right: 0; bottom: -30px; }
+    .wrapper-about { flex-direction: column; align-items: center; text-align: center; }
+    .about-text > h4, .about-text > div > h4 { text-align: center; }
+    .wrapper-about img { width: 100%; max-width: 350px; height: auto; }
+    .new-project-header { flex-direction: column; align-items: flex-start; gap: 15px; }
+    .np-title { font-size: 2em; }
+    .new-project-banner { height: auto; min-height: 250px; }
+    .np-glass-card { flex-direction: column; align-items: flex-start; gap: 15px; }
+    .np-arrow-btn { align-self: flex-end; }
+}
+
+@media screen and (max-width: 480px) {
+    .hero-title { font-size: 2.2em; }
+    .hero-subtitle { font-size: 1.8em; bottom: -20px; }
+    .np-title { font-size: 1.5em; }
+    .np-subtitle { font-size: 1em; }
+    .np-card-title { font-size: 1.2em; }
+    .wrapper-about img { max-width: 100%; }
+}
