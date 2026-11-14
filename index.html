@@ -5,9 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta http-equiv="X-UA-Compatible" content="ie=edge" />
   
-  <title>Muhammad Khoir Luqman — Principal Fullstack & Creative Technologist</title>
-  <meta name="description" content="Portfolio of Muhammad Khoir Luqman. Principal Fullstack Developer & Creative Technologist based in Semarang/Bekasi, ID. Student at ITESA Muhammadiyah Semarang. Biophilic Architectural Minimalism meets Google Material Expressive." />
-  <meta name="author" content="Muhammad Khoir Luqman" />
+  <title>Haidar Rifky Andrianno — FullStack Developer</title>
+  <meta name="description" content="Portfolio of Haidar Rifky Andrianno. FullStack Developer based in Semarang, ID. Student at ITESA Muhammadiyah Semarang. Biophilic Architectural Minimalism meets Google Material Expressive." />
+  <meta name="author" content="Haidar Rifky Andrianno" />
   <meta name="theme-color" content="#F4F3EF" />
 
   <!-- Preconnect & Typography Fonts -->
@@ -20,6 +20,7 @@
   <link rel="stylesheet" href="./src/styles/base.css" />
   <link rel="stylesheet" href="./src/styles/layout.css" />
   <link rel="stylesheet" href="./src/styles/sections.css" />
+  <link rel="stylesheet" href="./src/styles/scrollbarCapsule.css" />
 </head>
 <body>
   <!-- Precision Scroll Progress Bar -->
@@ -41,13 +42,30 @@
     <div class="grid-guide-col"></div>
   </div>
 
+  <!-- Interactive Scrollbar Capsule HUD (Small Sleek Pill -> Smooth Scale to Large Capsule) -->
+  <aside id="scrollbar-capsule-hud" class="scrollbar-capsule-hud" aria-label="Scroll Progress Capsule">
+    <!-- The Capsule Pill Widget (Gambar 1: Small Pill | Gambar 2: Large Capsule on Click) -->
+    <div class="hud-capsule-pill" id="hud-capsule-pill" data-cursor-target role="button" aria-expanded="false" aria-label="Toggle Capsule Detail" tabindex="0">
+      <!-- Internal Content (Smooth Scale & Fade inside the morphing capsule) -->
+      <div class="hud-capsule-content" id="hud-capsule-content">
+        <div class="hud-capsule-top-circle" id="hud-top-circle" title="Scroll Progress">
+          <span class="hud-circle-pct" id="hud-avatar-pct">0%</span>
+        </div>
+        <div class="hud-capsule-lower-body">
+          <span class="hud-capsule-line"></span>
+          <span class="hud-capsule-dot"></span>
+        </div>
+      </div>
+    </div>
+  </aside>
+
   <!-- Fixed Architectural Header & Telemetry Navigation -->
   <header class="architectural-header" role="banner">
     <div class="header-container">
       <!-- Monogram & Identity -->
       <a href="#welcome" class="header-branding" data-cursor-target>
-        <span class="brand-monogram">MKL</span>
-        <span class="brand-callsign">// ARCH.01</span>
+        <span class="brand-monogram">HRA</span>
+        <span class="brand-callsign">// HRA.DEV</span>
       </a>
 
       <!-- Real-time Telemetry & Global Geo-Nodes -->
@@ -57,7 +75,7 @@
           <span>SYS.OP // NOMINAL</span>
         </div>
         <div class="telemetry-item telemetry-secondary">
-          <span>SRG/BKS [6.9667°S]</span>
+          <span>SRG [6.9667°S]</span>
         </div>
         <div class="telemetry-item">
           <span id="live-clock">--:--:-- WIB [GMT+7]</span>
@@ -103,7 +121,7 @@
     </ul>
     <div style="font-family: var(--font-mono); font-size: var(--font-mono-tag); color: var(--text-muted); border-top: var(--border-hairline); padding-top: var(--space-md);">
       <div>BASE: ITESA Muhammadiyah Semarang</div>
-      <div>NODES: Semarang / Bekasi, Indonesia</div>
+      <div>NODE: Semarang, Indonesia</div>
     </div>
   </div>
 

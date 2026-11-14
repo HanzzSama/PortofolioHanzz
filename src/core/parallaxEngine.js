@@ -1,6 +1,6 @@
 /**
  * MULTI-LAYER PARALLAX ENGINE & MOTION PHYSICS
- * Linear Interpolation (Lerp), Multi-layer Z-Depth, Velocity Skew & Cursor Physics
+ * Linear Interpolation (Lerp), Multi-layer Z-Depth & Cursor Physics
  * Based on Google Material 3 Expressive motion principles
  */
 
@@ -26,7 +26,6 @@ export class ParallaxEngine {
     };
 
     this.layers = [];
-    this.skewElements = [];
     this.textSliders = [];
     this.scrollScaleTargets = [];
     this.isRunning = false;
@@ -72,9 +71,6 @@ export class ParallaxEngine {
       element: el,
       speed: parseFloat(el.getAttribute('data-parallax-speed')) || 0.1
     }));
-
-    // Velocity skew elements
-    this.skewElements = Array.from(document.querySelectorAll('[data-velocity-skew]'));
 
     // Text slider parallax elements
     this.textSliders = this.collectTextSliders();
@@ -194,7 +190,6 @@ export class ParallaxEngine {
     this.renderTextSliders();
     this.renderRelativeParallax();
     this.renderScrollScale();
-    this.renderVelocityScale();
     this.renderRotateParallax();
 
     if (this.isRunning) {
@@ -245,27 +240,18 @@ export class ParallaxEngine {
     const vh = window.innerHeight;
     this.scrollScaleTargets.forEach(target => {
       const rect = target.element.getBoundingClientRect();
-      // progress: 0 saat masuk viewport dari bawah, 1 saat center
-      const progress = Math.max(0, Math.min(1, (vh - rect.top) / (vh * 0.75)));
+      // True up-scale and down-scale relative to viewport center
+      const elemCenter = rect.top + rect.height / 2;
+      const vhCenter = vh / 2;
+      const distFromCenter = Math.abs(elemCenter - vhCenter);
+      const maxDist = (vh + rect.height) * 0.55;
+      // Progress: 1 when element is centered in viewport, smoothly dropping as it enters or leaves
+      const centerFactor = Math.max(0, Math.min(1, 1 - (distFromCenter / maxDist)));
+      // Smooth cosine bell curve
+      const progress = 0.5 * (1 - Math.cos(centerFactor * Math.PI));
       const scale = target.scaleFrom + (target.scaleTo - target.scaleFrom) * progress;
-      // Store scale as CSS var, let CSS combine it
       target.element.style.setProperty('--scroll-scale', scale.toFixed(4));
-      // Only apply transform directly if element doesn't also have velocity-skew
-      if (!target.element.hasAttribute('data-velocity-skew')) {
-        target.element.style.transform = `scale(${scale.toFixed(4)})`;
-      }
-    });
-  }
-
-  renderVelocityScale() {
-    const velocityAbs = Math.abs(this.scroll.velocity);
-    const scaleX = velocityAbs > 0.5 ? Math.min(1 + velocityAbs * 0.0004, 1.004) : 1;
-    this.skewElements.forEach(el => {
-      const rawSkew = this.scroll.velocity * 0.04;
-      const clampedSkew = Math.max(-2.5, Math.min(2.5, rawSkew));
-      // Read scroll-scale if present (set by renderScrollScale for dual-attribute elements)
-      const scrollScale = parseFloat(el.style.getPropertyValue('--scroll-scale')) || 1;
-      el.style.transform = `skewY(${clampedSkew}deg) scaleX(${scaleX.toFixed(5)}) scale(${scrollScale.toFixed(4)})`;
+      target.element.style.transform = `scale(${scale.toFixed(4)})`;
     });
   }
 

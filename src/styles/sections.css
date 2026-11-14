@@ -916,14 +916,6 @@
   transition: none; /* Override existing 0.6s transition — parallax handles it */
 }
 
-/* ==========================================================================
-   SCROLL-SCALE CSS VAR SUPPORT
-   Elemen dengan data-scroll-scale + data-velocity-skew combined
-   ========================================================================== */
-[data-scroll-scale][data-velocity-skew] {
-  /* transform handled by JS via CSS vars — no CSS transform conflict */
-  will-change: transform;
-}
 
 /* ==========================================================================
    SECTION WATERMARK LABEL — Counter Parallax

@@ -1,18 +1,18 @@
 /**
  * PORTFOLIO DATA ARCHITECTURE
  * Centralized Single Source of Truth
- * Identity: Muhammad Khoir Luqman
+ * Identity: Haidar Rifky Andrianno
  * Academic Base: ITESA Muhammadiyah Semarang
- * Geo-Nodes: Semarang & Bekasi, Indonesia
+ * Geo-Nodes: Semarang, Indonesia
  */
 
 export const portfolioData = {
   meta: {
-    fullName: "Muhammad Khoir Luqman",
-    shortName: "Luqman",
-    callsign: "MKL // ARCH.01",
-    role: "Principal Fullstack Developer & Creative Technologist",
-    subRole: "Design Systems Architect • Spatial Web Engineer",
+    fullName: "Haidar Rifky Andrianno",
+    shortName: "Haidar",
+    callsign: "HRA // ARCH.01",
+    role: "FullStack Developer",
+    subRole: "FullStack Web & Systems Developer",
     institution: {
       name: "ITESA Muhammadiyah Semarang",
       fullName: "Institut Teknologi Statistika dan Bisnis Muhammadiyah Semarang",
@@ -25,29 +25,21 @@ export const portfolioData = {
         region: "Central Java",
         country: "ID",
         coordinates: "6.9667° S, 110.4167° E",
-        type: "Primary Academic & Innovation Node",
+        type: "Primary Academic & Development Node",
         elevation: "82m ASL"
-      },
-      {
-        city: "Bekasi",
-        region: "West Java",
-        country: "ID",
-        coordinates: "6.2383° S, 106.9756° E",
-        type: "Metropolitan Lab & Engineering Hub",
-        elevation: "18m ASL"
       }
     ],
     availability: {
-      status: "Available for High-Impact Commissions & Architectural Roles",
+      status: "Available for High-Impact Commissions & FullStack Roles",
       badge: "SYSTEM STATUS: OPERATIONAL",
       responseLatency: "< 24 Hours",
       timezone: "GMT+7 (Asia/Jakarta)"
     },
     socials: [
-      { name: "GitHub", handle: "@khoirluqman", url: "https://github.com" },
-      { name: "LinkedIn", handle: "in/khoir-luqman", url: "https://linkedin.com" },
-      { name: "Terminal / Email", handle: "khoir.luqman.arch@gmail.com", url: "mailto:khoir.luqman.arch@gmail.com" },
-      { name: "Substack / Monograph", handle: "luqman.craft", url: "https://substack.com" }
+      { name: "GitHub", handle: "@HanzzSama", url: "https://github.com/HanzzSama" },
+      { name: "LinkedIn", handle: "in/haidar-rifky", url: "https://linkedin.com" },
+      { name: "Terminal / Email", handle: "haidarandrianno098@gmail.com", url: "mailto:haidarandrianno098@gmail.com" },
+      { name: "Portfolio / Repo", handle: "HanzzSama", url: "https://github.com/HanzzSama" }
     ]
   },
 
@@ -58,11 +50,11 @@ export const portfolioData = {
     headlineLine2: "ORGANIC NATURE",
     headlineLine3: "WITH RIGID CODE.",
     leadParagraph:
-      "Saya adalah Muhammad Khoir Luqman, Principal Fullstack Developer & Creative Technologist yang berbasis di Semarang & Bekasi. Berfokus pada sintesis ruang digital bernapas — memadukan keteraturan arsitektural minimalis, prinsip gerak Google Material Expressive, dan arsitektur perangkat lunak skala tinggi.",
+      "Saya adalah Haidar Rifky Andrianno, FullStack Developer yang berbasis di Semarang. Menempuh studi di ITESA Muhammadiyah Semarang, berfokus pada sintesis ruang digital bernapas — memadukan keteraturan arsitektural minimalis, rekayasa perangkat lunak skala tinggi, dan prinsip interaksi responsif modern.",
     telemetry: [
       { label: "ACADEMIC BASE", value: "ITESA Muhammadiyah Semarang" },
       { label: "COORDINATES", value: "6.9667° S, 110.4167° E" },
-      { label: "ENGINEERING DISCIPLINE", value: "Fullstack Architecture & Creative Tech" },
+      { label: "ENGINEERING DISCIPLINE", value: "FullStack Development & Systems" },
       { label: "INTERFACE PHYSICS", value: "Lerp Parallax • 60 FPS Smooth Flow" }
     ]
   },
@@ -74,7 +66,7 @@ export const portfolioData = {
     ethosTitle: "Mereduksi Kebisingan, Mengembalikan Ruang Bernapas",
     ethosParagraphs: [
       "Di tengah lanskap digital yang penuh dengan gradien artifisial hiper-jenuh dan antarmuka SaaS yang seragam, saya mengambil jalur berlawanan: Biophilic Architectural Minimalism. Kami memperlakukan layar bukan sebagai kanvas datar yang statis, melainkan sebagai ruang tektonik arsitektur di mana cahaya, proporsi grid 1px, tipografi editorial, dan tekstur alami saling berinteraksi.",
-      "Sebagai mahasiswa di ITESA Muhammadiyah Semarang, latar belakang statistika komputasional dan teknologi bisnis membentuk ketajaman analisis saya. Kode yang saya tulis bukan sekadar untuk merender piksel, melainkan membangun infrastruktur data terukur, bebas dari bloatware, dan memiliki ketahanan struktural layaknya arsitektur batu kapur alami."
+      "Sebagai mahasiswa di ITESA Muhammadiyah Semarang, pemahaman statistika komputasional dan teknologi membentuk ketajaman analisis saya. Kode yang saya tulis bukan sekadar untuk merender piksel, melainkan membangun infrastruktur data terukur, bebas dari bloatware, dan memiliki ketahanan struktural layaknya arsitektur batu kapur alami."
     ],
     pillars: [
       {
@@ -101,21 +93,21 @@ export const portfolioData = {
     timeline: [
       {
         year: "2024 — PRESENT",
-        title: "Principal Creative Technologist & Systems Architect",
-        place: "Independent Practice / Client Commissions",
-        description: "Merancang arsitektur sistem skala penuh, headless design systems, dan visualisasi spasial berbasis WebGL/Canvas untuk klien global."
+        title: "FullStack Developer & Systems Architect",
+        place: "Independent & Open Source Practice // Semarang",
+        description: "Merancang arsitektur sistem skala penuh, aplikasi berbasis web modern, dan kakas pengembang mutakhir."
       },
       {
         year: "2023 — PRESENT",
         title: "Applied Computer Science & Tech Studies",
         place: "ITESA Muhammadiyah Semarang",
-        description: "Mendalami statistika komputasional, struktur algoritma lanjut, dan rekayasa perangkat lunak berorientasi data."
+        description: "Mendalami statistika komputasional, algoritma komputasi, dan rekayasa perangkat lunak berorientasi data."
       },
       {
         year: "2022 — 2023",
-        title: "Lead Frontend Systems Engineer",
-        place: "Collaborative Labs // Bekasi & Semarang",
-        description: "Mengembangkan prototipe antarmuka berkinerja tinggi, modular design tokens, dan optimasi core web vitals sub-100ms."
+        title: "Web Systems & Interface Developer",
+        place: "Semarang Tech Community",
+        description: "Mengembangkan prototipe antarmuka berkinerja tinggi, modular design tokens, dan optimasi core web vitals."
       }
     ]
   },
@@ -160,7 +152,7 @@ export const portfolioData = {
         colorAccent: "var(--color-botanical-sage)",
         nodes: [
           { name: "Material 3 Expressive Curves", spec: "cubic-bezier(0.2, 0, 0, 1), Elevation", tag: "MOTION" },
-          { name: "Smooth Lerp Parallax Physics", spec: "requestAnimationFrame, Velocity Skew", tag: "PHYSICS" },
+          { name: "Smooth Lerp Parallax Physics", spec: "requestAnimationFrame, Fluid Scroll", tag: "PHYSICS" },
           { name: "Canvas & Generative Topography", spec: "Organic Vector Fields, SVG Noise", tag: "CREATIVE" },
           { name: "Architectural Grid Systems", spec: "Subpixel Hairline Borders, Clamp Scales", tag: "LAYOUT" },
           { name: "Headless Design Tokens", spec: "CSS Variables, Semantic Color Spaces", tag: "SYSTEM" }
@@ -191,202 +183,156 @@ export const portfolioData = {
       {
         id: "proj-01",
         code: "PRJ // 01",
-        title: "AURA.BIOS",
-        subtitle: "Biophilic Spatial Architecture Operating System",
+        title: "Mathicalc",
+        subtitle: "High-Precision Mathematical & Computational Engine",
         year: "2026",
-        client: "Autonomous Research Lab",
-        category: "Creative Technology / WebGL",
-        role: "Lead Systems Architect & Creative Technologist",
+        client: "Scientific & Computational Tools",
+        category: "Fullstack / Computational Web",
+        role: "FullStack Developer",
         description:
-          "Sistem operasi antarmuka spasial berbasis browser yang mengadaptasi pencahayaan sirkadian dan tekstur biofilik real-time untuk mengurangi kelelahan kognitif pekerja jarak jauh.",
+          "Mesin komputasi matematika dan kalkulator analitik berbasis web yang mengintegrasikan evaluasi ekspresi matematis instan, rendering LaTeX dinamis, dan visualisasi kalkulasi bertahap berpresisi tinggi.",
         deliverables: [
-          "Mesin rendering topografi real-time dengan WebGL",
-          "Material 3 Expressive motion choreography",
-          "Arsitektur state terdistribusi dengan Web Workers"
+          "Mesin parsing dan kalkulasi ekspresi matematis berkecepatan tinggi",
+          "Antarmuka reaktif minimalis dengan visualisasi formula real-time",
+          "Riwayat kalkulasi komputasional dan arsitektur modular WebAssembly"
         ],
-        techStack: ["TypeScript", "Canvas/WebGL", "Tailwind Tectonic", "Material Motion", "Web Audio API"],
+        techStack: ["TypeScript", "Next.js", "WebAssembly", "Tailwind CSS", "KaTeX"],
         metrics: {
-          fps: "60 FPS Locked",
-          co2: "0.08g CO2/view",
-          bundle: "32KB Gzipped"
+          latency: "2.8ms Compute",
+          precision: "64-bit Float",
+          bundle: "24KB Gzipped"
         },
         links: {
-          preview: "https://aura-bios.demo.internal",
-          code: "https://github.com/khoirluqman/aura-bios"
+          preview: "https://github.com/HanzzSama/Mathicalc",
+          code: "https://github.com/HanzzSama/Mathicalc"
         },
         accent: "var(--color-botanical-sage)",
-        blueprintSvg: "topographic",
+        blueprintSvg: "matrix",
         deepDive: {
-          problem: "Antarmuka kerja modern membanjiri indera visual dengan radiasi spektrum cahaya biru datar dan gerakan linier yang tidak wajar, memicu sindrom Computer Vision Fatigue.",
-          solution: "AURA.BIOS merancang ulang arsitektur tampilan dengan mengintegrasikan kalkulasi siklus sirkadian matahari lokal, noise perlin topografis bergradasi limestone, dan audio frekuensi 432Hz yang menenangkan.",
-          architectureSchema: `[ CLIENT INPUT: Lux & Coordinates ]
+          problem: "Kalkulator konvensional di peramban sering lambat, bergantung pada library bloated, dan gagal menyajikan penjabaran langkah matematis yang terstruktur.",
+          solution: "Mathicalc mengimplementasikan parser AST mandiri dengan evaluasi bertahap, alokasi memori minimal, dan rendering visual formula berbasis KaTeX tanpa latency.",
+          architectureSchema: `[ MATHEMATICAL EXPRESSION INPUT ]
                  ↓
-[ WORKER THREAD: Perlin Topography Field ]
+[ LEXER & AST EXPRESSION PARSER ]
                  ↓
-[ WEBGL SHADER: Circadian Chromatic Matrix ]
+[ HIGH-PRECISION ALGORITHMIC CORE ]
                  ↓
-[ 60 FPS RENDER: Organic Zero-Bloat Canvas ]`,
+[ STEP-BY-STEP KATEX VISUALIZER ]`,
           benchmarks: [
-            { metric: "Frame Budget", target: "16.6ms (60 FPS)", achieved: "14.2ms nominal" },
-            { metric: "Memory Heap", target: "< 45MB", achieved: "28.4MB steady" },
-            { metric: "Carbon Intensity", target: "< 0.10g CO2", achieved: "0.08g CO2/view" }
+            { metric: "Parse & Solve Latency", target: "< 10ms", achieved: "2.8ms" },
+            { metric: "Precision Level", target: "64-bit Exact", achieved: "100% Passed" },
+            { metric: "Bundle Overhead", target: "< 40KB", achieved: "24KB" }
           ],
-          sourceSnippet: `// Circadian Color Temperature Synthesizer
-export function computeCircadianTone(lat, lon, epoch) {
-  const solarAltitude = calcSolarZenith(lat, lon, epoch);
-  const kelvin = clamp(2200, 2200 + (solarAltitude * 43), 5600);
-  return kelvinToRGB(kelvin);
+          sourceSnippet: `// Mathicalc Expression AST Evaluator Node
+export function evaluateMathAst(node, context = {}) {
+  switch (node.type) {
+    case 'BinaryOp': return applyOperator(node.op, evaluateMathAst(node.left, context), evaluateMathAst(node.right, context));
+    case 'FunctionCall': return executeMathFunction(node.name, node.args.map(a => evaluateMathAst(a, context)));
+    case 'Number': return node.value;
+  }
 }`
         }
       },
       {
         id: "proj-02",
         code: "PRJ // 02",
-        title: "STATISTIKA.OS",
-        subtitle: "Institutional Data Intelligence & Macro Topology",
+        title: "TurnCode",
+        subtitle: "Intelligent Code Translation & Developer Productivity Engine",
         year: "2025",
-        client: "ITESA Academic Research Node",
-        category: "Enterprise Fullstack / Data Platform",
-        role: "Principal Backend & UI Architect",
+        client: "Developer Infrastructure & Tooling",
+        category: "Developer Tools / Code Intelligence",
+        role: "FullStack Developer",
         description:
-          "Platform agregasi data akademik dan analitik prediktif multi-kampus dengan visualisasi matriks relasional dan enkripsi zero-trust.",
+          "Platform otomasi dan transformasi kode sumber multi-bahasa yang mempercepat migrasi sistem, refaktorisasi pola arsitektur, dan standardisasi kode secara deterministik.",
         deliverables: [
-          "Pipeline ingestion data berbasis Go & PostgreSQL",
-          "Antarmuka analitik bertema arsitektural monokrom",
-          "Ekspor laporan editorial berstandar publikasi"
+          "Pipeline translasi dan refactoring sintaks berbasis Abstract Syntax Tree (AST)",
+          "Antarmuka dual-pane dengan diff visual real-time dan inspeksi token",
+          "Backend eksekusi modular berlatensi rendah dengan isolasi proses aman"
         ],
-        techStack: ["Go", "Next.js 15", "PostgreSQL", "Docker", "Apache ECharts", "Tailwind"],
+        techStack: ["TypeScript", "Node.js", "AST Compilers", "Docker", "REST API", "Tailwind CSS"],
         metrics: {
-          queryLatency: "14ms p99",
-          records: "1.2M Datapoints",
-          uptime: "99.98%"
+          throughput: "12k LoC/sec",
+          errorRate: "0.01% Strict Syntax",
+          coverage: "98.5% Test Suite"
         },
         links: {
-          preview: "https://statistika-os.itesa.ac.id",
-          code: "https://github.com/khoirluqman/statistika-os"
+          preview: "https://github.com/HanzzSama/TurnCode",
+          code: "https://github.com/HanzzSama/TurnCode"
         },
         accent: "var(--color-warm-sand)",
-        blueprintSvg: "matrix",
+        blueprintSvg: "geometry",
         deepDive: {
-          problem: "Fragmentasi data riset multi-fakultas pada ITESA Muhammadiyah Semarang dengan latensi kueri agregasi lambat (>850ms) dan kurangnya standarisasi arsitektur data terbuka.",
-          solution: "Membangun sistem micro-daemon berbasis Go dengan connection pool terisolasi, indexing partisi PostgreSQL berorientasi waktu, dan antarmuka analitik editorial minim beban.",
-          architectureSchema: `[ ACADEMIC SOURCES ] → [ GO INGESTION DAEMON ]
-                                ↓
-                        [ PARTITIONED PGSQL ]
-                                ↓
-              [ REDIS CACHE GRID (TTL 300s) ]
-                                ↓
-              [ NEXT.JS SSR EDITORIAL DASHBOARD ]`,
+          problem: "Migrasi repositori skala besar lintas bahasa membutuhkan penyesuaian sintaks berulang yang rawan human error dan memakan waktu berhari-hari.",
+          solution: "TurnCode menyediakan aturan transformasi berbasis AST yang dapat diuji secara otomatis dalam sandbox terisolasi, memastikan semantik kode tetap konsisten.",
+          architectureSchema: `[ SOURCE REPOSITORY INPUT ] → [ MULTI-LANGUAGE LEXER ]
+                                  ↓
+                        [ AST NORMALIZER ENGINE ]
+                                  ↓
+                        [ PATTERN REWRITE RULES ]
+                                  ↓
+              [ TARGET EMITTER & REAL-TIME DIFF INSPECTOR ]`,
           benchmarks: [
-            { metric: "p99 Query Latency", target: "< 50ms", achieved: "14ms" },
-            { metric: "Concurrent Queries", target: "1,000 req/s", achieved: "2,400 req/s" },
-            { metric: "Data Ingestion Throughput", target: "10k rec/s", achieved: "28k rec/s" }
+            { metric: "Transformation Speed", target: "> 5k LoC/s", achieved: "12k LoC/s" },
+            { metric: "Syntax Preservation", target: "> 99%", achieved: "99.9% Clean AST" },
+            { metric: "Sandbox Isolation", target: "Zero Leakage", achieved: "Verified 100%" }
           ],
-          sourceSnippet: `// High-Concurrency Partitioned Query Node
-func QueryAcademicAggregates(ctx context.Context, pool *pgxpool.Pool, cohortID string) (*AggResult, error) {
-    query := "SELECT metric_id, percentile_disc(0.95) WITHIN GROUP (ORDER BY latency) FROM telemetry WHERE cohort = $1"
-    return pool.QueryRow(ctx, query, cohortID)...
+          sourceSnippet: `// TurnCode AST Migration Pipeline
+export async function transformSourcePipeline(sourceCode, ruleSet) {
+  const ast = parseSourceToAst(sourceCode);
+  const normalizedAst = applyRuleTransformers(ast, ruleSet);
+  return generateTargetCode(normalizedAst, { format: 'standard' });
 }`
         }
       },
       {
         id: "proj-03",
         code: "PRJ // 03",
-        title: "TERRA.TELEMETRY",
-        subtitle: "Microclimate IoT Node & Agricultural Soil Network",
+        title: "Neura",
+        subtitle: "Neural Cognitive Interface & AI Orchestration Platform",
         year: "2025",
-        client: "Central Java Agritech Syndicate",
-        category: "Embedded & Edge Fullstack",
-        role: "Fullstack IoT & Systems Engineer",
+        client: "Cognitive Systems & AI Lab",
+        category: "AI & FullStack Engineering",
+        role: "FullStack Developer",
         description:
-          "Jaringan sensor mikroklimat cerdas untuk perkebunan presisi di Jawa Tengah. Menghubungkan node sensor fisik di lapangan ke dashboard spasial real-time.",
+          "Platform orkestrasi model AI dan antarmuka kognitif cerdas dengan streaming respons real-time latensi rendah, penelusuran konteks adaptif, dan integrasi pangkalan pengetahuan terdistribusi.",
         deliverables: [
-          "Edge gateway parser dengan protokol MQTT & WebSockets",
-          "Dashboard biophilic dengan peringatan dini kekeringan tanah",
-          "Offline-first PWA dengan sinkronisasi otomatis"
+          "Arsitektur server-sent events (SSE) untuk streaming inferensi sub-50ms",
+          "Sistem retrieval kontekstual berbasis vektor database dan caching cerdas",
+          "Antarmuka biophilic modular berstandar ketenangan visual dan performa tinggi"
         ],
-        techStack: ["Node.js", "TypeScript", "MQTT", "TimescaleDB", "Redis", "PWA Architecture"],
+        techStack: ["Python", "TypeScript", "FastAPI", "Next.js", "Vector DB", "Redis"],
         metrics: {
-          edgeLatency: "28ms Real-time",
-          sensors: "128 Active Field Nodes",
-          batteryLife: "18 Months Low Power"
+          ttfb: "48ms First Token",
+          concurrency: "1,500 Streams",
+          uptime: "99.95%"
         },
         links: {
-          preview: "https://terra.telemetry.io",
-          code: "https://github.com/khoirluqman/terra-telemetry"
+          preview: "https://github.com/HanzzSama/Neura",
+          code: "https://github.com/HanzzSama/Neura"
         },
         accent: "var(--color-botanical-sage)",
         blueprintSvg: "contour",
         deepDive: {
-          problem: "Petani hortikultura di area pegunungan Jawa Tengah sering menghadapi ketidakpastian anomali cuaca mikro yang menyebabkan kegagalan irigasi panen.",
-          solution: "Menyebarkan 128 sensor berdaya rendah bertenaga surya yang mentransmisikan data kelembaban tanah melalui LoRaWAN / MQTT gateway ke antarmuka peta topografi biofilik.",
-          architectureSchema: `[ 128 LORAWAN NODES ] → [ CENTRAL JAVA EDGE GATEWAY ]
-                                  ↓
-                        [ MQTT BROKER (EMQX) ]
-                                  ↓
-                        [ TIMESCALEDB PIPELINE ]
-                                  ↓
-                        [ WEBSOCKET REACTIVE MAP ]`,
+          problem: "Banyak antarmuka AI membebani pengguna dengan latensi respons tinggi, antarmuka generik yang bising, dan ketiadaan retensi konteks multi-sesi yang akurat.",
+          solution: "Neura mengkombinasikan backend streaming asinkron FastAPI berkecepatan tinggi dengan antarmuka front-end bertema tektonik yang hemat komputasi dan responsif.",
+          architectureSchema: `[ USER PROMPT / CONTEXT ]
+                 ↓
+[ HYBRID VECTOR RETRIEVAL (RAG) ]
+                 ↓
+[ STREAMING INFERENCE ORCHESTRATOR ]
+                 ↓
+[ ZERO-LATENCY SSE TO REACTIVE UI ]`,
           benchmarks: [
-            { metric: "Sensor Packet Loss", target: "< 1.5%", achieved: "0.28%" },
-            { metric: "Edge Dispatch Latency", target: "< 100ms", achieved: "28ms" },
-            { metric: "Offline IndexedDB Cache", target: "100% Offline Read", achieved: "Verified" }
+            { metric: "Time to First Token (TTFT)", target: "< 100ms", achieved: "48ms" },
+            { metric: "Stream Throughput", target: "> 60 tokens/s", achieved: "85 tokens/s" },
+            { metric: "Context Cache Hit Rate", target: "> 70%", achieved: "84.2%" }
           ],
-          sourceSnippet: `// Soil Moisture Anomaly Detector
-export function evaluateSoilHydration(fieldReading) {
-  const { moisture, ambientTemp, vaporDeficit } = fieldReading;
-  const moistureStressIndex = (100 - moisture) * (ambientTemp / 28.0) * vaporDeficit;
-  return { alert: moistureStressIndex > 45, level: moistureStressIndex };
-}`
-        }
-      },
-      {
-        id: "proj-04",
-        code: "PRJ // 04",
-        title: "SYNTHESIS.TOKENS",
-        subtitle: "Headless Design System & Material Expressive Compiler",
-        year: "2024",
-        client: "Open Source Collective",
-        category: "Design Engineering Tooling",
-        role: "Creator & Maintainer",
-        description:
-          "Kompiler token desain universal yang mentranslasikan variabel Figma dan kurva gerak Google Material 3 ke CSS Variables, Tailwind Plugins, dan native Swift/Kotlin.",
-        deliverables: [
-          "CLI parser dengan deteksi kontras WCAG AAA otomatis",
-          "Plugin Webpack/Vite untuk tree-shaking style tokens",
-          "Dokumentasi interaktif dengan kalkulator kurva Bezier"
-        ],
-        techStack: ["TypeScript", "Node.js", "AST Parser", "CSS Custom Properties", "Vite"],
-        metrics: {
-          downloads: "42k Monthly",
-          coverage: "100% Test Coverage",
-          size: "4.8KB Core"
-        },
-        links: {
-          preview: "https://synthesis-tokens.dev",
-          code: "https://github.com/khoirluqman/synthesis-tokens"
-        },
-        accent: "var(--color-charcoal-slate)",
-        blueprintSvg: "geometry",
-        deepDive: {
-          problem: "Inkonsistensi antara spesifikasi kurva gerak desainer di Figma dengan implementasi frontend engineer, menyebabkan animasi web terasa kasar dan kaku.",
-          solution: "SYNTHESIS.TOKENS mengubah definisi kurva cubic-bezier dan token elevasi menjadi AST murni yang siap disuntikkan langsung ke CSS Variables dan Tailwind secara zero-overhead.",
-          architectureSchema: `[ FIGMA TOKENS JSON ] → [ SYNTHESIS PARSER CLI ]
-                                  ↓
-                         [ AST GENERATOR ]
-                                  ↓
-             ┌────────────────────┼────────────────────┐
-             ↓                    ↓                    ↓
-      [ CSS VARIABLES ]   [ TAILWIND PLUGIN ]   [ SWIFTUI TOKENS ]`,
-          benchmarks: [
-            { metric: "Parse Speed", target: "< 50ms (1k tokens)", achieved: "12ms" },
-            { metric: "Core Output Size", target: "< 10KB", achieved: "4.8KB" },
-            { metric: "Contrast Validation", target: "WCAG AAA 7:1", achieved: "100% Passed" }
-          ],
-          sourceSnippet: `// Material 3 Expressive Curve Parser
-export function compileBezierCurve(tokens) {
-  const { x1, y1, x2, y2 } = tokens.motion.emphasized;
-  return \`cubic-bezier(\${x1}, \${y1}, \${x2}, \${y2})\`;
+          sourceSnippet: `// Neura Low-Latency SSE Dispatcher
+export async function streamNeuraInference(prompt, streamWriter) {
+  const context = await retrieveVectorContext(prompt);
+  for await (const chunk of executeModelStream(prompt, context)) {
+    streamWriter.write(formatSseEvent(chunk));
+  }
 }`
         }
       }
@@ -430,8 +376,8 @@ export function compileBezierCurve(tokens) {
           <p>Banyak pengembang mengimpor library scroll berbobot ratusan kilobyte hanya untuk mendapatkan efek gerak halus. Hal ini mengorbankan metrik INP (Interaction to Next Paint) dan membebani memori browser.</p>
           <h4>2. Matematika Lerp yang Elegan</h4>
           <p>Formula lerp(start, end, factor) = start + (end - start) * factor yang dijalankan dalam loop requestAnimationFrame dengan nilai factor antara 0.08 hingga 0.1 memberikan kehalusan 60–120 FPS tanpa overhead.</p>
-          <h4>3. Velocity Skew Dinamis</h4>
-          <p>Dengan menghitung delta scroll secara real-time, kita dapat menerapkan rotasi atau kemiringan mikro (skewY hingga 2.5deg) yang merefleksikan kecepatan scroll pengguna, memberikan umpan balik taktil yang memuaskan.</p>
+          <h4>3. Momentum Parallax Halus</h4>
+          <p>Dengan menghitung delta scroll secara real-time, kita dapat menerapkan translasi koordinat berbasis kecepatan scroll pengguna, memberikan pengalaman interaksi yang bersih, stabil, dan presisi.</p>
         `
       },
       {
@@ -466,7 +412,7 @@ export function compileBezierCurve(tokens) {
       typography: "Syne (Display) • Instrument Serif (Editorial) • Plus Jakarta Sans (Body) • JetBrains Mono (Telemetry)",
       gridSystem: "Tectonic 12-Column Hairline Modular Grid",
       carbonEstimate: "Est. 0.09g CO2 per page view • Hosted on Edge Server",
-      license: "Architectural Design & Systems © 2026 Muhammad Khoir Luqman. Crafted with precision."
+      license: "Architectural Design & Systems © 2026 Haidar Rifky Andrianno. Crafted with precision."
     }
   }
 };

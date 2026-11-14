@@ -81,6 +81,9 @@ export class ArchitecturalObserver {
           if (watermarkCurrent) {
             watermarkCurrent.textContent = id.toUpperCase();
           }
+
+          // Emit global section change event for HUD Capsule and other components
+          window.dispatchEvent(new CustomEvent('sectionchange', { detail: { id } }));
         }
       });
     }, options);

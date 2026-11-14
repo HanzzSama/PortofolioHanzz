@@ -1,12 +1,13 @@
 /**
  * MAIN ENTRY POINT
  * Modular Orchestration of Components, Parallax Physics, Web Audio & Telemetry
- * Identity: Muhammad Khoir Luqman // ITESA Muhammadiyah Semarang
+ * Identity: Haidar Rifky Andrianno // ITESA Muhammadiyah Semarang
  */
 
 import { portfolioData } from './data/portfolioData.js';
 import { ParallaxEngine } from './core/parallaxEngine.js';
 import { ArchitecturalObserver } from './core/observer.js';
+import { ScrollbarPillEngine } from './core/scrollbarPill.js';
 
 import { renderWelcome } from './components/renderWelcome.js';
 import { renderAbout } from './components/renderAbout.js';
@@ -39,6 +40,7 @@ class PortfolioApp {
     this.initSystemDrawer();
     this.initMobileNav();
     this.initKineticTopographyCanvas();
+    this.initScrollbarPill();
   }
 
   renderDOM() {
@@ -70,7 +72,7 @@ class PortfolioApp {
 
     const updateClock = () => {
       const now = new Date();
-      // Format time in Asia/Jakarta (Semarang / Bekasi Node)
+      // Format time in Asia/Jakarta (Semarang Node)
       const options = {
         timeZone: 'Asia/Jakarta',
         hour: '2-digit',
@@ -200,29 +202,35 @@ class PortfolioApp {
 
   drawIdleVisualizer(canvas) {
     const ctx = canvas.getContext('2d');
-    const width = (canvas.width = canvas.offsetWidth * window.devicePixelRatio);
-    const height = (canvas.height = canvas.offsetHeight * window.devicePixelRatio);
-    ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
 
     const draw = () => {
       if (this.isAudioPlaying) return;
-      ctx.clearRect(0, 0, canvas.offsetWidth, canvas.offsetHeight);
+      const W = canvas.offsetWidth;
+      const H = canvas.offsetHeight;
+      if (!W || !H) { requestAnimationFrame(draw); return; }
+      if (canvas.width !== W) canvas.width = W;
+      if (canvas.height !== H) canvas.height = H;
+
+      ctx.clearRect(0, 0, W, H);
       ctx.beginPath();
-      ctx.strokeStyle = 'rgba(74, 93, 78, 0.25)';
+      ctx.strokeStyle = 'rgba(74, 93, 78, 0.3)';
       ctx.lineWidth = 1;
 
-      const sliceWidth = canvas.offsetWidth / 40;
+      const slices = 48;
+      const sliceW = W / slices;
       let x = 0;
-      for (let i = 0; i <= 40; i++) {
-        const y = canvas.offsetHeight / 2 + Math.sin(i * 0.35 + Date.now() * 0.002) * 4;
+      for (let i = 0; i <= slices; i++) {
+        const y = H / 2 + Math.sin(i * 0.3 + Date.now() * 0.0018) * 5;
         if (i === 0) ctx.moveTo(x, y);
         else ctx.lineTo(x, y);
-        x += sliceWidth;
+        x += sliceW;
       }
       ctx.stroke();
       requestAnimationFrame(draw);
     };
-    draw();
+
+    // Defer one frame to allow CSS layout to assign dimensions
+    requestAnimationFrame(draw);
   }
 
   startVisualizer(canvas) {
@@ -235,29 +243,29 @@ class PortfolioApp {
       if (!this.isAudioPlaying) return;
       this.canvasAnimationId = requestAnimationFrame(renderWave);
 
+      const W = canvas.offsetWidth;
+      const H = canvas.offsetHeight;
+      if (!W || !H) return;
+      if (canvas.width !== W) canvas.width = W;
+      if (canvas.height !== H) canvas.height = H;
+
       this.analyser.getByteTimeDomainData(dataArray);
 
-      ctx.clearRect(0, 0, canvas.offsetWidth, canvas.offsetHeight);
+      ctx.clearRect(0, 0, W, H);
       ctx.lineWidth = 1.5;
       ctx.strokeStyle = 'var(--accent-primary)';
-
       ctx.beginPath();
-      const sliceWidth = (canvas.offsetWidth * 1.0) / bufferLength;
-      let x = 0;
 
+      const sliceW = W / bufferLength;
+      let x = 0;
       for (let i = 0; i < bufferLength; i++) {
         const v = dataArray[i] / 128.0;
-        const y = (v * canvas.offsetHeight) / 2;
-
-        if (i === 0) {
-          ctx.moveTo(x, y);
-        } else {
-          ctx.lineTo(x, y);
-        }
-        x += sliceWidth;
+        const y = (v * H) / 2;
+        if (i === 0) ctx.moveTo(x, y);
+        else ctx.lineTo(x, y);
+        x += sliceW;
       }
-
-      ctx.lineTo(canvas.offsetWidth, canvas.offsetHeight / 2);
+      ctx.lineTo(W, H / 2);
       ctx.stroke();
     };
 
@@ -465,14 +473,14 @@ class PortfolioApp {
       <div class="drawer-section-block">
         <div class="drawer-section-heading">DESIGN SYSTEM PRINCIPLE</div>
         <p style="font-size: var(--font-body-md); line-height: 1.65; color: var(--text-secondary);">
-          Node ini diintegrasikan ke dalam metodologi rekayasa sistem Muhammad Khoir Luqman. Menolak pendekatan statis atau library bloatware pihak ketiga; setiap implementasi mengedepankan efisiensi siklus komputasi, kebersihan antarmuka, dan keselarasan biofilik alami.
+          Node ini diintegrasikan ke dalam metodologi rekayasa sistem Haidar Rifky Andrianno. Menolak pendekatan statis atau library bloatware pihak ketiga; setiap implementasi mengedepankan efisiensi siklus komputasi, kebersihan antarmuka, dan keselarasan biofilik alami.
         </p>
       </div>
 
       <div class="drawer-section-block">
         <div class="drawer-section-heading">ACADEMIC & ENTERPRISE CONTEXT</div>
         <p style="font-size: var(--font-body-md); line-height: 1.65; color: var(--text-secondary);">
-          Diaplikasikan dalam riset analitik skala institusi pada <strong>ITESA Muhammadiyah Semarang</strong> serta arsitektur antarmuka klien di koridor inovasi Semarang dan Bekasi.
+          Diaplikasikan dalam riset analitik skala institusi pada <strong>ITESA Muhammadiyah Semarang</strong> serta arsitektur antarmuka dan rekayasa FullStack di Semarang.
         </p>
       </div>
     `;
@@ -494,7 +502,7 @@ class PortfolioApp {
       </div>
 
       <div class="drawer-section-block" style="font-family: var(--font-mono); font-size: var(--font-mono-micro); color: var(--text-muted);">
-        PUBLISHED BY: Muhammad Khoir Luqman • ITESA Muhammadiyah Semarang Node
+        PUBLISHED BY: Haidar Rifky Andrianno • ITESA Muhammadiyah Semarang Node
       </div>
     `;
 
@@ -601,6 +609,10 @@ class PortfolioApp {
     };
 
     render();
+  }
+
+  initScrollbarPill() {
+    this.scrollbarPill = new ScrollbarPillEngine();
   }
 }
 

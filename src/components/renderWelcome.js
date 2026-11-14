@@ -31,7 +31,7 @@ export function renderWelcome(data) {
         <span>${welcome.architecturalPreamble}</span>
       </div>
 
-      <h1 class="welcome-headline font-display" data-velocity-skew>
+      <h1 class="welcome-headline font-display">
         <span class="line-break" data-parallax-slide="left" data-parallax-speed="0.055">${welcome.headlineLine1}</span>
         <span class="line-break"><span class="editorial-word" data-parallax-slide="up" data-parallax-speed="0.035">${welcome.headlineLine2}</span></span>
         <span class="line-break" data-parallax-slide="right" data-parallax-speed="0.055">${welcome.headlineLine3}</span>

@@ -77,7 +77,7 @@ export function renderProjects(data) {
         ${projects.items
           .map(
             (proj) => `
-          <article class="project-architectural-card" data-stagger data-velocity-skew data-scroll-scale data-scale-from="0.93" data-scale-to="1.0">
+          <article class="project-architectural-card" data-stagger data-scroll-scale data-scale-from="0.88" data-scale-to="1.0">
             <div class="project-details-panel">
               <div>
                 <div class="project-card-meta">

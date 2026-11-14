@@ -81,7 +81,7 @@ export function renderAnother(data) {
           </div>
           <h3 class="font-display">Initiate Collaboration</h3>
           <p>
-            Terbuka untuk diskusi arsitektur sistem, peran Principal Fullstack, rekacipta interaktif WebGL, atau riset komputasional bersama ITESA Muhammadiyah Semarang.
+            Terbuka untuk diskusi arsitektur sistem, peran FullStack Developer, rekacipta aplikasi modern, atau riset komputasional bersama ITESA Muhammadiyah Semarang.
           </p>
 
           <button id="copy-email-btn" class="contact-quick-pill" data-email="${meta.socials[2].handle}" data-cursor-target>
