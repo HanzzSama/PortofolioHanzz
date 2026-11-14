@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  
+  <title>Muhammad Khoir Luqman — Principal Fullstack & Creative Technologist</title>
+  <meta name="description" content="Portfolio of Muhammad Khoir Luqman. Principal Fullstack Developer & Creative Technologist based in Semarang/Bekasi, ID. Student at ITESA Muhammadiyah Semarang. Biophilic Architectural Minimalism meets Google Material Expressive." />
+  <meta name="author" content="Muhammad Khoir Luqman" />
+  <meta name="theme-color" content="#F4F3EF" />
+
+  <!-- Preconnect & Typography Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@300;400;500;600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet" />
+
+  <!-- Modular Stylesheets Architecture -->
+  <link rel="stylesheet" href="./src/styles/variables.css" />
+  <link rel="stylesheet" href="./src/styles/base.css" />
+  <link rel="stylesheet" href="./src/styles/layout.css" />
+  <link rel="stylesheet" href="./src/styles/sections.css" />
+</head>
+<body>
+  <!-- Precision Scroll Progress Bar -->
+  <div class="scroll-progress-bar" aria-hidden="true"></div>
+
+  <!-- Subtle 3-4% SVG Grain / Noise Texture Overlay -->
+  <div class="grain-overlay" aria-hidden="true"></div>
+
+  <!-- Custom Dual-Element Architectural Precision Cursor -->
+  <div class="custom-cursor-dot" aria-hidden="true"></div>
+  <div class="custom-cursor-ring" aria-hidden="true"></div>
+
+  <!-- Hairline Architectural 12-Column Grid Guidelines -->
+  <div class="architectural-grid-guides" aria-hidden="true">
+    <div class="grid-guide-col"></div>
+    <div class="grid-guide-col"></div>
+    <div class="grid-guide-col"></div>
+    <div class="grid-guide-col"></div>
+    <div class="grid-guide-col"></div>
+  </div>
+
+  <!-- Fixed Architectural Header & Telemetry Navigation -->
+  <header class="architectural-header" role="banner">
+    <div class="header-container">
+      <!-- Monogram & Identity -->
+      <a href="#welcome" class="header-branding" data-cursor-target>
+        <span class="brand-monogram">MKL</span>
+        <span class="brand-callsign">// ARCH.01</span>
+      </a>
+
+      <!-- Real-time Telemetry & Global Geo-Nodes -->
+      <div class="header-telemetry" aria-label="System Telemetry">
+        <div class="telemetry-item">
+          <span class="status-pulse-dot" aria-hidden="true"></span>
+          <span>SYS.OP // NOMINAL</span>
+        </div>
+        <div class="telemetry-item telemetry-secondary">
+          <span>SRG/BKS [6.9667°S]</span>
+        </div>
+        <div class="telemetry-item">
+          <span id="live-clock">--:--:-- WIB [GMT+7]</span>
+        </div>
+      </div>
+
+      <!-- Quick-jump Navigation & Controls -->
+      <div class="header-nav">
+        <nav aria-label="Main Navigation">
+          <ul class="nav-links">
+            <li><a href="#welcome" class="nav-link active" data-cursor-target>01.WEL</a></li>
+            <li><a href="#about" class="nav-link" data-cursor-target>02.ABT</a></li>
+            <li><a href="#skills" class="nav-link" data-cursor-target>03.SKL</a></li>
+            <li><a href="#projects" class="nav-link" data-cursor-target>04.PRJ</a></li>
+            <li><a href="#another" class="nav-link" data-cursor-target>05.ANT</a></li>
+          </ul>
+        </nav>
+
+        <div class="header-actions">
+          <!-- Tactile Theme Mode Switcher -->
+          <button id="theme-toggle-btn" class="tactile-btn" aria-label="Toggle Obsidian / Limestone Theme" data-cursor-target>
+            <span id="theme-icon">☾</span>
+            <span id="theme-label" class="telemetry-secondary">Obsidian</span>
+          </button>
+
+          <!-- Mobile Navigation Toggle -->
+          <button id="mobile-nav-toggle" class="mobile-nav-toggle-btn tactile-btn" aria-label="Toggle Menu" data-cursor-target>
+            <span id="mobile-menu-label">MENU</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Navigation Overlay (Visible on small screens) -->
+  <div id="mobile-nav-overlay" class="mobile-nav-overlay" aria-hidden="true">
+    <ul class="mobile-nav-list">
+      <li><a href="#welcome" class="mobile-nav-link" data-cursor-target><span>01</span> Welcome</a></li>
+      <li><a href="#about" class="mobile-nav-link" data-cursor-target><span>02</span> Manifesto</a></li>
+      <li><a href="#skills" class="mobile-nav-link" data-cursor-target><span>03</span> Architecture</a></li>
+      <li><a href="#projects" class="mobile-nav-link" data-cursor-target><span>04</span> Selected Works</a></li>
+      <li><a href="#another" class="mobile-nav-link" data-cursor-target><span>05</span> Garden & Dispatch</a></li>
+    </ul>
+    <div style="font-family: var(--font-mono); font-size: var(--font-mono-tag); color: var(--text-muted); border-top: var(--border-hairline); padding-top: var(--space-md);">
+      <div>BASE: ITESA Muhammadiyah Semarang</div>
+      <div>NODES: Semarang / Bekasi, Indonesia</div>
+    </div>
+  </div>
+
+  <!-- Architectural Deep-Dive System Drawer & Modal -->
+  <div id="drawer-backdrop" class="drawer-backdrop" aria-hidden="true"></div>
+  <aside id="system-drawer" class="architectural-drawer" role="dialog" aria-modal="true" aria-label="System Deep-Dive Drawer">
+    <div class="drawer-header">
+      <div id="drawer-callsign" class="drawer-callsign">SYS.INSPECT // 00</div>
+      <button id="drawer-close-btn" class="drawer-close-btn" aria-label="Close Drawer" data-cursor-target>
+        <span>✕</span>
+        <span>CLOSE [ESC]</span>
+      </button>
+    </div>
+    <div id="drawer-body" class="drawer-content">
+      <!-- Dynamic deep-dive injected via main.js -->
+    </div>
+  </aside>
+
+  <!-- Interactive Parallax Viewport & Dynamic Application Shell -->
+  <div id="parallax-viewport">
+    <main id="app">
+      <!-- Dynamic Components Mounted via ./src/main.js -->
+    </main>
+  </div>
+
+  <!-- Modular Application Entry Point -->
+  <script type="module" src="./src/main.js"></script>
+</body>
+</html>

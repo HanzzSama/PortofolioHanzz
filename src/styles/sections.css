@@ -1,0 +1,968 @@
+/**
+ * SECTIONS ARCHITECTURE & COMPONENT STYLING
+ * 01: Welcome // 02: About // 03: Skills // 04: Projects // 05: Another & Garden
+ */
+
+/* ==========================================================================
+   01: WELCOME / HERO SECTION
+   ========================================================================== */
+.section-welcome {
+  min-height: 96vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  padding-top: calc(var(--space-3xl) + 2rem);
+  padding-bottom: var(--space-3xl);
+  overflow: hidden;
+}
+
+.welcome-preamble-bar {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  margin-bottom: var(--space-lg);
+  font-family: var(--font-mono);
+  font-size: var(--font-mono-tag);
+  color: var(--accent-primary);
+}
+
+.preamble-line {
+  height: 1px;
+  width: 48px;
+  background-color: var(--accent-primary);
+}
+
+.welcome-headline {
+  font-size: var(--font-hero);
+  line-height: var(--leading-tight);
+  letter-spacing: var(--kerning-tight);
+  margin-bottom: var(--space-xl);
+  max-width: 1400px;
+}
+
+.welcome-headline .line-break {
+  display: block;
+}
+
+.welcome-headline .editorial-word {
+  font-family: var(--font-editorial);
+  font-style: italic;
+  font-weight: 400;
+  color: var(--accent-primary);
+  letter-spacing: 0;
+  padding: 0 0.2em;
+}
+
+.welcome-grid-content {
+  display: grid;
+  grid-template-columns: 7fr 5fr;
+  gap: var(--column-gap);
+  align-items: end;
+  margin-top: var(--space-xl);
+  padding-top: var(--space-xl);
+  border-top: var(--border-hairline);
+}
+
+.welcome-lead-text {
+  font-size: var(--font-body-lg);
+  line-height: 1.7;
+  color: var(--text-secondary);
+  max-width: 680px;
+}
+
+.welcome-telemetry-cluster {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-sm);
+  background-color: var(--bg-surface);
+  border: var(--border-hairline);
+  padding: var(--space-md);
+  border-radius: var(--radius-sm);
+}
+
+.telemetry-cell {
+  padding: var(--space-xs);
+  border-bottom: var(--border-faint);
+}
+
+.telemetry-cell:nth-child(3),
+.telemetry-cell:nth-child(4) {
+  border-bottom: none;
+}
+
+.telemetry-cell-label {
+  font-family: var(--font-mono);
+  font-size: var(--font-mono-micro);
+  color: var(--text-muted);
+  text-transform: uppercase;
+  margin-bottom: 0.25rem;
+}
+
+.telemetry-cell-value {
+  font-family: var(--font-mono);
+  font-size: var(--font-mono-tag);
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+/* Floating Topographic Parallax Plane in Welcome */
+.welcome-topo-plane {
+  position: absolute;
+  top: 10%;
+  right: -5%;
+  width: 580px;
+  height: 580px;
+  pointer-events: none;
+  opacity: 0.45;
+  z-index: -1;
+  transition: transform 0.2s cubic-bezier(0.2, 0, 0, 1);
+  will-change: transform;
+}
+
+.welcome-topo-plane svg {
+  width: 100%;
+  height: 100%;
+  stroke: var(--accent-primary);
+}
+
+/* ==========================================================================
+   02: ABOUT / ARCHITECTURAL MANIFESTO
+   ========================================================================== */
+.section-about {
+  background-color: var(--bg-surface);
+  border-top: var(--border-hairline);
+}
+
+.about-manifesto-header {
+  margin-bottom: var(--space-2xl);
+}
+
+.about-manifesto-title {
+  font-size: var(--font-title-lg);
+  line-height: var(--leading-display);
+  margin-bottom: var(--space-md);
+  max-width: 900px;
+}
+
+.about-narrative-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--column-gap);
+  margin-bottom: var(--space-3xl);
+  font-size: var(--font-body-lg);
+  line-height: 1.75;
+}
+
+.about-pillars-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-md);
+  margin-bottom: var(--space-3xl);
+}
+
+.pillar-card {
+  background-color: var(--bg-canvas);
+  border: var(--border-hairline);
+  padding: var(--space-lg);
+  border-radius: var(--radius-sm);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 240px;
+  transition: transform var(--duration-fast) var(--ease-expressive),
+              border-color var(--duration-fast) var(--ease-expressive),
+              box-shadow var(--duration-fast) var(--ease-expressive);
+}
+
+.pillar-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--accent-primary);
+  box-shadow: var(--elevation-2);
+}
+
+.pillar-code {
+  font-family: var(--font-mono);
+  font-size: var(--font-mono-tag);
+  color: var(--accent-primary);
+  margin-bottom: var(--space-sm);
+}
+
+.pillar-title {
+  font-size: 1.15rem;
+  margin-bottom: var(--space-xs);
+  font-family: var(--font-display);
+}
+
+.pillar-desc {
+  font-size: var(--font-body-sm);
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* Timeline & Pedagogy Specs */
+.about-timeline-section {
+  border-top: var(--border-hairline);
+  padding-top: var(--space-2xl);
+}
+
+.timeline-header-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: var(--space-xl);
+}
+
+.timeline-items {
+  display: flex;
+  flex-direction: column;
+  border-top: var(--border-hairline);
+}
+
+.timeline-row {
+  display: grid;
+  grid-template-columns: 200px 300px 1fr;
+  gap: var(--space-md);
+  padding: var(--space-lg) 0;
+  border-bottom: var(--border-hairline);
+  align-items: baseline;
+  transition: background-color var(--duration-fast) var(--ease-expressive);
+}
+
+.timeline-row:hover {
+  background-color: var(--accent-tint);
+}
+
+.timeline-year {
+  font-family: var(--font-mono);
+  font-size: var(--font-mono-tag);
+  color: var(--accent-primary);
+  font-weight: 500;
+}
+
+.timeline-role-block h4 {
+  font-size: 1.05rem;
+  font-family: var(--font-display);
+}
+
+.timeline-place {
+  font-family: var(--font-mono);
+  font-size: var(--font-mono-micro);
+  color: var(--text-muted);
+}
+
+.timeline-description {
+  font-size: var(--font-body-sm);
+  color: var(--text-secondary);
+}
+
+/* ==========================================================================
+   03: SKILLS / SYSTEMIC ARCHITECTURE MATRIX
+   ========================================================================== */
+.section-skills {
+  position: relative;
+}
+
+.skills-intro {
+  max-width: 800px;
+  margin-bottom: var(--space-2xl);
+}
+
+.skills-intro h2 {
+  font-size: var(--font-title-lg);
+  margin-bottom: var(--space-sm);
+}
+
+.skills-intro p {
+  font-size: var(--font-body-lg);
+  color: var(--text-secondary);
+}
+
+.skills-matrix-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-lg);
+}
+
+.matrix-tier-card {
+  background-color: var(--bg-surface);
+  border: var(--border-hairline);
+  border-radius: var(--radius-sm);
+  padding: var(--space-xl);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  transition: border-color var(--duration-fast) var(--ease-expressive),
+              box-shadow var(--duration-fast) var(--ease-expressive);
+}
+
+.matrix-tier-card:hover {
+  border-color: var(--border-strong);
+  box-shadow: var(--elevation-1);
+}
+
+.tier-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: var(--space-sm);
+  padding-bottom: var(--space-xs);
+  border-bottom: var(--border-faint);
+}
+
+.tier-id {
+  font-family: var(--font-mono);
+  font-size: var(--font-mono-tag);
+  font-weight: 600;
+  color: var(--accent-primary);
+}
+
+.tier-concept {
+  font-family: var(--font-mono);
+  font-size: var(--font-mono-micro);
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+
+.tier-title {
+  font-size: 1.35rem;
+  margin-bottom: var(--space-lg);
+  font-family: var(--font-display);
+}
+
+.tier-nodes-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.node-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.65rem 0.85rem;
+  background-color: var(--bg-canvas);
+  border: var(--border-hairline);
+  border-radius: var(--radius-xs);
+  transition: transform var(--duration-fast) var(--ease-expressive),
+              border-color var(--duration-fast) var(--ease-expressive);
+}
+
+.node-item:hover {
+  transform: translateX(4px);
+  border-color: var(--accent-primary);
+}
+
+.node-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.node-name {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.925rem;
+  color: var(--text-primary);
+}
+
+.node-spec {
+  font-family: var(--font-mono);
+  font-size: var(--font-mono-micro);
+  color: var(--text-muted);
+}
+
+.node-tag-badge {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  padding: 0.2rem 0.45rem;
+  border-radius: var(--radius-xs);
+  background-color: var(--badge-bg);
+  color: var(--badge-text);
+  font-weight: 500;
+}
+
+/* ==========================================================================
+   04: PROJECTS / SELECTED WORKS
+   ========================================================================== */
+.section-projects {
+  position: relative;
+}
+
+.projects-intro {
+  margin-bottom: var(--space-2xl);
+}
+
+.projects-intro h2 {
+  font-size: var(--font-title-lg);
+  margin-bottom: var(--space-sm);
+}
+
+.projects-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3xl);
+}
+
+.project-architectural-card {
+  display: grid;
+  grid-template-columns: 6.5fr 5.5fr;
+  gap: var(--column-gap);
+  border: var(--border-hairline);
+  background-color: var(--bg-surface);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  transition: border-color var(--duration-fast) var(--ease-expressive),
+              box-shadow var(--duration-fast) var(--ease-expressive);
+}
+
+.project-architectural-card:hover {
+  border-color: var(--border-strong);
+  box-shadow: var(--elevation-2);
+}
+
+.project-architectural-card:nth-child(even) {
+  grid-template-columns: 5.5fr 6.5fr;
+}
+
+.project-architectural-card:nth-child(even) .project-blueprint-panel {
+  order: -1;
+}
+
+.project-details-panel {
+  padding: var(--space-2xl);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.project-card-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-md);
+  font-family: var(--font-mono);
+  font-size: var(--font-mono-tag);
+  color: var(--text-muted);
+}
+
+.project-code-tag {
+  color: var(--accent-primary);
+  font-weight: 600;
+}
+
+.project-title {
+  font-size: var(--font-title-md);
+  margin-bottom: 0.35rem;
+  font-family: var(--font-display);
+}
+
+.project-subtitle {
+  font-family: var(--font-editorial);
+  font-size: 1.25rem;
+  color: var(--accent-primary);
+  margin-bottom: var(--space-md);
+}
+
+.project-narrative {
+  font-size: var(--font-body-md);
+  color: var(--text-secondary);
+  line-height: 1.65;
+  margin-bottom: var(--space-lg);
+}
+
+.project-deliverables {
+  list-style: none;
+  margin-bottom: var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.deliverable-item {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  font-size: var(--font-body-sm);
+  color: var(--text-secondary);
+}
+
+.deliverable-bullet {
+  width: 5px;
+  height: 5px;
+  background-color: var(--accent-primary);
+  border-radius: 50%;
+}
+
+.project-tags-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin-bottom: var(--space-xl);
+}
+
+.project-tech-chip {
+  font-family: var(--font-mono);
+  font-size: var(--font-mono-micro);
+  padding: 0.25rem 0.55rem;
+  background-color: var(--bg-canvas);
+  border: var(--border-hairline);
+  border-radius: var(--radius-xs);
+  color: var(--text-secondary);
+}
+
+.project-card-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  border-top: var(--border-hairline);
+  padding-top: var(--space-md);
+}
+
+.project-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.2rem;
+  background-color: var(--text-primary);
+  color: var(--bg-canvas);
+  font-family: var(--font-mono);
+  font-size: var(--font-mono-tag);
+  border-radius: var(--radius-xs);
+  transition: all var(--duration-fast) var(--ease-expressive);
+}
+
+.project-btn-primary:hover {
+  background-color: var(--accent-primary);
+  transform: translateY(-2px);
+}
+
+.project-btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.2rem;
+  border: var(--border-hairline);
+  background-color: transparent;
+  color: var(--text-primary);
+  font-family: var(--font-mono);
+  font-size: var(--font-mono-tag);
+  border-radius: var(--radius-xs);
+  transition: all var(--duration-fast) var(--ease-expressive);
+}
+
+.project-btn-secondary:hover {
+  border-color: var(--text-primary);
+  transform: translateY(-2px);
+}
+
+/* Blueprint / Visual Canvas Panel */
+.project-blueprint-panel {
+  position: relative;
+  background-color: var(--bg-surface-sunken);
+  border-left: var(--border-hairline);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: var(--space-xl);
+  overflow: hidden;
+  min-height: 420px;
+}
+
+.project-architectural-card:nth-child(even) .project-blueprint-panel {
+  border-left: none;
+  border-right: var(--border-hairline);
+}
+
+.blueprint-meta-header {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-mono);
+  font-size: var(--font-mono-micro);
+  color: var(--text-muted);
+  z-index: 2;
+}
+
+.blueprint-canvas-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.85;
+  pointer-events: none;
+  transition: transform 0.6s var(--ease-expressive);
+}
+
+.project-architectural-card:hover .blueprint-canvas-container {
+  transform: scale(1.05);
+}
+
+.blueprint-telemetry-badge {
+  position: relative;
+  z-index: 2;
+  align-self: flex-start;
+  display: flex;
+  gap: var(--space-md);
+  padding: 0.5rem 0.8rem;
+  background-color: rgba(244, 243, 239, 0.9);
+  border: var(--border-hairline);
+  border-radius: var(--radius-xs);
+  font-family: var(--font-mono);
+  font-size: var(--font-mono-micro);
+}
+
+[data-theme="dark"] .blueprint-telemetry-badge {
+  background-color: rgba(13, 17, 14, 0.9);
+}
+
+/* ==========================================================================
+   05: ANOTHER / DIGITAL GARDEN & TRANSMISSION
+   ========================================================================== */
+.section-another {
+  background-color: var(--bg-surface);
+}
+
+.another-intro {
+  margin-bottom: var(--space-2xl);
+}
+
+.another-intro h2 {
+  font-size: var(--font-title-lg);
+  margin-bottom: var(--space-sm);
+}
+
+.garden-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-md);
+  margin-bottom: var(--space-3xl);
+}
+
+.garden-note-card {
+  background-color: var(--bg-canvas);
+  border: var(--border-hairline);
+  border-radius: var(--radius-sm);
+  padding: var(--space-xl);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: transform var(--duration-fast) var(--ease-expressive),
+              border-color var(--duration-fast) var(--ease-expressive),
+              box-shadow var(--duration-fast) var(--ease-expressive);
+}
+
+.garden-note-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--accent-primary);
+  box-shadow: var(--elevation-1);
+}
+
+.note-header {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-mono);
+  font-size: var(--font-mono-micro);
+  color: var(--accent-primary);
+  margin-bottom: var(--space-md);
+}
+
+.note-title {
+  font-size: 1.15rem;
+  font-family: var(--font-display);
+  margin-bottom: var(--space-sm);
+  line-height: 1.35;
+}
+
+.note-excerpt {
+  font-size: var(--font-body-sm);
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* Audio Synthesizer Interactive Box */
+.audio-synth-wrapper {
+  background-color: var(--bg-canvas);
+  border: var(--border-hairline);
+  border-radius: var(--radius-sm);
+  padding: var(--space-2xl);
+  margin-bottom: var(--space-3xl);
+}
+
+.synth-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: var(--space-lg);
+  border-bottom: var(--border-hairline);
+  padding-bottom: var(--space-sm);
+}
+
+.synth-header h3 {
+  font-size: var(--font-title-sm);
+  font-family: var(--font-display);
+}
+
+.synth-controls-cluster {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-md);
+  margin-bottom: var(--space-lg);
+}
+
+.synth-freq-btn {
+  padding: 0.6rem 1.1rem;
+  border: var(--border-hairline);
+  background-color: var(--bg-surface);
+  color: var(--text-primary);
+  font-family: var(--font-mono);
+  font-size: var(--font-mono-tag);
+  border-radius: var(--radius-xs);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  transition: all var(--duration-fast) var(--ease-expressive);
+}
+
+.synth-freq-btn:hover {
+  border-color: var(--accent-primary);
+  transform: translateY(-1px);
+}
+
+.synth-freq-btn.active-tone {
+  background-color: var(--accent-primary);
+  color: #FFFFFF;
+  border-color: var(--accent-primary);
+}
+
+.synth-sub-desc {
+  font-size: var(--font-mono-micro);
+  opacity: 0.75;
+}
+
+.synth-visualizer-canvas {
+  width: 100%;
+  height: 80px;
+  background-color: var(--bg-surface-sunken);
+  border: var(--border-hairline);
+  border-radius: var(--radius-xs);
+  display: block;
+}
+
+/* Transmission / Contact Terminal */
+.transmission-terminal {
+  border-top: var(--border-hairline);
+  padding-top: var(--space-2xl);
+  display: grid;
+  grid-template-columns: 6fr 6fr;
+  gap: var(--column-gap);
+  align-items: start;
+}
+
+.transmission-info h3 {
+  font-size: var(--font-title-md);
+  margin-bottom: var(--space-xs);
+}
+
+.transmission-info p {
+  font-size: var(--font-body-md);
+  margin-bottom: var(--space-xl);
+}
+
+.contact-quick-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: 0.75rem 1.25rem;
+  border: var(--border-hairline);
+  background-color: var(--bg-canvas);
+  border-radius: var(--radius-xs);
+  font-family: var(--font-mono);
+  font-size: var(--font-mono-tag);
+  transition: all var(--duration-fast) var(--ease-expressive);
+}
+
+.contact-quick-pill:hover {
+  border-color: var(--text-primary);
+  background-color: var(--bg-surface-elevated);
+}
+
+.copy-feedback-toast {
+  font-family: var(--font-mono);
+  font-size: var(--font-mono-micro);
+  color: var(--accent-primary);
+  margin-left: 0.5rem;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.copy-feedback-toast.show {
+  opacity: 1;
+}
+
+.transmission-socials {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-md);
+}
+
+.social-node-card {
+  padding: var(--space-md);
+  border: var(--border-hairline);
+  background-color: var(--bg-canvas);
+  border-radius: var(--radius-xs);
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  transition: all var(--duration-fast) var(--ease-expressive);
+}
+
+.social-node-card:hover {
+  border-color: var(--accent-primary);
+  transform: translateX(3px);
+}
+
+.social-network-name {
+  font-family: var(--font-mono);
+  font-size: var(--font-mono-micro);
+  color: var(--text-muted);
+}
+
+.social-network-handle {
+  font-family: var(--font-mono);
+  font-size: var(--font-mono-tag);
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+/* Colophon */
+.architectural-colophon {
+  margin-top: var(--space-3xl);
+  padding-top: var(--space-xl);
+  border-top: var(--border-hairline);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: var(--font-mono-micro);
+  color: var(--text-muted);
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+  .about-pillars-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .skills-matrix-container {
+    grid-template-columns: 1fr;
+  }
+  .garden-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .welcome-grid-content {
+    grid-template-columns: 1fr;
+  }
+  .about-narrative-split {
+    grid-template-columns: 1fr;
+  }
+  .about-pillars-grid {
+    grid-template-columns: 1fr;
+  }
+  .timeline-row {
+    grid-template-columns: 1fr;
+    gap: var(--space-xs);
+  }
+  .project-architectural-card,
+  .project-architectural-card:nth-child(even) {
+    grid-template-columns: 1fr;
+  }
+  .project-blueprint-panel {
+    border-left: none;
+    border-top: var(--border-hairline);
+    min-height: 280px;
+  }
+  .transmission-terminal {
+    grid-template-columns: 1fr;
+  }
+  .architectural-colophon {
+    flex-direction: column;
+    gap: var(--space-sm);
+    text-align: center;
+  }
+}
+
+
+/* ==========================================================================
+   SKILLS MATRIX — Column Drift Parallax Support
+   Column kiri (odd) dan kanan (even) bergerak relatif berbeda
+   Data attribute di-set oleh renderSkills.js
+   ========================================================================== */
+.skills-matrix-container > *[data-parallax-slide] {
+  will-change: transform;
+}
+
+/* ==========================================================================
+   PROJECT BLUEPRINT PANEL — Inner SVG Relative Parallax
+   ========================================================================== */
+.blueprint-canvas-container[data-parallax-relative] {
+  will-change: transform;
+  transition: none; /* Override existing 0.6s transition — parallax handles it */
+}
+
+/* ==========================================================================
+   SCROLL-SCALE CSS VAR SUPPORT
+   Elemen dengan data-scroll-scale + data-velocity-skew combined
+   ========================================================================== */
+[data-scroll-scale][data-velocity-skew] {
+  /* transform handled by JS via CSS vars — no CSS transform conflict */
+  will-change: transform;
+}
+
+/* ==========================================================================
+   SECTION WATERMARK LABEL — Counter Parallax
+   data-parallax-slide="right" speed negatif di HTML
+   ========================================================================== */
+.section-watermark-label[data-parallax-slide] {
+  will-change: transform;
+}
+
+/* ==========================================================================
+   PROJECT ARCHITECTURAL CARD — Scroll Scale Entry
+   Cards masuk dari bawah dengan scale
+   ========================================================================== */
+.project-architectural-card[data-scroll-scale] {
+  will-change: transform;
+}
+
+/* ==========================================================================
+   TEXT SLIDE PARALLAX — Welcome Headline Lines
+   ========================================================================== */
+.welcome-headline .line-break[data-parallax-slide] {
+  display: block;
+  will-change: transform;
+}
+
+/* ==========================================================================
+   RELATIVE PARALLAX — Blueprint SVG dalam Project Card
+   ========================================================================== */
+.project-blueprint-panel {
+  /* Butuh overflow: hidden agar SVG yang ber-parallax tidak overflow */
+  overflow: hidden;
+}
+
+/* Ensure blueprint container inherits position for relative parallax */
+.blueprint-canvas-container {
+  position: absolute;
+  /* Extend sedikit untuk cover saat parallax shift */
+  top: -8%;
+  left: -4%;
+  width: 108%;
+  height: 116%;
+}

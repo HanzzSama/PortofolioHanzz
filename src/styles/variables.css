@@ -1,0 +1,158 @@
+/**
+ * DESIGN SYSTEM TOKENS & VARIABLES
+ * Biophilic Architectural Minimalism × Google Material Expressive
+ * Strictly avoids generic SaaS gradients & AI-slop glassmorphism
+ */
+
+:root {
+  /* ==========================================================================
+     NATURE & ARCHITECTURAL COLOR PALETTE
+     ========================================================================== */
+  
+  /* Core Raw Limestone Light Theme (Default) */
+  --color-raw-limestone: #F4F3EF;
+  --color-limestone-light: #FAF9F6;
+  --color-limestone-dim: #ECEAE4;
+  --color-limestone-deep: #E1DFD7;
+
+  /* Deep Obsidian Moss */
+  --color-obsidian-moss: #0D110E;
+  --color-obsidian-surface: #141915;
+  --color-obsidian-card: #1B221D;
+  --color-obsidian-border: rgba(244, 243, 239, 0.12);
+
+  /* Primary Typography / Slate */
+  --color-charcoal-slate: #1A1C19;
+  --color-slate-secondary: #40443E;
+  --color-slate-muted: #6B7169;
+  --color-slate-faint: #9EA59B;
+
+  /* Nature Accents */
+  --color-botanical-sage: #4A5D4E;
+  --color-sage-deep: #344337;
+  --color-sage-light: #677E6C;
+  --color-sage-tint: rgba(74, 93, 78, 0.08);
+
+  /* Warm Terracotta / Sand */
+  --color-warm-sand: #C8B69E;
+  --color-sand-deep: #9F8A70;
+  --color-sand-tint: rgba(200, 182, 158, 0.15);
+
+  /* Mist Gray */
+  --color-mist-gray: #D8DAD5;
+  --color-mist-light: #E7E9E5;
+
+  /* Semantic Theme Mappings (Default: Light Raw Limestone) */
+  --bg-canvas: var(--color-raw-limestone);
+  --bg-surface: var(--color-limestone-light);
+  --bg-surface-elevated: #FFFFFF;
+  --bg-surface-sunken: var(--color-limestone-dim);
+  --text-primary: var(--color-charcoal-slate);
+  --text-secondary: var(--color-slate-secondary);
+  --text-muted: var(--color-slate-muted);
+  --border-hairline: 1px solid rgba(26, 28, 25, 0.12);
+  --border-strong: 1px solid rgba(26, 28, 25, 0.28);
+  --border-faint: 1px solid rgba(26, 28, 25, 0.06);
+  --accent-primary: var(--color-botanical-sage);
+  --accent-secondary: var(--color-warm-sand);
+  --accent-tint: var(--color-sage-tint);
+  --badge-bg: rgba(74, 93, 78, 0.1);
+  --badge-text: var(--color-botanical-sage);
+  --grid-line-color: rgba(26, 28, 25, 0.05);
+
+  /* Elevation Surface Tones (Material 3 Expressive, no heavy drop-shadows) */
+  --elevation-1: 0 1px 3px rgba(26, 28, 25, 0.04), 0 1px 2px rgba(26, 28, 25, 0.06);
+  --elevation-2: 0 3px 6px rgba(26, 28, 25, 0.05), 0 2px 4px rgba(26, 28, 25, 0.04);
+  --elevation-3: 0 10px 20px -3px rgba(26, 28, 25, 0.06), 0 4px 6px -2px rgba(26, 28, 25, 0.04);
+
+  /* ==========================================================================
+     TYPOGRAPHY TOKENS
+     ========================================================================== */
+  --font-display: 'Syne', system-ui, -apple-system, sans-serif;
+  --font-editorial: 'Instrument Serif', Georgia, serif;
+  --font-body: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Space Mono', ui-monospace, monospace;
+
+  /* Fluid Clamp Scales */
+  --font-hero: clamp(2.8rem, 7.8vw, 7.2rem);
+  --font-title-lg: clamp(2.2rem, 5vw, 4.5rem);
+  --font-title-md: clamp(1.75rem, 3.5vw, 3rem);
+  --font-title-sm: clamp(1.25rem, 2.2vw, 1.85rem);
+  --font-body-lg: clamp(1.05rem, 1.35vw, 1.25rem);
+  --font-body-md: clamp(0.95rem, 1.1vw, 1.05rem);
+  --font-body-sm: clamp(0.85rem, 0.95vw, 0.925rem);
+  --font-mono-tag: clamp(0.72rem, 0.85vw, 0.825rem);
+  --font-mono-micro: 0.68rem;
+
+  /* Leading & Kerning */
+  --leading-tight: 0.94;
+  --leading-display: 1.05;
+  --leading-snug: 1.25;
+  --leading-relaxed: 1.65;
+  --kerning-tight: -0.035em;
+  --kerning-normal: -0.01em;
+  --kerning-wide: 0.08em;
+  --kerning-mono: 0.12em;
+
+  /* ==========================================================================
+     GOOGLE MATERIAL 3 EXPRESSIVE MOTION
+     ========================================================================== */
+  --ease-expressive: cubic-bezier(0.2, 0.0, 0, 1.0);
+  --ease-accelerate: cubic-bezier(0.3, 0.0, 0.8, 0.15);
+  --ease-decelerate: cubic-bezier(0.05, 0.7, 0.1, 1.0);
+  --ease-smooth: cubic-bezier(0.16, 1, 0.3, 1);
+
+  --duration-fast: 180ms;
+  --duration-normal: 360ms;
+  --duration-medium: 520ms;
+  --duration-slow: 850ms;
+  --duration-stagger: 90ms;
+
+  /* ==========================================================================
+     ARCHITECTURAL SPATIAL SCALE
+     ========================================================================== */
+  --space-unit: clamp(0.25rem, 0.4vw, 0.375rem);
+  --space-2xs: calc(var(--space-unit) * 1);   /* ~4-6px */
+  --space-xs:  calc(var(--space-unit) * 2);   /* ~8-12px */
+  --space-sm:  calc(var(--space-unit) * 3);   /* ~12-18px */
+  --space-md:  calc(var(--space-unit) * 5);   /* ~20-30px */
+  --space-lg:  calc(var(--space-unit) * 8);   /* ~32-48px */
+  --space-xl:  calc(var(--space-unit) * 12);  /* ~48-72px */
+  --space-2xl: calc(var(--space-unit) * 18);  /* ~72-108px */
+  --space-3xl: calc(var(--space-unit) * 26);  /* ~104-156px */
+
+  /* Structural Container Boundaries */
+  --container-max: 1540px;
+  --gutter-x: clamp(1.25rem, 4vw, 4.5rem);
+  --column-gap: clamp(1rem, 2.5vw, 2.5rem);
+
+  /* Radius (Subtle Architectural Tectonic Cuts, Not round SaaS pills) */
+  --radius-xs: 2px;
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-full: 9999px;
+}
+
+/* Dark Palette Overrides (Obsidian Moss Mode) */
+[data-theme="dark"] {
+  --bg-canvas: var(--color-obsidian-moss);
+  --bg-surface: var(--color-obsidian-surface);
+  --bg-surface-elevated: var(--color-obsidian-card);
+  --bg-surface-sunken: #070908;
+  --text-primary: #F4F3EF;
+  --text-secondary: #C8CCC5;
+  --text-muted: #8E948B;
+  --border-hairline: 1px solid rgba(244, 243, 239, 0.12);
+  --border-strong: 1px solid rgba(244, 243, 239, 0.28);
+  --border-faint: 1px solid rgba(244, 243, 239, 0.05);
+  --accent-primary: #75927A;
+  --accent-secondary: var(--color-warm-sand);
+  --accent-tint: rgba(117, 146, 122, 0.14);
+  --badge-bg: rgba(117, 146, 122, 0.18);
+  --badge-text: #B4CEB8;
+  --grid-line-color: rgba(244, 243, 239, 0.035);
+  --elevation-1: 0 1px 3px rgba(0, 0, 0, 0.35);
+  --elevation-2: 0 4px 8px rgba(0, 0, 0, 0.45);
+  --elevation-3: 0 12px 24px -4px rgba(0, 0, 0, 0.6);
+}
