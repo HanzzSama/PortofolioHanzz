@@ -89,7 +89,7 @@ class PortfolioApp {
     });
 
     // Header dropdown option clicks
-    document.querySelectorAll('.lang-select-option').forEach((btn) => {
+    document.querySelectorAll('.lang-node-item').forEach((btn) => {
       btn.addEventListener('click', () => {
         const lang = btn.dataset.lang;
         this.setLanguage(lang);
@@ -183,7 +183,7 @@ class PortfolioApp {
     if (codeEl) codeEl.textContent = lang.toUpperCase();
 
     // Update active state in dropdown
-    document.querySelectorAll('.lang-select-option').forEach((btn) => {
+    document.querySelectorAll('.lang-node-item').forEach((btn) => {
       btn.classList.toggle('active', btn.dataset.lang === lang);
     });
 

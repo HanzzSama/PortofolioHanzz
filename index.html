@@ -101,49 +101,79 @@
         </nav>
 
         <div class="header-actions">
-          <!-- Tactile Language Switcher -->
+          <!-- Abstract Node Language Switcher -->
           <div class="lang-switcher-wrapper" id="lang-switcher">
-            <button id="lang-toggle-btn" class="tactile-btn lang-toggle-btn" aria-label="Switch Language" aria-expanded="false" data-cursor-target>
-              <span class="lang-globe-icon" aria-hidden="true">🌐</span>
-              <span id="current-lang-code" class="lang-current-code">ID</span>
-              <span class="lang-chevron" aria-hidden="true">▾</span>
+            <!-- Trigger: Coordinate Node Button -->
+            <button id="lang-toggle-btn" class="lang-node-trigger" aria-label="Switch Language" aria-expanded="false" data-cursor-target>
+              <span class="lang-node-crosshair" aria-hidden="true">
+                <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
+                  <line x1="5" y1="0" x2="5" y2="10" stroke="currentColor" stroke-width="0.8"/>
+                  <line x1="0" y1="5" x2="10" y2="5" stroke="currentColor" stroke-width="0.8"/>
+                  <circle cx="5" cy="5" r="1.5" fill="currentColor"/>
+                </svg>
+              </span>
+              <span id="current-lang-code" class="lang-node-code">ID</span>
+              <span class="lang-node-pulse" aria-hidden="true"></span>
             </button>
-            <div id="lang-dropdown" class="lang-dropdown-panel" aria-hidden="true">
-              <button class="lang-select-option active" data-lang="id" data-cursor-target>
-                <div class="lang-option-content">
-                  <span class="lang-flag">🇮🇩</span>
-                  <span class="lang-label">Indonesia</span>
-                </div>
-                <span class="lang-tag">ID</span>
-              </button>
-              <button class="lang-select-option" data-lang="en" data-cursor-target>
-                <div class="lang-option-content">
-                  <span class="lang-flag">🇬🇧</span>
-                  <span class="lang-label">English</span>
-                </div>
-                <span class="lang-tag">EN</span>
-              </button>
-              <button class="lang-select-option" data-lang="zh" data-cursor-target>
-                <div class="lang-option-content">
-                  <span class="lang-flag">🇨🇳</span>
-                  <span class="lang-label">中文 (简体)</span>
-                </div>
-                <span class="lang-tag">ZH</span>
-              </button>
-              <button class="lang-select-option" data-lang="ja" data-cursor-target>
-                <div class="lang-option-content">
-                  <span class="lang-flag">🇯🇵</span>
-                  <span class="lang-label">日本語</span>
-                </div>
-                <span class="lang-tag">JA</span>
-              </button>
-              <button class="lang-select-option" data-lang="de" data-cursor-target>
-                <div class="lang-option-content">
-                  <span class="lang-flag">🇩🇪</span>
-                  <span class="lang-label">Deutsch</span>
-                </div>
-                <span class="lang-tag">DE</span>
-              </button>
+
+            <!-- Abstract Dropdown Panel -->
+            <div id="lang-dropdown" class="lang-abstract-panel" aria-hidden="true">
+              <!-- Decorative Header -->
+              <div class="lang-panel-header" aria-hidden="true">
+                <span class="lang-panel-label">SYS.LANG // NODE</span>
+                <span class="lang-panel-coord">6.9667°S</span>
+              </div>
+              <!-- Deco grid lines -->
+              <div class="lang-panel-grid" aria-hidden="true">
+                <div class="lang-grid-line"></div>
+                <div class="lang-grid-line"></div>
+                <div class="lang-grid-line"></div>
+              </div>
+
+              <!-- Language Node Items -->
+              <div class="lang-nodes-list">
+                <button class="lang-node-item active" data-lang="id" data-cursor-target>
+                  <span class="lang-node-index" aria-hidden="true">01</span>
+                  <span class="lang-node-flag">🇮🇩</span>
+                  <span class="lang-node-name">Indonesia</span>
+                  <span class="lang-node-code-tag">ID</span>
+                  <span class="lang-node-active-dot" aria-hidden="true"></span>
+                </button>
+                <button class="lang-node-item" data-lang="en" data-cursor-target>
+                  <span class="lang-node-index" aria-hidden="true">02</span>
+                  <span class="lang-node-flag">🇬🇧</span>
+                  <span class="lang-node-name">English</span>
+                  <span class="lang-node-code-tag">EN</span>
+                  <span class="lang-node-active-dot" aria-hidden="true"></span>
+                </button>
+                <button class="lang-node-item" data-lang="zh" data-cursor-target>
+                  <span class="lang-node-index" aria-hidden="true">03</span>
+                  <span class="lang-node-flag">🇨🇳</span>
+                  <span class="lang-node-name">中文</span>
+                  <span class="lang-node-code-tag">ZH</span>
+                  <span class="lang-node-active-dot" aria-hidden="true"></span>
+                </button>
+                <button class="lang-node-item" data-lang="ja" data-cursor-target>
+                  <span class="lang-node-index" aria-hidden="true">04</span>
+                  <span class="lang-node-flag">🇯🇵</span>
+                  <span class="lang-node-name">日本語</span>
+                  <span class="lang-node-code-tag">JA</span>
+                  <span class="lang-node-active-dot" aria-hidden="true"></span>
+                </button>
+                <button class="lang-node-item" data-lang="de" data-cursor-target>
+                  <span class="lang-node-index" aria-hidden="true">05</span>
+                  <span class="lang-node-flag">🇩🇪</span>
+                  <span class="lang-node-name">Deutsch</span>
+                  <span class="lang-node-code-tag">DE</span>
+                  <span class="lang-node-active-dot" aria-hidden="true"></span>
+                </button>
+              </div>
+
+              <!-- Deco footer line -->
+              <div class="lang-panel-footer" aria-hidden="true">
+                <span class="lang-panel-footer-line"></span>
+                <span class="lang-panel-footer-label">5 NODES ACTIVE</span>
+              </div>
             </div>
           </div>
 
