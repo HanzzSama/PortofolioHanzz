@@ -70,7 +70,7 @@
     <div class="header-container">
       <!-- Monogram & Identity -->
       <a href="#welcome" class="header-branding" data-cursor-target>
-        <span class="brand-monogram">HRA</span>
+        <span class="brand-monogram">HANZZ</span>
         <span class="brand-callsign">// HANZZ.DEV</span>
       </a>
 
@@ -78,7 +78,7 @@
       <div class="header-telemetry" aria-label="System Telemetry">
         <div class="telemetry-item">
           <span class="status-pulse-dot" aria-hidden="true"></span>
-          <span>SYS.OP // NOMINAL</span>
+          <span id="telemetry-status">SYS.OP // NOMINAL</span>
         </div>
         <div class="telemetry-item telemetry-secondary">
           <span>SRG [6.9667°S]</span>
@@ -92,15 +92,61 @@
       <div class="header-nav">
         <nav aria-label="Main Navigation">
           <ul class="nav-links">
-            <li><a href="#welcome" class="nav-link active" data-cursor-target>01.WEL</a></li>
-            <li><a href="#about" class="nav-link" data-cursor-target>02.ABT</a></li>
-            <li><a href="#skills" class="nav-link" data-cursor-target>03.SKL</a></li>
-            <li><a href="#projects" class="nav-link" data-cursor-target>04.PRJ</a></li>
-            <li><a href="#another" class="nav-link" data-cursor-target>05.ANT</a></li>
+            <li><a href="#welcome" class="nav-link active" data-cursor-target><span class="nav-label-text">01.WEL</span></a></li>
+            <li><a href="#about" class="nav-link" data-cursor-target><span class="nav-label-text">02.ABT</span></a></li>
+            <li><a href="#skills" class="nav-link" data-cursor-target><span class="nav-label-text">03.SKL</span></a></li>
+            <li><a href="#projects" class="nav-link" data-cursor-target><span class="nav-label-text">04.PRJ</span></a></li>
+            <li><a href="#another" class="nav-link" data-cursor-target><span class="nav-label-text">05.ANT</span></a></li>
           </ul>
         </nav>
 
         <div class="header-actions">
+          <!-- Tactile Language Switcher -->
+          <div class="lang-switcher-wrapper" id="lang-switcher">
+            <button id="lang-toggle-btn" class="tactile-btn lang-toggle-btn" aria-label="Switch Language" aria-expanded="false" data-cursor-target>
+              <span class="lang-globe-icon" aria-hidden="true">🌐</span>
+              <span id="current-lang-code" class="lang-current-code">ID</span>
+              <span class="lang-chevron" aria-hidden="true">▾</span>
+            </button>
+            <div id="lang-dropdown" class="lang-dropdown-panel" aria-hidden="true">
+              <button class="lang-select-option active" data-lang="id" data-cursor-target>
+                <div class="lang-option-content">
+                  <span class="lang-flag">🇮🇩</span>
+                  <span class="lang-label">Indonesia</span>
+                </div>
+                <span class="lang-tag">ID</span>
+              </button>
+              <button class="lang-select-option" data-lang="en" data-cursor-target>
+                <div class="lang-option-content">
+                  <span class="lang-flag">🇬🇧</span>
+                  <span class="lang-label">English</span>
+                </div>
+                <span class="lang-tag">EN</span>
+              </button>
+              <button class="lang-select-option" data-lang="zh" data-cursor-target>
+                <div class="lang-option-content">
+                  <span class="lang-flag">🇨🇳</span>
+                  <span class="lang-label">中文 (简体)</span>
+                </div>
+                <span class="lang-tag">ZH</span>
+              </button>
+              <button class="lang-select-option" data-lang="ja" data-cursor-target>
+                <div class="lang-option-content">
+                  <span class="lang-flag">🇯🇵</span>
+                  <span class="lang-label">日本語</span>
+                </div>
+                <span class="lang-tag">JA</span>
+              </button>
+              <button class="lang-select-option" data-lang="de" data-cursor-target>
+                <div class="lang-option-content">
+                  <span class="lang-flag">🇩🇪</span>
+                  <span class="lang-label">Deutsch</span>
+                </div>
+                <span class="lang-tag">DE</span>
+              </button>
+            </div>
+          </div>
+
           <!-- Tactile Theme Mode Switcher -->
           <button id="theme-toggle-btn" class="tactile-btn" aria-label="Toggle Obsidian / Limestone Theme"
             data-cursor-target>
@@ -121,12 +167,25 @@
   <!-- Mobile Navigation Overlay (Visible on small screens) -->
   <div id="mobile-nav-overlay" class="mobile-nav-overlay" aria-hidden="true">
     <ul class="mobile-nav-list">
-      <li><a href="#welcome" class="mobile-nav-link" data-cursor-target><span>01</span> Welcome</a></li>
-      <li><a href="#about" class="mobile-nav-link" data-cursor-target><span>02</span> Manifesto</a></li>
-      <li><a href="#skills" class="mobile-nav-link" data-cursor-target><span>03</span> Architecture</a></li>
-      <li><a href="#projects" class="mobile-nav-link" data-cursor-target><span>04</span> Selected Works</a></li>
-      <li><a href="#another" class="mobile-nav-link" data-cursor-target><span>05</span> Garden & Dispatch</a></li>
+      <li><a href="#welcome" class="mobile-nav-link" data-cursor-target><span class="mobile-nav-num">01</span> <span class="mobile-nav-title">Welcome</span></a></li>
+      <li><a href="#about" class="mobile-nav-link" data-cursor-target><span class="mobile-nav-num">02</span> <span class="mobile-nav-title">Manifesto</span></a></li>
+      <li><a href="#skills" class="mobile-nav-link" data-cursor-target><span class="mobile-nav-num">03</span> <span class="mobile-nav-title">Architecture</span></a></li>
+      <li><a href="#projects" class="mobile-nav-link" data-cursor-target><span class="mobile-nav-num">04</span> <span class="mobile-nav-title">Selected Works</span></a></li>
+      <li><a href="#another" class="mobile-nav-link" data-cursor-target><span class="mobile-nav-num">05</span> <span class="mobile-nav-title">Garden & Dispatch</span></a></li>
     </ul>
+
+    <!-- Mobile Language Selector Row -->
+    <div class="mobile-lang-bar">
+      <span class="mobile-lang-title">LANGUAGE //</span>
+      <div class="mobile-lang-options">
+        <button class="mobile-lang-btn active" data-lang="id">🇮🇩 ID</button>
+        <button class="mobile-lang-btn" data-lang="en">🇬🇧 EN</button>
+        <button class="mobile-lang-btn" data-lang="zh">🇨🇳 ZH</button>
+        <button class="mobile-lang-btn" data-lang="ja">🇯🇵 JA</button>
+        <button class="mobile-lang-btn" data-lang="de">🇩🇪 DE</button>
+      </div>
+    </div>
+
     <div
       style="font-family: var(--font-mono); font-size: var(--font-mono-tag); color: var(--text-muted); border-top: var(--border-hairline); padding-top: var(--space-md);">
       <div>BASE: ITESA Muhammadiyah Semarang</div>

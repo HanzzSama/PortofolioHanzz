@@ -4,7 +4,8 @@
  * Identity: Haidar Rifky Andrianno // ITESA Muhammadiyah Semarang
  */
 
-import { portfolioData } from './data/portfolioData.js';
+import { portfolioData, getPortfolioData } from './data/portfolioData.js';
+import { translations } from './data/translations.js';
 import { ParallaxEngine } from './core/parallaxEngine.js';
 import { ArchitecturalObserver } from './core/observer.js';
 import { ScrollbarPillEngine } from './core/scrollbarPill.js';
@@ -26,6 +27,10 @@ class PortfolioApp {
     this.currentFrequency = 432;
     this.canvasAnimationId = null;
 
+    // Internationalization State
+    this.currentLang = localStorage.getItem('portfolio-language') || 'id';
+    this.data = getPortfolioData(this.currentLang);
+
     this.init();
   }
 
@@ -34,6 +39,7 @@ class PortfolioApp {
     this.initParallaxAndObserver();
     this.initLiveClock();
     this.initThemeToggle();
+    this.initLanguageSwitcher();
     this.initAudioSynthesizer();
     this.initClipboard();
     this.initSmoothNavLinks();
@@ -46,16 +52,145 @@ class PortfolioApp {
   renderDOM() {
     if (!this.appContainer) return;
 
-    // Render modular components sequentially
+    // Render modular components sequentially with current localized data
     const html = [
-      renderWelcome(portfolioData),
-      renderAbout(portfolioData),
-      renderSkills(portfolioData),
-      renderProjects(portfolioData),
-      renderAnother(portfolioData)
+      renderWelcome(this.data),
+      renderAbout(this.data),
+      renderSkills(this.data),
+      renderProjects(this.data),
+      renderAnother(this.data)
     ].join('\n');
 
     this.appContainer.innerHTML = html;
+  }
+
+  initLanguageSwitcher() {
+    const switcher = document.getElementById('lang-switcher');
+    const toggleBtn = document.getElementById('lang-toggle-btn');
+    const dropdown = document.getElementById('lang-dropdown');
+
+    if (!toggleBtn || !dropdown) return;
+
+    // Toggle dropdown open/close
+    toggleBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isOpen = switcher.classList.toggle('is-open');
+      toggleBtn.setAttribute('aria-expanded', String(isOpen));
+      dropdown.setAttribute('aria-hidden', String(!isOpen));
+    });
+
+    // Close on outside click
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('#lang-switcher')) {
+        switcher.classList.remove('is-open');
+        toggleBtn.setAttribute('aria-expanded', 'false');
+        dropdown.setAttribute('aria-hidden', 'true');
+      }
+    });
+
+    // Header dropdown option clicks
+    document.querySelectorAll('.lang-select-option').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const lang = btn.dataset.lang;
+        this.setLanguage(lang);
+        switcher.classList.remove('is-open');
+        toggleBtn.setAttribute('aria-expanded', 'false');
+        dropdown.setAttribute('aria-hidden', 'true');
+      });
+    });
+
+    // Mobile overlay option clicks
+    document.querySelectorAll('.mobile-lang-btn').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const lang = btn.dataset.lang;
+        this.setLanguage(lang);
+      });
+    });
+
+    // Initialize with stored or default language
+    this.applyLanguageUI(this.currentLang);
+  }
+
+  setLanguage(lang) {
+    if (!translations[lang]) return;
+    this.currentLang = lang;
+    localStorage.setItem('portfolio-language', lang);
+    this.data = getPortfolioData(lang);
+    document.documentElement.setAttribute('lang', lang);
+
+    this.applyLanguageUI(lang);
+
+    // Smooth subtle crossfade DOM re-render
+    if (this.appContainer) {
+      this.appContainer.style.transition = 'opacity 0.2s cubic-bezier(0.2, 0.0, 0, 1.0)';
+      this.appContainer.style.opacity = '0';
+      setTimeout(() => {
+        this.renderDOM();
+        this.appContainer.style.opacity = '1';
+
+        // Re-initialize dynamic component bindings after re-rendering
+        this.initKineticTopographyCanvas();
+        this.initParallaxAndObserver();
+        this.initSmoothNavLinks();
+        this.initAudioSynthesizer();
+        this.initClipboard();
+      }, 200);
+    }
+  }
+
+  applyLanguageUI(lang) {
+    const t = translations[lang] || translations.id;
+
+    // Update document title and meta description
+    if (t.documentTitle) document.title = t.documentTitle;
+    const metaDesc = document.querySelector('meta[name="description"]');
+    if (metaDesc && t.documentDesc) {
+      metaDesc.setAttribute('content', t.documentDesc);
+    }
+
+    // Update header nav labels
+    const navLinks = document.querySelectorAll('.nav-links .nav-label-text');
+    if (navLinks.length >= 5 && t.nav) {
+      navLinks[0].textContent = t.nav.welcome;
+      navLinks[1].textContent = t.nav.about;
+      navLinks[2].textContent = t.nav.skills;
+      navLinks[3].textContent = t.nav.projects;
+      navLinks[4].textContent = t.nav.another;
+    }
+
+    // Update mobile nav labels
+    const mobileTitles = document.querySelectorAll('.mobile-nav-title');
+    if (mobileTitles.length >= 5) {
+      const titles = {
+        id: ['Welcome', 'Manifesto', 'Architecture', 'Selected Works', 'Garden & Dispatch'],
+        en: ['Welcome', 'Manifesto', 'Capabilities', 'Selected Works', 'Garden & Dispatch'],
+        zh: ['首页', '建筑宣言', '能力矩阵', '精选作品', '数字花园'],
+        ja: ['冒頭', '建築宣言', '能力一覧', '選定実績', 'デジタル庭園'],
+        de: ['Willkommen', 'Manifest', 'Fähigkeiten', 'Ausgewählte Arbeiten', 'Digitaler Garten']
+      };
+      const curTitles = titles[lang] || titles.id;
+      mobileTitles.forEach((el, idx) => {
+        if (curTitles[idx]) el.textContent = curTitles[idx];
+      });
+    }
+
+    // Update telemetry status
+    const teleStatus = document.getElementById('telemetry-status');
+    if (teleStatus && t.ui) teleStatus.textContent = t.ui.sysOp;
+
+    // Update current lang code badge
+    const codeEl = document.getElementById('current-lang-code');
+    if (codeEl) codeEl.textContent = lang.toUpperCase();
+
+    // Update active state in dropdown
+    document.querySelectorAll('.lang-select-option').forEach((btn) => {
+      btn.classList.toggle('active', btn.dataset.lang === lang);
+    });
+
+    // Update active state in mobile selector
+    document.querySelectorAll('.mobile-lang-btn').forEach((btn) => {
+      btn.classList.toggle('active', btn.dataset.lang === lang);
+    });
   }
 
   initParallaxAndObserver() {
@@ -330,7 +465,7 @@ class PortfolioApp {
       if (projectTarget) {
         e.preventDefault();
         const projId = projectTarget.getAttribute('data-inspect-project');
-        const proj = portfolioData.projects.items.find((p) => p.id === projId);
+        const proj = this.data.projects.items.find((p) => p.id === projId);
         if (proj && proj.deepDive) {
           this.openProjectInspection(proj);
         }
@@ -352,7 +487,7 @@ class PortfolioApp {
       const noteTarget = e.target.closest('[data-inspect-note]');
       if (noteTarget) {
         const noteId = noteTarget.getAttribute('data-inspect-note');
-        const note = portfolioData.another.gardenNotes.find((n) => n.id === noteId);
+        const note = this.data.another.gardenNotes.find((n) => n.id === noteId);
         if (note) {
           this.openNoteInspection(note);
         }

@@ -6,6 +6,8 @@
  * Geo-Nodes: Semarang, Indonesia
  */
 
+import { translations } from './translations.js';
+
 export const portfolioData = {
   meta: {
     fullName: "Haidar Rifky Andrianno",
@@ -417,3 +419,56 @@ export async function streamNeuraInference(prompt, streamWriter) {
     }
   }
 };
+
+/**
+ * Returns localized portfolio data merged with the selected language translation.
+ * @param {string} lang - 'id' | 'en' | 'zh' | 'ja' | 'de'
+ * @returns {object}
+ */
+export function getPortfolioData(lang = 'id') {
+  const t = translations[lang] || translations.id;
+  
+  // Deep clone base data to avoid mutating original source
+  const localized = JSON.parse(JSON.stringify(portfolioData));
+
+  if (t.welcome) {
+    localized.welcome = { ...localized.welcome, ...t.welcome };
+  }
+  if (t.about) {
+    localized.about.sectionTitle = t.about.sectionTitle;
+    localized.about.sectionSub = t.about.sectionSub;
+    localized.about.ethosTitle = t.about.ethosTitle;
+    localized.about.ethosParagraphs = t.about.ethosParagraphs;
+    if (t.about.pillars) localized.about.pillars = t.about.pillars;
+    if (t.about.timeline) localized.about.timeline = t.about.timeline;
+  }
+  if (t.skills) {
+    localized.skills.sectionTitle = t.skills.sectionTitle;
+    localized.skills.sectionSub = t.skills.sectionSub;
+    localized.skills.description = t.skills.description;
+  }
+  if (t.projects) {
+    localized.projects.sectionTitle = t.projects.sectionTitle;
+    localized.projects.sectionSub = t.projects.sectionSub;
+    localized.projects.description = t.projects.description;
+    if (t.projects.itemsDesc) {
+      localized.projects.items = localized.projects.items.map((item) => ({
+        ...item,
+        description: t.projects.itemsDesc[item.id] || item.description
+      }));
+    }
+  }
+  if (t.another) {
+    localized.another.sectionTitle = t.another.sectionTitle;
+    localized.another.sectionSub = t.another.sectionSub;
+    localized.another.description = t.another.description;
+  }
+  if (t.meta) {
+    localized.meta = { ...localized.meta, ...t.meta };
+  }
+
+  localized.currentLang = lang;
+  localized.t = t;
+
+  return localized;
+}
