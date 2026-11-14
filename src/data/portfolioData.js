@@ -10,7 +10,8 @@ export const portfolioData = {
   meta: {
     fullName: "Haidar Rifky Andrianno",
     shortName: "Haidar",
-    callsign: "HRA // ARCH.01",
+    alias: "Hanzz",
+    callsign: "HANZZ // ARCH.01",
     role: "FullStack Developer",
     subRole: "FullStack Web & Systems Developer",
     institution: {
@@ -46,11 +47,11 @@ export const portfolioData = {
   welcome: {
     systemTag: "SYS.01 // RECONSTRUCTION",
     architecturalPreamble: "BIOPHILIC ARCHITECTURAL MINIMALISM × MATERIAL EXPRESSIVE",
-    headlineLine1: "HARMONIZING",
-    headlineLine2: "ORGANIC NATURE",
-    headlineLine3: "WITH RIGID CODE.",
+    headlineLine1: "PORTFOLIO",
+    headlineLine2: "HANZZ",
+    headlineLine3: "FULLSTACK DEVELOPER.",
     leadParagraph:
-      "Saya adalah Haidar Rifky Andrianno, FullStack Developer yang berbasis di Semarang. Menempuh studi di ITESA Muhammadiyah Semarang, berfokus pada sintesis ruang digital bernapas — memadukan keteraturan arsitektural minimalis, rekayasa perangkat lunak skala tinggi, dan prinsip interaksi responsif modern.",
+      "Saya adalah Haidar Rifky Andrianno (Hanzz), FullStack Developer yang berbasis di Semarang. Menempuh studi di ITESA Muhammadiyah Semarang, berfokus pada sintesis ruang digital bernapas — memadukan keteraturan arsitektural minimalis, rekayasa perangkat lunak skala tinggi, dan prinsip interaksi responsif modern.",
     telemetry: [
       { label: "ACADEMIC BASE", value: "ITESA Muhammadiyah Semarang" },
       { label: "COORDINATES", value: "6.9667° S, 110.4167° E" },
