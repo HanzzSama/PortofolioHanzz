@@ -546,23 +546,15 @@ class PortfolioApp {
     const callsignEl = document.getElementById('drawer-callsign');
     const bodyEl = document.getElementById('drawer-body');
 
-    if (this._drawerCloseTimer) {
-      clearTimeout(this._drawerCloseTimer);
-      this._drawerCloseTimer = null;
-    }
-
     if (callsignEl) callsignEl.textContent = callsign;
     if (bodyEl) bodyEl.innerHTML = contentHtml;
 
     if (backdrop && drawer) {
       drawer.scrollTop = 0;
+      backdrop.classList.add('active');
+      drawer.classList.add('active');
       document.body.style.overflow = 'hidden';
       this.smoothScroller?.stop();
-
-      requestAnimationFrame(() => {
-        backdrop.classList.add('active');
-        drawer.classList.add('active');
-      });
     }
   }
 
@@ -573,15 +565,8 @@ class PortfolioApp {
     if (backdrop && drawer) {
       backdrop.classList.remove('active');
       drawer.classList.remove('active');
-
-      if (this._drawerCloseTimer) clearTimeout(this._drawerCloseTimer);
-      this._drawerCloseTimer = setTimeout(() => {
-        if (!backdrop.classList.contains('active')) {
-          document.body.style.overflow = '';
-          this.smoothScroller?.start();
-        }
-        this._drawerCloseTimer = null;
-      }, 420);
+      document.body.style.overflow = '';
+      this.smoothScroller?.start();
     }
   }
 
