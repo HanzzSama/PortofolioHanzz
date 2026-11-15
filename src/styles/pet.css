@@ -1,0 +1,417 @@
+/**
+ * HANZZPET ARCHITECTURAL RESIDENT COMPANION STYLES
+ * Biophilic Architectural Minimalism × Expressive Interactive Pet
+ * Visual Style: Minimal Mochi Squircle with Procedural Expressive Eyes & Physics
+ */
+
+/* ── Floating Companion Dock ──────────────────────────────── */
+.hanzz-pet-dock {
+  position: fixed;
+  bottom: 24px;
+  left: 24px;
+  z-index: 995;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: none;
+  pointer-events: none;
+  transition: transform 0.25s var(--ease-expressive), opacity 0.25s ease;
+}
+
+.hanzz-pet-dock.is-dragged {
+  transition: none !important;
+  cursor: grabbing !important;
+}
+
+/* ── Speech / Thought Bubble ──────────────────────────────── */
+.hanzz-pet-speech {
+  position: absolute;
+  bottom: calc(100% + 12px);
+  left: 0;
+  margin-bottom: 0;
+  width: max-content;
+  max-width: min(280px, calc(100vw - 48px));
+  min-width: 175px;
+  padding: 0.65rem 0.95rem;
+  background-color: var(--bg-surface);
+  border: var(--border-hairline);
+  border-radius: var(--radius-sm);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  line-height: 1.45;
+  color: var(--text-primary);
+  opacity: 0;
+  transform: translateY(8px) scale(0.92);
+  transform-origin: bottom left;
+  pointer-events: none;
+  transition: opacity 0.22s var(--ease-expressive), transform 0.22s var(--ease-expressive);
+  z-index: 10;
+}
+
+[data-theme="dark"] .hanzz-pet-speech {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+  background-color: #171E19;
+}
+
+.hanzz-pet-speech.is-visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: auto;
+}
+
+/* Speech Bubble Tail - Aligned over the center of HanzzPet */
+.hanzz-pet-speech::after {
+  content: '';
+  position: absolute;
+  bottom: -6px;
+  left: 63px;
+  transform: translateX(-50%) rotate(45deg);
+  width: 10px;
+  height: 10px;
+  background-color: var(--bg-surface);
+  border-right: var(--border-hairline);
+  border-bottom: var(--border-hairline);
+}
+
+[data-theme="dark"] .hanzz-pet-speech::after {
+  background-color: #171E19;
+}
+
+/* Flipped speech alignment when pet is near the right boundary */
+.hanzz-pet-dock.speech-align-right .hanzz-pet-speech {
+  left: auto;
+  right: 0;
+  transform-origin: bottom right;
+}
+
+.hanzz-pet-dock.speech-align-right .hanzz-pet-speech::after {
+  left: auto;
+  right: 63px;
+  transform: translateX(50%) rotate(45deg);
+}
+
+.speech-prefix {
+  font-size: 0.62rem;
+  color: var(--accent-primary);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  margin-bottom: 0.15rem;
+  display: block;
+}
+
+.speech-text {
+  display: block;
+}
+
+/* ── Pet Avatar Interactive Stage ─────────────────────────── */
+.hanzz-pet-stage {
+  position: relative;
+  width: 126px;
+  height: 94px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: auto;
+  cursor: grab;
+  cursor: -webkit-grab;
+}
+
+.hanzz-pet-stage:active {
+  cursor: grabbing;
+  cursor: -webkit-grabbing;
+}
+
+/* ── SVG Pet Mochi Structure ──────────────────────────────── */
+.hanzz-pet-svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  filter: drop-shadow(0 6px 14px rgba(74, 93, 78, 0.12));
+  transition: filter 0.3s ease;
+}
+
+[data-theme="dark"] .hanzz-pet-svg {
+  filter: drop-shadow(0 0 16px rgba(255, 255, 255, 0.14));
+}
+
+/* Body deformation & breathing */
+.pet-body-group {
+  transform-origin: 64.5px 48px;
+  transition: transform 0.15s ease-out;
+}
+
+.pet-body-path {
+  fill: #FFFFFF;
+  stroke: rgba(0, 0, 0, 0.08);
+  stroke-width: 1.2;
+  transition: fill 0.3s ease, stroke 0.3s ease, filter 0.3s ease;
+}
+
+[data-theme="dark"] .pet-body-path {
+  fill: #FFFFFF;
+  stroke: none;
+  filter: drop-shadow(0 0 16px rgba(255, 255, 255, 0.22));
+}
+
+/* Wireframe Mode (Active when in Kinetic Lab) */
+.hanzz-pet-dock.is-wireframe .pet-body-path {
+  fill: rgba(255, 255, 255, 0.25);
+  stroke: var(--accent-primary);
+  stroke-width: 2;
+  stroke-dasharray: 4 2;
+}
+
+/* Ground Ambient Shadow */
+.pet-shadow {
+  fill: rgba(74, 93, 78, 0.12);
+  transform-origin: 64.5px 88px;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+[data-theme="dark"] .pet-shadow {
+  fill: rgba(0, 0, 0, 0.45);
+}
+
+/* ── Royal Crown Styling ──────────────────────────────────── */
+.pet-crown-group {
+  transform-origin: 64.5px 14px;
+  opacity: 0;
+  transform: translateY(-8px) scale(0.65);
+  transition: opacity 0.25s var(--ease-expressive), transform 0.25s var(--ease-expressive);
+  pointer-events: none;
+}
+
+.hanzz-pet-dock.is-royal .pet-crown-group {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  animation: crownFloat 2.8s ease-in-out infinite;
+}
+
+@keyframes crownFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-3px); }
+}
+
+.crown-body {
+  fill: #D4AF37;
+  stroke: #A8871E;
+  stroke-width: 1;
+}
+
+.crown-jewel {
+  fill: #2E7D32;
+  animation: jewelGlimmer 2s ease-in-out infinite;
+}
+
+@keyframes jewelGlimmer {
+  0%, 100% { opacity: 0.8; }
+  50% { opacity: 1; filter: drop-shadow(0 0 3px #4CAF50); }
+}
+
+/* ── Expressive Procedural Eyes (Pure Void Black Matching Reference Image) ── */
+.pet-eyes-container {
+  transform-origin: 64.5px 49px;
+}
+
+.pet-eye-pupil {
+  fill: #050806;
+  transition: transform 0.08s linear;
+}
+
+[data-theme="dark"] .pet-eye-pupil {
+  fill: #000000;
+}
+
+/* Happy Crescents (Hidden by default) */
+.pet-eye-happy {
+  fill: none;
+  stroke: #050806;
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+
+[data-theme="dark"] .pet-eye-happy {
+  stroke: #000000;
+}
+
+.hanzz-pet-dock.is-happy .pet-eye-pupil {
+  opacity: 0;
+}
+
+.hanzz-pet-dock.is-happy .pet-eye-happy {
+  opacity: 1;
+}
+
+/* Sleepy Slits */
+.pet-eye-sleepy {
+  fill: none;
+  stroke: #050806;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+
+[data-theme="dark"] .pet-eye-sleepy {
+  stroke: #000000;
+}
+
+.hanzz-pet-dock.is-sleepy .pet-eye-pupil,
+.hanzz-pet-dock.is-sleepy .pet-eye-happy {
+  opacity: 0;
+}
+
+.hanzz-pet-dock.is-sleepy .pet-eye-sleepy {
+  opacity: 1;
+}
+
+/* Blinking transition */
+.pet-eyes-wrapper.is-blinking {
+  transform: scaleY(0.08);
+}
+
+/* ── Blush Cheeks ─────────────────────────────────────────── */
+.pet-blush {
+  fill: #E57373;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+.hanzz-pet-dock.is-happy .pet-blush,
+.hanzz-pet-dock.is-petted .pet-blush {
+  opacity: 0.65;
+}
+
+/* ── Head Bobbing on 432Hz Audio Play ─────────────────────── */
+.hanzz-pet-dock.is-bobbing .pet-body-group {
+  animation: petBob 0.69s ease-in-out infinite alternate;
+}
+
+@keyframes petBob {
+  0% { transform: translateY(0) scale(1, 1); }
+  100% { transform: translateY(-4px) scale(0.97, 1.04); }
+}
+
+/* ── Floating Action Toolbar ──────────────────────────────── */
+.hanzz-pet-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 6px;
+  background-color: var(--bg-surface);
+  border: var(--border-hairline);
+  border-radius: 20px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+  margin-top: 6px;
+  opacity: 0.85;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  pointer-events: auto;
+}
+
+[data-theme="dark"] .hanzz-pet-toolbar {
+  background-color: #171E19;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+}
+
+.hanzz-pet-dock:hover .hanzz-pet-toolbar {
+  opacity: 1;
+  transform: translateY(-2px);
+}
+
+.pet-action-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 4px 6px;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-secondary);
+  transition: background-color 0.15s ease, transform 0.15s ease;
+  position: relative;
+}
+
+.pet-action-btn:hover {
+  background-color: var(--bg-surface-sunken);
+  color: var(--text-primary);
+  transform: scale(1.15);
+}
+
+.pet-action-btn:active {
+  transform: scale(0.95);
+}
+
+.pet-action-btn.active {
+  background-color: rgba(74, 93, 78, 0.15);
+  color: var(--accent-primary);
+}
+
+/* Mini Action Tooltip on button hover */
+.pet-action-btn[data-tip]:hover::after {
+  content: attr(data-tip);
+  position: absolute;
+  bottom: calc(100% + 6px);
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 0.2rem 0.45rem;
+  background: #111813;
+  color: #FFFFFF;
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  white-space: nowrap;
+  border-radius: 3px;
+  pointer-events: none;
+  z-index: 20;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+}
+
+/* ── Minimized Capsule State ──────────────────────────────── */
+.hanzz-pet-dock.is-minimized .hanzz-pet-speech,
+.hanzz-pet-dock.is-minimized .hanzz-pet-toolbar {
+  display: none !important;
+}
+
+.hanzz-pet-dock.is-minimized .hanzz-pet-stage {
+  width: 44px;
+  height: 36px;
+}
+
+/* ── Particle Bursts (Hearts, Leaves, Sparks) ─────────────── */
+.pet-particle {
+  position: fixed;
+  pointer-events: none;
+  z-index: 1000;
+  animation: particleFloat 1.2s cubic-bezier(0.2, 0.8, 0.4, 1) forwards;
+}
+
+@keyframes particleFloat {
+  0% {
+    opacity: 1;
+    transform: translate(0, 0) scale(0.6) rotate(0deg);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(var(--p-dx, 0px), var(--p-dy, -50px)) scale(1.1) rotate(var(--p-rot, 20deg));
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .hanzz-pet-dock {
+    bottom: 16px;
+    left: 16px;
+    transform: scale(0.9);
+    transform-origin: bottom left;
+  }
+}
+

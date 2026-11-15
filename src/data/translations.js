@@ -485,6 +485,20 @@ export const translations = {
         "inertia": "REDAMAN KECEPATAN",
         "fps": "RENDER FPS"
       }
+    },
+    "pet": {
+      "name": "HanzzPet",
+      "statusPrefix": "SYS.PET // NOMINAL",
+      "defaultThought": "Menyelaraskan koordinat Semarang... [6.9667° S]",
+      "tips": {
+        "pet": "Elus / Pet",
+        "crown": "Mahkota Royal",
+        "matcha": "Beri Matcha",
+        "zoomies": "Zoomies!",
+        "wisdom": "Celoteh Arsitektur",
+        "sleep": "Tidur / Bangun",
+        "toggle": "Ciutkan"
+      }
     }
   },
   "en": {
@@ -962,6 +976,20 @@ export const translations = {
         "vertexCount": "ACTIVE VERTICES",
         "inertia": "VELOCITY DAMPING",
         "fps": "RENDER FPS"
+      }
+    },
+    "pet": {
+      "name": "HanzzPet",
+      "statusPrefix": "SYS.PET // NOMINAL",
+      "defaultThought": "Harmonizing Semarang coordinates... [6.9667° S]",
+      "tips": {
+        "pet": "Pet / Stroke",
+        "crown": "Royal Crown",
+        "matcha": "Serve Matcha",
+        "zoomies": "Zoomies!",
+        "wisdom": "Architecture Wisdom",
+        "sleep": "Sleep / Wake",
+        "toggle": "Minimize"
       }
     }
   },
@@ -1441,6 +1469,20 @@ export const translations = {
         "inertia": "角速度阻尼比",
         "fps": "画布帧率 (FPS)"
       }
+    },
+    "pet": {
+      "name": "HanzzPet",
+      "statusPrefix": "SYS.PET // 运行正常",
+      "defaultThought": "协调三宝垄地理坐标... [6.9667° S]",
+      "tips": {
+        "pet": "抚摸",
+        "crown": "皇家王冠",
+        "matcha": "赠送抹茶",
+        "zoomies": "极速暴走！",
+        "wisdom": "架构心得",
+        "sleep": "休眠 / 唤醒",
+        "toggle": "收起"
+      }
     }
   },
   "ja": {
@@ -1919,6 +1961,20 @@ export const translations = {
         "inertia": "角速度減衰率",
         "fps": "描画FPS"
       }
+    },
+    "pet": {
+      "name": "HanzzPet",
+      "statusPrefix": "SYS.PET // 稼働中",
+      "defaultThought": "スマラン座標を調和中... [6.9667° S]",
+      "tips": {
+        "pet": "撫でる",
+        "crown": "王室の王冠",
+        "matcha": "抹茶をあげる",
+        "zoomies": "超高速ダッシュ！",
+        "wisdom": "建築哲学",
+        "sleep": "睡眠 / 覚醒",
+        "toggle": "最小化"
+      }
     }
   },
   "de": {
@@ -2396,6 +2452,20 @@ export const translations = {
         "vertexCount": "AKTIVE SCHEITELPUNKTE",
         "inertia": "GESCHWINDIGKEITSDÄMPFUNG",
         "fps": "RENDER-FPS"
+      }
+    },
+    "pet": {
+      "name": "HanzzPet",
+      "statusPrefix": "SYS.PET // NOMINAL",
+      "defaultThought": "Harmonisiere Semarang-Koordinaten... [6.9667° S]",
+      "tips": {
+        "pet": "Streicheln",
+        "crown": "Königliche Krone",
+        "matcha": "Matcha geben",
+        "zoomies": "Zoomies!",
+        "wisdom": "Architektur-Weisheit",
+        "sleep": "Schlafen / Aufwachen",
+        "toggle": "Minimieren"
       }
     }
   }

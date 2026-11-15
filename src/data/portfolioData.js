@@ -468,6 +468,21 @@ export async function streamNeuraInference(prompt, streamWriter) {
     }
   },
 
+  pet: {
+    name: "HanzzPet",
+    statusPrefix: "SYS.PET // NOMINAL",
+    defaultThought: "Menyelaraskan koordinat Semarang... [6.9667° S]",
+    tips: {
+      pet: "Elus / Pet",
+      crown: "Mahkota Royal",
+      matcha: "Beri Matcha",
+      zoomies: "Zoomies!",
+      wisdom: "Celoteh Arsitektur",
+      sleep: "Tidur / Bangun",
+      toggle: "Ciutkan"
+    }
+  },
+
   another: {
     sectionIndex: "06",
     sectionTitle: "DIGITAL GARDEN & TRANSMISSION",
@@ -703,6 +718,10 @@ export function getPortfolioData(lang = 'id') {
         ...t.another.colophon
       };
     }
+  }
+
+  if (t.pet) {
+    localized.pet = t.pet;
   }
 
   if (t.meta) {

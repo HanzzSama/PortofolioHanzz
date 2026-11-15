@@ -18,7 +18,9 @@ import { renderProjects } from './components/renderProjects.js';
 import { renderGithub } from './components/renderGithub.js';
 import { renderLab } from './components/renderLab.js';
 import { renderAnother } from './components/renderAnother.js';
+import { renderPet } from './components/renderPet.js';
 import { MonolithSimulator } from './core/monolithSimulator.js';
+import { HanzzPetEngine } from './core/hanzzPetEngine.js';
 
 class PortfolioApp {
   constructor() {
@@ -31,6 +33,7 @@ class PortfolioApp {
     this.currentFrequency = 432;
     this.canvasAnimationId = null;
     this.monolithSim = null;
+    this.petEngine = null;
 
     // Internationalization State
     this.currentLang = localStorage.getItem('portfolio-language') || 'id';
@@ -53,6 +56,7 @@ class PortfolioApp {
     this.initMobileNav();
     this.initKineticTopographyCanvas();
     this.initMonolithSimulator();
+    this.initHanzzPet();
     this.initScrollbarPill();
   }
 
@@ -140,6 +144,7 @@ class PortfolioApp {
         // Re-initialize dynamic component bindings after re-rendering
         this.initKineticTopographyCanvas();
         this.initMonolithSimulator();
+        this.initHanzzPet();
         this.initParallaxAndObserver();
         this.initSmoothNavLinks();
         this.initAudioSynthesizer();
@@ -315,6 +320,7 @@ class PortfolioApp {
           if (stateIcon) stateIcon.textContent = '▶';
           if (stateLabel) stateLabel.textContent = this.data.another?.ui?.synthBtnPlay || 'Activate Resonant Tone';
           muteBtn.classList.remove('active');
+          document.getElementById('hanzz-pet-dock')?.classList.remove('is-bobbing');
         } else {
           // Fade in to gentle ambient level
           this.gainNode.gain.setTargetAtTime(0.08, this.audioContext.currentTime, 0.15);
@@ -322,6 +328,7 @@ class PortfolioApp {
           if (stateIcon) stateIcon.textContent = '■';
           if (stateLabel) stateLabel.textContent = this.data.another?.ui?.synthBtnStop || 'Halt Resonance';
           muteBtn.classList.add('active');
+          document.getElementById('hanzz-pet-dock')?.classList.add('is-bobbing');
           this.startVisualizer(canvas);
         }
       });
@@ -781,6 +788,19 @@ class PortfolioApp {
     if (canvas) {
       this.monolithSim = new MonolithSimulator('monolith-canvas');
     }
+  }
+
+  initHanzzPet() {
+    const container = document.getElementById('hanzz-pet-container');
+    if (!container) return;
+
+    if (this.petEngine) {
+      this.petEngine.destroy();
+      this.petEngine = null;
+    }
+
+    container.innerHTML = renderPet(this.data);
+    this.petEngine = new HanzzPetEngine();
   }
 
   initScrollbarPill() {
