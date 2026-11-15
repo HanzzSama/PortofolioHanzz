@@ -499,7 +499,14 @@ export const translations = {
         "talk": "Ajak Bicara",
         "sleep": "Tidur / Bangun",
         "sound": "Suara On/Off",
-        "toggle": "Ciutkan"
+        "toggle": "Ciutkan",
+        "context_welcome": "Pancarkan Suar Beacon",
+        "context_about": "Siram Tunas Biophilic",
+        "context_skills": "Pindai Stack Komputasi",
+        "context_projects": "Inspeksi Cetak Biru",
+        "context_github": "Radar Komit GitHub",
+        "context_lab": "Inversi Gravitasi 3D",
+        "context_another": "Resonansi 432Hz Zen"
       }
     }
   },
@@ -993,7 +1000,14 @@ export const translations = {
         "talk": "Chat Wisdom",
         "sleep": "Sleep / Wake",
         "sound": "Sound On/Off",
-        "toggle": "Minimize"
+        "toggle": "Minimize",
+        "context_welcome": "Emit Welcome Beacon",
+        "context_about": "Nurture Bio Sprout",
+        "context_skills": "Scan Compute Stack",
+        "context_projects": "Inspect Blueprints",
+        "context_github": "GitHub Commit Radar",
+        "context_lab": "Invert 3D Gravity",
+        "context_another": "Resonate 432Hz Zen"
       }
     }
   },
@@ -1487,7 +1501,14 @@ export const translations = {
         "talk": "架构交流",
         "sleep": "睡觉 / 唤醒",
         "sound": "声音 开/关",
-        "toggle": "折叠"
+        "toggle": "折叠",
+        "context_welcome": "发射信标脉冲",
+        "context_about": "浇灌亲自然嫩芽",
+        "context_skills": "扫描架构技术栈",
+        "context_projects": "检视工程蓝图",
+        "context_github": "GitHub 提交雷达",
+        "context_lab": "反转 3D 重力",
+        "context_another": "432Hz 颂钵共鸣"
       }
     }
   },
@@ -1981,7 +2002,14 @@ export const translations = {
         "talk": "建築の知恵",
         "sleep": "寝る / 起きる",
         "sound": "効果音 ON/OFF",
-        "toggle": "最小化"
+        "toggle": "最小化",
+        "context_welcome": "ウェルカムビーコン",
+        "context_about": "バイオ新芽の水やり",
+        "context_skills": "スタック精密スキャン",
+        "context_projects": "青写真の検査",
+        "context_github": "GitHubコミットレーダー",
+        "context_lab": "3D重力反転",
+        "context_another": "432Hz瞑想チャイム"
       }
     }
   },
@@ -2475,7 +2503,14 @@ export const translations = {
         "talk": "Architektur-Weisheit",
         "sleep": "Schlafen / Aufwachen",
         "sound": "Ton Ein/Aus",
-        "toggle": "Minimieren"
+        "toggle": "Minimieren",
+        "context_welcome": "Willkommens-Beacon",
+        "context_about": "Biophilic-Spross gießen",
+        "context_skills": "Stack-Analyse scannen",
+        "context_projects": "Baupläne inspizieren",
+        "context_github": "GitHub-Commit-Radar",
+        "context_lab": "3D-Schwerkraft umkehren",
+        "context_another": "432Hz-Zen-Klangschale"
       }
     }
   }

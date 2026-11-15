@@ -1,9 +1,13 @@
 /**
- * HANZZPET INTERACTIVE ENGINE (v2.4)
+ * HANZZPET INTERACTIVE ENGINE (v2.5)
  * Autonomous Mascot System: Eye Tracking with Organic Head Tilt,
- * Procedural Eye Expressions Library, Jelly Squish & Happy Dance Physics,
- * 432Hz/Chirp Web Audio Synthesizer, Dynamic Particle Cloud, and Boundary Bounce
+ * 7 Section Persona Metamorphosis, Contextual Dynamic Powers,
+ * Procedural Eye Expressions Library, Chewy Mochi Physics,
+ * Web Audio Modular Synthesizers (432Hz/Chirp/Sonar/Droplets/Matrix),
+ * Dynamic Particle Cloud, and Boundary Bounce
  */
+
+import { translations } from '../data/translations.js';
 
 // Procedural SVG Eye Expression Templates
 export const EYE_TEMPLATES = {
@@ -30,7 +34,113 @@ export const EYE_TEMPLATES = {
   wink: `
     <path d="M 27 44 Q 33 37 39 44" stroke="#000000" stroke-width="3.4" stroke-linecap="round" fill="none"/>
     <ellipse cx="67" cy="44" rx="5.5" ry="8" transform="rotate(-6 67 44)" fill="#000000" />
+  `,
+  code: `
+    <text x="26" y="50" font-family="monospace" font-size="14" font-weight="900" fill="#000000">{</text>
+    <text x="62" y="50" font-family="monospace" font-size="14" font-weight="900" fill="#000000">}</text>
+  `,
+  sparkle: `
+    <path d="M 33 37 L 35 42 L 40 44 L 35 46 L 33 51 L 31 46 L 26 44 L 31 42 Z" fill="#D4AF37"/>
+    <path d="M 67 37 L 69 42 L 74 44 L 69 46 L 67 51 L 65 46 L 60 44 L 65 42 Z" fill="#D4AF37"/>
+  `,
+  binary: `
+    <text x="27" y="50" font-family="monospace" font-size="13" font-weight="900" fill="#10B981">1</text>
+    <text x="63" y="50" font-family="monospace" font-size="13" font-weight="900" fill="#10B981">0</text>
+  `,
+  zen: `
+    <path d="M 27 45 Q 33 50 39 45" stroke="#000000" stroke-width="3.2" stroke-linecap="round" fill="none"/>
+    <path d="M 61 45 Q 67 50 73 45" stroke="#000000" stroke-width="3.2" stroke-linecap="round" fill="none"/>
   `
+};
+
+// 7 Section Personas Configuration
+export const SECTION_PERSONAS = {
+  welcome: {
+    name: 'Pure Mochi Guardian',
+    className: 'persona-welcome-active',
+    defaultEyes: 'normal',
+    tipKey: 'context_welcome',
+    defaultTip: 'Beacon',
+    iconSvg: `
+      <circle cx="8" cy="8" r="3" stroke="currentColor" stroke-width="1.3"/>
+      <path d="M8 1V3M8 13V15M1 8H3M13 8H15" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+    `,
+    particle: '✨'
+  },
+  about: {
+    name: 'Biophilic Dryad',
+    className: 'persona-about-active',
+    defaultEyes: 'happy',
+    tipKey: 'context_about',
+    defaultTip: 'Siram Tunas',
+    iconSvg: `
+      <path d="M8 2C8 2 4 6.5 4 9.5C4 11.7 5.8 13.5 8 13.5C10.2 13.5 12 11.7 12 9.5C12 6.5 8 2 8 2Z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/>
+      <path d="M8 8V11M6.5 9.5L8 11L9.5 9.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+    `,
+    particle: '🍃'
+  },
+  skills: {
+    name: 'Master Artisan',
+    className: 'persona-skills-active',
+    defaultEyes: 'code',
+    tipKey: 'context_skills',
+    defaultTip: 'Pindai Stack',
+    iconSvg: `
+      <circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.3"/>
+      <path d="M8 4V12M4 8H12M8 6L10 8L8 10" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+    `,
+    particle: '📐'
+  },
+  projects: {
+    name: 'Hardhat Architect',
+    className: 'persona-projects-active',
+    defaultEyes: 'sparkle',
+    tipKey: 'context_projects',
+    defaultTip: 'Inspeksi Blueprint',
+    iconSvg: `
+      <path d="M3 13V6C3 4.5 5 3 8 3C11 3 13 4.5 13 6V13" stroke="currentColor" stroke-width="1.3"/>
+      <path d="M2 13H14M6 6H10" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+    `,
+    particle: '⭐'
+  },
+  github: {
+    name: 'Cyber Terminal Node',
+    className: 'persona-github-active',
+    defaultEyes: 'binary',
+    tipKey: 'context_github',
+    defaultTip: 'Radar Komit',
+    iconSvg: `
+      <circle cx="5" cy="5" r="2" stroke="currentColor" stroke-width="1.2"/>
+      <circle cx="5" cy="11" r="2" stroke="currentColor" stroke-width="1.2"/>
+      <circle cx="11" cy="8" r="2" stroke="currentColor" stroke-width="1.2"/>
+      <path d="M5 7V9M7 5.5L9 7M7 10.5L9 9" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+    `,
+    particle: '💻'
+  },
+  lab: {
+    name: 'Holographic Polyhedron',
+    className: 'persona-lab-active',
+    defaultEyes: 'curious',
+    tipKey: 'context_lab',
+    defaultTip: 'Inversi Gravitasi',
+    iconSvg: `
+      <path d="M8 2L13 5V11L8 14L3 11V5L8 2Z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/>
+      <path d="M8 2V14M3 5L13 11M3 11L13 5" stroke="currentColor" stroke-width="0.9" stroke-linecap="round"/>
+    `,
+    particle: '🔮'
+  },
+  another: {
+    name: 'Zen Sound Harmonizer',
+    className: 'persona-another-active',
+    defaultEyes: 'zen',
+    tipKey: 'context_another',
+    defaultTip: 'Chime 432Hz',
+    iconSvg: `
+      <circle cx="8" cy="8" r="3.5" stroke="currentColor" stroke-width="1.3"/>
+      <path d="M4.5 4.5C3 6 3 10 4.5 11.5M11.5 4.5C13 6 13 10 11.5 11.5M2 2C-0.5 4.5 -0.5 11.5 2 14M14 2C16.5 4.5 16.5 11.5 14 14" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/>
+    `,
+    particle: '🎶'
+  }
 };
 
 export class HanzzPetEngine {
@@ -65,7 +175,8 @@ export class HanzzPetEngine {
 
     this.currentMood = 'ready';
     this.currentExpression = 'normal';
-    this.expressionKeys = ['normal', 'happy', 'sleepy', 'love', 'curious', 'wink'];
+    this.currentSection = 'welcome';
+    this.expressionKeys = ['normal', 'happy', 'sleepy', 'love', 'curious', 'wink', 'code', 'sparkle', 'binary', 'zen'];
     this.expressionIdx = 0;
 
     // Multi-click detection
@@ -111,6 +222,7 @@ export class HanzzPetEngine {
     this.scheduleBlinkLoop();
     this.resetIdleTimer();
     this.resetToDock();
+    this.applySectionPersona('welcome', false);
 
     // Initial greeting quote
     setTimeout(() => {
@@ -260,6 +372,166 @@ export class HanzzPetEngine {
     } catch (_) {}
   }
 
+  /* Section Web Audio Modular Synthesizers */
+  playSonarPingSound() {
+    if (!this.isSoundEnabled) return;
+    try {
+      const ctx = this.getAudioContext();
+      if (!ctx) return;
+      const now = ctx.currentTime;
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(880, now);
+      osc.frequency.exponentialRampToValueAtTime(1760, now + 0.18);
+      gain.gain.setValueAtTime(0.08, now);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.28);
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start(now);
+      osc.stop(now + 0.28);
+    } catch (_) {}
+  }
+
+  playDropletSound() {
+    if (!this.isSoundEnabled) return;
+    try {
+      const ctx = this.getAudioContext();
+      if (!ctx) return;
+      const now = ctx.currentTime;
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(520, now);
+      osc.frequency.exponentialRampToValueAtTime(1180, now + 0.08);
+      osc.frequency.exponentialRampToValueAtTime(740, now + 0.22);
+      gain.gain.setValueAtTime(0.09, now);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.25);
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start(now);
+      osc.stop(now + 0.25);
+    } catch (_) {}
+  }
+
+  playScannerBlipSound() {
+    if (!this.isSoundEnabled) return;
+    try {
+      const notes = [659, 880, 1318];
+      notes.forEach((freq, idx) => {
+        setTimeout(() => {
+          this.playSoundChirp(freq, freq * 1.12, 'triangle', 0.08);
+        }, idx * 45);
+      });
+    } catch (_) {}
+  }
+
+  playMetalClinkSound() {
+    if (!this.isSoundEnabled) return;
+    try {
+      const ctx = this.getAudioContext();
+      if (!ctx) return;
+      const now = ctx.currentTime;
+      [784, 1568].forEach((freq) => {
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(freq, now);
+        osc.frequency.exponentialRampToValueAtTime(freq * 0.95, now + 0.18);
+        gain.gain.setValueAtTime(0.05, now);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + 0.18);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start(now);
+        osc.stop(now + 0.18);
+      });
+    } catch (_) {}
+  }
+
+  playDataModemSound() {
+    if (!this.isSoundEnabled) return;
+    try {
+      const notes = [1046, 1318, 1567, 2093];
+      notes.forEach((freq, idx) => {
+        setTimeout(() => {
+          this.playSoundChirp(freq, freq * 1.04, 'square', 0.05);
+        }, idx * 35);
+      });
+    } catch (_) {}
+  }
+
+  playSciFiGlitchSound() {
+    if (!this.isSoundEnabled) return;
+    try {
+      const ctx = this.getAudioContext();
+      if (!ctx) return;
+      const now = ctx.currentTime;
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.type = 'sawtooth';
+      osc.frequency.setValueAtTime(1400, now);
+      osc.frequency.exponentialRampToValueAtTime(280, now + 0.28);
+      gain.gain.setValueAtTime(0.04, now);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.28);
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start(now);
+      osc.stop(now + 0.28);
+    } catch (_) {}
+  }
+
+  playSingingBowl432Sound() {
+    if (!this.isSoundEnabled) return;
+    try {
+      const ctx = this.getAudioContext();
+      if (!ctx) return;
+      const now = ctx.currentTime;
+      [432, 864, 1296].forEach((freq, idx) => {
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(freq, now);
+        const startGain = 0.06 / (idx + 1);
+        gain.gain.setValueAtTime(startGain, now);
+        gain.gain.exponentialRampToValueAtTime(0.0001, now + 1.8);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start(now);
+        osc.stop(now + 1.8);
+      });
+    } catch (_) {}
+  }
+
+  playSectionTransitionSound(sectionId) {
+    if (!this.isSoundEnabled) return;
+    switch (sectionId) {
+      case 'welcome':
+        this.playSoundChirp(440, 660, 'sine', 0.15);
+        break;
+      case 'about':
+        this.playDropletSound();
+        break;
+      case 'skills':
+        this.playSoundChirp(520, 880, 'triangle', 0.12);
+        break;
+      case 'projects':
+        this.playMetalClinkSound();
+        break;
+      case 'github':
+        this.playSoundChirp(880, 1320, 'square', 0.08);
+        break;
+      case 'lab':
+        this.playSoundChirp(340, 680, 'sawtooth', 0.14);
+        break;
+      case 'another':
+        this.playSingingBowl432Sound();
+        break;
+      default:
+        this.playSoundChirp(440, 660, 'sine', 0.15);
+        break;
+    }
+  }
+
   toggleSound() {
     this.isSoundEnabled = !this.isSoundEnabled;
     localStorage.setItem('pet-sound', this.isSoundEnabled ? 'active' : 'muted');
@@ -305,9 +577,197 @@ export class HanzzPetEngine {
       sleepy: "Tidur (- -)",
       love: "Cinta (♥ ♥)",
       curious: "Kepo (o O)",
-      wink: "Kedip (^ •)"
+      wink: "Kedip (^ •)",
+      code: "Kode ({ })",
+      sparkle: "Bintang (✦ ✦)",
+      binary: "Biner (1 0)",
+      zen: "Zen (◡ ◡)"
     };
     this.say("PET.EXPR", `Ekspresi mata: ${labels[nextExpr] || nextExpr}`, 2400);
+  }
+
+  /* ==========================================================================
+     THE 7 SECTION PERSONA METAMORPHOSIS & CONTEXTUAL ACTIONS
+     ========================================================================== */
+  applySectionPersona(sectionId, notify = true) {
+    if (!this.dock) return;
+    this.currentSection = sectionId;
+    const persona = SECTION_PERSONAS[sectionId] || SECTION_PERSONAS.welcome;
+
+    // 1. Remove previous persona classes and apply current persona
+    Object.values(SECTION_PERSONAS).forEach(p => {
+      this.dock.classList.remove(p.className);
+    });
+    this.dock.classList.add(persona.className);
+
+    // 2. Wireframe mode for Lab
+    if (sectionId === 'lab') {
+      this.dock.classList.add('is-wireframe');
+    } else {
+      this.dock.classList.remove('is-wireframe');
+    }
+
+    // 3. Update Contextual Action Button Icon & Tooltip
+    const contextBtn = document.getElementById('pet-btn-context');
+    const contextIcon = document.getElementById('pet-context-icon');
+    if (contextBtn && contextIcon) {
+      contextIcon.innerHTML = persona.iconSvg;
+      const tooltip = this.getTooltip(persona.tipKey) || persona.defaultTip;
+      contextBtn.setAttribute('data-tip', tooltip);
+
+      // Pulse animation on button to indicate persona superpower
+      contextBtn.classList.remove('section-pulse');
+      void contextBtn.offsetWidth;
+      contextBtn.classList.add('section-pulse');
+    }
+
+    // 4. Update Eye Expression to section persona default (if not in sleep or dance)
+    if (!this.isSleepy && !this.isDancing && !this.isPetting) {
+      this.setEyeExpression(persona.defaultEyes);
+    }
+
+    // 5. Sound & speech notification
+    if (notify) {
+      this.playSectionTransitionSound(sectionId);
+      const quote = this.getQuote(sectionId);
+      if (quote) {
+        this.say(`SYS.PERSONA // ${persona.name.toUpperCase()}`, quote, 4200);
+      }
+    }
+  }
+
+  getTooltip(key) {
+    try {
+      const lang = translations[this.currentLang] ? this.currentLang : 'id';
+      return translations[lang]?.tips?.[key] || translations.id.tips[key];
+    } catch (_) {
+      return '';
+    }
+  }
+
+  triggerContextAction() {
+    if (!this.dock || !this.petBody) return;
+
+    // Trigger elastic chewy mochi squish on button click
+    this.petBody.classList.remove('is-squished', 'is-dancing', 'is-bouncing');
+    void this.petBody.offsetWidth;
+    this.petBody.classList.add('is-squished');
+
+    switch (this.currentSection) {
+      case 'welcome':
+        this.pingBeacon();
+        break;
+      case 'about':
+        this.waterSprout();
+        break;
+      case 'skills':
+        this.scanSkills();
+        break;
+      case 'projects':
+        this.inspectBlueprint();
+        break;
+      case 'github':
+        this.pulseGitCommits();
+        break;
+      case 'lab':
+        this.invertGravity();
+        break;
+      case 'another':
+        this.resonate432Hz();
+        break;
+      default:
+        this.pingBeacon();
+        break;
+    }
+
+    setTimeout(() => {
+      if (this.petBody) this.petBody.classList.remove('is-squished');
+    }, 720);
+  }
+
+  pingBeacon() {
+    this.playSonarPingSound();
+    this.spawnParticles(50, 20, 8, '✨');
+    this.setEyeExpression('curious');
+    this.say("SYS.BEACON", "Radar suar aktif! Koordinat menyambut Anda di portal arsitektural Haidar Rifky.");
+    setTimeout(() => {
+      if (!this.isSleepy) this.setEyeExpression('normal');
+    }, 2800);
+  }
+
+  waterSprout() {
+    this.playDropletSound();
+    this.spawnParticles(50, 10, 8, '🍃');
+    const blossom = document.getElementById('sprout-blossom');
+    if (blossom) {
+      blossom.setAttribute('r', '2.8');
+      setTimeout(() => blossom.setAttribute('r', '1.3'), 2200);
+    }
+    this.setEyeExpression('happy');
+    this.say("SYS.BIO // SPROUT", "Tunas biophilic bermekaran! Harmoni alam organik & arsitektur presisi.");
+    setTimeout(() => {
+      if (!this.isSleepy) this.setEyeExpression('happy');
+    }, 2800);
+  }
+
+  scanSkills() {
+    this.playScannerBlipSound();
+    this.spawnParticles(50, 44, 7, '📐');
+    this.setEyeExpression('code');
+    this.say("SYS.SKILL // MATRIX", "Komputasi Stack: Node, React, Cloud & Zero Bloatware terverifikasi 100%!");
+    setTimeout(() => {
+      if (!this.isSleepy) this.setEyeExpression('code');
+    }, 3000);
+  }
+
+  inspectBlueprint() {
+    this.playMetalClinkSound();
+    this.spawnParticles(50, 20, 8, '⭐');
+    this.setEyeExpression('sparkle');
+    this.say("SYS.BUILD // BLUEPRINT", "Membuka cetak biru: Sistem terdistribusi berdaya tahan tinggi!");
+    setTimeout(() => {
+      if (!this.isSleepy) this.setEyeExpression('normal');
+    }, 2800);
+  }
+
+  pulseGitCommits() {
+    this.playDataModemSound();
+    this.spawnParticles(50, 44, 9, '💻');
+    this.setEyeExpression('binary');
+    this.say("SYS.GIT // RADAR", "44+ komit riil tahunan di repositori @HanzzSama! Teruji dan transparan.");
+    setTimeout(() => {
+      if (!this.isSleepy) this.setEyeExpression('binary');
+    }, 2800);
+  }
+
+  invertGravity() {
+    this.playSciFiGlitchSound();
+    this.spawnParticles(50, 40, 10, '🔮');
+    this.setEyeExpression('curious');
+    if (this.petBody) {
+      this.petBody.style.transform = 'translateY(-28px) rotate(360deg) scale(1.15)';
+      setTimeout(() => {
+        if (this.petBody) {
+          this.petBody.style.transform = '';
+          this.petBody.classList.remove('is-squished', 'is-bouncing');
+          void this.petBody.offsetWidth;
+          this.petBody.classList.add('is-bouncing');
+          this.playMochiBounceSound(8);
+          setTimeout(() => this.petBody && this.petBody.classList.remove('is-bouncing'), 680);
+        }
+      }, 420);
+    }
+    this.say("SYS.LAB // QUANTUM", "Gravitasi kuantum kanvas dibalik sejenak! Proyeksi matematika 3D aktif.");
+  }
+
+  resonate432Hz() {
+    this.playSingingBowl432Sound();
+    this.spawnParticles(50, 10, 8, '🎶');
+    this.setEyeExpression('zen');
+    this.say("SYS.ZEN // 432HZ", "Resonansi gelombang 432Hz menenangkan memori komputasi.");
+    setTimeout(() => {
+      if (!this.isSleepy) this.setEyeExpression('zen');
+    }, 3200);
   }
 
   /* ==========================================================================
@@ -850,6 +1310,7 @@ export class HanzzPetEngine {
 
     // Action Toolbar buttons
     document.getElementById('pet-btn-pet')?.addEventListener('click', (e) => this.triggerPetInteraction(e));
+    document.getElementById('pet-btn-context')?.addEventListener('click', () => this.triggerContextAction());
     document.getElementById('pet-btn-dance')?.addEventListener('click', () => this.triggerHappyDance());
     document.getElementById('pet-btn-matcha')?.addEventListener('click', () => this.feedMatcha());
     document.getElementById('pet-btn-expr')?.addEventListener('click', () => this.nextEyeExpression());
@@ -862,24 +1323,11 @@ export class HanzzPetEngine {
     document.getElementById('pet-btn-sound')?.addEventListener('click', () => this.toggleSound());
     document.getElementById('pet-btn-minimize')?.addEventListener('click', () => this.toggleMinimize());
 
-    // Contextual section change observer listener
+    // Contextual section change observer listener: triggers dynamic persona metamorphosis
     window.addEventListener('sectionchange', (e) => {
       const sectionId = e.detail?.id;
       if (!sectionId) return;
-
-      if (sectionId === 'lab') {
-        this.dock.classList.add('is-wireframe');
-        this.say("SYS.PET // LAB", this.getQuote('lab'), 5000);
-      } else {
-        this.dock.classList.remove('is-wireframe');
-      }
-
-      if (Math.random() < 0.65) {
-        const quote = this.getQuote(sectionId);
-        if (quote) {
-          this.say(`SYS.NODE // 0${this.getSectionNum(sectionId)}`, quote, 4200);
-        }
-      }
+      this.applySectionPersona(sectionId, true);
     });
 
     // Window resize
