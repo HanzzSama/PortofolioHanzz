@@ -491,12 +491,14 @@ export const translations = {
       "statusPrefix": "SYS.PET // NOMINAL",
       "defaultThought": "Menyelaraskan koordinat Semarang... [6.9667° S]",
       "tips": {
-        "pet": "Elus / Pet",
-        "crown": "Mahkota Royal",
+        "pet": "Elus HanzzPet",
+        "dance": "Joget Bersama",
         "matcha": "Beri Matcha",
-        "zoomies": "Zoomies!",
-        "wisdom": "Celoteh Arsitektur",
+        "expr": "Ganti Ekspresi",
+        "crown": "Mahkota Royal",
+        "talk": "Ajak Bicara",
         "sleep": "Tidur / Bangun",
+        "sound": "Suara On/Off",
         "toggle": "Ciutkan"
       }
     }
@@ -983,12 +985,14 @@ export const translations = {
       "statusPrefix": "SYS.PET // NOMINAL",
       "defaultThought": "Harmonizing Semarang coordinates... [6.9667° S]",
       "tips": {
-        "pet": "Pet / Stroke",
-        "crown": "Royal Crown",
+        "pet": "Pet HanzzPet",
+        "dance": "Happy Dance",
         "matcha": "Serve Matcha",
-        "zoomies": "Zoomies!",
-        "wisdom": "Architecture Wisdom",
+        "expr": "Switch Expression",
+        "crown": "Royal Crown",
+        "talk": "Chat Wisdom",
         "sleep": "Sleep / Wake",
+        "sound": "Sound On/Off",
         "toggle": "Minimize"
       }
     }
@@ -1476,12 +1480,14 @@ export const translations = {
       "defaultThought": "协调三宝垄地理坐标... [6.9667° S]",
       "tips": {
         "pet": "抚摸",
-        "crown": "皇家王冠",
+        "dance": "欢快跳舞",
         "matcha": "赠送抹茶",
-        "zoomies": "极速暴走！",
-        "wisdom": "架构心得",
-        "sleep": "休眠 / 唤醒",
-        "toggle": "收起"
+        "expr": "切换表情",
+        "crown": "皇家王冠",
+        "talk": "架构交流",
+        "sleep": "睡觉 / 唤醒",
+        "sound": "声音 开/关",
+        "toggle": "折叠"
       }
     }
   },
@@ -1968,11 +1974,13 @@ export const translations = {
       "defaultThought": "スマラン座標を調和中... [6.9667° S]",
       "tips": {
         "pet": "撫でる",
-        "crown": "王室の王冠",
+        "dance": "ダンスタイム",
         "matcha": "抹茶をあげる",
-        "zoomies": "超高速ダッシュ！",
-        "wisdom": "建築哲学",
-        "sleep": "睡眠 / 覚醒",
+        "expr": "表情切り替え",
+        "crown": "王室の王冠",
+        "talk": "建築の知恵",
+        "sleep": "寝る / 起きる",
+        "sound": "効果音 ON/OFF",
         "toggle": "最小化"
       }
     }
@@ -2460,11 +2468,13 @@ export const translations = {
       "defaultThought": "Harmonisiere Semarang-Koordinaten... [6.9667° S]",
       "tips": {
         "pet": "Streicheln",
+        "dance": "Fröhlicher Tanz",
+        "matcha": "Matcha servieren",
+        "expr": "Ausdruck wechseln",
         "crown": "Königliche Krone",
-        "matcha": "Matcha geben",
-        "zoomies": "Zoomies!",
-        "wisdom": "Architektur-Weisheit",
+        "talk": "Architektur-Weisheit",
         "sleep": "Schlafen / Aufwachen",
+        "sound": "Ton Ein/Aus",
         "toggle": "Minimieren"
       }
     }

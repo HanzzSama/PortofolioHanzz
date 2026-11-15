@@ -1,8 +1,37 @@
 /**
- * HANZZPET INTERACTIVE ENGINE
- * Real-time Procedural Eye-Tracking, Verlet Toss & Bounce Physics,
- * Web Audio 432Hz Sound Synthesis, and Architectural Telemetry State Machine
+ * HANZZPET INTERACTIVE ENGINE (v2.4)
+ * Autonomous Mascot System: Eye Tracking with Organic Head Tilt,
+ * Procedural Eye Expressions Library, Jelly Squish & Happy Dance Physics,
+ * 432Hz/Chirp Web Audio Synthesizer, Dynamic Particle Cloud, and Boundary Bounce
  */
+
+// Procedural SVG Eye Expression Templates
+export const EYE_TEMPLATES = {
+  normal: `
+    <ellipse cx="33" cy="44" rx="5.5" ry="8" transform="rotate(6 33 44)" fill="#000000" />
+    <ellipse cx="67" cy="44" rx="5.5" ry="8" transform="rotate(-6 67 44)" fill="#000000" />
+  `,
+  happy: `
+    <path d="M 27 44 Q 33 36 39 44" stroke="#000000" stroke-width="3.4" stroke-linecap="round" fill="none"/>
+    <path d="M 61 44 Q 67 36 73 44" stroke="#000000" stroke-width="3.4" stroke-linecap="round" fill="none"/>
+  `,
+  sleepy: `
+    <line x1="27" y1="44" x2="39" y2="44" stroke="#000000" stroke-width="3.4" stroke-linecap="round"/>
+    <line x1="61" y1="44" x2="73" y2="44" stroke="#000000" stroke-width="3.4" stroke-linecap="round"/>
+  `,
+  love: `
+    <path d="M 33 40 C 31 37 27 37 27 40 C 27 44 33 48 33 48 C 33 48 39 44 39 40 C 39 37 35 37 33 40 Z" fill="#e11d48"/>
+    <path d="M 67 40 C 65 37 61 37 61 40 C 61 44 67 48 67 48 C 67 48 73 44 73 40 C 73 37 69 37 67 40 Z" fill="#e11d48"/>
+  `,
+  curious: `
+    <ellipse cx="33" cy="43" rx="4.5" ry="6" transform="rotate(6 33 43)" fill="#000000" />
+    <circle cx="67" cy="42" r="7.5" fill="#000000" />
+  `,
+  wink: `
+    <path d="M 27 44 Q 33 37 39 44" stroke="#000000" stroke-width="3.4" stroke-linecap="round" fill="none"/>
+    <ellipse cx="67" cy="44" rx="5.5" ry="8" transform="rotate(-6 67 44)" fill="#000000" />
+  `
+};
 
 export class HanzzPetEngine {
   constructor() {
@@ -10,35 +39,46 @@ export class HanzzPetEngine {
     if (!this.dock) return;
 
     this.stage = document.getElementById('hanzz-pet-stage');
+    this.petBody = document.getElementById('neurapet-body');
+    this.petHead = document.getElementById('neurapet-head');
+    this.eyesWrapper = document.getElementById('neurapet-eyes-wrapper');
+    this.eyesTrack = document.getElementById('neurapet-eyes-track');
+    this.stageGlow = document.getElementById('pet-stage-glow');
+    this.particleCloud = document.getElementById('pet-particle-cloud');
+
     this.speech = document.getElementById('hanzz-pet-speech');
     this.speechPrefix = document.getElementById('pet-speech-prefix');
     this.speechText = document.getElementById('pet-speech-text');
 
-    this.bodyGroup = document.getElementById('pet-body-group');
-    this.eyesWrapper = document.getElementById('pet-eyes-wrapper');
-    this.eyeLeft = document.getElementById('pet-eye-left');
-    this.eyeRight = document.getElementById('pet-eye-right');
-    this.glimmerLeft = document.getElementById('pet-glimmer-left');
-    this.glimmerRight = document.getElementById('pet-glimmer-right');
-    this.shadow = document.getElementById('pet-shadow');
-
-    // State
+    // State Variables
+    this.isTrackingEnabled = true;
+    this.isBlinkEnabled = true;
+    this.isSoundEnabled = localStorage.getItem('pet-sound') !== 'muted';
+    this.isPetting = false;
+    this.isDancing = false;
     this.isRoyal = false;
     this.isSleepy = false;
     this.isMinimized = false;
     this.isWireframe = false;
     this.isDragging = false;
     this.isTossed = false;
-    this.isPetting = false;
 
-    // Default Dock Coordinates
+    this.currentMood = 'ready';
+    this.currentExpression = 'normal';
+    this.expressionKeys = ['normal', 'happy', 'sleepy', 'love', 'curious', 'wink'];
+    this.expressionIdx = 0;
+
+    // Multi-click detection
+    this.clickCount = 0;
+    this.clickTimer = null;
+
+    // Dock Coordinates & Physics
     this.dockHeight = 138;
     this.dockX = 24;
     this.dockY = window.innerHeight - this.dockHeight - 24;
     this.currentX = this.dockX;
     this.currentY = this.dockY;
 
-    // Physics Velocity
     this.vx = 0;
     this.vy = 0;
     this.gravity = 0.55;
@@ -47,21 +87,19 @@ export class HanzzPetEngine {
     this.lastPointerPos = { x: 0, y: 0, time: 0 };
     this.velocityHistory = [];
 
-    // Eye Tracking Coordinates & Lerp
+    // Mouse Tracking target & damping
     this.mouse = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
-    this.eyePos = { x: 0, y: 0 };
-    this.targetEyePos = { x: 0, y: 0 };
+    this.trackingRaf = null;
 
-    // Audio Context (Synthesized 432Hz)
+    // Web Audio Context
     this.audioCtx = null;
 
     // Timers
     this.idleTimer = null;
     this.blinkTimer = null;
     this.speechTimeout = null;
-    this.rafId = null;
 
-    // Internationalized Dialogue Quotes
+    // Internationalization
     this.currentLang = localStorage.getItem('portfolio-language') || 'id';
 
     this.init();
@@ -70,19 +108,430 @@ export class HanzzPetEngine {
   init() {
     this.setupAudio();
     this.bindEvents();
-    this.startEyeTrackingLoop();
-    this.scheduleNaturalBlink();
+    this.scheduleBlinkLoop();
     this.resetIdleTimer();
-
-    // Initial positioning: reset cleanly to CSS dock anchor (bottom: 24px; left: 24px)
     this.resetToDock();
 
-    // Initial greeting thought
+    // Initial greeting quote
     setTimeout(() => {
       this.say("SYS.PET // ONLINE", this.getQuote('welcome'));
     }, 1200);
   }
 
+  /* ==========================================================================
+     SYNTHESIZED WEB AUDIO (Pure Chimes, Purrs, and Arpeggios)
+     ========================================================================== */
+  setupAudio() {
+    const initAudio = () => {
+      if (!this.audioCtx) {
+        const AudioCtx = window.AudioContext || window.webkitAudioContext;
+        if (AudioCtx) this.audioCtx = new AudioCtx();
+      }
+      if (this.audioCtx && this.audioCtx.state === 'suspended') {
+        this.audioCtx.resume();
+      }
+      window.removeEventListener('pointerdown', initAudio);
+    };
+    window.addEventListener('pointerdown', initAudio, { once: true });
+  }
+
+  getAudioContext() {
+    if (!this.audioCtx) {
+      const AudioCtx = window.AudioContext || window.webkitAudioContext;
+      if (AudioCtx) this.audioCtx = new AudioCtx();
+    }
+    if (this.audioCtx && this.audioCtx.state === 'suspended') {
+      this.audioCtx.resume();
+    }
+    return this.audioCtx;
+  }
+
+  playSoundChirp(freq1 = 520, freq2 = 780, type = 'sine', duration = 0.15) {
+    if (!this.isSoundEnabled) return;
+    try {
+      const ctx = this.getAudioContext();
+      if (!ctx) return;
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+
+      osc.type = type;
+      const now = ctx.currentTime;
+      osc.frequency.setValueAtTime(freq1, now);
+      osc.frequency.exponentialRampToValueAtTime(freq2, now + duration);
+
+      gain.gain.setValueAtTime(0.08, now);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + duration);
+
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+
+      osc.start(now);
+      osc.stop(now + duration);
+    } catch (_) {}
+  }
+
+  playHappyArpeggio() {
+    if (!this.isSoundEnabled) return;
+    const notes = [440, 554.37, 659.25, 880];
+    notes.forEach((freq, idx) => {
+      setTimeout(() => {
+        this.playSoundChirp(freq, freq * 1.05, 'triangle', 0.12);
+      }, idx * 65);
+    });
+  }
+
+  playPurrSound() {
+    if (!this.isSoundEnabled) return;
+    this.playSoundChirp(280, 420, 'sine', 0.22);
+  }
+
+  /* Tactile Mochi Rubber Bounce Sound (Sine frequency sweep + snap transient) */
+  playMochiBounceSound(velocity = 6) {
+    if (!this.isSoundEnabled) return;
+    try {
+      const ctx = this.getAudioContext();
+      if (!ctx) return;
+      const now = ctx.currentTime;
+
+      // Calculate dynamic pitch and volume based on impact intensity
+      const intensity = Math.min(Math.max(velocity / 8, 0.4), 1.8);
+      const baseFreq = 160 * intensity;
+      const peakFreq = 340 * intensity;
+      const duration = 0.22;
+
+      // 1. Chewy Rubber Spring Oscillator (Sine Sweep Up & Down)
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.type = 'sine';
+
+      osc.frequency.setValueAtTime(baseFreq, now);
+      osc.frequency.exponentialRampToValueAtTime(peakFreq, now + 0.05);
+      osc.frequency.exponentialRampToValueAtTime(baseFreq * 0.85, now + duration);
+
+      const maxGain = Math.min(0.06 * intensity, 0.14);
+      gain.gain.setValueAtTime(maxGain, now);
+      gain.gain.exponentialRampToValueAtTime(0.0005, now + duration);
+
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start(now);
+      osc.stop(now + duration);
+
+      // 2. Harmonic Tactile "Plop/Boing" Transients (Triangle snap)
+      const snapOsc = ctx.createOscillator();
+      const snapGain = ctx.createGain();
+      snapOsc.type = 'triangle';
+      snapOsc.frequency.setValueAtTime(432 * intensity, now);
+      snapOsc.frequency.exponentialRampToValueAtTime(216, now + 0.09);
+
+      snapGain.gain.setValueAtTime(0.04 * intensity, now);
+      snapGain.gain.exponentialRampToValueAtTime(0.0001, now + 0.09);
+
+      snapOsc.connect(snapGain);
+      snapGain.connect(ctx.destination);
+      snapOsc.start(now);
+      snapOsc.stop(now + 0.09);
+    } catch (_) {}
+  }
+
+  /* Organic Mochi Squish / Squeeze Pop Sound */
+  playSquishPopSound() {
+    if (!this.isSoundEnabled) return;
+    try {
+      const ctx = this.getAudioContext();
+      if (!ctx) return;
+      const now = ctx.currentTime;
+
+      // Chewy Mochi Squeeze ("pyoo-wump")
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(260, now);
+      osc.frequency.exponentialRampToValueAtTime(520, now + 0.07);
+      osc.frequency.exponentialRampToValueAtTime(320, now + 0.19);
+
+      gain.gain.setValueAtTime(0.08, now);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.2);
+
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start(now);
+      osc.stop(now + 0.2);
+    } catch (_) {}
+  }
+
+  toggleSound() {
+    this.isSoundEnabled = !this.isSoundEnabled;
+    localStorage.setItem('pet-sound', this.isSoundEnabled ? 'active' : 'muted');
+
+    const soundOnSvg = document.getElementById('pet-sound-on-svg');
+    const soundOffSvg = document.getElementById('pet-sound-off-svg');
+    if (soundOnSvg && soundOffSvg) {
+      soundOnSvg.style.display = this.isSoundEnabled ? 'block' : 'none';
+      soundOffSvg.style.display = this.isSoundEnabled ? 'none' : 'block';
+    }
+
+    const soundBtn = document.getElementById('pet-btn-sound');
+    if (soundBtn) {
+      soundBtn.classList.toggle('active', this.isSoundEnabled);
+    }
+
+    if (this.isSoundEnabled) {
+      this.playMochiBounceSound(6);
+      this.say("SYS.SFX // AUDIO", "Audio Web Audio diaktifkan!");
+    } else {
+      this.say("SYS.SFX // MUTED", "Audio dimatikan (mode hening).");
+    }
+  }
+
+  /* ==========================================================================
+     EYE EXPRESSIONS LIBRARY & SWITCHER
+     ========================================================================== */
+  setEyeExpression(exprName) {
+    if (!EYE_TEMPLATES[exprName] || !this.eyesTrack) return;
+    this.currentExpression = exprName;
+    this.eyesTrack.innerHTML = EYE_TEMPLATES[exprName];
+  }
+
+  nextEyeExpression() {
+    this.expressionIdx = (this.expressionIdx + 1) % this.expressionKeys.length;
+    const nextExpr = this.expressionKeys[this.expressionIdx];
+    this.setEyeExpression(nextExpr);
+    this.playSoundChirp(480, 640, 'triangle', 0.1);
+
+    const labels = {
+      normal: "Normal (• •)",
+      happy: "Senang (^ ^)",
+      sleepy: "Tidur (- -)",
+      love: "Cinta (♥ ♥)",
+      curious: "Kepo (o O)",
+      wink: "Kedip (^ •)"
+    };
+    this.say("PET.EXPR", `Ekspresi mata: ${labels[nextExpr] || nextExpr}`, 2400);
+  }
+
+  /* ==========================================================================
+     ORGANIC MOUSE TRACKING & HEAD TILT
+     ========================================================================== */
+  updateTracking(targetX, targetY) {
+    if (!this.petBody || !this.eyesTrack || !this.petHead) return;
+    if (!this.isTrackingEnabled || this.isPetting || this.isDancing || this.isSleepy) return;
+
+    const rect = this.petBody.getBoundingClientRect();
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height / 2;
+
+    const deltaX = targetX - centerX;
+    const deltaY = targetY - centerY;
+    const dist = Math.hypot(deltaX, deltaY);
+
+    if (dist === 0) {
+      this.eyesTrack.style.transform = 'translate(0px, 0px)';
+      this.petHead.style.transform = 'translate(0px, 0px) rotate(0deg)';
+      return;
+    }
+
+    // Max eye displacement limit: ±6.8px horizontal, ±5.2px vertical
+    const maxRadius = 450;
+    const factor = Math.min(dist / maxRadius, 1);
+    const offsetX = (deltaX / dist) * factor * 6.8;
+    const offsetY = (deltaY / dist) * factor * 5.2;
+
+    this.eyesTrack.style.transform = `translate(${offsetX.toFixed(2)}px, ${offsetY.toFixed(2)}px)`;
+
+    // Subtle organic head tilt (±4.5 deg) & shift
+    const tiltAngle = (deltaX / dist) * factor * 4.5;
+    const headShiftX = (deltaX / dist) * factor * 2.5;
+    this.petHead.style.transform = `translate(${headShiftX.toFixed(2)}px, 0px) rotate(${tiltAngle.toFixed(2)}deg)`;
+  }
+
+  /* ==========================================================================
+     AUTONOMOUS BLINKING (Random Intervals & Rapid Double-Blink)
+     ========================================================================== */
+  performBlink() {
+    if (!this.isBlinkEnabled || this.isPetting || this.isSleepy) return;
+    if (!this.eyesWrapper) return;
+
+    this.eyesWrapper.classList.add('is-blinking');
+    setTimeout(() => {
+      if (this.eyesWrapper) this.eyesWrapper.classList.remove('is-blinking');
+    }, 120);
+
+    // 30% chance for organic rapid double-blink
+    if (Math.random() < 0.3) {
+      setTimeout(() => {
+        if (this.eyesWrapper) {
+          this.eyesWrapper.classList.add('is-blinking');
+          setTimeout(() => {
+            if (this.eyesWrapper) this.eyesWrapper.classList.remove('is-blinking');
+          }, 100);
+        }
+      }, 220);
+    }
+  }
+
+  scheduleBlinkLoop() {
+    const delay = 2200 + Math.random() * 2800;
+    this.blinkTimer = setTimeout(() => {
+      this.performBlink();
+      this.scheduleBlinkLoop();
+    }, delay);
+  }
+
+  /* ==========================================================================
+     PARTICLE CLOUD GENERATOR
+     ========================================================================== */
+  spawnParticles(x, y, count = 6, emoji = '💖') {
+    if (!this.particleCloud) return;
+    const emojis = ['💖', '✨', '⭐', '🌸', '💫', '🍃'];
+
+    for (let i = 0; i < count; i++) {
+      const p = document.createElement('div');
+      p.className = 'floating-heart';
+      p.textContent = emoji === 'random' ? emojis[Math.floor(Math.random() * emojis.length)] : emoji;
+
+      const offsetX = (Math.random() - 0.5) * 70;
+      const offsetY = (Math.random() - 0.5) * 35;
+      const rot = (Math.random() - 0.5) * 45;
+      const dx = (Math.random() - 0.5) * 60;
+
+      p.style.left = `${x + offsetX}px`;
+      p.style.top = `${y + offsetY}px`;
+      p.style.setProperty('--dx', `${dx}px`);
+      p.style.setProperty('--rot', `${rot}deg`);
+
+      this.particleCloud.appendChild(p);
+
+      setTimeout(() => {
+        if (p.parentNode) p.parentNode.removeChild(p);
+      }, 1250);
+    }
+  }
+
+  /* ==========================================================================
+     INTERACTIONS: PETTING & HAPPY DANCE
+     ========================================================================== */
+  triggerPetInteraction(e) {
+    if (!this.petBody) return;
+    this.isPetting = true;
+    this.dock.classList.add('is-petted', 'is-happy');
+
+    // Squish animation reflow with chewy mochi bounce
+    this.petBody.classList.remove('is-squished', 'is-dancing', 'is-bouncing');
+    void this.petBody.offsetWidth; // force reflow
+    this.petBody.classList.add('is-squished');
+
+    this.playSquishPopSound();
+
+    // Spawn hearts
+    const rect = this.petBody.getBoundingClientRect();
+    const clickX = e && e.clientX ? e.clientX - rect.left : rect.width / 2;
+    const clickY = e && e.clientY ? e.clientY - rect.top : rect.height / 2;
+    this.spawnParticles(clickX, clickY, 6, '💖');
+
+    this.setEyeExpression('happy');
+
+    const happyQuotes = [
+      'Hehe, kenyal seperti mochi arsitektural! ✨',
+      'Purr purr... senangnya ditemani arsitek ramah!',
+      'Frekuensi harmonis 432Hz terkalibrasi 100%! 💚',
+      'Elusan kamu bikin komputasi makin elastis & lancar!'
+    ];
+    this.say("SYS.PET // HAPPY", happyQuotes[Math.floor(Math.random() * happyQuotes.length)]);
+
+    setTimeout(() => {
+      this.isPetting = false;
+      this.dock.classList.remove('is-petted', 'is-happy');
+      this.petBody.classList.remove('is-squished');
+      if (!this.isSleepy) {
+        this.setEyeExpression(this.currentExpression === 'happy' ? 'normal' : this.currentExpression);
+      }
+    }, 720);
+  }
+
+  triggerHappyDance() {
+    if (!this.petBody || this.isDancing) return;
+    this.isDancing = true;
+
+    this.petBody.classList.remove('is-squished', 'is-dancing');
+    void this.petBody.offsetWidth;
+    this.petBody.classList.add('is-dancing');
+
+    this.playHappyArpeggio();
+
+    const rect = this.petBody.getBoundingClientRect();
+    this.spawnParticles(rect.width / 2, rect.height / 2, 12, 'random');
+    this.setEyeExpression('love');
+    this.say("SYS.PET // DANCE", "Yaaay! Joget arsitektural merayakan kode presisi! 🎶💃");
+
+    setTimeout(() => {
+      this.isDancing = false;
+      if (this.petBody) this.petBody.classList.remove('is-dancing');
+      this.setEyeExpression('happy');
+      setTimeout(() => {
+        if (!this.isSleepy && !this.isDancing) this.setEyeExpression('normal');
+      }, 1200);
+    }, 1800);
+  }
+
+  feedMatcha() {
+    this.playSoundChirp(600, 950, 'triangle', 0.2);
+    const rect = this.petBody.getBoundingClientRect();
+    this.spawnParticles(rect.width / 2, rect.height / 2, 7, '🍵');
+    this.setEyeExpression('curious');
+    this.say("SYS.PET // MATCHA", "Slurp... Teh matcha hangat menenangkan memori sistem! 🍃");
+    setTimeout(() => this.setEyeExpression('happy'), 800);
+    setTimeout(() => {
+      if (!this.isSleepy) this.setEyeExpression('normal');
+    }, 2400);
+  }
+
+  toggleRoyal() {
+    this.isRoyal = !this.isRoyal;
+    this.dock.classList.toggle('is-royal', this.isRoyal);
+    const royalBtn = document.getElementById('pet-btn-royal');
+    if (royalBtn) royalBtn.classList.toggle('active', this.isRoyal);
+
+    if (this.isRoyal) {
+      this.playHappyArpeggio();
+      this.setEyeExpression('curious');
+      this.say("SYS.PET // ROYAL", "Mahkota arsitektural terpasang! Baginda HanzzPet siap memerintah.");
+      this.spawnParticles(50, 10, 8, '👑');
+    } else {
+      this.say("SYS.PET // CASUAL", "Mahkota disimpan di brankas kode.");
+      this.setEyeExpression('normal');
+    }
+  }
+
+  toggleSleep() {
+    this.isSleepy = !this.isSleepy;
+    this.dock.classList.toggle('is-sleepy', this.isSleepy);
+    const sleepBtn = document.getElementById('pet-btn-sleep');
+    if (sleepBtn) sleepBtn.classList.toggle('active', this.isSleepy);
+
+    if (this.isSleepy) {
+      this.playSoundChirp(320, 160, 'sine', 0.35);
+      this.setEyeExpression('sleepy');
+      this.say("SYS.PET // NAP", "Zzz... Mode hemat energi diaktifkan...");
+    } else {
+      this.playSoundChirp(200, 540, 'triangle', 0.2);
+      this.setEyeExpression('normal');
+      this.say("SYS.PET // WAKE", "Bangun! Siap merancang arsitektur kembali.");
+    }
+  }
+
+  toggleMinimize() {
+    this.isMinimized = !this.isMinimized;
+    this.dock.classList.toggle('is-minimized', this.isMinimized);
+    const minPath = document.getElementById('pet-min-path');
+    if (minPath) {
+      minPath.setAttribute('d', this.isMinimized ? 'M8 3V13M3 8H13' : 'M3 8H13');
+    }
+  }
+
+  /* ==========================================================================
+     PHYSICS ENGINE: DRAG, TOSS & BOUNDARY BOUNCE
+     ========================================================================== */
   resetToDock() {
     if (this.dock) {
       this.dock.style.left = '';
@@ -97,199 +546,6 @@ export class HanzzPetEngine {
     this.currentY = this.dockY;
   }
 
-  /* ==========================================================================
-     SYNTHESIZED WEB AUDIO (432Hz PENTATONIC HARMONICS)
-     ========================================================================== */
-  setupAudio() {
-    // Lazy initialize on first user interaction to satisfy browser autoplay policy
-    const initAudio = () => {
-      if (!this.audioCtx) {
-        const AudioContext = window.AudioContext || window.webkitAudioContext;
-        if (AudioContext) {
-          this.audioCtx = new AudioContext();
-        }
-      }
-      window.removeEventListener('pointerdown', initAudio);
-    };
-    window.addEventListener('pointerdown', initAudio, { once: true });
-  }
-
-  playTone(freq, duration = 0.25, type = 'sine', gainVal = 0.08) {
-    if (!this.audioCtx) return;
-    try {
-      if (this.audioCtx.state === 'suspended') {
-        this.audioCtx.resume();
-      }
-
-      const osc = this.audioCtx.createOscillator();
-      const gain = this.audioCtx.createGain();
-
-      osc.type = type;
-      osc.frequency.setValueAtTime(freq, this.audioCtx.currentTime);
-
-      gain.gain.setValueAtTime(gainVal, this.audioCtx.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.0001, this.audioCtx.currentTime + duration);
-
-      osc.connect(gain);
-      gain.connect(this.audioCtx.destination);
-
-      osc.start();
-      osc.stop(this.audioCtx.currentTime + duration);
-    } catch (_) {}
-  }
-
-  playPurr() {
-    // Warm low-frequency purr with frequency modulation
-    if (!this.audioCtx) return;
-    try {
-      const now = this.audioCtx.currentTime;
-      const osc = this.audioCtx.createOscillator();
-      const lfo = this.audioCtx.createOscillator();
-      const lfoGain = this.audioCtx.createGain();
-      const mainGain = this.audioCtx.createGain();
-
-      lfo.frequency.setValueAtTime(18, now); // 18Hz vibrato flutter
-      lfoGain.gain.setValueAtTime(12, now);
-
-      osc.frequency.setValueAtTime(108, now); // 108Hz harmonic root
-      lfo.connect(lfoGain);
-      lfoGain.connect(osc.frequency);
-
-      mainGain.gain.setValueAtTime(0.06, now);
-      mainGain.gain.exponentialRampToValueAtTime(0.0001, now + 0.4);
-
-      osc.connect(mainGain);
-      mainGain.connect(this.audioCtx.destination);
-
-      lfo.start(now);
-      osc.start(now);
-      lfo.stop(now + 0.4);
-      osc.stop(now + 0.4);
-    } catch (_) {}
-  }
-
-  playChime(noteIdx = 0) {
-    // 432Hz natural pentatonic tuning scale (C, D, E, G, A)
-    const scale = [432, 486, 540, 648, 720];
-    const freq = scale[noteIdx % scale.length];
-    this.playTone(freq, 0.35, 'sine', 0.09);
-  }
-
-  playBoing() {
-    // Elastic spring pitch glide
-    if (!this.audioCtx) return;
-    try {
-      const now = this.audioCtx.currentTime;
-      const osc = this.audioCtx.createOscillator();
-      const gain = this.audioCtx.createGain();
-
-      osc.type = 'triangle';
-      osc.frequency.setValueAtTime(160, now);
-      osc.frequency.exponentialRampToValueAtTime(432, now + 0.18);
-
-      gain.gain.setValueAtTime(0.09, now);
-      gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.28);
-
-      osc.connect(gain);
-      gain.connect(this.audioCtx.destination);
-
-      osc.start(now);
-      osc.stop(now + 0.28);
-    } catch (_) {}
-  }
-
-  playRoyalFanfare() {
-    // Majestic arpeggio chord: C4 (432Hz), E4 (540Hz), G4 (648Hz), C5 (864Hz)
-    const chord = [432, 540, 648, 864];
-    chord.forEach((freq, i) => {
-      setTimeout(() => {
-        this.playTone(freq, 0.45, 'triangle', 0.1);
-      }, i * 90);
-    });
-  }
-
-  /* ==========================================================================
-     EYE TRACKING & PROCEDURAL ANIMATION LOOP
-     ========================================================================== */
-  startEyeTrackingLoop() {
-    const loop = () => {
-      // Calculate target eye position from stage center to mouse
-      if (this.stage && !this.isSleepy) {
-        const rect = this.stage.getBoundingClientRect();
-        const stageCenterX = rect.left + rect.width / 2;
-        const stageCenterY = rect.top + rect.height / 2;
-
-        const dx = this.mouse.x - stageCenterX;
-        const dy = this.mouse.y - stageCenterY;
-        const dist = Math.hypot(dx, dy);
-
-        // Clamped maximum eye travel range (elliptical bounds)
-        const maxRadius = 3.8;
-        const factor = Math.min(dist / 220, 1.0);
-        const angle = Math.atan2(dy, dx);
-
-        this.targetEyePos.x = Math.cos(angle) * maxRadius * factor;
-        this.targetEyePos.y = Math.sin(angle) * (maxRadius * 0.75) * factor;
-
-        // Smooth Lerp Damping
-        this.eyePos.x += (this.targetEyePos.x - this.eyePos.x) * 0.12;
-        this.eyePos.y += (this.targetEyePos.y - this.eyePos.y) * 0.12;
-
-        // Update Pupil positions (Centered at lx=46, ly=49 and rx=83, ry=49)
-        if (this.eyeLeft && this.eyeRight) {
-          const lx = 46 + this.eyePos.x;
-          const ly = 49 + this.eyePos.y;
-          const rx = 83 + this.eyePos.x;
-          const ry = 49 + this.eyePos.y;
-
-          this.eyeLeft.setAttribute('cx', lx.toFixed(2));
-          this.eyeLeft.setAttribute('cy', ly.toFixed(2));
-          this.eyeRight.setAttribute('cx', rx.toFixed(2));
-          this.eyeRight.setAttribute('cy', ry.toFixed(2));
-        }
-      }
-
-      // Physics loop for Toss & Bounce
-      if (this.isTossed) {
-        this.updateTossPhysics();
-      }
-
-      this.rafId = requestAnimationFrame(loop);
-    };
-
-    loop();
-  }
-
-  scheduleNaturalBlink() {
-    const blink = () => {
-      if (!this.isSleepy && this.eyesWrapper) {
-        this.eyesWrapper.classList.add('is-blinking');
-        setTimeout(() => {
-          this.eyesWrapper.classList.remove('is-blinking');
-
-          // 25% chance of charming double-blink
-          if (Math.random() < 0.25) {
-            setTimeout(() => {
-              this.eyesWrapper.classList.add('is-blinking');
-              setTimeout(() => {
-                this.eyesWrapper.classList.remove('is-blinking');
-              }, 110);
-            }, 120);
-          }
-        }, 130);
-      }
-
-      // Schedule next blink at organic interval (3.5 - 7 seconds)
-      const nextDelay = 3500 + Math.random() * 3500;
-      this.blinkTimer = setTimeout(blink, nextDelay);
-    };
-
-    this.blinkTimer = setTimeout(blink, 2500);
-  }
-
-  /* ==========================================================================
-     PHYSICS ENGINE: DRAG, TOSS & BOUNDARY BOUNCE
-     ========================================================================== */
   updatePosition(x, y) {
     this.currentX = x;
     this.currentY = y;
@@ -298,7 +554,6 @@ export class HanzzPetEngine {
       this.dock.style.bottom = 'auto';
       this.dock.style.top = `${y}px`;
 
-      // Flip speech bubble direction when near the right edge
       if (x > window.innerWidth - 260) {
         this.dock.classList.add('speech-align-right');
       } else {
@@ -322,47 +577,55 @@ export class HanzzPetEngine {
     const maxY = window.innerHeight - this.dockHeight - 24;
 
     let hasBounced = false;
+    let impactVelocity = 0;
 
-    // Horizontal Boundary Collisions
     if (nextX <= minX) {
       nextX = minX;
+      impactVelocity = Math.abs(this.vx);
       this.vx = -this.vx * this.bounceDamping;
       hasBounced = true;
     } else if (nextX >= maxX) {
       nextX = maxX;
+      impactVelocity = Math.abs(this.vx);
       this.vx = -this.vx * this.bounceDamping;
       hasBounced = true;
     }
 
-    // Vertical Boundary Collisions
     if (nextY <= minY) {
       nextY = minY;
+      impactVelocity = Math.max(impactVelocity, Math.abs(this.vy));
       this.vy = -this.vy * this.bounceDamping;
       hasBounced = true;
     } else if (nextY >= maxY) {
       nextY = maxY;
+      impactVelocity = Math.max(impactVelocity, Math.abs(this.vy));
       this.vy = -this.vy * this.bounceDamping;
       hasBounced = true;
-
-      // Friction on ground
       this.vx *= 0.88;
+
+      // Floor impact triggers chewy mochi squash and bounce
+      if (this.petBody && impactVelocity > 1.6) {
+        this.petBody.classList.remove('is-bouncing', 'is-squished');
+        void this.petBody.offsetWidth;
+        this.petBody.classList.add('is-bouncing');
+        setTimeout(() => {
+          if (this.petBody) this.petBody.classList.remove('is-bouncing');
+        }, 680);
+      }
     }
 
-    if (hasBounced && Math.hypot(this.vx, this.vy) > 2) {
-      this.playBoing();
-      this.squish(1.22, 0.78);
-      this.spawnParticle('spark', this.currentX + 60, this.currentY + 50);
+    if (hasBounced && impactVelocity > 1.2) {
+      this.playMochiBounceSound(impactVelocity);
+      this.spawnParticles(60, 45, Math.min(Math.floor(impactVelocity * 0.8) + 1, 6), '✨');
     }
 
     this.updatePosition(nextX, nextY);
 
-    // Stop toss when velocity settles
     if (Math.hypot(this.vx, this.vy) < 0.65 && nextY >= maxY - 4) {
       this.isTossed = false;
       this.vx = 0;
       this.vy = 0;
 
-      // Crawl/Spring back gently to home dock
       setTimeout(() => {
         this.returnToDock();
       }, 800);
@@ -393,142 +656,9 @@ export class HanzzPetEngine {
     animateReturn();
   }
 
-  squish(scaleX = 1.15, scaleY = 0.85) {
-    if (!this.bodyGroup) return;
-    this.bodyGroup.style.transform = `scale(${scaleX}, ${scaleY})`;
-    setTimeout(() => {
-      if (this.bodyGroup) {
-        this.bodyGroup.style.transform = '';
-      }
-    }, 180);
-  }
-
   /* ==========================================================================
-     PARTICLE BURST ENGINE (Hearts, Sage Leaves, Royal Sparks)
+     SPEECH & DIALOGUES
      ========================================================================== */
-  spawnParticle(type = 'heart', x, y) {
-    const particle = document.createElement('span');
-    particle.className = 'pet-particle font-mono';
-
-    const icons = {
-      heart: '💚',
-      leaf: '🍃',
-      spark: '✨',
-      tea: '🍵',
-      crown: '👑'
-    };
-    particle.textContent = icons[type] || '✨';
-
-    const dx = (Math.random() - 0.5) * 60;
-    const dy = -40 - Math.random() * 45;
-    const rot = (Math.random() - 0.5) * 40;
-
-    particle.style.left = `${x}px`;
-    particle.style.top = `${y}px`;
-    particle.style.setProperty('--p-dx', `${dx}px`);
-    particle.style.setProperty('--p-dy', `${dy}px`);
-    particle.style.setProperty('--p-rot', `${rot}deg`);
-
-    document.body.appendChild(particle);
-    setTimeout(() => particle.remove(), 1250);
-  }
-
-  /* ==========================================================================
-     STATE MACHINE & ACTIONS
-     ========================================================================== */
-  setHappy(isHappy) {
-    this.dock.classList.toggle('is-happy', isHappy);
-    if (isHappy) {
-      this.dock.classList.remove('is-sleepy');
-      this.isSleepy = false;
-    }
-  }
-
-  toggleRoyal() {
-    this.isRoyal = !this.isRoyal;
-    this.dock.classList.toggle('is-royal', this.isRoyal);
-    const royalBtn = document.getElementById('pet-btn-royal');
-    if (royalBtn) royalBtn.classList.toggle('active', this.isRoyal);
-
-    if (this.isRoyal) {
-      this.playRoyalFanfare();
-      this.squish(1.08, 0.92);
-      this.say("SYS.PET // ROYAL", "Mahkota arsitektural terpasang! Baginda HanzzPet siap memerintah.");
-      this.spawnParticle('crown', this.currentX + 50, this.currentY);
-      this.spawnParticle('spark', this.currentX + 70, this.currentY + 10);
-    } else {
-      this.say("SYS.PET // CASUAL", "Mahkota disimpan di brankas kode.");
-    }
-  }
-
-  feedMatcha() {
-    this.setHappy(true);
-    this.playChime(2);
-    this.squish(0.92, 1.12);
-    this.say("SYS.PET // MATCHA", "Slurp... Teh matcha hangat menenangkan frekuensi sistem.");
-    this.spawnParticle('tea', this.currentX + 58, this.currentY + 20);
-    this.spawnParticle('leaf', this.currentX + 35, this.currentY + 15);
-    setTimeout(() => this.setHappy(false), 2200);
-  }
-
-  triggerZoomies() {
-    this.say("SYS.PET // ZOOMIES", "Woooo! Kecepatan komputasi hiperaktif diaktifkan!");
-    this.playTone(648, 0.2);
-
-    let step = 0;
-    const maxSteps = 24;
-    const startX = this.currentX;
-    const startY = this.currentY;
-
-    const zoom = () => {
-      step++;
-      const offsetAngle = (step / maxSteps) * Math.PI * 4;
-      const jx = startX + Math.sin(offsetAngle) * 160;
-      const jy = startY - Math.abs(Math.cos(offsetAngle)) * 80;
-
-      this.updatePosition(jx, jy);
-      this.spawnParticle('spark', jx + 60, jy + 50);
-
-      if (step % 4 === 0) {
-        this.playTone(300 + step * 25, 0.1);
-      }
-
-      if (step < maxSteps) {
-        requestAnimationFrame(zoom);
-      } else {
-        this.returnToDock();
-        this.say("SYS.PET // REST", "Fiuh... Latihan sirkuit selesai!");
-      }
-    };
-
-    zoom();
-  }
-
-  toggleSleep() {
-    this.isSleepy = !this.isSleepy;
-    this.dock.classList.toggle('is-sleepy', this.isSleepy);
-    const sleepBtn = document.getElementById('pet-btn-sleep');
-    if (sleepBtn) sleepBtn.classList.toggle('active', this.isSleepy);
-
-    if (this.isSleepy) {
-      this.playTone(160, 0.4, 'sine', 0.05);
-      this.say("SYS.PET // NAP", "Zzz... Mode hemat energi diaktifkan...");
-    } else {
-      this.playTone(540, 0.2);
-      this.squish(0.9, 1.15);
-      this.say("SYS.PET // WAKE", "Bangun! Siap merancang arsitektur kembali.");
-    }
-  }
-
-  toggleMinimize() {
-    this.isMinimized = !this.isMinimized;
-    this.dock.classList.toggle('is-minimized', this.isMinimized);
-    const minBtn = document.getElementById('pet-btn-minimize');
-    if (minBtn) {
-      minBtn.querySelector('span').textContent = this.isMinimized ? '+' : '–';
-    }
-  }
-
   say(prefix, text, duration = 4500) {
     if (!this.speech || this.isMinimized) return;
 
@@ -539,7 +669,7 @@ export class HanzzPetEngine {
 
     if (this.speechTimeout) clearTimeout(this.speechTimeout);
     this.speechTimeout = setTimeout(() => {
-      this.speech.classList.remove('is-visible');
+      if (this.speech) this.speech.classList.remove('is-visible');
     }, duration);
   }
 
@@ -590,45 +720,46 @@ export class HanzzPetEngine {
      EVENT BINDINGS
      ========================================================================== */
   bindEvents() {
-    // Window mouse tracker
+    // Mouse tracking across viewport
     window.addEventListener('pointermove', (e) => {
       this.mouse.x = e.clientX;
       this.mouse.y = e.clientY;
       this.resetIdleTimer();
+
+      if (this.trackingRaf) cancelAnimationFrame(this.trackingRaf);
+      this.trackingRaf = requestAnimationFrame(() => {
+        this.updateTracking(e.clientX, e.clientY);
+      });
     }, { passive: true });
 
-    // Petting / Hover on Stage
+    // Physics Loop for Toss
+    const physicsLoop = () => {
+      if (this.isTossed) {
+        this.updateTossPhysics();
+      }
+      requestAnimationFrame(physicsLoop);
+    };
+    requestAnimationFrame(physicsLoop);
+
+    // Multi-click & Click on Character Body
+    if (this.petBody) {
+      this.petBody.addEventListener('click', (e) => {
+        if (this.isDragging) return;
+        this.clickCount++;
+        clearTimeout(this.clickTimer);
+        this.clickTimer = setTimeout(() => { this.clickCount = 0; }, 380);
+
+        if (this.clickCount >= 3) {
+          this.clickCount = 0;
+          this.triggerHappyDance();
+        } else {
+          this.triggerPetInteraction(e);
+        }
+      });
+    }
+
+    // Pointer Drag & Toss on Stage
     if (this.stage) {
-      let petMoveCount = 0;
-
-      this.stage.addEventListener('pointerenter', () => {
-        this.isPetting = true;
-        this.dock.classList.add('is-petted');
-        this.setHappy(true);
-        this.playPurr();
-        this.spawnParticle('heart', this.currentX + 60, this.currentY + 20);
-      });
-
-      this.stage.addEventListener('pointermove', (e) => {
-        if (!this.isDragging) {
-          petMoveCount++;
-          if (petMoveCount % 12 === 0) {
-            this.playPurr();
-            this.spawnParticle('leaf', e.clientX, e.clientY - 20);
-          }
-        }
-      });
-
-      this.stage.addEventListener('pointerleave', () => {
-        this.isPetting = false;
-        this.dock.classList.remove('is-petted');
-        petMoveCount = 0;
-        if (!this.isRoyal) {
-          setTimeout(() => this.setHappy(false), 800);
-        }
-      });
-
-      // Pointer Drag & Toss
       this.stage.addEventListener('pointerdown', (e) => {
         if (e.target.closest('.pet-action-btn')) return;
 
@@ -648,8 +779,7 @@ export class HanzzPetEngine {
         this.velocityHistory = [];
 
         try { this.stage.setPointerCapture(e.pointerId); } catch (_) {}
-        this.squish(0.9, 1.15);
-        this.playTone(320, 0.15);
+        this.playSoundChirp(320, 480, 'triangle', 0.12);
       });
 
       this.stage.addEventListener('pointermove', (e) => {
@@ -668,6 +798,14 @@ export class HanzzPetEngine {
         if (this.velocityHistory.length > 5) this.velocityHistory.shift();
 
         this.lastPointerPos = { x: e.clientX, y: e.clientY, time: now };
+
+        // Elastic dynamic mochi stretch while dragging based on velocity
+        if (this.petBody) {
+          const speed = Math.hypot(vx, vy);
+          const stretch = Math.min(speed * 0.012, 0.28);
+          const tilt = Math.max(Math.min(vx * 0.7, 18), -18);
+          this.petBody.style.transform = `scale(${1 + stretch}, ${1 - stretch * 0.55}) rotate(${tilt.toFixed(1)}deg)`;
+        }
       });
 
       const handlePointerUp = (e) => {
@@ -676,7 +814,11 @@ export class HanzzPetEngine {
         this.dock.classList.remove('is-dragged');
         try { this.stage.releasePointerCapture(e.pointerId); } catch (_) {}
 
-        // Calculate fling release velocity
+        // Reset inline stretch transform
+        if (this.petBody) {
+          this.petBody.style.transform = '';
+        }
+
         if (this.velocityHistory.length > 0) {
           const avgVx = this.velocityHistory.reduce((s, v) => s + v.vx, 0) / this.velocityHistory.length;
           const avgVy = this.velocityHistory.reduce((s, v) => s + v.vy, 0) / this.velocityHistory.length;
@@ -685,8 +827,19 @@ export class HanzzPetEngine {
             this.isTossed = true;
             this.vx = avgVx * 0.9;
             this.vy = avgVy * 0.9;
-            this.playBoing();
+            this.playMochiBounceSound(Math.hypot(avgVx, avgVy));
             this.say("SYS.PET // TOSS", "Wheee! Fisika lemparan bebas!");
+          } else {
+            // Soft release spring squish
+            if (this.petBody) {
+              this.petBody.classList.remove('is-squished', 'is-bouncing');
+              void this.petBody.offsetWidth;
+              this.petBody.classList.add('is-squished');
+              this.playMochiBounceSound(3);
+              setTimeout(() => {
+                if (this.petBody) this.petBody.classList.remove('is-squished');
+              }, 720);
+            }
           }
         }
       };
@@ -696,14 +849,17 @@ export class HanzzPetEngine {
     }
 
     // Action Toolbar buttons
-    document.getElementById('pet-btn-royal')?.addEventListener('click', () => this.toggleRoyal());
+    document.getElementById('pet-btn-pet')?.addEventListener('click', (e) => this.triggerPetInteraction(e));
+    document.getElementById('pet-btn-dance')?.addEventListener('click', () => this.triggerHappyDance());
     document.getElementById('pet-btn-matcha')?.addEventListener('click', () => this.feedMatcha());
-    document.getElementById('pet-btn-zoomies')?.addEventListener('click', () => this.triggerZoomies());
-    document.getElementById('pet-btn-wisdom')?.addEventListener('click', () => {
-      this.playChime(1);
+    document.getElementById('pet-btn-expr')?.addEventListener('click', () => this.nextEyeExpression());
+    document.getElementById('pet-btn-royal')?.addEventListener('click', () => this.toggleRoyal());
+    document.getElementById('pet-btn-talk')?.addEventListener('click', () => {
+      this.playSoundChirp(450, 680, 'sine', 0.15);
       this.say("HANZZ // WISDOM", this.getQuote('random'));
     });
     document.getElementById('pet-btn-sleep')?.addEventListener('click', () => this.toggleSleep());
+    document.getElementById('pet-btn-sound')?.addEventListener('click', () => this.toggleSound());
     document.getElementById('pet-btn-minimize')?.addEventListener('click', () => this.toggleMinimize());
 
     // Contextual section change observer listener
@@ -711,7 +867,6 @@ export class HanzzPetEngine {
       const sectionId = e.detail?.id;
       if (!sectionId) return;
 
-      // Special visual reaction when entering Kinetic Lab
       if (sectionId === 'lab') {
         this.dock.classList.add('is-wireframe');
         this.say("SYS.PET // LAB", this.getQuote('lab'), 5000);
@@ -719,11 +874,10 @@ export class HanzzPetEngine {
         this.dock.classList.remove('is-wireframe');
       }
 
-      // Contextual thought bubble
       if (Math.random() < 0.65) {
         const quote = this.getQuote(sectionId);
         if (quote) {
-          this.say(`SYS.0${this.getSectionNum(sectionId)} // NODE`, quote, 4200);
+          this.say(`SYS.NODE // 0${this.getSectionNum(sectionId)}`, quote, 4200);
         }
       }
     });
@@ -746,17 +900,16 @@ export class HanzzPetEngine {
   resetIdleTimer() {
     if (this.idleTimer) clearTimeout(this.idleTimer);
     this.idleTimer = setTimeout(() => {
-      if (!this.isDragging && !this.isTossed) {
+      if (!this.isDragging && !this.isTossed && !this.isSleepy) {
         this.toggleSleep();
       }
-    }, 22000); // 22 seconds idle triggers nap
+    }, 28000);
   }
 
   destroy() {
-    if (this.rafId) cancelAnimationFrame(this.rafId);
     if (this.blinkTimer) clearTimeout(this.blinkTimer);
     if (this.idleTimer) clearTimeout(this.idleTimer);
     if (this.speechTimeout) clearTimeout(this.speechTimeout);
+    if (this.trackingRaf) cancelAnimationFrame(this.trackingRaf);
   }
 }
-
