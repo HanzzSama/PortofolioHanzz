@@ -20,7 +20,8 @@ export const translations = {
       "about": "02.ABT",
       "skills": "03.SKL",
       "projects": "04.PRJ",
-      "another": "05.ANT"
+      "another": "06.LAB",
+      "github": "05.GIT"
     },
     "ui": {
       "themeObsidian": "Obsidian",
@@ -367,6 +368,123 @@ export const translations = {
         "carbonEstimate": "Est. 0.09g CO2 per tayangan halaman • Dihosting di Edge Server",
         "license": "Desain Arsitektural & Sistem © 2026 Haidar Rifky Andrianno. Dibuat dengan presisi."
       }
+    },
+    "github": {
+      "sectionTitle": "GIT TELEMETRY & VAULT",
+      "sectionSub": "PUBLIC REPOSITORIES // CONTRIBUTION MATRIX",
+      "headline": "Repositori Terbuka & Matriks Kontribusi",
+      "description": "Arsip kode sumber publik, commit berkala, dan proyek rekayasa perangkat lunak mandiri yang didokumentasikan di ekosistem GitHub @HanzzSama.",
+      "profile": {
+        "bio": "Hanzz // FullStack Developer & Rekayasa Perangkat Lunak. ITESA Muhammadiyah Semarang.",
+        "actionLabel": "KUNJUNGI PROFIL GITHUB ↗",
+        "stats": [
+          {
+            "label": "REPOSITORI PUBLIK",
+            "value": "19",
+            "id": "repos"
+          },
+          {
+            "label": "KOMIT TAHUNAN",
+            "value": "44+",
+            "id": "commits"
+          },
+          {
+            "label": "PENGIKUT",
+            "value": "3",
+            "id": "followers"
+          },
+          {
+            "label": "MENGIKUTI",
+            "value": "5",
+            "id": "following"
+          },
+          {
+            "label": "PENCAPAIAN",
+            "value": "YOLO // TERBUKA",
+            "id": "badge"
+          }
+        ]
+      },
+      "heatmap": {
+        "year": "2026",
+        "totalContributions": "44 kontribusi dalam setahun terakhir",
+        "legend": [
+          "Sedikit",
+          "Level 1",
+          "Level 2",
+          "Level 3",
+          "Banyak"
+        ]
+      },
+      "repositories": {
+        "repo-01": {
+          "description": "Mesin kalkulator komputasi presisi tinggi dengan evaluasi rumus matematika bertahap dan visualisasi ekspresi real-time.",
+          "badge": "INTI SISTEM",
+          "tag": "KOMPUTASI"
+        },
+        "repo-02": {
+          "description": "Inti pustaka parsing aljabar dan struktur data pohon sintaks matematika untuk evaluasi formula tanpa overhead.",
+          "badge": "PUSTAKA KODE",
+          "tag": "ALGORITMA"
+        },
+        "repo-03": {
+          "description": "Sistem manajemen pembayaran SPP dan administrasi keuangan institusi pendidikan berbasis arsitektur MVC terstruktur.",
+          "badge": "ENTERPRISE",
+          "tag": "AKADEMIA"
+        },
+        "repo-04": {
+          "description": "Platform e-ticketing dan reservasi tiket terdistribusi dengan alur checkout instan dan validasi tiket QR aman.",
+          "badge": "FULLSTACK",
+          "tag": "KOMERSIAL"
+        },
+        "repo-05": {
+          "description": "Katalog e-commerce gaya hidup urban dengan sistem keranjang belanja modular, filter kategori dinamis, dan UI responsif.",
+          "badge": "E-COMMERCE",
+          "tag": "REAKTIF"
+        },
+        "repo-06": {
+          "description": "Pintu gerbang agregasi audio digital dan kurasi playlist berkinerja tinggi dengan antarmuka media taktil.",
+          "badge": "STREAMING",
+          "tag": "AUDIO WEB"
+        }
+      }
+    },
+    "kineticLab": {
+      "title": "KINETIC MONOLITH SIMULATOR",
+      "subtitle": "REAL-TIME 3D WIREFRAME // ROTATIONAL GRAVITY GYROSCOPE",
+      "description": "Eksperimen grafis komputasional 3D interaktif murni Canvas. Drag untuk merotasi geometri monolit, ubah topologi bentuk, dan amati pembelokan sumbu koordinat secara real-time.",
+      "modes": [
+        {
+          "id": "monolith",
+          "label": "Monolit Tektonik",
+          "vertices": 8,
+          "edges": 12
+        },
+        {
+          "id": "tesseract",
+          "label": "Hiperkubus 4D",
+          "vertices": 16,
+          "edges": 32
+        },
+        {
+          "id": "geodesic",
+          "label": "Bola Geodesik",
+          "vertices": 12,
+          "edges": 30
+        },
+        {
+          "id": "wave",
+          "label": "Kisi Topografi",
+          "vertices": 36,
+          "edges": 60
+        }
+      ],
+      "telemetryLabels": {
+        "rotation": "MATRIKS ROTASI",
+        "vertexCount": "TITIK VERTEX AKTIF",
+        "inertia": "REDAMAN KECEPATAN",
+        "fps": "RENDER FPS"
+      }
     }
   },
   "en": {
@@ -380,7 +498,8 @@ export const translations = {
       "about": "02.ABT",
       "skills": "03.SKL",
       "projects": "04.PRJ",
-      "another": "05.ANT"
+      "another": "06.LAB",
+      "github": "05.GIT"
     },
     "ui": {
       "themeObsidian": "Obsidian",
@@ -727,6 +846,123 @@ export const translations = {
         "carbonEstimate": "Est. 0.09g CO2 per page view • Hosted on Edge Server",
         "license": "Architectural Design & Systems © 2026 Haidar Rifky Andrianno. Crafted with precision."
       }
+    },
+    "github": {
+      "sectionTitle": "GIT TELEMETRY & VAULT",
+      "sectionSub": "PUBLIC REPOSITORIES // CONTRIBUTION MATRIX",
+      "headline": "Open Repositories & Contribution Matrix",
+      "description": "Archive of public source code, continuous commits, and independent software engineering experiments documented across the @HanzzSama GitHub ecosystem.",
+      "profile": {
+        "bio": "Hanzz // FullStack Developer & Systems Craftsman. ITESA Muhammadiyah Semarang.",
+        "actionLabel": "VISIT GITHUB PROFILE ↗",
+        "stats": [
+          {
+            "label": "PUBLIC REPOS",
+            "value": "19",
+            "id": "repos"
+          },
+          {
+            "label": "ANNUAL COMMITS",
+            "value": "44+",
+            "id": "commits"
+          },
+          {
+            "label": "FOLLOWERS",
+            "value": "3",
+            "id": "followers"
+          },
+          {
+            "label": "FOLLOWING",
+            "value": "5",
+            "id": "following"
+          },
+          {
+            "label": "ACHIEVEMENT",
+            "value": "YOLO // UNLOCKED",
+            "id": "badge"
+          }
+        ]
+      },
+      "heatmap": {
+        "year": "2026",
+        "totalContributions": "44 contributions in the last year",
+        "legend": [
+          "Less",
+          "Level 1",
+          "Level 2",
+          "Level 3",
+          "More"
+        ]
+      },
+      "repositories": {
+        "repo-01": {
+          "description": "High-precision mathematical computing engine with step-by-step formula evaluation and real-time expression visualizer.",
+          "badge": "CORE ENGINE",
+          "tag": "COMPUTATION"
+        },
+        "repo-02": {
+          "description": "Core algebraic parsing library and math AST data structures for zero-overhead formula evaluation.",
+          "badge": "LIBRARY",
+          "tag": "ALGORITHM"
+        },
+        "repo-03": {
+          "description": "Tuition management and educational finance administration platform built on clean structured MVC.",
+          "badge": "ENTERPRISE",
+          "tag": "ACADEMIA"
+        },
+        "repo-04": {
+          "description": "Distributed e-ticketing and event reservation platform with instant checkout and secure QR validation.",
+          "badge": "FULLSTACK",
+          "tag": "COMMERCE"
+        },
+        "repo-05": {
+          "description": "Modern urban lifestyle e-commerce portal with modular cart management, dynamic category filters, and responsive UI.",
+          "badge": "COMMERCE",
+          "tag": "REACTIVE"
+        },
+        "repo-06": {
+          "description": "High-performance digital audio streaming gateway and curated media engine with tactile sound controls.",
+          "badge": "STREAMING",
+          "tag": "AUDIO WEB"
+        }
+      }
+    },
+    "kineticLab": {
+      "title": "KINETIC MONOLITH SIMULATOR",
+      "subtitle": "REAL-TIME 3D WIREFRAME // ROTATIONAL GRAVITY GYROSCOPE",
+      "description": "Interactive pure-canvas 3D computational experiment. Drag to rotate the monolithic geometry, switch topological wireframes, and observe coordinate axis deflections in real-time.",
+      "modes": [
+        {
+          "id": "monolith",
+          "label": "Tectonic Monolith",
+          "vertices": 8,
+          "edges": 12
+        },
+        {
+          "id": "tesseract",
+          "label": "Hypercube 4D",
+          "vertices": 16,
+          "edges": 32
+        },
+        {
+          "id": "geodesic",
+          "label": "Geodesic Sphere",
+          "vertices": 12,
+          "edges": 30
+        },
+        {
+          "id": "wave",
+          "label": "Topographic Grid",
+          "vertices": 36,
+          "edges": 60
+        }
+      ],
+      "telemetryLabels": {
+        "rotation": "ROTATION MATRIX",
+        "vertexCount": "ACTIVE VERTICES",
+        "inertia": "VELOCITY DAMPING",
+        "fps": "RENDER FPS"
+      }
     }
   },
   "zh": {
@@ -738,9 +974,10 @@ export const translations = {
     "nav": {
       "welcome": "01.首页",
       "about": "02.宣言",
-      "skills": "03.矩阵",
+      "skills": "03.能力",
       "projects": "04.作品",
-      "another": "05.花园"
+      "another": "06.实验",
+      "github": "05.开源"
     },
     "ui": {
       "themeObsidian": "黑曜苔藓",
@@ -1087,6 +1324,123 @@ export const translations = {
         "carbonEstimate": "单次访问仅产生约 0.09g 二氧化碳 • 部署于全球边缘服务器",
         "license": "数字建筑设计与系统工程 © 2026 Haidar Rifky Andrianno. 匠心精工构建。"
       }
+    },
+    "github": {
+      "sectionTitle": "开源代码库与遥测中枢",
+      "sectionSub": "公共仓库拓扑 // 贡献动态矩阵",
+      "headline": "公开仓库与贡献矩阵",
+      "description": "记录于 @HanzzSama GitHub 生态中的公开源代码、周期性提交轨迹与独立软件系统工程成果。",
+      "profile": {
+        "bio": "Hanzz // 全栈开发者与系统工匠。ITESA Muhammadiyah Semarang 在读。",
+        "actionLabel": "访问 GITHUB 个人主页 ↗",
+        "stats": [
+          {
+            "label": "公开仓库数",
+            "value": "19",
+            "id": "repos"
+          },
+          {
+            "label": "年度提交次数",
+            "value": "44+",
+            "id": "commits"
+          },
+          {
+            "label": "关注者",
+            "value": "3",
+            "id": "followers"
+          },
+          {
+            "label": "关注中",
+            "value": "5",
+            "id": "following"
+          },
+          {
+            "label": "成就勋章",
+            "value": "YOLO // 已解锁",
+            "id": "badge"
+          }
+        ]
+      },
+      "heatmap": {
+        "year": "2026",
+        "totalContributions": "过去一年共 44 次代码提交贡献",
+        "legend": [
+          "少",
+          "等级 1",
+          "等级 2",
+          "等级 3",
+          "多"
+        ]
+      },
+      "repositories": {
+        "repo-01": {
+          "description": "高精度数学计算引擎，支持分步公式推导与实时可视化表达式排版。",
+          "badge": "核心计算引擎",
+          "tag": "算法数理"
+        },
+        "repo-02": {
+          "description": "代数表达式解析与轻量级数学抽象语法树（AST）核心库。",
+          "badge": "通用算法库",
+          "tag": "计算科学"
+        },
+        "repo-03": {
+          "description": "基于标准 MVC 架构的高校学费清算与教育财务管理系统。",
+          "badge": "企业级应用",
+          "tag": "学术系统"
+        },
+        "repo-04": {
+          "description": "具备极速结算流与安全二维码鉴权的高并发在线票务分发平台。",
+          "badge": "全栈应用",
+          "tag": "商业工程"
+        },
+        "repo-05": {
+          "description": "模块化购物车系统、动态商品多级分类与高响应式体验的电商平台。",
+          "badge": "电商体系",
+          "tag": "响应式UI"
+        },
+        "repo-06": {
+          "description": "具备触觉反馈交互的高性能流媒体音频汇聚与播放网关。",
+          "badge": "流媒体架构",
+          "tag": "音频网络"
+        }
+      }
+    },
+    "kineticLab": {
+      "title": "动量几何体模拟实验室",
+      "subtitle": "实时 3D 构造线框 // 陀螺引力旋转场",
+      "description": "基于原生 Canvas 打造的 3D 动力学几何实验。按住拖拽即可旋转三维单体结构，自由切换多维线框拓扑，实时捕捉物理轴偏转数据。",
+      "modes": [
+        {
+          "id": "monolith",
+          "label": "构造巨石单体",
+          "vertices": 8,
+          "edges": 12
+        },
+        {
+          "id": "tesseract",
+          "label": "四维超正方体",
+          "vertices": 16,
+          "edges": 32
+        },
+        {
+          "id": "geodesic",
+          "label": "测地线多面球",
+          "vertices": 12,
+          "edges": 30
+        },
+        {
+          "id": "wave",
+          "label": "三维地形波动网",
+          "vertices": 36,
+          "edges": 60
+        }
+      ],
+      "telemetryLabels": {
+        "rotation": "旋转矩阵坐标",
+        "vertexCount": "有效拓扑顶点数",
+        "inertia": "角速度阻尼比",
+        "fps": "画布帧率 (FPS)"
+      }
     }
   },
   "ja": {
@@ -1100,7 +1454,8 @@ export const translations = {
       "about": "02.宣言",
       "skills": "03.能力",
       "projects": "04.実績",
-      "another": "05.庭園"
+      "another": "06.実験",
+      "github": "05.開発"
     },
     "ui": {
       "themeObsidian": "黒曜石",
@@ -1447,6 +1802,123 @@ export const translations = {
         "carbonEstimate": "推定 0.09g CO2 / ページ表示 • エッジサーバー配信",
         "license": "建築的デザイン & システム工学 © 2026 Haidar Rifky Andrianno. 厳密な精度で構築。"
       }
+    },
+    "github": {
+      "sectionTitle": "GITテレメトリ & コードアーカイブ",
+      "sectionSub": "公開リポジトリ群 // コントリビューション・マトリクス",
+      "headline": "公開リポジトリと貢献マトリクス",
+      "description": "@HanzzSama のGitHubエコシステムに刻まれたオープンソースコード、コミット履歴、および自律的ソフトウェア工学の実績一覧。",
+      "profile": {
+        "bio": "Hanzz // フルスタック開発者 & システム職人。ITESA Muhammadiyah Semarang 在学。",
+        "actionLabel": "GITHUB プロフィールへ ↗",
+        "stats": [
+          {
+            "label": "公開リポジトリ",
+            "value": "19",
+            "id": "repos"
+          },
+          {
+            "label": "年間コミット数",
+            "value": "44+",
+            "id": "commits"
+          },
+          {
+            "label": "フォロワー",
+            "value": "3",
+            "id": "followers"
+          },
+          {
+            "label": "フォロー中",
+            "value": "5",
+            "id": "following"
+          },
+          {
+            "label": "アチーブメント",
+            "value": "YOLO // 解除済",
+            "id": "badge"
+          }
+        ]
+      },
+      "heatmap": {
+        "year": "2026",
+        "totalContributions": "過去1年間に44回のコントリビューション",
+        "legend": [
+          "少",
+          "段階 1",
+          "段階 2",
+          "段階 3",
+          "多"
+        ]
+      },
+      "repositories": {
+        "repo-01": {
+          "description": "数式の段階的評価とリアルタイム数式グラフ描画を備えた超高精度・数理計算機エンジン。",
+          "badge": "基底エンジン",
+          "tag": "数理計算"
+        },
+        "repo-02": {
+          "description": "オーバーヘッドなしで数理式を評価するための代数パーサーおよびAST構造ライブラリ。",
+          "badge": "コアライブラリ",
+          "tag": "アルゴリズム"
+        },
+        "repo-03": {
+          "description": "厳格なMVCアーキテクチャに基づいた教育機関向け学費・財務管理システム。",
+          "badge": "エンタープライズ",
+          "tag": "アカデミア"
+        },
+        "repo-04": {
+          "description": "即時決済フローと安全なQRチケット検証を備えた分散型電子チケット予約プラットフォーム。",
+          "badge": "フルスタック",
+          "tag": "コマース"
+        },
+        "repo-05": {
+          "description": "モジュール式カート設計と動的カテゴリフィルターを備えた現代的ECカタログシステム。",
+          "badge": "EC基盤",
+          "tag": "リアクティブUI"
+        },
+        "repo-06": {
+          "description": "直感的な触覚メディア操作を備えた高性能デジタルオーディオ集約・ストリーミングゲートウェイ。",
+          "badge": "ストリーミング",
+          "tag": "音響Web"
+        }
+      }
+    },
+    "kineticLab": {
+      "title": "キネティック・モノリス・シミュレーター",
+      "subtitle": "リアルタイム3Dワイヤーフレーム // ジャイロ回転重力場",
+      "description": "ピュアCanvasで描画される3D計算機グラフィクス実験。ドラッグで立体ジオメトリを旋回させ、形状トポロジーを動的に切り替えながら座標偏向をリアルタイム観測できます。",
+      "modes": [
+        {
+          "id": "monolith",
+          "label": "構造モノリス",
+          "vertices": 8,
+          "edges": 12
+        },
+        {
+          "id": "tesseract",
+          "label": "4次元超立方体",
+          "vertices": 16,
+          "edges": 32
+        },
+        {
+          "id": "geodesic",
+          "label": "測地線球体",
+          "vertices": 12,
+          "edges": 30
+        },
+        {
+          "id": "wave",
+          "label": "地形波形グリッド",
+          "vertices": 36,
+          "edges": 60
+        }
+      ],
+      "telemetryLabels": {
+        "rotation": "回転マトリクス座標",
+        "vertexCount": "有効頂点数",
+        "inertia": "角速度減衰率",
+        "fps": "描画FPS"
+      }
     }
   },
   "de": {
@@ -1460,7 +1932,8 @@ export const translations = {
       "about": "02.ABT",
       "skills": "03.SKL",
       "projects": "04.PRJ",
-      "another": "05.ANT"
+      "another": "06.LAB",
+      "github": "05.GIT"
     },
     "ui": {
       "themeObsidian": "Obsidian",
@@ -1806,6 +2279,123 @@ export const translations = {
         "gridSystem": "Tektonisches 12-Spalten-Haarlinien-Raster",
         "carbonEstimate": "Geschätzt 0.09g CO2 pro Seitenaufruf • Auf Edge-Server gehostet",
         "license": "Architektonisches Design & Systeme © 2026 Haidar Rifky Andrianno. Mit Präzision gefertigt."
+      }
+    },
+    "github": {
+      "sectionTitle": "GIT-TELEMETRIE & ARCHIV",
+      "sectionSub": "ÖFFENTLICHE REPOSITORIEN // BEITRAGSMATRIX",
+      "headline": "Öffentliche Repositorien & Beitragsmatrix",
+      "description": "Archiv öffentlicher Quellcodes, kontinuierlicher Commits und unabhängiger Software-Engineering-Projekte im @HanzzSama GitHub-Ökosystem.",
+      "profile": {
+        "bio": "Hanzz // FullStack-Entwickler & Systemingenieur. ITESA Muhammadiyah Semarang.",
+        "actionLabel": "GITHUB-PROFIL BESUCHEN ↗",
+        "stats": [
+          {
+            "label": "ÖFFENTLICHE REPOS",
+            "value": "19",
+            "id": "repos"
+          },
+          {
+            "label": "JÄHRLICHE COMMITS",
+            "value": "44+",
+            "id": "commits"
+          },
+          {
+            "label": "FOLLOWER",
+            "value": "3",
+            "id": "followers"
+          },
+          {
+            "label": "FOLGEND",
+            "value": "5",
+            "id": "following"
+          },
+          {
+            "label": "ABZEICHEN",
+            "value": "YOLO // FREIGESCHALTET",
+            "id": "badge"
+          }
+        ]
+      },
+      "heatmap": {
+        "year": "2026",
+        "totalContributions": "44 Beiträge im letzten Jahr",
+        "legend": [
+          "Weniger",
+          "Stufe 1",
+          "Stufe 2",
+          "Stufe 3",
+          "Mehr"
+        ]
+      },
+      "repositories": {
+        "repo-01": {
+          "description": "Hochpräzise mathematische Rechen-Engine mit schrittweiser Formelauswertung und Echtzeit-Ausdrucksvisualisierung.",
+          "badge": "KERN-ENGINE",
+          "tag": "BERECHNUNG"
+        },
+        "repo-02": {
+          "description": "Algebraische Parser-Kernbibliothek und mathematische AST-Datenstrukturen zur latenzfreien Formelauswertung.",
+          "badge": "BIBLIOTHEK",
+          "tag": "ALGORITHMUS"
+        },
+        "repo-03": {
+          "description": "Schulgebührenverwaltung und Bildungsfinanzierungsplattform auf Basis strukturierter MVC-Architektur.",
+          "badge": "ENTERPRISE",
+          "tag": "AKADEMIE"
+        },
+        "repo-04": {
+          "description": "Verteilte E-Ticketing- und Veranstaltungsreservierungsplattform mit Sofort-Checkout und sicherer QR-Validierung.",
+          "badge": "FULLSTACK",
+          "tag": "HANDEL"
+        },
+        "repo-05": {
+          "description": "Modernes Urban-Lifestyle-E-Commerce-Portal mit modularem Warenkorbsystem und reaktiver Benutzeroberfläche.",
+          "badge": "E-COMMERCE",
+          "tag": "REAKTIV"
+        },
+        "repo-06": {
+          "description": "Hochperformantes Streaming-Gateway für digitale Audiodaten mit taktilen Medien-Bedienelementen.",
+          "badge": "STREAMING",
+          "tag": "AUDIO WEB"
+        }
+      }
+    },
+    "kineticLab": {
+      "title": "KINETISCHER MONOLITH-SIMULATOR",
+      "subtitle": "ECHTZEIT-3D-DRAHTGITTER // GYROSKOPISCHE GRAVITATION",
+      "description": "Interaktives 3D-Canvas-Grafikexperiment. Ziehen Sie, um die monolithische Geometrie zu drehen, wechseln Sie Gittertopologien und beobachten Sie Koordinatenablenkungen in Echtzeit.",
+      "modes": [
+        {
+          "id": "monolith",
+          "label": "Tektonischer Monolith",
+          "vertices": 8,
+          "edges": 12
+        },
+        {
+          "id": "tesseract",
+          "label": "Hyperwürfel 4D",
+          "vertices": 16,
+          "edges": 32
+        },
+        {
+          "id": "geodesic",
+          "label": "Geodätische Kugel",
+          "vertices": 12,
+          "edges": 30
+        },
+        {
+          "id": "wave",
+          "label": "Topografisches Gitter",
+          "vertices": 36,
+          "edges": 60
+        }
+      ],
+      "telemetryLabels": {
+        "rotation": "ROTATIONSMATRIX",
+        "vertexCount": "AKTIVE SCHEITELPUNKTE",
+        "inertia": "GESCHWINDIGKEITSDÄMPFUNG",
+        "fps": "RENDER-FPS"
       }
     }
   }

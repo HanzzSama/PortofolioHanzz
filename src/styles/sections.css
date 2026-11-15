@@ -958,3 +958,923 @@
   width: 108%;
   height: 116%;
 }
+
+
+/* ==========================================================================
+   COMPONENT 05: GITHUB TELEMETRY & OPEN-SOURCE VAULT
+   ========================================================================== */
+.section-github {
+  position: relative;
+}
+
+.github-intro {
+  margin-bottom: var(--space-xl);
+}
+
+.github-preamble {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: var(--font-mono-tag);
+  color: var(--accent-primary);
+  margin-bottom: var(--space-sm);
+  letter-spacing: 0.08em;
+}
+
+.github-preamble-line {
+  width: 24px;
+  height: 1px;
+  background-color: var(--accent-primary);
+}
+
+.github-lead-text {
+  max-width: 680px;
+  font-size: var(--font-body-md);
+  color: var(--text-secondary);
+  line-height: var(--leading-relaxed);
+  margin-top: var(--space-xs);
+}
+
+/* ── GitHub Profile Monolith Card ─────────────────────────── */
+.github-profile-monolith {
+  background-color: var(--bg-surface);
+  border: var(--border-hairline);
+  border-radius: var(--radius-sm);
+  padding: var(--space-xl);
+  margin-bottom: var(--space-xl);
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--shadow-ambient);
+  transition: border-color var(--duration-fast) ease, box-shadow var(--duration-fast) ease;
+}
+
+.github-profile-monolith:hover {
+  border-color: var(--accent-primary);
+  box-shadow: var(--shadow-elevated);
+}
+
+.github-profile-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-lg);
+  flex-wrap: wrap;
+  padding-bottom: var(--space-lg);
+  border-bottom: var(--border-hairline);
+}
+
+.github-avatar-cluster {
+  display: flex;
+  align-items: center;
+  gap: var(--space-lg);
+}
+
+.github-avatar-orbital-ring {
+  position: relative;
+  width: 76px;
+  height: 76px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.github-avatar-orbital-ring::before {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+  border: 1px dashed var(--accent-primary);
+  animation: orbitalSpin 24s linear infinite;
+}
+
+@keyframes orbitalSpin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.github-avatar-img {
+  width: 66px;
+  height: 66px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid var(--border-hairline);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+  z-index: 1;
+}
+
+.github-avatar-fallback {
+  width: 66px;
+  height: 66px;
+  border-radius: 50%;
+  background: var(--bg-canvas);
+  color: var(--accent-primary);
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 1.15rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: var(--border-hairline);
+  z-index: 1;
+}
+
+.github-identity-block {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.github-handle-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.github-handle {
+  font-size: 1.45rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--text-primary);
+}
+
+.github-pulse-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.2rem 0.55rem;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 600;
+  border-radius: 12px;
+  background: rgba(74, 93, 78, 0.12);
+  color: var(--accent-primary);
+  letter-spacing: 0.06em;
+}
+
+.github-pulse-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--accent-primary);
+  box-shadow: 0 0 8px var(--accent-primary);
+  animation: dotPulse 2s ease infinite;
+}
+
+.github-bio {
+  font-size: var(--font-body-sm);
+  color: var(--text-secondary);
+  max-width: 540px;
+  line-height: 1.5;
+}
+
+.github-cta-btn {
+  padding: 0.6rem 1.25rem;
+  font-family: var(--font-mono);
+  font-size: var(--font-mono-tag);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  border: var(--border-hairline);
+  border-radius: var(--radius-xs);
+  background: var(--bg-surface);
+  color: var(--text-primary);
+  text-decoration: none;
+  transition: all var(--duration-fast) var(--ease-expressive);
+  display: inline-flex;
+  align-items: center;
+}
+
+.github-cta-btn:hover {
+  background: var(--accent-primary);
+  color: #FFFFFF;
+  border-color: var(--accent-primary);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(74, 93, 78, 0.25);
+}
+
+/* ── Telemetry Stats Grid (5 Symmetrical Columns) ────────── */
+.github-telemetry-row {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: var(--space-md);
+  margin-top: var(--space-lg);
+}
+
+@media (max-width: 1024px) {
+  .github-telemetry-row {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .github-telemetry-row {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.github-telemetry-cell {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding: 0.75rem 1rem;
+  background: var(--bg-canvas);
+  border: var(--border-hairline);
+  border-radius: var(--radius-xs);
+  transition: border-color var(--duration-fast) ease, transform var(--duration-fast) ease;
+}
+
+.github-telemetry-cell:hover {
+  border-color: var(--accent-primary);
+  transform: translateY(-1px);
+}
+
+.github-telemetry-label {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  color: var(--text-muted);
+  letter-spacing: 0.08em;
+}
+
+.github-telemetry-value {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--accent-primary);
+  line-height: 1.2;
+}
+
+/* ── Interactive 52-Week Heatmap Container ─────────────────── */
+.github-heatmap-container {
+  background-color: var(--bg-surface);
+  border: var(--border-hairline);
+  border-radius: var(--radius-sm);
+  padding: var(--space-lg) var(--space-xl);
+  margin-bottom: var(--space-2xl);
+  box-shadow: var(--shadow-ambient);
+}
+
+.heatmap-header-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-md);
+  padding-bottom: var(--space-xs);
+  border-bottom: var(--border-hairline);
+}
+
+.heatmap-title-group {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: var(--font-mono-tag);
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.heatmap-icon {
+  color: var(--accent-primary);
+  font-size: 0.75rem;
+}
+
+.heatmap-year-selector {
+  display: flex;
+  gap: 0.5rem;
+  font-size: var(--font-mono-micro);
+}
+
+.heatmap-year {
+  padding: 0.2rem 0.6rem;
+  border-radius: 2px;
+  cursor: pointer;
+  color: var(--text-muted);
+  border: var(--border-hairline);
+  transition: all var(--duration-fast) ease;
+}
+
+.heatmap-year.active {
+  background: var(--accent-primary);
+  color: #FFFFFF;
+  border-color: var(--accent-primary);
+  font-weight: 600;
+}
+
+/* Scrollable Container with Fixed Ratio */
+.heatmap-scrollable-content {
+  overflow-x: auto;
+  padding-bottom: 0.5rem;
+  -webkit-overflow-scrolling: touch;
+}
+
+.heatmap-inner-layout {
+  min-width: 780px;
+  width: 100%;
+}
+
+.heatmap-months-row {
+  display: flex;
+  justify-content: space-between;
+  padding-left: 36px;
+  padding-right: 12px;
+  font-size: 0.65rem;
+  color: var(--text-muted);
+  margin-bottom: 0.4rem;
+  opacity: 0.85;
+}
+
+.heatmap-matrix-wrapper {
+  display: flex;
+  gap: 0.6rem;
+  align-items: flex-start;
+}
+
+.heatmap-days-legend {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 98px;
+  font-size: 0.6rem;
+  color: var(--text-muted);
+  padding-top: 2px;
+}
+
+.heatmap-grid {
+  display: flex;
+  gap: 3px;
+  flex: 1;
+}
+
+.heatmap-week-col {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.heatmap-cell {
+  width: 11px;
+  height: 11px;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: transform 0.15s ease, filter 0.15s ease;
+  position: relative;
+}
+
+.heatmap-cell:hover {
+  transform: scale(1.45);
+  z-index: 10;
+  outline: 1px solid var(--accent-primary);
+}
+
+/* Floating Tooltip on Hover */
+.heatmap-cell[data-tooltip]:hover::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: calc(100% + 6px);
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 0.25rem 0.5rem;
+  background: #111813;
+  color: #FFFFFF;
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  white-space: nowrap;
+  border-radius: 3px;
+  pointer-events: none;
+  z-index: 20;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+}
+
+[data-theme="dark"] .heatmap-cell[data-tooltip]:hover::after {
+  background: #253328;
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Heatmap commit levels */
+.heatmap-cell.level-0,
+.legend-cell.level-0 {
+  background-color: rgba(74, 93, 78, 0.08);
+  border: 1px solid rgba(74, 93, 78, 0.04);
+}
+
+[data-theme="dark"] .heatmap-cell.level-0,
+[data-theme="dark"] .legend-cell.level-0 {
+  background-color: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.02);
+}
+
+.heatmap-cell.level-1,
+.legend-cell.level-1 {
+  background-color: rgba(74, 93, 78, 0.32);
+}
+
+[data-theme="dark"] .heatmap-cell.level-1,
+[data-theme="dark"] .legend-cell.level-1 {
+  background-color: rgba(117, 146, 122, 0.35);
+}
+
+.heatmap-cell.level-2,
+.legend-cell.level-2 {
+  background-color: rgba(74, 93, 78, 0.58);
+}
+
+[data-theme="dark"] .heatmap-cell.level-2,
+[data-theme="dark"] .legend-cell.level-2 {
+  background-color: rgba(117, 146, 122, 0.60);
+}
+
+.heatmap-cell.level-3,
+.legend-cell.level-3 {
+  background-color: rgba(74, 93, 78, 0.82);
+}
+
+[data-theme="dark"] .heatmap-cell.level-3,
+[data-theme="dark"] .legend-cell.level-3 {
+  background-color: rgba(117, 146, 122, 0.82);
+}
+
+.heatmap-cell.level-4,
+.legend-cell.level-4 {
+  background-color: var(--accent-primary);
+  box-shadow: 0 0 6px rgba(74, 93, 78, 0.4);
+}
+
+[data-theme="dark"] .heatmap-cell.level-4,
+[data-theme="dark"] .legend-cell.level-4 {
+  background-color: #92B198;
+  box-shadow: 0 0 8px rgba(146, 177, 152, 0.5);
+}
+
+.heatmap-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: var(--space-md);
+  padding-top: var(--space-sm);
+  border-top: var(--border-hairline);
+  font-size: var(--font-mono-micro);
+  color: var(--text-muted);
+}
+
+.heatmap-legend {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.legend-cell {
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+  display: inline-block;
+}
+
+/* ── Pinned Repositories Grid (3 Symmetrical Columns) ─────── */
+.github-repos-section {
+  margin-top: var(--space-xl);
+}
+
+.github-repos-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: var(--space-md);
+  padding-bottom: var(--space-xs);
+  border-bottom: var(--border-hairline);
+}
+
+.github-repos-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-md);
+}
+
+@media (max-width: 1024px) {
+  .github-repos-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .github-repos-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.github-repo-card {
+  background-color: var(--bg-surface);
+  border: var(--border-hairline);
+  border-radius: var(--radius-sm);
+  padding: var(--space-md) var(--space-lg);
+  min-height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: var(--space-sm);
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.22s var(--ease-expressive), border-color 0.22s ease, box-shadow 0.22s ease;
+}
+
+.github-repo-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; width: 3px; height: 100%;
+  background-color: var(--accent-primary);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.github-repo-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--accent-primary);
+  box-shadow: var(--shadow-elevated);
+}
+
+.github-repo-card:hover::before {
+  opacity: 1;
+}
+
+.repo-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.repo-meta-tags {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.repo-index {
+  font-size: var(--font-mono-micro);
+  color: var(--accent-primary);
+  font-weight: 700;
+}
+
+.repo-visibility {
+  font-size: 0.6rem;
+  padding: 0.1rem 0.35rem;
+  border-radius: 2px;
+  border: var(--border-hairline);
+  color: var(--text-muted);
+}
+
+.repo-badge {
+  font-size: 0.6rem;
+  padding: 0.1rem 0.45rem;
+  border-radius: 2px;
+  background: rgba(74, 93, 78, 0.12);
+  color: var(--accent-primary);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+}
+
+.repo-external-link {
+  color: var(--text-muted);
+  transition: color 0.18s ease, transform 0.18s ease;
+  display: flex;
+  align-items: center;
+}
+
+.github-repo-card:hover .repo-external-link {
+  color: var(--accent-primary);
+  transform: translate(2px, -2px);
+}
+
+.repo-card-body {
+  flex: 1;
+  padding: 0.25rem 0;
+}
+
+.repo-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 0.35rem;
+  line-height: 1.3;
+}
+
+.repo-title a {
+  color: var(--text-primary);
+  text-decoration: none;
+  transition: color 0.18s ease;
+}
+
+.github-repo-card:hover .repo-title a {
+  color: var(--accent-primary);
+}
+
+.repo-desc {
+  font-size: 0.82rem;
+  line-height: 1.55;
+  color: var(--text-secondary);
+}
+
+.repo-card-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: var(--space-sm);
+  border-top: var(--border-hairline);
+  font-size: 0.72rem;
+  color: var(--text-muted);
+}
+
+.repo-lang-cluster {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.repo-lang-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.repo-stats-cluster {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.repo-stat-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+/* ==========================================================================
+   COMPONENT 06: KINETIC LAB / 3D MONOLITH SIMULATOR
+   ========================================================================== */
+.section-lab {
+  position: relative;
+}
+
+.lab-intro {
+  margin-bottom: var(--space-xl);
+}
+
+.lab-preamble {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: var(--font-mono-tag);
+  color: var(--accent-primary);
+  margin-bottom: var(--space-sm);
+  letter-spacing: 0.08em;
+}
+
+.lab-preamble-line {
+  width: 24px;
+  height: 1px;
+  background-color: var(--accent-primary);
+}
+
+.lab-lead-text {
+  max-width: 680px;
+  font-size: var(--font-body-md);
+  color: var(--text-secondary);
+  line-height: var(--leading-relaxed);
+  margin-top: var(--space-xs);
+}
+
+/* ── Interactive 3D Canvas Stage ─────────────────────────── */
+.lab-stage-container {
+  background-color: var(--bg-surface);
+  border: var(--border-hairline);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  box-shadow: var(--shadow-ambient);
+}
+
+.lab-canvas-viewport {
+  position: relative;
+  width: 100%;
+  height: 460px;
+  background: var(--bg-surface-sunken);
+  background-image: 
+    linear-gradient(rgba(74, 93, 78, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(74, 93, 78, 0.035) 1px, transparent 1px);
+  background-size: 36px 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: grab;
+  cursor: -webkit-grab;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: none;
+}
+
+[data-theme="dark"] .lab-canvas-viewport {
+  background-image: 
+    linear-gradient(rgba(117, 146, 122, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(117, 146, 122, 0.04) 1px, transparent 1px);
+}
+
+.lab-canvas-viewport:active {
+  cursor: grabbing;
+  cursor: -webkit-grabbing;
+}
+
+.monolith-canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* Corner Crosshair Overlays */
+.stage-overlay-tl,
+.stage-overlay-tr,
+.stage-overlay-bl,
+.stage-overlay-br {
+  position: absolute;
+  font-size: 0.6rem;
+  color: var(--text-muted);
+  opacity: 0.6;
+  letter-spacing: 0.08em;
+  pointer-events: none;
+}
+
+.stage-overlay-tl { top: 14px; left: 18px; }
+.stage-overlay-tr { top: 14px; right: 18px; }
+.stage-overlay-bl { bottom: 14px; left: 18px; }
+.stage-overlay-br { bottom: 14px; right: 18px; }
+
+/* Central Interaction Hint */
+.stage-interaction-hint {
+  position: absolute;
+  top: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 0.85rem;
+  border-radius: 20px;
+  background: rgba(0, 0, 0, 0.5);
+  color: #FFFFFF;
+  font-size: 0.62rem;
+  letter-spacing: 0.08em;
+  pointer-events: none;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: opacity 0.25s ease;
+  white-space: nowrap;
+}
+
+[data-theme="light"] .stage-interaction-hint {
+  background: rgba(255, 255, 255, 0.9);
+  color: var(--text-primary);
+  border: var(--border-hairline);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.hint-pulse {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent-primary);
+  animation: dotPulse 1.8s ease infinite;
+}
+
+/* Floating Telemetry HUD */
+.stage-telemetry-cluster {
+  position: absolute;
+  bottom: 14px;
+  left: 18px;
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  pointer-events: none;
+}
+
+.telemetry-pill {
+  padding: 0.3rem 0.65rem;
+  border-radius: var(--radius-xs);
+  background: rgba(0, 0, 0, 0.55);
+  color: #FFFFFF;
+  font-size: 0.62rem;
+  letter-spacing: 0.06em;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+[data-theme="light"] .telemetry-pill {
+  background: rgba(255, 255, 255, 0.92);
+  color: var(--text-primary);
+  border: var(--border-hairline);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+}
+
+.pill-dim {
+  color: var(--text-muted);
+  opacity: 0.75;
+}
+
+/* ── Lab Control Console ──────────────────────────────────── */
+.lab-control-console {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  padding: 0.85rem 1.25rem;
+  border-top: var(--border-hairline);
+  background: var(--bg-surface);
+}
+
+.console-modes-group {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.console-label {
+  font-size: var(--font-mono-micro);
+  color: var(--text-muted);
+  letter-spacing: 0.08em;
+  font-weight: 600;
+}
+
+.console-mode-buttons {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  flex-wrap: wrap;
+}
+
+.console-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.38rem 0.8rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  border: var(--border-hairline);
+  border-radius: var(--radius-xs);
+  background: transparent;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all var(--duration-fast) var(--ease-expressive);
+  letter-spacing: 0.06em;
+}
+
+.console-btn:hover {
+  border-color: var(--accent-primary);
+  color: var(--accent-primary);
+  transform: translateY(-1px);
+}
+
+.console-btn.active {
+  background: var(--accent-primary);
+  color: #FFFFFF;
+  border-color: var(--accent-primary);
+  font-weight: 600;
+}
+
+.btn-indicator {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: currentColor;
+  opacity: 0.75;
+}
+
+.console-actions-group {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  flex-wrap: wrap;
+}
+
+.console-action-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.38rem 0.75rem;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  border: var(--border-hairline);
+  border-radius: var(--radius-xs);
+  background: transparent;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all var(--duration-fast) var(--ease-expressive);
+}
+
+.console-action-btn:hover {
+  border-color: var(--accent-primary);
+  color: var(--accent-primary);
+  transform: translateY(-1px);
+}
+
+.console-action-btn.active {
+  color: var(--accent-primary);
+  border-color: var(--accent-primary);
+  background: rgba(74, 93, 78, 0.08);
+}

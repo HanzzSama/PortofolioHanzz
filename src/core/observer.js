@@ -71,7 +71,8 @@ export class ArchitecturalObserver {
           const id = entry.target.getAttribute('id');
 
           navLinks.forEach((link) => {
-            if (link.getAttribute('href') === `#${id}`) {
+            const href = link.getAttribute('href');
+            if (href === `#${id}` || (id === 'another' && href === '#lab')) {
               link.classList.add('active');
             } else {
               link.classList.remove('active');

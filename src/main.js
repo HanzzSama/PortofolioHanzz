@@ -15,7 +15,10 @@ import { renderWelcome } from './components/renderWelcome.js';
 import { renderAbout } from './components/renderAbout.js';
 import { renderSkills } from './components/renderSkills.js';
 import { renderProjects } from './components/renderProjects.js';
+import { renderGithub } from './components/renderGithub.js';
+import { renderLab } from './components/renderLab.js';
 import { renderAnother } from './components/renderAnother.js';
+import { MonolithSimulator } from './core/monolithSimulator.js';
 
 class PortfolioApp {
   constructor() {
@@ -27,6 +30,7 @@ class PortfolioApp {
     this.isAudioPlaying = false;
     this.currentFrequency = 432;
     this.canvasAnimationId = null;
+    this.monolithSim = null;
 
     // Internationalization State
     this.currentLang = localStorage.getItem('portfolio-language') || 'id';
@@ -48,6 +52,7 @@ class PortfolioApp {
     this.initSystemDrawer();
     this.initMobileNav();
     this.initKineticTopographyCanvas();
+    this.initMonolithSimulator();
     this.initScrollbarPill();
   }
 
@@ -60,6 +65,8 @@ class PortfolioApp {
       renderAbout(this.data),
       renderSkills(this.data),
       renderProjects(this.data),
+      renderGithub(this.data),
+      renderLab(this.data),
       renderAnother(this.data)
     ].join('\n');
 
@@ -132,6 +139,7 @@ class PortfolioApp {
 
         // Re-initialize dynamic component bindings after re-rendering
         this.initKineticTopographyCanvas();
+        this.initMonolithSimulator();
         this.initParallaxAndObserver();
         this.initSmoothNavLinks();
         this.initAudioSynthesizer();
@@ -152,23 +160,24 @@ class PortfolioApp {
 
     // Update header nav labels
     const navLinks = document.querySelectorAll('.nav-links .nav-label-text');
-    if (navLinks.length >= 5 && t.nav) {
+    if (navLinks.length >= 6 && t.nav) {
       navLinks[0].textContent = t.nav.welcome;
       navLinks[1].textContent = t.nav.about;
       navLinks[2].textContent = t.nav.skills;
       navLinks[3].textContent = t.nav.projects;
-      navLinks[4].textContent = t.nav.another;
+      navLinks[4].textContent = t.nav.github || '05.GIT';
+      navLinks[5].textContent = t.nav.another || '06.LAB';
     }
 
     // Update mobile nav labels
     const mobileTitles = document.querySelectorAll('.mobile-nav-title');
-    if (mobileTitles.length >= 5) {
+    if (mobileTitles.length >= 6) {
       const titles = {
-        id: ['Welcome', 'Manifesto', 'Architecture', 'Selected Works', 'Garden & Dispatch'],
-        en: ['Welcome', 'Manifesto', 'Capabilities', 'Selected Works', 'Garden & Dispatch'],
-        zh: ['首页', '建筑宣言', '能力矩阵', '精选作品', '数字花园'],
-        ja: ['冒頭', '建築宣言', '能力一覧', '選定実績', 'デジタル庭園'],
-        de: ['Willkommen', 'Manifest', 'Fähigkeiten', 'Ausgewählte Arbeiten', 'Digitaler Garten']
+        id: ['Welcome', 'Manifesto', 'Architecture', 'Selected Works', 'GitHub Vault', 'Kinetic Lab'],
+        en: ['Welcome', 'Manifesto', 'Capabilities', 'Selected Works', 'GitHub Vault', 'Kinetic Lab'],
+        zh: ['首页', '建筑宣言', '能力矩阵', '精选作品', '开源仓库', '动能实验室'],
+        ja: ['冒頭', '建築宣言', '能力一覧', '選定実績', '開発拠点', '動的実験室'],
+        de: ['Willkommen', 'Manifest', 'Fähigkeiten', 'Ausgewählte Arbeiten', 'GitHub Tresor', 'Kinetisches Labor']
       };
       const curTitles = titles[lang] || titles.id;
       mobileTitles.forEach((el, idx) => {
@@ -761,6 +770,17 @@ class PortfolioApp {
     };
 
     render();
+  }
+
+  initMonolithSimulator() {
+    if (this.monolithSim) {
+      this.monolithSim.destroy();
+      this.monolithSim = null;
+    }
+    const canvas = document.getElementById('monolith-canvas');
+    if (canvas) {
+      this.monolithSim = new MonolithSimulator('monolith-canvas');
+    }
   }
 
   initScrollbarPill() {
