@@ -593,10 +593,10 @@ class PortfolioApp {
 
   initSmoothScroller() {
     this.smoothScroller = new SmoothScroller({
-      duration: 1.2,
+      lerp: 0.055, // Ultra-smooth cinematic floating inertia
       headerOffset: 72,
-      wheelMultiplier: 1.0,
-      touchMultiplier: 1.5
+      wheelMultiplier: 0.7,
+      touchMultiplier: 1.8
     });
   }
 
@@ -610,7 +610,11 @@ class PortfolioApp {
         if (targetEl) {
           e.preventDefault();
           if (this.smoothScroller) {
-            this.smoothScroller.scrollTo(targetEl, { offset: -72, duration: 1.2 });
+            this.smoothScroller.scrollTo(targetEl, {
+              offset: -72,
+              duration: 1.6,
+              easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
+            });
           } else {
             targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
           }

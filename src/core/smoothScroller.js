@@ -9,10 +9,13 @@ import Lenis from '../vendor/lenis.js';
 export class SmoothScroller {
   constructor(options = {}) {
     this.options = {
-      duration: options.duration || 1.2,
+      lerp: options.lerp !== undefined ? options.lerp : 0.055, // Ultra-smooth cinematic inertia — heavy floating mass feel
+      duration: options.duration !== undefined ? options.duration : undefined,
       headerOffset: options.headerOffset || 72,
-      wheelMultiplier: options.wheelMultiplier || 1.0,
-      touchMultiplier: options.touchMultiplier || 1.5,
+      wheelMultiplier: options.wheelMultiplier !== undefined ? options.wheelMultiplier : 0.7,
+      touchMultiplier: options.touchMultiplier !== undefined ? options.touchMultiplier : 1.8,
+      smoothWheel: true,
+      smoothTouch: false,
       ...options
     };
 
@@ -34,19 +37,22 @@ export class SmoothScroller {
       return;
     }
 
-    // Initialize Lenis with Google Antigravity exponential easing physics
+    // Initialize Lenis with Google Antigravity physics specifications
     this.lenis = new Lenis({
+      lerp: this.options.lerp,
       duration: this.options.duration,
       // Exponential ease-out curve (identical to Google Antigravity & high-end physics showcases)
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      direction: 'vertical',
-      gestureDirection: 'vertical',
-      smooth: true,
-      smoothWheel: true,
+      orientation: 'vertical',
+      gestureOrientation: 'vertical',
+      smoothWheel: this.options.smoothWheel,
+      smoothTouch: this.options.smoothTouch,
       wheelMultiplier: this.options.wheelMultiplier,
       touchMultiplier: this.options.touchMultiplier,
       infinite: false,
-      autoRaf: false // Controlled manually via dedicated requestAnimationFrame loop
+      autoResize: true,
+      overscroll: true,
+      autoRaf: false // Driven via dedicated high-frequency RAF loop
     });
 
     // Make instance accessible globally for components
@@ -118,7 +124,8 @@ export class SmoothScroller {
 
     const defaultOptions = {
       offset: -this.options.headerOffset,
-      duration: this.options.duration,
+      duration: 1.6,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       immediate: false,
       lock: false
     };
@@ -174,7 +181,8 @@ export class SmoothScroller {
         }
         this.scrollTo(targetEl, {
           offset: -this.options.headerOffset,
-          duration: 1.2
+          duration: 1.6,
+          easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
         });
       }
     });

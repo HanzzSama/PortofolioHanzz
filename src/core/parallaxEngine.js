@@ -97,9 +97,13 @@ export class ParallaxEngine {
   }
 
   bindEvents() {
-    // Wheel / Scroll event tracking
+    // Wheel / Scroll event tracking — only used as fallback when Lenis is NOT active.
+    // When Lenis is active, scroll.current is synced directly from window.lenis.scroll
+    // in the render loop, so this listener only updates the progress bar.
     window.addEventListener('scroll', () => {
-      this.scroll.target = window.scrollY;
+      if (!window.lenis) {
+        this.scroll.target = window.scrollY;
+      }
       this.updateProgressBar();
     }, { passive: true });
 
@@ -155,11 +159,16 @@ export class ParallaxEngine {
     this.lastFrameTime = now;
     const dt = dtMs / 16.667;
 
-    // Smooth Lerp for scroll velocity calculation (frame-rate independent)
-    const isSmoothScroller = Boolean(window.lenis);
-    const scrollEase = isSmoothScroller ? 0.35 : this.ease;
-    this.scroll.current = this.lerp(this.scroll.current, this.scroll.target, scrollEase, dt);
-    this.scroll.velocity = this.scroll.target - this.scroll.current;
+    // Smooth Scroll synchronization (1:1 lock with Lenis physics or smooth fallback)
+    if (window.lenis && typeof window.lenis.scroll === 'number') {
+      this.scroll.current = window.lenis.scroll;
+      this.scroll.velocity = window.lenis.velocity || 0;
+    } else {
+      this.scroll.current = this.lerp(this.scroll.current, this.scroll.target, this.ease, dt);
+      this.scroll.velocity = this.scroll.target - this.scroll.current;
+    }
+
+    this.updateProgressBar();
 
     // Lerp Cursor Ring
     if (this.cursorRing) {

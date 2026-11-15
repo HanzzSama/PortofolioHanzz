@@ -30,6 +30,11 @@ html.lenis body {
   height: auto;
 }
 
+html.lenis {
+  will-change: scroll-position;
+  -webkit-overflow-scrolling: touch;
+}
+
 .lenis.lenis-smooth {
   scroll-behavior: auto !important;
 }
@@ -42,7 +47,8 @@ html.lenis body {
   overflow: clip !important;
 }
 
-.lenis.lenis-smooth iframe {
+.lenis.lenis-smooth iframe,
+.lenis.lenis-scrolling iframe {
   pointer-events: none;
 }
 
@@ -98,7 +104,7 @@ body {
   pointer-events: none;
   z-index: 1000000;
   transform: translate(-50%, -50%);
-  transition: opacity 0.2s ease, transform 0.1s ease;
+  transition: opacity 0.2s ease;
   will-change: transform;
 }
 
