@@ -351,7 +351,7 @@ export async function streamNeuraInference(prompt, streamWriter) {
     profile: {
       username: "HanzzSama",
       profileUrl: "https://github.com/HanzzSama",
-      avatarUrl: "./src/assets/hanzz-avatar.jpg",
+      avatarUrl: "./src/assets/hanzz-avatar.png",
       stats: [
         { label: "PUBLIC REPOS", value: "19", id: "repos" },
         { label: "ANNUAL COMMITS", value: "44+", id: "commits" },

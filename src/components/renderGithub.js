@@ -77,12 +77,9 @@ export function renderGithub(data) {
                 src="${profile.avatarUrl}" 
                 alt="${profile.username} Avatar" 
                 class="github-avatar-img"
-                loading="lazy"
-                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+                loading="eager"
+                onerror="this.src='./src/assets/hanzz-avatar.png'; this.onerror=null;"
               />
-              <div class="github-avatar-fallback" style="display: none;">
-                <span>HZ</span>
-              </div>
             </div>
             <div class="github-identity-block">
               <div class="github-handle-row">
