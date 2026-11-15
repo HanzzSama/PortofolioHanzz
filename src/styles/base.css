@@ -264,12 +264,12 @@ button {
   background: var(--color-botanical-sage);
 }
 
-/* Accessibility Reduced Motion */
+/* Accessibility Reduced Motion - Preserve interactive UI drawer slide */
 @media (prefers-reduced-motion: reduce) {
 
-  *,
-  *::before,
-  *::after {
+  *:not(.architectural-drawer):not(.drawer-backdrop):not(.drawer-content):not(.drawer-content *),
+  *:not(.architectural-drawer):not(.drawer-backdrop):not(.drawer-content):not(.drawer-content *)::before,
+  *:not(.architectural-drawer):not(.drawer-backdrop):not(.drawer-content):not(.drawer-content *)::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;

@@ -253,11 +253,129 @@ class PortfolioApp {
       themeBtn.addEventListener('click', () => {
         const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
         const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-        document.documentElement.setAttribute('data-theme', newTheme);
-        localStorage.setItem('portfolio-theme', newTheme);
-        this.updateThemeButtonState(newTheme, themeIcon, themeLabel);
+
+        // 1. Calculate center coordinates of button relative to viewport
+        const rect = themeBtn.getBoundingClientRect();
+        const x = rect.left + rect.width / 2;
+        const y = rect.top + rect.height / 2;
+
+        // 2. Maximum radius required to cover the farthest corner of the viewport
+        const endRadius = Math.hypot(
+          Math.max(x, window.innerWidth - x),
+          Math.max(y, window.innerHeight - y)
+        );
+
+        const applyThemeChange = () => {
+          document.documentElement.setAttribute('data-theme', newTheme);
+          localStorage.setItem('portfolio-theme', newTheme);
+          this.updateThemeButtonState(newTheme, themeIcon, themeLabel);
+
+          const metaThemeColor = document.querySelector('meta[name="theme-color"]');
+          if (metaThemeColor) {
+            metaThemeColor.setAttribute('content', newTheme === 'dark' ? '#0E1310' : '#F4F3EF');
+          }
+        };
+
+        // 3. Modern View Transitions API with circular clip-path wave
+        if (typeof document.startViewTransition === 'function') {
+          // Soft radiant wave halo expanding from button center
+          this.spawnThemeWaveHalo(x, y, endRadius);
+
+          const transition = document.startViewTransition(() => {
+            applyThemeChange();
+          });
+
+          transition.ready.then(() => {
+            const clipPath = [
+              `circle(0px at ${x}px ${y}px)`,
+              `circle(${endRadius}px at ${x}px ${y}px)`
+            ];
+
+            // Balanced ease-in-out curve (smooth from start to finish, 820ms)
+            document.documentElement.animate(
+              {
+                clipPath: clipPath,
+                opacity: [0.94, 1]
+              },
+              {
+                duration: 820,
+                easing: 'cubic-bezier(0.4, 0, 0.2, 1)',
+                pseudoElement: '::view-transition-new(root)'
+              }
+            );
+
+            // Gentle companion fade on prior view to soften contrast
+            document.documentElement.animate(
+              {
+                opacity: [1, 0.96]
+              },
+              {
+                duration: 820,
+                easing: 'cubic-bezier(0.4, 0, 0.2, 1)',
+                pseudoElement: '::view-transition-old(root)'
+              }
+            );
+          }).catch(() => {
+            applyThemeChange();
+          });
+        } else {
+          // 4. Universal Fallback: Dynamic Ripple Overlay Element
+          this.executeThemeRippleFallback(x, y, endRadius, newTheme, applyThemeChange);
+        }
       });
     }
+  }
+
+  spawnThemeWaveHalo(x, y, endRadius) {
+    const halo = document.createElement('div');
+    halo.className = 'theme-wave-halo';
+    halo.style.top = `${y}px`;
+    halo.style.left = `${x}px`;
+    halo.style.width = `${endRadius * 2.1}px`;
+    halo.style.height = `${endRadius * 2.1}px`;
+    document.body.appendChild(halo);
+
+    void halo.offsetWidth;
+    requestAnimationFrame(() => {
+      halo.style.transform = 'translate(-50%, -50%) scale(1)';
+      halo.style.opacity = '0';
+      setTimeout(() => {
+        halo.remove();
+      }, 880);
+    });
+  }
+
+  executeThemeRippleFallback(x, y, radius, newTheme, applyCallback) {
+    const ripple = document.createElement('div');
+    ripple.className = 'theme-wave-overlay';
+    const bgColor = newTheme === 'dark' ? '#0E1310' : '#F4F3EF';
+    ripple.style.cssText = `
+      position: fixed;
+      top: ${y}px;
+      left: ${x}px;
+      width: ${radius * 2}px;
+      height: ${radius * 2}px;
+      border-radius: 50%;
+      background-color: ${bgColor};
+      transform: translate(-50%, -50%) scale(0);
+      pointer-events: none;
+      z-index: 99998;
+      transition: transform 0.82s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.32s ease 0.55s;
+      will-change: transform, opacity;
+    `;
+    document.body.appendChild(ripple);
+
+    void ripple.offsetWidth;
+    requestAnimationFrame(() => {
+      ripple.style.transform = 'translate(-50%, -50%) scale(1)';
+      setTimeout(() => {
+        applyCallback();
+        ripple.style.opacity = '0';
+        setTimeout(() => {
+          ripple.remove();
+        }, 400);
+      }, 500);
+    });
   }
 
   updateThemeButtonState(theme, iconEl, labelEl) {
@@ -491,15 +609,23 @@ class PortfolioApp {
     const closeBtn = document.getElementById('drawer-close-btn');
 
     if (closeBtn) {
-      closeBtn.addEventListener('click', () => this.closeDrawer());
+      closeBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        this.closeDrawer();
+      });
     }
 
     if (backdrop) {
-      backdrop.addEventListener('click', () => this.closeDrawer());
+      backdrop.addEventListener('click', (e) => {
+        e.stopPropagation();
+        this.closeDrawer();
+      });
     }
 
     window.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') this.closeDrawer();
+      if (e.key === 'Escape' && drawer?.classList.contains('active')) {
+        this.closeDrawer();
+      }
     });
 
     // Delegated click listeners
@@ -519,6 +645,7 @@ class PortfolioApp {
       // 2. Inspect Skill Node
       const skillTarget = e.target.closest('[data-inspect-skill]');
       if (skillTarget) {
+        e.preventDefault();
         const skillName = skillTarget.getAttribute('data-inspect-skill');
         const spec = skillTarget.getAttribute('data-spec');
         const tier = skillTarget.getAttribute('data-tier');
@@ -530,6 +657,7 @@ class PortfolioApp {
       // 3. Inspect Digital Garden Monograph
       const noteTarget = e.target.closest('[data-inspect-note]');
       if (noteTarget) {
+        e.preventDefault();
         const noteId = noteTarget.getAttribute('data-inspect-note');
         const note = this.data.another.gardenNotes.find((n) => n.id === noteId);
         if (note) {
@@ -546,28 +674,75 @@ class PortfolioApp {
     const callsignEl = document.getElementById('drawer-callsign');
     const bodyEl = document.getElementById('drawer-body');
 
-    if (callsignEl) callsignEl.textContent = callsign;
-    if (bodyEl) bodyEl.innerHTML = contentHtml;
+    if (!backdrop || !drawer) return;
 
-    if (backdrop && drawer) {
-      drawer.scrollTop = 0;
+    if (this._drawerCloseTimer) {
+      clearTimeout(this._drawerCloseTimer);
+      this._drawerCloseTimer = null;
+    }
+
+    const isOpen = drawer.classList.contains('active');
+
+    if (isOpen) {
+      // Fluid cross-slide transition when changing details while already open
+      if (bodyEl) {
+        bodyEl.classList.add('is-switching');
+        setTimeout(() => {
+          if (callsignEl) callsignEl.textContent = callsign;
+          bodyEl.innerHTML = contentHtml;
+          drawer.scrollTop = 0;
+          bodyEl.classList.remove('is-switching');
+          bodyEl.classList.add('is-entering');
+          void bodyEl.offsetWidth;
+          requestAnimationFrame(() => {
+            bodyEl.classList.remove('is-entering');
+          });
+        }, 160);
+      }
+      return;
+    }
+
+    // Opening from closed state
+    if (callsignEl) callsignEl.textContent = callsign;
+    if (bodyEl) {
+      bodyEl.classList.remove('is-switching', 'is-entering');
+      bodyEl.innerHTML = contentHtml;
+    }
+    drawer.scrollTop = 0;
+
+    // Lock page scroll cleanly
+    document.body.style.overflow = 'hidden';
+    this.smoothScroller?.stop();
+
+    // Prepare off-screen position and trigger hardware slide
+    drawer.classList.remove('active');
+    backdrop.classList.remove('active');
+    void drawer.offsetWidth; // Force reflow to commit translate3d(100%, 0, 0)
+
+    requestAnimationFrame(() => {
       backdrop.classList.add('active');
       drawer.classList.add('active');
-      document.body.style.overflow = 'hidden';
-      this.smoothScroller?.stop();
-    }
+    });
   }
 
   closeDrawer() {
     const backdrop = document.getElementById('drawer-backdrop');
     const drawer = document.getElementById('system-drawer');
 
-    if (backdrop && drawer) {
-      backdrop.classList.remove('active');
-      drawer.classList.remove('active');
-      document.body.style.overflow = '';
-      this.smoothScroller?.start();
-    }
+    if (!backdrop || !drawer) return;
+
+    // Trigger smooth slide out
+    backdrop.classList.remove('active');
+    drawer.classList.remove('active');
+
+    if (this._drawerCloseTimer) clearTimeout(this._drawerCloseTimer);
+    this._drawerCloseTimer = setTimeout(() => {
+      if (!drawer.classList.contains('active')) {
+        document.body.style.overflow = '';
+        this.smoothScroller?.start();
+      }
+      this._drawerCloseTimer = null;
+    }, 380);
   }
 
   openProjectInspection(proj) {
