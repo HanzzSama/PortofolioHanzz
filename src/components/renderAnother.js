@@ -14,7 +14,7 @@ export function renderAnother(data) {
       </div>
 
       <div class="another-intro" data-stagger>
-        <h2 class="font-display">Digital Garden & Field Notes</h2>
+        <h2 class="font-display">${another.headline || 'Digital Garden & Field Notes'}</h2>
         <p>${another.description}</p>
       </div>
 
@@ -33,8 +33,8 @@ export function renderAnother(data) {
               <p class="note-excerpt">${note.excerpt}</p>
             </div>
             <div style="margin-top: var(--space-md); display: flex; justify-content: space-between; align-items: center; font-family: var(--font-mono); font-size: var(--font-mono-micro); color: var(--text-muted);">
-              <span>READ TIME: ${note.readTime}</span>
-              <span style="color: var(--accent-primary);">INSPECT MONOGRAPH ↗</span>
+              <span>${another.ui?.readTimeLabel || 'READ TIME:'} ${note.readTime}</span>
+              <span style="color: var(--accent-primary);">${another.ui?.inspectLabel || 'INSPECT MONOGRAPH ↗'}</span>
             </div>
           </div>
         `
@@ -53,7 +53,7 @@ export function renderAnother(data) {
           </div>
           <button id="synth-mute-toggle" class="tactile-btn" data-cursor-target>
             <span id="synth-state-icon">▶</span>
-            <span id="synth-state-label">Activate Resonant Tone</span>
+            <span id="synth-state-label">${another.ui?.synthBtnPlay || 'Activate Resonant Tone'}</span>
           </button>
         </div>
 
@@ -77,18 +77,18 @@ export function renderAnother(data) {
       <div class="transmission-terminal" data-stagger>
         <div class="transmission-info">
           <div style="font-family: var(--font-mono); font-size: var(--font-mono-tag); color: var(--accent-primary); margin-bottom: 0.5rem;">
-            COMMUNICATION DISPATCH // PROTOCOL: ENCRYPTED
+            ${another.ui?.dispatchTag || 'COMMUNICATION DISPATCH // PROTOCOL: ENCRYPTED'}
           </div>
-          <h3 class="font-display">Initiate Collaboration</h3>
+          <h3 class="font-display">${another.ui?.dispatchTitle || 'Initiate Collaboration'}</h3>
           <p>
-            Terbuka untuk diskusi arsitektur sistem, peran FullStack Developer, rekacipta aplikasi modern, atau riset komputasional bersama ITESA Muhammadiyah Semarang.
+            ${another.ui?.dispatchLead || 'Terbuka untuk diskusi arsitektur sistem, peran FullStack Developer, rekacipta aplikasi modern, atau riset komputasional bersama ITESA Muhammadiyah Semarang.'}
           </p>
 
           <button id="copy-email-btn" class="contact-quick-pill" data-email="${meta.socials[2].handle}" data-cursor-target>
             <span>✉</span>
             <span>${meta.socials[2].handle}</span>
-            <span style="opacity: 0.5;">[COPY]</span>
-            <span id="copy-toast" class="copy-feedback-toast">COPIED TO CLIPBOARD</span>
+            <span style="opacity: 0.5;">${another.ui?.copyLabel || '[COPY]'}</span>
+            <span id="copy-toast" class="copy-feedback-toast">${another.ui?.copiedToast || 'COPIED TO CLIPBOARD'}</span>
           </button>
         </div>
 

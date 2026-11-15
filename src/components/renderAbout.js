@@ -48,7 +48,7 @@ export function renderAbout(data) {
       <!-- Timeline & Pedagogy Specs -->
       <div class="about-timeline-section" data-stagger>
         <div class="timeline-header-bar">
-          <h3 class="font-display">Pedagogical Chronology & Field Practice</h3>
+          <h3 class="font-display">${about.timelineTitle || 'Pedagogical Chronology & Field Practice'}</h3>
           <span class="font-mono" style="font-size: var(--font-mono-tag); color: var(--accent-primary);">
             BASE: ${meta.institution.name} [SEMARANG]
           </span>

@@ -14,7 +14,7 @@ export function renderSkills(data) {
       </div>
 
       <div class="skills-intro" data-stagger>
-        <h2 class="font-display">Taxonomy of Capabilities</h2>
+        <h2 class="font-display">${skills.headline || 'Taxonomy of Capabilities'}</h2>
         <p>${skills.description}</p>
       </div>
 

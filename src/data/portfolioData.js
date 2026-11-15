@@ -342,8 +342,134 @@ export async function streamNeuraInference(prompt, streamWriter) {
     ]
   },
 
-  another: {
+  github: {
     sectionIndex: "05",
+    sectionTitle: "GIT TELEMETRY & VAULT",
+    sectionSub: "PUBLIC REPOSITORIES // CONTRIBUTION MATRIX",
+    headline: "Repositori Terbuka & Matriks Kontribusi",
+    description: "Arsip kode sumber publik, commit berkala, dan proyek rekayasa perangkat lunak mandiri yang didokumentasikan di ekosistem GitHub @HanzzSama.",
+    profile: {
+      username: "HanzzSama",
+      profileUrl: "https://github.com/HanzzSama",
+      avatarUrl: "https://avatars.githubusercontent.com/u/149814168?v=4",
+      stats: [
+        { label: "PUBLIC REPOS", value: "19", id: "repos" },
+        { label: "ANNUAL COMMITS", value: "44+", id: "commits" },
+        { label: "FOLLOWERS", value: "3", id: "followers" },
+        { label: "FOLLOWING", value: "5", id: "following" },
+        { label: "ACHIEVEMENT", value: "YOLO // UNLOCKED", id: "badge" }
+      ],
+      bio: "Hanzz // FullStack Developer & Systems Craftsman. ITESA Muhammadiyah Semarang.",
+      actionLabel: "VISIT GITHUB PROFILE ↗"
+    },
+    repositories: [
+      {
+        id: "repo-01",
+        name: "MathiCalc",
+        fullName: "HanzzSama/MathiCalc",
+        url: "https://github.com/HanzzSama/MathiCalc",
+        description: "Mesin kalkulator komputasi presisi tinggi dengan evaluasi rumus matematika bertahap dan visualisasi ekspresi real-time.",
+        language: "JavaScript",
+        langColor: "#F7DF1E",
+        stars: 1,
+        forks: 0,
+        badge: "CORE ENGINE",
+        tag: "COMPUTATION"
+      },
+      {
+        id: "repo-02",
+        name: "MathiCore",
+        fullName: "HanzzSama/MathiCore",
+        url: "https://github.com/HanzzSama/MathiCore",
+        description: "Inti pustaka parsing aljabar dan struktur data pohon sintaks matematika untuk evaluasi formula tanpa overhead.",
+        language: "HTML / JS",
+        langColor: "#E34F26",
+        stars: 0,
+        forks: 0,
+        badge: "LIBRARY",
+        tag: "ALGORITHM"
+      },
+      {
+        id: "repo-03",
+        name: "MySPP",
+        fullName: "HanzzSama/MySPP",
+        url: "https://github.com/HanzzSama/MySPP",
+        description: "Sistem manajemen pembayaran SPP dan administrasi keuangan institusi pendidikan berbasis arsitektur MVC terstruktur.",
+        language: "Blade / PHP",
+        langColor: "#F05340",
+        stars: 0,
+        forks: 0,
+        badge: "ENTERPRISE",
+        tag: "ACADEMIA"
+      },
+      {
+        id: "repo-04",
+        name: "TiketKu",
+        fullName: "HanzzSama/TiketKu",
+        url: "https://github.com/HanzzSama/TiketKu",
+        description: "Platform e-ticketing dan reservasi tiket terdistribusi dengan alur checkout instan dan validasi tiket QR aman.",
+        language: "Blade / PHP",
+        langColor: "#F05340",
+        stars: 0,
+        forks: 0,
+        badge: "FULLSTACK",
+        tag: "COMMERCE"
+      },
+      {
+        id: "repo-05",
+        name: "UrbanChic",
+        fullName: "HanzzSama/UrbanChic",
+        url: "https://github.com/HanzzSama/UrbanChic",
+        description: "Katalog e-commerce gaya hidup urban dengan sistem keranjang belanja modular, filter kategori dinamis, dan UI responsif.",
+        language: "Blade / PHP",
+        langColor: "#F05340",
+        stars: 0,
+        forks: 0,
+        badge: "COMMERCE",
+        tag: "REACTIVE"
+      },
+      {
+        id: "repo-06",
+        name: "MusicGate",
+        fullName: "HanzzSama/MusicGate",
+        url: "https://github.com/HanzzSama/MusicGate",
+        description: "Pintu gerbang agregasi audio digital dan kurasi playlist berkinerja tinggi dengan antarmuka media taktil.",
+        language: "Blade / PHP",
+        langColor: "#F05340",
+        stars: 0,
+        forks: 0,
+        badge: "STREAMING",
+        tag: "AUDIO WEB"
+      }
+    ],
+    heatmap: {
+      year: "2026",
+      totalContributions: "44 kontribusi dalam setahun terakhir",
+      legend: ["Less", "Level 1", "Level 2", "Level 3", "More"]
+    }
+  },
+
+  kineticLab: {
+    sectionIndex: "06.A",
+    title: "KINETIC MONOLITH SIMULATOR",
+    subtitle: "REAL-TIME 3D WIREFRAME // ROTATIONAL GRAVITY GYROSCOPE",
+    description: "Eksperimen grafis komputasional 3D interaktif murni Canvas. Drag untuk merotasi geometri monolit, ubah topologi bentuk, dan amati pembelokan sumbu koordinat secara real-time.",
+    modes: [
+      { id: "monolith", label: "Tectonic Monolith", vertices: 8, edges: 12 },
+      { id: "tesseract", label: "Hypercube 4D", vertices: 16, edges: 32 },
+      { id: "geodesic", label: "Icosahedron Sphere", vertices: 12, edges: 30 },
+      { id: "wave", label: "Topographic Grid", vertices: 36, edges: 60 }
+    ],
+    telemetryLabels: {
+      rotation: "ROTATION MATRIX",
+      vertexCount: "ACTIVE VERTICES",
+      inertia: "VELOCITY DAMPING",
+      fps: "RENDER FPS"
+    }
+  },
+
+  another: {
+    sectionIndex: "06",
     sectionTitle: "DIGITAL GARDEN & TRANSMISSION",
     sectionSub: "LAB EXPERIMENTS // FREQUENCY SYNTH // DISPATCH",
     description:
@@ -434,35 +560,151 @@ export function getPortfolioData(lang = 'id') {
   if (t.welcome) {
     localized.welcome = { ...localized.welcome, ...t.welcome };
   }
+
   if (t.about) {
-    localized.about.sectionTitle = t.about.sectionTitle;
-    localized.about.sectionSub = t.about.sectionSub;
-    localized.about.ethosTitle = t.about.ethosTitle;
-    localized.about.ethosParagraphs = t.about.ethosParagraphs;
+    localized.about.sectionTitle = t.about.sectionTitle || localized.about.sectionTitle;
+    localized.about.sectionSub = t.about.sectionSub || localized.about.sectionSub;
+    localized.about.ethosTitle = t.about.ethosTitle || localized.about.ethosTitle;
+    localized.about.ethosParagraphs = t.about.ethosParagraphs || localized.about.ethosParagraphs;
+    if (t.about.timelineTitle) localized.about.timelineTitle = t.about.timelineTitle;
     if (t.about.pillars) localized.about.pillars = t.about.pillars;
     if (t.about.timeline) localized.about.timeline = t.about.timeline;
   }
+
   if (t.skills) {
-    localized.skills.sectionTitle = t.skills.sectionTitle;
-    localized.skills.sectionSub = t.skills.sectionSub;
-    localized.skills.description = t.skills.description;
+    localized.skills.sectionTitle = t.skills.sectionTitle || localized.skills.sectionTitle;
+    localized.skills.sectionSub = t.skills.sectionSub || localized.skills.sectionSub;
+    localized.skills.headline = t.skills.headline || localized.skills.headline;
+    localized.skills.description = t.skills.description || localized.skills.description;
+    if (t.skills.matrixTiers && Array.isArray(t.skills.matrixTiers)) {
+      localized.skills.matrixTiers = localized.skills.matrixTiers.map((tier, idx) => {
+        const transTier = t.skills.matrixTiers[idx];
+        if (!transTier) return tier;
+        return {
+          ...tier,
+          concept: transTier.concept || tier.concept,
+          layerName: transTier.layerName || tier.layerName,
+          nodes: tier.nodes.map((node, nodeIdx) => {
+            const transNode = transTier.nodes?.[nodeIdx];
+            if (!transNode) return node;
+            return {
+              ...node,
+              name: transNode.name || node.name,
+              spec: transNode.spec || node.spec,
+              tag: transNode.tag || node.tag
+            };
+          })
+        };
+      });
+    }
   }
+
   if (t.projects) {
-    localized.projects.sectionTitle = t.projects.sectionTitle;
-    localized.projects.sectionSub = t.projects.sectionSub;
-    localized.projects.description = t.projects.description;
-    if (t.projects.itemsDesc) {
+    localized.projects.sectionTitle = t.projects.sectionTitle || localized.projects.sectionTitle;
+    localized.projects.sectionSub = t.projects.sectionSub || localized.projects.sectionSub;
+    localized.projects.headline = t.projects.headline || localized.projects.headline;
+    localized.projects.description = t.projects.description || localized.projects.description;
+    localized.projects.ui = t.projects.ui || localized.projects.ui;
+    if (t.projects.items) {
+      localized.projects.items = localized.projects.items.map((item, idx) => {
+        const transItem = t.projects.items[item.id] || t.projects.items[idx];
+        if (!transItem) return item;
+        return {
+          ...item,
+          subtitle: transItem.subtitle || item.subtitle,
+          category: transItem.category || item.category,
+          role: transItem.role || item.role,
+          client: transItem.client || item.client,
+          description: transItem.description || item.description,
+          deliverables: transItem.deliverables || item.deliverables,
+          metrics: transItem.metrics || item.metrics,
+          deepDive: transItem.deepDive ? {
+            ...item.deepDive,
+            problem: transItem.deepDive.problem || item.deepDive?.problem,
+            solution: transItem.deepDive.solution || item.deepDive?.solution
+          } : item.deepDive
+        };
+      });
+    } else if (t.projects.itemsDesc) {
       localized.projects.items = localized.projects.items.map((item) => ({
         ...item,
         description: t.projects.itemsDesc[item.id] || item.description
       }));
     }
   }
-  if (t.another) {
-    localized.another.sectionTitle = t.another.sectionTitle;
-    localized.another.sectionSub = t.another.sectionSub;
-    localized.another.description = t.another.description;
+
+  if (t.github) {
+    localized.github.sectionTitle = t.github.sectionTitle || localized.github.sectionTitle;
+    localized.github.sectionSub = t.github.sectionSub || localized.github.sectionSub;
+    localized.github.headline = t.github.headline || localized.github.headline;
+    localized.github.description = t.github.description || localized.github.description;
+    if (t.github.profile) {
+      localized.github.profile = {
+        ...localized.github.profile,
+        ...t.github.profile,
+        stats: t.github.profile.stats || localized.github.profile.stats
+      };
+    }
+    if (t.github.heatmap) {
+      localized.github.heatmap = {
+        ...localized.github.heatmap,
+        ...t.github.heatmap
+      };
+    }
+    if (t.github.repositories) {
+      localized.github.repositories = localized.github.repositories.map((repo, idx) => {
+        const transRepo = t.github.repositories[repo.id] || t.github.repositories[idx];
+        if (!transRepo) return repo;
+        return {
+          ...repo,
+          description: transRepo.description || repo.description,
+          badge: transRepo.badge || repo.badge,
+          tag: transRepo.tag || repo.tag
+        };
+      });
+    }
   }
+
+  if (t.kineticLab) {
+    localized.kineticLab = {
+      ...localized.kineticLab,
+      ...t.kineticLab
+    };
+  }
+
+  if (t.another) {
+    localized.another.sectionTitle = t.another.sectionTitle || localized.another.sectionTitle;
+    localized.another.sectionSub = t.another.sectionSub || localized.another.sectionSub;
+    localized.another.headline = t.another.headline || localized.another.headline;
+    localized.another.description = t.another.description || localized.another.description;
+    localized.another.ui = t.another.ui || localized.another.ui;
+    if (t.another.gardenNotes) {
+      localized.another.gardenNotes = localized.another.gardenNotes.map((note, idx) => {
+        const transNote = t.another.gardenNotes[note.id] || t.another.gardenNotes[idx];
+        if (!transNote) return note;
+        return {
+          ...note,
+          title: transNote.title || note.title,
+          excerpt: transNote.excerpt || note.excerpt,
+          readTime: transNote.readTime || note.readTime,
+          content: transNote.content || note.content
+        };
+      });
+    }
+    if (t.another.audioSynth) {
+      localized.another.audioSynth = {
+        ...localized.another.audioSynth,
+        ...t.another.audioSynth
+      };
+    }
+    if (t.another.colophon) {
+      localized.another.colophon = {
+        ...localized.another.colophon,
+        ...t.another.colophon
+      };
+    }
+  }
+
   if (t.meta) {
     localized.meta = { ...localized.meta, ...t.meta };
   }

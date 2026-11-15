@@ -304,14 +304,14 @@ class PortfolioApp {
           this.gainNode.gain.setTargetAtTime(0, this.audioContext.currentTime, 0.1);
           this.isAudioPlaying = false;
           if (stateIcon) stateIcon.textContent = '▶';
-          if (stateLabel) stateLabel.textContent = 'Activate Resonant Tone';
+          if (stateLabel) stateLabel.textContent = this.data.another?.ui?.synthBtnPlay || 'Activate Resonant Tone';
           muteBtn.classList.remove('active');
         } else {
           // Fade in to gentle ambient level
           this.gainNode.gain.setTargetAtTime(0.08, this.audioContext.currentTime, 0.15);
           this.isAudioPlaying = true;
           if (stateIcon) stateIcon.textContent = '■';
-          if (stateLabel) stateLabel.textContent = 'Mute Resonant Tone';
+          if (stateLabel) stateLabel.textContent = this.data.another?.ui?.synthBtnStop || 'Halt Resonance';
           muteBtn.classList.add('active');
           this.startVisualizer(canvas);
         }

@@ -69,7 +69,7 @@ export function renderProjects(data) {
       </div>
 
       <div class="projects-intro" data-stagger>
-        <h2 class="font-display">Curated Engineering Systems</h2>
+        <h2 class="font-display">${projects.headline || 'Curated Engineering Systems'}</h2>
         <p>${projects.description}</p>
       </div>
 
@@ -115,19 +115,19 @@ export function renderProjects(data) {
 
               <div class="project-card-actions">
                 <button class="project-btn-primary" data-inspect-project="${proj.id}" data-cursor-target>
-                  <span>Deep-Dive Topology</span>
+                  <span>${projects.ui?.inspect || 'Deep-Dive Topology'}</span>
                   <span>↗</span>
                 </button>
                 <a href="${proj.links.code}" target="_blank" rel="noopener noreferrer" class="project-btn-secondary" data-cursor-target>
-                  <span>GitHub Node</span>
+                  <span>${projects.ui?.github || 'GitHub Node'}</span>
                 </a>
               </div>
             </div>
 
-            <div class="project-blueprint-panel" data-inspect-project="${proj.id}" data-cursor-target title="Click to inspect architecture">
+            <div class="project-blueprint-panel" data-inspect-project="${proj.id}" data-cursor-target title="${projects.ui?.inspectTooltip || 'Click to inspect architecture'}">
               <div class="blueprint-meta-header">
-                <span>ROLE: ${proj.role}</span>
-                <span>CLIENT: ${proj.client}</span>
+                <span>${projects.ui?.role || 'ROLE:'} ${proj.role}</span>
+                <span>${projects.ui?.client || 'CLIENT:'} ${proj.client}</span>
               </div>
 
               <div class="blueprint-canvas-container" style="color: ${proj.accent};" data-parallax-relative data-parallax-speed="0.12">
