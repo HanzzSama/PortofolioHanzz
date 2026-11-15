@@ -7,6 +7,7 @@ export class ArchitecturalObserver {
   constructor() {
     this.sectionObserver = null;
     this.revealObserver = null;
+    this.cardSlideObserver = null;
     this.springObserver = null;
     this.timelineObserver = null;
     this.init();
@@ -14,9 +15,10 @@ export class ArchitecturalObserver {
 
   init() {
     this.setupRevealObserver();
+    this.setupCardSlideInOutObserver(); // Continuous Slide In-Out for all Portfolio Cards
     this.setupSectionObserver();
-    this.setupScrollScaleObserver();  // BARU
-    this.setupTimelineReveal();        // BARU
+    this.setupScrollScaleObserver();
+    this.setupTimelineReveal();
   }
 
   setupRevealObserver() {
@@ -45,12 +47,77 @@ export class ArchitecturalObserver {
     }, options);
 
     const revealTargets = document.querySelectorAll(
-      '.architectural-section, .pillar-card, .matrix-tier-card, .project-architectural-card, .garden-note-card, [data-reveal]'
+      '.architectural-section, [data-reveal]'
     );
 
     revealTargets.forEach((target) => {
       target.classList.add('reveal-init');
       this.revealObserver.observe(target);
+    });
+  }
+
+  setupCardSlideInOutObserver() {
+    const cardOptions = {
+      root: null,
+      rootMargin: '10px 0px -30px 0px',
+      threshold: 0.08
+    };
+
+    this.cardSlideObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        const card = entry.target;
+        const rect = entry.boundingClientRect;
+        const rootBounds = entry.rootBounds || {
+          top: 0,
+          bottom: window.innerHeight
+        };
+
+        if (entry.isIntersecting) {
+          // Card enters viewport -> SLIDE IN
+          card.classList.remove('card-slide-out', 'slide-out-top', 'slide-out-bottom');
+          card.classList.add('card-slide-in');
+        } else {
+          // Card leaves viewport -> SLIDE OUT
+          card.classList.remove('card-slide-in');
+          // Determine whether it exited past top or bottom of viewport
+          if (rect.bottom <= rootBounds.top) {
+            card.classList.remove('slide-out-bottom');
+            card.classList.add('card-slide-out', 'slide-out-top');
+          } else if (rect.top >= rootBounds.bottom) {
+            card.classList.remove('slide-out-top');
+            card.classList.add('card-slide-out', 'slide-out-bottom');
+          } else {
+            card.classList.add('card-slide-out');
+          }
+        }
+      });
+    }, cardOptions);
+
+    const cards = document.querySelectorAll(
+      '.project-architectural-card, .github-repo-card, .matrix-tier-card, .pillar-card, .garden-note-card'
+    );
+
+    cards.forEach((card, index) => {
+      card.classList.add('card-slide-init');
+
+      // Stagger within grid row siblings
+      if (card.parentElement) {
+        const siblings = Array.from(card.parentElement.children).filter((c) =>
+          c.matches('.project-architectural-card, .github-repo-card, .matrix-tier-card, .pillar-card, .garden-note-card')
+        );
+        const colIndex = siblings.indexOf(card);
+        if (colIndex > 0) {
+          card.style.transitionDelay = `${colIndex * 90}ms`;
+        }
+      }
+
+      // Alternating direction for Project Architectural Cards
+      if (card.classList.contains('project-architectural-card')) {
+        const isRight = index % 2 === 1;
+        card.classList.add(isRight ? 'card-slide-right' : 'card-slide-left');
+      }
+
+      this.cardSlideObserver.observe(card);
     });
   }
 
@@ -95,40 +162,7 @@ export class ArchitecturalObserver {
   }
 
   setupScrollScaleObserver() {
-    // Garden Note Cards — spring scale entry
-    const springOptions = {
-      root: null,
-      rootMargin: '0px 0px -8% 0px',
-      threshold: 0.08
-    };
-
-    this.springObserver = new IntersectionObserver((entries, observer) => {
-      entries.forEach((entry, i) => {
-        if (entry.isIntersecting) {
-          // Add spring class with stagger delay
-          const siblings = Array.from(entry.target.parentElement.children);
-          const index = siblings.indexOf(entry.target);
-          setTimeout(() => {
-            entry.target.classList.add('is-spring-revealed');
-          }, index * 60);
-          observer.unobserve(entry.target);
-        }
-      });
-    }, springOptions);
-
-    // Pillar cards spring entry
-    const pillarTargets = document.querySelectorAll('.pillar-card');
-    pillarTargets.forEach(el => {
-      el.classList.add('spring-init');
-      this.springObserver.observe(el);
-    });
-
-    // Garden note cards spring entry  
-    const gardenTargets = document.querySelectorAll('.garden-note-card');
-    gardenTargets.forEach(el => {
-      el.classList.add('spring-init');
-      this.springObserver.observe(el);
-    });
+    // Kept for backward compatibility or custom spring elements
   }
 
   setupTimelineReveal() {
@@ -162,6 +196,7 @@ export class ArchitecturalObserver {
   refresh() {
     if (this.revealObserver) this.revealObserver.disconnect();
     if (this.sectionObserver) this.sectionObserver.disconnect();
+    if (this.cardSlideObserver) this.cardSlideObserver.disconnect();
     if (this.springObserver) this.springObserver.disconnect();
     if (this.timelineObserver) this.timelineObserver.disconnect();
     this.init();

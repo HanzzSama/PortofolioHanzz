@@ -254,7 +254,6 @@ export class ParallaxEngine {
       const progress = 0.5 * (1 - Math.cos(centerFactor * Math.PI));
       const scale = target.scaleFrom + (target.scaleTo - target.scaleFrom) * progress;
       target.element.style.setProperty('--scroll-scale', scale.toFixed(4));
-      target.element.style.transform = `scale(${scale.toFixed(4)})`;
     });
   }
 
