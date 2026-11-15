@@ -95,6 +95,74 @@ export function renderPet(data) {
               <circle class="crown-jewel" cx="39" cy="5" r="1" />
               <circle class="crown-jewel" cx="61" cy="5" r="1" />
             </g>
+
+            <!-- ========================================================
+                 THE 7 SECTION PERSONA MORPHOLOGY OVERLAYS
+                 ======================================================== -->
+            <!-- 1. Welcome Persona: Pure Mochi with Radar Pulse Antenna -->
+            <g id="persona-welcome" class="persona-accessory persona-welcome">
+              <line x1="50" y1="6" x2="50" y2="-2" stroke="var(--accent-primary)" stroke-width="1.3" stroke-linecap="round"/>
+              <circle cx="50" cy="-3" r="1.5" fill="var(--accent-primary)"/>
+              <path class="beacon-wave beacon-wave-1" d="M 44 -5 A 7 7 0 0 1 56 -5" stroke="var(--accent-primary)" stroke-width="1.1" stroke-linecap="round" fill="none"/>
+              <path class="beacon-wave beacon-wave-2" d="M 40 -8 A 12 12 0 0 1 60 -8" stroke="var(--accent-primary)" stroke-width="0.9" stroke-linecap="round" fill="none" opacity="0.6"/>
+            </g>
+
+            <!-- 2. About Persona: Biophilic Organic Sprout & Twin Leaves -->
+            <g id="persona-about" class="persona-accessory persona-about">
+              <path id="sprout-stem" d="M 50 6 Q 50 1 50 -2" stroke="#588157" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+              <path id="sprout-leaf-l" class="sprout-leaf-left" d="M 50 -2 C 43 -5 41 -12 47 -12 C 51 -12 51 -4 50 -2 Z" fill="#74A872" stroke="#436842" stroke-width="0.7"/>
+              <path id="sprout-leaf-r" class="sprout-leaf-right" d="M 50 -2 C 57 -5 59 -12 53 -12 C 49 -12 49 -4 50 -2 Z" fill="#88C286" stroke="#436842" stroke-width="0.7"/>
+              <circle id="sprout-blossom" cx="50" cy="-2" r="1.3" fill="#E9C46A" opacity="0.9"/>
+            </g>
+
+            <!-- 3. Skills Persona: Master Artisan Blueprint Monocle -->
+            <g id="persona-skills" class="persona-accessory persona-skills">
+              <circle cx="67" cy="44" r="12" fill="rgba(74, 144, 226, 0.12)" stroke="var(--accent-primary)" stroke-width="1.3"/>
+              <circle cx="67" cy="44" r="9" stroke="var(--accent-primary)" stroke-width="0.6" stroke-dasharray="2 2" fill="none"/>
+              <line x1="67" y1="33" x2="67" y2="36" stroke="var(--accent-primary)" stroke-width="1.2"/>
+              <line x1="67" y1="52" x2="67" y2="55" stroke="var(--accent-primary)" stroke-width="1.2"/>
+              <line x1="56" y1="44" x2="59" y2="44" stroke="var(--accent-primary)" stroke-width="1.2"/>
+              <line x1="75" y1="44" x2="78" y2="44" stroke="var(--accent-primary)" stroke-width="1.2"/>
+              <path d="M 79 44 C 83 44 86 49 85 54" stroke="var(--accent-primary)" stroke-width="1.1" fill="none" stroke-linecap="round"/>
+            </g>
+
+            <!-- 4. Projects Persona: Minimalist Architectural Safety Hardhat -->
+            <g id="persona-projects" class="persona-accessory persona-projects">
+              <path class="hardhat-body" d="M 30 7 C 30 -5 70 -5 70 7 Z" fill="#F4F1DE" stroke="#3D405B" stroke-width="1.2"/>
+              <path d="M 26 7 Q 50 11 74 7" stroke="#3D405B" stroke-width="1.6" stroke-linecap="round" fill="none"/>
+              <path d="M 44 -4 H 56 V 7 H 44 Z" fill="#D4AF37" opacity="0.85"/>
+              <line x1="50" y1="-4" x2="50" y2="7" stroke="#3D405B" stroke-width="0.8"/>
+            </g>
+
+            <!-- 5. GitHub Persona: Cyberpunk Terminal HUD Visor -->
+            <g id="persona-github" class="persona-accessory persona-github">
+              <path d="M 23 37 H 77 C 78.5 37 79.5 39 79 49 C 78 54 75 55 70 55 H 30 C 25 55 22 54 21 49 C 20.5 39 21.5 37 23 37 Z" fill="rgba(16, 185, 129, 0.16)" stroke="#10B981" stroke-width="1.3"/>
+              <line class="hud-scanline" x1="25" y1="46" x2="75" y2="46" stroke="#34D399" stroke-width="1" stroke-linecap="round"/>
+              <rect x="26" y="40" width="3" height="1.5" fill="#10B981"/>
+              <rect x="71" y="40" width="3" height="1.5" fill="#10B981"/>
+            </g>
+
+            <!-- 6. Lab Persona: 3D Holographic Polyhedron Wireframe -->
+            <g id="persona-lab" class="persona-accessory persona-lab">
+              <path class="wireframe-lattice" d="M 50 6 L 86 24 L 86 54 L 50 71 L 14 54 L 14 24 Z" stroke="var(--accent-primary)" stroke-width="1.2" stroke-dasharray="3 2" fill="rgba(74, 93, 78, 0.05)"/>
+              <line x1="50" y1="6" x2="50" y2="71" stroke="var(--accent-primary)" stroke-width="0.9" stroke-dasharray="2 2"/>
+              <line x1="14" y1="24" x2="86" y2="54" stroke="var(--accent-primary)" stroke-width="0.9" stroke-dasharray="2 2"/>
+              <line x1="14" y1="54" x2="86" y2="24" stroke="var(--accent-primary)" stroke-width="0.9" stroke-dasharray="2 2"/>
+              <circle cx="50" cy="6" r="1.5" fill="var(--accent-primary)"/>
+              <circle cx="86" cy="24" r="1.5" fill="var(--accent-primary)"/>
+              <circle cx="86" cy="54" r="1.5" fill="var(--accent-primary)"/>
+              <circle cx="50" cy="71" r="1.5" fill="var(--accent-primary)"/>
+              <circle cx="14" cy="54" r="1.5" fill="var(--accent-primary)"/>
+              <circle cx="14" cy="24" r="1.5" fill="var(--accent-primary)"/>
+            </g>
+
+            <!-- 7. Another Persona: Zen 432Hz Acoustic Floating Halo -->
+            <g id="persona-another" class="persona-accessory persona-another">
+              <ellipse class="zen-halo-outer" cx="50" cy="-3" rx="20" ry="5.5" stroke="#60A5FA" stroke-width="1.2" fill="none" stroke-dasharray="4 2"/>
+              <ellipse class="zen-halo-inner" cx="50" cy="0" rx="14" ry="4" stroke="var(--accent-primary)" stroke-width="1" fill="none" opacity="0.6"/>
+              <circle cx="36" cy="-3" r="1.2" fill="#60A5FA"/>
+              <circle cx="64" cy="-3" r="1.2" fill="#60A5FA"/>
+            </g>
           </svg>
         </div>
       </div>
@@ -109,7 +177,15 @@ export function renderPet(data) {
           </svg>
         </button>
 
-        <!-- 2. Dance: Abstract Kinetic Rhythm Pillars -->
+        <!-- 2. Dynamic Contextual Action: Mutates per Active Section -->
+        <button id="pet-btn-context" class="pet-action-btn pet-context-btn active" data-tip="${t.tips.context_welcome || 'Beacon'}" aria-label="Special Action">
+          <svg id="pet-context-icon" class="monolith-icon" viewBox="0 0 16 16" fill="none">
+            <circle cx="8" cy="8" r="3" stroke="currentColor" stroke-width="1.3"/>
+            <path d="M8 1V3M8 13V15M1 8H3M13 8H15" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+          </svg>
+        </button>
+
+        <!-- 3. Dance: Abstract Kinetic Rhythm Pillars -->
         <button id="pet-btn-dance" class="pet-action-btn" data-tip="${t.tips.dance || 'Joget'}" aria-label="Dance">
           <svg class="monolith-icon" viewBox="0 0 16 16" fill="none">
             <path d="M3 13V7M6.5 14V3M10 13V5M13.5 14V8" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
