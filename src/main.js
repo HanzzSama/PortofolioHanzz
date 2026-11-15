@@ -21,6 +21,7 @@ import { renderAnother } from './components/renderAnother.js';
 import { renderPet } from './components/renderPet.js';
 import { MonolithSimulator } from './core/monolithSimulator.js';
 import { HanzzPetEngine } from './core/hanzzPetEngine.js';
+import { monolithAudio, SOUNDSCAPE_TRACKS } from './core/monolithAudioEngine.js';
 
 class PortfolioApp {
   constructor() {
@@ -270,159 +271,171 @@ class PortfolioApp {
   }
 
   initAudioSynthesizer() {
-    const muteBtn = document.getElementById('synth-mute-toggle');
-    const stateIcon = document.getElementById('synth-state-icon');
-    const stateLabel = document.getElementById('synth-state-label');
-    const freqButtons = document.querySelectorAll('.synth-freq-btn');
-    const canvas = document.getElementById('synth-canvas');
+    const headerPill = document.getElementById('header-audio-pill');
+    const modalBackdrop = document.getElementById('monolith-audio-backdrop');
+    const consoleCloseBtn = document.getElementById('console-close-btn');
+    const masterPlayBtn = document.getElementById('console-master-play-btn');
+    const inPagePlayBtn = document.getElementById('synth-mute-toggle');
+    const studioOpenConsoleBtn = document.getElementById('studio-open-console-btn');
 
-    const ensureAudioContext = () => {
-      if (!this.audioContext) {
-        const AudioCtx = window.AudioContext || window.webkitAudioContext;
-        this.audioContext = new AudioCtx();
+    // ── No auto-start: user must explicitly press play ───────────────────────
 
-        this.analyser = this.audioContext.createAnalyser();
-        this.analyser.fftSize = 256;
+    // Register Mini Equalizer Bars in Header
+    const eqBars = [
+      document.getElementById('eq-bar-1'),
+      document.getElementById('eq-bar-2'),
+      document.getElementById('eq-bar-3'),
+      document.getElementById('eq-bar-4')
+    ].filter(Boolean);
+    monolithAudio.registerHeaderEq(eqBars);
 
-        this.gainNode = this.audioContext.createGain();
-        this.gainNode.gain.setValueAtTime(0, this.audioContext.currentTime);
+    // Register Visualizer Canvases (both in Modal and in Section Another)
+    const modalCanvas = document.getElementById('console-visualizer-canvas');
+    const studioCanvas = document.getElementById('synth-canvas');
+    if (modalCanvas) monolithAudio.registerCanvas(modalCanvas);
+    if (studioCanvas) monolithAudio.registerCanvas(studioCanvas);
 
-        // Lowpass filter to ensure organic, calm biophilic warmth (eliminating digital harshness)
-        const filter = this.audioContext.createBiquadFilter();
-        filter.type = 'lowpass';
-        filter.frequency.setValueAtTime(650, this.audioContext.currentTime);
-
-        this.oscillator = this.audioContext.createOscillator();
-        this.oscillator.type = 'sine';
-        this.oscillator.frequency.setValueAtTime(this.currentFrequency, this.audioContext.currentTime);
-
-        this.oscillator.connect(filter);
-        filter.connect(this.gainNode);
-        this.gainNode.connect(this.analyser);
-        this.analyser.connect(this.audioContext.destination);
-
-        this.oscillator.start();
-      }
-    };
-
-    if (muteBtn) {
-      muteBtn.addEventListener('click', () => {
-        ensureAudioContext();
-
-        if (this.audioContext.state === 'suspended') {
-          this.audioContext.resume();
-        }
-
-        if (this.isAudioPlaying) {
-          // Fade out gracefully
-          this.gainNode.gain.setTargetAtTime(0, this.audioContext.currentTime, 0.1);
-          this.isAudioPlaying = false;
-          if (stateIcon) stateIcon.textContent = '▶';
-          if (stateLabel) stateLabel.textContent = this.data.another?.ui?.synthBtnPlay || 'Activate Resonant Tone';
-          muteBtn.classList.remove('active');
-          document.getElementById('hanzz-pet-dock')?.classList.remove('is-bobbing');
-        } else {
-          // Fade in to gentle ambient level
-          this.gainNode.gain.setTargetAtTime(0.08, this.audioContext.currentTime, 0.15);
-          this.isAudioPlaying = true;
-          if (stateIcon) stateIcon.textContent = '■';
-          if (stateLabel) stateLabel.textContent = this.data.another?.ui?.synthBtnStop || 'Halt Resonance';
-          muteBtn.classList.add('active');
-          document.getElementById('hanzz-pet-dock')?.classList.add('is-bobbing');
-          this.startVisualizer(canvas);
-        }
-      });
+    // Populate Modal Tracks Matrix
+    const tracksGrid = document.getElementById('console-tracks-grid');
+    if (tracksGrid && tracksGrid.children.length === 0) {
+      tracksGrid.innerHTML = SOUNDSCAPE_TRACKS.map((t, idx) => `
+        <button class="console-track-card" data-track-select="${t.id}" data-cursor-target>
+          <div class="track-card-top">
+            <span class="track-index-num">0${idx + 1}</span>
+            <span class="track-cat-badge">${t.category}</span>
+          </div>
+          <div class="track-card-name">${t.name}</div>
+          <div class="track-card-desc">${t.desc}</div>
+        </button>
+      `).join('');
     }
 
-    freqButtons.forEach((btn) => {
-      btn.addEventListener('click', () => {
-        const freq = parseFloat(btn.getAttribute('data-frequency'));
-        this.currentFrequency = freq;
-
-        freqButtons.forEach((b) => b.classList.remove('active-tone'));
-        btn.classList.add('active-tone');
-
-        if (this.oscillator && this.audioContext) {
-          this.oscillator.frequency.setTargetAtTime(freq, this.audioContext.currentTime, 0.08);
-        }
-      });
+    // Sync initial active state — currentTrackId is null on fresh load, so all buttons nonactive
+    const initTrackId = monolithAudio.currentTrackId; // null on refresh
+    document.querySelectorAll('[data-track-select]').forEach(b => {
+      b.classList.remove('active-track', 'active-tone');
+      if (initTrackId && b.getAttribute('data-track-select') === initTrackId) {
+        b.classList.add('active-track', 'active-tone');
+      }
     });
 
-    if (canvas) {
-      this.drawIdleVisualizer(canvas);
-    }
-  }
-
-  drawIdleVisualizer(canvas) {
-    const ctx = canvas.getContext('2d');
-
-    const draw = () => {
-      if (this.isAudioPlaying) return;
-      const W = canvas.offsetWidth;
-      const H = canvas.offsetHeight;
-      if (!W || !H) { requestAnimationFrame(draw); return; }
-      if (canvas.width !== W) canvas.width = W;
-      if (canvas.height !== H) canvas.height = H;
-
-      ctx.clearRect(0, 0, W, H);
-      ctx.beginPath();
-      ctx.strokeStyle = 'rgba(74, 93, 78, 0.3)';
-      ctx.lineWidth = 1;
-
-      const slices = 48;
-      const sliceW = W / slices;
-      let x = 0;
-      for (let i = 0; i <= slices; i++) {
-        const y = H / 2 + Math.sin(i * 0.3 + Date.now() * 0.0018) * 5;
-        if (i === 0) ctx.moveTo(x, y);
-        else ctx.lineTo(x, y);
-        x += sliceW;
-      }
-      ctx.stroke();
-      requestAnimationFrame(draw);
+    // Modal Open / Close Handlers
+    const openModal = () => {
+      if (modalBackdrop) modalBackdrop.classList.add('is-open');
+    };
+    const closeModal = () => {
+      if (modalBackdrop) modalBackdrop.classList.remove('is-open');
     };
 
-    // Defer one frame to allow CSS layout to assign dimensions
-    requestAnimationFrame(draw);
-  }
-
-  startVisualizer(canvas) {
-    if (!canvas || !this.analyser) return;
-    const ctx = canvas.getContext('2d');
-    const bufferLength = this.analyser.frequencyBinCount;
-    const dataArray = new Uint8Array(bufferLength);
-
-    const renderWave = () => {
-      if (!this.isAudioPlaying) return;
-      this.canvasAnimationId = requestAnimationFrame(renderWave);
-
-      const W = canvas.offsetWidth;
-      const H = canvas.offsetHeight;
-      if (!W || !H) return;
-      if (canvas.width !== W) canvas.width = W;
-      if (canvas.height !== H) canvas.height = H;
-
-      this.analyser.getByteTimeDomainData(dataArray);
-
-      ctx.clearRect(0, 0, W, H);
-      ctx.lineWidth = 1.5;
-      ctx.strokeStyle = 'var(--accent-primary)';
-      ctx.beginPath();
-
-      const sliceW = W / bufferLength;
-      let x = 0;
-      for (let i = 0; i < bufferLength; i++) {
-        const v = dataArray[i] / 128.0;
-        const y = (v * H) / 2;
-        if (i === 0) ctx.moveTo(x, y);
-        else ctx.lineTo(x, y);
-        x += sliceW;
+    headerPill?.addEventListener('click', (e) => {
+      if (e.target.closest('.header-audio-gear-icon')) {
+        openModal();
+      } else {
+        monolithAudio.toggle();
       }
-      ctx.lineTo(W, H / 2);
-      ctx.stroke();
+    });
+
+    studioOpenConsoleBtn?.addEventListener('click', openModal);
+    consoleCloseBtn?.addEventListener('click', closeModal);
+    modalBackdrop?.addEventListener('click', (e) => {
+      if (e.target === modalBackdrop) closeModal();
+    });
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && modalBackdrop?.classList.contains('is-open')) {
+        closeModal();
+      }
+    });
+
+    // Master Play Buttons
+    masterPlayBtn?.addEventListener('click', () => monolithAudio.toggle());
+    inPagePlayBtn?.addEventListener('click', () => monolithAudio.toggle());
+
+    // Track Select Handlers across page & modal
+    // Use event delegation on document to catch dynamically injected cards too
+    document.addEventListener('click', (e) => {
+      const btn = e.target.closest('[data-track-select]');
+      if (!btn) return;
+      const trackId = btn.getAttribute('data-track-select');
+
+      // Immediately update active state on ALL track buttons — no waiting for AudioContext
+      document.querySelectorAll('[data-track-select]').forEach(b => {
+        const isThis = b.getAttribute('data-track-select') === trackId;
+        b.classList.toggle('active-track', isThis);
+        b.classList.toggle('active-tone', isThis); // keep synth-freq-btn compat
+      });
+
+      // Start playback
+      monolithAudio.play(trackId);
+      const nameEl = document.getElementById('console-now-playing-name');
+      const track = SOUNDSCAPE_TRACKS.find(t => t.id === trackId);
+      if (nameEl && track) nameEl.textContent = track.name;
+    });
+
+    // Faders & Sliders
+    const volSlider = document.getElementById('fader-volume');
+    const studioVolSlider = document.getElementById('studio-volume-slider');
+    const gainReadout = document.getElementById('fader-gain-readout');
+    const studioVolReadout = document.getElementById('studio-vol-readout');
+
+    const handleVolume = (val) => {
+      monolithAudio.setVolume(val);
+      const pct = `${Math.round(val * 100)}%`;
+      if (gainReadout) gainReadout.textContent = pct;
+      if (studioVolReadout) studioVolReadout.textContent = pct;
+      if (volSlider) volSlider.value = val;
+      if (studioVolSlider) studioVolSlider.value = val;
     };
 
-    renderWave();
+    volSlider?.addEventListener('input', (e) => handleVolume(parseFloat(e.target.value)));
+    studioVolSlider?.addEventListener('input', (e) => handleVolume(parseFloat(e.target.value)));
+
+    const filterSlider = document.getElementById('fader-filter');
+    const studioFilterSlider = document.getElementById('studio-filter-slider');
+    const filterReadout = document.getElementById('fader-filter-readout');
+    const studioFilterReadout = document.getElementById('studio-filter-readout');
+
+    const handleFilter = (val) => {
+      monolithAudio.setFilterCutoff(val);
+      const text = `${Math.round(val)} Hz`;
+      if (filterReadout) filterReadout.textContent = text;
+      if (studioFilterReadout) studioFilterReadout.textContent = text;
+      if (filterSlider) filterSlider.value = val;
+      if (studioFilterSlider) studioFilterSlider.value = val;
+    };
+
+    filterSlider?.addEventListener('input', (e) => handleFilter(parseFloat(e.target.value)));
+    studioFilterSlider?.addEventListener('input', (e) => handleFilter(parseFloat(e.target.value)));
+
+    // Rain Toggle
+    const rainBtn = document.getElementById('btn-toggle-rain-overlay');
+    const studioRainBtn = document.getElementById('studio-toggle-rain-btn');
+    const handleRainToggle = () => {
+      const active = monolithAudio.toggleRainOverlay();
+      rainBtn?.classList.toggle('active', active);
+      studioRainBtn?.classList.toggle('active', active);
+    };
+    rainBtn?.addEventListener('click', handleRainToggle);
+    studioRainBtn?.addEventListener('click', handleRainToggle);
+
+    // Custom Audio Upload & Stream URL
+    const fileInput = document.getElementById('custom-audio-file-input');
+    fileInput?.addEventListener('change', (e) => {
+      if (e.target.files && e.target.files[0]) {
+        monolithAudio.loadCustomFile(e.target.files[0]);
+      }
+    });
+
+    const streamUrlInput = document.getElementById('custom-stream-url-input');
+    const loadStreamBtn = document.getElementById('btn-load-stream-url');
+    loadStreamBtn?.addEventListener('click', () => {
+      if (streamUrlInput && streamUrlInput.value.trim()) {
+        monolithAudio.loadCustomAudioUrl(streamUrlInput.value.trim());
+        monolithAudio.play('06_custom');
+      }
+    });
+
+    // Initial visualizer idle draw
+    monolithAudio.drawIdleState();
   }
 
   initClipboard() {

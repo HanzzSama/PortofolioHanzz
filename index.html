@@ -26,6 +26,7 @@
   <link rel="stylesheet" href="./src/styles/sections.css" />
   <link rel="stylesheet" href="./src/styles/scrollbarCapsule.css" />
   <link rel="stylesheet" href="./src/styles/pet.css" />
+  <link rel="stylesheet" href="./src/styles/monolithAudio.css" />
 </head>
 
 <body>
@@ -72,28 +73,15 @@
   <!-- Fixed Architectural Header & Telemetry Navigation -->
   <header class="architectural-header" role="banner">
     <div class="header-container">
-      <!-- Monogram & Identity -->
-      <a href="#welcome" class="header-branding" data-cursor-target>
-        <span class="brand-monogram">HRA</span>
-        <span class="brand-callsign">// HANZZ.DEV</span>
-      </a>
+      <div class="header-top-row">
+        <!-- Monogram & Identity -->
+        <a href="#welcome" class="header-branding" data-cursor-target>
+          <span class="brand-monogram">HRA</span>
+          <span class="brand-callsign">// HANZZ.DEV</span>
+        </a>
 
-      <!-- Real-time Telemetry & Global Geo-Nodes -->
-      <div class="header-telemetry" aria-label="System Telemetry">
-        <div class="telemetry-item">
-          <span class="status-pulse-dot" aria-hidden="true"></span>
-          <span id="telemetry-status">SYS.OP // NOMINAL</span>
-        </div>
-        <div class="telemetry-item telemetry-secondary">
-          <span>SRG [6.9667°S]</span>
-        </div>
-        <div class="telemetry-item">
-          <span id="live-clock">--:--:-- WIB [GMT+7]</span>
-        </div>
-      </div>
-
-      <!-- Quick-jump Navigation & Controls -->
-      <div class="header-nav">
+        <!-- Quick-jump Navigation & Controls -->
+        <div class="header-nav">
         <nav aria-label="Main Navigation">
           <ul class="nav-links">
             <li><a href="#welcome" class="nav-link active" data-cursor-target><span
@@ -111,6 +99,21 @@
         </nav>
 
         <div class="header-actions">
+            <!-- Monolith Audio Icon Button -->
+            <button id="header-audio-pill" class="header-action-icon-btn" aria-label="Toggle Monolith Soundscape" title="Monolith Soundscape" data-cursor-target>
+              <div class="mini-eq-cluster" aria-hidden="true">
+                <span class="mini-eq-bar" id="eq-bar-1"></span>
+                <span class="mini-eq-bar" id="eq-bar-2"></span>
+                <span class="mini-eq-bar" id="eq-bar-3"></span>
+                <span class="mini-eq-bar" id="eq-bar-4"></span>
+              </div>
+            </button>
+
+            <!-- Tactile Theme Mode Switcher -->
+            <button id="theme-toggle-btn" class="header-action-icon-btn" aria-label="Toggle Obsidian / Limestone Theme" title="Toggle Theme" data-cursor-target>
+              <span id="theme-icon">☾</span>
+            </button>
+
           <!-- Abstract Node Language Switcher -->
           <div class="lang-switcher-wrapper" id="lang-switcher">
             <!-- Trigger: Coordinate Node Button -->
@@ -188,20 +191,31 @@
             </div>
           </div>
 
-          <!-- Tactile Theme Mode Switcher -->
-          <button id="theme-toggle-btn" class="tactile-btn" aria-label="Toggle Obsidian / Limestone Theme"
-            data-cursor-target>
-            <span id="theme-icon">☾</span>
-            <span id="theme-label" class="telemetry-secondary">Obsidian</span>
-          </button>
-
           <!-- Mobile Navigation Toggle -->
-          <button id="mobile-nav-toggle" class="mobile-nav-toggle-btn tactile-btn" aria-label="Toggle Menu"
+          <button id="mobile-nav-toggle" class="mobile-nav-toggle-btn header-action-icon-btn" aria-label="Toggle Menu"
             data-cursor-target>
-            <span id="mobile-menu-label">MENU</span>
+            <span id="mobile-menu-label">≡</span>
           </button>
+        </div><!-- /.header-actions -->
+      </div><!-- /.header-nav -->
+      </div><!-- /.header-top-row -->
+
+      <!-- Telemetry Sub-bar -->
+      <div class="header-telemetry" aria-label="System Telemetry">
+        <div class="telemetry-item">
+          <span class="status-pulse-dot" aria-hidden="true"></span>
+          <span id="telemetry-status">SYS.OP // NOMINAL</span>
+        </div>
+        <span class="telemetry-sep" aria-hidden="true">·</span>
+        <div class="telemetry-item telemetry-secondary">
+          <span>SRG [6.9667°S]</span>
+        </div>
+        <span class="telemetry-sep" aria-hidden="true">·</span>
+        <div class="telemetry-item">
+          <span id="live-clock">--:--:-- WIB [GMT+7]</span>
         </div>
       </div>
+
     </div>
   </header>
 
@@ -262,6 +276,85 @@
     <main id="app">
       <!-- Dynamic Components Mounted via ./src/main.js -->
     </main>
+  </div>
+
+  <!-- ====================================================================
+       MONOLITH AUDIOPHILE SOUND CONSOLE MODAL
+       ==================================================================== -->
+  <div id="monolith-audio-backdrop" class="monolith-audio-backdrop" aria-hidden="true">
+    <div class="monolith-audio-console" role="dialog" aria-modal="true" aria-label="Acoustic Monolith Sound Console">
+      <!-- Console Top Bar -->
+      <div class="console-header-bar">
+        <div class="console-telemetry-badge">
+          <span class="console-status-dot"></span>
+          <span>AUDIO_DSP // 48kHz • 24-BIT • WEB AUDIO</span>
+        </div>
+        <button id="console-close-btn" class="console-close-btn" aria-label="Close Audio Console">
+          CLOSE [ESC]
+        </button>
+      </div>
+
+      <!-- Live Oscilloscope & FFT Visualizer -->
+      <div class="console-visualizer-container">
+        <div class="canvas-coord-overlay">FFT.SPECTRUM // REAL-TIME LISSAJOUS</div>
+        <canvas id="console-visualizer-canvas" class="console-visualizer-canvas" width="600" height="110"></canvas>
+      </div>
+
+      <!-- Main Playback & Current Track Bar -->
+      <div class="console-playback-strip">
+        <button id="console-master-play-btn" class="console-main-play-btn" data-cursor-target>
+          <span class="monolith-play-icon">▶</span>
+          <span class="monolith-play-label">ACTIVATE SOUND</span>
+        </button>
+        <div class="console-track-display">
+          <span class="console-now-playing-label">ACTIVE SOUNDSCAPE NODE:</span>
+          <span id="console-now-playing-name" class="console-now-playing-title">432Hz Harmonic Sanctuary</span>
+        </div>
+      </div>
+
+      <!-- Curated Track Matrix -->
+      <div class="console-section-title">SELECT SOUNDSCAPE ARCHITECTURE [01-06]:</div>
+      <div class="console-tracks-grid" id="console-tracks-grid"></div>
+
+      <!-- Audiophile Faders & Knobs -->
+      <div class="console-section-title">DSP FADERS & ANALOG SATURATION:</div>
+      <div class="console-tuning-cluster">
+        <div class="fader-group">
+          <div class="fader-label-row">
+            <span>MASTER GAIN</span>
+            <span id="fader-gain-readout" class="fader-val-readout">35%</span>
+          </div>
+          <input type="range" id="fader-volume" class="monolith-range-slider" min="0" max="1" step="0.01" value="0.35">
+        </div>
+
+        <div class="fader-group">
+          <div class="fader-label-row">
+            <span>LPF FILTER CUTOFF</span>
+            <span id="fader-filter-readout" class="fader-val-readout">1400 Hz</span>
+          </div>
+          <input type="range" id="fader-filter" class="monolith-range-slider" min="200" max="8000" step="50" value="1400">
+        </div>
+      </div>
+
+      <!-- Toggles & Options -->
+      <div class="console-options-row">
+        <button id="btn-toggle-rain-overlay" class="tactile-toggle-pill" data-cursor-target>
+          <span>🌧️</span>
+          <span>BIOPHILIC RAIN LAYER</span>
+        </button>
+        <label class="tactile-toggle-pill" style="cursor: pointer;" data-cursor-target>
+          <span>📂</span>
+          <span>LOAD CUSTOM AUDIO FILE</span>
+          <input type="file" id="custom-audio-file-input" accept="audio/*" style="display:none;">
+        </label>
+      </div>
+
+      <!-- Custom Stream URL Ingestion -->
+      <div class="console-custom-stream-bar">
+        <input type="text" id="custom-stream-url-input" class="custom-url-input" placeholder="Paste custom MP3 or Lo-Fi audio stream URL...">
+        <button id="btn-load-stream-url" class="tactile-btn" style="padding: 0.38rem 0.75rem; font-size: 0.68rem;" data-cursor-target>LOAD STREAM</button>
+      </div>
+    </div>
   </div>
 
   <!-- Modular Application Entry Point -->

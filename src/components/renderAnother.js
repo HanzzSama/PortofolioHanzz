@@ -42,35 +42,82 @@ export function renderAnother(data) {
           .join('')}
       </div>
 
-      <!-- Interactive Web Audio Biophilic Synthesizer -->
-      <div class="audio-synth-wrapper" data-stagger>
+      <!-- Acoustic Monolith Soundscape Studio Workstation -->
+      <div class="audio-synth-wrapper monolith-audio-studio-box" data-stagger>
         <div class="synth-header">
           <div>
-            <h3>${another.audioSynth.title}</h3>
-            <p style="font-family: var(--font-mono); font-size: var(--font-mono-tag); color: var(--accent-primary);">
-              ${another.audioSynth.tagline}
+            <div style="font-family: var(--font-mono); font-size: 0.62rem; color: var(--accent-primary); letter-spacing: 0.08em; margin-bottom: 0.25rem;">
+              AUDIO_DSP // PROCEDURAL SOUNDSCAPE ENGINE
+            </div>
+            <h3>${another.audioSynth.title || 'Acoustic Monolith Sound Studio'}</h3>
+            <p style="font-family: var(--font-mono); font-size: var(--font-mono-tag); color: var(--text-secondary);">
+              ${another.audioSynth.tagline || '432Hz Nature Solfeggio • Binaural Theta • Biophilic Rain Audio Suite'}
             </p>
           </div>
-          <button id="synth-mute-toggle" class="tactile-btn" data-cursor-target>
-            <span id="synth-state-icon">▶</span>
-            <span id="synth-state-label">${another.ui?.synthBtnPlay || 'Activate Resonant Tone'}</span>
+          <div style="display: flex; gap: 8px; align-items: center;">
+            <button id="studio-open-console-btn" class="tactile-btn" title="Open Advanced Hardware Console" data-cursor-target>
+              <span>⚙</span>
+              <span>CONSOLE [DSP]</span>
+            </button>
+            <button id="synth-mute-toggle" class="tactile-btn" data-cursor-target>
+              <span id="synth-state-icon" class="monolith-play-icon">▶</span>
+              <span id="synth-state-label" class="monolith-play-label">${another.ui?.synthBtnPlay || 'ACTIVATE SOUND'}</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- 6 Track Architecture Nodes -->
+        <div class="synth-controls-cluster" id="studio-track-buttons">
+          <button class="synth-freq-btn" data-track-select="01_sanctuary" data-cursor-target>
+            <strong>01 // 432Hz Sanctuary</strong>
+            <span class="synth-sub-desc">Resonant Meditation Drone</span>
+          </button>
+          <button class="synth-freq-btn" data-track-select="02_solfeggio" data-cursor-target>
+            <strong>02 // 528Hz Solfeggio</strong>
+            <span class="synth-sub-desc">Miracle Chords &amp; Warmth</span>
+          </button>
+          <button class="synth-freq-btn" data-track-select="03_rain_lofi" data-cursor-target>
+            <strong>03 // Semarang Rain</strong>
+            <span class="synth-sub-desc">Biophilic Pink Noise &amp; Rhodes</span>
+          </button>
+          <button class="synth-freq-btn" data-track-select="04_cyber_pulse" data-cursor-target>
+            <strong>04 // Cyber Pulse</strong>
+            <span class="synth-sub-desc">90 BPM Modular Ostinato</span>
+          </button>
+          <button class="synth-freq-btn" data-track-select="05_binaural_theta" data-cursor-target>
+            <strong>05 // 6Hz Theta Flow</strong>
+            <span class="synth-sub-desc">Binaural Deep Focus</span>
+          </button>
+          <button class="synth-freq-btn" data-track-select="06_custom" data-cursor-target>
+            <strong>06 // Custom Stream</strong>
+            <span class="synth-sub-desc">User Stream &amp; Audio File</span>
           </button>
         </div>
 
-        <div class="synth-controls-cluster">
-          ${another.audioSynth.frequencies
-            .map(
-              (freq, index) => `
-            <button class="synth-freq-btn ${index === 2 ? 'active-tone' : ''}" data-frequency="${freq.freq}" data-cursor-target>
-              <strong>${freq.label}</strong>
-              <span class="synth-sub-desc">${freq.desc}</span>
-            </button>
-          `
-            )
-            .join('')}
+        <!-- Real-Time Oscilloscope & Spectrum Display -->
+        <div style="position: relative; margin-bottom: var(--space-md);">
+          <div style="position: absolute; top: 8px; left: 10px; font-family: var(--font-mono); font-size: 0.58rem; color: var(--text-muted); letter-spacing: 0.05em; pointer-events: none;">
+            FFT.MATRIX // LISSAJOUS VECTOR CRT
+          </div>
+          <canvas id="synth-canvas" class="synth-visualizer-canvas" width="800" height="90"></canvas>
         </div>
 
-        <canvas id="synth-canvas" class="synth-visualizer-canvas"></canvas>
+        <!-- Quick Faders Row -->
+        <div style="display: flex; gap: 16px; align-items: center; justify-content: space-between; font-family: var(--font-mono); font-size: 0.65rem; color: var(--text-muted); flex-wrap: wrap;">
+          <div style="display: flex; align-items: center; gap: 8px; flex: 1; min-width: 180px;">
+            <span>VOL:</span>
+            <input type="range" id="studio-volume-slider" class="monolith-range-slider" min="0" max="1" step="0.01" value="0.35">
+            <span id="studio-vol-readout" style="color: var(--accent-primary); font-weight: 600;">35%</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 8px; flex: 1; min-width: 180px;">
+            <span>LPF:</span>
+            <input type="range" id="studio-filter-slider" class="monolith-range-slider" min="200" max="8000" step="50" value="1400">
+            <span id="studio-filter-readout" style="color: var(--accent-primary); font-weight: 600;">1400Hz</span>
+          </div>
+          <button id="studio-toggle-rain-btn" class="tactile-toggle-pill" data-cursor-target>
+            <span>🌧️ RAIN OVERLAY</span>
+          </button>
+        </div>
       </div>
 
       <!-- Transmission / Contact Terminal -->

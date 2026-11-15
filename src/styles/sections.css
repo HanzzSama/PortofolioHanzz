@@ -733,7 +733,8 @@
   transform: translateY(-1px);
 }
 
-.synth-freq-btn.active-tone {
+.synth-freq-btn.active-tone,
+.synth-freq-btn.active-track {
   background-color: var(--accent-primary);
   color: #FFFFFF;
   border-color: var(--accent-primary);
