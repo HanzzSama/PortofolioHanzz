@@ -22,6 +22,13 @@ export class MonolithSimulator {
     this.resonanceEl = document.getElementById('telemetry-resonance');
     this.resonancePillEl = document.getElementById('telemetry-resonance-pill');
     this.hintEl = document.getElementById('stage-hint');
+    this.fpsOverlayEl = document.getElementById('stage-fps-overlay');
+
+    // High Refresh Rate & Delta-Time Physics State
+    this.lastFrameTime = performance.now();
+    this.fpsUpdateTimer = 0;
+    this.measuredFps = 60;
+    this.fpsFrameCount = 0;
 
     // State
     this.currentMode = 'monolith';
@@ -41,7 +48,31 @@ export class MonolithSimulator {
     this.time = 0;
     this.rafId = null;
 
+    // 3D Ambient Stardust Particle Cloud
+    this.particleCount = 160;
+    this.particles = [];
+    this.initParticleCloud();
+
     this.init();
+  }
+
+  initParticleCloud() {
+    this.particles = [];
+    for (let i = 0; i < this.particleCount; i++) {
+      const phi = Math.acos(1 - 2 * (i + 0.5) / this.particleCount);
+      const theta = Math.PI * (1 + Math.sqrt(5)) * (i + 0.5);
+      const r = 1.35 + Math.random() * 0.95;
+
+      this.particles.push({
+        baseR: r,
+        phi,
+        theta,
+        speed: (0.002 + Math.random() * 0.003) * (Math.random() > 0.5 ? 1 : -1),
+        size: 1.2 + Math.random() * 1.6,
+        pulseSpeed: 1 + Math.random() * 2,
+        phase: Math.random() * Math.PI * 2
+      });
+    }
   }
 
   init() {
@@ -499,9 +530,27 @@ export class MonolithSimulator {
     return { x: projX, y: projY, z: z2 };
   }
 
-  render() {
+  render(timestamp) {
     if (!this.ctx) return;
-    this.time += 0.02;
+
+    // Delta-Time Calculation (Frame-rate independent physics for 60/120/144/240+ Hz displays)
+    const now = timestamp || performance.now();
+    const dtMs = this.lastFrameTime ? Math.min(64, Math.max(1, now - this.lastFrameTime)) : 16.67;
+    this.lastFrameTime = now;
+    const dt = dtMs / 16.667; // Normalized to 60fps baseline
+
+    // Real-Time Frame Rate Measurement
+    this.fpsFrameCount++;
+    if (now > this.fpsUpdateTimer + 350) {
+      this.measuredFps = Math.round((this.fpsFrameCount * 1000) / (now - this.fpsUpdateTimer));
+      this.fpsFrameCount = 0;
+      this.fpsUpdateTimer = now;
+      if (this.fpsOverlayEl) {
+        this.fpsOverlayEl.textContent = `[FPS: ${this.measuredFps} Hz // UNLOCKED] +`;
+      }
+    }
+
+    this.time += 0.02 * dt;
 
     this.ctx.clearRect(0, 0, this.width, this.height);
 
@@ -512,17 +561,17 @@ export class MonolithSimulator {
       : { bass: 0, mid: 0, overall: 0, isPlaying: false, trackName: 'IDLE' };
     const isResonating = isCymatics && audio.isPlaying;
 
-    // Inertia physics update with audio pulse (strictly only for cymatics)
+    // Inertia physics update with audio pulse (Delta-time dampened)
     if (!this.isDragging) {
       if (this.autoRotate) {
         const speedBoost = isResonating ? 1.0 + audio.bass * 0.75 : 1.0;
-        this.rot.y += 0.006 * speedBoost;
-        this.rot.x += 0.0025 * speedBoost;
+        this.rot.y += 0.006 * speedBoost * dt;
+        this.rot.x += 0.0025 * speedBoost * dt;
       }
-      this.rot.x += this.vel.x;
-      this.rot.y += this.vel.y;
-      this.vel.x *= this.damping;
-      this.vel.y *= this.damping;
+      this.rot.x += this.vel.x * dt;
+      this.rot.y += this.vel.y * dt;
+      this.vel.x *= Math.pow(this.damping, dt);
+      this.vel.y *= Math.pow(this.damping, dt);
     }
 
     // Colors
@@ -592,10 +641,44 @@ export class MonolithSimulator {
       }
     });
 
+    // Render 3D Ambient Stardust Particle Cloud
+    this.renderParticleCloud(audio, isDark, dt);
+
     // Update Telemetry DOM with audio status
     this.updateTelemetry(geom.vertices.length, audio, isCymatics);
 
-    this.rafId = requestAnimationFrame(() => this.render());
+    this.rafId = requestAnimationFrame((t) => this.render(t));
+  }
+
+  renderParticleCloud(audio, isDark, dt = 1.0) {
+    if (!this.ctx || !this.particles) return;
+
+    const bassBoost = audio.isPlaying ? (audio.bass || 0) * 0.45 : 0;
+    const energy = audio.isPlaying ? (audio.overall || 0) : 0;
+
+    this.particles.forEach(p => {
+      p.theta += p.speed * (1 + energy * 1.5) * dt;
+      p.phase += 0.03 * dt;
+
+      const dynamicR = p.baseR * (1 + bassBoost * 0.35 + Math.sin(p.phase * p.pulseSpeed) * 0.04);
+      const x = dynamicR * Math.sin(p.phi) * Math.cos(p.theta);
+      const y = dynamicR * Math.cos(p.phi);
+      const z = dynamicR * Math.sin(p.phi) * Math.sin(p.theta);
+
+      const proj = this.project([x, y, z]);
+      if (!proj) return;
+
+      const alpha = Math.max(0.12, Math.min(0.85, 0.42 + proj.z * 0.35 + (audio.isPlaying ? (audio.bass || 0) * 0.25 : 0)));
+      const rad = p.size * (1 + (audio.isPlaying ? (audio.bass || 0) * 0.5 : 0));
+
+      this.ctx.fillStyle = isDark
+        ? `rgba(168, 209, 175, ${alpha})`
+        : `rgba(74, 93, 78, ${alpha * 0.8})`;
+
+      this.ctx.beginPath();
+      this.ctx.arc(proj.x, proj.y, rad, 0, Math.PI * 2);
+      this.ctx.fill();
+    });
   }
 
   updateTelemetry(vertexCount, audio, isCymatics) {

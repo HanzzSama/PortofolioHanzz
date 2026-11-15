@@ -144,22 +144,27 @@ export class ParallaxEngine {
     progressBar.style.width = `${progress}%`;
   }
 
-  lerp(start, end, factor) {
-    return start + (end - start) * factor;
+  lerp(start, end, factor, dt = 1.0) {
+    const rate = 1 - Math.pow(Math.max(0, 1 - factor), dt);
+    return start + (end - start) * rate;
   }
 
-  render() {
-    // Smooth Lerp for scroll velocity calculation
-    // When Antigravity smooth scroller is active, scroll.target is already smoothly interpolated
+  render(timestamp) {
+    const now = timestamp || performance.now();
+    const dtMs = this.lastFrameTime ? Math.min(50, Math.max(1, now - this.lastFrameTime)) : 16.67;
+    this.lastFrameTime = now;
+    const dt = dtMs / 16.667;
+
+    // Smooth Lerp for scroll velocity calculation (frame-rate independent)
     const isSmoothScroller = Boolean(window.lenis);
     const scrollEase = isSmoothScroller ? 0.35 : this.ease;
-    this.scroll.current = this.lerp(this.scroll.current, this.scroll.target, scrollEase);
+    this.scroll.current = this.lerp(this.scroll.current, this.scroll.target, scrollEase, dt);
     this.scroll.velocity = this.scroll.target - this.scroll.current;
 
     // Lerp Cursor Ring
     if (this.cursorRing) {
-      this.cursorPos.ringX = this.lerp(this.cursorPos.ringX, this.mouse.targetX, 0.22);
-      this.cursorPos.ringY = this.lerp(this.cursorPos.ringY, this.mouse.targetY, 0.22);
+      this.cursorPos.ringX = this.lerp(this.cursorPos.ringX, this.mouse.targetX, 0.22, dt);
+      this.cursorPos.ringY = this.lerp(this.cursorPos.ringY, this.mouse.targetY, 0.22, dt);
       this.cursorRing.style.transform = `translate3d(${this.cursorPos.ringX - 16}px, ${this.cursorPos.ringY - 16}px, 0)`;
     }
 
@@ -196,7 +201,7 @@ export class ParallaxEngine {
     this.renderRotateParallax();
 
     if (this.isRunning) {
-      this.rafId = requestAnimationFrame(() => this.render());
+      this.rafId = requestAnimationFrame((t) => this.render(t));
     }
   }
 

@@ -8,10 +8,10 @@
 export const SOUNDSCAPE_TRACKS = [
   {
     id: '01_sanctuary',
-    name: '432Hz Terra Alpha',
-    category: 'BIOPHILIC SANCTUARY',
-    desc: 'Harmonik 432Hz dipadu gelombang otak 10Hz Alpha, derai hujan alami & akord hangat.',
-    bpm: 'SLOW // 432Hz ALPHA',
+    name: 'Terra Sanctuary 432Hz',
+    category: 'NATURE AMBIENT SONG',
+    desc: 'Lagu ambient damai bernuansa alam: harmoni akord hangat 432Hz, denting melodi rintik & semilir kanopi.',
+    bpm: '50 BPM // AMBIENT LULLABY',
     color: '#4A5D4E'
   },
   {
@@ -265,7 +265,10 @@ export class MonolithAudioEngine {
   }
 
   stopActiveVoices() {
-    this.timerIds.forEach(id => clearInterval(id));
+    this.timerIds.forEach(id => {
+      clearInterval(id);
+      clearTimeout(id);
+    });
     this.timerIds = [];
 
     this.activeNodes.forEach(node => {
@@ -285,114 +288,227 @@ export class MonolithAudioEngine {
      PROCEDURAL SOUNDSCAPE GENERATORS (Pure Web Audio Math)
      ========================================================================== */
   
-  // Track 01: 432Hz Terra Alpha (Warmth, Biophilic Rain Canopy & 10Hz Alpha Brainwave)
+  // Track 01: Terra Sanctuary 432Hz (Calm Nature Ambient Song & Warm Rhodes Chords)
   start432HzSanctuary() {
-    // 1. Organic Warm Grounding Drone Matrix (A=432Hz Verdi Series)
-    const droneFreqs = [108, 216, 432, 648]; // Sub, Root, Fundamental, 5th harmonic
-    const droneGains = [0.20, 0.16, 0.12, 0.06];
+    if (!this.ctx) return;
 
-    droneFreqs.forEach((freq, i) => {
-      const osc = this.ctx.createOscillator();
-      const gain = this.ctx.createGain();
-
-      osc.type = i === 2 ? 'triangle' : 'sine';
-      osc.frequency.setValueAtTime(freq, this.ctx.currentTime);
-
-      // Slow organic breath LFO (0.04Hz - 0.08Hz)
-      const lfo = this.ctx.createOscillator();
-      const lfoGain = this.ctx.createGain();
-      lfo.frequency.setValueAtTime(0.04 + i * 0.018, this.ctx.currentTime);
-      lfoGain.gain.setValueAtTime(1.8, this.ctx.currentTime);
-      lfo.connect(osc.frequency);
-      lfo.start();
-      this.activeNodes.push(lfo);
-
-      gain.gain.setValueAtTime(droneGains[i], this.ctx.currentTime);
-      osc.connect(gain);
-      gain.connect(this.masterFilter);
-      osc.start();
-
-      this.activeNodes.push(osc, gain);
-    });
-
-    // 2. 10.0Hz Alpha Wave Binaural Differential for Calm Mental Balance
-    // Left: 216Hz, Right: 226Hz => Differential = 10.0Hz Alpha Wave
-    try {
-      if (this.ctx.createStereoPanner) {
-        const leftOsc = this.ctx.createOscillator();
-        const leftGain = this.ctx.createGain();
-        const leftPan = this.ctx.createStereoPanner();
-        leftOsc.type = 'sine';
-        leftOsc.frequency.setValueAtTime(216, this.ctx.currentTime);
-        leftGain.gain.setValueAtTime(0.08, this.ctx.currentTime);
-        leftPan.pan.setValueAtTime(-0.85, this.ctx.currentTime);
-        leftOsc.connect(leftGain);
-        leftGain.connect(leftPan);
-        leftPan.connect(this.masterFilter);
-        leftOsc.start();
-        this.activeNodes.push(leftOsc, leftGain, leftPan);
-
-        const rightOsc = this.ctx.createOscillator();
-        const rightGain = this.ctx.createGain();
-        const rightPan = this.ctx.createStereoPanner();
-        rightOsc.type = 'sine';
-        rightOsc.frequency.setValueAtTime(226, this.ctx.currentTime); // +10Hz Alpha differential
-        rightGain.gain.setValueAtTime(0.08, this.ctx.currentTime);
-        rightPan.pan.setValueAtTime(0.85, this.ctx.currentTime);
-        rightOsc.connect(rightGain);
-        rightGain.connect(rightPan);
-        rightPan.connect(this.masterFilter);
-        rightOsc.start();
-        this.activeNodes.push(rightOsc, rightGain, rightPan);
-      }
-    } catch (_) {
-      // Fallback if StereoPanner is unsupported
-    }
-
-    // 3. Soft Biophilic Nature Texture (Gentle Canopy Pink Rain Bed)
+    // 1. Soft biophilic canopy texture (breeze & delicate rain bed with breathing LFO)
     this.startSoftBiophilicNatureBed();
 
-    // 4. Meditative Pentatonic Warm Rhodes Drops (Spaced gently every 5.5s)
-    const pentatonicNotes = [
-      [216.0, 270.0, 324.0, 432.0], // Warm 432-tuned Pentatonic Cluster 1
-      [162.0, 216.0, 270.0, 324.0], // Cluster 2 (Gentle low)
-      [270.0, 324.0, 432.0, 540.0], // Cluster 3 (Warm air)
-      [216.0, 256.0, 324.0, 384.0]  // Cluster 4 (Warm major 7th)
+    // 2. 4-Bar Soothing Chord Progression in Natural 432Hz Harmonic Tuning (A4 = 432Hz)
+    // D2=72.08, F#2=90.82, G2=96.22, A2=108.00, C#3=136.07, D3=144.16, E3=161.82, F#3=181.63, G3=192.44, A3=216.00, B3=242.45
+    // C#4=272.14, D4=288.33, E4=323.63, F#4=363.27, G4=384.87, A4=432.00, B4=484.90, C#5=544.29, D5=576.65, E5=647.27
+    const songBars = [
+      // Bar 0: Dmaj9 (Morning Meadow / Serene Awakening)
+      {
+        rootBass: 72.08,    // D2
+        passBass: 108.00,   // A2
+        chord: [144.16, 216.00, 272.14, 323.63, 363.27], // D3, A3, C#4, E4, F#4
+        melody: [
+          { delay: 1.4, freq: 432.00, pan: -0.35, vel: 0.038 }, // A4
+          { delay: 2.8, freq: 363.27, pan: 0.30, vel: 0.032 },  // F#4
+          { delay: 3.8, freq: 323.63, pan: -0.15, vel: 0.028 }  // E4
+        ]
+      },
+      // Bar 1: F#m7(11) (Lush Forest Canopy / Quiet Flow)
+      {
+        rootBass: 90.82,    // F#2
+        passBass: 136.07,   // C#3
+        chord: [181.63, 272.14, 323.63, 432.00, 484.90], // F#3, C#4, E4, A4, B4
+        melody: [
+          { delay: 1.2, freq: 544.29, pan: 0.40, vel: 0.038 },  // C#5
+          { delay: 2.4, freq: 484.90, pan: -0.25, vel: 0.034 }, // B4
+          { delay: 3.6, freq: 432.00, pan: 0.20, vel: 0.030 }   // A4
+        ]
+      },
+      // Bar 2: Gmaj7(add9) (Warm Sunbeams Through Leaves)
+      {
+        rootBass: 96.22,    // G2
+        passBass: 144.16,   // D3
+        chord: [192.44, 288.33, 363.27, 432.00, 484.90], // G3, D4, F#4, A4, B4
+        melody: [
+          { delay: 1.2, freq: 576.65, pan: -0.35, vel: 0.040 }, // D5
+          { delay: 2.2, freq: 544.29, pan: 0.30, vel: 0.035 },  // C#5
+          { delay: 3.4, freq: 432.00, pan: -0.20, vel: 0.032 }  // A4
+        ]
+      },
+      // Bar 3: Aadd9 (Peaceful Homecoming & Resolution)
+      {
+        rootBass: 108.00,   // A2
+        passBass: 161.82,   // E3
+        chord: [216.00, 323.63, 432.00, 484.90, 544.29], // A3, E4, A4, B4, C#5
+        melody: [
+          { delay: 1.2, freq: 484.90, pan: 0.30, vel: 0.035 },  // B4
+          { delay: 2.4, freq: 432.00, pan: -0.30, vel: 0.038 }, // A4
+          { delay: 3.6, freq: 323.63, pan: 0.15, vel: 0.030 }   // E4
+        ]
+      }
     ];
 
-    let pIdx = 0;
-    const playWarmDrop = () => {
+    const barDuration = 4.8; // seconds per bar (~50 BPM)
+    let barIndex = 0;
+
+    const playCurrentBar = () => {
       if (!this.isPlaying || this.currentTrackId !== '01_sanctuary' || !this.ctx) return;
-      const cluster = pentatonicNotes[pIdx % pentatonicNotes.length];
-      pIdx++;
+      const bar = songBars[barIndex % songBars.length];
+      barIndex++;
 
-      cluster.forEach((freq, nIdx) => {
-        setTimeout(() => {
-          if (!this.isPlaying || !this.ctx) return;
-          const osc = this.ctx.createOscillator();
-          const gain = this.ctx.createGain();
+      const now = this.ctx.currentTime;
 
-          osc.type = 'triangle';
-          osc.frequency.setValueAtTime(freq, this.ctx.currentTime);
+      // A. Warm Acoustic Bass Line (Root on beat 1, Passing tone on beat 3)
+      this.playNatureBass(bar.rootBass, now, 3.8, 0.055);
+      const bassTimeout = setTimeout(() => {
+        if (!this.isPlaying || this.currentTrackId !== '01_sanctuary' || !this.ctx) return;
+        this.playNatureBass(bar.passBass, this.ctx.currentTime, 2.2, 0.035);
+      }, 2400);
+      this.timerIds.push(bassTimeout);
 
-          const now = this.ctx.currentTime;
-          gain.gain.setValueAtTime(0.045, now);
-          gain.gain.exponentialRampToValueAtTime(0.0001, now + 4.2);
+      // B. Warm Rhodes / Felt Piano Chords (Arpeggiated human strum spread)
+      bar.chord.forEach((freq, idx) => {
+        const strumDelayMs = idx * 75; // 75ms strum spread
+        const chordTimeout = setTimeout(() => {
+          if (!this.isPlaying || this.currentTrackId !== '01_sanctuary' || !this.ctx) return;
+          this.playRhodesVoice(freq, this.ctx.currentTime, 4.4, 0.042);
+        }, strumDelayMs);
+        this.timerIds.push(chordTimeout);
+      });
 
-          osc.connect(gain);
-          gain.connect(this.masterFilter);
-          osc.start(now);
-          osc.stop(now + 4.2);
-        }, nIdx * 110);
+      // C. Delicate Wind Chime / Forest Kalimba Melody Drops
+      bar.melody.forEach(note => {
+        const melodyTimeout = setTimeout(() => {
+          if (!this.isPlaying || this.currentTrackId !== '01_sanctuary' || !this.ctx) return;
+          this.playChimeVoice(note.freq, this.ctx.currentTime, 2.6, note.pan, note.vel);
+        }, note.delay * 1000);
+        this.timerIds.push(melodyTimeout);
       });
     };
 
-    playWarmDrop();
-    const dropTimer = setInterval(playWarmDrop, 5500);
-    this.timerIds.push(dropTimer);
+    // Play first bar immediately
+    playCurrentBar();
+
+    // Loop progression every barDuration
+    const barInterval = setInterval(playCurrentBar, barDuration * 1000);
+    this.timerIds.push(barInterval);
   }
 
-  // Soft filtered pink-noise nature bed for the 432Hz Sanctuary
+  // Warm Felt Rhodes / Electric Piano Voice (Dual harmonic + dynamic filter envelope)
+  playRhodesVoice(freq, startTime, duration = 4.4, velocity = 0.042) {
+    if (!this.ctx) return;
+
+    const osc1 = this.ctx.createOscillator();
+    const osc2 = this.ctx.createOscillator();
+    const voiceFilter = this.ctx.createBiquadFilter();
+    const voiceGain = this.ctx.createGain();
+
+    osc1.type = 'triangle';
+    osc1.frequency.setValueAtTime(freq, startTime);
+
+    // Subtle detune (+1.5 cents) for rich analog chorusing warmth
+    osc2.type = 'sine';
+    osc2.frequency.setValueAtTime(freq, startTime);
+    osc2.detune.setValueAtTime(1.5, startTime);
+
+    // Filter envelope: starts open (1300Hz) and gently warms down (380Hz)
+    voiceFilter.type = 'lowpass';
+    voiceFilter.frequency.setValueAtTime(1300, startTime);
+    voiceFilter.frequency.exponentialRampToValueAtTime(380, startTime + duration);
+
+    // Dynamic ADSR Gain envelope: soft click-free attack, long musical decay
+    voiceGain.gain.setValueAtTime(0.0001, startTime);
+    voiceGain.gain.linearRampToValueAtTime(velocity, startTime + 0.06);
+    voiceGain.gain.exponentialRampToValueAtTime(velocity * 0.45, startTime + 0.8);
+    voiceGain.gain.exponentialRampToValueAtTime(0.0001, startTime + duration);
+
+    osc1.connect(voiceFilter);
+    osc2.connect(voiceFilter);
+    voiceFilter.connect(voiceGain);
+    voiceGain.connect(this.masterFilter);
+
+    osc1.start(startTime);
+    osc2.start(startTime);
+    osc1.stop(startTime + duration);
+    osc2.stop(startTime + duration);
+
+    this.activeNodes.push(osc1, osc2, voiceFilter, voiceGain);
+  }
+
+  // Deep Acoustic Ground Bass Voice
+  playNatureBass(freq, startTime, duration = 3.6, velocity = 0.055) {
+    if (!this.ctx) return;
+
+    const osc = this.ctx.createOscillator();
+    const filter = this.ctx.createBiquadFilter();
+    const gain = this.ctx.createGain();
+
+    osc.type = 'sine';
+    osc.frequency.setValueAtTime(freq, startTime);
+
+    filter.type = 'lowpass';
+    filter.frequency.setValueAtTime(220, startTime);
+
+    gain.gain.setValueAtTime(0.0001, startTime);
+    gain.gain.linearRampToValueAtTime(velocity, startTime + 0.04);
+    gain.gain.exponentialRampToValueAtTime(0.0001, startTime + duration);
+
+    osc.connect(filter);
+    filter.connect(gain);
+    gain.connect(this.masterFilter);
+
+    osc.start(startTime);
+    osc.stop(startTime + duration);
+
+    this.activeNodes.push(osc, filter, gain);
+  }
+
+  // Crystal Chime / Nature Kalimba Melody Voice (Bell overtones + spatial panning)
+  playChimeVoice(freq, startTime, duration = 2.6, pan = 0, velocity = 0.038) {
+    if (!this.ctx) return;
+
+    const osc = this.ctx.createOscillator();
+    const bellHarmonic = this.ctx.createOscillator();
+    const gain = this.ctx.createGain();
+    const harmGain = this.ctx.createGain();
+
+    osc.type = 'sine';
+    osc.frequency.setValueAtTime(freq, startTime);
+
+    // Inharmonic bell overtone (2.756x ratio) gives delicate raindrop / music box sparkle
+    bellHarmonic.type = 'sine';
+    bellHarmonic.frequency.setValueAtTime(freq * 2.756, startTime);
+
+    gain.gain.setValueAtTime(0.0001, startTime);
+    gain.gain.linearRampToValueAtTime(velocity, startTime + 0.012);
+    gain.gain.exponentialRampToValueAtTime(0.0001, startTime + duration);
+
+    harmGain.gain.setValueAtTime(velocity * 0.18, startTime);
+    harmGain.gain.exponentialRampToValueAtTime(0.0001, startTime + 0.7);
+
+    let destinationNode = this.masterFilter;
+    if (this.ctx.createStereoPanner) {
+      try {
+        const panner = this.ctx.createStereoPanner();
+        panner.pan.setValueAtTime(Math.max(-1, Math.min(1, pan)), startTime);
+        panner.connect(this.masterFilter);
+        destinationNode = panner;
+        this.activeNodes.push(panner);
+      } catch (_) {}
+    }
+
+    osc.connect(gain);
+    gain.connect(destinationNode);
+
+    bellHarmonic.connect(harmGain);
+    harmGain.connect(destinationNode);
+
+    osc.start(startTime);
+    bellHarmonic.start(startTime);
+    osc.stop(startTime + duration);
+    bellHarmonic.stop(startTime + 0.7);
+
+    this.activeNodes.push(osc, bellHarmonic, gain, harmGain);
+  }
+
+  // Soft filtered pink-noise nature bed with gentle breathing LFO for forest canopy breeze & rain
   startSoftBiophilicNatureBed() {
     if (!this.ctx) return;
     const bufferSize = this.ctx.sampleRate * 2;
@@ -408,7 +524,7 @@ export class MonolithAudioEngine {
       b3 = 0.86650 * b3 + white * 0.3104856;
       b4 = 0.55000 * b4 + white * 0.5329522;
       b5 = -0.7616 * b5 - white * 0.0168980;
-      output[i] = (b0 + b1 + b2 + b3 + b4 + b5 + b6 + white * 0.5362) * 0.022; // very soft & calm
+      output[i] = (b0 + b1 + b2 + b3 + b4 + b5 + b6 + white * 0.5362) * 0.018; // soft whisper bed
       b6 = white * 0.115926;
     }
 
@@ -418,10 +534,20 @@ export class MonolithAudioEngine {
 
     const noiseFilter = this.ctx.createBiquadFilter();
     noiseFilter.type = 'lowpass';
-    noiseFilter.frequency.setValueAtTime(800, this.ctx.currentTime); // warm canopy foliage cut
+    noiseFilter.frequency.setValueAtTime(620, this.ctx.currentTime);
+
+    // Organic breath LFO (0.05Hz) to simulate natural canopy breeze
+    const lfo = this.ctx.createOscillator();
+    const lfoGain = this.ctx.createGain();
+    lfo.type = 'sine';
+    lfo.frequency.setValueAtTime(0.05, this.ctx.currentTime);
+    lfoGain.gain.setValueAtTime(140, this.ctx.currentTime);
+    lfo.connect(noiseFilter.frequency);
+    lfo.start();
+    this.activeNodes.push(lfo, lfoGain);
 
     const noiseGain = this.ctx.createGain();
-    noiseGain.gain.setValueAtTime(0.045, this.ctx.currentTime);
+    noiseGain.gain.setValueAtTime(0.032, this.ctx.currentTime);
 
     whiteNoise.connect(noiseFilter);
     noiseFilter.connect(noiseGain);
@@ -873,6 +999,11 @@ export class MonolithAudioEngine {
       if (trackNameEl) {
         trackNameEl.textContent = isPlaying ? (track ? track.name : 'AUDIO ON') : 'AUDIO // OFF';
       }
+    }
+
+    const archHeader = document.querySelector('.architectural-header');
+    if (archHeader) {
+      archHeader.classList.toggle('is-audio-breathing', isPlaying);
     }
 
     // Sync track highlight on all track buttons — active-track = selected, active-tone = selected on synth btns

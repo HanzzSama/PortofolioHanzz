@@ -36,7 +36,7 @@ export function renderLab(data) {
           
           <!-- Stage Architectural Overlays (Corner Crosshairs) -->
           <div class="stage-overlay-tl font-mono" aria-hidden="true">+ [TOPOLOGY.NODE]</div>
-          <div class="stage-overlay-tr font-mono" aria-hidden="true">[FPS: 60/120] +</div>
+          <div class="stage-overlay-tr font-mono" id="stage-fps-overlay" aria-hidden="true">[FPS: DETECTING...] +</div>
           <div class="stage-overlay-bl font-mono" aria-hidden="true">+ [PROJECTION: PERSPECTIVE]</div>
           <div class="stage-overlay-br font-mono" aria-hidden="true">[DAMPING: 0.94] +</div>
 

@@ -60,6 +60,45 @@
   opacity: 0.75;
 }
 
+/* Abstract Session Entropy Seed Badge */
+.session-seed-badge {
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  opacity: 0.7;
+  border: 1px solid var(--border-subtle);
+  padding: 1px 7px;
+  border-radius: var(--radius-xs);
+  background-color: var(--bg-surface);
+  user-select: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  transition: opacity 0.3s ease, border-color 0.3s ease;
+}
+
+.session-seed-badge:hover {
+  opacity: 1;
+  border-color: var(--accent-primary);
+}
+
+.session-seed-badge::before {
+  content: '';
+  display: inline-block;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background-color: var(--accent-primary);
+  opacity: 0.85;
+}
+
+@media (max-width: 900px) {
+  .session-seed-badge {
+    display: none;
+  }
+}
+
 /* ── Bottom row: telemetry sub-bar ─────────────────────────── */
 .header-telemetry {
   display: flex;
@@ -85,6 +124,37 @@
   display: flex;
   align-items: center;
   gap: 0.4rem;
+}
+
+.telemetry-solar {
+  color: var(--accent-primary);
+  opacity: 0.88;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+}
+
+@media (max-width: 992px) {
+  .telemetry-solar {
+    display: none;
+  }
+}
+
+/* Ambient Solar Atmosphere Radial Lighting */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  background: radial-gradient(
+    circle 850px at 50% 15%,
+    var(--solar-glow, rgba(16, 185, 129, 0.05)),
+    transparent 72%
+  );
+  z-index: 0;
+  transition: background 2s ease;
 }
 
 .status-pulse-dot {
@@ -253,6 +323,48 @@
   margin: 0 auto;
   padding: var(--space-3xl) var(--gutter-x);
   border-bottom: var(--border-hairline);
+}
+
+/* Abstract Architectural Blueprint Section Boundaries */
+.architectural-section::before {
+  content: '+';
+  position: absolute;
+  bottom: 8px;
+  left: var(--gutter-x);
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  line-height: 1;
+  color: var(--accent-primary);
+  opacity: 0.45;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.architectural-section::after {
+  content: '+ [TOPOLOGY // 07°00\'S 110°25\'E]';
+  position: absolute;
+  bottom: 8px;
+  right: var(--gutter-x);
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  line-height: 1;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  opacity: 0.55;
+  pointer-events: none;
+  transition: opacity 0.3s ease, color 0.3s ease;
+}
+
+.architectural-section:hover::before,
+.architectural-section:hover::after {
+  opacity: 0.9;
+  color: var(--accent-primary);
+}
+
+@media (max-width: 640px) {
+  .architectural-section::after {
+    display: none;
+  }
 }
 
 .section-watermark-label {
@@ -1114,4 +1226,212 @@
   border-radius: 50%;
   pointer-events: none;
   z-index: 99998;
+}
+
+/* ==========================================================================
+   X-RAY BIOSPHERE TELEMETRY HUD OVERLAY
+   ========================================================================== */
+.xray-biosphere-hud {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 100500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.xray-biosphere-hud.is-active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.xray-backdrop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(13, 17, 14, 0.88);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+[data-theme="light"] .xray-backdrop {
+  background-color: rgba(244, 243, 239, 0.90);
+}
+
+.xray-panel {
+  position: relative;
+  z-index: 2;
+  width: 92%;
+  max-width: 900px;
+  max-height: 90vh;
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-medium);
+  border-radius: var(--radius-sm);
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.45);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transform: scale(0.96) translateY(12px);
+  transition: transform 0.38s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.xray-biosphere-hud.is-active .xray-panel {
+  transform: scale(1) translateY(0);
+}
+
+.xray-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.8rem 1.2rem;
+  border-bottom: var(--border-hairline);
+  background-color: var(--bg-canvas);
+}
+
+.xray-title-group {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.xray-status-blink {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #10B981;
+  box-shadow: 0 0 10px #10B981;
+  animation: pulse-glow 1.5s infinite ease-in-out;
+}
+
+.xray-title {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--text-primary);
+}
+
+.xray-close-btn {
+  background: transparent;
+  border: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+  padding: 0.35rem 0.75rem;
+  font-size: 0.68rem;
+  cursor: pointer;
+  border-radius: var(--radius-xs);
+  transition: all 0.2s ease;
+}
+
+.xray-close-btn:hover {
+  border-color: var(--accent-primary);
+  color: var(--accent-primary);
+}
+
+.xray-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  padding: 1.2rem;
+  overflow-y: auto;
+  max-height: calc(90vh - 110px);
+}
+
+@media (max-width: 768px) {
+  .xray-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.xray-module {
+  border: var(--border-hairline);
+  border-radius: var(--radius-xs);
+  background-color: var(--bg-canvas);
+  padding: 0.85rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.module-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.64rem;
+  color: var(--text-muted);
+  letter-spacing: 0.05em;
+  margin-bottom: 0.65rem;
+  padding-bottom: 0.35rem;
+  border-bottom: 1px dashed var(--border-subtle);
+}
+
+.module-tag {
+  color: var(--accent-primary);
+  font-weight: 600;
+}
+
+.xray-fft-canvas,
+.xray-fps-canvas {
+  width: 100%;
+  height: 95px;
+  background-color: rgba(0, 0, 0, 0.15);
+  border-radius: 2px;
+  display: block;
+}
+
+[data-theme="light"] .xray-fft-canvas,
+[data-theme="light"] .xray-fps-canvas {
+  background-color: rgba(0, 0, 0, 0.03);
+}
+
+.xray-metrics-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.62rem;
+  color: var(--text-secondary);
+  margin-top: 0.5rem;
+  padding-top: 0.35rem;
+}
+
+.tag-success {
+  color: #10B981;
+  font-weight: 700;
+}
+
+.xray-data-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  font-size: 0.68rem;
+  padding: 0.35rem 0;
+}
+
+.data-item {
+  display: flex;
+  justify-content: space-between;
+  color: var(--text-secondary);
+  border-bottom: 1px solid rgba(128, 128, 128, 0.08);
+  padding-bottom: 0.3rem;
+}
+
+.data-item span:last-child {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.xray-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.65rem 1.2rem;
+  border-top: var(--border-hairline);
+  background-color: var(--bg-canvas);
+  font-size: 0.58rem;
+  color: var(--text-muted);
+  letter-spacing: 0.06em;
 }

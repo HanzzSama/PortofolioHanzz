@@ -22,6 +22,12 @@ import { renderPet } from './components/renderPet.js';
 import { MonolithSimulator } from './core/monolithSimulator.js';
 import { HanzzPetEngine } from './core/hanzzPetEngine.js';
 import { monolithAudio, SOUNDSCAPE_TRACKS } from './core/monolithAudioEngine.js';
+import { FluidCursorEngine } from './core/fluidCursorEngine.js';
+import { hapticAudio } from './core/hapticAudioEngine.js';
+import { MagneticTiltEngine } from './core/magneticTilt.js';
+import { XRayBiosphereEngine } from './core/xrayBiosphere.js';
+import { KineticTypographyEngine } from './core/kineticTypography.js';
+import { BioTimeEngine } from './core/bioTimeEngine.js';
 
 class PortfolioApp {
   constructor() {
@@ -35,6 +41,11 @@ class PortfolioApp {
     this.canvasAnimationId = null;
     this.monolithSim = null;
     this.petEngine = null;
+    this.fluidCursor = null;
+    this.magneticTilt = null;
+    this.xrayEngine = null;
+    this.kineticTypo = null;
+    this.bioTime = null;
 
     // Internationalization State
     this.currentLang = localStorage.getItem('portfolio-language') || 'id';
@@ -48,6 +59,7 @@ class PortfolioApp {
     this.initSmoothScroller();
     this.initParallaxAndObserver();
     this.initLiveClock();
+    this.initSessionSeed();
     this.initThemeToggle();
     this.initLanguageSwitcher();
     this.initAudioSynthesizer();
@@ -59,6 +71,11 @@ class PortfolioApp {
     this.initMonolithSimulator();
     this.initHanzzPet();
     this.initScrollbarPill();
+    this.initFluidCursor();
+    this.initMagneticTilt();
+    this.initKineticTypography();
+    this.initXRayBiosphere();
+    this.initBioTime();
   }
 
   renderDOM() {
@@ -724,6 +741,7 @@ class PortfolioApp {
     requestAnimationFrame(() => {
       backdrop.classList.add('active');
       drawer.classList.add('active');
+      hapticAudio.playWhoosh();
     });
   }
 
@@ -734,6 +752,7 @@ class PortfolioApp {
     if (!backdrop || !drawer) return;
 
     // Trigger smooth slide out
+    hapticAudio.playWhoosh();
     backdrop.classList.remove('active');
     drawer.classList.remove('active');
 
@@ -996,6 +1015,45 @@ class PortfolioApp {
 
   initScrollbarPill() {
     this.scrollbarPill = new ScrollbarPillEngine();
+  }
+
+  initSessionSeed() {
+    const seedEl = document.getElementById('session-seed-badge');
+    if (!seedEl) return;
+    const hex = Math.floor(Math.random() * 0xffff).toString(16).toUpperCase().padStart(4, '0');
+    seedEl.textContent = `[SEED: #432-TERRA-0x${hex}]`;
+  }
+
+  initFluidCursor() {
+    if (!this.fluidCursor) {
+      this.fluidCursor = new FluidCursorEngine();
+    }
+  }
+
+  initMagneticTilt() {
+    if (!this.magneticTilt) {
+      this.magneticTilt = new MagneticTiltEngine();
+    } else {
+      this.magneticTilt.refresh();
+    }
+  }
+
+  initKineticTypography() {
+    if (!this.kineticTypo) {
+      this.kineticTypo = new KineticTypographyEngine();
+    }
+  }
+
+  initXRayBiosphere() {
+    if (!this.xrayEngine) {
+      this.xrayEngine = new XRayBiosphereEngine();
+    }
+  }
+
+  initBioTime() {
+    if (!this.bioTime) {
+      this.bioTime = new BioTimeEngine();
+    }
   }
 }
 

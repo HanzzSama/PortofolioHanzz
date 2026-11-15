@@ -96,7 +96,7 @@ body {
   background-color: var(--accent-primary);
   border-radius: 50%;
   pointer-events: none;
-  z-index: 100000;
+  z-index: 1000000;
   transform: translate(-50%, -50%);
   transition: opacity 0.2s ease, transform 0.1s ease;
   will-change: transform;
@@ -111,7 +111,7 @@ body {
   border: 1px solid var(--accent-primary);
   border-radius: 50%;
   pointer-events: none;
-  z-index: 99999;
+  z-index: 999999;
   transform: translate(-50%, -50%);
   opacity: 0.65;
   transition: width 0.3s var(--ease-expressive),
@@ -174,12 +174,94 @@ body {
   height: 100%;
   width: 1px;
   background-color: var(--grid-line-color);
+  position: relative;
+}
+
+/* Subtle architectural crosshairs along blueprint columns */
+.grid-guide-col::before {
+  content: '+';
+  position: absolute;
+  top: 25vh;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--accent-primary);
+  opacity: 0.28;
+  pointer-events: none;
+}
+
+.grid-guide-col::after {
+  content: '+';
+  position: absolute;
+  top: 75vh;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--accent-primary);
+  opacity: 0.28;
+  pointer-events: none;
 }
 
 @media (max-width: 768px) {
   .grid-guide-col:nth-child(n+3) {
     display: none;
   }
+}
+
+/* ==========================================================================
+   MAGNETIC 3D TILT SURFACE GLARE
+   ========================================================================== */
+.project-architectural-card,
+.synth-freq-btn,
+.about-grid-card,
+.pillar-card,
+.matrix-tier-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.project-architectural-card::after,
+.synth-freq-btn::after,
+.about-grid-card::after,
+.pillar-card::after,
+.matrix-tier-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  background: radial-gradient(
+    circle 260px at var(--glare-x, 50%) var(--glare-y, 50%),
+    rgba(255, 255, 255, 0.08),
+    transparent 65%
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 10;
+}
+
+.project-architectural-card:hover::after,
+.synth-freq-btn:hover::after,
+.about-grid-card:hover::after,
+.pillar-card:hover::after,
+.matrix-tier-card:hover::after {
+  opacity: 1;
+}
+
+[data-theme="light"] .project-architectural-card::after,
+[data-theme="light"] .synth-freq-btn::after,
+[data-theme="light"] .about-grid-card::after,
+[data-theme="light"] .pillar-card::after,
+[data-theme="light"] .matrix-tier-card::after {
+  background: radial-gradient(
+    circle 260px at var(--glare-x, 50%) var(--glare-y, 50%),
+    rgba(74, 93, 78, 0.06),
+    transparent 65%
+  );
 }
 
 /* ==========================================================================
