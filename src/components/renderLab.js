@@ -58,6 +58,9 @@ export function renderLab(data) {
             <div class="telemetry-pill">
               <span class="pill-dim">PHYSICS:</span> <span id="telemetry-physics">INERTIA DAMPED</span>
             </div>
+            <div class="telemetry-pill" id="telemetry-resonance-pill">
+              <span class="pill-dim">RESONANCE:</span> <span id="telemetry-resonance">IDLE // 432Hz READY</span>
+            </div>
           </div>
         </div>
 

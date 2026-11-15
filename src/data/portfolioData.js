@@ -456,6 +456,10 @@ export async function streamNeuraInference(prompt, streamWriter) {
     description: "Eksperimen grafis komputasional 3D interaktif murni Canvas. Drag untuk merotasi geometri monolit, ubah topologi bentuk, dan amati pembelokan sumbu koordinat secara real-time.",
     modes: [
       { id: "monolith", label: "Tectonic Monolith", vertices: 8, edges: 12 },
+      { id: "cymatics", label: "Harmonic Cymatics Core", vertices: 66, edges: 144 },
+      { id: "manta", label: "Giant Manta Ray", vertices: 44, edges: 92 },
+      { id: "helix", label: "Biophilic Double Helix", vertices: 48, edges: 70 },
+      { id: "torus", label: "Quantum Torus Knot", vertices: 64, edges: 128 },
       { id: "tesseract", label: "Hypercube 4D", vertices: 16, edges: 32 },
       { id: "geodesic", label: "Icosahedron Sphere", vertices: 12, edges: 30 },
       { id: "wave", label: "Topographic Grid", vertices: 36, edges: 60 }

@@ -461,6 +461,30 @@ export const translations = {
           "edges": 12
         },
         {
+          "id": "cymatics",
+          "label": "Resonator Simatik 3D",
+          "vertices": 66,
+          "edges": 144
+        },
+        {
+          "id": "manta",
+          "label": "Ikan Pari Raksasa",
+          "vertices": 44,
+          "edges": 92
+        },
+        {
+          "id": "helix",
+          "label": "Heliks Ganda Biofilik",
+          "vertices": 48,
+          "edges": 70
+        },
+        {
+          "id": "torus",
+          "label": "Torus Kuantum",
+          "vertices": 64,
+          "edges": 128
+        },
+        {
           "id": "tesseract",
           "label": "Hiperkubus 4D",
           "vertices": 16,
@@ -960,6 +984,30 @@ export const translations = {
           "label": "Tectonic Monolith",
           "vertices": 8,
           "edges": 12
+        },
+        {
+          "id": "cymatics",
+          "label": "Harmonic Cymatics Core",
+          "vertices": 66,
+          "edges": 144
+        },
+        {
+          "id": "manta",
+          "label": "Giant Manta Ray",
+          "vertices": 44,
+          "edges": 92
+        },
+        {
+          "id": "helix",
+          "label": "Biophilic Double Helix",
+          "vertices": 48,
+          "edges": 70
+        },
+        {
+          "id": "torus",
+          "label": "Quantum Torus Knot",
+          "vertices": 64,
+          "edges": 128
         },
         {
           "id": "tesseract",
@@ -1463,6 +1511,30 @@ export const translations = {
           "edges": 12
         },
         {
+          "id": "cymatics",
+          "label": "声学共振谐波体",
+          "vertices": 66,
+          "edges": 144
+        },
+        {
+          "id": "manta",
+          "label": "深海巨型蝠鲼",
+          "vertices": 44,
+          "edges": 92
+        },
+        {
+          "id": "helix",
+          "label": "生机双螺旋体",
+          "vertices": 48,
+          "edges": 70
+        },
+        {
+          "id": "torus",
+          "label": "量子环面结",
+          "vertices": 64,
+          "edges": 128
+        },
+        {
           "id": "tesseract",
           "label": "四维超正方体",
           "vertices": 16,
@@ -1964,6 +2036,30 @@ export const translations = {
           "edges": 12
         },
         {
+          "id": "cymatics",
+          "label": "音響共鳴サイマティクス",
+          "vertices": 66,
+          "edges": 144
+        },
+        {
+          "id": "manta",
+          "label": "巨大オニイトマキエイ",
+          "vertices": 44,
+          "edges": 92
+        },
+        {
+          "id": "helix",
+          "label": "生体二重らせん",
+          "vertices": 48,
+          "edges": 70
+        },
+        {
+          "id": "torus",
+          "label": "量子トーラス環",
+          "vertices": 64,
+          "edges": 128
+        },
+        {
           "id": "tesseract",
           "label": "4次元超立方体",
           "vertices": 16,
@@ -2463,6 +2559,30 @@ export const translations = {
           "label": "Tektonischer Monolith",
           "vertices": 8,
           "edges": 12
+        },
+        {
+          "id": "cymatics",
+          "label": "Harmonischer Kymatik-Kern",
+          "vertices": 66,
+          "edges": 144
+        },
+        {
+          "id": "manta",
+          "label": "Riesenmanta-Rochen",
+          "vertices": 44,
+          "edges": 92
+        },
+        {
+          "id": "helix",
+          "label": "Biophile Doppelhelix",
+          "vertices": 48,
+          "edges": 70
+        },
+        {
+          "id": "torus",
+          "label": "Quanten-Torus",
+          "vertices": 64,
+          "edges": 128
         },
         {
           "id": "tesseract",

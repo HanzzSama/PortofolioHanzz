@@ -1,8 +1,10 @@
 /**
  * KINETIC MONOLITH 3D WIREFRAME SIMULATOR
  * Pure Canvas Linear Algebra, Projection Mathematics & Rotational Inertia Physics
- * Designed for Biophilic Architectural Minimalism
+ * Biophilic Architectural Minimalism × Real-time Audio Resonance Coupling
  */
+
+import { monolithAudio } from './monolithAudioEngine.js';
 
 export class MonolithSimulator {
   constructor(canvasId = 'monolith-canvas') {
@@ -17,6 +19,8 @@ export class MonolithSimulator {
     this.ryEl = document.getElementById('telemetry-ry');
     this.verticesEl = document.getElementById('telemetry-vertices');
     this.physicsEl = document.getElementById('telemetry-physics');
+    this.resonanceEl = document.getElementById('telemetry-resonance');
+    this.resonancePillEl = document.getElementById('telemetry-resonance-pill');
     this.hintEl = document.getElementById('stage-hint');
 
     // State
@@ -64,10 +68,19 @@ export class MonolithSimulator {
   }
 
   // -------------------------------------------------------------
-  // GEOMETRIC TOPOLOGY GENERATORS
+  // GEOMETRIC TOPOLOGY GENERATORS (Only 'cymatics' couples with audio)
   // -------------------------------------------------------------
-  getGeometry(mode) {
+  getGeometry(mode, audio = { bass: 0, mid: 0, overall: 0, isPlaying: false }) {
     switch (mode) {
+      case 'cymatics':
+        // The DEDICATED Audio Resonance Model
+        return this.createCymaticsResonator(audio);
+      case 'manta':
+        return this.createMantaRay();
+      case 'helix':
+        return this.createDoubleHelix();
+      case 'torus':
+        return this.createTorusKnot();
       case 'tesseract':
         return this.createTesseract();
       case 'geodesic':
@@ -80,8 +93,297 @@ export class MonolithSimulator {
     }
   }
 
+  createCymaticsResonator(audio) {
+    // Dedicated Harmonic Cymatics Audio Resonator
+    // Directly metamorphoses its 3D wireframe architecture based on the active audio frequency & track profile
+    const vertices = [];
+    const edges = [];
+
+    // Central Singularity Node (index 0)
+    const coreIdx = 0;
+    const corePulse = audio.isPlaying ? (audio.bass * 0.25) : Math.sin(this.time * 3) * 0.05;
+    vertices.push([0, corePulse, 0]);
+
+    // Resonator Shell: 5 latitude rings x 12 points = 60 vertices (+ 2 polar points + 1 core = 63 vertices)
+    const rings = 5;
+    const pointsPerRing = 12;
+    const baseR = 1.05;
+
+    const trackId = audio.trackId || '';
+    const isPlaying = audio.isPlaying;
+    const bass = audio.bass || 0;
+    const mid = audio.mid || 0;
+
+    const ringIndices = [];
+
+    for (let r = 0; r < rings; r++) {
+      const ringRow = [];
+      const theta = ((r + 1) / (rings + 1)) * Math.PI; // latitude from north to south
+      const sinTheta = Math.sin(theta);
+      const cosTheta = Math.cos(theta);
+
+      for (let p = 0; p < pointsPerRing; p++) {
+        const phi = (p / pointsPerRing) * Math.PI * 2; // longitude around ring
+
+        // Harmonic Wave Modulation based on specific resonance frequency soundscape:
+        let cymaticDisp = 0;
+
+        if (!isPlaying) {
+          // Idle: Dormant geometric breathing crystal
+          cymaticDisp = Math.sin(3 * phi + this.time * 1.5) * Math.sin(2 * theta) * 0.12;
+        } else if (trackId === '01_sanctuary') {
+          // 432Hz Sanctuary: Sacred 8-fold flower of life / merkaba harmonic
+          const harm432 = Math.cos(4 * phi + this.time * 2.2) * Math.sin(3 * theta);
+          cymaticDisp = harm432 * (0.32 + bass * 0.55);
+        } else if (trackId === '02_solfeggio') {
+          // 528Hz Solfeggio: Golden 5-fold blossoming transformation
+          const harm528 = Math.sin(5 * phi - this.time * 2.5) * Math.sin(2 * theta);
+          cymaticDisp = harm528 * (0.35 + bass * 0.45);
+        } else if (trackId === '03_rain_lofi') {
+          // Semarang Rain: Rippling concentric liquid droplet wave
+          const rainRipple = Math.sin(theta * 7 - this.time * 4.5) * Math.cos(phi * 2);
+          cymaticDisp = rainRipple * (0.30 + bass * 0.40);
+        } else if (trackId === '04_cyber_pulse') {
+          // Cyber Pulse: Sharp geometric facet spikes on beat
+          const cyberSpike = Math.pow(Math.abs(Math.sin(6 * phi) * Math.cos(3 * theta)), 2.5);
+          cymaticDisp = (cyberSpike * 0.55 + Math.sin(this.time * 10) * 0.08) * (1 + bass * 0.9);
+        } else if (trackId === '05_binaural_theta') {
+          // 6Hz Theta Flow: Dual 6-wave undulating meditative brainwave ribbons
+          const thetaWave = Math.sin(phi * 6 - this.time * 6.0) * Math.sin(theta * 2);
+          cymaticDisp = thetaWave * (0.38 + bass * 0.35);
+        } else {
+          // 06_custom or dynamic spectrum: Samples raw audio frequency bins
+          const binIndex = Math.floor((p / pointsPerRing) * 24);
+          const binEnergy = audio.freqBins ? (audio.freqBins[binIndex] / 255) : mid;
+          cymaticDisp = (binEnergy * 0.65) * Math.sin(theta * 3);
+        }
+
+        const radius = Math.max(0.35, baseR + cymaticDisp);
+        const x = radius * sinTheta * Math.cos(phi);
+        const y = radius * cosTheta;
+        const z = radius * sinTheta * Math.sin(phi);
+
+        const vIdx = vertices.length;
+        vertices.push([x, y, z]);
+        ringRow.push(vIdx);
+
+        // Radial resonating spokes connecting outer shell directly to core node
+        if (p % 3 === 0) {
+          edges.push([coreIdx, vIdx]);
+        }
+      }
+      ringIndices.push(ringRow);
+    }
+
+    // North & South Pole Singularity Nodes
+    const northPoleIdx = vertices.length;
+    const northPulse = (baseR + (isPlaying ? bass * 0.4 : Math.sin(this.time * 2) * 0.1));
+    vertices.push([0, northPulse, 0]);
+
+    const southPoleIdx = vertices.length;
+    const southPulse = -(baseR + (isPlaying ? bass * 0.4 : -Math.sin(this.time * 2) * 0.1));
+    vertices.push([0, southPulse, 0]);
+
+    // Connect Poles to top and bottom rings
+    for (let p = 0; p < pointsPerRing; p++) {
+      edges.push([northPoleIdx, ringIndices[0][p]]);
+      edges.push([southPoleIdx, ringIndices[rings - 1][p]]);
+    }
+
+    // Connect Ring Latitudinal Loops and Longitudinal Ribs
+    for (let r = 0; r < rings; r++) {
+      const row = ringIndices[r];
+      for (let p = 0; p < pointsPerRing; p++) {
+        const nextP = (p + 1) % pointsPerRing;
+        edges.push([row[p], row[nextP]]); // Latitudinal circle
+
+        if (r < rings - 1) {
+          const nextRow = ringIndices[r + 1];
+          edges.push([row[p], nextRow[p]]); // Longitudinal rib
+          // Cymatics diagonal harmonic lattice
+          edges.push([row[p], nextRow[nextP]]);
+        }
+      }
+    }
+
+    return { vertices, edges };
+  }
+
+  createMantaRay() {
+    // Biophilic Giant Oceanic Manta Ray Wireframe
+    // Graceful natural undulating aquatic locomotion
+    const vertices = [];
+    const edges = [];
+
+    const flapSpeed = 2.2;
+    const flapAmp = 0.35;
+    const flapPhase = this.time * flapSpeed;
+
+    // Body stations along longitudinal axis Z: [z, halfSpan, bodyThickness]
+    const stations = [
+      { z: -1.40, span: 0.32, thick: 0.08 }, // Cephalic horn roots & snout
+      { z: -1.05, span: 0.70, thick: 0.16 }, // Head & gills
+      { z: -0.60, span: 1.40, thick: 0.20 }, // Anterior wings
+      { z: -0.10, span: 2.10, thick: 0.18 }, // Maximum wingtip span
+      { z:  0.45, span: 1.45, thick: 0.13 }, // Posterior trailing edge
+      { z:  0.95, span: 0.60, thick: 0.08 }, // Pelvic fins
+      { z:  1.35, span: 0.14, thick: 0.04 }  // Tail base
+    ];
+
+    const lateralSteps = 3; // 7 points across each station (center + 3 left + 3 right)
+    const rowIndices = [];
+
+    stations.forEach((st) => {
+      const row = [];
+      const spinePitch = Math.sin(flapPhase - st.z * 1.2) * 0.07;
+
+      for (let c = -lateralSteps; c <= lateralSteps; c++) {
+        const u = c / lateralSteps; // -1 to +1
+        const x = u * st.span;
+        const distFromCenter = Math.abs(u);
+
+        // Flapping wave equation: outward traveling wave + z propagation
+        const wingWave = Math.sin(flapPhase - Math.abs(x) * 1.8 + st.z * 1.1);
+        const wingElevation = wingWave * flapAmp * Math.pow(distFromCenter, 1.4);
+
+        const thickness = st.thick * Math.cos(distFromCenter * (Math.PI / 2));
+        const y = spinePitch + wingElevation - thickness * 0.25;
+
+        const vIdx = vertices.length;
+        vertices.push([x, y, st.z]);
+        row.push(vIdx);
+      }
+      rowIndices.push(row);
+    });
+
+    // Cephalic Horns (frontal sensory/feeding lobes)
+    const hornWave = Math.sin(flapPhase * 1.4) * 0.08;
+    const leftHornIdx = vertices.length;
+    vertices.push([-0.36, hornWave - 0.04, -1.72]);
+    const rightHornIdx = vertices.length;
+    vertices.push([0.36, hornWave - 0.04, -1.72]);
+
+    // Connect Cephalic Horns to front station
+    edges.push([leftHornIdx, rowIndices[0][lateralSteps - 1]]);
+    edges.push([leftHornIdx, rowIndices[0][lateralSteps]]);
+    edges.push([rightHornIdx, rowIndices[0][lateralSteps + 1]]);
+    edges.push([rightHornIdx, rowIndices[0][lateralSteps]]);
+
+    // Sleek undulating whip-tail trailing behind
+    const tailSegments = 4;
+    const tailBaseIdx = rowIndices[rowIndices.length - 1][lateralSteps];
+    let prevTailIdx = tailBaseIdx;
+
+    for (let t = 1; t <= tailSegments; t++) {
+      const tProgress = t / tailSegments;
+      const tz = 1.35 + tProgress * 1.45;
+      const tailSway = Math.sin(flapPhase - tz * 2.2) * (0.05 + tProgress * 0.25);
+      const tailElevation = Math.sin(flapPhase - tz * 1.6) * 0.10;
+      const tIdx = vertices.length;
+      vertices.push([tailSway, tailElevation, tz]);
+      edges.push([prevTailIdx, tIdx]);
+      prevTailIdx = tIdx;
+    }
+
+    // Connect Stations (Ribs, Longitudinal Struts & Diagonal Tessellation)
+    for (let s = 0; s < stations.length; s++) {
+      const row = rowIndices[s];
+      // Lateral wing rib lines
+      for (let c = 0; c < row.length - 1; c++) {
+        edges.push([row[c], row[c + 1]]);
+      }
+      // Longitudinal connections to next station
+      if (s < stations.length - 1) {
+        const nextRow = rowIndices[s + 1];
+        for (let c = 0; c < row.length; c++) {
+          edges.push([row[c], nextRow[c]]);
+          if (c < row.length - 1) {
+            edges.push([row[c], nextRow[c + 1]]);
+          }
+        }
+      }
+    }
+
+    return { vertices, edges };
+  }
+
+  createDoubleHelix() {
+    // Biophilic DNA Double Helix Spiral with hydrogen base rungs
+    const vertices = [];
+    const edges = [];
+
+    const turns = 2.4;
+    const numSteps = 24;
+    const height = 2.5;
+    const radius = 0.72;
+    const rotationSpeed = 1.0;
+
+    const strandA = [];
+    const strandB = [];
+
+    for (let i = 0; i < numSteps; i++) {
+      const t = i / (numSteps - 1);
+      const y = -height / 2 + t * height;
+      const angle = t * Math.PI * 2 * turns + this.time * rotationSpeed;
+
+      const xA = Math.cos(angle) * radius;
+      const zA = Math.sin(angle) * radius;
+      const idxA = vertices.length;
+      vertices.push([xA, y, zA]);
+      strandA.push(idxA);
+
+      const xB = Math.cos(angle + Math.PI) * radius;
+      const zB = Math.sin(angle + Math.PI) * radius;
+      const idxB = vertices.length;
+      vertices.push([xB, y, zB]);
+      strandB.push(idxB);
+
+      // Horizontal base-pair rungs
+      edges.push([idxA, idxB]);
+    }
+
+    // Connecting backbone helical edges
+    for (let i = 0; i < numSteps - 1; i++) {
+      edges.push([strandA[i], strandA[i + 1]]);
+      edges.push([strandB[i], strandB[i + 1]]);
+      // Diagonal hydrogen bond lattice
+      edges.push([strandA[i], strandB[i + 1]]);
+    }
+
+    return { vertices, edges };
+  }
+
+  createTorusKnot() {
+    // Quantum Architectural Torus Knot (p=2, q=3)
+    const vertices = [];
+    const edges = [];
+
+    const p = 2;
+    const q = 3;
+    const steps = 48;
+
+    for (let i = 0; i < steps; i++) {
+      const phi = (i / steps) * Math.PI * 2;
+      const r = 0.78 + 0.34 * Math.cos(q * phi + this.time * 1.2);
+      const x = r * Math.cos(p * phi);
+      const y = 0.48 * Math.sin(q * phi + this.time * 1.2);
+      const z = r * Math.sin(p * phi);
+      vertices.push([x, y, z]);
+    }
+
+    for (let i = 0; i < steps; i++) {
+      const next = (i + 1) % steps;
+      edges.push([i, next]);
+      if (i % 2 === 0) {
+        edges.push([i, (i + Math.floor(steps / 3)) % steps]);
+      }
+    }
+
+    return { vertices, edges };
+  }
+
   createMonolith() {
-    // Elegant tall architectural cuboid
+    // Architectural cuboid (classic pure geometry)
     const w = 0.75, h = 1.35, d = 0.55;
     const vertices = [
       [-w, -h, -d], [w, -h, -d], [w, h, -d], [-w, h, -d],
@@ -108,11 +410,8 @@ export class MonolithSimulator {
       [-i, -i,  i], [i, -i,  i], [i, i,  i], [-i, i,  i]
     ];
     const edges = [
-      // Outer edges
       [0,1],[1,2],[2,3],[3,0],[4,5],[5,6],[6,7],[7,4],[0,4],[1,5],[2,6],[3,7],
-      // Inner edges
       [8,9],[9,10],[10,11],[11,8],[12,13],[13,14],[14,15],[15,12],[8,12],[9,13],[10,14],[11,15],
-      // Inter-dimensional bridges
       [0,8],[1,9],[2,10],[3,11],[4,12],[5,13],[6,14],[7,15]
     ];
     return { vertices, edges };
@@ -151,13 +450,15 @@ export class MonolithSimulator {
     const step = 0.45;
     const offset = ((size - 1) * step) / 2;
 
+    const waveHeight = 0.28;
+    const waveSpeed = 2.0;
+
     for (let x = 0; x < size; x++) {
       for (let z = 0; z < size; z++) {
         const vx = x * step - offset;
         const vz = z * step - offset;
-        // Harmonic undulating wave height
         const dist = Math.hypot(vx, vz);
-        const vy = Math.sin(dist * 4 - this.time * 2) * 0.28;
+        const vy = Math.sin(dist * 4 - this.time * waveSpeed) * waveHeight;
         vertices.push([vx, vy, vz]);
       }
     }
@@ -204,11 +505,19 @@ export class MonolithSimulator {
 
     this.ctx.clearRect(0, 0, this.width, this.height);
 
-    // Inertia physics update
+    // Audio Resonance Energy Coupling (Exclusively active on 'cymatics' mode)
+    const isCymatics = this.currentMode === 'cymatics';
+    const audio = (monolithAudio && typeof monolithAudio.getAudioEnergy === 'function')
+      ? monolithAudio.getAudioEnergy()
+      : { bass: 0, mid: 0, overall: 0, isPlaying: false, trackName: 'IDLE' };
+    const isResonating = isCymatics && audio.isPlaying;
+
+    // Inertia physics update with audio pulse (strictly only for cymatics)
     if (!this.isDragging) {
       if (this.autoRotate) {
-        this.rot.y += 0.006;
-        this.rot.x += 0.0025;
+        const speedBoost = isResonating ? 1.0 + audio.bass * 0.75 : 1.0;
+        this.rot.y += 0.006 * speedBoost;
+        this.rot.x += 0.0025 * speedBoost;
       }
       this.rot.x += this.vel.x;
       this.rot.y += this.vel.y;
@@ -234,22 +543,23 @@ export class MonolithSimulator {
     this.ctx.lineTo(cx, cy + 160);
     this.ctx.stroke();
 
-    // Fetch geometry
-    const geom = this.getGeometry(this.currentMode);
+    // Fetch geometry (passing audio energy for real-time mesh deformation)
+    const geom = this.getGeometry(this.currentMode, audio);
     const projected = geom.vertices.map(v => this.project(v));
 
-    // Draw Edges (Wireframe)
-    this.ctx.strokeStyle = wireColor;
-    this.ctx.lineWidth = 1.35;
+    // Draw Edges (Wireframe) — line modulation strictly only for cymatics
+    const baseLineWidth = 1.35 + (isResonating ? audio.bass * 1.1 : 0);
+    this.ctx.lineWidth = baseLineWidth;
 
     geom.edges.forEach(([i1, i2]) => {
       const p1 = projected[i1];
       const p2 = projected[i2];
       if (!p1 || !p2) return;
 
-      // Depth gradient fade
+      // Depth gradient fade (audio alpha boost only for cymatics)
       const avgZ = (p1.z + p2.z) / 2;
-      const alpha = Math.max(0.18, Math.min(1.0, 0.65 + avgZ * 0.35));
+      const alphaBoost = isResonating ? audio.bass * 0.22 : 0;
+      const alpha = Math.max(0.18, Math.min(1.0, 0.65 + avgZ * 0.35 + alphaBoost));
 
       this.ctx.strokeStyle = isDark
         ? `rgba(117, 146, 122, ${alpha})`
@@ -261,22 +571,34 @@ export class MonolithSimulator {
       this.ctx.stroke();
     });
 
-    // Draw Vertices (Precision architectural points)
+    // Draw Vertices (Audio vertex pulse and halo strictly only for cymatics)
     projected.forEach(p => {
-      const pointRadius = Math.max(1.8, Math.min(3.5, 2.4 + p.z * 0.8));
+      const audioPulse = isResonating ? (1 + audio.bass * 0.55) : 1;
+      const pointRadius = Math.max(1.8, Math.min(4.5, (2.4 + p.z * 0.8) * audioPulse));
       this.ctx.fillStyle = vertexColor;
       this.ctx.beginPath();
       this.ctx.arc(p.x, p.y, pointRadius, 0, Math.PI * 2);
       this.ctx.fill();
+
+      // Resonance halo ring strictly on dedicated cymatics model during strong beats
+      if (isResonating && audio.bass > 0.22) {
+        this.ctx.strokeStyle = isDark
+          ? `rgba(168, 209, 175, ${audio.bass * 0.4})`
+          : `rgba(74, 93, 78, ${audio.bass * 0.35})`;
+        this.ctx.lineWidth = 1;
+        this.ctx.beginPath();
+        this.ctx.arc(p.x, p.y, pointRadius + audio.bass * 4, 0, Math.PI * 2);
+        this.ctx.stroke();
+      }
     });
 
-    // Update Telemetry DOM
-    this.updateTelemetry(geom.vertices.length);
+    // Update Telemetry DOM with audio status
+    this.updateTelemetry(geom.vertices.length, audio, isCymatics);
 
     this.rafId = requestAnimationFrame(() => this.render());
   }
 
-  updateTelemetry(vertexCount) {
+  updateTelemetry(vertexCount, audio, isCymatics) {
     if (this.rxEl) {
       const rxVal = (this.rot.x % (Math.PI * 2)).toFixed(2);
       this.rxEl.textContent = (this.rot.x >= 0 ? '+' : '') + rxVal;
@@ -287,6 +609,20 @@ export class MonolithSimulator {
     }
     if (this.verticesEl) {
       this.verticesEl.textContent = String(vertexCount);
+    }
+    if (this.resonanceEl) {
+      if (isCymatics) {
+        if (audio && audio.isPlaying) {
+          this.resonanceEl.textContent = `SYNCED [${(audio.bass * 100).toFixed(0)}%]`;
+          this.resonanceEl.style.color = 'var(--accent-primary)';
+        } else {
+          this.resonanceEl.textContent = 'STANDBY // READY';
+          this.resonanceEl.style.color = '';
+        }
+      } else {
+        this.resonanceEl.textContent = 'OFF // GEOMETRIC';
+        this.resonanceEl.style.color = '';
+      }
     }
   }
 

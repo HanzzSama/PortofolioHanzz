@@ -523,6 +523,40 @@ export class MonolithAudioEngine {
     this.headerEqBars = barsArray;
   }
 
+  getAudioEnergy() {
+    if (!this.analyser || !this.isPlaying) {
+      return { bass: 0, mid: 0, treble: 0, overall: 0, isPlaying: false, trackName: 'IDLE' };
+    }
+    const binCount = this.analyser.frequencyBinCount;
+    const freqData = new Uint8Array(binCount);
+    this.analyser.getByteFrequencyData(freqData);
+
+    let bass = 0;
+    const bassBins = Math.min(16, binCount);
+    for (let i = 0; i < bassBins; i++) bass += freqData[i];
+    bass = bass / (bassBins * 255);
+
+    let mid = 0;
+    const midBins = Math.min(64, binCount);
+    for (let i = bassBins; i < midBins; i++) mid += freqData[i];
+    mid = mid / (Math.max(1, midBins - bassBins) * 255);
+
+    let overall = 0;
+    for (let i = 0; i < binCount; i++) overall += freqData[i];
+    overall = overall / (binCount * 255);
+
+    const currentTrack = SOUNDSCAPE_TRACKS.find(t => t.id === this.currentTrackId);
+    return {
+      bass,
+      mid,
+      overall,
+      isPlaying: true,
+      trackName: currentTrack ? currentTrack.name : 'RESONANCE ON',
+      trackId: this.currentTrackId,
+      freqBins: freqData
+    };
+  }
+
   startVisualizerLoop() {
     if (this.animId) cancelAnimationFrame(this.animId);
 
