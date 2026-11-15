@@ -8,10 +8,10 @@
 export const SOUNDSCAPE_TRACKS = [
   {
     id: '01_sanctuary',
-    name: '432Hz Sanctuary',
-    category: 'RESONANT DRONE',
-    desc: 'Harmonik 432Hz dengan overton rasio emas & sub-bass 108Hz yang menenangkan.',
-    bpm: 'SLOW // 432Hz',
+    name: '432Hz Terra Alpha',
+    category: 'BIOPHILIC SANCTUARY',
+    desc: 'Harmonik 432Hz dipadu gelombang otak 10Hz Alpha, derai hujan alami & akord hangat.',
+    bpm: 'SLOW // 432Hz ALPHA',
     color: '#4A5D4E'
   },
   {
@@ -60,7 +60,7 @@ export class MonolithAudioEngine {
   constructor() {
     this.ctx = null;
     this.isPlaying = false;
-    this.currentTrackId = null; // No track selected on fresh load
+    this.currentTrackId = '01_sanctuary'; // Default track set on startup & refresh
     this.volume = parseFloat(localStorage.getItem('monolith-vol') || '0.35');
     this.filterCutoff = parseFloat(localStorage.getItem('monolith-filter') || '1400');
     this.isRainActive = localStorage.getItem('monolith-rain') === 'true';
@@ -202,6 +202,68 @@ export class MonolithAudioEngine {
     }
   }
 
+  /* ==========================================================================
+     STARTUP & REFRESH AUTOPLAY ORCHESTRATION (Browser Policy Compliant)
+     ========================================================================== */
+  initAutoplayOnStartup(defaultTrackId = '01_sanctuary') {
+    this.currentTrackId = defaultTrackId;
+    this.updateUIPerPlayback(false); // Highlight Track 01 button immediately
+
+    const startAutoplay = () => {
+      this.ensureContext();
+      if (!this.ctx) return;
+
+      this.play(defaultTrackId);
+
+      // Smooth gradual 1.8s fade-in for comforting, warm entry
+      if (this.masterGain && this.ctx) {
+        const now = this.ctx.currentTime;
+        const targetVol = this.volume || 0.35;
+        this.masterGain.gain.cancelScheduledValues(now);
+        this.masterGain.gain.setValueAtTime(0.001, now);
+        this.masterGain.gain.exponentialRampToValueAtTime(Math.max(0.001, targetVol), now + 1.8);
+      }
+    };
+
+    this.ensureContext();
+
+    if (this.ctx && this.ctx.state === 'running') {
+      startAutoplay();
+    } else {
+      // Browser Autoplay Policy: AudioContext starts suspended until user gesture.
+      // Attach transparent passive gesture trigger to unlock instantly on first interaction.
+      const unlockAndPlay = () => {
+        ['click', 'pointerdown', 'keydown', 'touchstart', 'scroll'].forEach(evt => {
+          window.removeEventListener(evt, unlockAndPlay, { capture: true });
+        });
+
+        this.ensureContext();
+        if (this.ctx && this.ctx.state === 'suspended') {
+          this.ctx.resume().then(() => {
+            startAutoplay();
+          }).catch(() => {
+            startAutoplay();
+          });
+        } else {
+          startAutoplay();
+        }
+      };
+
+      ['click', 'pointerdown', 'keydown', 'touchstart', 'scroll'].forEach(evt => {
+        window.addEventListener(evt, unlockAndPlay, { capture: true, once: true, passive: true });
+      });
+
+      // Immediate resume attempt in case tab pre-approved media engagement
+      if (this.ctx && typeof this.ctx.resume === 'function') {
+        this.ctx.resume().then(() => {
+          if (this.ctx.state === 'running') {
+            startAutoplay();
+          }
+        }).catch(() => {});
+      }
+    }
+  }
+
   stopActiveVoices() {
     this.timerIds.forEach(id => clearInterval(id));
     this.timerIds = [];
@@ -223,34 +285,150 @@ export class MonolithAudioEngine {
      PROCEDURAL SOUNDSCAPE GENERATORS (Pure Web Audio Math)
      ========================================================================== */
   
-  // Track 01: 432Hz Harmonic Sanctuary
+  // Track 01: 432Hz Terra Alpha (Warmth, Biophilic Rain Canopy & 10Hz Alpha Brainwave)
   start432HzSanctuary() {
-    const freqs = [108, 216, 432, 648]; // Sub, Root, Fundamental, 5th harmonic
-    const gains = [0.22, 0.18, 0.14, 0.08];
+    // 1. Organic Warm Grounding Drone Matrix (A=432Hz Verdi Series)
+    const droneFreqs = [108, 216, 432, 648]; // Sub, Root, Fundamental, 5th harmonic
+    const droneGains = [0.20, 0.16, 0.12, 0.06];
 
-    freqs.forEach((freq, i) => {
+    droneFreqs.forEach((freq, i) => {
       const osc = this.ctx.createOscillator();
       const gain = this.ctx.createGain();
 
       osc.type = i === 2 ? 'triangle' : 'sine';
       osc.frequency.setValueAtTime(freq, this.ctx.currentTime);
 
-      // Subtle breathing frequency LFO for organic non-repetitive warmth
+      // Slow organic breath LFO (0.04Hz - 0.08Hz)
       const lfo = this.ctx.createOscillator();
       const lfoGain = this.ctx.createGain();
-      lfo.frequency.setValueAtTime(0.06 + i * 0.02, this.ctx.currentTime);
-      lfoGain.gain.setValueAtTime(1.5, this.ctx.currentTime);
+      lfo.frequency.setValueAtTime(0.04 + i * 0.018, this.ctx.currentTime);
+      lfoGain.gain.setValueAtTime(1.8, this.ctx.currentTime);
       lfo.connect(osc.frequency);
       lfo.start();
       this.activeNodes.push(lfo);
 
-      gain.gain.setValueAtTime(gains[i], this.ctx.currentTime);
+      gain.gain.setValueAtTime(droneGains[i], this.ctx.currentTime);
       osc.connect(gain);
       gain.connect(this.masterFilter);
       osc.start();
 
       this.activeNodes.push(osc, gain);
     });
+
+    // 2. 10.0Hz Alpha Wave Binaural Differential for Calm Mental Balance
+    // Left: 216Hz, Right: 226Hz => Differential = 10.0Hz Alpha Wave
+    try {
+      if (this.ctx.createStereoPanner) {
+        const leftOsc = this.ctx.createOscillator();
+        const leftGain = this.ctx.createGain();
+        const leftPan = this.ctx.createStereoPanner();
+        leftOsc.type = 'sine';
+        leftOsc.frequency.setValueAtTime(216, this.ctx.currentTime);
+        leftGain.gain.setValueAtTime(0.08, this.ctx.currentTime);
+        leftPan.pan.setValueAtTime(-0.85, this.ctx.currentTime);
+        leftOsc.connect(leftGain);
+        leftGain.connect(leftPan);
+        leftPan.connect(this.masterFilter);
+        leftOsc.start();
+        this.activeNodes.push(leftOsc, leftGain, leftPan);
+
+        const rightOsc = this.ctx.createOscillator();
+        const rightGain = this.ctx.createGain();
+        const rightPan = this.ctx.createStereoPanner();
+        rightOsc.type = 'sine';
+        rightOsc.frequency.setValueAtTime(226, this.ctx.currentTime); // +10Hz Alpha differential
+        rightGain.gain.setValueAtTime(0.08, this.ctx.currentTime);
+        rightPan.pan.setValueAtTime(0.85, this.ctx.currentTime);
+        rightOsc.connect(rightGain);
+        rightGain.connect(rightPan);
+        rightPan.connect(this.masterFilter);
+        rightOsc.start();
+        this.activeNodes.push(rightOsc, rightGain, rightPan);
+      }
+    } catch (_) {
+      // Fallback if StereoPanner is unsupported
+    }
+
+    // 3. Soft Biophilic Nature Texture (Gentle Canopy Pink Rain Bed)
+    this.startSoftBiophilicNatureBed();
+
+    // 4. Meditative Pentatonic Warm Rhodes Drops (Spaced gently every 5.5s)
+    const pentatonicNotes = [
+      [216.0, 270.0, 324.0, 432.0], // Warm 432-tuned Pentatonic Cluster 1
+      [162.0, 216.0, 270.0, 324.0], // Cluster 2 (Gentle low)
+      [270.0, 324.0, 432.0, 540.0], // Cluster 3 (Warm air)
+      [216.0, 256.0, 324.0, 384.0]  // Cluster 4 (Warm major 7th)
+    ];
+
+    let pIdx = 0;
+    const playWarmDrop = () => {
+      if (!this.isPlaying || this.currentTrackId !== '01_sanctuary' || !this.ctx) return;
+      const cluster = pentatonicNotes[pIdx % pentatonicNotes.length];
+      pIdx++;
+
+      cluster.forEach((freq, nIdx) => {
+        setTimeout(() => {
+          if (!this.isPlaying || !this.ctx) return;
+          const osc = this.ctx.createOscillator();
+          const gain = this.ctx.createGain();
+
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(freq, this.ctx.currentTime);
+
+          const now = this.ctx.currentTime;
+          gain.gain.setValueAtTime(0.045, now);
+          gain.gain.exponentialRampToValueAtTime(0.0001, now + 4.2);
+
+          osc.connect(gain);
+          gain.connect(this.masterFilter);
+          osc.start(now);
+          osc.stop(now + 4.2);
+        }, nIdx * 110);
+      });
+    };
+
+    playWarmDrop();
+    const dropTimer = setInterval(playWarmDrop, 5500);
+    this.timerIds.push(dropTimer);
+  }
+
+  // Soft filtered pink-noise nature bed for the 432Hz Sanctuary
+  startSoftBiophilicNatureBed() {
+    if (!this.ctx) return;
+    const bufferSize = this.ctx.sampleRate * 2;
+    const noiseBuffer = this.ctx.createBuffer(1, bufferSize, this.ctx.sampleRate);
+    const output = noiseBuffer.getChannelData(0);
+
+    let b0 = 0, b1 = 0, b2 = 0, b3 = 0, b4 = 0, b5 = 0, b6 = 0;
+    for (let i = 0; i < bufferSize; i++) {
+      const white = Math.random() * 2 - 1;
+      b0 = 0.99886 * b0 + white * 0.0555179;
+      b1 = 0.99332 * b1 + white * 0.0750759;
+      b2 = 0.96900 * b2 + white * 0.1538520;
+      b3 = 0.86650 * b3 + white * 0.3104856;
+      b4 = 0.55000 * b4 + white * 0.5329522;
+      b5 = -0.7616 * b5 - white * 0.0168980;
+      output[i] = (b0 + b1 + b2 + b3 + b4 + b5 + b6 + white * 0.5362) * 0.022; // very soft & calm
+      b6 = white * 0.115926;
+    }
+
+    const whiteNoise = this.ctx.createBufferSource();
+    whiteNoise.buffer = noiseBuffer;
+    whiteNoise.loop = true;
+
+    const noiseFilter = this.ctx.createBiquadFilter();
+    noiseFilter.type = 'lowpass';
+    noiseFilter.frequency.setValueAtTime(800, this.ctx.currentTime); // warm canopy foliage cut
+
+    const noiseGain = this.ctx.createGain();
+    noiseGain.gain.setValueAtTime(0.045, this.ctx.currentTime);
+
+    whiteNoise.connect(noiseFilter);
+    noiseFilter.connect(noiseGain);
+    noiseGain.connect(this.masterFilter);
+
+    whiteNoise.start();
+    this.activeNodes.push(whiteNoise, noiseFilter, noiseGain);
   }
 
   // Track 02: 528Hz Solfeggio Miracle Chords

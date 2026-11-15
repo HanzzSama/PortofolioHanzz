@@ -68,9 +68,9 @@ export function renderAnother(data) {
 
         <!-- 6 Track Architecture Nodes -->
         <div class="synth-controls-cluster" id="studio-track-buttons">
-          <button class="synth-freq-btn" data-track-select="01_sanctuary" data-cursor-target>
-            <strong>01 // 432Hz Sanctuary</strong>
-            <span class="synth-sub-desc">Resonant Meditation Drone</span>
+          <button class="synth-freq-btn active-track active-tone" data-track-select="01_sanctuary" data-cursor-target>
+            <strong>01 // 432Hz Terra Alpha</strong>
+            <span class="synth-sub-desc">Biophilic Nature &amp; Alpha Flow</span>
           </button>
           <button class="synth-freq-btn" data-track-select="02_solfeggio" data-cursor-target>
             <strong>02 // 528Hz Solfeggio</strong>

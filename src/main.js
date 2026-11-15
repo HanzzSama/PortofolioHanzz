@@ -428,14 +428,16 @@ class PortfolioApp {
       `).join('');
     }
 
-    // Sync initial active state — currentTrackId is null on fresh load, so all buttons nonactive
-    const initTrackId = monolithAudio.currentTrackId; // null on refresh
+    // Sync initial active state — 01_sanctuary is default active on startup & refresh
+    const initTrackId = monolithAudio.currentTrackId || '01_sanctuary';
     document.querySelectorAll('[data-track-select]').forEach(b => {
-      b.classList.remove('active-track', 'active-tone');
-      if (initTrackId && b.getAttribute('data-track-select') === initTrackId) {
-        b.classList.add('active-track', 'active-tone');
-      }
+      const isCurrent = b.getAttribute('data-track-select') === initTrackId;
+      b.classList.toggle('active-track', isCurrent);
+      b.classList.toggle('active-tone', isCurrent);
     });
+
+    // Initialize Autoplay on page entry & refresh with smooth 1.8s fade-in
+    monolithAudio.initAutoplayOnStartup(initTrackId);
 
     // Modal Open / Close Handlers
     const openModal = () => {
