@@ -593,10 +593,10 @@ class PortfolioApp {
 
   initSmoothScroller() {
     this.smoothScroller = new SmoothScroller({
-      lerp: 0.055, // Ultra-smooth cinematic floating inertia
+      lerp: 0.04, // Ultra-cinematic heavy floating inertia — long deceleration tail
       headerOffset: 72,
-      wheelMultiplier: 0.7,
-      touchMultiplier: 1.8
+      wheelMultiplier: 1.2,
+      touchMultiplier: 2.0
     });
   }
 

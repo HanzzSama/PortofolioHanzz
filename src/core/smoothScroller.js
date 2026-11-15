@@ -9,11 +9,11 @@ import Lenis from '../vendor/lenis.js';
 export class SmoothScroller {
   constructor(options = {}) {
     this.options = {
-      lerp: options.lerp !== undefined ? options.lerp : 0.055, // Ultra-smooth cinematic inertia — heavy floating mass feel
+      lerp: options.lerp !== undefined ? options.lerp : 0.04, // Ultra-cinematic heavy floating mass — long deceleration tail
       duration: options.duration !== undefined ? options.duration : undefined,
       headerOffset: options.headerOffset || 72,
-      wheelMultiplier: options.wheelMultiplier !== undefined ? options.wheelMultiplier : 0.7,
-      touchMultiplier: options.touchMultiplier !== undefined ? options.touchMultiplier : 1.8,
+      wheelMultiplier: options.wheelMultiplier !== undefined ? options.wheelMultiplier : 1.2,
+      touchMultiplier: options.touchMultiplier !== undefined ? options.touchMultiplier : 2.0,
       smoothWheel: true,
       smoothTouch: false,
       ...options
@@ -46,12 +46,13 @@ export class SmoothScroller {
       orientation: 'vertical',
       gestureOrientation: 'vertical',
       smoothWheel: this.options.smoothWheel,
-      smoothTouch: this.options.smoothTouch,
+      syncTouch: false,
+      syncTouchLerp: 0.075,
+      touchInertiaMultiplier: 35,
       wheelMultiplier: this.options.wheelMultiplier,
       touchMultiplier: this.options.touchMultiplier,
       infinite: false,
       autoResize: true,
-      overscroll: true,
       autoRaf: false // Driven via dedicated high-frequency RAF loop
     });
 
