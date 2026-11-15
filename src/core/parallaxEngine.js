@@ -150,7 +150,10 @@ export class ParallaxEngine {
 
   render() {
     // Smooth Lerp for scroll velocity calculation
-    this.scroll.current = this.lerp(this.scroll.current, this.scroll.target, this.ease);
+    // When Antigravity smooth scroller is active, scroll.target is already smoothly interpolated
+    const isSmoothScroller = Boolean(window.lenis);
+    const scrollEase = isSmoothScroller ? 0.35 : this.ease;
+    this.scroll.current = this.lerp(this.scroll.current, this.scroll.target, scrollEase);
     this.scroll.velocity = this.scroll.target - this.scroll.current;
 
     // Lerp Cursor Ring

@@ -131,10 +131,15 @@ export class ScrollbarPillEngine {
           const availableTrack = Math.max(50, vh - 110 - this.config.activeHeight);
           const scrollRatio = docHeight / availableTrack;
 
-          window.scrollTo({
-            top: Math.max(0, Math.min(docHeight, this.dragStartScroll + deltaY * scrollRatio)),
-            behavior: 'instant'
-          });
+          const targetY = Math.max(0, Math.min(docHeight, this.dragStartScroll + deltaY * scrollRatio));
+          if (window.lenis) {
+            window.lenis.scrollTo(targetY, { immediate: true });
+          } else {
+            window.scrollTo({
+              top: targetY,
+              behavior: 'instant'
+            });
+          }
         }
       }
     });

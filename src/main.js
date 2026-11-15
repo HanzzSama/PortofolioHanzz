@@ -9,6 +9,7 @@ import { translations } from './data/translations.js';
 import { ParallaxEngine } from './core/parallaxEngine.js';
 import { ArchitecturalObserver } from './core/observer.js';
 import { ScrollbarPillEngine } from './core/scrollbarPill.js';
+import { SmoothScroller } from './core/smoothScroller.js';
 
 import { renderWelcome } from './components/renderWelcome.js';
 import { renderAbout } from './components/renderAbout.js';
@@ -36,6 +37,7 @@ class PortfolioApp {
 
   init() {
     this.renderDOM();
+    this.initSmoothScroller();
     this.initParallaxAndObserver();
     this.initLiveClock();
     this.initThemeToggle();
@@ -423,16 +425,29 @@ class PortfolioApp {
     });
   }
 
+  initSmoothScroller() {
+    this.smoothScroller = new SmoothScroller({
+      duration: 1.2,
+      headerOffset: 72,
+      wheelMultiplier: 1.0,
+      touchMultiplier: 1.5
+    });
+  }
+
   initSmoothNavLinks() {
     const links = document.querySelectorAll('a[href^="#"]');
     links.forEach((link) => {
       link.addEventListener('click', (e) => {
         const targetId = link.getAttribute('href');
-        if (targetId === '#') return;
+        if (!targetId || targetId === '#') return;
         const targetEl = document.querySelector(targetId);
         if (targetEl) {
           e.preventDefault();
-          targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          if (this.smoothScroller) {
+            this.smoothScroller.scrollTo(targetEl, { offset: -72, duration: 1.2 });
+          } else {
+            targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
         }
       });
     });
@@ -509,6 +524,7 @@ class PortfolioApp {
       backdrop.classList.add('active');
       drawer.classList.add('active');
       document.body.style.overflow = 'hidden';
+      this.smoothScroller?.stop();
     }
   }
 
@@ -520,6 +536,7 @@ class PortfolioApp {
       backdrop.classList.remove('active');
       drawer.classList.remove('active');
       document.body.style.overflow = '';
+      this.smoothScroller?.start();
     }
   }
 
