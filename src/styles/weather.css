@@ -62,6 +62,139 @@
   box-shadow: var(--elevation-2);
 }
 
+/* Diurnal Atmosphere Phase Header */
+.weather-diurnal-bar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.65rem 1rem;
+  border-bottom: var(--border-hairline);
+  background-color: rgba(var(--color-obsidian-card), 0.35);
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  z-index: 2;
+}
+
+[data-theme="light"] .weather-diurnal-bar {
+  background-color: rgba(0, 0, 0, 0.02);
+}
+
+.diurnal-title {
+  color: var(--text-muted);
+  letter-spacing: 0.08em;
+  font-size: 0.62rem;
+}
+
+.diurnal-btn-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+}
+
+.diurnal-btn {
+  background: transparent;
+  border: var(--border-hairline);
+  color: var(--text-secondary);
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.04em;
+  padding: 0.24rem 0.55rem;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: all 0.2s var(--ease-expressive);
+}
+
+.diurnal-btn:hover {
+  color: var(--text-primary);
+  border-color: var(--border-strong);
+}
+
+.diurnal-btn.is-active {
+  background-color: var(--accent-primary);
+  color: #0E1310;
+  border-color: var(--accent-primary);
+  font-weight: 600;
+  box-shadow: 0 0 10px rgba(16, 185, 129, 0.25);
+}
+
+[data-theme="light"] .diurnal-btn.is-active {
+  color: #FFFFFF;
+  box-shadow: 0 2px 8px rgba(117, 146, 122, 0.35);
+}
+
+/* Individual Phase Button Vibrant Accents */
+.diurnal-btn[data-diurnal-phase="dawn"].is-active {
+  background-color: #d97706;
+  border-color: #d97706;
+  color: #ffffff;
+  box-shadow: 0 0 10px rgba(217, 119, 6, 0.40);
+}
+
+.diurnal-btn[data-diurnal-phase="noon"].is-active {
+  background-color: #ea580c;
+  border-color: #ea580c;
+  color: #ffffff;
+  box-shadow: 0 0 12px rgba(234, 88, 12, 0.45);
+}
+
+.diurnal-btn[data-diurnal-phase="golden"].is-active {
+  background-color: #c2410c;
+  border-color: #c2410c;
+  color: #ffffff;
+  box-shadow: 0 0 12px rgba(194, 65, 12, 0.45);
+}
+
+.diurnal-btn[data-diurnal-phase="twilight"].is-active {
+  background-color: #2563eb;
+  border-color: #2563eb;
+  color: #ffffff;
+  box-shadow: 0 0 12px rgba(37, 99, 235, 0.45);
+}
+
+.diurnal-btn[data-diurnal-phase="night"].is-active {
+  background-color: #1e3a8a;
+  border-color: #1e3a8a;
+  color: #ffffff;
+  box-shadow: 0 0 12px rgba(30, 58, 138, 0.45);
+}
+
+[data-theme="dark"] .diurnal-btn[data-diurnal-phase="dawn"].is-active {
+  background-color: #fbbf24;
+  border-color: #fbbf24;
+  color: #0E1310;
+  box-shadow: 0 0 12px rgba(251, 191, 36, 0.40);
+}
+
+[data-theme="dark"] .diurnal-btn[data-diurnal-phase="noon"].is-active {
+  background-color: #fb923c;
+  border-color: #fb923c;
+  color: #0E1310;
+  box-shadow: 0 0 12px rgba(251, 146, 60, 0.45);
+}
+
+[data-theme="dark"] .diurnal-btn[data-diurnal-phase="golden"].is-active {
+  background-color: #ea580c;
+  border-color: #ea580c;
+  color: #ffffff;
+  box-shadow: 0 0 12px rgba(234, 88, 12, 0.45);
+}
+
+[data-theme="dark"] .diurnal-btn[data-diurnal-phase="twilight"].is-active {
+  background-color: #60a5fa;
+  border-color: #60a5fa;
+  color: #0E1310;
+  box-shadow: 0 0 12px rgba(96, 165, 250, 0.45);
+}
+
+[data-theme="dark"] .diurnal-btn[data-diurnal-phase="night"].is-active {
+  background-color: #3b82f6;
+  border-color: #3b82f6;
+  color: #ffffff;
+  box-shadow: 0 0 12px rgba(59, 130, 246, 0.45);
+}
+
 .weather-contour-canvas-wrap {
   position: relative;
   flex: 1;
@@ -79,7 +212,7 @@
   display: block;
 }
 
-/* Floating Crosshair Coordinates Overlay */
+/* Floating Crosshair Coordinates Overlay (Frosted Telemetry Badge) */
 .weather-canvas-crosshairs {
   position: absolute;
   top: 1rem;
@@ -87,15 +220,51 @@
   pointer-events: none;
   font-family: var(--font-mono);
   font-size: 0.65rem;
-  color: var(--text-muted);
+  color: var(--text-secondary);
   letter-spacing: 0.08em;
-  line-height: 1.5;
+  line-height: 1.55;
   z-index: 2;
+  padding: 0.45rem 0.75rem;
+  border-radius: 4px;
+  background: rgba(var(--color-obsidian-surface), 0.78);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: var(--border-hairline);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s var(--ease-expressive);
+}
+
+[data-theme="light"] .weather-canvas-crosshairs {
+  background: rgba(255, 255, 255, 0.78);
+  color: var(--text-secondary);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
 }
 
 .weather-canvas-crosshairs .active-coord {
   color: var(--accent-primary);
   font-weight: 500;
+}
+
+/* Dynamic Nocturnal Contrast for Twilight (Petang) & Night (Malam) */
+.weather-contour-card[data-diurnal-active="twilight"] .weather-canvas-crosshairs,
+.weather-contour-card[data-diurnal-active="night"] .weather-canvas-crosshairs {
+  background: rgba(10, 18, 38, 0.85) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  border: 1px solid rgba(147, 197, 253, 0.30) !important;
+  color: rgba(226, 232, 240, 0.92) !important;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.35) !important;
+}
+
+.weather-contour-card[data-diurnal-active="twilight"] .weather-canvas-crosshairs .active-coord {
+  color: #93c5fd !important;
+  text-shadow: 0 0 8px rgba(147, 197, 253, 0.45) !important;
+}
+
+.weather-contour-card[data-diurnal-active="night"] .weather-canvas-crosshairs .active-coord {
+  color: #fef08a !important;
+  text-shadow: 0 0 8px rgba(254, 240, 138, 0.45) !important;
 }
 
 /* Live Nada Wave Ripple Status Badge */

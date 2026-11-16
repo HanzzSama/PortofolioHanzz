@@ -49,6 +49,31 @@ export function renderWeather(data) {
       <div class="weather-stage-grid">
         <!-- Left: Interactive Generative Contour Isobar Canvas -->
         <div class="weather-contour-card" data-stagger>
+          <!-- Diurnal Atmosphere Time Phase Header -->
+          <div class="weather-diurnal-bar">
+            <span class="diurnal-title">ATMOSPHERIC AMBIANCE //</span>
+            <div class="diurnal-btn-group">
+              <button class="diurnal-btn is-active" data-diurnal-phase="auto" data-cursor-target title="Sync with Real-time Clock">
+                ● LIVE WIB
+              </button>
+              <button class="diurnal-btn" data-diurnal-phase="dawn" data-cursor-target title="06:00 WIB • Pagi Hari (Warm Soft Sunrise)">
+                PAGI
+              </button>
+              <button class="diurnal-btn" data-diurnal-phase="noon" data-cursor-target title="12:00 WIB • Siang Hari (Palette Orange Warm, Soft)">
+                SIANG
+              </button>
+              <button class="diurnal-btn" data-diurnal-phase="golden" data-cursor-target title="17:00 WIB • Sore Hari (Palette Orange Tua Warm, Soft)">
+                SORE
+              </button>
+              <button class="diurnal-btn" data-diurnal-phase="twilight" data-cursor-target title="19:00 WIB • Petang / Senja (Biru Warm Twilight)">
+                PETANG
+              </button>
+              <button class="diurnal-btn" data-diurnal-phase="night" data-cursor-target title="23:00 WIB • Malam Hari (Biru Dark Warm Midnight)">
+                MALAM
+              </button>
+            </div>
+          </div>
+
           <!-- Canvas Container -->
           <div class="weather-contour-canvas-wrap">
             <canvas id="weather-contour-canvas"></canvas>
@@ -57,7 +82,7 @@ export function renderWeather(data) {
             <div class="weather-canvas-crosshairs">
               <div>NODE: SEMARANG // 82m ASL</div>
               <div id="weather-cursor-coord" class="active-coord">07°00.125S 110°25.416E</div>
-              <div>MAP: TOPOGRAPHIC CONTOUR</div>
+              <div id="weather-phase-indicator" class="active-coord">SOLAR: SIANG // ZENITH</div>
             </div>
 
             <!-- Wave Mode Real-time Indicator -->

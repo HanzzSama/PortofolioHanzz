@@ -1,6 +1,7 @@
 /**
- * METEOROLOGICAL CONTOUR & ACOUSTIC NADA WAVE ENGINE
- * Generative Topographic Isobars, Real-Time Open-Meteo Telemetry & 432Hz Sound Synthesis
+ * METEOROLOGICAL CONTOUR & ACOUSTIC NADA WAVE ENGINE (v2.0)
+ * Generative Topographic Isobars, Diurnal Solar Ambiance (Pagi, Siang, Sore, Petang, Malam),
+ * Real-Time Open-Meteo Telemetry & 432Hz Sound Synthesis
  * High-Refresh Rate Compatible (60/120/144/240Hz)
  */
 
@@ -34,9 +35,17 @@ export class WeatherContourEngine {
       isLive: false
     };
 
+    // Diurnal Ambiance State: 'auto' | 'dawn' | 'noon' | 'golden' | 'twilight' | 'night'
+    this.diurnalMode = 'auto';
+    this.activePhase = 'noon';
+
+    // Ambient Airborne Particles (36 lightweight floating particles)
+    this.ambientParticles = [];
+    this.initAmbientParticles();
+
     // Contour Visualization State
     this.contourMode = 'isobars'; // 'isobars' | 'wind' | 'elevation'
-    this.contourLevels = 16;
+    this.contourLevels = 18;
     this.time = 0;
     this.animId = null;
 
@@ -68,7 +77,24 @@ export class WeatherContourEngine {
     this.checkTheme();
     this.bindEvents();
     this.fetchRealtimeWeather();
+    this.resolveDiurnalPhase();
     this.startLoop();
+  }
+
+  initAmbientParticles() {
+    this.ambientParticles = [];
+    for (let i = 0; i < 36; i++) {
+      this.ambientParticles.push({
+        x: Math.random() * (this.width || 600),
+        y: Math.random() * (this.height || 400),
+        vx: (Math.random() - 0.5) * 0.4,
+        vy: (Math.random() - 0.5) * 0.3,
+        size: 1 + Math.random() * 2.5,
+        alpha: 0.2 + Math.random() * 0.6,
+        pulseSpeed: 0.002 + Math.random() * 0.004,
+        seed: Math.random() * 100
+      });
+    }
   }
 
   checkTheme() {
@@ -91,10 +117,102 @@ export class WeatherContourEngine {
       this.ctx.setTransform(1, 0, 0, 1, 0, 0);
       this.ctx.scale(this.dpr, this.dpr);
     }
+
+    if (this.ambientParticles.length === 0) {
+      this.initAmbientParticles();
+    }
+  }
+
+  // Calculate diurnal atmospheric phase based on mode or local clock
+  resolveDiurnalPhase() {
+    if (this.diurnalMode !== 'auto') {
+      this.activePhase = this.diurnalMode;
+    } else {
+      const now = new Date();
+      const hours = now.getHours() + (now.getMinutes() / 60);
+
+      if (hours >= 5.0 && hours < 10.0) {
+        this.activePhase = 'dawn';     // Pagi Hari (05:00 - 10:00)
+      } else if (hours >= 10.0 && hours < 15.5) {
+        this.activePhase = 'noon';     // Siang Hari (10:00 - 15:30)
+      } else if (hours >= 15.5 && hours < 18.5) {
+        this.activePhase = 'golden';   // Sore Hari / Golden Hour (15:30 - 18:30)
+      } else if (hours >= 18.5 && hours < 19.75) {
+        this.activePhase = 'twilight'; // Petang / Senja (18:30 - 19:45)
+      } else {
+        this.activePhase = 'night';    // Malam Hari (19:45 - 05:00)
+      }
+    }
+
+    this.updateDiurnalUI();
+    return this.activePhase;
+  }
+
+  setDiurnalPhase(phase) {
+    this.diurnalMode = phase;
+    this.resolveDiurnalPhase();
+
+    // Trigger visual contour wave ripple and harmonic tone shift
+    this.triggerWaveRipple(this.width / 2, this.height / 2, 1.4);
+    this.playChordStrike();
+
+    // If Nada Wave is running, retune drone to new phase chord
+    if (this.isNadaWaveActive) {
+      this.stopNadaWaveDrone();
+      setTimeout(() => this.startNadaWaveDrone(), 200);
+    }
+  }
+
+  updateDiurnalUI() {
+    // Update button states
+    const btns = document.querySelectorAll('[data-diurnal-phase]');
+    btns.forEach(btn => {
+      const p = btn.getAttribute('data-diurnal-phase');
+      btn.classList.toggle('is-active', p === this.diurnalMode);
+    });
+
+    // Tag the weather card with the active diurnal phase for dynamic telemetry badge styling
+    const card = document.querySelector('.weather-contour-card');
+    if (card) {
+      card.setAttribute('data-diurnal-active', this.activePhase);
+    }
+
+    const phaseAccents = {
+      dawn: { color: this.isDark ? '#fbbf24' : '#d97706' },
+      noon: { color: this.isDark ? '#fb923c' : '#ea580c' },
+      golden: { color: this.isDark ? '#ea580c' : '#c2410c' },
+      twilight: { color: '#93c5fd' },
+      night: { color: '#fef08a' }
+    };
+
+    // Update phase indicator label
+    const indicator = document.getElementById('weather-phase-indicator');
+    if (indicator) {
+      const labels = {
+        dawn: 'SOLAR: PAGI // WARM SUNRISE [06:00]',
+        noon: 'SOLAR: SIANG // WARM AMBER ZENITH [12:00]',
+        golden: 'SOLAR: SORE // ORANGE TUA GOLDEN HOUR [17:00]',
+        twilight: 'SOLAR: PETANG // BIRU WARM TWILIGHT [19:00]',
+        night: 'SOLAR: MALAM // BIRU DARK WARM [23:00]'
+      };
+      indicator.textContent = labels[this.activePhase] || 'SOLAR: SIANG // WARM AMBER ZENITH';
+      if (phaseAccents[this.activePhase]) {
+        indicator.style.color = phaseAccents[this.activePhase].color;
+      }
+    }
   }
 
   bindEvents() {
     window.addEventListener('resize', () => this.resize(), { passive: true });
+
+    // Diurnal Phase Buttons
+    const diurnalBtns = document.querySelectorAll('[data-diurnal-phase]');
+    diurnalBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const phase = btn.getAttribute('data-diurnal-phase');
+        this.setDiurnalPhase(phase);
+      });
+    });
 
     // Canvas Mouse Interaction for Topographic Elevation Warp
     if (this.canvas) {
@@ -317,7 +435,7 @@ export class WeatherContourEngine {
   }
 
   // =========================================================================
-  // NADA WAVE AUDIO SYNTHESIS (432Hz Solfeggio & Harmonic Chord Suite)
+  // NADA WAVE AUDIO SYNTHESIS (Diurnal Solfeggio & Harmonic Chords)
   // =========================================================================
   ensureAudioContext() {
     if (monolithAudio && monolithAudio.ctx) {
@@ -327,6 +445,28 @@ export class WeatherContourEngine {
       return monolithAudio.ctx;
     }
     return monolithAudio ? monolithAudio.ensureContext() : null;
+  }
+
+  // Get harmonic chord frequencies based on diurnal phase
+  getPhaseFrequencies() {
+    switch (this.activePhase) {
+      case 'dawn':
+        // Dewy Morning Major 9th (A=432Hz): F#3 (182.25), A3 (216), C#4 (273.38), E4 (324), G#4 (432)
+        return [182.25, 216.0, 273.38, 324.0, 432.0];
+      case 'noon':
+        // High Radiant Zenith Open Fifths (432Hz): D3 (144), A3 (216), E4 (324), B4 (486)
+        return [144.0, 216.0, 324.0, 432.0, 486.0];
+      case 'golden':
+        // Soulful Golden Hour Pentatonic Minor 7th: D3 (144), F#3 (182.25), A3 (216), C#4 (273.38), E4 (324)
+        return [144.0, 182.25, 216.0, 273.38, 364.5];
+      case 'twilight':
+        // Violet Dusk Twilight Sus4: C#3 (136.69), F#3 (182.25), G#3 (202.5), C#4 (273.38)
+        return [136.69, 182.25, 202.5, 273.38, 405.0];
+      case 'night':
+      default:
+        // Nocturnal 432Hz Deep Theta Drone: A2 (108), E3 (162), A3 (216), E4 (324), A4 (432)
+        return [108.0, 162.0, 216.0, 324.0, 432.0];
+    }
   }
 
   toggleNadaWaveMode() {
@@ -343,7 +483,6 @@ export class WeatherContourEngine {
 
     if (this.isNadaWaveActive) {
       this.startNadaWaveDrone();
-      // Trigger a dramatic central expanding soundwave across the contour canvas
       this.triggerWaveRipple(this.width / 2, this.height / 2, 2.0);
     } else {
       this.stopNadaWaveDrone();
@@ -355,15 +494,16 @@ export class WeatherContourEngine {
     if (!ctx) return;
 
     try {
-      // 432Hz Solfeggio Pentatonic Cluster (F#3, C#4, F#4, G#4)
-      const freqs = [182.25, 273.38, 364.5, 432.0];
+      const freqs = this.getPhaseFrequencies();
       const masterGain = ctx.createGain();
       masterGain.gain.setValueAtTime(0.0001, ctx.currentTime);
       masterGain.gain.linearRampToValueAtTime(0.045, ctx.currentTime + 1.2);
 
       const filter = ctx.createBiquadFilter();
       filter.type = 'lowpass';
-      filter.frequency.setValueAtTime(680, ctx.currentTime);
+      // Lowpass cutoff changes with diurnal mood: brighter in noon/golden, softer in dawn/night
+      const cutoff = this.activePhase === 'noon' ? 950 : this.activePhase === 'golden' ? 780 : 540;
+      filter.frequency.setValueAtTime(cutoff, ctx.currentTime);
 
       const oscs = freqs.map((f, idx) => {
         const osc = ctx.createOscillator();
@@ -371,8 +511,11 @@ export class WeatherContourEngine {
         osc.type = idx % 2 === 0 ? 'sine' : 'triangle';
         osc.frequency.setValueAtTime(f, ctx.currentTime);
 
-        // Slow organic binaural beating (0.1Hz ~ 0.3Hz)
-        oscGain.gain.setValueAtTime(0.25 / freqs.length, ctx.currentTime);
+        // Organic micro-detuning for binaural warmth
+        const detune = (idx - 2) * 1.2;
+        osc.detune.setValueAtTime(detune, ctx.currentTime);
+
+        oscGain.gain.setValueAtTime(0.24 / freqs.length, ctx.currentTime);
 
         osc.connect(oscGain);
         oscGain.connect(filter);
@@ -406,7 +549,7 @@ export class WeatherContourEngine {
   // Play a musical harmonic tone when moving across contour elevations
   playElevationTone(x, y) {
     const now = performance.now();
-    if (now - this.lastToneTime < 140) return;
+    if (now - this.lastToneTime < 130) return;
     this.lastToneTime = now;
 
     const ctx = this.ensureAudioContext();
@@ -414,11 +557,10 @@ export class WeatherContourEngine {
 
     try {
       const t = ctx.currentTime;
-      // Map elevation field value at (x, y) to pentatonic pitch
       const elev = this.sampleElevation(x, y);
-      const pentatonic = [216, 243, 270, 324, 364.5, 432, 486, 540];
+      const pentatonic = this.getPhaseFrequencies();
       const noteIdx = Math.floor(Math.abs(elev) * pentatonic.length) % pentatonic.length;
-      const freq = pentatonic[noteIdx];
+      const freq = pentatonic[noteIdx] * (elev > 0.6 ? 2 : 1);
 
       const osc = ctx.createOscillator();
       const gain = ctx.createGain();
@@ -426,16 +568,15 @@ export class WeatherContourEngine {
       osc.frequency.setValueAtTime(freq, t);
 
       gain.gain.setValueAtTime(0.0001, t);
-      gain.gain.linearRampToValueAtTime(0.025, t + 0.015);
-      gain.gain.exponentialRampToValueAtTime(0.0001, t + 0.35);
+      gain.gain.linearRampToValueAtTime(0.028, t + 0.015);
+      gain.gain.exponentialRampToValueAtTime(0.0001, t + 0.38);
 
       osc.connect(gain);
       gain.connect(ctx.destination);
 
       osc.start(t);
-      osc.stop(t + 0.36);
+      osc.stop(t + 0.40);
 
-      // Spawn a mini contour ripple ring
       this.triggerWaveRipple(x, y, 0.6);
     } catch (_) {}
   }
@@ -447,21 +588,21 @@ export class WeatherContourEngine {
 
     try {
       const t = ctx.currentTime;
-      const chord = [432, 540, 648, 864];
+      const chord = this.getPhaseFrequencies();
       chord.forEach((f, idx) => {
         const osc = ctx.createOscillator();
         const gain = ctx.createGain();
         osc.type = 'sine';
-        osc.frequency.setValueAtTime(f, t + idx * 0.02);
+        osc.frequency.setValueAtTime(f * 2, t + idx * 0.02);
 
         gain.gain.setValueAtTime(0.0001, t);
-        gain.gain.linearRampToValueAtTime(0.03 / chord.length, t + 0.01 + idx * 0.02);
-        gain.gain.exponentialRampToValueAtTime(0.0001, t + 0.65 + idx * 0.05);
+        gain.gain.linearRampToValueAtTime(0.035 / chord.length, t + 0.01 + idx * 0.02);
+        gain.gain.exponentialRampToValueAtTime(0.0001, t + 0.75 + idx * 0.05);
 
         osc.connect(gain);
         gain.connect(ctx.destination);
         osc.start(t + idx * 0.02);
-        osc.stop(t + 0.75 + idx * 0.05);
+        osc.stop(t + 0.85 + idx * 0.05);
       });
     } catch (_) {}
   }
@@ -472,7 +613,7 @@ export class WeatherContourEngine {
       x,
       y,
       radius: 0,
-      maxRadius: Math.max(this.width, this.height) * 1.1,
+      maxRadius: Math.max(this.width, this.height) * 1.15,
       speed: 380 * power,
       alpha: 1.0,
       active: true
@@ -486,7 +627,7 @@ export class WeatherContourEngine {
   }
 
   // =========================================================================
-  // GENERATIVE TOPOGRAPHIC CONTOUR RENDERING ENGINE
+  // GENERATIVE TOPOGRAPHIC CONTOUR & DIURNAL RENDERING ENGINE
   // =========================================================================
   startLoop() {
     this.lastFrameTime = performance.now();
@@ -521,7 +662,7 @@ export class WeatherContourEngine {
       const warpRadius = 140;
       if (dist < warpRadius) {
         const falloff = Math.cos((dist / warpRadius) * (Math.PI / 2));
-        val += falloff * 0.85; // Creates an interactive topographic mountain peak under cursor
+        val += falloff * 0.85;
       }
     }
 
@@ -539,7 +680,281 @@ export class WeatherContourEngine {
       }
     }
 
-    return (val + 1.75) / 3.5; // Normalized 0..1
+    return (val + 1.75) / 3.5;
+  }
+
+  // Draw Sky Atmosphere Gradient matching active diurnal phase
+  renderAtmosphericSky(now) {
+    const phase = this.activePhase;
+    const grad = this.ctx.createLinearGradient(0, 0, 0, this.height);
+
+    if (this.isDark) {
+      // Obsidian Dark Theme Atmospheres
+      switch (phase) {
+        case 'dawn':
+          // Pagi: Soft warm sunrise peach-amber glow
+          grad.addColorStop(0, 'rgba(75, 42, 28, 0.65)');
+          grad.addColorStop(0.5, 'rgba(52, 30, 22, 0.55)');
+          grad.addColorStop(1, 'rgba(16, 14, 16, 0.95)');
+          break;
+        case 'noon':
+          // Siang: Palette orange warm, soft solar daylight
+          grad.addColorStop(0, 'rgba(95, 52, 20, 0.68)');
+          grad.addColorStop(0.5, 'rgba(60, 32, 14, 0.60)');
+          grad.addColorStop(1, 'rgba(18, 14, 12, 0.95)');
+          break;
+        case 'golden':
+          // Sore: Palette orange tua warm, soft sunset glow
+          grad.addColorStop(0, 'rgba(125, 45, 12, 0.78)');
+          grad.addColorStop(0.5, 'rgba(85, 28, 10, 0.70)');
+          grad.addColorStop(1, 'rgba(22, 12, 10, 0.96)');
+          break;
+        case 'twilight':
+          // Petang: Biru warm twilight (indigo-cobalt dusk)
+          grad.addColorStop(0, 'rgba(24, 46, 88, 0.88)');
+          grad.addColorStop(0.5, 'rgba(18, 34, 68, 0.80)');
+          grad.addColorStop(1, 'rgba(10, 16, 30, 0.98)');
+          break;
+        case 'night':
+        default:
+          // Malam: Biru dark warm nocturnal deep navy
+          grad.addColorStop(0, 'rgba(10, 18, 38, 0.95)');
+          grad.addColorStop(0.6, 'rgba(8, 14, 28, 0.96)');
+          grad.addColorStop(1, 'rgba(5, 8, 18, 0.99)');
+          break;
+      }
+    } else {
+      // Limestone Light Theme Atmospheres (Warm, tactile, real-world natural daylight)
+      switch (phase) {
+        case 'dawn':
+          // Pagi: Soft peach apricot sunrise morning light
+          grad.addColorStop(0, 'rgba(255, 228, 205, 0.85)');
+          grad.addColorStop(0.5, 'rgba(255, 240, 225, 0.60)');
+          grad.addColorStop(1, 'rgba(247, 245, 240, 0.95)');
+          break;
+        case 'noon':
+          // Siang: Palette orange warm, soft daylight glow
+          grad.addColorStop(0, 'rgba(255, 225, 185, 0.88)');
+          grad.addColorStop(0.5, 'rgba(255, 238, 215, 0.65)');
+          grad.addColorStop(1, 'rgba(248, 246, 242, 0.95)');
+          break;
+        case 'golden':
+          // Sore: Palette orange tua warm, soft golden hour
+          grad.addColorStop(0, 'rgba(255, 185, 130, 0.92)');
+          grad.addColorStop(0.5, 'rgba(250, 165, 105, 0.70)');
+          grad.addColorStop(1, 'rgba(245, 232, 218, 0.96)');
+          break;
+        case 'twilight':
+          // Petang: Biru warm twilight (rich warm blue dusk)
+          grad.addColorStop(0, 'rgba(68, 108, 179, 0.85)');
+          grad.addColorStop(0.5, 'rgba(110, 150, 210, 0.65)');
+          grad.addColorStop(1, 'rgba(238, 242, 248, 0.96)');
+          break;
+        case 'night':
+        default:
+          // Malam: Biru dark warm midnight sky
+          grad.addColorStop(0, 'rgba(28, 48, 82, 0.90)');
+          grad.addColorStop(0.6, 'rgba(45, 72, 115, 0.70)');
+          grad.addColorStop(1, 'rgba(230, 236, 244, 0.96)');
+          break;
+      }
+    }
+
+    this.ctx.fillStyle = grad;
+    this.ctx.fillRect(0, 0, this.width, this.height);
+  }
+
+  // Draw Sun / Moon Celestial Body along astronomical orbital arc
+  renderCelestialBody(now) {
+    const phase = this.activePhase;
+    let cx, cy, radius, isSun = true;
+    let mainColor, glowColor, rayColor;
+
+    switch (phase) {
+      case 'dawn':
+        // Low on left horizon rising (Pagi - soft golden sunrise)
+        cx = this.width * 0.18;
+        cy = this.height * 0.50;
+        radius = 20;
+        isSun = true;
+        mainColor = this.isDark ? '#fbbf24' : '#d97706';
+        glowColor = this.isDark ? 'rgba(245, 158, 11, 0.38)' : 'rgba(217, 119, 6, 0.35)';
+        rayColor = this.isDark ? 'rgba(251, 191, 36, 0.60)' : 'rgba(217, 119, 6, 0.55)';
+        break;
+      case 'noon':
+        // High zenith at top center (Siang - palette orange warm, soft)
+        cx = this.width * 0.50;
+        cy = this.height * 0.18;
+        radius = 24;
+        isSun = true;
+        mainColor = this.isDark ? '#fb923c' : '#ea580c';
+        glowColor = this.isDark ? 'rgba(249, 115, 22, 0.40)' : 'rgba(234, 88, 12, 0.35)';
+        rayColor = this.isDark ? 'rgba(251, 146, 60, 0.68)' : 'rgba(234, 88, 12, 0.60)';
+        break;
+      case 'golden':
+        // Sinking low on right horizon (Sore - palette orange tua warm, soft)
+        cx = this.width * 0.82;
+        cy = this.height * 0.54;
+        radius = 26;
+        isSun = true;
+        mainColor = this.isDark ? '#ea580c' : '#c2410c';
+        glowColor = this.isDark ? 'rgba(234, 88, 12, 0.48)' : 'rgba(194, 65, 12, 0.42)';
+        rayColor = this.isDark ? 'rgba(249, 115, 22, 0.75)' : 'rgba(194, 65, 12, 0.68)';
+        break;
+      case 'twilight':
+        // Dipped just below right horizon (Petang - biru warm twilight)
+        cx = this.width * 0.88;
+        cy = this.height * 0.68;
+        radius = 18;
+        isSun = true;
+        mainColor = this.isDark ? '#60a5fa' : '#2563eb';
+        glowColor = this.isDark ? 'rgba(96, 165, 250, 0.38)' : 'rgba(37, 99, 235, 0.35)';
+        rayColor = this.isDark ? 'rgba(147, 197, 253, 0.65)' : 'rgba(59, 130, 246, 0.60)';
+        break;
+      case 'night':
+      default:
+        // Glowing Crescent Moon at upper right (Malam - biru dark warm moon & stars)
+        cx = this.width * 0.78;
+        cy = this.height * 0.22;
+        radius = 18;
+        isSun = false;
+        mainColor = this.isDark ? '#fef08a' : '#1e3a8a';
+        glowColor = this.isDark ? 'rgba(254, 240, 138, 0.35)' : 'rgba(30, 58, 138, 0.28)';
+        break;
+    }
+
+    this.ctx.save();
+
+    // Radiant Corona Glow
+    const coronaRadius = radius * 3.4;
+    const coronaGrad = this.ctx.createRadialGradient(cx, cy, radius * 0.4, cx, cy, coronaRadius);
+    coronaGrad.addColorStop(0, glowColor);
+    coronaGrad.addColorStop(1, 'rgba(0, 0, 0, 0)');
+    this.ctx.fillStyle = coronaGrad;
+    this.ctx.beginPath();
+    this.ctx.arc(cx, cy, coronaRadius, 0, Math.PI * 2);
+    this.ctx.fill();
+
+    if (isSun) {
+      // Draw Sun Body
+      this.ctx.fillStyle = mainColor;
+      this.ctx.beginPath();
+      this.ctx.arc(cx, cy, radius, 0, Math.PI * 2);
+      this.ctx.fill();
+
+      // Sun Halo Ring
+      this.ctx.strokeStyle = rayColor;
+      this.ctx.lineWidth = 1.2;
+      this.ctx.beginPath();
+      this.ctx.arc(cx, cy, radius + 5, 0, Math.PI * 2);
+      this.ctx.stroke();
+
+      // Minimalist Sun Rays
+      const rot = now * 0.0006;
+      const numRays = 8;
+      this.ctx.strokeStyle = rayColor;
+      this.ctx.lineWidth = 1.2;
+      for (let i = 0; i < numRays; i++) {
+        const a = rot + (i * Math.PI * 2) / numRays;
+        const r1 = radius + 9;
+        const r2 = radius + 16 + Math.sin(now * 0.004 + i) * 3;
+        this.ctx.beginPath();
+        this.ctx.moveTo(cx + Math.cos(a) * r1, cy + Math.sin(a) * r1);
+        this.ctx.lineTo(cx + Math.cos(a) * r2, cy + Math.sin(a) * r2);
+        this.ctx.stroke();
+      }
+    } else {
+      // Draw Crisp Geometric Crescent Moon without punching transparent hole in sky
+      this.ctx.fillStyle = mainColor;
+      this.ctx.beginPath();
+      // Outer arc from top to bottom
+      this.ctx.arc(cx, cy, radius, -Math.PI * 0.42, Math.PI * 0.65, false);
+      // Inner carve arc curving back from bottom to top
+      this.ctx.arc(cx - radius * 0.42, cy - radius * 0.12, radius * 0.88, Math.PI * 0.65, -Math.PI * 0.42, true);
+      this.ctx.closePath();
+      this.ctx.fill();
+
+      // Lunar Halo Ring
+      this.ctx.strokeStyle = this.isDark ? 'rgba(254, 240, 138, 0.40)' : 'rgba(30, 58, 138, 0.35)';
+      this.ctx.lineWidth = 0.9;
+      this.ctx.setLineDash([3, 3]);
+      this.ctx.beginPath();
+      this.ctx.arc(cx, cy, radius + 8, 0, Math.PI * 2);
+      this.ctx.stroke();
+      this.ctx.setLineDash([]);
+    }
+
+    this.ctx.restore();
+  }
+
+  // Draw Airborne Atmospheric Particles (Mist in Dawn, Sparkles in Noon, Embers in Sore, Stars in Night)
+  renderAtmosphericParticles(dt, now) {
+    const phase = this.activePhase;
+    this.ctx.save();
+
+    for (let i = 0; i < this.ambientParticles.length; i++) {
+      const p = this.ambientParticles[i];
+
+      // Update position with wind drift
+      const windSpeed = Math.max(0.2, this.weather.windSpeedKm * 0.04);
+      p.x += (p.vx + windSpeed) * dt;
+      p.y += p.vy * dt;
+
+      // Wrap around edges
+      if (p.x > this.width + 10) p.x = -10;
+      if (p.x < -10) p.x = this.width + 10;
+      if (p.y > this.height + 10) p.y = -10;
+      if (p.y < -10) p.y = this.height + 10;
+
+      // Dynamic alpha pulse
+      const pulse = 0.5 + Math.sin(now * p.pulseSpeed + p.seed) * 0.5;
+      const alpha = p.alpha * pulse;
+
+      let r, g, b;
+      switch (phase) {
+        case 'dawn':
+          // Soft golden-peach morning motes
+          r = 251; g = 191; b = 36;
+          break;
+        case 'noon':
+          // Warm soft orange solar motes
+          r = 251; g = 146; b = 60;
+          break;
+        case 'golden':
+          // Orange tua warm sunset embers
+          r = 234; g = 88; b = 12;
+          break;
+        case 'twilight':
+          // Biru warm twilight motes
+          r = 96; g = 165; b = 250;
+          break;
+        case 'night':
+        default:
+          // Biru dark warm starry motes
+          r = 254; g = 240; b = 138;
+          break;
+      }
+
+      this.ctx.fillStyle = `rgba(${r}, ${g}, ${b}, ${alpha})`;
+      this.ctx.beginPath();
+
+      if (phase === 'night' && i % 3 === 0) {
+        // Draw 4-point star for select night particles
+        const arm = p.size * 1.8;
+        this.ctx.moveTo(p.x, p.y - arm);
+        this.ctx.lineTo(p.x, p.y + arm);
+        this.ctx.moveTo(p.x - arm, p.y);
+        this.ctx.lineTo(p.x + arm, p.y);
+        this.ctx.strokeStyle = `rgba(${r}, ${g}, ${b}, ${alpha})`;
+        this.ctx.lineWidth = 0.6;
+        this.ctx.stroke();
+      } else {
+        this.ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+        this.ctx.fill();
+      }
+    }
+
+    this.ctx.restore();
   }
 
   renderFrame(timestamp) {
@@ -549,6 +964,11 @@ export class WeatherContourEngine {
     const dtMs = this.lastFrameTime ? Math.min(50, Math.max(1, now - this.lastFrameTime)) : 16.67;
     this.lastFrameTime = now;
     const dt = dtMs / 16.667;
+
+    // Periodically re-resolve diurnal phase if in auto mode
+    if (this.diurnalMode === 'auto' && Math.floor(now / 1000) % 30 === 0) {
+      this.resolveDiurnalPhase();
+    }
 
     // Progress time based on wind velocity
     this.time += 0.008 * dt * (1 + this.weather.windSpeedKm * 0.03);
@@ -573,13 +993,21 @@ export class WeatherContourEngine {
     // Clear Canvas
     this.ctx.clearRect(0, 0, this.width, this.height);
 
-    // Grid resolution for contour marching segments
+    // 1. Render Atmospheric Sky Backdrop (Pagi, Siang, Sore, Petang, Malam)
+    this.renderAtmosphericSky(now);
+
+    // 2. Render Celestial Body (Sun / Moon)
+    this.renderCelestialBody(now);
+
+    // 3. Render Airborne Ambient Particles (Mist, Solar Sparkles, Golden Embers, Stars)
+    this.renderAtmosphericParticles(dt, now);
+
+    // 4. Sample 2D Grid Matrix for Topographic Marching Contours
     const stepX = 14;
     const stepY = 14;
     const cols = Math.ceil(this.width / stepX) + 1;
     const rows = Math.ceil(this.height / stepY) + 1;
 
-    // Sample 2D grid matrix
     const grid = [];
     for (let y = 0; y < rows; y++) {
       grid[y] = [];
@@ -588,22 +1016,55 @@ export class WeatherContourEngine {
       }
     }
 
-    // Theme color palette: Obsidian (Emerald Moss / Warm Gold) vs Limestone (Sage Olive / Slate)
-    const baseColor = this.isDark ? '16, 185, 129' : '74, 93, 78';
-    const accentColor = this.isDark ? '212, 175, 55' : '58, 80, 65';
+    // Dynamic Isobar Color Palette matching diurnal atmosphere
+    let baseColor, accentColor, majorColor;
+    switch (this.activePhase) {
+      case 'dawn':
+        // Pagi - Soft peach-amber sunrise
+        baseColor = this.isDark ? '217, 130, 60' : '180, 105, 45';
+        accentColor = this.isDark ? '251, 191, 36' : '217, 119, 6';
+        majorColor = this.isDark ? '#fbbf24' : '#d97706';
+        break;
+      case 'noon':
+        // Siang - Palette orange warm, soft daylight
+        baseColor = this.isDark ? '234, 120, 40' : '195, 95, 30';
+        accentColor = this.isDark ? '251, 146, 60' : '234, 88, 12';
+        majorColor = this.isDark ? '#fb923c' : '#ea580c';
+        break;
+      case 'golden':
+        // Sore - Palette orange tua warm, soft golden hour
+        baseColor = this.isDark ? '220, 80, 25' : '175, 55, 15';
+        accentColor = this.isDark ? '249, 115, 22' : '194, 65, 12';
+        majorColor = this.isDark ? '#ea580c' : '#c2410c';
+        break;
+      case 'twilight':
+        // Petang - Biru warm twilight
+        baseColor = this.isDark ? '45, 80, 145' : '65, 105, 170';
+        accentColor = this.isDark ? '147, 197, 253' : '96, 165, 250';
+        majorColor = '#93c5fd';
+        break;
+      case 'night':
+      default:
+        // Malam - Biru dark warm midnight
+        baseColor = this.isDark ? '35, 60, 115' : '45, 75, 135';
+        accentColor = this.isDark ? '96, 165, 250' : '147, 197, 253';
+        majorColor = '#fef08a';
+        break;
+    }
 
-    // Render Contour Isobar Lines
+    // 5. Render High-Contrast Topographic Isobar Contours
     const numLevels = this.contourLevels;
-    this.ctx.lineWidth = 1;
 
     for (let l = 1; l < numLevels; l++) {
       const threshold = l / numLevels;
       const isMajorIsobar = l % 4 === 0;
 
+      // Higher visibility and crispness on both dark and light modes
       const alpha = isMajorIsobar
-        ? (this.isDark ? 0.42 : 0.45)
-        : (this.isDark ? 0.14 : 0.16);
+        ? (this.isDark ? 0.78 : 0.72)
+        : (this.isDark ? 0.35 : 0.32);
 
+      this.ctx.lineWidth = isMajorIsobar ? 1.4 : 0.9;
       this.ctx.strokeStyle = isMajorIsobar
         ? `rgba(${accentColor}, ${alpha})`
         : `rgba(${baseColor}, ${alpha})`;
@@ -642,17 +1103,17 @@ export class WeatherContourEngine {
       if (isMajorIsobar && l === 8) {
         const isobarHpa = (990 + threshold * 35).toFixed(0);
         this.ctx.font = '9px "JetBrains Mono", monospace';
-        this.ctx.fillStyle = `rgba(${this.isDark ? '16, 185, 129' : '74, 93, 78'}, 0.45)`;
-        this.ctx.fillText(`${isobarHpa} hPa // ISO.${l}`, 24, 40 + l * 18);
+        this.ctx.fillStyle = majorColor;
+        this.ctx.fillText(`${isobarHpa} hPa // ISO.${l}`, 24, 52 + l * 16);
       }
     }
 
-    // Draw Wind Stream Vector Streamlines if in 'wind' or 'isobars' mode
+    // 6. Draw Wind Stream Vectors
     if (this.contourMode === 'wind' || this.contourMode === 'isobars') {
-      this.renderWindStreamlines(dt);
+      this.renderWindStreamlines(dt, accentColor);
     }
 
-    // Draw Ripple Wave Rings
+    // 7. Draw Ripple Wave Rings
     for (let i = 0; i < this.waveRipples.length; i++) {
       const r = this.waveRipples[i];
       if (!r.active) continue;
@@ -660,30 +1121,30 @@ export class WeatherContourEngine {
       this.ctx.save();
       this.ctx.beginPath();
       this.ctx.arc(r.x, r.y, r.radius, 0, Math.PI * 2);
-      this.ctx.strokeStyle = `rgba(${this.isDark ? '16, 185, 129' : '74, 93, 78'}, ${r.alpha * 0.75})`;
-      this.ctx.lineWidth = 1.5;
+      this.ctx.strokeStyle = `rgba(${accentColor}, ${r.alpha * 0.85})`;
+      this.ctx.lineWidth = 1.6;
       this.ctx.setLineDash([4, 4]);
       this.ctx.stroke();
       this.ctx.restore();
     }
 
-    // Draw Cursor Elevation Magnetic Reticle when hovering
+    // 8. Draw Cursor Elevation Magnetic Reticle
     if (this.mouse.isHovered && this.mouse.x > -100) {
       this.ctx.save();
       const cursorPulse = Math.sin(now * 0.008) * 3;
       this.ctx.beginPath();
-      this.ctx.arc(this.mouse.x, this.mouse.y, 20 + cursorPulse, 0, Math.PI * 2);
-      this.ctx.strokeStyle = `rgba(${this.isDark ? '212, 175, 55' : '74, 93, 78'}, 0.6)`;
+      this.ctx.arc(this.mouse.x, this.mouse.y, 22 + cursorPulse, 0, Math.PI * 2);
+      this.ctx.strokeStyle = majorColor;
       this.ctx.lineWidth = 1;
       this.ctx.stroke();
 
-      // Crosshair lines
+      // Reticle crosshair lines
       this.ctx.beginPath();
-      this.ctx.moveTo(this.mouse.x - 28, this.mouse.y);
-      this.ctx.lineTo(this.mouse.x + 28, this.mouse.y);
-      this.ctx.moveTo(this.mouse.x, this.mouse.y - 28);
-      this.ctx.lineTo(this.mouse.x, this.mouse.y + 28);
-      this.ctx.strokeStyle = `rgba(${this.isDark ? '16, 185, 129' : '74, 93, 78'}, 0.35)`;
+      this.ctx.moveTo(this.mouse.x - 30, this.mouse.y);
+      this.ctx.lineTo(this.mouse.x + 30, this.mouse.y);
+      this.ctx.moveTo(this.mouse.x, this.mouse.y - 30);
+      this.ctx.lineTo(this.mouse.x, this.mouse.y + 30);
+      this.ctx.strokeStyle = `rgba(${baseColor}, 0.55)`;
       this.ctx.stroke();
 
       this.ctx.restore();
@@ -691,14 +1152,14 @@ export class WeatherContourEngine {
   }
 
   // Draw subtle wind flow streamlines
-  renderWindStreamlines(dt) {
+  renderWindStreamlines(dt, color) {
     const angle = (this.weather.windDirectionDeg * Math.PI) / 180;
     const speed = Math.max(0.4, this.weather.windSpeedKm * 0.06);
     const count = 18;
 
     this.ctx.save();
-    this.ctx.strokeStyle = `rgba(${this.isDark ? '16, 185, 129' : '74, 93, 78'}, 0.16)`;
-    this.ctx.lineWidth = 0.8;
+    this.ctx.strokeStyle = `rgba(${color}, 0.28)`;
+    this.ctx.lineWidth = 0.9;
 
     for (let i = 0; i < count; i++) {
       const seed = i * 137.5;
@@ -722,4 +1183,3 @@ export class WeatherContourEngine {
     this.stopNadaWaveDrone();
   }
 }
-
