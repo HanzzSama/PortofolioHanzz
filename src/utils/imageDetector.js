@@ -57,6 +57,45 @@ export function getProjectImageCandidates(proj) {
 }
 
 /**
+ * Generate prioritized candidate image paths for a given certificate
+ * @param {Object} cert - Certificate data object
+ * @returns {string[]} Array of candidate image URL paths
+ */
+export function getCertificateImageCandidates(cert) {
+  const candidates = [];
+
+  if (cert.image) {
+    candidates.push(cert.image);
+  }
+
+  const slugs = Array.from(
+    new Set(
+      [
+        cert.slug ? slugify(cert.slug) : '',
+        cert.title ? slugify(cert.title) : '',
+        cert.id ? slugify(cert.id) : '',
+        cert.credentialId ? slugify(cert.credentialId) : ''
+      ].filter(Boolean)
+    )
+  );
+
+  const directories = ['./src/assets/certificates/', './src/assets/'];
+
+  directories.forEach((dir) => {
+    slugs.forEach((slug) => {
+      SUPPORTED_EXTENSIONS.forEach((ext) => {
+        const path = `${dir}${slug}.${ext}`;
+        if (!candidates.includes(path)) {
+          candidates.push(path);
+        }
+      });
+    });
+  });
+
+  return candidates;
+}
+
+/**
  * Global client-side fallback handler for project preview images
  * Installed onto window for seamless inline onerror integration
  */
@@ -115,4 +154,64 @@ export function initProjectImageDetector() {
     }
   }
 }
+
+/**
+ * Global client-side fallback handler for certificate preview images
+ */
+export function initCertificateImageDetector() {
+  if (typeof window === 'undefined') return;
+
+  window.__handleCertImgError = function (imgEl) {
+    if (!imgEl) return;
+    try {
+      const candidatesRaw = imgEl.getAttribute('data-candidates');
+      if (!candidatesRaw) {
+        fallbackCertToSeal(imgEl);
+        return;
+      }
+      const candidates = JSON.parse(candidatesRaw);
+      let nextIdx = parseInt(imgEl.getAttribute('data-candidate-idx') || '0', 10) + 1;
+
+      if (Array.isArray(candidates) && nextIdx < candidates.length) {
+        imgEl.setAttribute('data-candidate-idx', String(nextIdx));
+        imgEl.src = candidates[nextIdx];
+      } else {
+        fallbackCertToSeal(imgEl);
+      }
+    } catch (e) {
+      fallbackCertToSeal(imgEl);
+    }
+  };
+
+  window.__handleCertImgLoad = function (imgEl) {
+    if (!imgEl) return;
+    const card = imgEl.closest('.cert-card');
+    const viewport = imgEl.closest('.cert-seal-viewport');
+    if (card) {
+      card.classList.add('has-active-image');
+      card.classList.remove('has-no-image');
+    }
+    if (viewport) {
+      viewport.classList.add('has-active-image');
+      viewport.classList.remove('has-no-image');
+    }
+    imgEl.style.opacity = '1';
+    imgEl.style.visibility = 'visible';
+  };
+
+  function fallbackCertToSeal(imgEl) {
+    imgEl.style.display = 'none';
+    const card = imgEl.closest('.cert-card');
+    const viewport = imgEl.closest('.cert-seal-viewport');
+    if (card) {
+      card.classList.remove('has-active-image');
+      card.classList.add('has-no-image');
+    }
+    if (viewport) {
+      viewport.classList.remove('has-active-image');
+      viewport.classList.add('has-no-image');
+    }
+  }
+}
+
 

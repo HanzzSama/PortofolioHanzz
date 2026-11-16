@@ -11,105 +11,278 @@ export function renderProjects(data) {
 
   const renderBlueprintSvg = (type, proj = {}) => {
     const label = proj.title ? `${proj.title.toUpperCase()} // ${proj.year || '2026'}` : 'PROYEK // HANZZ';
+    const gridId = `arch-grid-${proj.id || 'def'}`;
+
+    const gridBackground = `
+      <defs>
+        <pattern id="${gridId}" width="20" height="20" patternUnits="userSpaceOnUse">
+          <path d="M 20 0 L 0 0 0 20" fill="none" stroke="currentColor" stroke-width="0.35" stroke-opacity="0.18"/>
+        </pattern>
+      </defs>
+      <rect width="400" height="400" fill="url(#${gridId})" />
+    `;
+
     switch (type) {
       case 'neural':
       case 'ai':
         return `
           <svg viewBox="0 0 400 400" width="100%" height="100%" fill="none" stroke="currentColor">
-            <circle cx="80" cy="120" r="7" stroke-width="1.5"/>
-            <circle cx="80" cy="200" r="7" stroke-width="1.5"/>
-            <circle cx="80" cy="280" r="7" stroke-width="1.5"/>
-            <circle cx="200" cy="90" r="9" stroke-width="1.5"/>
-            <circle cx="200" cy="170" r="11" stroke-width="2"/>
-            <circle cx="200" cy="250" r="9" stroke-width="1.5"/>
-            <circle cx="200" cy="320" r="7" stroke-width="1.2"/>
-            <circle cx="320" cy="150" r="13" stroke-width="2"/>
-            <circle cx="320" cy="250" r="13" stroke-width="2"/>
-            <line x1="87" y1="120" x2="191" y2="90" stroke-width="0.75" stroke-dasharray="2 3"/>
-            <line x1="87" y1="120" x2="189" y2="170" stroke-width="0.75"/>
-            <line x1="87" y1="200" x2="189" y2="170" stroke-width="1"/>
-            <line x1="87" y1="200" x2="191" y2="250" stroke-width="0.75"/>
-            <line x1="87" y1="280" x2="191" y2="250" stroke-width="0.75"/>
-            <line x1="87" y1="280" x2="193" y2="320" stroke-width="0.75" stroke-dasharray="2 3"/>
-            <line x1="209" y1="90" x2="307" y2="150" stroke-width="0.75"/>
-            <line x1="211" y1="170" x2="307" y2="150" stroke-width="1.2"/>
-            <line x1="211" y1="170" x2="307" y2="250" stroke-width="1.2"/>
-            <line x1="209" y1="250" x2="307" y2="250" stroke-width="0.75"/>
-            <line x1="207" y1="320" x2="307" y2="250" stroke-width="0.75" stroke-dasharray="2 3"/>
-            <circle cx="320" cy="150" r="4" fill="currentColor"/>
-            <circle cx="320" cy="250" r="4" fill="currentColor"/>
-            <text x="120" y="380" font-family="'JetBrains Mono', monospace" font-size="8" fill="currentColor">NEURAL DIAGNOSTIC // XGBOOST</text>
-            <text x="140" y="65" font-family="'JetBrains Mono', monospace" font-size="8" fill="currentColor">${label}</text>
+            ${gridBackground}
+            <!-- Axis lines -->
+            <line x1="20" y1="185" x2="380" y2="185" stroke-width="0.5" stroke-opacity="0.25" stroke-dasharray="4 4"/>
+            <line x1="200" y1="20" x2="200" y2="340" stroke-width="0.5" stroke-opacity="0.25" stroke-dasharray="4 4"/>
+
+            <!-- Interconnects with clean hierarchy -->
+            <!-- Input to Hidden -->
+            <line x1="90" y1="110" x2="200" y2="75" stroke-width="0.8" stroke-opacity="0.35"/>
+            <line x1="90" y1="110" x2="200" y2="145" stroke-width="1.2" stroke-opacity="0.6"/>
+            <line x1="90" y1="110" x2="200" y2="215" stroke-width="0.8" stroke-opacity="0.35"/>
+            <line x1="90" y1="185" x2="200" y2="75" stroke-width="0.8" stroke-opacity="0.35"/>
+            <line x1="90" y1="185" x2="200" y2="145" stroke-width="1.5" stroke-opacity="0.8"/>
+            <line x1="90" y1="185" x2="200" y2="215" stroke-width="1.2" stroke-opacity="0.6"/>
+            <line x1="90" y1="185" x2="200" y2="285" stroke-width="0.8" stroke-opacity="0.35"/>
+            <line x1="90" y1="260" x2="200" y2="145" stroke-width="0.8" stroke-opacity="0.35"/>
+            <line x1="90" y1="260" x2="200" y2="215" stroke-width="1.5" stroke-opacity="0.8"/>
+            <line x1="90" y1="260" x2="200" y2="285" stroke-width="1.2" stroke-opacity="0.6"/>
+
+            <!-- Hidden to Output -->
+            <line x1="200" y1="75" x2="310" y2="145" stroke-width="1" stroke-opacity="0.5"/>
+            <line x1="200" y1="145" x2="310" y2="145" stroke-width="1.8" stroke-opacity="0.9"/>
+            <line x1="200" y1="215" x2="310" y2="145" stroke-width="0.8" stroke-opacity="0.4"/>
+            <line x1="200" y1="145" x2="310" y2="245" stroke-width="0.8" stroke-opacity="0.4"/>
+            <line x1="200" y1="215" x2="310" y2="245" stroke-width="1.8" stroke-opacity="0.9"/>
+            <line x1="200" y1="285" x2="310" y2="245" stroke-width="1" stroke-opacity="0.5"/>
+
+            <!-- Enclosing decision envelope -->
+            <polygon points="200,45 340,185 200,315 60,185" stroke-width="0.75" stroke-opacity="0.3" stroke-dasharray="3 3"/>
+
+            <!-- Nodes with solid fill so lines terminate cleanly at circumference -->
+            <!-- Input layer -->
+            <circle cx="90" cy="110" r="10" fill="var(--bg-surface-sunken)" stroke-width="1.5"/>
+            <circle cx="90" cy="110" r="4" fill="currentColor"/>
+            <circle cx="90" cy="185" r="12" fill="var(--bg-surface-sunken)" stroke-width="2"/>
+            <circle cx="90" cy="185" r="5" fill="currentColor"/>
+            <circle cx="90" cy="260" r="10" fill="var(--bg-surface-sunken)" stroke-width="1.5"/>
+            <circle cx="90" cy="260" r="4" fill="currentColor"/>
+
+            <!-- Hidden layer -->
+            <circle cx="200" cy="75" r="9" fill="var(--bg-surface-sunken)" stroke-width="1.5"/>
+            <circle cx="200" cy="145" r="14" fill="var(--bg-surface-sunken)" stroke-width="2"/>
+            <circle cx="200" cy="145" r="6" fill="currentColor"/>
+            <circle cx="200" cy="215" r="14" fill="var(--bg-surface-sunken)" stroke-width="2"/>
+            <circle cx="200" cy="215" r="6" fill="currentColor"/>
+            <circle cx="200" cy="285" r="9" fill="var(--bg-surface-sunken)" stroke-width="1.5"/>
+
+            <!-- Output layer -->
+            <circle cx="310" cy="145" r="16" fill="var(--bg-surface-sunken)" stroke-width="2"/>
+            <circle cx="310" cy="145" r="7" fill="currentColor"/>
+            <circle cx="310" cy="245" r="16" fill="var(--bg-surface-sunken)" stroke-width="2"/>
+            <circle cx="310" cy="245" r="7" fill="currentColor"/>
+
+            <!-- Centered, uncollided label -->
+            <text x="200" y="365" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8.5" font-weight="600" letter-spacing="0.08em" fill="currentColor">${label}</text>
           </svg>
         `;
+
       case 'roadmap':
       case 'code':
         return `
           <svg viewBox="0 0 400 400" width="100%" height="100%" fill="none" stroke="currentColor">
-            <line x1="60" y1="320" x2="340" y2="80" stroke-width="1.5" stroke-dasharray="3 3"/>
-            <rect x="70" y="270" width="70" height="40" stroke-width="1.2"/>
-            <text x="80" y="295" font-family="'JetBrains Mono', monospace" font-size="8" fill="currentColor">01. ZERO</text>
-            <rect x="165" y="190" width="70" height="40" stroke-width="1.2"/>
-            <text x="175" y="215" font-family="'JetBrains Mono', monospace" font-size="8" fill="currentColor">02. CORE</text>
-            <rect x="260" y="110" width="70" height="40" stroke-width="1.5"/>
-            <text x="275" y="135" font-family="'JetBrains Mono', monospace" font-size="8" fill="currentColor">03. PRO</text>
-            <circle cx="105" cy="270" r="3" fill="currentColor"/>
-            <circle cx="200" cy="190" r="3" fill="currentColor"/>
-            <circle cx="295" cy="110" r="4" fill="currentColor"/>
-            <line x1="140" y1="290" x2="165" y2="210" stroke-width="0.75"/>
-            <line x1="235" y1="210" x2="260" y2="130" stroke-width="0.75"/>
-            <text x="70" y="360" font-family="'JetBrains Mono', monospace" font-size="8" fill="currentColor">${label}</text>
+            ${gridBackground}
+            <!-- Outer compass circle -->
+            <circle cx="200" cy="185" r="130" stroke-width="0.75" stroke-opacity="0.3" stroke-dasharray="4 4"/>
+            <circle cx="200" cy="185" r="80" stroke-width="0.5" stroke-opacity="0.2"/>
+
+            <!-- Precision Isometric Step Monolith -->
+            <!-- Base Foundation Layer (01 ZERO) -->
+            <polygon points="120,225 200,180 280,225 200,270" fill="var(--bg-surface-sunken)" stroke-width="1.5"/>
+            <polygon points="120,225 200,270 200,290 120,245" fill="var(--bg-surface-sunken)" stroke-width="1.2" stroke-opacity="0.7"/>
+            <polygon points="200,270 280,225 280,245 200,290" fill="var(--bg-surface-sunken)" stroke-width="1.2" stroke-opacity="0.5"/>
+
+            <!-- Mid Architecture Layer (02 CORE) -->
+            <polygon points="145,175 200,145 255,175 200,205" fill="var(--bg-surface-sunken)" stroke-width="1.5"/>
+            <polygon points="145,175 200,205 200,220 145,190" fill="var(--bg-surface-sunken)" stroke-width="1.2" stroke-opacity="0.7"/>
+            <polygon points="200,205 255,175 255,190 200,220" fill="var(--bg-surface-sunken)" stroke-width="1.2" stroke-opacity="0.5"/>
+
+            <!-- Top Apex Layer (03 PRO) -->
+            <polygon points="170,125 200,107 230,125 200,143" fill="var(--bg-surface-sunken)" stroke-width="1.5"/>
+            <polygon points="170,125 200,143 200,155 170,137" fill="var(--bg-surface-sunken)" stroke-width="1.2" stroke-opacity="0.7"/>
+            <polygon points="200,143 230,125 230,137 200,155" fill="var(--bg-surface-sunken)" stroke-width="1.2" stroke-opacity="0.5"/>
+
+            <!-- Central vertical spine line -->
+            <line x1="200" y1="70" x2="200" y2="300" stroke-width="1" stroke-dasharray="3 3"/>
+            <circle cx="200" cy="70" r="4" fill="currentColor"/>
+
+            <!-- Dimension / Extension Annotations -->
+            <line x1="60" y1="235" x2="110" y2="235" stroke-width="0.75"/>
+            <text x="55" y="238" text-anchor="end" font-family="'JetBrains Mono', monospace" font-size="7.5" fill="currentColor">01.ZERO</text>
+
+            <line x1="340" y1="175" x2="265" y2="175" stroke-width="0.75"/>
+            <text x="345" y="178" text-anchor="start" font-family="'JetBrains Mono', monospace" font-size="7.5" fill="currentColor">02.CORE</text>
+
+            <line x1="60" y1="125" x2="160" y2="125" stroke-width="0.75"/>
+            <text x="55" y="128" text-anchor="end" font-family="'JetBrains Mono', monospace" font-size="7.5" fill="currentColor">03.PRO</text>
+
+            <!-- Centered, uncollided label -->
+            <text x="200" y="365" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8.5" font-weight="600" letter-spacing="0.08em" fill="currentColor">${label}</text>
           </svg>
         `;
+
       case 'topographic':
         return `
           <svg viewBox="0 0 400 400" width="100%" height="100%" fill="none" stroke="currentColor">
-            <path d="M 40,200 Q 120,80 200,200 T 360,200" stroke-width="0.75" stroke-dasharray="3 3"/>
-            <path d="M 60,200 C 90,130 150,90 200,100 C 270,110 320,160 340,200 C 320,250 260,310 200,300 C 130,290 80,250 60,200 Z" stroke-width="1.2"/>
-            <path d="M 100,200 C 120,150 160,130 200,135 C 240,140 280,170 290,200 C 280,230 240,270 200,265 C 160,260 120,230 100,200 Z" stroke-width="1"/>
-            <circle cx="200" cy="200" r="4" fill="currentColor"/>
-            <line x1="180" y1="200" x2="220" y2="200" stroke-width="0.75"/>
-            <line x1="200" y1="180" x2="200" y2="220" stroke-width="0.75"/>
-            <text x="210" y="195" font-family="'JetBrains Mono', monospace" font-size="8" fill="currentColor">${label}</text>
+            ${gridBackground}
+            <!-- Precision Concentric Topographic Isobars -->
+            <circle cx="200" cy="180" r="145" stroke-width="0.5" stroke-opacity="0.2" stroke-dasharray="3 4"/>
+            <path d="M 50,180 C 50,100 120,50 200,50 C 280,50 350,100 350,180 C 350,260 280,310 200,310 C 120,310 50,260 50,180 Z" stroke-width="1"/>
+            <path d="M 80,180 C 80,120 135,80 200,80 C 265,80 320,120 320,180 C 320,240 265,280 200,280 C 135,280 80,240 80,180 Z" stroke-width="1.2" stroke-opacity="0.8"/>
+            <path d="M 115,180 C 115,135 150,110 200,110 C 250,110 285,135 285,180 C 285,225 250,250 200,250 C 150,250 115,225 115,180 Z" stroke-width="1.5"/>
+            <path d="M 150,180 C 150,150 170,135 200,135 C 230,135 250,150 250,180 C 250,210 230,225 200,225 C 170,225 150,210 150,180 Z" stroke-width="1.2" stroke-opacity="0.85"/>
+            <circle cx="200" cy="180" r="18" fill="var(--bg-surface-sunken)" stroke-width="1.5"/>
+            <circle cx="200" cy="180" r="4" fill="currentColor"/>
+
+            <!-- Precision Crosshairs & Cardinal Ticks -->
+            <line x1="160" y1="180" x2="240" y2="180" stroke-width="0.75"/>
+            <line x1="200" y1="140" x2="200" y2="220" stroke-width="0.75"/>
+            <line x1="20" y1="180" x2="40" y2="180" stroke-width="1"/>
+            <line x1="360" y1="180" x2="380" y2="180" stroke-width="1"/>
+            <line x1="200" y1="20" x2="200" y2="40" stroke-width="1"/>
+
+            <!-- Elevation annotations -->
+            <text x="208" y="125" font-family="'JetBrains Mono', monospace" font-size="6.5" fill="currentColor" opacity="0.7">+120m</text>
+            <text x="208" y="95" font-family="'JetBrains Mono', monospace" font-size="6.5" fill="currentColor" opacity="0.7">+80m</text>
+
+            <!-- Centered, uncollided label -->
+            <text x="200" y="365" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8.5" font-weight="600" letter-spacing="0.08em" fill="currentColor">${label}</text>
           </svg>
         `;
+
       case 'matrix':
         return `
           <svg viewBox="0 0 400 400" width="100%" height="100%" fill="none" stroke="currentColor">
-            <rect x="50" y="50" width="300" height="300" stroke-width="0.75" stroke-dasharray="2 4"/>
-            <circle cx="100" cy="120" r="8" stroke-width="1.5"/>
-            <circle cx="200" cy="80" r="12" stroke-width="1.5"/>
-            <circle cx="300" cy="150" r="10" stroke-width="1.5"/>
-            <circle cx="150" cy="250" r="14" stroke-width="2"/>
-            <circle cx="260" cy="270" r="9" stroke-width="1.5"/>
-            <line x1="100" y1="120" x2="200" y2="80" stroke-width="0.75"/>
-            <line x1="200" y1="80" x2="300" y2="150" stroke-width="0.75"/>
-            <line x1="100" y1="120" x2="150" y2="250" stroke-width="0.75"/>
-            <line x1="150" y1="250" x2="260" y2="270" stroke-width="0.75"/>
-            <line x1="300" y1="150" x2="260" y2="270" stroke-width="0.75"/>
-            <text x="160" y="245" font-family="'JetBrains Mono', monospace" font-size="8" fill="currentColor">${label}</text>
+            ${gridBackground}
+            <!-- Precision Symmetrical Cartesian Matrix Grid -->
+            <rect x="70" y="55" width="260" height="260" fill="none" stroke-width="0.75" stroke-opacity="0.3" stroke-dasharray="3 3"/>
+            <circle cx="200" cy="185" r="115" stroke-width="0.5" stroke-opacity="0.25"/>
+
+            <!-- Interconnect Lines (Exact Center-to-Center) -->
+            <line x1="110" y1="105" x2="200" y2="85" stroke-width="1"/>
+            <line x1="200" y1="85" x2="290" y2="105" stroke-width="1"/>
+            <line x1="110" y1="105" x2="130" y2="205" stroke-width="1.2"/>
+            <line x1="200" y1="85" x2="200" y2="185" stroke-width="1.5"/>
+            <line x1="290" y1="105" x2="270" y2="205" stroke-width="1.2"/>
+            <line x1="130" y1="205" x2="200" y2="185" stroke-width="1.2"/>
+            <line x1="270" y1="205" x2="200" y2="185" stroke-width="1.2"/>
+            <line x1="130" y1="205" x2="160" y2="275" stroke-width="1"/>
+            <line x1="200" y1="185" x2="200" y2="275" stroke-width="1"/>
+            <line x1="270" y1="205" x2="240" y2="275" stroke-width="1"/>
+            <line x1="160" y1="275" x2="240" y2="275" stroke-width="1.2"/>
+
+            <!-- Nodes with solid fill so lines terminate cleanly at circumference -->
+            <circle cx="110" cy="105" r="10" fill="var(--bg-surface-sunken)" stroke-width="1.5"/>
+            <circle cx="110" cy="105" r="3.5" fill="currentColor"/>
+
+            <circle cx="200" cy="85" r="12" fill="var(--bg-surface-sunken)" stroke-width="1.75"/>
+            <circle cx="200" cy="85" r="4.5" fill="currentColor"/>
+
+            <circle cx="290" cy="105" r="10" fill="var(--bg-surface-sunken)" stroke-width="1.5"/>
+            <circle cx="290" cy="105" r="3.5" fill="currentColor"/>
+
+            <circle cx="130" cy="205" r="12" fill="var(--bg-surface-sunken)" stroke-width="1.75"/>
+            <circle cx="130" cy="205" r="4" fill="currentColor"/>
+
+            <!-- Central Hub Node -->
+            <circle cx="200" cy="185" r="18" fill="var(--bg-surface-sunken)" stroke-width="2"/>
+            <circle cx="200" cy="185" r="7" fill="currentColor"/>
+            <circle cx="200" cy="185" r="24" stroke-width="0.5" stroke-dasharray="2 3"/>
+
+            <circle cx="270" cy="205" r="12" fill="var(--bg-surface-sunken)" stroke-width="1.75"/>
+            <circle cx="270" cy="205" r="4" fill="currentColor"/>
+
+            <circle cx="160" cy="275" r="11" fill="var(--bg-surface-sunken)" stroke-width="1.5"/>
+            <circle cx="160" cy="275" r="3.5" fill="currentColor"/>
+
+            <circle cx="240" cy="275" r="11" fill="var(--bg-surface-sunken)" stroke-width="1.5"/>
+            <circle cx="240" cy="275" r="3.5" fill="currentColor"/>
+
+            <!-- Centered, uncollided label -->
+            <text x="200" y="365" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8.5" font-weight="600" letter-spacing="0.08em" fill="currentColor">${label}</text>
           </svg>
         `;
+
       case 'contour':
       case 'orbit':
         return `
           <svg viewBox="0 0 400 400" width="100%" height="100%" fill="none" stroke="currentColor">
-            <ellipse cx="200" cy="200" rx="160" ry="120" stroke-width="0.75"/>
-            <ellipse cx="200" cy="200" rx="120" ry="85" stroke-width="1"/>
-            <ellipse cx="200" cy="200" rx="80" ry="50" stroke-width="1.25"/>
-            <circle cx="200" cy="200" r="3" fill="currentColor"/>
-            <line x1="40" y1="200" x2="360" y2="200" stroke-width="0.5" stroke-dasharray="4 4"/>
-            <text x="210" y="195" font-family="'JetBrains Mono', monospace" font-size="8" fill="currentColor">${label}</text>
+            ${gridBackground}
+            <!-- Precision Celestial Orbit System -->
+            <!-- Axis lines -->
+            <line x1="30" y1="185" x2="370" y2="185" stroke-width="0.5" stroke-opacity="0.25" stroke-dasharray="4 4"/>
+            <line x1="200" y1="20" x2="200" y2="340" stroke-width="0.5" stroke-opacity="0.25" stroke-dasharray="4 4"/>
+
+            <!-- Outer Azimuth Ring with 4 Cardinal Markers -->
+            <circle cx="200" cy="185" r="140" stroke-width="0.75" stroke-opacity="0.3"/>
+            <circle cx="200" cy="45" r="3" fill="currentColor"/>
+            <circle cx="340" cy="185" r="3" fill="currentColor"/>
+            <circle cx="200" cy="325" r="3" fill="currentColor"/>
+            <circle cx="60" cy="185" r="3" fill="currentColor"/>
+
+            <!-- Keplerian Ellipses (Cleanly Oriented) -->
+            <ellipse cx="200" cy="185" rx="140" ry="85" stroke-width="1" stroke-opacity="0.75" transform="rotate(-15 200 185)"/>
+            <ellipse cx="200" cy="185" rx="105" ry="60" stroke-width="1.25" transform="rotate(25 200 185)"/>
+            <ellipse cx="200" cy="185" rx="70" ry="40" stroke-width="1" stroke-opacity="0.6"/>
+
+            <!-- Satellite Nodes on Ellipses -->
+            <circle cx="310" cy="155" r="7" fill="var(--bg-surface-sunken)" stroke-width="1.5"/>
+            <circle cx="310" cy="155" r="3" fill="currentColor"/>
+
+            <circle cx="110" cy="145" r="6" fill="var(--bg-surface-sunken)" stroke-width="1.5"/>
+            <circle cx="110" cy="145" r="2.5" fill="currentColor"/>
+
+            <circle cx="260" cy="210" r="5" fill="var(--bg-surface-sunken)" stroke-width="1.5"/>
+            <circle cx="260" cy="210" r="2" fill="currentColor"/>
+
+            <!-- Core Star / Nexus -->
+            <circle cx="200" cy="185" r="18" fill="var(--bg-surface-sunken)" stroke-width="2"/>
+            <circle cx="200" cy="185" r="7" fill="currentColor"/>
+            <circle cx="200" cy="185" r="26" stroke-width="0.5" stroke-dasharray="2 3"/>
+
+            <!-- Centered, uncollided label -->
+            <text x="200" y="365" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8.5" font-weight="600" letter-spacing="0.08em" fill="currentColor">${label}</text>
           </svg>
         `;
+
       default:
         return `
           <svg viewBox="0 0 400 400" width="100%" height="100%" fill="none" stroke="currentColor">
-            <circle cx="200" cy="200" r="140" stroke-width="0.75"/>
-            <polygon points="200,80 310,270 90,270" stroke-width="1"/>
-            <rect x="150" y="150" width="100" height="100" stroke-width="1.2"/>
-            <line x1="100" y1="100" x2="300" y2="300" stroke-width="0.5" stroke-dasharray="2 2"/>
-            <text x="210" y="195" font-family="'JetBrains Mono', monospace" font-size="8" fill="currentColor">${label}</text>
+            ${gridBackground}
+            <!-- Sacred Geometry / Vitruvian Architectural Modulor -->
+            <!-- Concentric Harmonic Circles -->
+            <circle cx="200" cy="180" r="135" stroke-width="0.75" stroke-opacity="0.35"/>
+            <circle cx="200" cy="180" r="95" stroke-width="1"/>
+            <circle cx="200" cy="180" r="55" stroke-width="0.75" stroke-opacity="0.5"/>
+
+            <!-- Mathematically Inscribed Square (Standard & 45° Rotated) -->
+            <rect x="133" y="113" width="134" height="134" fill="var(--bg-surface-sunken)" fill-opacity="0.3" stroke-width="1.2"/>
+            <rect x="133" y="113" width="134" height="134" stroke-width="0.75" stroke-opacity="0.5" stroke-dasharray="4 4" transform="rotate(45 200 180)"/>
+
+            <!-- Precision Inscribed Equilateral Triangle (All 3 vertices touch outer circle r=135 at (200, 180)) -->
+            <polygon points="200,45 317,247.5 83,247.5" stroke-width="1.5"/>
+
+            <!-- Cardinal Axis Lines & Registration Crosshairs -->
+            <line x1="30" y1="180" x2="370" y2="180" stroke-width="0.5" stroke-opacity="0.3"/>
+            <line x1="200" y1="15" x2="200" y2="345" stroke-width="0.5" stroke-opacity="0.3"/>
+
+            <circle cx="200" cy="45" r="4" fill="currentColor"/>
+            <circle cx="317" cy="247.5" r="4" fill="currentColor"/>
+            <circle cx="83" cy="247.5" r="4" fill="currentColor"/>
+
+            <!-- Central Core Eye -->
+            <circle cx="200" cy="180" r="14" fill="var(--bg-surface-sunken)" stroke-width="2"/>
+            <circle cx="200" cy="180" r="5" fill="currentColor"/>
+
+            <!-- Centered, uncollided label -->
+            <text x="200" y="365" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8.5" font-weight="600" letter-spacing="0.08em" fill="currentColor">${label}</text>
           </svg>
         `;
     }
