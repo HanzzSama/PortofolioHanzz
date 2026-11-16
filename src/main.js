@@ -15,7 +15,6 @@ import { renderWelcome } from './components/renderWelcome.js';
 import { renderAbout } from './components/renderAbout.js';
 import { renderSkills } from './components/renderSkills.js';
 import { renderProjects } from './components/renderProjects.js';
-import { renderCertificates, renderCryptographicSeal } from './components/renderCertificates.js';
 import { renderGithub } from './components/renderGithub.js';
 import { renderLab } from './components/renderLab.js';
 import { renderWeather } from './components/renderWeather.js';
@@ -33,9 +32,7 @@ import { BioTimeEngine } from './core/bioTimeEngine.js';
 import { WeatherContourEngine } from './core/weatherContourEngine.js';
 import { 
   initProjectImageDetector, 
-  getProjectImageCandidates,
-  initCertificateImageDetector,
-  getCertificateImageCandidates
+  getProjectImageCandidates
 } from './utils/imageDetector.js';
 
 class PortfolioApp {
@@ -66,7 +63,6 @@ class PortfolioApp {
 
   init() {
     initProjectImageDetector();
-    initCertificateImageDetector();
     this.renderDOM();
     this.initSmoothScroller();
     this.initParallaxAndObserver();
@@ -78,7 +74,6 @@ class PortfolioApp {
     this.initClipboard();
     this.initSmoothNavLinks();
     this.initSystemDrawer();
-    this.initCertificatesLedger();
     this.initMobileNav();
     this.initKineticTopographyCanvas();
     this.initMonolithSimulator();
@@ -101,7 +96,6 @@ class PortfolioApp {
       renderAbout(this.data),
       renderSkills(this.data),
       renderProjects(this.data),
-      renderCertificates(this.data),
       renderGithub(this.data),
       renderLab(this.data),
       renderWeather(this.data),
@@ -182,7 +176,6 @@ class PortfolioApp {
         this.initHanzzPet();
         this.initParallaxAndObserver();
         this.initSmoothNavLinks();
-        this.initCertificatesLedger();
         this.initAudioSynthesizer();
         this.initClipboard();
       }, 200);
@@ -206,21 +199,20 @@ class PortfolioApp {
       navLinks[1].textContent = t.nav.about;
       navLinks[2].textContent = t.nav.skills;
       navLinks[3].textContent = t.nav.projects;
-      if (navLinks[4]) navLinks[4].textContent = t.nav.certificates || '04.CRT';
-      if (navLinks[5]) navLinks[5].textContent = t.nav.github || '05.GIT';
-      if (navLinks[6]) navLinks[6].textContent = t.nav.another || '06.LAB';
-      if (navLinks[7]) navLinks[7].textContent = t.nav.weather || '07.ATM';
+      if (navLinks[4]) navLinks[4].textContent = t.nav.github || '05.GIT';
+      if (navLinks[5]) navLinks[5].textContent = t.nav.another || '06.LAB';
+      if (navLinks[6]) navLinks[6].textContent = t.nav.weather || '07.ATM';
     }
 
     // Update mobile nav labels
     const mobileTitles = document.querySelectorAll('.mobile-nav-title');
     if (mobileTitles.length >= 6) {
       const titles = {
-        id: ['Welcome', 'Manifesto', 'Architecture', 'Selected Works', 'GitHub Vault', 'Kinetic Lab'],
-        en: ['Welcome', 'Manifesto', 'Capabilities', 'Selected Works', 'GitHub Vault', 'Kinetic Lab'],
-        zh: ['首页', '建筑宣言', '能力矩阵', '精选作品', '开源仓库', '动能实验室'],
-        ja: ['冒頭', '建築宣言', '能力一覧', '選定実績', '開発拠点', '動的実験室'],
-        de: ['Willkommen', 'Manifest', 'Fähigkeiten', 'Ausgewählte Arbeiten', 'GitHub Tresor', 'Kinetisches Labor']
+        id: ['Welcome', 'Manifesto', 'Architecture', 'Selected Works', 'GitHub Vault', 'Kinetic Lab', 'Atmosphere'],
+        en: ['Welcome', 'Manifesto', 'Capabilities', 'Selected Works', 'GitHub Vault', 'Kinetic Lab', 'Atmosphere'],
+        zh: ['首页', '建筑宣言', '能力矩阵', '精选作品', '开源仓库', '动能实验室', '气象站'],
+        ja: ['冒頭', '建築宣言', '能力一覧', '選定実績', '開発拠点', '動的実験室', '気象観測'],
+        de: ['Willkommen', 'Manifest', 'Fähigkeiten', 'Ausgewählte Arbeiten', 'GitHub Tresor', 'Kinetisches Labor', 'Atmosphäre']
       };
       const curTitles = titles[lang] || titles.id;
       mobileTitles.forEach((el, idx) => {
@@ -713,19 +705,6 @@ class PortfolioApp {
         }
         return;
       }
-
-      // 4. Inspect Certificate
-      const certTarget = e.target.closest('[data-inspect-cert]');
-      if (certTarget) {
-        if (e.target.closest('.cert-verify-link')) return;
-        e.preventDefault();
-        const certId = certTarget.getAttribute('data-inspect-cert');
-        const cert = this.data.certificates?.items?.find((c) => c.id === certId);
-        if (cert) {
-          this.openCertificateInspection(cert);
-        }
-        return;
-      }
     });
   }
 
@@ -985,384 +964,6 @@ class PortfolioApp {
     `;
 
     this.openDrawer(note.tag, html);
-  }
-
-  openCertificateInspection(cert) {
-    const candidates = getCertificateImageCandidates(cert);
-    const firstCandidate = candidates[0] || '';
-    const sealSvg = renderCryptographicSeal(cert.sealType || 'guilloche', cert);
-
-    const skillsHtml = (cert.skills || [])
-      .map(
-        (s) => `
-        <span class="cert-skill-tag" style="padding: 4px 10px; font-size: 0.72rem;">${s}</span>
-      `
-      )
-      .join('');
-
-    const html = `
-      <div class="drawer-title-group">
-        <div style="font-family: var(--font-mono); font-size: var(--font-mono-tag); color: var(--accent-primary); margin-bottom: 0.25rem;">
-          CERT // ${cert.credentialId} [${cert.issuedDate}]
-        </div>
-        <h2 style="font-size: 1.5rem; line-height: 1.25;">${cert.title}</h2>
-        <div class="drawer-subtitle">${cert.issuer} • ${cert.status || 'VERIFIED'}</div>
-      </div>
-
-      <!-- Seal & Preview Hero in Drawer -->
-      <div class="drawer-preview-hero cert-seal-viewport" style="aspect-ratio: 16 / 10; margin-bottom: var(--space-xl);">
-        <span class="cert-reticle cert-reticle-tl">┌</span>
-        <span class="cert-reticle cert-reticle-tr">┐</span>
-        <span class="cert-reticle cert-reticle-bl">└</span>
-        <span class="cert-reticle cert-reticle-br">┘</span>
-
-        <div class="cert-seal-svg-container" style="opacity: 0.85;">
-          ${sealSvg}
-        </div>
-
-        <div class="cert-media-inner">
-          <img 
-            src="${firstCandidate}" 
-            alt="Sertifikat ${cert.title}" 
-            class="cert-image-preview" 
-            data-candidates='${JSON.stringify(candidates)}'
-            data-candidate-idx="0"
-            onload="window.__handleCertImgLoad && window.__handleCertImgLoad(this)"
-            onerror="window.__handleCertImgError && window.__handleCertImgError(this)"
-          />
-        </div>
-      </div>
-
-      <div class="drawer-section-block">
-        <div class="drawer-section-heading">01 // ACCREDITATION SCOPE & SUMMARY</div>
-        <p style="font-size: var(--font-body-md); line-height: 1.65; color: var(--text-secondary);">
-          ${cert.description}
-        </p>
-      </div>
-
-      <div class="drawer-section-block">
-        <div class="drawer-section-heading">02 // VERIFIED SKILLS & COMPETENCY MATRIX</div>
-        <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.5rem;">
-          ${skillsHtml}
-        </div>
-      </div>
-
-      <div class="drawer-section-block">
-        <div class="drawer-section-heading">03 // METADATA & TELEMETRY LEDGER</div>
-        <pre class="drawer-schema-box"><code>[ISSUER]: ${cert.issuer}
-[CREDENTIAL ID]: ${cert.credentialId}
-[PERIOD VALIDITY]: ${cert.issuedDate} — ${cert.expiryDate || 'LIFETIME'}
-[VALIDATION STATUS]: ${cert.status || 'ACTIVE'}
-[SECURITY SEAL]: ${cert.sealType?.toUpperCase() || 'GUILLOCHE'} CRYPTOGRAPHIC STAMP
-${cert.verifyUrl ? `[VERIFICATION URL]: ${cert.verifyUrl}` : ''}</code></pre>
-      </div>
-
-      ${
-        cert.verifyUrl
-          ? `
-        <div class="drawer-section-block" style="padding-top: var(--space-md);">
-          <a href="${cert.verifyUrl}" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 0.5rem; text-decoration: none;" data-cursor-target>
-            <span>KUNJUNGI VERIFIKASI RESMI</span>
-            <span>↗</span>
-          </a>
-        </div>
-      `
-          : ''
-      }
-    `;
-
-    this.openDrawer(`CERT // ${cert.credentialId}`, html);
-  }
-
-  initCertificatesLedger() {
-    const section = document.getElementById('certificates');
-    const viewport = document.getElementById('certs-horizontal-viewport');
-    const rail = document.getElementById('certs-horizontal-rail');
-    const filterPills = document.querySelectorAll('.cert-filter-pill');
-    const certCards = document.querySelectorAll('.cert-card');
-    const progressBar = document.getElementById('certs-scroll-bar-fill');
-    const currIdxEl = document.getElementById('certs-curr-idx');
-    const totalIdxEl = document.getElementById('certs-total-idx');
-    const indicatorEl = document.getElementById('certs-live-indicator');
-    const indicatorTextEl = document.getElementById('certs-live-indicator-text');
-    const hintTextEl = document.getElementById('certs-telemetry-hint-text');
-    const hintArrowEl = document.getElementById('certs-telemetry-hint-arrow');
-
-    if (!section || !viewport || !rail || !certCards.length) return;
-
-    // 1. Dynamic Section Height Calculation with Entry & Exit Pause Buffers
-    const updateDimensions = () => {
-      const activeCards = Array.from(certCards).filter(
-        (c) => c.style.display !== 'none'
-      );
-      if (totalIdxEl) {
-        totalIdxEl.textContent = activeCards.length.toString().padStart(2, '0');
-      }
-
-      const railWidth = rail.scrollWidth;
-      const viewportWidth = viewport.clientWidth;
-      const maxScrollX = Math.max(0, railWidth - viewportWidth + 48);
-
-      if (maxScrollX <= 10) {
-        section.style.minHeight = '100vh';
-        section.style.height = 'auto';
-        rail.style.transform = 'translate3d(0, 0, 0)';
-        if (progressBar) progressBar.style.width = '100%';
-        if (currIdxEl) currIdxEl.textContent = '01';
-      } else {
-        // Generous vertical scroll distance providing an extended, deliberate entry pause buffer:
-        // [Long Entry Pause Buffer (30%)] -> [Smooth Horizontal Traverse (58%)] -> [Exit Pause Buffer (12%)]
-        const scrollDistance = maxScrollX * 2.2 + window.innerHeight * 1.6;
-        section.style.minHeight = `${window.innerHeight + scrollDistance}px`;
-        section.style.height = `${window.innerHeight + scrollDistance}px`;
-      }
-    };
-
-    // 2. Choreographed Parallax Scroll Synchronization with Extended Entry Pause
-    const PAUSE_ENTER = 0.30; // 30% extended initial pause on Card 01 before rail begins moving
-    const PAUSE_EXIT = 0.88;  // 12% exit pause buffer on last Card before unlocking vertical scroll
-
-    let railProgress = 0;
-
-    const handleScroll = () => {
-      // If a card is currently expanded and pinned at center, let vertical scroll gracefully collapse it
-      if (window.__certExpandedCard) {
-        const expCard = window.__certExpandedCard;
-        expCard.classList.remove('is-expanded');
-        window.__certExpandedCard = null;
-        window.__certExpandedTargetX = null;
-        rail.style.transition = 'transform 0.04s linear';
-      }
-
-      const railWidth = rail.scrollWidth;
-      const viewportWidth = viewport.clientWidth;
-      const maxScrollX = Math.max(0, railWidth - viewportWidth + 48);
-
-      if (maxScrollX <= 10) return;
-
-      const sectionTop = section.offsetTop;
-      const totalScrollable = section.offsetHeight - window.innerHeight;
-
-      if (totalScrollable <= 0) return;
-
-      const currentScroll = window.scrollY;
-      const rawProgress = (currentScroll - sectionTop) / totalScrollable;
-      const progress = Math.min(Math.max(rawProgress, 0), 1);
-
-      const activeCards = Array.from(certCards).filter(
-        (c) => c.style.display !== 'none'
-      );
-      const totalCount = activeCards.length || 1;
-
-      if (progress <= PAUSE_ENTER) {
-        // PHASE 1: Jeda Masuk Ekstra (Berhenti tenang di kartu pertama sebelum bergeser)
-        railProgress = 0;
-        const entryPct = Math.min(Math.round((progress / PAUSE_ENTER) * 100), 100);
-        if (indicatorEl) {
-          indicatorEl.classList.remove('is-traversing', 'is-complete');
-        }
-        if (indicatorTextEl) indicatorTextEl.textContent = 'STAGE PINNED // PAUSED';
-        if (hintTextEl) {
-          hintTextEl.textContent = `STAGE LOCKED • SCROLL TO ADVANCE (${entryPct}%)`;
-        }
-        if (hintArrowEl) hintArrowEl.textContent = '➔';
-        if (currIdxEl) currIdxEl.textContent = '01';
-        if (progressBar) progressBar.style.width = '0%';
-      } else if (progress >= PAUSE_EXIT) {
-        // PHASE 3: Jeda Keluar (Berhenti di kartu terakhir sebelum scroll bebas ke bawah)
-        railProgress = 1;
-        if (indicatorEl) {
-          indicatorEl.classList.remove('is-traversing');
-          indicatorEl.classList.add('is-complete');
-        }
-        if (indicatorTextEl) indicatorTextEl.textContent = 'RAIL COMPLETE // PAUSED';
-        if (hintTextEl) hintTextEl.textContent = 'REACHED END • SCROLL TO EXIT';
-        if (hintArrowEl) hintArrowEl.textContent = '↓';
-        if (currIdxEl) currIdxEl.textContent = totalCount.toString().padStart(2, '0');
-        if (progressBar) progressBar.style.width = '100%';
-      } else {
-        // PHASE 2: Pergeseran Parallax Horizontal Dinamis (Smoothstep Interpolation)
-        const normalized = (progress - PAUSE_ENTER) / (PAUSE_EXIT - PAUSE_ENTER);
-        // Smoothstep interpolation (Hermite curve) for zero-jerk gentle start & finish
-        railProgress = normalized * normalized * (3 - 2 * normalized);
-
-        if (indicatorEl) {
-          indicatorEl.classList.add('is-traversing');
-          indicatorEl.classList.remove('is-complete');
-        }
-        if (indicatorTextEl) indicatorTextEl.textContent = 'TRAVERSING RAIL';
-        if (hintTextEl) {
-          hintTextEl.textContent = `TRAVERSING (${Math.round(normalized * 100)}%)`;
-        }
-        if (hintArrowEl) hintArrowEl.textContent = '➔';
-
-        if (progressBar) {
-          progressBar.style.width = `${normalized * 100}%`;
-        }
-
-        const activeIdx = Math.min(
-          Math.floor(normalized * totalCount) + 1,
-          totalCount
-        );
-        if (currIdxEl) {
-          currIdxEl.textContent = activeIdx.toString().padStart(2, '0');
-        }
-      }
-
-      // Translate horizontal rail
-      const currentX = railProgress * maxScrollX;
-      rail.style.transform = `translate3d(-${currentX}px, 0, 0)`;
-
-      // Parallax differential on card SVG seals
-      if (activeCards.length > 0) {
-        activeCards.forEach((card) => {
-          const seal = card.querySelector('.cert-seal-svg-container');
-          if (seal) {
-            const cardRect = card.getBoundingClientRect();
-            const centerDiff =
-              cardRect.left + cardRect.width / 2 - window.innerWidth / 2;
-            const parallaxOffset = centerDiff * -0.06;
-            seal.style.transform = `translate3d(${parallaxOffset}px, 0, 0)`;
-          }
-        });
-      }
-    };
-
-    // Calculate dimensions on init
-    updateDimensions();
-
-    // Attach to Smooth Scroller / Window Scroll
-    if (this.smoothScroller && typeof this.smoothScroller.onScroll === 'function') {
-      this.smoothScroller.onScroll(handleScroll);
-    } else if (window.lenis) {
-      window.lenis.on('scroll', handleScroll);
-    }
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    window.addEventListener('resize', () => {
-      updateDimensions();
-      handleScroll();
-    });
-
-    // 3. Category Filter logic
-    filterPills.forEach((pill) => {
-      pill.addEventListener('click', (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        const targetCategory = pill.getAttribute('data-filter');
-
-        filterPills.forEach((p) => p.classList.remove('active'));
-        pill.classList.add('active');
-
-        // Collapse any open card when filter changes
-        certCards.forEach((c) => c.classList.remove('is-expanded'));
-        window.__certExpandedCard = null;
-        window.__certExpandedTargetX = null;
-
-        certCards.forEach((card) => {
-          const cardCategory = card.getAttribute('data-category');
-          if (targetCategory === 'all' || cardCategory === targetCategory) {
-            card.style.display = 'flex';
-            card.style.opacity = '1';
-          } else {
-            card.style.display = 'none';
-          }
-        });
-
-        // Recalculate dimensions & re-align immediately
-        updateDimensions();
-        handleScroll();
-      });
-    });
-
-    // Center Card in Viewport when Expanded with Silky-Smooth Spring Deceleration
-    const centerCardInViewport = (card, isExpanding) => {
-      const viewportWidth = viewport.clientWidth;
-      const activeCards = Array.from(certCards).filter(
-        (c) => c.style.display !== 'none'
-      );
-      const cardIdx = activeCards.indexOf(card);
-      if (cardIdx === -1) return;
-
-      if (isExpanding) {
-        const gap = 24;
-        const slotWidth = (viewportWidth - (gap * 2)) / 3;
-        const expandedWidth = (slotWidth * 2) + gap;
-        const centerOffset = (viewportWidth - expandedWidth) / 2;
-
-        // Position of the card in the rail
-        const cardLeftInRail = cardIdx * (slotWidth + gap);
-
-        // Target rail translate to center the expanded card exactly in viewport
-        const targetRailX = cardLeftInRail - centerOffset;
-
-        // Smoothly glide rail to center the expanded card
-        rail.style.transition = 'transform 0.65s cubic-bezier(0.16, 1, 0.3, 1)';
-        rail.style.transform = `translate3d(-${targetRailX}px, 0, 0)`;
-
-        window.__certExpandedTargetX = targetRailX;
-        window.__certExpandedCard = card;
-      } else {
-        window.__certExpandedTargetX = null;
-        window.__certExpandedCard = null;
-
-        // Smoothly glide back to scroll-based position
-        const railWidth = rail.scrollWidth;
-        const maxScroll = Math.max(0, railWidth - viewportWidth + 48);
-        const currentRailX = railProgress * maxScroll;
-
-        rail.style.transition = 'transform 0.65s cubic-bezier(0.16, 1, 0.3, 1)';
-        rail.style.transform = `translate3d(-${currentRailX}px, 0, 0)`;
-
-        setTimeout(() => {
-          rail.style.transition = 'transform 0.04s linear';
-        }, 660);
-      }
-    };
-
-    // 4. Interactive Card Expand / Collapse Toggle (Accordion Dossier with Center Glide)
-    certCards.forEach((card) => {
-      card.addEventListener('click', (e) => {
-        // Do not toggle if user clicked on deep view or external verification link
-        if (
-          e.target.closest('[data-inspect-cert]') || 
-          e.target.closest('.cert-btn-registry') || 
-          e.target.closest('.cert-verify-link')
-        ) {
-          return;
-        }
-
-        const isToggleTrigger = e.target.closest('[data-cert-toggle]');
-        const isAlreadyExpanded = card.classList.contains('is-expanded');
-
-        if (isToggleTrigger || !isAlreadyExpanded) {
-          e.preventDefault();
-
-          // Safe haptic audio tick
-          if (typeof hapticAudio !== 'undefined' && typeof hapticAudio.playTick === 'function') {
-            hapticAudio.playTick();
-          }
-
-          if (isAlreadyExpanded) {
-            // Collapse card
-            card.classList.remove('is-expanded');
-            centerCardInViewport(card, false);
-          } else {
-            // Collapse all others and expand this card to 2-slot width centered
-            certCards.forEach((c) => c.classList.remove('is-expanded'));
-            card.classList.add('is-expanded');
-            centerCardInViewport(card, true);
-          }
-
-          // Let the 0.65s CSS transition glide with 60/120fps hardware acceleration
-          setTimeout(() => {
-            updateDimensions();
-          }, 660);
-        }
-      });
-    });
-
-    // Initial frame pass
-    requestAnimationFrame(handleScroll);
   }
 
   /* ==========================================================================

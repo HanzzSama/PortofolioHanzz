@@ -670,106 +670,6 @@ export const portfolioData = {
     ]
   },
 
-  certificates: {
-    sectionIndex: "04.B",
-    sectionTitle: "CREDENTIAL ARCHIVE",
-    sectionSub: "ACCREDITATION & INDUSTRY RECOGNITION",
-    headline: "Arsip Akreditasi, Lisensi & Verifikasi Kompetensi",
-    description: "Dokumentasi rekam jejak sertifikasi teknis, lisensi pengembangan sistem, dan validasi kompetensi rekayasa perangkat lunak dari berbagai institusi profesional dan akademik.",
-    ui: {
-      filterAll: "SEMUA BIDANG",
-      verifiedBadge: "VALIDATED // VERIFIED",
-      credentialLabel: "ID KREDENSIAL",
-      issuerLabel: "PENERBIT",
-      yearLabel: "TAHUN TERBIT",
-      skillsLabel: "KOMPETENSI TERVERIFIKASI",
-      viewCredential: "VERIFIKASI RESMI ↗",
-      inspectCertificate: "INSPEKSI SERTIFIKAT",
-      closeDrawer: "TUTUP [ESC]"
-    },
-    categories: [
-      { id: "all", label: "SEMUA" },
-      { id: "cybersec", label: "CYBER SECURITY" },
-      { id: "software", label: "SOFTWARE DEV" },
-      { id: "fullstack", label: "FULLSTACK" },
-      { id: "ai", label: "AI & ML" }
-    ],
-    items: [
-      {
-        id: "cert-01",
-        slug: "dicoding-front-end-expert",
-        title: "Frontend & Modern Web Application Architecture",
-        subtitle: "Arsitektur Web Modern, Progressive Web Apps & State Management",
-        issuer: "Dicoding Indonesia",
-        credentialId: "DCD-FE-2024-9102",
-        issuedDate: "2024",
-        expiryDate: "2027",
-        category: "software",
-        categoryLabel: "SOFTWARE DEV",
-        status: "ACTIVE // VERIFIED",
-        sealType: "circuit",
-        description: "Validasi penguasaan arsitektur aplikasi web modern, Progressive Web Apps (PWA), performa runtime rendering, dan pengujian otomatis modul frontend berstandar industri.",
-        skills: ["JavaScript ES6+", "RESTful Architecture", "Component State Management", "Clean Code & Automated Testing"],
-        verifyUrl: "https://www.dicoding.com/certificates/DCD-FE-2024-9102",
-        image: null
-      },
-      {
-        id: "cert-02",
-        slug: "cisco-network-cyber-defense",
-        title: "Network Defense & Cyber Security Exploration",
-        subtitle: "Keamanan Jaringan Siber, Packet Inspection & Linux Hardening",
-        issuer: "Cisco Networking Academy",
-        credentialId: "CSCO-SEC-2022-8190",
-        issuedDate: "2022",
-        expiryDate: "LIFETIME",
-        category: "cybersec",
-        categoryLabel: "CYBER SECURITY",
-        status: "LIFETIME VALIDATION",
-        sealType: "cipher",
-        description: "Sertifikasi eksplorasi keamanan siber, analisis paket jaringan dengan Wireshark, pemahaman ancaman keamanan data, serta teknik dasar hardening sistem operasi Linux di bangku SMP TEXMACO Semarang.",
-        skills: ["Network Security Fundamentals", "Packet Inspection", "Linux Hardening", "Penetration Testing Tools"],
-        verifyUrl: "https://www.credly.com/org/cisco",
-        image: null
-      },
-      {
-        id: "cert-03",
-        slug: "bnsp-fullstack-web-engineering",
-        title: "Fullstack Web Engineering & Relational Database Architecture",
-        subtitle: "Standarisasi Kompetensi Rekayasa Web Nasional & Arsitektur Basis Data",
-        issuer: "Badan Nasional Sertifikasi Profesi (BNSP)",
-        credentialId: "BNSP-TI-2025-4471",
-        issuedDate: "2025",
-        expiryDate: "2028",
-        category: "fullstack",
-        categoryLabel: "FULLSTACK",
-        status: "PROFESSIONAL CERTIFIED",
-        sealType: "guilloche",
-        description: "Standarisasi kompetensi nasional bidang Rekayasa Perangkat Lunak Web, mencakup perancangan basis data relasional ternormalisasi, implementasi RESTful API teramankan, dan arsitektur backend Laravel berskala.",
-        skills: ["Laravel MVC Architecture", "Database Normalization & Indexing", "API Security & JWT", "Fullstack Orchestration"],
-        verifyUrl: "https://bnsp.go.id",
-        image: null
-      },
-      {
-        id: "cert-04",
-        slug: "itesa-machine-learning-predictive",
-        title: "Applied Machine Learning & Diagnostic Systems",
-        subtitle: "Model Diagnostik Medis XGBoost & Integrasi Inferensi Pipeline LLM",
-        issuer: "ITESA Muhammadiyah Tech & AI Lab",
-        credentialId: "ITESA-AIML-2026-0042",
-        issuedDate: "2026",
-        expiryDate: "LIFETIME",
-        category: "ai",
-        categoryLabel: "AI & ML",
-        status: "ACADEMIC HONORS",
-        sealType: "neural",
-        description: "Riset dan validasi implementasi model pembelajaran mesin lanjutan, mencakup algoritma XGBoost untuk prediksi diagnostik medis (Alzheimer) dan integrasi pipeline inferensi LLM cerdas berbasis web.",
-        skills: ["XGBoost Classification", "LLM Prompt Engineering", "Feature Selection & Evaluation", "Health-Tech AI Integration"],
-        verifyUrl: "https://itesa.ac.id",
-        image: null
-      }
-    ]
-  },
-
   github: {
     sectionIndex: "05",
     sectionTitle: "GIT TELEMETRY & VAULT",
@@ -1100,30 +1000,6 @@ export function getPortfolioData(lang = 'id') {
         ...item,
         description: t.projects.itemsDesc[item.id] || item.description
       }));
-    }
-  }
-
-  if (t.certificates && localized.certificates) {
-    localized.certificates.sectionTitle = t.certificates.sectionTitle || localized.certificates.sectionTitle;
-    localized.certificates.sectionSub = t.certificates.sectionSub || localized.certificates.sectionSub;
-    localized.certificates.headline = t.certificates.headline || localized.certificates.headline;
-    localized.certificates.description = t.certificates.description || localized.certificates.description;
-    if (t.certificates.ui) {
-      localized.certificates.ui = { ...localized.certificates.ui, ...t.certificates.ui };
-    }
-    if (t.certificates.items && Array.isArray(t.certificates.items)) {
-      localized.certificates.items = localized.certificates.items.map((item, idx) => {
-        const transItem = t.certificates.items[idx];
-        if (!transItem) return item;
-        return {
-          ...item,
-          title: transItem.title || item.title,
-          issuer: transItem.issuer || item.issuer,
-          categoryLabel: transItem.categoryLabel || item.categoryLabel,
-          status: transItem.status || item.status,
-          description: transItem.description || item.description
-        };
-      });
     }
   }
 

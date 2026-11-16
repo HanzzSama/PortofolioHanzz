@@ -21,7 +21,6 @@ export const translations = {
       "about": "02.ABT",
       "skills": "03.SKL",
       "projects": "04.PRJ",
-      "certificates": "04.CRT",
       "another": "06.LAB",
       "github": "05.GIT"
     },
@@ -837,7 +836,6 @@ export const translations = {
       "about": "02.ABT",
       "skills": "03.SKL",
       "projects": "04.PRJ",
-      "certificates": "04.CRT",
       "another": "06.LAB",
       "github": "05.GIT"
     },
@@ -1653,7 +1651,6 @@ export const translations = {
       "about": "02.ABT",
       "skills": "03.SKL",
       "projects": "04.PRJ",
-      "certificates": "04.CRT",
       "another": "06.LAB",
       "github": "05.GIT"
     },
@@ -2469,7 +2466,6 @@ export const translations = {
       "about": "02.ABT",
       "skills": "03.SKL",
       "projects": "04.PRJ",
-      "certificates": "04.CRT",
       "another": "06.LAB",
       "github": "05.GIT"
     },
@@ -3285,7 +3281,6 @@ export const translations = {
       "about": "02.ABT",
       "skills": "03.SKL",
       "projects": "04.PRJ",
-      "certificates": "04.CRT",
       "another": "06.LAB",
       "github": "05.GIT"
     },
