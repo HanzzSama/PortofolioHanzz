@@ -301,7 +301,8 @@ export const translations = {
                 "target": "Terintegrasi",
                 "achieved": "Dashboard Admin"
               }
-            ]
+            ],
+            "architectureSchema": "[CLIENT: WEB & MOBILE BROWSERS]\n       │\n       ▼ HTTPS / TLS 1.3\n[LARAVEL ROUTING & TAILWIND BLADE ENGINE]\n       │\n       ├──► [ADMISSION CONTROLLER: JALUR & PRODI]\n       │           │\n       │           ├──► [FORM VALIDATION & SANITIZATION]\n       │           └──► [DOCUMENT UPLOAD & VERIF ENGINE]\n       │\n       ├──► [ADMIN DASHBOARD: PANITIA PMB ITESA]\n       │\n       ▼ ELOQUENT ORM / QUERY BUILDER\n[MYSQL DATABASE: CAMABA, PRODI, KUOTA, STATUS]"
           }
         },
         "proj-02": {
@@ -334,7 +335,8 @@ export const translations = {
                 "target": "Fleksibel",
                 "achieved": "100% Personal"
               }
-            ]
+            ],
+            "architectureSchema": "[USER INPUT: KEYBOARD & TOUCH NUMPAD]\n       │\n       ▼ EVENT LISTENER\n[PARSER & TOKENIZER: MATH EXPRESSION]\n       │\n       ├──► [MATH BOT ENGINE: AUTO-CORRECT & CALC]\n       │\n       ├──► [THEME ENGINE: DYNAMIC CSS VARIABLES]\n       │           │\n       │           └──► [LOCALSTORAGE STATE PERSISTENCE]\n       │\n       ▼ REAL-TIME DOM RENDERER\n[CANVAS / LCD DISPLAY: RESULT & HISTORY LOG]"
           }
         },
         "proj-03": {
@@ -367,7 +369,8 @@ export const translations = {
                 "target": "Tinggi",
                 "achieved": "Laravel MVC"
               }
-            ]
+            ],
+            "architectureSchema": "[LEARNER / DEVELOPER UI]\n       │\n       ▼ HTTPS REST API\n[LARAVEL CORE: LEARNING ROADMAP ENGINE]\n       │\n       ├──► [MODULAR CURRICULUM: ZERO TO PRO]\n       │           │\n       │           ├──► [CODE PLAYGROUND & SANDBOX]\n       │           └──► [INTERACTIVE SYNTAX VALIDATOR]\n       │\n       ├──► [PROGRESSION & MILESTONE TRACKER]\n       │\n       ▼ ELOQUENT ORM\n[MYSQL DATABASE: USERS, LESSONS, COMPLETIONS]"
           }
         },
         "proj-04": {
@@ -400,7 +403,8 @@ export const translations = {
                 "target": "Intuitif",
                 "achieved": "Asesmen Interaktif"
               }
-            ]
+            ],
+            "architectureSchema": "[CLINICAL ASSESSMENT / USER QUESTIONNAIRE]\n       │\n       ▼ WEBSOCKET / REST API\n[FASTAPI & LLM INTERFACE LAYER]\n       │\n       ├──► [LLM: SYMPTOM EXTRACTION & CONTEXT]\n       │           │\n       │           ▼\n       ├──► [FEATURE VECTOR PREPROCESSING]\n       │           │\n       │           ▼\n       ├──► [XGBOOST CLASSIFIER: ALZHEIMER RISK]\n       │           │\n       │           └──► [DECISION TREE ENSEMBLE SCORING]\n       │\n       ▼ JSON TELEMETRY RESPONSE\n[DIAGNOSTIC RADAR & RISK STRATIFICATION UI]"
           }
         },
         "proj-05": {
@@ -433,7 +437,8 @@ export const translations = {
                 "target": "Responsif",
                 "achieved": "Optimal di HP"
               }
-            ]
+            ],
+            "architectureSchema": "[AGROTECH PORTAL USER]\n       │\n       ▼ HTTPS\n[PHP MVC FRAMEWORK & WEB RUNTIME]\n       │\n       ├──► [KATALOG PRODUK PERTANIAN & AGRIBISNIS]\n       │\n       ├──► [SISTEM INFORMASI KEMITRAAN PETANI]\n       │\n       ▼ MYSQL STORAGE\n[DATABASE PRODUK, ARTIKEL TANI & DATA MITRA]"
           }
         },
         "proj-06": {
@@ -466,7 +471,8 @@ export const translations = {
                 "target": "100%",
                 "achieved": "Otomatis"
               }
-            ]
+            ],
+            "architectureSchema": "[CUSTOMER TABLE / MOBILE ORDER]\n       │\n       ▼\n[ORDER DISPATCHER & CART STATE]\n       │\n       ├──► [MENU SELECTOR & PRICING CALCULATOR]\n       │\n       ├──► [KITCHEN DISPLAY SYSTEM TICKETING]\n       │\n       ▼ TRANSACTION LOG\n[ORDER STATUS, PAYMENT RECEIPT & DATABASE]"
           }
         },
         "proj-07": {
@@ -499,7 +505,8 @@ export const translations = {
                 "target": "Akurat",
                 "achieved": "Otomatis"
               }
-            ]
+            ],
+            "architectureSchema": "[SISWA & PUSTAKAWAN INTERFACE]\n       │\n       ▼\n[LIBRARY MANAGEMENT CORE]\n       │\n       ├──► [OPAC: ONLINE CATALOG SEARCH]\n       │\n       ├──► [CIRCULATION: PINJAM, KEMBALI, DENDA]\n       │\n       ▼ RELATIONAL SCHEMA\n[DATABASE BUKU, MEMBER, & RIWAYAT PEMINJAMAN]"
           }
         },
         "proj-08": {
@@ -532,7 +539,8 @@ export const translations = {
                 "target": "Relasional",
                 "achieved": "MySQL Terstruktur"
               }
-            ]
+            ],
+            "architectureSchema": "[ADMIN KEUANGAN & SISWA PORTAL]\n       │\n       ▼\n[FINANCIAL LEDGER & BILLING SYSTEM]\n       │\n       ├──► [VERIFIKASI TAGIHAN BULANAN SISWA]\n       │\n       ├──► [CETAK BUKTI PEMBAYARAN & KWITANSI]\n       │\n       ▼ TRANSACTION ARCHIVE\n[DATABASE TRANSAKSI, REKAP KAS & LAPORAN SPP]"
           }
         },
         "proj-09": {
@@ -565,7 +573,8 @@ export const translations = {
                 "target": "Lokal",
                 "achieved": "Zero Jeda"
               }
-            ]
+            ],
+            "architectureSchema": "[USER TASK INPUT & GESTURE CONTROL]\n       │\n       ▼\n[TASK STATE MANAGER: CRUD & FILTERING]\n       │\n       ├──► [PRIORITY MATRIX: HIGH / MED / LOW]\n       │\n       ├──► [LOCALSTORAGE OFFLINE SYNC]\n       │\n       ▼ REACTIVE DOM\n[INTERACTIVE TASK LIST & COMPLETION TELEMETRY]"
           }
         }
       }
@@ -1107,7 +1116,8 @@ export const translations = {
                 "target": "Terintegrasi",
                 "achieved": "Dashboard Admin"
               }
-            ]
+            ],
+            "architectureSchema": "[CLIENT: WEB & MOBILE BROWSERS]\n       │\n       ▼ HTTPS / TLS 1.3\n[LARAVEL ROUTING & TAILWIND BLADE ENGINE]\n       │\n       ├──► [ADMISSION CONTROLLER: JALUR & PRODI]\n       │           │\n       │           ├──► [FORM VALIDATION & SANITIZATION]\n       │           └──► [DOCUMENT UPLOAD & VERIF ENGINE]\n       │\n       ├──► [ADMIN DASHBOARD: PANITIA PMB ITESA]\n       │\n       ▼ ELOQUENT ORM / QUERY BUILDER\n[MYSQL DATABASE: CAMABA, PRODI, KUOTA, STATUS]"
           }
         },
         "proj-02": {
@@ -1140,7 +1150,8 @@ export const translations = {
                 "target": "Fleksibel",
                 "achieved": "100% Personal"
               }
-            ]
+            ],
+            "architectureSchema": "[USER INPUT: KEYBOARD & TOUCH NUMPAD]\n       │\n       ▼ EVENT LISTENER\n[PARSER & TOKENIZER: MATH EXPRESSION]\n       │\n       ├──► [MATH BOT ENGINE: AUTO-CORRECT & CALC]\n       │\n       ├──► [THEME ENGINE: DYNAMIC CSS VARIABLES]\n       │           │\n       │           └──► [LOCALSTORAGE STATE PERSISTENCE]\n       │\n       ▼ REAL-TIME DOM RENDERER\n[CANVAS / LCD DISPLAY: RESULT & HISTORY LOG]"
           }
         },
         "proj-03": {
@@ -1173,7 +1184,8 @@ export const translations = {
                 "target": "Tinggi",
                 "achieved": "Laravel MVC"
               }
-            ]
+            ],
+            "architectureSchema": "[LEARNER / DEVELOPER UI]\n       │\n       ▼ HTTPS REST API\n[LARAVEL CORE: LEARNING ROADMAP ENGINE]\n       │\n       ├──► [MODULAR CURRICULUM: ZERO TO PRO]\n       │           │\n       │           ├──► [CODE PLAYGROUND & SANDBOX]\n       │           └──► [INTERACTIVE SYNTAX VALIDATOR]\n       │\n       ├──► [PROGRESSION & MILESTONE TRACKER]\n       │\n       ▼ ELOQUENT ORM\n[MYSQL DATABASE: USERS, LESSONS, COMPLETIONS]"
           }
         },
         "proj-04": {
@@ -1206,7 +1218,8 @@ export const translations = {
                 "target": "Intuitif",
                 "achieved": "Asesmen Interaktif"
               }
-            ]
+            ],
+            "architectureSchema": "[CLINICAL ASSESSMENT / USER QUESTIONNAIRE]\n       │\n       ▼ WEBSOCKET / REST API\n[FASTAPI & LLM INTERFACE LAYER]\n       │\n       ├──► [LLM: SYMPTOM EXTRACTION & CONTEXT]\n       │           │\n       │           ▼\n       ├──► [FEATURE VECTOR PREPROCESSING]\n       │           │\n       │           ▼\n       ├──► [XGBOOST CLASSIFIER: ALZHEIMER RISK]\n       │           │\n       │           └──► [DECISION TREE ENSEMBLE SCORING]\n       │\n       ▼ JSON TELEMETRY RESPONSE\n[DIAGNOSTIC RADAR & RISK STRATIFICATION UI]"
           }
         },
         "proj-05": {
@@ -1239,7 +1252,8 @@ export const translations = {
                 "target": "Responsif",
                 "achieved": "Optimal di HP"
               }
-            ]
+            ],
+            "architectureSchema": "[AGROTECH PORTAL USER]\n       │\n       ▼ HTTPS\n[PHP MVC FRAMEWORK & WEB RUNTIME]\n       │\n       ├──► [KATALOG PRODUK PERTANIAN & AGRIBISNIS]\n       │\n       ├──► [SISTEM INFORMASI KEMITRAAN PETANI]\n       │\n       ▼ MYSQL STORAGE\n[DATABASE PRODUK, ARTIKEL TANI & DATA MITRA]"
           }
         },
         "proj-06": {
@@ -1272,7 +1286,8 @@ export const translations = {
                 "target": "100%",
                 "achieved": "Otomatis"
               }
-            ]
+            ],
+            "architectureSchema": "[CUSTOMER TABLE / MOBILE ORDER]\n       │\n       ▼\n[ORDER DISPATCHER & CART STATE]\n       │\n       ├──► [MENU SELECTOR & PRICING CALCULATOR]\n       │\n       ├──► [KITCHEN DISPLAY SYSTEM TICKETING]\n       │\n       ▼ TRANSACTION LOG\n[ORDER STATUS, PAYMENT RECEIPT & DATABASE]"
           }
         },
         "proj-07": {
@@ -1305,7 +1320,8 @@ export const translations = {
                 "target": "Akurat",
                 "achieved": "Otomatis"
               }
-            ]
+            ],
+            "architectureSchema": "[SISWA & PUSTAKAWAN INTERFACE]\n       │\n       ▼\n[LIBRARY MANAGEMENT CORE]\n       │\n       ├──► [OPAC: ONLINE CATALOG SEARCH]\n       │\n       ├──► [CIRCULATION: PINJAM, KEMBALI, DENDA]\n       │\n       ▼ RELATIONAL SCHEMA\n[DATABASE BUKU, MEMBER, & RIWAYAT PEMINJAMAN]"
           }
         },
         "proj-08": {
@@ -1338,7 +1354,8 @@ export const translations = {
                 "target": "Relasional",
                 "achieved": "MySQL Terstruktur"
               }
-            ]
+            ],
+            "architectureSchema": "[ADMIN KEUANGAN & SISWA PORTAL]\n       │\n       ▼\n[FINANCIAL LEDGER & BILLING SYSTEM]\n       │\n       ├──► [VERIFIKASI TAGIHAN BULANAN SISWA]\n       │\n       ├──► [CETAK BUKTI PEMBAYARAN & KWITANSI]\n       │\n       ▼ TRANSACTION ARCHIVE\n[DATABASE TRANSAKSI, REKAP KAS & LAPORAN SPP]"
           }
         },
         "proj-09": {
@@ -1371,7 +1388,8 @@ export const translations = {
                 "target": "Lokal",
                 "achieved": "Zero Jeda"
               }
-            ]
+            ],
+            "architectureSchema": "[USER TASK INPUT & GESTURE CONTROL]\n       │\n       ▼\n[TASK STATE MANAGER: CRUD & FILTERING]\n       │\n       ├──► [PRIORITY MATRIX: HIGH / MED / LOW]\n       │\n       ├──► [LOCALSTORAGE OFFLINE SYNC]\n       │\n       ▼ REACTIVE DOM\n[INTERACTIVE TASK LIST & COMPLETION TELEMETRY]"
           }
         }
       }
@@ -1913,7 +1931,8 @@ export const translations = {
                 "target": "Terintegrasi",
                 "achieved": "Dashboard Admin"
               }
-            ]
+            ],
+            "architectureSchema": "[CLIENT: WEB & MOBILE BROWSERS]\n       │\n       ▼ HTTPS / TLS 1.3\n[LARAVEL ROUTING & TAILWIND BLADE ENGINE]\n       │\n       ├──► [ADMISSION CONTROLLER: JALUR & PRODI]\n       │           │\n       │           ├──► [FORM VALIDATION & SANITIZATION]\n       │           └──► [DOCUMENT UPLOAD & VERIF ENGINE]\n       │\n       ├──► [ADMIN DASHBOARD: PANITIA PMB ITESA]\n       │\n       ▼ ELOQUENT ORM / QUERY BUILDER\n[MYSQL DATABASE: CAMABA, PRODI, KUOTA, STATUS]"
           }
         },
         "proj-02": {
@@ -1946,7 +1965,8 @@ export const translations = {
                 "target": "Fleksibel",
                 "achieved": "100% Personal"
               }
-            ]
+            ],
+            "architectureSchema": "[USER INPUT: KEYBOARD & TOUCH NUMPAD]\n       │\n       ▼ EVENT LISTENER\n[PARSER & TOKENIZER: MATH EXPRESSION]\n       │\n       ├──► [MATH BOT ENGINE: AUTO-CORRECT & CALC]\n       │\n       ├──► [THEME ENGINE: DYNAMIC CSS VARIABLES]\n       │           │\n       │           └──► [LOCALSTORAGE STATE PERSISTENCE]\n       │\n       ▼ REAL-TIME DOM RENDERER\n[CANVAS / LCD DISPLAY: RESULT & HISTORY LOG]"
           }
         },
         "proj-03": {
@@ -1979,7 +1999,8 @@ export const translations = {
                 "target": "Tinggi",
                 "achieved": "Laravel MVC"
               }
-            ]
+            ],
+            "architectureSchema": "[LEARNER / DEVELOPER UI]\n       │\n       ▼ HTTPS REST API\n[LARAVEL CORE: LEARNING ROADMAP ENGINE]\n       │\n       ├──► [MODULAR CURRICULUM: ZERO TO PRO]\n       │           │\n       │           ├──► [CODE PLAYGROUND & SANDBOX]\n       │           └──► [INTERACTIVE SYNTAX VALIDATOR]\n       │\n       ├──► [PROGRESSION & MILESTONE TRACKER]\n       │\n       ▼ ELOQUENT ORM\n[MYSQL DATABASE: USERS, LESSONS, COMPLETIONS]"
           }
         },
         "proj-04": {
@@ -2012,7 +2033,8 @@ export const translations = {
                 "target": "Intuitif",
                 "achieved": "Asesmen Interaktif"
               }
-            ]
+            ],
+            "architectureSchema": "[CLINICAL ASSESSMENT / USER QUESTIONNAIRE]\n       │\n       ▼ WEBSOCKET / REST API\n[FASTAPI & LLM INTERFACE LAYER]\n       │\n       ├──► [LLM: SYMPTOM EXTRACTION & CONTEXT]\n       │           │\n       │           ▼\n       ├──► [FEATURE VECTOR PREPROCESSING]\n       │           │\n       │           ▼\n       ├──► [XGBOOST CLASSIFIER: ALZHEIMER RISK]\n       │           │\n       │           └──► [DECISION TREE ENSEMBLE SCORING]\n       │\n       ▼ JSON TELEMETRY RESPONSE\n[DIAGNOSTIC RADAR & RISK STRATIFICATION UI]"
           }
         },
         "proj-05": {
@@ -2045,7 +2067,8 @@ export const translations = {
                 "target": "Responsif",
                 "achieved": "Optimal di HP"
               }
-            ]
+            ],
+            "architectureSchema": "[AGROTECH PORTAL USER]\n       │\n       ▼ HTTPS\n[PHP MVC FRAMEWORK & WEB RUNTIME]\n       │\n       ├──► [KATALOG PRODUK PERTANIAN & AGRIBISNIS]\n       │\n       ├──► [SISTEM INFORMASI KEMITRAAN PETANI]\n       │\n       ▼ MYSQL STORAGE\n[DATABASE PRODUK, ARTIKEL TANI & DATA MITRA]"
           }
         },
         "proj-06": {
@@ -2078,7 +2101,8 @@ export const translations = {
                 "target": "100%",
                 "achieved": "Otomatis"
               }
-            ]
+            ],
+            "architectureSchema": "[CUSTOMER TABLE / MOBILE ORDER]\n       │\n       ▼\n[ORDER DISPATCHER & CART STATE]\n       │\n       ├──► [MENU SELECTOR & PRICING CALCULATOR]\n       │\n       ├──► [KITCHEN DISPLAY SYSTEM TICKETING]\n       │\n       ▼ TRANSACTION LOG\n[ORDER STATUS, PAYMENT RECEIPT & DATABASE]"
           }
         },
         "proj-07": {
@@ -2111,7 +2135,8 @@ export const translations = {
                 "target": "Akurat",
                 "achieved": "Otomatis"
               }
-            ]
+            ],
+            "architectureSchema": "[SISWA & PUSTAKAWAN INTERFACE]\n       │\n       ▼\n[LIBRARY MANAGEMENT CORE]\n       │\n       ├──► [OPAC: ONLINE CATALOG SEARCH]\n       │\n       ├──► [CIRCULATION: PINJAM, KEMBALI, DENDA]\n       │\n       ▼ RELATIONAL SCHEMA\n[DATABASE BUKU, MEMBER, & RIWAYAT PEMINJAMAN]"
           }
         },
         "proj-08": {
@@ -2144,7 +2169,8 @@ export const translations = {
                 "target": "Relasional",
                 "achieved": "MySQL Terstruktur"
               }
-            ]
+            ],
+            "architectureSchema": "[ADMIN KEUANGAN & SISWA PORTAL]\n       │\n       ▼\n[FINANCIAL LEDGER & BILLING SYSTEM]\n       │\n       ├──► [VERIFIKASI TAGIHAN BULANAN SISWA]\n       │\n       ├──► [CETAK BUKTI PEMBAYARAN & KWITANSI]\n       │\n       ▼ TRANSACTION ARCHIVE\n[DATABASE TRANSAKSI, REKAP KAS & LAPORAN SPP]"
           }
         },
         "proj-09": {
@@ -2177,7 +2203,8 @@ export const translations = {
                 "target": "Lokal",
                 "achieved": "Zero Jeda"
               }
-            ]
+            ],
+            "architectureSchema": "[USER TASK INPUT & GESTURE CONTROL]\n       │\n       ▼\n[TASK STATE MANAGER: CRUD & FILTERING]\n       │\n       ├──► [PRIORITY MATRIX: HIGH / MED / LOW]\n       │\n       ├──► [LOCALSTORAGE OFFLINE SYNC]\n       │\n       ▼ REACTIVE DOM\n[INTERACTIVE TASK LIST & COMPLETION TELEMETRY]"
           }
         }
       }
@@ -2719,7 +2746,8 @@ export const translations = {
                 "target": "Terintegrasi",
                 "achieved": "Dashboard Admin"
               }
-            ]
+            ],
+            "architectureSchema": "[CLIENT: WEB & MOBILE BROWSERS]\n       │\n       ▼ HTTPS / TLS 1.3\n[LARAVEL ROUTING & TAILWIND BLADE ENGINE]\n       │\n       ├──► [ADMISSION CONTROLLER: JALUR & PRODI]\n       │           │\n       │           ├──► [FORM VALIDATION & SANITIZATION]\n       │           └──► [DOCUMENT UPLOAD & VERIF ENGINE]\n       │\n       ├──► [ADMIN DASHBOARD: PANITIA PMB ITESA]\n       │\n       ▼ ELOQUENT ORM / QUERY BUILDER\n[MYSQL DATABASE: CAMABA, PRODI, KUOTA, STATUS]"
           }
         },
         "proj-02": {
@@ -2752,7 +2780,8 @@ export const translations = {
                 "target": "Fleksibel",
                 "achieved": "100% Personal"
               }
-            ]
+            ],
+            "architectureSchema": "[USER INPUT: KEYBOARD & TOUCH NUMPAD]\n       │\n       ▼ EVENT LISTENER\n[PARSER & TOKENIZER: MATH EXPRESSION]\n       │\n       ├──► [MATH BOT ENGINE: AUTO-CORRECT & CALC]\n       │\n       ├──► [THEME ENGINE: DYNAMIC CSS VARIABLES]\n       │           │\n       │           └──► [LOCALSTORAGE STATE PERSISTENCE]\n       │\n       ▼ REAL-TIME DOM RENDERER\n[CANVAS / LCD DISPLAY: RESULT & HISTORY LOG]"
           }
         },
         "proj-03": {
@@ -2785,7 +2814,8 @@ export const translations = {
                 "target": "Tinggi",
                 "achieved": "Laravel MVC"
               }
-            ]
+            ],
+            "architectureSchema": "[LEARNER / DEVELOPER UI]\n       │\n       ▼ HTTPS REST API\n[LARAVEL CORE: LEARNING ROADMAP ENGINE]\n       │\n       ├──► [MODULAR CURRICULUM: ZERO TO PRO]\n       │           │\n       │           ├──► [CODE PLAYGROUND & SANDBOX]\n       │           └──► [INTERACTIVE SYNTAX VALIDATOR]\n       │\n       ├──► [PROGRESSION & MILESTONE TRACKER]\n       │\n       ▼ ELOQUENT ORM\n[MYSQL DATABASE: USERS, LESSONS, COMPLETIONS]"
           }
         },
         "proj-04": {
@@ -2818,7 +2848,8 @@ export const translations = {
                 "target": "Intuitif",
                 "achieved": "Asesmen Interaktif"
               }
-            ]
+            ],
+            "architectureSchema": "[CLINICAL ASSESSMENT / USER QUESTIONNAIRE]\n       │\n       ▼ WEBSOCKET / REST API\n[FASTAPI & LLM INTERFACE LAYER]\n       │\n       ├──► [LLM: SYMPTOM EXTRACTION & CONTEXT]\n       │           │\n       │           ▼\n       ├──► [FEATURE VECTOR PREPROCESSING]\n       │           │\n       │           ▼\n       ├──► [XGBOOST CLASSIFIER: ALZHEIMER RISK]\n       │           │\n       │           └──► [DECISION TREE ENSEMBLE SCORING]\n       │\n       ▼ JSON TELEMETRY RESPONSE\n[DIAGNOSTIC RADAR & RISK STRATIFICATION UI]"
           }
         },
         "proj-05": {
@@ -2851,7 +2882,8 @@ export const translations = {
                 "target": "Responsif",
                 "achieved": "Optimal di HP"
               }
-            ]
+            ],
+            "architectureSchema": "[AGROTECH PORTAL USER]\n       │\n       ▼ HTTPS\n[PHP MVC FRAMEWORK & WEB RUNTIME]\n       │\n       ├──► [KATALOG PRODUK PERTANIAN & AGRIBISNIS]\n       │\n       ├──► [SISTEM INFORMASI KEMITRAAN PETANI]\n       │\n       ▼ MYSQL STORAGE\n[DATABASE PRODUK, ARTIKEL TANI & DATA MITRA]"
           }
         },
         "proj-06": {
@@ -2884,7 +2916,8 @@ export const translations = {
                 "target": "100%",
                 "achieved": "Otomatis"
               }
-            ]
+            ],
+            "architectureSchema": "[CUSTOMER TABLE / MOBILE ORDER]\n       │\n       ▼\n[ORDER DISPATCHER & CART STATE]\n       │\n       ├──► [MENU SELECTOR & PRICING CALCULATOR]\n       │\n       ├──► [KITCHEN DISPLAY SYSTEM TICKETING]\n       │\n       ▼ TRANSACTION LOG\n[ORDER STATUS, PAYMENT RECEIPT & DATABASE]"
           }
         },
         "proj-07": {
@@ -2917,7 +2950,8 @@ export const translations = {
                 "target": "Akurat",
                 "achieved": "Otomatis"
               }
-            ]
+            ],
+            "architectureSchema": "[SISWA & PUSTAKAWAN INTERFACE]\n       │\n       ▼\n[LIBRARY MANAGEMENT CORE]\n       │\n       ├──► [OPAC: ONLINE CATALOG SEARCH]\n       │\n       ├──► [CIRCULATION: PINJAM, KEMBALI, DENDA]\n       │\n       ▼ RELATIONAL SCHEMA\n[DATABASE BUKU, MEMBER, & RIWAYAT PEMINJAMAN]"
           }
         },
         "proj-08": {
@@ -2950,7 +2984,8 @@ export const translations = {
                 "target": "Relasional",
                 "achieved": "MySQL Terstruktur"
               }
-            ]
+            ],
+            "architectureSchema": "[ADMIN KEUANGAN & SISWA PORTAL]\n       │\n       ▼\n[FINANCIAL LEDGER & BILLING SYSTEM]\n       │\n       ├──► [VERIFIKASI TAGIHAN BULANAN SISWA]\n       │\n       ├──► [CETAK BUKTI PEMBAYARAN & KWITANSI]\n       │\n       ▼ TRANSACTION ARCHIVE\n[DATABASE TRANSAKSI, REKAP KAS & LAPORAN SPP]"
           }
         },
         "proj-09": {
@@ -2983,7 +3018,8 @@ export const translations = {
                 "target": "Lokal",
                 "achieved": "Zero Jeda"
               }
-            ]
+            ],
+            "architectureSchema": "[USER TASK INPUT & GESTURE CONTROL]\n       │\n       ▼\n[TASK STATE MANAGER: CRUD & FILTERING]\n       │\n       ├──► [PRIORITY MATRIX: HIGH / MED / LOW]\n       │\n       ├──► [LOCALSTORAGE OFFLINE SYNC]\n       │\n       ▼ REACTIVE DOM\n[INTERACTIVE TASK LIST & COMPLETION TELEMETRY]"
           }
         }
       }
@@ -3525,7 +3561,8 @@ export const translations = {
                 "target": "Terintegrasi",
                 "achieved": "Dashboard Admin"
               }
-            ]
+            ],
+            "architectureSchema": "[CLIENT: WEB & MOBILE BROWSERS]\n       │\n       ▼ HTTPS / TLS 1.3\n[LARAVEL ROUTING & TAILWIND BLADE ENGINE]\n       │\n       ├──► [ADMISSION CONTROLLER: JALUR & PRODI]\n       │           │\n       │           ├──► [FORM VALIDATION & SANITIZATION]\n       │           └──► [DOCUMENT UPLOAD & VERIF ENGINE]\n       │\n       ├──► [ADMIN DASHBOARD: PANITIA PMB ITESA]\n       │\n       ▼ ELOQUENT ORM / QUERY BUILDER\n[MYSQL DATABASE: CAMABA, PRODI, KUOTA, STATUS]"
           }
         },
         "proj-02": {
@@ -3558,7 +3595,8 @@ export const translations = {
                 "target": "Fleksibel",
                 "achieved": "100% Personal"
               }
-            ]
+            ],
+            "architectureSchema": "[USER INPUT: KEYBOARD & TOUCH NUMPAD]\n       │\n       ▼ EVENT LISTENER\n[PARSER & TOKENIZER: MATH EXPRESSION]\n       │\n       ├──► [MATH BOT ENGINE: AUTO-CORRECT & CALC]\n       │\n       ├──► [THEME ENGINE: DYNAMIC CSS VARIABLES]\n       │           │\n       │           └──► [LOCALSTORAGE STATE PERSISTENCE]\n       │\n       ▼ REAL-TIME DOM RENDERER\n[CANVAS / LCD DISPLAY: RESULT & HISTORY LOG]"
           }
         },
         "proj-03": {
@@ -3591,7 +3629,8 @@ export const translations = {
                 "target": "Tinggi",
                 "achieved": "Laravel MVC"
               }
-            ]
+            ],
+            "architectureSchema": "[LEARNER / DEVELOPER UI]\n       │\n       ▼ HTTPS REST API\n[LARAVEL CORE: LEARNING ROADMAP ENGINE]\n       │\n       ├──► [MODULAR CURRICULUM: ZERO TO PRO]\n       │           │\n       │           ├──► [CODE PLAYGROUND & SANDBOX]\n       │           └──► [INTERACTIVE SYNTAX VALIDATOR]\n       │\n       ├──► [PROGRESSION & MILESTONE TRACKER]\n       │\n       ▼ ELOQUENT ORM\n[MYSQL DATABASE: USERS, LESSONS, COMPLETIONS]"
           }
         },
         "proj-04": {
@@ -3624,7 +3663,8 @@ export const translations = {
                 "target": "Intuitif",
                 "achieved": "Asesmen Interaktif"
               }
-            ]
+            ],
+            "architectureSchema": "[CLINICAL ASSESSMENT / USER QUESTIONNAIRE]\n       │\n       ▼ WEBSOCKET / REST API\n[FASTAPI & LLM INTERFACE LAYER]\n       │\n       ├──► [LLM: SYMPTOM EXTRACTION & CONTEXT]\n       │           │\n       │           ▼\n       ├──► [FEATURE VECTOR PREPROCESSING]\n       │           │\n       │           ▼\n       ├──► [XGBOOST CLASSIFIER: ALZHEIMER RISK]\n       │           │\n       │           └──► [DECISION TREE ENSEMBLE SCORING]\n       │\n       ▼ JSON TELEMETRY RESPONSE\n[DIAGNOSTIC RADAR & RISK STRATIFICATION UI]"
           }
         },
         "proj-05": {
@@ -3657,7 +3697,8 @@ export const translations = {
                 "target": "Responsif",
                 "achieved": "Optimal di HP"
               }
-            ]
+            ],
+            "architectureSchema": "[AGROTECH PORTAL USER]\n       │\n       ▼ HTTPS\n[PHP MVC FRAMEWORK & WEB RUNTIME]\n       │\n       ├──► [KATALOG PRODUK PERTANIAN & AGRIBISNIS]\n       │\n       ├──► [SISTEM INFORMASI KEMITRAAN PETANI]\n       │\n       ▼ MYSQL STORAGE\n[DATABASE PRODUK, ARTIKEL TANI & DATA MITRA]"
           }
         },
         "proj-06": {
@@ -3690,7 +3731,8 @@ export const translations = {
                 "target": "100%",
                 "achieved": "Otomatis"
               }
-            ]
+            ],
+            "architectureSchema": "[CUSTOMER TABLE / MOBILE ORDER]\n       │\n       ▼\n[ORDER DISPATCHER & CART STATE]\n       │\n       ├──► [MENU SELECTOR & PRICING CALCULATOR]\n       │\n       ├──► [KITCHEN DISPLAY SYSTEM TICKETING]\n       │\n       ▼ TRANSACTION LOG\n[ORDER STATUS, PAYMENT RECEIPT & DATABASE]"
           }
         },
         "proj-07": {
@@ -3723,7 +3765,8 @@ export const translations = {
                 "target": "Akurat",
                 "achieved": "Otomatis"
               }
-            ]
+            ],
+            "architectureSchema": "[SISWA & PUSTAKAWAN INTERFACE]\n       │\n       ▼\n[LIBRARY MANAGEMENT CORE]\n       │\n       ├──► [OPAC: ONLINE CATALOG SEARCH]\n       │\n       ├──► [CIRCULATION: PINJAM, KEMBALI, DENDA]\n       │\n       ▼ RELATIONAL SCHEMA\n[DATABASE BUKU, MEMBER, & RIWAYAT PEMINJAMAN]"
           }
         },
         "proj-08": {
@@ -3756,7 +3799,8 @@ export const translations = {
                 "target": "Relasional",
                 "achieved": "MySQL Terstruktur"
               }
-            ]
+            ],
+            "architectureSchema": "[ADMIN KEUANGAN & SISWA PORTAL]\n       │\n       ▼\n[FINANCIAL LEDGER & BILLING SYSTEM]\n       │\n       ├──► [VERIFIKASI TAGIHAN BULANAN SISWA]\n       │\n       ├──► [CETAK BUKTI PEMBAYARAN & KWITANSI]\n       │\n       ▼ TRANSACTION ARCHIVE\n[DATABASE TRANSAKSI, REKAP KAS & LAPORAN SPP]"
           }
         },
         "proj-09": {
@@ -3789,7 +3833,8 @@ export const translations = {
                 "target": "Lokal",
                 "achieved": "Zero Jeda"
               }
-            ]
+            ],
+            "architectureSchema": "[USER TASK INPUT & GESTURE CONTROL]\n       │\n       ▼\n[TASK STATE MANAGER: CRUD & FILTERING]\n       │\n       ├──► [PRIORITY MATRIX: HIGH / MED / LOW]\n       │\n       ├──► [LOCALSTORAGE OFFLINE SYNC]\n       │\n       ▼ REACTIVE DOM\n[INTERACTIVE TASK LIST & COMPLETION TELEMETRY]"
           }
         }
       }

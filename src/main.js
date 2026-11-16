@@ -30,6 +30,7 @@ import { XRayBiosphereEngine } from './core/xrayBiosphere.js';
 import { KineticTypographyEngine } from './core/kineticTypography.js';
 import { BioTimeEngine } from './core/bioTimeEngine.js';
 import { WeatherContourEngine } from './core/weatherContourEngine.js';
+import { initProjectImageDetector, getProjectImageCandidates } from './utils/imageDetector.js';
 
 class PortfolioApp {
   constructor() {
@@ -58,6 +59,7 @@ class PortfolioApp {
   }
 
   init() {
+    initProjectImageDetector();
     this.renderDOM();
     this.initSmoothScroller();
     this.initParallaxAndObserver();
@@ -782,7 +784,15 @@ class PortfolioApp {
   }
 
   openProjectInspection(proj) {
-    const { deepDive } = proj;
+    const deepDive = proj.deepDive || {};
+    const candidates = getProjectImageCandidates(proj);
+    const firstCandidate = candidates[0] || '';
+
+    const schemaText =
+      deepDive.architectureSchema ||
+      proj.architectureSchema ||
+      `[SYSTEM: ${proj.title.toUpperCase()}]\n       │\n       ▼ RUNTIME\n[MODULAR ARCHITECTURAL CHASSIS]\n       │\n       ├──► [CORE LOGIC ENGINE: ${proj.techStack?.[0] || 'COMPUTATION'}]\n       └──► [PRESENTATION LAYER: ${proj.category || 'UI/UX'}]`;
+
     const html = `
       <div class="drawer-title-group">
         <div style="font-family: var(--font-mono); font-size: var(--font-mono-tag); color: var(--accent-primary); margin-bottom: 0.25rem;">
@@ -792,25 +802,61 @@ class PortfolioApp {
         <div class="drawer-subtitle">${proj.subtitle}</div>
       </div>
 
+      <!-- Abstract Preview Hero in Drawer -->
+      <div class="drawer-preview-hero project-preview-viewport">
+        <span class="drafting-crosshair ch-tl" aria-hidden="true">+</span>
+        <span class="drafting-crosshair ch-tr" aria-hidden="true">+</span>
+        <span class="drafting-crosshair ch-bl" aria-hidden="true">+</span>
+        <span class="drafting-crosshair ch-br" aria-hidden="true">+</span>
+        <span class="reticle-bracket rb-tl" aria-hidden="true"></span>
+        <span class="reticle-bracket rb-tr" aria-hidden="true"></span>
+        <span class="reticle-bracket rb-bl" aria-hidden="true"></span>
+        <span class="reticle-bracket rb-br" aria-hidden="true"></span>
+
+        <div class="preview-media-inner">
+          <img 
+            src="${firstCandidate}" 
+            alt="${proj.title} Preview" 
+            class="project-preview-img"
+            data-candidates='${JSON.stringify(candidates)}'
+            data-candidate-idx="0"
+            onload="window.__handleProjectImgLoad && window.__handleProjectImgLoad(this)"
+            onerror="window.__handleProjectImgError && window.__handleProjectImgError(this)"
+          />
+
+          <div class="non-image-blueprint-chassis" style="color: ${proj.accent || 'var(--accent-primary)'};">
+            <div class="drawer-blueprint-graphic font-mono">
+              <span class="blueprint-code-tag">${proj.code} // CHASSIS PREVIEW</span>
+              <div class="blueprint-spec-grid">
+                <span>TECH: ${proj.techStack?.join(' • ') || 'WEB SYSTEM'}</span>
+                <span>YEAR: ${proj.year || '2026'}</span>
+              </div>
+            </div>
+          </div>
+          <div class="abstract-shimmer-sweep" aria-hidden="true"></div>
+        </div>
+      </div>
+
       <div class="drawer-section-block">
         <div class="drawer-section-heading">01 // PROBLEM STATEMENT</div>
         <p style="font-size: var(--font-body-md); line-height: 1.65; color: var(--text-secondary);">
-          ${deepDive.problem}
+          ${deepDive.problem || proj.description || 'Penyediaan sistem informasi terstruktur dan efisien.'}
         </p>
       </div>
 
       <div class="drawer-section-block">
         <div class="drawer-section-heading">02 // ARCHITECTURAL SOLUTION</div>
         <p style="font-size: var(--font-body-md); line-height: 1.65; color: var(--text-secondary);">
-          ${deepDive.solution}
+          ${deepDive.solution || proj.description || 'Perancangan arsitektur modular dengan performa andal.'}
         </p>
       </div>
 
       <div class="drawer-section-block">
         <div class="drawer-section-heading">03 // SYSTEM TOPOLOGY SCHEMA</div>
-        <pre class="drawer-schema-box"><code>${deepDive.architectureSchema}</code></pre>
+        <pre class="drawer-schema-box"><code>${schemaText}</code></pre>
       </div>
 
+      ${deepDive.benchmarks && deepDive.benchmarks.length > 0 ? `
       <div class="drawer-section-block">
         <div class="drawer-section-heading">04 // PRODUCTION BENCHMARKS</div>
         <div class="drawer-benchmarks-grid">
@@ -827,23 +873,37 @@ class PortfolioApp {
             .join('')}
         </div>
       </div>
+      ` : ''}
 
+      ${deepDive.sourceSnippet ? `
       <div class="drawer-section-block">
         <div class="drawer-section-heading">05 // CODE IMPLEMENTATION KERNEL</div>
         <pre class="drawer-code-preview"><code>${deepDive.sourceSnippet}</code></pre>
       </div>
+      ` : ''}
 
       <div style="display: flex; gap: var(--space-md); margin-top: var(--space-md);">
+        ${proj.links?.preview && proj.links.preview !== '#' ? `
         <a href="${proj.links.preview}" target="_blank" rel="noopener noreferrer" class="project-btn-primary" data-cursor-target>
           <span>Live Deployment</span> <span>↗</span>
         </a>
+        ` : ''}
+        ${proj.links?.code ? `
         <a href="${proj.links.code}" target="_blank" rel="noopener noreferrer" class="project-btn-secondary" data-cursor-target>
           <span>Repository</span>
         </a>
+        ` : ''}
       </div>
     `;
 
     this.openDrawer(`${proj.code} // DEEP INSPECT`, html);
+
+    requestAnimationFrame(() => {
+      const heroImg = document.querySelector('.drawer-preview-hero .project-preview-img');
+      if (heroImg && heroImg.complete && heroImg.naturalWidth > 0) {
+        window.__handleProjectImgLoad && window.__handleProjectImgLoad(heroImg);
+      }
+    });
   }
 
   openSkillInspection(skillName, spec, tier, tag) {

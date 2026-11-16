@@ -1,14 +1,66 @@
 /**
  * COMPONENT 04: SELECTED WORKS / ARCHITECTURAL PROJECTS
  * Gallery-Standard Multi-Layer Cards & Vector Blueprint Canvases
+ * Abstract, Minimalist & Expressive Project Previews with Auto-Detection & Fallback
  */
+
+import { getProjectImageCandidates } from '../utils/imageDetector.js';
 
 export function renderProjects(data) {
   const { projects } = data;
 
   const renderBlueprintSvg = (type, proj = {}) => {
-    const label = proj.title ? `${proj.title.toUpperCase()} // ${proj.year || '2024'}` : 'PROYEK // HANZZ';
+    const label = proj.title ? `${proj.title.toUpperCase()} // ${proj.year || '2026'}` : 'PROYEK // HANZZ';
     switch (type) {
+      case 'neural':
+      case 'ai':
+        return `
+          <svg viewBox="0 0 400 400" width="100%" height="100%" fill="none" stroke="currentColor">
+            <circle cx="80" cy="120" r="7" stroke-width="1.5"/>
+            <circle cx="80" cy="200" r="7" stroke-width="1.5"/>
+            <circle cx="80" cy="280" r="7" stroke-width="1.5"/>
+            <circle cx="200" cy="90" r="9" stroke-width="1.5"/>
+            <circle cx="200" cy="170" r="11" stroke-width="2"/>
+            <circle cx="200" cy="250" r="9" stroke-width="1.5"/>
+            <circle cx="200" cy="320" r="7" stroke-width="1.2"/>
+            <circle cx="320" cy="150" r="13" stroke-width="2"/>
+            <circle cx="320" cy="250" r="13" stroke-width="2"/>
+            <line x1="87" y1="120" x2="191" y2="90" stroke-width="0.75" stroke-dasharray="2 3"/>
+            <line x1="87" y1="120" x2="189" y2="170" stroke-width="0.75"/>
+            <line x1="87" y1="200" x2="189" y2="170" stroke-width="1"/>
+            <line x1="87" y1="200" x2="191" y2="250" stroke-width="0.75"/>
+            <line x1="87" y1="280" x2="191" y2="250" stroke-width="0.75"/>
+            <line x1="87" y1="280" x2="193" y2="320" stroke-width="0.75" stroke-dasharray="2 3"/>
+            <line x1="209" y1="90" x2="307" y2="150" stroke-width="0.75"/>
+            <line x1="211" y1="170" x2="307" y2="150" stroke-width="1.2"/>
+            <line x1="211" y1="170" x2="307" y2="250" stroke-width="1.2"/>
+            <line x1="209" y1="250" x2="307" y2="250" stroke-width="0.75"/>
+            <line x1="207" y1="320" x2="307" y2="250" stroke-width="0.75" stroke-dasharray="2 3"/>
+            <circle cx="320" cy="150" r="4" fill="currentColor"/>
+            <circle cx="320" cy="250" r="4" fill="currentColor"/>
+            <text x="120" y="380" font-family="'JetBrains Mono', monospace" font-size="8" fill="currentColor">NEURAL DIAGNOSTIC // XGBOOST</text>
+            <text x="140" y="65" font-family="'JetBrains Mono', monospace" font-size="8" fill="currentColor">${label}</text>
+          </svg>
+        `;
+      case 'roadmap':
+      case 'code':
+        return `
+          <svg viewBox="0 0 400 400" width="100%" height="100%" fill="none" stroke="currentColor">
+            <line x1="60" y1="320" x2="340" y2="80" stroke-width="1.5" stroke-dasharray="3 3"/>
+            <rect x="70" y="270" width="70" height="40" stroke-width="1.2"/>
+            <text x="80" y="295" font-family="'JetBrains Mono', monospace" font-size="8" fill="currentColor">01. ZERO</text>
+            <rect x="165" y="190" width="70" height="40" stroke-width="1.2"/>
+            <text x="175" y="215" font-family="'JetBrains Mono', monospace" font-size="8" fill="currentColor">02. CORE</text>
+            <rect x="260" y="110" width="70" height="40" stroke-width="1.5"/>
+            <text x="275" y="135" font-family="'JetBrains Mono', monospace" font-size="8" fill="currentColor">03. PRO</text>
+            <circle cx="105" cy="270" r="3" fill="currentColor"/>
+            <circle cx="200" cy="190" r="3" fill="currentColor"/>
+            <circle cx="295" cy="110" r="4" fill="currentColor"/>
+            <line x1="140" y1="290" x2="165" y2="210" stroke-width="0.75"/>
+            <line x1="235" y1="210" x2="260" y2="130" stroke-width="0.75"/>
+            <text x="70" y="360" font-family="'JetBrains Mono', monospace" font-size="8" fill="currentColor">${label}</text>
+          </svg>
+        `;
       case 'topographic':
         return `
           <svg viewBox="0 0 400 400" width="100%" height="100%" fill="none" stroke="currentColor">
@@ -77,8 +129,11 @@ export function renderProjects(data) {
 
       <div class="projects-list">
         ${projects.items
-          .map(
-            (proj) => `
+          .map((proj) => {
+            const candidates = getProjectImageCandidates(proj);
+            const firstCandidate = candidates[0] || '';
+
+            return `
           <article class="project-architectural-card" data-scroll-scale data-scale-from="0.94" data-scale-to="1.0">
             <div class="project-details-panel">
               <div>
@@ -126,25 +181,72 @@ export function renderProjects(data) {
               </div>
             </div>
 
-            <div class="project-blueprint-panel" data-inspect-project="${proj.id}" data-cursor-target title="${projects.ui?.inspectTooltip || 'Click to inspect architecture'}">
+            <!-- Abstract, Minimalist & Expressive Project Preview Panel -->
+            <div class="project-blueprint-panel" data-inspect-project="${proj.id}" data-cursor-target title="${projects.ui?.inspectTooltip || 'Klik untuk inspeksi detail arsitektur'}">
+              <!-- 4 Drafting Registration Crosshairs -->
+              <span class="drafting-crosshair ch-tl" aria-hidden="true">+</span>
+              <span class="drafting-crosshair ch-tr" aria-hidden="true">+</span>
+              <span class="drafting-crosshair ch-bl" aria-hidden="true">+</span>
+              <span class="drafting-crosshair ch-br" aria-hidden="true">+</span>
+
               <div class="blueprint-meta-header">
-                <span>${projects.ui?.role || 'ROLE:'} ${proj.role}</span>
-                <span>${projects.ui?.client || 'CLIENT:'} ${proj.client}</span>
+                <div class="blueprint-meta-left font-mono">
+                  <span class="blueprint-radar-dot"></span>
+                  <span>${proj.code} // ${proj.category}</span>
+                </div>
+                <div class="blueprint-meta-right font-mono">
+                  <span>${proj.year} // ${proj.techStack?.[0] || 'DEV'}</span>
+                </div>
               </div>
 
-              <div class="blueprint-canvas-container" style="color: ${proj.accent};" data-parallax-relative data-parallax-speed="0.12">
-                ${renderBlueprintSvg(proj.blueprintSvg, proj)}
+              <!-- Refined Architectural Preview Chassis (Passe-Partout Matting) -->
+              <div class="project-preview-viewport">
+                <!-- Optical Reticle Brackets (Cleanly Positioned on the Chassis Mat) -->
+                <span class="reticle-bracket rb-tl" aria-hidden="true"></span>
+                <span class="reticle-bracket rb-tr" aria-hidden="true"></span>
+                <span class="reticle-bracket rb-bl" aria-hidden="true"></span>
+                <span class="reticle-bracket rb-br" aria-hidden="true"></span>
+
+                <!-- Inner Media Canvas: Clean Frame & Shadow -->
+                <div class="preview-media-inner">
+                  <!-- Image Candidate with Auto-Detect & Cascade Fallback -->
+                  <img 
+                    src="${firstCandidate}" 
+                    alt="${proj.title} Preview" 
+                    class="project-preview-img"
+                    loading="lazy"
+                    data-candidates='${JSON.stringify(candidates)}'
+                    data-candidate-idx="0"
+                    onload="window.__handleProjectImgLoad && window.__handleProjectImgLoad(this)"
+                    onerror="window.__handleProjectImgError && window.__handleProjectImgError(this)"
+                  />
+
+                  <!-- Abstract Non-Image Thumbnail (Vector Blueprint Matrix) -->
+                  <div class="non-image-blueprint-chassis" style="color: ${proj.accent};" data-parallax-relative data-parallax-speed="0.12">
+                    ${renderBlueprintSvg(proj.blueprintSvg, proj)}
+                    <div class="blueprint-ambient-grid" aria-hidden="true"></div>
+                  </div>
+
+                  <!-- Hover Shimmer Sweep -->
+                  <div class="abstract-shimmer-sweep" aria-hidden="true"></div>
+                </div>
+
+                <!-- Floating Interactive Hover Capsule (Clean & Non-Colliding) -->
+                <div class="preview-hover-tag font-mono" aria-hidden="true">
+                  <span class="hover-tag-dot"></span>
+                  <span>DEEP INSPECT ↗</span>
+                </div>
               </div>
 
-              <div class="blueprint-telemetry-badge">
+              <div class="blueprint-telemetry-badge font-mono">
                 ${Object.entries(proj.metrics)
                   .map(([key, val]) => `<span><strong>${key.toUpperCase()}:</strong> ${val}</span>`)
                   .join('<span style="opacity: 0.4;">|</span>')}
               </div>
             </div>
           </article>
-        `
-          )
+        `;
+          })
           .join('')}
       </div>
     </section>
