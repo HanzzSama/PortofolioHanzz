@@ -64,13 +64,13 @@ export function renderProjects(data) {
   };
 
   return `
-    <section id="projects" class="architectural-section section-projects" data-reveal>
+    <section id="projects" class="architectural-section section-projects">
       <div class="section-watermark-label" data-parallax-slide="right" data-parallax-speed="-0.06">
         <span class="watermark-index">${projects.sectionIndex} // ${projects.sectionTitle}</span>
         <span class="watermark-meta">${projects.sectionSub}</span>
       </div>
 
-      <div class="projects-intro" data-stagger>
+      <div class="projects-intro">
         <h2 class="font-display">${projects.headline || 'Curated Engineering Systems'}</h2>
         <p>${projects.description}</p>
       </div>

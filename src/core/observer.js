@@ -22,8 +22,8 @@ export class ArchitecturalObserver {
   setupRevealObserver() {
     const options = {
       root: null,
-      rootMargin: '0px 0px -10% 0px',
-      threshold: 0.12
+      rootMargin: '0px 0px -20px 0px',
+      threshold: 0.01
     };
 
     this.revealObserver = new IntersectionObserver((entries, observer) => {
@@ -45,7 +45,7 @@ export class ArchitecturalObserver {
     }, options);
 
     const revealTargets = document.querySelectorAll(
-      '.architectural-section, .pillar-card, .matrix-tier-card, .garden-note-card, [data-reveal]'
+      '.architectural-section:not(#projects):not(.section-projects), .pillar-card, .matrix-tier-card, .garden-note-card, [data-reveal]:not(#projects):not(.section-projects)'
     );
 
     revealTargets.forEach((target) => {

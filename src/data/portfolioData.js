@@ -103,28 +103,34 @@ export const portfolioData = {
     timelineTitle: "Kronologi Karier & Pengalaman Nyata",
     timeline: [
       {
-        year: "2024 — SEKARANG",
-        title: "Pengembangan Portal & Web Interaktif",
+        year: "2026 — SEKARANG",
+        title: "Pengembangan Lanjutan Frontend & Backend",
         place: "Semarang, Jawa Tengah",
-        description: "Merancang portal PMB ITESA serta aplikasi utilitas personal modern seperti Mylist Todo App."
+        description: "Memperluas keilmuan di bidang frontend dan backend, merancang arsitektur sistem modern, serta memperdalam rekayasa web interaktif berkinerja tinggi."
       },
       {
-        year: "2023 — SEKARANG",
-        title: "Pendidikan Tinggi IT & Komputasi",
+        year: "2025 — 2026",
+        title: "Artificial Intelligence & Fullstack Engineering",
         place: "ITESA Muhammadiyah Semarang",
-        description: "Menempuh studi akademik dan memperdalam logika komputasional, rekayasa web, dan kolaborasi sistem."
+        description: "Memperdalam keilmuan untuk memahami lebih dalam seputar artifisial inteligensi dan fullstack developer, sembari menempuh pendidikan perguruan tinggi di ITESA Muhammadiyah Semarang."
       },
       {
-        year: "2022 — 2023",
-        title: "Perancangan Aplikasi & Kompetisi",
-        place: "Jawa Tengah",
-        description: "Membangun Website Ladangku untuk perlombaan agrotech, Sistem Perpustakaan Terpadu, dan Aplikasi Pembayaran SPP."
+        year: "2024 — 2025",
+        title: "Pengembangan Skill Coding & Fullstack Developer",
+        place: "Semarang, Jawa Tengah",
+        description: "Mengembangkan skill coding dan pemahaman mendalam di dunia frontend dan backend, serta membangun kapabilitas jobdesk fullstack developer."
+      },
+      {
+        year: "2022 — 2024",
+        title: "Eksplorasi Web, Aplikasi & Software Engineering",
+        place: "SMK TEXMACO Semarang",
+        description: "Memulai eksplorasi di dunia website dan aplikasi serta membangun background IT software engineering di bangku SMK TEXMACO Semarang."
       },
       {
         year: "2020 — 2022",
-        title: "Awal Mula Perjalanan IT (Desain & Web)",
-        place: "Semarang",
-        description: "Memulai eksplorasi intensif dasar web (HTML, CSS, JS, PHP) serta desain grafis (Canva, Figma, Photoshop)."
+        title: "Eksplorasi Perdana Cyber Security Tools",
+        place: "SMP TEXMACO Semarang",
+        description: "Memulai eksplorasi awal di dunia IT dengan mempelajari cyber security tools di bangku SMP TEXMACO Semarang."
       }
     ]
   },

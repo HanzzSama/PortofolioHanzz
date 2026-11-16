@@ -154,6 +154,285 @@
   align-items: start;
 }
 
+/* ==========================================================================
+   ABSTRACT MINIMALIST PROFILE CHASSIS (Architectural Drafting Aesthetic)
+   ========================================================================== */
+.about-abstract-card {
+  position: relative;
+  background-color: var(--bg-surface);
+  border: var(--border-hairline);
+  padding: 1.15rem;
+  border-radius: var(--radius-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  box-shadow: var(--elevation-1);
+  box-sizing: border-box;
+  transition: border-color var(--duration-fast) var(--ease-expressive),
+              box-shadow var(--duration-fast) var(--ease-expressive),
+              transform var(--duration-fast) var(--ease-expressive);
+}
+
+.about-abstract-card:hover {
+  border-color: var(--accent-primary);
+  box-shadow: var(--elevation-2);
+  transform: translateY(-3px);
+}
+
+/* 4 Corner Registration Crosshairs */
+.drafting-crosshair {
+  position: absolute;
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+  font-weight: 300;
+  line-height: 1;
+  color: var(--text-muted);
+  opacity: 0.45;
+  pointer-events: none;
+  z-index: 10;
+  transition: all var(--duration-fast) var(--ease-expressive);
+}
+
+.drafting-crosshair.ch-tl { top: -8px; left: -6px; }
+.drafting-crosshair.ch-tr { top: -8px; right: -6px; }
+.drafting-crosshair.ch-bl { bottom: -8px; left: -6px; }
+.drafting-crosshair.ch-br { bottom: -8px; right: -6px; }
+
+.about-abstract-card:hover .drafting-crosshair {
+  color: var(--accent-primary);
+  opacity: 1;
+  transform: scale(1.2);
+}
+
+/* Minimalist Telemetry Header */
+.abstract-card-hud-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.65rem;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border-hairline);
+}
+
+.hud-left-tag {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--accent-primary);
+  font-weight: 600;
+}
+
+.hud-pulse-ring {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--accent-primary);
+  box-shadow: 0 0 6px var(--accent-primary);
+  animation: geoDotPulse 2s infinite ease-in-out;
+  display: inline-block;
+}
+
+.hud-right-coords {
+  opacity: 0.75;
+}
+
+/* Abstract Photo Viewport Chamber */
+.abstract-photo-chamber {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 4.75;
+  overflow: hidden;
+  border-radius: calc(var(--radius-sm) - 2px);
+  background: var(--bg-surface-sunken);
+  border: 1px solid var(--border-hairline);
+}
+
+/* Optical Reticle Framing Brackets */
+.reticle-bracket {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-color: rgba(255, 255, 255, 0.45);
+  pointer-events: none;
+  z-index: 4;
+  transition: all var(--duration-fast) var(--ease-expressive);
+}
+
+.reticle-bracket.rb-tl { top: 8px; left: 8px; border-top: 1.5px solid; border-left: 1.5px solid; }
+.reticle-bracket.rb-tr { top: 8px; right: 8px; border-top: 1.5px solid; border-right: 1.5px solid; }
+.reticle-bracket.rb-bl { bottom: 8px; left: 8px; border-bottom: 1.5px solid; border-left: 1.5px solid; }
+.reticle-bracket.rb-br { bottom: 8px; right: 8px; border-bottom: 1.5px solid; border-right: 1.5px solid; }
+
+.about-abstract-card:hover .reticle-bracket {
+  border-color: var(--accent-primary);
+  width: 14px;
+  height: 14px;
+}
+
+.abstract-photo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+  filter: contrast(1.03) saturate(1.02);
+  transition: transform 0.65s var(--ease-expressive),
+              filter 0.65s var(--ease-expressive);
+}
+
+.about-abstract-card:hover .abstract-photo-img {
+  transform: scale(1.035);
+  filter: contrast(1.06) saturate(1.08);
+}
+
+.abstract-photo-scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,0.01) 50%, rgba(0,0,0,0.55) 100%);
+  pointer-events: none;
+  z-index: 2;
+}
+
+.abstract-shimmer-sweep {
+  position: absolute;
+  top: 0;
+  left: -120%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.18), transparent);
+  transform: skewX(-25deg);
+  pointer-events: none;
+  z-index: 3;
+  transition: left 0.85s var(--ease-expressive);
+}
+
+.about-abstract-card:hover .abstract-shimmer-sweep {
+  left: 160%;
+}
+
+.chamber-watermark {
+  position: absolute;
+  bottom: 8px;
+  left: 10px;
+  right: 10px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.62rem;
+  color: #ffffff;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.85);
+  z-index: 4;
+  letter-spacing: 0.05em;
+  pointer-events: none;
+  opacity: 0.85;
+}
+
+/* Minimalist Expressive Metadata Footer */
+.abstract-card-footer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  padding-top: 0.2rem;
+}
+
+.abstract-identity-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.abstract-eyebrow {
+  font-size: 0.62rem;
+  letter-spacing: 0.08em;
+  color: var(--accent-primary);
+  text-transform: uppercase;
+  font-weight: 600;
+  display: block;
+  margin-bottom: 2px;
+}
+
+.abstract-person-name {
+  font-size: 1.12rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0;
+  line-height: 1.2;
+}
+
+.abstract-exp-tag {
+  font-size: 0.65rem;
+  color: var(--text-muted);
+  background: var(--bg-canvas);
+  border: var(--border-hairline);
+  padding: 2px 7px;
+  border-radius: var(--radius-xs);
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+
+.abstract-context-row {
+  font-size: 0.72rem;
+  color: var(--text-secondary);
+  line-height: 1.4;
+  letter-spacing: 0.02em;
+}
+
+/* Sleek Single-Line Telemetry Capsule (Never Wraps) */
+.abstract-telemetry-capsule {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: 0.68rem;
+  color: var(--accent-primary);
+  background-color: var(--accent-tint);
+  border: 1px solid var(--accent-border, rgba(46, 125, 87, 0.25));
+  padding: 6px 12px;
+  border-radius: 999px;
+  width: 100%;
+  box-sizing: border-box;
+  white-space: nowrap;
+  overflow: hidden;
+  letter-spacing: 0.03em;
+  margin-top: 0.15rem;
+}
+
+.capsule-geo-section {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.capsule-radar-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--accent-primary);
+  box-shadow: 0 0 6px var(--accent-primary);
+  animation: geoDotPulse 2s infinite ease-in-out;
+  flex-shrink: 0;
+}
+
+.capsule-city {
+  font-weight: 600;
+}
+
+.capsule-divider {
+  opacity: 0.45;
+  flex-shrink: 0;
+}
+
+.capsule-base {
+  font-size: 0.65rem;
+  opacity: 0.9;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+/* Backwards compatibility for any legacy photo-card references */
 .about-photo-card {
   background-color: var(--bg-canvas);
   border: var(--border-hairline);
@@ -163,24 +442,6 @@
   flex-direction: column;
   gap: 0.6rem;
   box-shadow: var(--elevation-1);
-  transition: border-color var(--duration-fast) var(--ease-expressive),
-              box-shadow var(--duration-fast) var(--ease-expressive),
-              transform var(--duration-fast) var(--ease-expressive);
-}
-
-.about-photo-card:hover {
-  border-color: var(--accent-primary);
-  box-shadow: var(--elevation-2);
-  transform: translateY(-2px);
-}
-
-.about-photo-frame {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 4 / 4.8;
-  overflow: hidden;
-  border-radius: calc(var(--radius-sm) - 2px);
-  background: var(--bg-surface);
 }
 
 .about-photo-img {
@@ -189,34 +450,6 @@
   object-fit: cover;
   object-position: center top;
   display: block;
-  filter: contrast(1.03) saturate(1.02);
-  transition: transform var(--duration-normal) var(--ease-expressive);
-}
-
-.about-photo-card:hover .about-photo-img {
-  transform: scale(1.03);
-}
-
-.about-photo-frame-border {
-  position: absolute;
-  inset: 0;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  pointer-events: none;
-}
-
-.about-photo-meta {
-  padding: 0.35rem 0.2rem 0.15rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.55rem;
-}
-
-.about-photo-caption {
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  color: var(--text-secondary);
-  letter-spacing: 0.02em;
-  line-height: 1.45;
 }
 
 .about-geo-badge {
@@ -271,6 +504,7 @@
     grid-template-columns: 1fr;
     gap: var(--space-lg);
   }
+  .about-abstract-card,
   .about-photo-card {
     max-width: 360px;
     margin: 0 auto;
@@ -513,10 +747,14 @@
    ========================================================================== */
 .section-projects {
   position: relative;
+  opacity: 1 !important;
+  visibility: visible !important;
 }
 
 .projects-intro {
   margin-bottom: var(--space-2xl);
+  opacity: 1 !important;
+  visibility: visible !important;
 }
 
 .projects-intro h2 {

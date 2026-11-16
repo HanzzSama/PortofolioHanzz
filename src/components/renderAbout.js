@@ -19,25 +19,74 @@ export function renderAbout(data) {
         </h2>
       </div>
 
-      <!-- Authentic Profile Hero with Pacitan Photo & Narrative -->
+      <!-- Authentic Profile Hero with Abstract Architectural Drafting Chassis -->
       <div class="about-profile-hero" data-stagger>
-        <div class="about-photo-card">
-          <div class="about-photo-frame">
+        <div class="about-abstract-card" data-cursor-target>
+          <!-- 4 Drafting Registration Crosshairs -->
+          <span class="drafting-crosshair ch-tl" aria-hidden="true">+</span>
+          <span class="drafting-crosshair ch-tr" aria-hidden="true">+</span>
+          <span class="drafting-crosshair ch-bl" aria-hidden="true">+</span>
+          <span class="drafting-crosshair ch-br" aria-hidden="true">+</span>
+
+          <!-- Minimalist Telemetry Header -->
+          <div class="abstract-card-hud-bar">
+            <div class="hud-left-tag">
+              <span class="hud-pulse-ring"></span>
+              <span class="hud-tag-text font-mono">NODE // SRG.01</span>
+            </div>
+            <div class="hud-right-coords font-mono">
+              <span>06°58'S 110°25'E</span>
+            </div>
+          </div>
+
+          <!-- Abstract Photo Viewport Chamber -->
+          <div class="abstract-photo-chamber">
+            <!-- Optical framing reticle brackets -->
+            <span class="reticle-bracket rb-tl" aria-hidden="true"></span>
+            <span class="reticle-bracket rb-tr" aria-hidden="true"></span>
+            <span class="reticle-bracket rb-bl" aria-hidden="true"></span>
+            <span class="reticle-bracket rb-br" aria-hidden="true"></span>
+
             <img 
               src="${about.photo || meta.photo || './src/assets/Hanzz.jpeg'}" 
               alt="${meta.fullName} - ${meta.role}" 
-              class="about-photo-img" 
+              class="abstract-photo-img" 
               loading="lazy"
             />
-            <div class="about-photo-frame-border"></div>
-          </div>
-          <div class="about-photo-meta">
-            <div class="about-photo-caption">
-              <span>${about.photoCaption || 'Foto Haidar Rifky Andrianno — Pantai Pacitan'}</span>
+            
+            <!-- Expressive architectural kinetic overlay on hover -->
+            <div class="abstract-photo-scrim" aria-hidden="true"></div>
+            <div class="abstract-shimmer-sweep" aria-hidden="true"></div>
+
+            <!-- In-frame micro watermark -->
+            <div class="chamber-watermark font-mono">
+              <span class="chamber-index">EXP // PACITAN</span>
+              <span class="chamber-elevation">82M ASL</span>
             </div>
-            <div class="about-geo-badge">
-              <span class="geo-dot"></span>
-              <span>${about.locationBadge || 'Indonesia | Jawa Tengah | Kota Semarang'}</span>
+          </div>
+
+          <!-- Minimalist Expressive Metadata Footer -->
+          <div class="abstract-card-footer">
+            <div class="abstract-identity-row">
+              <div class="abstract-name-block">
+                <span class="abstract-eyebrow font-mono">AUTEUR // CREATIVE</span>
+                <h3 class="abstract-person-name font-display">${meta.fullName || 'Haidar Rifky Andrianno'}</h3>
+              </div>
+              <span class="abstract-exp-tag font-mono">4 YRS IT</span>
+            </div>
+
+            <div class="abstract-context-row font-mono">
+              <span class="abstract-caption-text">${about.photoCaption || 'Foto Lapangan Pantai Pacitan — In Situ'}</span>
+            </div>
+
+            <!-- Sleek Single-Line Telemetry Capsule (Never Wraps) -->
+            <div class="abstract-telemetry-capsule font-mono" title="${about.locationBadge || 'Indonesia | Jawa Tengah | Kota Semarang'}">
+              <div class="capsule-geo-section">
+                <span class="capsule-radar-dot"></span>
+                <span class="capsule-city">SEMARANG, ID</span>
+              </div>
+              <span class="capsule-divider">//</span>
+              <span class="capsule-base">BASE: ITESA</span>
             </div>
           </div>
         </div>
