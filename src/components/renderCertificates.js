@@ -226,96 +226,172 @@ export function renderCertificates(data) {
       const candidates = getCertificateImageCandidates(cert);
       const candidatesJson = JSON.stringify(candidates).replace(/"/g, '&quot;');
       const sealSvg = renderCryptographicSeal(cert.sealType || 'guilloche', cert);
-
-      const skillsHtml = (cert.skills || [])
-        .map((s) => `<span class="cert-skill-tag">${s}</span>`)
-        .join('');
+      const indexStr = (idx + 1).toString().padStart(2, '0');
 
       return `
         <article 
           class="cert-card" 
+          id="cert-card-${cert.id}"
           data-cert-id="${cert.id}" 
-          data-inspect-cert="${cert.id}"
           data-category="${cert.category || 'all'}"
           data-cursor-target
         >
-          <!-- Passe-Partout Architectural Seal Viewport -->
-          <div class="cert-seal-viewport has-no-image">
-            <span class="cert-reticle cert-reticle-tl">┌</span>
-            <span class="cert-reticle cert-reticle-tr">┐</span>
-            <span class="cert-reticle cert-reticle-bl">└</span>
-            <span class="cert-reticle cert-reticle-br">┘</span>
+          <!-- Atmospheric Ambient Shimmer -->
+          <div class="cert-shimmer-sweep" aria-hidden="true"></div>
 
-            <!-- Mathematical Vector SVG Seal (Fallback & Ambient Backing) -->
-            <div class="cert-seal-svg-container">
-              ${sealSvg}
+          <!-- PRIMARY ANCHOR CHAMBER (Left Column - Constant 320px width, zero layout shift) -->
+          <div class="cert-col-anchor">
+            <!-- Architectural Blueprint Seal Viewport -->
+            <div class="cert-seal-viewport" data-cert-toggle="${cert.id}">
+              <!-- Precision Drafting Crosshairs (+) -->
+              <span class="drafting-crosshair ch-tl" aria-hidden="true">+</span>
+              <span class="drafting-crosshair ch-tr" aria-hidden="true">+</span>
+              <span class="drafting-crosshair ch-bl" aria-hidden="true">+</span>
+              <span class="drafting-crosshair ch-br" aria-hidden="true">+</span>
+
+              <!-- Corner Reticle Brackets (┌ ┐ └ ┘) -->
+              <span class="cert-reticle cert-reticle-tl">┌</span>
+              <span class="cert-reticle cert-reticle-tr">┐</span>
+              <span class="cert-reticle cert-reticle-bl">└</span>
+              <span class="cert-reticle cert-reticle-br">┘</span>
+
+              <!-- Watermark Ghost Index Stamp -->
+              <div class="cert-watermark-stamp font-mono">${indexStr}</div>
+
+              <!-- Live Status Pill -->
+              <div class="cert-status-capsule font-mono">
+                <span class="status-radar-dot"></span>
+                <span>${cert.status || 'VERIFIED'}</span>
+              </div>
+
+              <!-- Mathematical Vector SVG Seal -->
+              <div class="cert-seal-svg-container">
+                ${sealSvg}
+              </div>
+
+              <!-- Auto-detected Physical Image with Natural Ratio -->
+              <div class="cert-media-inner">
+                <img 
+                  src="${candidates[0] || ''}" 
+                  alt="Sertifikat ${cert.title}" 
+                  class="cert-image-preview" 
+                  loading="lazy"
+                  data-candidates="${candidatesJson}"
+                  data-candidate-idx="0"
+                  onload="window.__handleCertImgLoad && window.__handleCertImgLoad(this)"
+                  onerror="window.__handleCertImgError && window.__handleCertImgError(this)"
+                />
+              </div>
+
+              <!-- Interactive Floating Inspect Pill -->
+              <div class="cert-hover-inspect font-mono">
+                <span class="inspect-arrow">↗</span>
+                <span>INSPEKSI</span>
+              </div>
             </div>
 
-            <!-- Auto-detected Physical Image with Natural Aspect Ratio -->
-            <div class="cert-media-inner">
-              <img 
-                src="${candidates[0] || ''}" 
-                alt="Sertifikat ${cert.title}" 
-                class="cert-image-preview" 
-                loading="lazy"
-                data-candidates="${candidatesJson}"
-                data-candidate-idx="0"
-                onload="window.__handleCertImgLoad && window.__handleCertImgLoad(this)"
-                onerror="window.__handleCertImgError && window.__handleCertImgError(this)"
-              />
-            </div>
+            <!-- Identity & Metadata Anchor Block -->
+            <div class="cert-anchor-content">
+              <div class="cert-meta-header font-mono">
+                <span class="cert-code-tag">CRT // ${indexStr}</span>
+                <span class="cert-issuer-badge" title="${cert.issuer}">${cert.issuer}</span>
+              </div>
 
-            <!-- Floating Hover Interaction Pill -->
-            <div class="cert-hover-tag">
-              <span>${ui.inspectCertificate || 'DEEP INSPECT'} ↗</span>
+              <!-- Display Title in Syne -->
+              <h3 class="cert-anchor-title font-display">${cert.title}</h3>
+
+              <!-- High-Contrast Clean Subtitle -->
+              <div class="cert-anchor-subtitle">
+                ${cert.subtitle || cert.description.slice(0, 65) + '...'}
+              </div>
+
+              <!-- Sleek High-Contrast Telemetry Capsule -->
+              <div class="cert-telemetry-capsule font-mono">
+                <div class="capsule-id">
+                  <span class="capsule-dot"></span>
+                  <span class="capsule-id-text">${cert.credentialId}</span>
+                </div>
+                <div class="capsule-period">${cert.issuedDate} — ${cert.expiryDate || 'LIFETIME'}</div>
+              </div>
+
+              <!-- Tactile Expand / Collapse Trigger Bar (Aligned with Dossier Actions) -->
+              <div class="cert-anchor-actions">
+                <button type="button" class="cert-action-toggle font-mono" data-cert-toggle="${cert.id}" data-cursor-target>
+                  <span class="toggle-lbl-collapsed">BUKA DOSSIER KREDENSIAL</span>
+                  <span class="toggle-lbl-expanded">✕ TUTUP DOSSIER</span>
+                  <span class="toggle-ico-collapsed">[ + ]</span>
+                  <span class="toggle-ico-expanded">[ — ]</span>
+                </button>
+              </div>
             </div>
           </div>
 
-          <!-- Card Header Telemetry -->
-          <div class="cert-card-header">
-            <div class="cert-serial-line">
-              <span class="cert-serial-tag">CERT // ${(idx + 1).toString().padStart(2, '0')} // ${cert.credentialId}</span>
-              <span class="cert-badge-status">${cert.status || 'VERIFIED'}</span>
-            </div>
-            <h3 class="cert-card-title">${cert.title}</h3>
-          </div>
+          <!-- EXTENDED ACCREDITATION DOSSIER (Right Column - Smoothly unrolls to 410px) -->
+          <div class="cert-col-dossier">
+            <div class="cert-dossier-inner">
+              <!-- Dossier Technical Header -->
+              <div class="cert-dossier-header">
+                <div class="dossier-serial-line font-mono">
+                  <span class="dossier-tag">ACCREDITATION DOSSIER // ${cert.credentialId}</span>
+                  <span class="dossier-badge-status">${cert.categoryLabel || 'VERIFIED'}</span>
+                </div>
+                <h4 class="dossier-headline font-display">${cert.title}</h4>
+              </div>
 
-          <!-- Metadata Spec Grid -->
-          <div class="cert-meta-grid">
-            <div class="cert-meta-item">
-              <span class="cert-meta-label">${ui.issuerLabel || 'ISSUER'}</span>
-              <span class="cert-meta-value">${cert.issuer}</span>
-            </div>
-            <div class="cert-meta-item">
-              <span class="cert-meta-label">${ui.yearLabel || 'PERIOD'}</span>
-              <span class="cert-meta-value">${cert.issuedDate} — ${cert.expiryDate || 'LIFETIME'}</span>
-            </div>
-          </div>
+              <!-- Validation Narrative -->
+              <div class="cert-dossier-block">
+                <span class="dossier-section-label font-mono">// CAKUPAN VALIDASI KOMPETENSI</span>
+                <p class="dossier-narrative">${cert.description}</p>
+              </div>
 
-          <!-- Description -->
-          <p class="cert-card-desc">${cert.description}</p>
+              <!-- Verified Deliverables / Competency Matrix -->
+              <div class="cert-dossier-block">
+                <span class="dossier-section-label font-mono">// KOMPETENSI TERUJI & TERVALIDASI</span>
+                <ul class="dossier-deliverables">
+                  ${(cert.skills || [])
+                    .map(
+                      (skill) => `
+                    <li class="dossier-deliverable-item">
+                      <span class="dossier-bullet"></span>
+                      <span class="dossier-skill-text">${skill}</span>
+                    </li>
+                  `
+                    )
+                    .join('')}
+                </ul>
+              </div>
 
-          <!-- Competency Skill Chips -->
-          <div class="cert-skills-wrap">
-            ${skillsHtml}
-          </div>
+              <!-- Action Bar: Deep View & Registry Verification -->
+              <div class="cert-dossier-actions">
+                <button 
+                  type="button" 
+                  class="cert-btn-deep-view font-mono" 
+                  data-inspect-cert="${cert.id}" 
+                  data-cursor-target
+                >
+                  <span class="pulse-indicator-dot"></span>
+                  <span>DEEP VIEW CERTIFICATE</span>
+                  <span class="btn-arrow">↗</span>
+                </button>
 
-          <!-- Card Actions Footer -->
-          <div class="cert-card-footer">
-            <button type="button" class="cert-action-btn cert-inspect-trigger" data-cert-id="${cert.id}" data-inspect-cert="${cert.id}" data-cursor-target>
-              <span>${ui.inspectCertificate || 'INSPEKSI KREDENSIAL'}</span>
-              <span class="btn-arrow">↗</span>
-            </button>
-            ${
-              cert.verifyUrl
-                ? `
-                  <a href="${cert.verifyUrl}" target="_blank" rel="noopener noreferrer" class="cert-verify-link" data-cursor-target>
+                ${
+                  cert.verifyUrl
+                    ? `
+                  <a 
+                    href="${cert.verifyUrl}" 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    class="cert-btn-registry font-mono" 
+                    data-cursor-target
+                  >
                     <span>${ui.viewCredential || 'VERIFIKASI RESMI'}</span>
                     <span class="link-arrow">↗</span>
                   </a>
                 `
-                : ''
-            }
+                    : ''
+                }
+              </div>
+            </div>
           </div>
         </article>
       `;
@@ -323,48 +399,61 @@ export function renderCertificates(data) {
     .join('');
 
   return `
-    <section id="certificates" class="section certs-section">
-      <!-- Section Watermark Index -->
-      <div class="section-watermark" aria-hidden="true">
+    <section id="certificates" class="architectural-section certs-section certs-pinned-section">
+      <!-- Architectural Parallax Watermark Label -->
+      <div class="section-watermark-label" data-parallax-slide="right" data-parallax-speed="-0.06">
         <span class="watermark-index">${certs.sectionIndex} // ${certs.sectionTitle}</span>
+        <span class="watermark-meta">${certs.sectionSub}</span>
       </div>
 
-      <div class="section-container">
-        <!-- Section Header -->
-        <header class="section-header">
-          <div class="section-title-wrap">
-            <span class="section-badge">// ${certs.sectionIndex} // ${certs.sectionSub}</span>
-            <h2 class="section-title">${certs.headline}</h2>
-            <p class="section-desc">${certs.description}</p>
-          </div>
-        </header>
-
-        <!-- Category Filter Bar -->
-        <div class="cert-filter-bar" role="tablist" aria-label="Filter Sertifikat">
-          ${categoriesHtml}
-        </div>
-
-        <!-- Architectural Grid of Certificates -->
-        <div class="certs-grid" id="certs-grid">
-          ${certCardsHtml}
-        </div>
-      </div>
-
-      <!-- Credential Deep-Inspect Drawer / Modal Container -->
-      <div class="cert-drawer-backdrop" id="cert-drawer-backdrop" aria-hidden="true">
-        <div class="cert-drawer" id="cert-drawer" role="dialog" aria-modal="true" aria-labelledby="cert-drawer-title">
-          <header class="cert-drawer-header">
-            <div class="cert-drawer-telemetry">
-              <span id="cert-drawer-serial">CERT // INSPECTION</span>
+      <!-- Sticky Stage Viewport Pin (Stays 100vh until horizontal rail finishes) -->
+      <div class="certs-sticky-stage" id="certs-sticky-stage">
+        <div class="certs-stage-container">
+          
+          <!-- Compact Architectural Header Row -->
+          <header class="certs-header-row">
+            <div class="certs-header-info">
+              <div class="certs-badge-line">
+                <span class="section-badge">// ${certs.sectionIndex} // ${certs.sectionSub}</span>
+                <span class="certs-live-indicator" id="certs-live-indicator">
+                  <span class="live-pulse-dot"></span>
+                  <span id="certs-live-indicator-text">STAGE LOCKED // PAUSED</span>
+                </span>
+              </div>
+              <h2 class="section-title certs-main-title font-display">${certs.headline}</h2>
+              <p class="section-desc certs-main-desc">${certs.description}</p>
             </div>
-            <button type="button" class="cert-drawer-close" id="cert-drawer-close-btn" aria-label="Tutup Inspeksi" data-cursor-target>
-              <span>${ui.closeDrawer || 'CLOSE [ESC]'}</span>
-            </button>
+
+            <!-- Dynamic Telemetry & Scroll Progress Track -->
+            <div class="certs-telemetry-cluster font-mono">
+              <div class="certs-counter-wrap">
+                <span class="certs-counter-label">CREDENTIAL TRAVERSE</span>
+                <span class="certs-counter-val">
+                  CERT // <strong id="certs-curr-idx">01</strong> OF <strong id="certs-total-idx">${(certs.items || []).length.toString().padStart(2, '0')}</strong>
+                </span>
+              </div>
+              <div class="certs-progress-track">
+                <div class="certs-progress-fill" id="certs-scroll-bar-fill"></div>
+              </div>
+              <div class="certs-telemetry-hint">
+                <span id="certs-telemetry-hint-text">SCROLL TO ADVANCE</span>
+                <span class="hint-arrow" id="certs-telemetry-hint-arrow">➔</span>
+              </div>
+            </div>
           </header>
 
-          <div class="cert-drawer-body" id="cert-drawer-content">
-            <!-- Dynamically populated on click -->
+          <!-- Category Filter Bar -->
+          <div class="cert-filter-bar" role="tablist" aria-label="Filter Sertifikat">
+            ${categoriesHtml}
           </div>
+
+          <!-- Horizontal Viewport & Rail -->
+          <div class="certs-horizontal-viewport" id="certs-horizontal-viewport">
+            <div class="certs-horizontal-rail" id="certs-horizontal-rail">
+              ${certCardsHtml}
+            </div>
+          </div>
+
         </div>
       </div>
     </section>

@@ -1075,17 +1075,188 @@ ${cert.verifyUrl ? `[VERIFICATION URL]: ${cert.verifyUrl}` : ''}</code></pre>
   }
 
   initCertificatesLedger() {
+    const section = document.getElementById('certificates');
+    const viewport = document.getElementById('certs-horizontal-viewport');
+    const rail = document.getElementById('certs-horizontal-rail');
     const filterPills = document.querySelectorAll('.cert-filter-pill');
     const certCards = document.querySelectorAll('.cert-card');
+    const progressBar = document.getElementById('certs-scroll-bar-fill');
+    const currIdxEl = document.getElementById('certs-curr-idx');
+    const totalIdxEl = document.getElementById('certs-total-idx');
+    const indicatorEl = document.getElementById('certs-live-indicator');
+    const indicatorTextEl = document.getElementById('certs-live-indicator-text');
+    const hintTextEl = document.getElementById('certs-telemetry-hint-text');
+    const hintArrowEl = document.getElementById('certs-telemetry-hint-arrow');
 
-    if (!filterPills.length || !certCards.length) return;
+    if (!section || !viewport || !rail || !certCards.length) return;
 
+    // 1. Dynamic Section Height Calculation with Entry & Exit Pause Buffers
+    const updateDimensions = () => {
+      const activeCards = Array.from(certCards).filter(
+        (c) => c.style.display !== 'none'
+      );
+      if (totalIdxEl) {
+        totalIdxEl.textContent = activeCards.length.toString().padStart(2, '0');
+      }
+
+      const railWidth = rail.scrollWidth;
+      const viewportWidth = viewport.clientWidth;
+      const maxScrollX = Math.max(0, railWidth - viewportWidth + 48);
+
+      if (maxScrollX <= 10) {
+        section.style.minHeight = '100vh';
+        section.style.height = 'auto';
+        rail.style.transform = 'translate3d(0, 0, 0)';
+        if (progressBar) progressBar.style.width = '100%';
+        if (currIdxEl) currIdxEl.textContent = '01';
+      } else {
+        // Generous vertical scroll distance providing an extended, deliberate entry pause buffer:
+        // [Long Entry Pause Buffer (30%)] -> [Smooth Horizontal Traverse (58%)] -> [Exit Pause Buffer (12%)]
+        const scrollDistance = maxScrollX * 2.2 + window.innerHeight * 1.6;
+        section.style.minHeight = `${window.innerHeight + scrollDistance}px`;
+        section.style.height = `${window.innerHeight + scrollDistance}px`;
+      }
+    };
+
+    // 2. Choreographed Parallax Scroll Synchronization with Extended Entry Pause
+    const PAUSE_ENTER = 0.30; // 30% extended initial pause on Card 01 before rail begins moving
+    const PAUSE_EXIT = 0.88;  // 12% exit pause buffer on last Card before unlocking vertical scroll
+
+    let railProgress = 0;
+
+    const handleScroll = () => {
+      // If a card is currently expanded and pinned at center, let vertical scroll gracefully collapse it
+      if (window.__certExpandedCard) {
+        const expCard = window.__certExpandedCard;
+        expCard.classList.remove('is-expanded');
+        window.__certExpandedCard = null;
+        window.__certExpandedTargetX = null;
+        rail.style.transition = 'transform 0.04s linear';
+      }
+
+      const railWidth = rail.scrollWidth;
+      const viewportWidth = viewport.clientWidth;
+      const maxScrollX = Math.max(0, railWidth - viewportWidth + 48);
+
+      if (maxScrollX <= 10) return;
+
+      const sectionTop = section.offsetTop;
+      const totalScrollable = section.offsetHeight - window.innerHeight;
+
+      if (totalScrollable <= 0) return;
+
+      const currentScroll = window.scrollY;
+      const rawProgress = (currentScroll - sectionTop) / totalScrollable;
+      const progress = Math.min(Math.max(rawProgress, 0), 1);
+
+      const activeCards = Array.from(certCards).filter(
+        (c) => c.style.display !== 'none'
+      );
+      const totalCount = activeCards.length || 1;
+
+      if (progress <= PAUSE_ENTER) {
+        // PHASE 1: Jeda Masuk Ekstra (Berhenti tenang di kartu pertama sebelum bergeser)
+        railProgress = 0;
+        const entryPct = Math.min(Math.round((progress / PAUSE_ENTER) * 100), 100);
+        if (indicatorEl) {
+          indicatorEl.classList.remove('is-traversing', 'is-complete');
+        }
+        if (indicatorTextEl) indicatorTextEl.textContent = 'STAGE PINNED // PAUSED';
+        if (hintTextEl) {
+          hintTextEl.textContent = `STAGE LOCKED • SCROLL TO ADVANCE (${entryPct}%)`;
+        }
+        if (hintArrowEl) hintArrowEl.textContent = '➔';
+        if (currIdxEl) currIdxEl.textContent = '01';
+        if (progressBar) progressBar.style.width = '0%';
+      } else if (progress >= PAUSE_EXIT) {
+        // PHASE 3: Jeda Keluar (Berhenti di kartu terakhir sebelum scroll bebas ke bawah)
+        railProgress = 1;
+        if (indicatorEl) {
+          indicatorEl.classList.remove('is-traversing');
+          indicatorEl.classList.add('is-complete');
+        }
+        if (indicatorTextEl) indicatorTextEl.textContent = 'RAIL COMPLETE // PAUSED';
+        if (hintTextEl) hintTextEl.textContent = 'REACHED END • SCROLL TO EXIT';
+        if (hintArrowEl) hintArrowEl.textContent = '↓';
+        if (currIdxEl) currIdxEl.textContent = totalCount.toString().padStart(2, '0');
+        if (progressBar) progressBar.style.width = '100%';
+      } else {
+        // PHASE 2: Pergeseran Parallax Horizontal Dinamis (Smoothstep Interpolation)
+        const normalized = (progress - PAUSE_ENTER) / (PAUSE_EXIT - PAUSE_ENTER);
+        // Smoothstep interpolation (Hermite curve) for zero-jerk gentle start & finish
+        railProgress = normalized * normalized * (3 - 2 * normalized);
+
+        if (indicatorEl) {
+          indicatorEl.classList.add('is-traversing');
+          indicatorEl.classList.remove('is-complete');
+        }
+        if (indicatorTextEl) indicatorTextEl.textContent = 'TRAVERSING RAIL';
+        if (hintTextEl) {
+          hintTextEl.textContent = `TRAVERSING (${Math.round(normalized * 100)}%)`;
+        }
+        if (hintArrowEl) hintArrowEl.textContent = '➔';
+
+        if (progressBar) {
+          progressBar.style.width = `${normalized * 100}%`;
+        }
+
+        const activeIdx = Math.min(
+          Math.floor(normalized * totalCount) + 1,
+          totalCount
+        );
+        if (currIdxEl) {
+          currIdxEl.textContent = activeIdx.toString().padStart(2, '0');
+        }
+      }
+
+      // Translate horizontal rail
+      const currentX = railProgress * maxScrollX;
+      rail.style.transform = `translate3d(-${currentX}px, 0, 0)`;
+
+      // Parallax differential on card SVG seals
+      if (activeCards.length > 0) {
+        activeCards.forEach((card) => {
+          const seal = card.querySelector('.cert-seal-svg-container');
+          if (seal) {
+            const cardRect = card.getBoundingClientRect();
+            const centerDiff =
+              cardRect.left + cardRect.width / 2 - window.innerWidth / 2;
+            const parallaxOffset = centerDiff * -0.06;
+            seal.style.transform = `translate3d(${parallaxOffset}px, 0, 0)`;
+          }
+        });
+      }
+    };
+
+    // Calculate dimensions on init
+    updateDimensions();
+
+    // Attach to Smooth Scroller / Window Scroll
+    if (this.smoothScroller && typeof this.smoothScroller.onScroll === 'function') {
+      this.smoothScroller.onScroll(handleScroll);
+    } else if (window.lenis) {
+      window.lenis.on('scroll', handleScroll);
+    }
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('resize', () => {
+      updateDimensions();
+      handleScroll();
+    });
+
+    // 3. Category Filter logic
     filterPills.forEach((pill) => {
-      pill.addEventListener('click', () => {
+      pill.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
         const targetCategory = pill.getAttribute('data-filter');
 
         filterPills.forEach((p) => p.classList.remove('active'));
         pill.classList.add('active');
+
+        // Collapse any open card when filter changes
+        certCards.forEach((c) => c.classList.remove('is-expanded'));
+        window.__certExpandedCard = null;
+        window.__certExpandedTargetX = null;
 
         certCards.forEach((card) => {
           const cardCategory = card.getAttribute('data-category');
@@ -1096,8 +1267,102 @@ ${cert.verifyUrl ? `[VERIFICATION URL]: ${cert.verifyUrl}` : ''}</code></pre>
             card.style.display = 'none';
           }
         });
+
+        // Recalculate dimensions & re-align immediately
+        updateDimensions();
+        handleScroll();
       });
     });
+
+    // Center Card in Viewport when Expanded with Silky-Smooth Spring Deceleration
+    const centerCardInViewport = (card, isExpanding) => {
+      const viewportWidth = viewport.clientWidth;
+      const activeCards = Array.from(certCards).filter(
+        (c) => c.style.display !== 'none'
+      );
+      const cardIdx = activeCards.indexOf(card);
+      if (cardIdx === -1) return;
+
+      if (isExpanding) {
+        const gap = 24;
+        const slotWidth = (viewportWidth - (gap * 2)) / 3;
+        const expandedWidth = (slotWidth * 2) + gap;
+        const centerOffset = (viewportWidth - expandedWidth) / 2;
+
+        // Position of the card in the rail
+        const cardLeftInRail = cardIdx * (slotWidth + gap);
+
+        // Target rail translate to center the expanded card exactly in viewport
+        const targetRailX = cardLeftInRail - centerOffset;
+
+        // Smoothly glide rail to center the expanded card
+        rail.style.transition = 'transform 0.65s cubic-bezier(0.16, 1, 0.3, 1)';
+        rail.style.transform = `translate3d(-${targetRailX}px, 0, 0)`;
+
+        window.__certExpandedTargetX = targetRailX;
+        window.__certExpandedCard = card;
+      } else {
+        window.__certExpandedTargetX = null;
+        window.__certExpandedCard = null;
+
+        // Smoothly glide back to scroll-based position
+        const railWidth = rail.scrollWidth;
+        const maxScroll = Math.max(0, railWidth - viewportWidth + 48);
+        const currentRailX = railProgress * maxScroll;
+
+        rail.style.transition = 'transform 0.65s cubic-bezier(0.16, 1, 0.3, 1)';
+        rail.style.transform = `translate3d(-${currentRailX}px, 0, 0)`;
+
+        setTimeout(() => {
+          rail.style.transition = 'transform 0.04s linear';
+        }, 660);
+      }
+    };
+
+    // 4. Interactive Card Expand / Collapse Toggle (Accordion Dossier with Center Glide)
+    certCards.forEach((card) => {
+      card.addEventListener('click', (e) => {
+        // Do not toggle if user clicked on deep view or external verification link
+        if (
+          e.target.closest('[data-inspect-cert]') || 
+          e.target.closest('.cert-btn-registry') || 
+          e.target.closest('.cert-verify-link')
+        ) {
+          return;
+        }
+
+        const isToggleTrigger = e.target.closest('[data-cert-toggle]');
+        const isAlreadyExpanded = card.classList.contains('is-expanded');
+
+        if (isToggleTrigger || !isAlreadyExpanded) {
+          e.preventDefault();
+
+          // Safe haptic audio tick
+          if (typeof hapticAudio !== 'undefined' && typeof hapticAudio.playTick === 'function') {
+            hapticAudio.playTick();
+          }
+
+          if (isAlreadyExpanded) {
+            // Collapse card
+            card.classList.remove('is-expanded');
+            centerCardInViewport(card, false);
+          } else {
+            // Collapse all others and expand this card to 2-slot width centered
+            certCards.forEach((c) => c.classList.remove('is-expanded'));
+            card.classList.add('is-expanded');
+            centerCardInViewport(card, true);
+          }
+
+          // Let the 0.65s CSS transition glide with 60/120fps hardware acceleration
+          setTimeout(() => {
+            updateDimensions();
+          }, 660);
+        }
+      });
+    });
+
+    // Initial frame pass
+    requestAnimationFrame(handleScroll);
   }
 
   /* ==========================================================================
