@@ -15,6 +15,7 @@ import { renderWelcome } from './components/renderWelcome.js';
 import { renderAbout } from './components/renderAbout.js';
 import { renderSkills } from './components/renderSkills.js';
 import { renderProjects } from './components/renderProjects.js';
+import { renderCertificates, renderCryptographicSeal } from './components/renderCertificates.js';
 import { renderGithub } from './components/renderGithub.js';
 import { renderLab } from './components/renderLab.js';
 import { renderWeather } from './components/renderWeather.js';
@@ -30,7 +31,12 @@ import { XRayBiosphereEngine } from './core/xrayBiosphere.js';
 import { KineticTypographyEngine } from './core/kineticTypography.js';
 import { BioTimeEngine } from './core/bioTimeEngine.js';
 import { WeatherContourEngine } from './core/weatherContourEngine.js';
-import { initProjectImageDetector, getProjectImageCandidates } from './utils/imageDetector.js';
+import { 
+  initProjectImageDetector, 
+  getProjectImageCandidates,
+  initCertificateImageDetector,
+  getCertificateImageCandidates
+} from './utils/imageDetector.js';
 
 class PortfolioApp {
   constructor() {
@@ -60,6 +66,7 @@ class PortfolioApp {
 
   init() {
     initProjectImageDetector();
+    initCertificateImageDetector();
     this.renderDOM();
     this.initSmoothScroller();
     this.initParallaxAndObserver();
@@ -71,6 +78,7 @@ class PortfolioApp {
     this.initClipboard();
     this.initSmoothNavLinks();
     this.initSystemDrawer();
+    this.initCertificatesLedger();
     this.initMobileNav();
     this.initKineticTopographyCanvas();
     this.initMonolithSimulator();
@@ -93,6 +101,7 @@ class PortfolioApp {
       renderAbout(this.data),
       renderSkills(this.data),
       renderProjects(this.data),
+      renderCertificates(this.data),
       renderGithub(this.data),
       renderLab(this.data),
       renderWeather(this.data),
@@ -173,6 +182,7 @@ class PortfolioApp {
         this.initHanzzPet();
         this.initParallaxAndObserver();
         this.initSmoothNavLinks();
+        this.initCertificatesLedger();
         this.initAudioSynthesizer();
         this.initClipboard();
       }, 200);
@@ -196,8 +206,10 @@ class PortfolioApp {
       navLinks[1].textContent = t.nav.about;
       navLinks[2].textContent = t.nav.skills;
       navLinks[3].textContent = t.nav.projects;
-      navLinks[4].textContent = t.nav.github || '05.GIT';
-      navLinks[5].textContent = t.nav.another || '06.LAB';
+      if (navLinks[4]) navLinks[4].textContent = t.nav.certificates || '04.CRT';
+      if (navLinks[5]) navLinks[5].textContent = t.nav.github || '05.GIT';
+      if (navLinks[6]) navLinks[6].textContent = t.nav.another || '06.LAB';
+      if (navLinks[7]) navLinks[7].textContent = t.nav.weather || '07.ATM';
     }
 
     // Update mobile nav labels
@@ -701,6 +713,19 @@ class PortfolioApp {
         }
         return;
       }
+
+      // 4. Inspect Certificate
+      const certTarget = e.target.closest('[data-inspect-cert]');
+      if (certTarget) {
+        if (e.target.closest('.cert-verify-link')) return;
+        e.preventDefault();
+        const certId = certTarget.getAttribute('data-inspect-cert');
+        const cert = this.data.certificates?.items?.find((c) => c.id === certId);
+        if (cert) {
+          this.openCertificateInspection(cert);
+        }
+        return;
+      }
     });
   }
 
@@ -960,6 +985,119 @@ class PortfolioApp {
     `;
 
     this.openDrawer(note.tag, html);
+  }
+
+  openCertificateInspection(cert) {
+    const candidates = getCertificateImageCandidates(cert);
+    const firstCandidate = candidates[0] || '';
+    const sealSvg = renderCryptographicSeal(cert.sealType || 'guilloche', cert);
+
+    const skillsHtml = (cert.skills || [])
+      .map(
+        (s) => `
+        <span class="cert-skill-tag" style="padding: 4px 10px; font-size: 0.72rem;">${s}</span>
+      `
+      )
+      .join('');
+
+    const html = `
+      <div class="drawer-title-group">
+        <div style="font-family: var(--font-mono); font-size: var(--font-mono-tag); color: var(--accent-primary); margin-bottom: 0.25rem;">
+          CERT // ${cert.credentialId} [${cert.issuedDate}]
+        </div>
+        <h2 style="font-size: 1.5rem; line-height: 1.25;">${cert.title}</h2>
+        <div class="drawer-subtitle">${cert.issuer} • ${cert.status || 'VERIFIED'}</div>
+      </div>
+
+      <!-- Seal & Preview Hero in Drawer -->
+      <div class="drawer-preview-hero cert-seal-viewport" style="aspect-ratio: 16 / 10; margin-bottom: var(--space-xl);">
+        <span class="cert-reticle cert-reticle-tl">┌</span>
+        <span class="cert-reticle cert-reticle-tr">┐</span>
+        <span class="cert-reticle cert-reticle-bl">└</span>
+        <span class="cert-reticle cert-reticle-br">┘</span>
+
+        <div class="cert-seal-svg-container" style="opacity: 0.85;">
+          ${sealSvg}
+        </div>
+
+        <div class="cert-media-inner">
+          <img 
+            src="${firstCandidate}" 
+            alt="Sertifikat ${cert.title}" 
+            class="cert-image-preview" 
+            data-candidates='${JSON.stringify(candidates)}'
+            data-candidate-idx="0"
+            onload="window.__handleCertImgLoad && window.__handleCertImgLoad(this)"
+            onerror="window.__handleCertImgError && window.__handleCertImgError(this)"
+          />
+        </div>
+      </div>
+
+      <div class="drawer-section-block">
+        <div class="drawer-section-heading">01 // ACCREDITATION SCOPE & SUMMARY</div>
+        <p style="font-size: var(--font-body-md); line-height: 1.65; color: var(--text-secondary);">
+          ${cert.description}
+        </p>
+      </div>
+
+      <div class="drawer-section-block">
+        <div class="drawer-section-heading">02 // VERIFIED SKILLS & COMPETENCY MATRIX</div>
+        <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.5rem;">
+          ${skillsHtml}
+        </div>
+      </div>
+
+      <div class="drawer-section-block">
+        <div class="drawer-section-heading">03 // METADATA & TELEMETRY LEDGER</div>
+        <pre class="drawer-schema-box"><code>[ISSUER]: ${cert.issuer}
+[CREDENTIAL ID]: ${cert.credentialId}
+[PERIOD VALIDITY]: ${cert.issuedDate} — ${cert.expiryDate || 'LIFETIME'}
+[VALIDATION STATUS]: ${cert.status || 'ACTIVE'}
+[SECURITY SEAL]: ${cert.sealType?.toUpperCase() || 'GUILLOCHE'} CRYPTOGRAPHIC STAMP
+${cert.verifyUrl ? `[VERIFICATION URL]: ${cert.verifyUrl}` : ''}</code></pre>
+      </div>
+
+      ${
+        cert.verifyUrl
+          ? `
+        <div class="drawer-section-block" style="padding-top: var(--space-md);">
+          <a href="${cert.verifyUrl}" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 0.5rem; text-decoration: none;" data-cursor-target>
+            <span>KUNJUNGI VERIFIKASI RESMI</span>
+            <span>↗</span>
+          </a>
+        </div>
+      `
+          : ''
+      }
+    `;
+
+    this.openDrawer(`CERT // ${cert.credentialId}`, html);
+  }
+
+  initCertificatesLedger() {
+    const filterPills = document.querySelectorAll('.cert-filter-pill');
+    const certCards = document.querySelectorAll('.cert-card');
+
+    if (!filterPills.length || !certCards.length) return;
+
+    filterPills.forEach((pill) => {
+      pill.addEventListener('click', () => {
+        const targetCategory = pill.getAttribute('data-filter');
+
+        filterPills.forEach((p) => p.classList.remove('active'));
+        pill.classList.add('active');
+
+        certCards.forEach((card) => {
+          const cardCategory = card.getAttribute('data-category');
+          if (targetCategory === 'all' || cardCategory === targetCategory) {
+            card.style.display = 'flex';
+            card.style.opacity = '1';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    });
   }
 
   /* ==========================================================================

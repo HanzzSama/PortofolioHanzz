@@ -21,6 +21,7 @@ export const translations = {
       "about": "02.ABT",
       "skills": "03.SKL",
       "projects": "04.PRJ",
+      "certificates": "04.CRT",
       "another": "06.LAB",
       "github": "05.GIT"
     },
@@ -288,6 +289,7 @@ export const translations = {
             "status": "Aktif"
           },
           "deepDive": {
+            "architectureSchema": "[CLIENT: WEB & MOBILE BROWSERS]\n       │\n       ▼ HTTPS / TLS 1.3\n[LARAVEL ROUTING & TAILWIND BLADE ENGINE]\n       │\n       ├──► [ADMISSION CONTROLLER: JALUR & PRODI]\n       │           │\n       │           ├──► [FORM VALIDATION & SANITIZATION]\n       │           └──► [DOCUMENT UPLOAD & VERIF ENGINE]\n       │\n       ├──► [ADMIN DASHBOARD: PANITIA PMB ITESA]\n       │\n       ▼ ELOQUENT ORM / QUERY BUILDER\n[MYSQL DATABASE: CAMABA, PRODI, KUOTA, STATUS]",
             "problem": "Calon mahasiswa baru membutuhkan akses informasi pendaftaran yang akurat, lengkap, dan mudah diakses dari berbagai perangkat tanpa kendala.",
             "solution": "Membangun portal PMB terpadu berbasis Laravel dengan navigasi informatif seputar program studi, biaya, jalur pendaftaran, dan verifikasi berkas daring.",
             "benchmarks": [
@@ -301,8 +303,7 @@ export const translations = {
                 "target": "Terintegrasi",
                 "achieved": "Dashboard Admin"
               }
-            ],
-            "architectureSchema": "[CLIENT: WEB & MOBILE BROWSERS]\n       │\n       ▼ HTTPS / TLS 1.3\n[LARAVEL ROUTING & TAILWIND BLADE ENGINE]\n       │\n       ├──► [ADMISSION CONTROLLER: JALUR & PRODI]\n       │           │\n       │           ├──► [FORM VALIDATION & SANITIZATION]\n       │           └──► [DOCUMENT UPLOAD & VERIF ENGINE]\n       │\n       ├──► [ADMIN DASHBOARD: PANITIA PMB ITESA]\n       │\n       ▼ ELOQUENT ORM / QUERY BUILDER\n[MYSQL DATABASE: CAMABA, PRODI, KUOTA, STATUS]"
+            ]
           }
         },
         "proj-02": {
@@ -322,6 +323,7 @@ export const translations = {
             "tema": "Personalisasi"
           },
           "deepDive": {
+            "architectureSchema": "[USER INPUT: KEYBOARD & TOUCH NUMPAD]\n       │\n       ▼ EVENT LISTENER\n[PARSER & TOKENIZER: MATH EXPRESSION]\n       │\n       ├──► [MATH BOT ENGINE: AUTO-CORRECT & CALC]\n       │\n       ├──► [THEME ENGINE: DYNAMIC CSS VARIABLES]\n       │           │\n       │           └──► [LOCALSTORAGE STATE PERSISTENCE]\n       │\n       ▼ REAL-TIME DOM RENDERER\n[CANVAS / LCD DISPLAY: RESULT & HISTORY LOG]",
             "problem": "Banyak kalkulator web yang monoton, kaku tanpa interaksi asisten, dan tidak memungkinkan pengguna mengubah tema sesuai preferensi personal.",
             "solution": "Mengembangkan Mathicalc murni dengan HTML, CSS, dan JavaScript — memadukan bot asisten matematis dan tema personalisasi tanpa dependensi berat.",
             "benchmarks": [
@@ -335,8 +337,7 @@ export const translations = {
                 "target": "Fleksibel",
                 "achieved": "100% Personal"
               }
-            ],
-            "architectureSchema": "[USER INPUT: KEYBOARD & TOUCH NUMPAD]\n       │\n       ▼ EVENT LISTENER\n[PARSER & TOKENIZER: MATH EXPRESSION]\n       │\n       ├──► [MATH BOT ENGINE: AUTO-CORRECT & CALC]\n       │\n       ├──► [THEME ENGINE: DYNAMIC CSS VARIABLES]\n       │           │\n       │           └──► [LOCALSTORAGE STATE PERSISTENCE]\n       │\n       ▼ REAL-TIME DOM RENDERER\n[CANVAS / LCD DISPLAY: RESULT & HISTORY LOG]"
+            ]
           }
         },
         "proj-03": {
@@ -356,6 +357,7 @@ export const translations = {
             "basis": "Web App"
           },
           "deepDive": {
+            "architectureSchema": "[LEARNER / DEVELOPER UI]\n       │\n       ▼ HTTPS REST API\n[LARAVEL CORE: LEARNING ROADMAP ENGINE]\n       │\n       ├──► [MODULAR CURRICULUM: ZERO TO PRO]\n       │           │\n       │           ├──► [CODE PLAYGROUND & SANDBOX]\n       │           └──► [INTERACTIVE SYNTAX VALIDATOR]\n       │\n       ├──► [PROGRESSION & MILESTONE TRACKER]\n       │\n       ▼ ELOQUENT ORM\n[MYSQL DATABASE: USERS, LESSONS, COMPLETIONS]",
             "problem": "Banyak calon programmer pemula kesulitan belajar mandiri karena materi online yang terpecah-pecah tanpa panduan tahapan yang runtut.",
             "solution": "Membangun platform TurnCode di atas Laravel untuk menghadirkan alur belajar terpadu 'Zero to Pro' yang terarah dan mudah dipahami.",
             "benchmarks": [
@@ -369,8 +371,7 @@ export const translations = {
                 "target": "Tinggi",
                 "achieved": "Laravel MVC"
               }
-            ],
-            "architectureSchema": "[LEARNER / DEVELOPER UI]\n       │\n       ▼ HTTPS REST API\n[LARAVEL CORE: LEARNING ROADMAP ENGINE]\n       │\n       ├──► [MODULAR CURRICULUM: ZERO TO PRO]\n       │           │\n       │           ├──► [CODE PLAYGROUND & SANDBOX]\n       │           └──► [INTERACTIVE SYNTAX VALIDATOR]\n       │\n       ├──► [PROGRESSION & MILESTONE TRACKER]\n       │\n       ▼ ELOQUENT ORM\n[MYSQL DATABASE: USERS, LESSONS, COMPLETIONS]"
+            ]
           }
         },
         "proj-04": {
@@ -390,6 +391,7 @@ export const translations = {
             "analisis": "Kognitif"
           },
           "deepDive": {
+            "architectureSchema": "[CLINICAL ASSESSMENT / USER QUESTIONNAIRE]\n       │\n       ▼ WEBSOCKET / REST API\n[FASTAPI & LLM INTERFACE LAYER]\n       │\n       ├──► [LLM: SYMPTOM EXTRACTION & CONTEXT]\n       │           │\n       │           ▼\n       ├──► [FEATURE VECTOR PREPROCESSING]\n       │           │\n       │           ▼\n       ├──► [XGBOOST CLASSIFIER: ALZHEIMER RISK]\n       │           │\n       │           └──► [DECISION TREE ENSEMBLE SCORING]\n       │\n       ▼ JSON TELEMETRY RESPONSE\n[DIAGNOSTIC RADAR & RISK STRATIFICATION UI]",
             "problem": "Pemeriksaan gejala alzheimer pada fase awal sering terlambat karena keterbatasan akses skrining kognitif awal yang cepat dan terjangkau.",
             "solution": "Menggabungkan model LLM untuk ekstraksi interaksi bahasa dengan ketepatan algoritma tabular XGBoost guna mengkalkulasi indikasi gejala secara akurat.",
             "benchmarks": [
@@ -403,8 +405,7 @@ export const translations = {
                 "target": "Intuitif",
                 "achieved": "Asesmen Interaktif"
               }
-            ],
-            "architectureSchema": "[CLINICAL ASSESSMENT / USER QUESTIONNAIRE]\n       │\n       ▼ WEBSOCKET / REST API\n[FASTAPI & LLM INTERFACE LAYER]\n       │\n       ├──► [LLM: SYMPTOM EXTRACTION & CONTEXT]\n       │           │\n       │           ▼\n       ├──► [FEATURE VECTOR PREPROCESSING]\n       │           │\n       │           ▼\n       ├──► [XGBOOST CLASSIFIER: ALZHEIMER RISK]\n       │           │\n       │           └──► [DECISION TREE ENSEMBLE SCORING]\n       │\n       ▼ JSON TELEMETRY RESPONSE\n[DIAGNOSTIC RADAR & RISK STRATIFICATION UI]"
+            ]
           }
         },
         "proj-05": {
@@ -424,6 +425,7 @@ export const translations = {
             "status": "Selesai"
           },
           "deepDive": {
+            "architectureSchema": "[AGROTECH PORTAL USER]\n       │\n       ▼ HTTPS\n[PHP MVC FRAMEWORK & WEB RUNTIME]\n       │\n       ├──► [KATALOG PRODUK PERTANIAN & AGRIBISNIS]\n       │\n       ├──► [SISTEM INFORMASI KEMITRAAN PETANI]\n       │\n       ▼ MYSQL STORAGE\n[DATABASE PRODUK, ARTIKEL TANI & DATA MITRA]",
             "problem": "Petani tradisional menghadapi kesulitan dalam pencatatan siklus tanam, pemetaan lahan, dan pemantauan sumber daya karena masih mengandalkan pencatatan manual di kertas.",
             "solution": "Merancang Ladangku sebagai platform web ringan dengan navigasi sederhana, indikator status visual, dan aksesibilitas cepat melalui perangkat mobile para petani.",
             "benchmarks": [
@@ -437,8 +439,7 @@ export const translations = {
                 "target": "Responsif",
                 "achieved": "Optimal di HP"
               }
-            ],
-            "architectureSchema": "[AGROTECH PORTAL USER]\n       │\n       ▼ HTTPS\n[PHP MVC FRAMEWORK & WEB RUNTIME]\n       │\n       ├──► [KATALOG PRODUK PERTANIAN & AGRIBISNIS]\n       │\n       ├──► [SISTEM INFORMASI KEMITRAAN PETANI]\n       │\n       ▼ MYSQL STORAGE\n[DATABASE PRODUK, ARTIKEL TANI & DATA MITRA]"
+            ]
           }
         },
         "proj-06": {
@@ -458,6 +459,7 @@ export const translations = {
             "status": "Selesai"
           },
           "deepDive": {
+            "architectureSchema": "[CUSTOMER TABLE / MOBILE ORDER]\n       │\n       ▼\n[ORDER DISPATCHER & CART STATE]\n       │\n       ├──► [MENU SELECTOR & PRICING CALCULATOR]\n       │\n       ├──► [KITCHEN DISPLAY SYSTEM TICKETING]\n       │\n       ▼ TRANSACTION LOG\n[ORDER STATUS, PAYMENT RECEIPT & DATABASE]",
             "problem": "Buku menu fisik konvensional memicu antrean pesanan yang lambat, kesalahan perhitungan harga manual, dan repot saat memperbarui daftar menu harian.",
             "solution": "Membangun aplikasi menu digital yang responsif dengan kartu menu visual, perhitungan total harga otomatis, dan konfirmasi pesanan instan.",
             "benchmarks": [
@@ -471,8 +473,7 @@ export const translations = {
                 "target": "100%",
                 "achieved": "Otomatis"
               }
-            ],
-            "architectureSchema": "[CUSTOMER TABLE / MOBILE ORDER]\n       │\n       ▼\n[ORDER DISPATCHER & CART STATE]\n       │\n       ├──► [MENU SELECTOR & PRICING CALCULATOR]\n       │\n       ├──► [KITCHEN DISPLAY SYSTEM TICKETING]\n       │\n       ▼ TRANSACTION LOG\n[ORDER STATUS, PAYMENT RECEIPT & DATABASE]"
+            ]
           }
         },
         "proj-07": {
@@ -492,6 +493,7 @@ export const translations = {
             "status": "Selesai"
           },
           "deepDive": {
+            "architectureSchema": "[SISWA & PUSTAKAWAN INTERFACE]\n       │\n       ▼\n[LIBRARY MANAGEMENT CORE]\n       │\n       ├──► [OPAC: ONLINE CATALOG SEARCH]\n       │\n       ├──► [CIRCULATION: PINJAM, KEMBALI, DENDA]\n       │\n       ▼ RELATIONAL SCHEMA\n[DATABASE BUKU, MEMBER, & RIWAYAT PEMINJAMAN]",
             "problem": "Pencatatan buku pinjaman secara manual sering menyebabkan kehilangan buku, kekeliruan data peminjam, dan pencarian koleksi yang memakan waktu lama.",
             "solution": "Menghadirkan sistem web terpadu yang mengotomatisasi log sirkulasi, memantau tenggat waktu pengembalian, dan menyajikan katalog buku yang mudah dicari.",
             "benchmarks": [
@@ -505,8 +507,7 @@ export const translations = {
                 "target": "Akurat",
                 "achieved": "Otomatis"
               }
-            ],
-            "architectureSchema": "[SISWA & PUSTAKAWAN INTERFACE]\n       │\n       ▼\n[LIBRARY MANAGEMENT CORE]\n       │\n       ├──► [OPAC: ONLINE CATALOG SEARCH]\n       │\n       ├──► [CIRCULATION: PINJAM, KEMBALI, DENDA]\n       │\n       ▼ RELATIONAL SCHEMA\n[DATABASE BUKU, MEMBER, & RIWAYAT PEMINJAMAN]"
+            ]
           }
         },
         "proj-08": {
@@ -526,6 +527,7 @@ export const translations = {
             "status": "Selesai"
           },
           "deepDive": {
+            "architectureSchema": "[ADMIN KEUANGAN & SISWA PORTAL]\n       │\n       ▼\n[FINANCIAL LEDGER & BILLING SYSTEM]\n       │\n       ├──► [VERIFIKASI TAGIHAN BULANAN SISWA]\n       │\n       ├──► [CETAK BUKTI PEMBAYARAN & KWITANSI]\n       │\n       ▼ TRANSACTION ARCHIVE\n[DATABASE TRANSAKSI, REKAP KAS & LAPORAN SPP]",
             "problem": "Petugas keuangan sekolah kewalahan merekap pembayaran ratusan siswa secara manual di buku kas, menyulitkan pengecekan tunggakan secara akurat.",
             "solution": "Membangun portal administrasi berbasis framework Laravel dengan database relasional terstruktur, verifikasi kwitansi otomatis, dan pelaporan keuangan bulanan.",
             "benchmarks": [
@@ -539,8 +541,7 @@ export const translations = {
                 "target": "Relasional",
                 "achieved": "MySQL Terstruktur"
               }
-            ],
-            "architectureSchema": "[ADMIN KEUANGAN & SISWA PORTAL]\n       │\n       ▼\n[FINANCIAL LEDGER & BILLING SYSTEM]\n       │\n       ├──► [VERIFIKASI TAGIHAN BULANAN SISWA]\n       │\n       ├──► [CETAK BUKTI PEMBAYARAN & KWITANSI]\n       │\n       ▼ TRANSACTION ARCHIVE\n[DATABASE TRANSAKSI, REKAP KAS & LAPORAN SPP]"
+            ]
           }
         },
         "proj-09": {
@@ -560,6 +561,7 @@ export const translations = {
             "status": "Selesai"
           },
           "deepDive": {
+            "architectureSchema": "[USER TASK INPUT & GESTURE CONTROL]\n       │\n       ▼\n[TASK STATE MANAGER: CRUD & FILTERING]\n       │\n       ├──► [PRIORITY MATRIX: HIGH / MED / LOW]\n       │\n       ├──► [LOCALSTORAGE OFFLINE SYNC]\n       │\n       ▼ REACTIVE DOM\n[INTERACTIVE TASK LIST & COMPLETION TELEMETRY]",
             "problem": "Banyak aplikasi to-do dipenuhi fitur rumit dan iklan yang justru mengganggu fokus pengguna saat mencatat agenda penting harian.",
             "solution": "Merancang Mylist Todo App dengan tampilan bersih, fokus navigasi cepat, dan persistensi LocalStorage untuk akses kilat setiap saat.",
             "benchmarks": [
@@ -573,8 +575,7 @@ export const translations = {
                 "target": "Lokal",
                 "achieved": "Zero Jeda"
               }
-            ],
-            "architectureSchema": "[USER TASK INPUT & GESTURE CONTROL]\n       │\n       ▼\n[TASK STATE MANAGER: CRUD & FILTERING]\n       │\n       ├──► [PRIORITY MATRIX: HIGH / MED / LOW]\n       │\n       ├──► [LOCALSTORAGE OFFLINE SYNC]\n       │\n       ▼ REACTIVE DOM\n[INTERACTIVE TASK LIST & COMPLETION TELEMETRY]"
+            ]
           }
         }
       }
@@ -836,6 +837,7 @@ export const translations = {
       "about": "02.ABT",
       "skills": "03.SKL",
       "projects": "04.PRJ",
+      "certificates": "04.CRT",
       "another": "06.LAB",
       "github": "05.GIT"
     },
@@ -916,34 +918,34 @@ export const translations = {
       "timelineTitle": "Career Chronology & Practical Experience",
       "timeline": [
         {
-          "year": "2026 — PRESENT",
-          "title": "Advanced Frontend & Backend Expansion",
-          "place": "Semarang, Central Java",
-          "description": "Expanding expertise across modern frontend and backend architectures, interactive engineering, and high-performance web systems."
+          "year": "2026 — SEKARANG",
+          "title": "Pengembangan Lanjutan Frontend & Backend",
+          "place": "Semarang, Jawa Tengah",
+          "description": "Memperluas keilmuan di bidang frontend dan backend, merancang arsitektur sistem modern, serta memperdalam rekayasa web interaktif berkinerja tinggi."
         },
         {
           "year": "2025 — 2026",
           "title": "Artificial Intelligence & Fullstack Engineering",
           "place": "ITESA Muhammadiyah Semarang",
-          "description": "Deepening knowledge in artificial intelligence and fullstack development while pursuing higher education at ITESA Muhammadiyah Semarang."
+          "description": "Memperdalam keilmuan untuk memahami lebih dalam seputar artifisial inteligensi dan fullstack developer, sembari menempuh pendidikan perguruan tinggi di ITESA Muhammadiyah Semarang."
         },
         {
           "year": "2024 — 2025",
-          "title": "Coding Mastery & Fullstack Developer Role",
-          "place": "Semarang, Central Java",
-          "description": "Advancing programming skills and comprehensive understanding of frontend and backend environments, building professional fullstack developer competence."
+          "title": "Pengembangan Skill Coding & Fullstack Developer",
+          "place": "Semarang, Jawa Tengah",
+          "description": "Mengembangkan skill coding dan pemahaman mendalam di dunia frontend dan backend, serta membangun kapabilitas jobdesk fullstack developer."
         },
         {
           "year": "2022 — 2024",
-          "title": "Website & Application Software Engineering",
+          "title": "Eksplorasi Web, Aplikasi & Software Engineering",
           "place": "SMK TEXMACO Semarang",
-          "description": "Beginning exploration into web applications and software engineering foundations at SMK TEXMACO Semarang."
+          "description": "Memulai eksplorasi di dunia website dan aplikasi serta membangun background IT software engineering di bangku SMK TEXMACO Semarang."
         },
         {
           "year": "2020 — 2022",
-          "title": "Cyber Security Tools Exploration",
+          "title": "Eksplorasi Perdana Cyber Security Tools",
           "place": "SMP TEXMACO Semarang",
-          "description": "Initial IT journey exploring cyber security tools during junior high school at SMP TEXMACO Semarang."
+          "description": "Memulai eksplorasi awal di dunia IT dengan mempelajari cyber security tools di bangku SMP TEXMACO Semarang."
         }
       ]
     },
@@ -1103,6 +1105,7 @@ export const translations = {
             "status": "Aktif"
           },
           "deepDive": {
+            "architectureSchema": "[CLIENT: WEB & MOBILE BROWSERS]\n       │\n       ▼ HTTPS / TLS 1.3\n[LARAVEL ROUTING & TAILWIND BLADE ENGINE]\n       │\n       ├──► [ADMISSION CONTROLLER: JALUR & PRODI]\n       │           │\n       │           ├──► [FORM VALIDATION & SANITIZATION]\n       │           └──► [DOCUMENT UPLOAD & VERIF ENGINE]\n       │\n       ├──► [ADMIN DASHBOARD: PANITIA PMB ITESA]\n       │\n       ▼ ELOQUENT ORM / QUERY BUILDER\n[MYSQL DATABASE: CAMABA, PRODI, KUOTA, STATUS]",
             "problem": "Calon mahasiswa baru membutuhkan akses informasi pendaftaran yang akurat, lengkap, dan mudah diakses dari berbagai perangkat tanpa kendala.",
             "solution": "Membangun portal PMB terpadu berbasis Laravel dengan navigasi informatif seputar program studi, biaya, jalur pendaftaran, dan verifikasi berkas daring.",
             "benchmarks": [
@@ -1116,8 +1119,7 @@ export const translations = {
                 "target": "Terintegrasi",
                 "achieved": "Dashboard Admin"
               }
-            ],
-            "architectureSchema": "[CLIENT: WEB & MOBILE BROWSERS]\n       │\n       ▼ HTTPS / TLS 1.3\n[LARAVEL ROUTING & TAILWIND BLADE ENGINE]\n       │\n       ├──► [ADMISSION CONTROLLER: JALUR & PRODI]\n       │           │\n       │           ├──► [FORM VALIDATION & SANITIZATION]\n       │           └──► [DOCUMENT UPLOAD & VERIF ENGINE]\n       │\n       ├──► [ADMIN DASHBOARD: PANITIA PMB ITESA]\n       │\n       ▼ ELOQUENT ORM / QUERY BUILDER\n[MYSQL DATABASE: CAMABA, PRODI, KUOTA, STATUS]"
+            ]
           }
         },
         "proj-02": {
@@ -1137,6 +1139,7 @@ export const translations = {
             "tema": "Personalisasi"
           },
           "deepDive": {
+            "architectureSchema": "[USER INPUT: KEYBOARD & TOUCH NUMPAD]\n       │\n       ▼ EVENT LISTENER\n[PARSER & TOKENIZER: MATH EXPRESSION]\n       │\n       ├──► [MATH BOT ENGINE: AUTO-CORRECT & CALC]\n       │\n       ├──► [THEME ENGINE: DYNAMIC CSS VARIABLES]\n       │           │\n       │           └──► [LOCALSTORAGE STATE PERSISTENCE]\n       │\n       ▼ REAL-TIME DOM RENDERER\n[CANVAS / LCD DISPLAY: RESULT & HISTORY LOG]",
             "problem": "Banyak kalkulator web yang monoton, kaku tanpa interaksi asisten, dan tidak memungkinkan pengguna mengubah tema sesuai preferensi personal.",
             "solution": "Mengembangkan Mathicalc murni dengan HTML, CSS, dan JavaScript — memadukan bot asisten matematis dan tema personalisasi tanpa dependensi berat.",
             "benchmarks": [
@@ -1150,8 +1153,7 @@ export const translations = {
                 "target": "Fleksibel",
                 "achieved": "100% Personal"
               }
-            ],
-            "architectureSchema": "[USER INPUT: KEYBOARD & TOUCH NUMPAD]\n       │\n       ▼ EVENT LISTENER\n[PARSER & TOKENIZER: MATH EXPRESSION]\n       │\n       ├──► [MATH BOT ENGINE: AUTO-CORRECT & CALC]\n       │\n       ├──► [THEME ENGINE: DYNAMIC CSS VARIABLES]\n       │           │\n       │           └──► [LOCALSTORAGE STATE PERSISTENCE]\n       │\n       ▼ REAL-TIME DOM RENDERER\n[CANVAS / LCD DISPLAY: RESULT & HISTORY LOG]"
+            ]
           }
         },
         "proj-03": {
@@ -1171,6 +1173,7 @@ export const translations = {
             "basis": "Web App"
           },
           "deepDive": {
+            "architectureSchema": "[LEARNER / DEVELOPER UI]\n       │\n       ▼ HTTPS REST API\n[LARAVEL CORE: LEARNING ROADMAP ENGINE]\n       │\n       ├──► [MODULAR CURRICULUM: ZERO TO PRO]\n       │           │\n       │           ├──► [CODE PLAYGROUND & SANDBOX]\n       │           └──► [INTERACTIVE SYNTAX VALIDATOR]\n       │\n       ├──► [PROGRESSION & MILESTONE TRACKER]\n       │\n       ▼ ELOQUENT ORM\n[MYSQL DATABASE: USERS, LESSONS, COMPLETIONS]",
             "problem": "Banyak calon programmer pemula kesulitan belajar mandiri karena materi online yang terpecah-pecah tanpa panduan tahapan yang runtut.",
             "solution": "Membangun platform TurnCode di atas Laravel untuk menghadirkan alur belajar terpadu 'Zero to Pro' yang terarah dan mudah dipahami.",
             "benchmarks": [
@@ -1184,8 +1187,7 @@ export const translations = {
                 "target": "Tinggi",
                 "achieved": "Laravel MVC"
               }
-            ],
-            "architectureSchema": "[LEARNER / DEVELOPER UI]\n       │\n       ▼ HTTPS REST API\n[LARAVEL CORE: LEARNING ROADMAP ENGINE]\n       │\n       ├──► [MODULAR CURRICULUM: ZERO TO PRO]\n       │           │\n       │           ├──► [CODE PLAYGROUND & SANDBOX]\n       │           └──► [INTERACTIVE SYNTAX VALIDATOR]\n       │\n       ├──► [PROGRESSION & MILESTONE TRACKER]\n       │\n       ▼ ELOQUENT ORM\n[MYSQL DATABASE: USERS, LESSONS, COMPLETIONS]"
+            ]
           }
         },
         "proj-04": {
@@ -1205,6 +1207,7 @@ export const translations = {
             "analisis": "Kognitif"
           },
           "deepDive": {
+            "architectureSchema": "[CLINICAL ASSESSMENT / USER QUESTIONNAIRE]\n       │\n       ▼ WEBSOCKET / REST API\n[FASTAPI & LLM INTERFACE LAYER]\n       │\n       ├──► [LLM: SYMPTOM EXTRACTION & CONTEXT]\n       │           │\n       │           ▼\n       ├──► [FEATURE VECTOR PREPROCESSING]\n       │           │\n       │           ▼\n       ├──► [XGBOOST CLASSIFIER: ALZHEIMER RISK]\n       │           │\n       │           └──► [DECISION TREE ENSEMBLE SCORING]\n       │\n       ▼ JSON TELEMETRY RESPONSE\n[DIAGNOSTIC RADAR & RISK STRATIFICATION UI]",
             "problem": "Pemeriksaan gejala alzheimer pada fase awal sering terlambat karena keterbatasan akses skrining kognitif awal yang cepat dan terjangkau.",
             "solution": "Menggabungkan model LLM untuk ekstraksi interaksi bahasa dengan ketepatan algoritma tabular XGBoost guna mengkalkulasi indikasi gejala secara akurat.",
             "benchmarks": [
@@ -1218,8 +1221,7 @@ export const translations = {
                 "target": "Intuitif",
                 "achieved": "Asesmen Interaktif"
               }
-            ],
-            "architectureSchema": "[CLINICAL ASSESSMENT / USER QUESTIONNAIRE]\n       │\n       ▼ WEBSOCKET / REST API\n[FASTAPI & LLM INTERFACE LAYER]\n       │\n       ├──► [LLM: SYMPTOM EXTRACTION & CONTEXT]\n       │           │\n       │           ▼\n       ├──► [FEATURE VECTOR PREPROCESSING]\n       │           │\n       │           ▼\n       ├──► [XGBOOST CLASSIFIER: ALZHEIMER RISK]\n       │           │\n       │           └──► [DECISION TREE ENSEMBLE SCORING]\n       │\n       ▼ JSON TELEMETRY RESPONSE\n[DIAGNOSTIC RADAR & RISK STRATIFICATION UI]"
+            ]
           }
         },
         "proj-05": {
@@ -1239,6 +1241,7 @@ export const translations = {
             "status": "Selesai"
           },
           "deepDive": {
+            "architectureSchema": "[AGROTECH PORTAL USER]\n       │\n       ▼ HTTPS\n[PHP MVC FRAMEWORK & WEB RUNTIME]\n       │\n       ├──► [KATALOG PRODUK PERTANIAN & AGRIBISNIS]\n       │\n       ├──► [SISTEM INFORMASI KEMITRAAN PETANI]\n       │\n       ▼ MYSQL STORAGE\n[DATABASE PRODUK, ARTIKEL TANI & DATA MITRA]",
             "problem": "Petani tradisional menghadapi kesulitan dalam pencatatan siklus tanam, pemetaan lahan, dan pemantauan sumber daya karena masih mengandalkan pencatatan manual di kertas.",
             "solution": "Merancang Ladangku sebagai platform web ringan dengan navigasi sederhana, indikator status visual, dan aksesibilitas cepat melalui perangkat mobile para petani.",
             "benchmarks": [
@@ -1252,8 +1255,7 @@ export const translations = {
                 "target": "Responsif",
                 "achieved": "Optimal di HP"
               }
-            ],
-            "architectureSchema": "[AGROTECH PORTAL USER]\n       │\n       ▼ HTTPS\n[PHP MVC FRAMEWORK & WEB RUNTIME]\n       │\n       ├──► [KATALOG PRODUK PERTANIAN & AGRIBISNIS]\n       │\n       ├──► [SISTEM INFORMASI KEMITRAAN PETANI]\n       │\n       ▼ MYSQL STORAGE\n[DATABASE PRODUK, ARTIKEL TANI & DATA MITRA]"
+            ]
           }
         },
         "proj-06": {
@@ -1273,6 +1275,7 @@ export const translations = {
             "status": "Selesai"
           },
           "deepDive": {
+            "architectureSchema": "[CUSTOMER TABLE / MOBILE ORDER]\n       │\n       ▼\n[ORDER DISPATCHER & CART STATE]\n       │\n       ├──► [MENU SELECTOR & PRICING CALCULATOR]\n       │\n       ├──► [KITCHEN DISPLAY SYSTEM TICKETING]\n       │\n       ▼ TRANSACTION LOG\n[ORDER STATUS, PAYMENT RECEIPT & DATABASE]",
             "problem": "Buku menu fisik konvensional memicu antrean pesanan yang lambat, kesalahan perhitungan harga manual, dan repot saat memperbarui daftar menu harian.",
             "solution": "Membangun aplikasi menu digital yang responsif dengan kartu menu visual, perhitungan total harga otomatis, dan konfirmasi pesanan instan.",
             "benchmarks": [
@@ -1286,8 +1289,7 @@ export const translations = {
                 "target": "100%",
                 "achieved": "Otomatis"
               }
-            ],
-            "architectureSchema": "[CUSTOMER TABLE / MOBILE ORDER]\n       │\n       ▼\n[ORDER DISPATCHER & CART STATE]\n       │\n       ├──► [MENU SELECTOR & PRICING CALCULATOR]\n       │\n       ├──► [KITCHEN DISPLAY SYSTEM TICKETING]\n       │\n       ▼ TRANSACTION LOG\n[ORDER STATUS, PAYMENT RECEIPT & DATABASE]"
+            ]
           }
         },
         "proj-07": {
@@ -1307,6 +1309,7 @@ export const translations = {
             "status": "Selesai"
           },
           "deepDive": {
+            "architectureSchema": "[SISWA & PUSTAKAWAN INTERFACE]\n       │\n       ▼\n[LIBRARY MANAGEMENT CORE]\n       │\n       ├──► [OPAC: ONLINE CATALOG SEARCH]\n       │\n       ├──► [CIRCULATION: PINJAM, KEMBALI, DENDA]\n       │\n       ▼ RELATIONAL SCHEMA\n[DATABASE BUKU, MEMBER, & RIWAYAT PEMINJAMAN]",
             "problem": "Pencatatan buku pinjaman secara manual sering menyebabkan kehilangan buku, kekeliruan data peminjam, dan pencarian koleksi yang memakan waktu lama.",
             "solution": "Menghadirkan sistem web terpadu yang mengotomatisasi log sirkulasi, memantau tenggat waktu pengembalian, dan menyajikan katalog buku yang mudah dicari.",
             "benchmarks": [
@@ -1320,8 +1323,7 @@ export const translations = {
                 "target": "Akurat",
                 "achieved": "Otomatis"
               }
-            ],
-            "architectureSchema": "[SISWA & PUSTAKAWAN INTERFACE]\n       │\n       ▼\n[LIBRARY MANAGEMENT CORE]\n       │\n       ├──► [OPAC: ONLINE CATALOG SEARCH]\n       │\n       ├──► [CIRCULATION: PINJAM, KEMBALI, DENDA]\n       │\n       ▼ RELATIONAL SCHEMA\n[DATABASE BUKU, MEMBER, & RIWAYAT PEMINJAMAN]"
+            ]
           }
         },
         "proj-08": {
@@ -1341,6 +1343,7 @@ export const translations = {
             "status": "Selesai"
           },
           "deepDive": {
+            "architectureSchema": "[ADMIN KEUANGAN & SISWA PORTAL]\n       │\n       ▼\n[FINANCIAL LEDGER & BILLING SYSTEM]\n       │\n       ├──► [VERIFIKASI TAGIHAN BULANAN SISWA]\n       │\n       ├──► [CETAK BUKTI PEMBAYARAN & KWITANSI]\n       │\n       ▼ TRANSACTION ARCHIVE\n[DATABASE TRANSAKSI, REKAP KAS & LAPORAN SPP]",
             "problem": "Petugas keuangan sekolah kewalahan merekap pembayaran ratusan siswa secara manual di buku kas, menyulitkan pengecekan tunggakan secara akurat.",
             "solution": "Membangun portal administrasi berbasis framework Laravel dengan database relasional terstruktur, verifikasi kwitansi otomatis, dan pelaporan keuangan bulanan.",
             "benchmarks": [
@@ -1354,8 +1357,7 @@ export const translations = {
                 "target": "Relasional",
                 "achieved": "MySQL Terstruktur"
               }
-            ],
-            "architectureSchema": "[ADMIN KEUANGAN & SISWA PORTAL]\n       │\n       ▼\n[FINANCIAL LEDGER & BILLING SYSTEM]\n       │\n       ├──► [VERIFIKASI TAGIHAN BULANAN SISWA]\n       │\n       ├──► [CETAK BUKTI PEMBAYARAN & KWITANSI]\n       │\n       ▼ TRANSACTION ARCHIVE\n[DATABASE TRANSAKSI, REKAP KAS & LAPORAN SPP]"
+            ]
           }
         },
         "proj-09": {
@@ -1375,6 +1377,7 @@ export const translations = {
             "status": "Selesai"
           },
           "deepDive": {
+            "architectureSchema": "[USER TASK INPUT & GESTURE CONTROL]\n       │\n       ▼\n[TASK STATE MANAGER: CRUD & FILTERING]\n       │\n       ├──► [PRIORITY MATRIX: HIGH / MED / LOW]\n       │\n       ├──► [LOCALSTORAGE OFFLINE SYNC]\n       │\n       ▼ REACTIVE DOM\n[INTERACTIVE TASK LIST & COMPLETION TELEMETRY]",
             "problem": "Banyak aplikasi to-do dipenuhi fitur rumit dan iklan yang justru mengganggu fokus pengguna saat mencatat agenda penting harian.",
             "solution": "Merancang Mylist Todo App dengan tampilan bersih, fokus navigasi cepat, dan persistensi LocalStorage untuk akses kilat setiap saat.",
             "benchmarks": [
@@ -1388,8 +1391,7 @@ export const translations = {
                 "target": "Lokal",
                 "achieved": "Zero Jeda"
               }
-            ],
-            "architectureSchema": "[USER TASK INPUT & GESTURE CONTROL]\n       │\n       ▼\n[TASK STATE MANAGER: CRUD & FILTERING]\n       │\n       ├──► [PRIORITY MATRIX: HIGH / MED / LOW]\n       │\n       ├──► [LOCALSTORAGE OFFLINE SYNC]\n       │\n       ▼ REACTIVE DOM\n[INTERACTIVE TASK LIST & COMPLETION TELEMETRY]"
+            ]
           }
         }
       }
@@ -1651,6 +1653,7 @@ export const translations = {
       "about": "02.ABT",
       "skills": "03.SKL",
       "projects": "04.PRJ",
+      "certificates": "04.CRT",
       "another": "06.LAB",
       "github": "05.GIT"
     },
@@ -1731,34 +1734,34 @@ export const translations = {
       "timelineTitle": "Career Chronology & Practical Experience",
       "timeline": [
         {
-          "year": "2026 — 至今",
-          "title": "前端与后端深层拓展",
-          "place": "三宝垄，中爪哇",
-          "description": "拓展现代前端与后端技术体系，构建高性能交互式系统。"
+          "year": "2026 — SEKARANG",
+          "title": "Pengembangan Lanjutan Frontend & Backend",
+          "place": "Semarang, Jawa Tengah",
+          "description": "Memperluas keilmuan di bidang frontend dan backend, merancang arsitektur sistem modern, serta memperdalam rekayasa web interaktif berkinerja tinggi."
         },
         {
           "year": "2025 — 2026",
-          "title": "人工智能与全栈开发深造",
+          "title": "Artificial Intelligence & Fullstack Engineering",
           "place": "ITESA Muhammadiyah Semarang",
-          "description": "深入钻研人工智能技术与全栈工程体系，于三宝垄穆罕默德迪亚技术与商业学院接受高等教育。"
+          "description": "Memperdalam keilmuan untuk memahami lebih dalam seputar artifisial inteligensi dan fullstack developer, sembari menempuh pendidikan perguruan tinggi di ITESA Muhammadiyah Semarang."
         },
         {
           "year": "2024 — 2025",
-          "title": "编程精进与全栈开发实践",
-          "place": "三宝垄，中爪哇",
-          "description": "提升编程技能，全面理解前后端架构，建立全栈开发者职责与交付能力。"
+          "title": "Pengembangan Skill Coding & Fullstack Developer",
+          "place": "Semarang, Jawa Tengah",
+          "description": "Mengembangkan skill coding dan pemahaman mendalam di dunia frontend dan backend, serta membangun kapabilitas jobdesk fullstack developer."
         },
         {
           "year": "2022 — 2024",
-          "title": "网站与应用软件工程探索",
+          "title": "Eksplorasi Web, Aplikasi & Software Engineering",
           "place": "SMK TEXMACO Semarang",
-          "description": "在三宝垄德斯玛科职业高中（SMK TEXMACO）开启网站与应用软件工程背景。"
+          "description": "Memulai eksplorasi di dunia website dan aplikasi serta membangun background IT software engineering di bangku SMK TEXMACO Semarang."
         },
         {
           "year": "2020 — 2022",
-          "title": "网络安全工具早期启蒙",
+          "title": "Eksplorasi Perdana Cyber Security Tools",
           "place": "SMP TEXMACO Semarang",
-          "description": "在三宝垄德斯玛科初中（SMP TEXMACO）开始探索网络安全工具与IT基石。"
+          "description": "Memulai eksplorasi awal di dunia IT dengan mempelajari cyber security tools di bangku SMP TEXMACO Semarang."
         }
       ]
     },
@@ -1918,6 +1921,7 @@ export const translations = {
             "status": "Aktif"
           },
           "deepDive": {
+            "architectureSchema": "[CLIENT: WEB & MOBILE BROWSERS]\n       │\n       ▼ HTTPS / TLS 1.3\n[LARAVEL ROUTING & TAILWIND BLADE ENGINE]\n       │\n       ├──► [ADMISSION CONTROLLER: JALUR & PRODI]\n       │           │\n       │           ├──► [FORM VALIDATION & SANITIZATION]\n       │           └──► [DOCUMENT UPLOAD & VERIF ENGINE]\n       │\n       ├──► [ADMIN DASHBOARD: PANITIA PMB ITESA]\n       │\n       ▼ ELOQUENT ORM / QUERY BUILDER\n[MYSQL DATABASE: CAMABA, PRODI, KUOTA, STATUS]",
             "problem": "Calon mahasiswa baru membutuhkan akses informasi pendaftaran yang akurat, lengkap, dan mudah diakses dari berbagai perangkat tanpa kendala.",
             "solution": "Membangun portal PMB terpadu berbasis Laravel dengan navigasi informatif seputar program studi, biaya, jalur pendaftaran, dan verifikasi berkas daring.",
             "benchmarks": [
@@ -1931,8 +1935,7 @@ export const translations = {
                 "target": "Terintegrasi",
                 "achieved": "Dashboard Admin"
               }
-            ],
-            "architectureSchema": "[CLIENT: WEB & MOBILE BROWSERS]\n       │\n       ▼ HTTPS / TLS 1.3\n[LARAVEL ROUTING & TAILWIND BLADE ENGINE]\n       │\n       ├──► [ADMISSION CONTROLLER: JALUR & PRODI]\n       │           │\n       │           ├──► [FORM VALIDATION & SANITIZATION]\n       │           └──► [DOCUMENT UPLOAD & VERIF ENGINE]\n       │\n       ├──► [ADMIN DASHBOARD: PANITIA PMB ITESA]\n       │\n       ▼ ELOQUENT ORM / QUERY BUILDER\n[MYSQL DATABASE: CAMABA, PRODI, KUOTA, STATUS]"
+            ]
           }
         },
         "proj-02": {
@@ -1952,6 +1955,7 @@ export const translations = {
             "tema": "Personalisasi"
           },
           "deepDive": {
+            "architectureSchema": "[USER INPUT: KEYBOARD & TOUCH NUMPAD]\n       │\n       ▼ EVENT LISTENER\n[PARSER & TOKENIZER: MATH EXPRESSION]\n       │\n       ├──► [MATH BOT ENGINE: AUTO-CORRECT & CALC]\n       │\n       ├──► [THEME ENGINE: DYNAMIC CSS VARIABLES]\n       │           │\n       │           └──► [LOCALSTORAGE STATE PERSISTENCE]\n       │\n       ▼ REAL-TIME DOM RENDERER\n[CANVAS / LCD DISPLAY: RESULT & HISTORY LOG]",
             "problem": "Banyak kalkulator web yang monoton, kaku tanpa interaksi asisten, dan tidak memungkinkan pengguna mengubah tema sesuai preferensi personal.",
             "solution": "Mengembangkan Mathicalc murni dengan HTML, CSS, dan JavaScript — memadukan bot asisten matematis dan tema personalisasi tanpa dependensi berat.",
             "benchmarks": [
@@ -1965,8 +1969,7 @@ export const translations = {
                 "target": "Fleksibel",
                 "achieved": "100% Personal"
               }
-            ],
-            "architectureSchema": "[USER INPUT: KEYBOARD & TOUCH NUMPAD]\n       │\n       ▼ EVENT LISTENER\n[PARSER & TOKENIZER: MATH EXPRESSION]\n       │\n       ├──► [MATH BOT ENGINE: AUTO-CORRECT & CALC]\n       │\n       ├──► [THEME ENGINE: DYNAMIC CSS VARIABLES]\n       │           │\n       │           └──► [LOCALSTORAGE STATE PERSISTENCE]\n       │\n       ▼ REAL-TIME DOM RENDERER\n[CANVAS / LCD DISPLAY: RESULT & HISTORY LOG]"
+            ]
           }
         },
         "proj-03": {
@@ -1986,6 +1989,7 @@ export const translations = {
             "basis": "Web App"
           },
           "deepDive": {
+            "architectureSchema": "[LEARNER / DEVELOPER UI]\n       │\n       ▼ HTTPS REST API\n[LARAVEL CORE: LEARNING ROADMAP ENGINE]\n       │\n       ├──► [MODULAR CURRICULUM: ZERO TO PRO]\n       │           │\n       │           ├──► [CODE PLAYGROUND & SANDBOX]\n       │           └──► [INTERACTIVE SYNTAX VALIDATOR]\n       │\n       ├──► [PROGRESSION & MILESTONE TRACKER]\n       │\n       ▼ ELOQUENT ORM\n[MYSQL DATABASE: USERS, LESSONS, COMPLETIONS]",
             "problem": "Banyak calon programmer pemula kesulitan belajar mandiri karena materi online yang terpecah-pecah tanpa panduan tahapan yang runtut.",
             "solution": "Membangun platform TurnCode di atas Laravel untuk menghadirkan alur belajar terpadu 'Zero to Pro' yang terarah dan mudah dipahami.",
             "benchmarks": [
@@ -1999,8 +2003,7 @@ export const translations = {
                 "target": "Tinggi",
                 "achieved": "Laravel MVC"
               }
-            ],
-            "architectureSchema": "[LEARNER / DEVELOPER UI]\n       │\n       ▼ HTTPS REST API\n[LARAVEL CORE: LEARNING ROADMAP ENGINE]\n       │\n       ├──► [MODULAR CURRICULUM: ZERO TO PRO]\n       │           │\n       │           ├──► [CODE PLAYGROUND & SANDBOX]\n       │           └──► [INTERACTIVE SYNTAX VALIDATOR]\n       │\n       ├──► [PROGRESSION & MILESTONE TRACKER]\n       │\n       ▼ ELOQUENT ORM\n[MYSQL DATABASE: USERS, LESSONS, COMPLETIONS]"
+            ]
           }
         },
         "proj-04": {
@@ -2020,6 +2023,7 @@ export const translations = {
             "analisis": "Kognitif"
           },
           "deepDive": {
+            "architectureSchema": "[CLINICAL ASSESSMENT / USER QUESTIONNAIRE]\n       │\n       ▼ WEBSOCKET / REST API\n[FASTAPI & LLM INTERFACE LAYER]\n       │\n       ├──► [LLM: SYMPTOM EXTRACTION & CONTEXT]\n       │           │\n       │           ▼\n       ├──► [FEATURE VECTOR PREPROCESSING]\n       │           │\n       │           ▼\n       ├──► [XGBOOST CLASSIFIER: ALZHEIMER RISK]\n       │           │\n       │           └──► [DECISION TREE ENSEMBLE SCORING]\n       │\n       ▼ JSON TELEMETRY RESPONSE\n[DIAGNOSTIC RADAR & RISK STRATIFICATION UI]",
             "problem": "Pemeriksaan gejala alzheimer pada fase awal sering terlambat karena keterbatasan akses skrining kognitif awal yang cepat dan terjangkau.",
             "solution": "Menggabungkan model LLM untuk ekstraksi interaksi bahasa dengan ketepatan algoritma tabular XGBoost guna mengkalkulasi indikasi gejala secara akurat.",
             "benchmarks": [
@@ -2033,8 +2037,7 @@ export const translations = {
                 "target": "Intuitif",
                 "achieved": "Asesmen Interaktif"
               }
-            ],
-            "architectureSchema": "[CLINICAL ASSESSMENT / USER QUESTIONNAIRE]\n       │\n       ▼ WEBSOCKET / REST API\n[FASTAPI & LLM INTERFACE LAYER]\n       │\n       ├──► [LLM: SYMPTOM EXTRACTION & CONTEXT]\n       │           │\n       │           ▼\n       ├──► [FEATURE VECTOR PREPROCESSING]\n       │           │\n       │           ▼\n       ├──► [XGBOOST CLASSIFIER: ALZHEIMER RISK]\n       │           │\n       │           └──► [DECISION TREE ENSEMBLE SCORING]\n       │\n       ▼ JSON TELEMETRY RESPONSE\n[DIAGNOSTIC RADAR & RISK STRATIFICATION UI]"
+            ]
           }
         },
         "proj-05": {
@@ -2054,6 +2057,7 @@ export const translations = {
             "status": "Selesai"
           },
           "deepDive": {
+            "architectureSchema": "[AGROTECH PORTAL USER]\n       │\n       ▼ HTTPS\n[PHP MVC FRAMEWORK & WEB RUNTIME]\n       │\n       ├──► [KATALOG PRODUK PERTANIAN & AGRIBISNIS]\n       │\n       ├──► [SISTEM INFORMASI KEMITRAAN PETANI]\n       │\n       ▼ MYSQL STORAGE\n[DATABASE PRODUK, ARTIKEL TANI & DATA MITRA]",
             "problem": "Petani tradisional menghadapi kesulitan dalam pencatatan siklus tanam, pemetaan lahan, dan pemantauan sumber daya karena masih mengandalkan pencatatan manual di kertas.",
             "solution": "Merancang Ladangku sebagai platform web ringan dengan navigasi sederhana, indikator status visual, dan aksesibilitas cepat melalui perangkat mobile para petani.",
             "benchmarks": [
@@ -2067,8 +2071,7 @@ export const translations = {
                 "target": "Responsif",
                 "achieved": "Optimal di HP"
               }
-            ],
-            "architectureSchema": "[AGROTECH PORTAL USER]\n       │\n       ▼ HTTPS\n[PHP MVC FRAMEWORK & WEB RUNTIME]\n       │\n       ├──► [KATALOG PRODUK PERTANIAN & AGRIBISNIS]\n       │\n       ├──► [SISTEM INFORMASI KEMITRAAN PETANI]\n       │\n       ▼ MYSQL STORAGE\n[DATABASE PRODUK, ARTIKEL TANI & DATA MITRA]"
+            ]
           }
         },
         "proj-06": {
@@ -2088,6 +2091,7 @@ export const translations = {
             "status": "Selesai"
           },
           "deepDive": {
+            "architectureSchema": "[CUSTOMER TABLE / MOBILE ORDER]\n       │\n       ▼\n[ORDER DISPATCHER & CART STATE]\n       │\n       ├──► [MENU SELECTOR & PRICING CALCULATOR]\n       │\n       ├──► [KITCHEN DISPLAY SYSTEM TICKETING]\n       │\n       ▼ TRANSACTION LOG\n[ORDER STATUS, PAYMENT RECEIPT & DATABASE]",
             "problem": "Buku menu fisik konvensional memicu antrean pesanan yang lambat, kesalahan perhitungan harga manual, dan repot saat memperbarui daftar menu harian.",
             "solution": "Membangun aplikasi menu digital yang responsif dengan kartu menu visual, perhitungan total harga otomatis, dan konfirmasi pesanan instan.",
             "benchmarks": [
@@ -2101,8 +2105,7 @@ export const translations = {
                 "target": "100%",
                 "achieved": "Otomatis"
               }
-            ],
-            "architectureSchema": "[CUSTOMER TABLE / MOBILE ORDER]\n       │\n       ▼\n[ORDER DISPATCHER & CART STATE]\n       │\n       ├──► [MENU SELECTOR & PRICING CALCULATOR]\n       │\n       ├──► [KITCHEN DISPLAY SYSTEM TICKETING]\n       │\n       ▼ TRANSACTION LOG\n[ORDER STATUS, PAYMENT RECEIPT & DATABASE]"
+            ]
           }
         },
         "proj-07": {
@@ -2122,6 +2125,7 @@ export const translations = {
             "status": "Selesai"
           },
           "deepDive": {
+            "architectureSchema": "[SISWA & PUSTAKAWAN INTERFACE]\n       │\n       ▼\n[LIBRARY MANAGEMENT CORE]\n       │\n       ├──► [OPAC: ONLINE CATALOG SEARCH]\n       │\n       ├──► [CIRCULATION: PINJAM, KEMBALI, DENDA]\n       │\n       ▼ RELATIONAL SCHEMA\n[DATABASE BUKU, MEMBER, & RIWAYAT PEMINJAMAN]",
             "problem": "Pencatatan buku pinjaman secara manual sering menyebabkan kehilangan buku, kekeliruan data peminjam, dan pencarian koleksi yang memakan waktu lama.",
             "solution": "Menghadirkan sistem web terpadu yang mengotomatisasi log sirkulasi, memantau tenggat waktu pengembalian, dan menyajikan katalog buku yang mudah dicari.",
             "benchmarks": [
@@ -2135,8 +2139,7 @@ export const translations = {
                 "target": "Akurat",
                 "achieved": "Otomatis"
               }
-            ],
-            "architectureSchema": "[SISWA & PUSTAKAWAN INTERFACE]\n       │\n       ▼\n[LIBRARY MANAGEMENT CORE]\n       │\n       ├──► [OPAC: ONLINE CATALOG SEARCH]\n       │\n       ├──► [CIRCULATION: PINJAM, KEMBALI, DENDA]\n       │\n       ▼ RELATIONAL SCHEMA\n[DATABASE BUKU, MEMBER, & RIWAYAT PEMINJAMAN]"
+            ]
           }
         },
         "proj-08": {
@@ -2156,6 +2159,7 @@ export const translations = {
             "status": "Selesai"
           },
           "deepDive": {
+            "architectureSchema": "[ADMIN KEUANGAN & SISWA PORTAL]\n       │\n       ▼\n[FINANCIAL LEDGER & BILLING SYSTEM]\n       │\n       ├──► [VERIFIKASI TAGIHAN BULANAN SISWA]\n       │\n       ├──► [CETAK BUKTI PEMBAYARAN & KWITANSI]\n       │\n       ▼ TRANSACTION ARCHIVE\n[DATABASE TRANSAKSI, REKAP KAS & LAPORAN SPP]",
             "problem": "Petugas keuangan sekolah kewalahan merekap pembayaran ratusan siswa secara manual di buku kas, menyulitkan pengecekan tunggakan secara akurat.",
             "solution": "Membangun portal administrasi berbasis framework Laravel dengan database relasional terstruktur, verifikasi kwitansi otomatis, dan pelaporan keuangan bulanan.",
             "benchmarks": [
@@ -2169,8 +2173,7 @@ export const translations = {
                 "target": "Relasional",
                 "achieved": "MySQL Terstruktur"
               }
-            ],
-            "architectureSchema": "[ADMIN KEUANGAN & SISWA PORTAL]\n       │\n       ▼\n[FINANCIAL LEDGER & BILLING SYSTEM]\n       │\n       ├──► [VERIFIKASI TAGIHAN BULANAN SISWA]\n       │\n       ├──► [CETAK BUKTI PEMBAYARAN & KWITANSI]\n       │\n       ▼ TRANSACTION ARCHIVE\n[DATABASE TRANSAKSI, REKAP KAS & LAPORAN SPP]"
+            ]
           }
         },
         "proj-09": {
@@ -2190,6 +2193,7 @@ export const translations = {
             "status": "Selesai"
           },
           "deepDive": {
+            "architectureSchema": "[USER TASK INPUT & GESTURE CONTROL]\n       │\n       ▼\n[TASK STATE MANAGER: CRUD & FILTERING]\n       │\n       ├──► [PRIORITY MATRIX: HIGH / MED / LOW]\n       │\n       ├──► [LOCALSTORAGE OFFLINE SYNC]\n       │\n       ▼ REACTIVE DOM\n[INTERACTIVE TASK LIST & COMPLETION TELEMETRY]",
             "problem": "Banyak aplikasi to-do dipenuhi fitur rumit dan iklan yang justru mengganggu fokus pengguna saat mencatat agenda penting harian.",
             "solution": "Merancang Mylist Todo App dengan tampilan bersih, fokus navigasi cepat, dan persistensi LocalStorage untuk akses kilat setiap saat.",
             "benchmarks": [
@@ -2203,8 +2207,7 @@ export const translations = {
                 "target": "Lokal",
                 "achieved": "Zero Jeda"
               }
-            ],
-            "architectureSchema": "[USER TASK INPUT & GESTURE CONTROL]\n       │\n       ▼\n[TASK STATE MANAGER: CRUD & FILTERING]\n       │\n       ├──► [PRIORITY MATRIX: HIGH / MED / LOW]\n       │\n       ├──► [LOCALSTORAGE OFFLINE SYNC]\n       │\n       ▼ REACTIVE DOM\n[INTERACTIVE TASK LIST & COMPLETION TELEMETRY]"
+            ]
           }
         }
       }
@@ -2466,6 +2469,7 @@ export const translations = {
       "about": "02.ABT",
       "skills": "03.SKL",
       "projects": "04.PRJ",
+      "certificates": "04.CRT",
       "another": "06.LAB",
       "github": "05.GIT"
     },
@@ -2546,34 +2550,34 @@ export const translations = {
       "timelineTitle": "Career Chronology & Practical Experience",
       "timeline": [
         {
-          "year": "2026 — 現在",
-          "title": "フロントエンド＆バックエンドの知見拡張",
-          "place": "スマラン、中部ジャワ",
-          "description": "最新のフロントエンドおよびバックエンド技術の知見を広げ、高機能なWebシステムを設計。"
+          "year": "2026 — SEKARANG",
+          "title": "Pengembangan Lanjutan Frontend & Backend",
+          "place": "Semarang, Jawa Tengah",
+          "description": "Memperluas keilmuan di bidang frontend dan backend, merancang arsitektur sistem modern, serta memperdalam rekayasa web interaktif berkinerja tinggi."
         },
         {
           "year": "2025 — 2026",
-          "title": "人工知能とフルスタックエンジニアリングの深化",
+          "title": "Artificial Intelligence & Fullstack Engineering",
           "place": "ITESA Muhammadiyah Semarang",
-          "description": "AIとフルスタック開発の専門知識を深め、ITESA Muhammadiyah Semarang大学にて高等教育を履修。"
+          "description": "Memperdalam keilmuan untuk memahami lebih dalam seputar artifisial inteligensi dan fullstack developer, sembari menempuh pendidikan perguruan tinggi di ITESA Muhammadiyah Semarang."
         },
         {
           "year": "2024 — 2025",
-          "title": "コーディングスキル向上とフルスタック開発",
-          "place": "スマラン、中部ジャワ",
-          "description": "フロントエンドとバックエンドの知見とコーディング技術を磨き、フルスタックエンジニアとしての実務力を確立。"
+          "title": "Pengembangan Skill Coding & Fullstack Developer",
+          "place": "Semarang, Jawa Tengah",
+          "description": "Mengembangkan skill coding dan pemahaman mendalam di dunia frontend dan backend, serta membangun kapabilitas jobdesk fullstack developer."
         },
         {
           "year": "2022 — 2024",
-          "title": "Web・アプリ開発とソフトウェア工学の探求",
+          "title": "Eksplorasi Web, Aplikasi & Software Engineering",
           "place": "SMK TEXMACO Semarang",
-          "description": "SMK TEXMACO Semarang高校にてWebサイトとアプリの探索を開始し、ソフトウェア開発の基礎を構築。"
+          "description": "Memulai eksplorasi di dunia website dan aplikasi serta membangun background IT software engineering di bangku SMK TEXMACO Semarang."
         },
         {
           "year": "2020 — 2022",
-          "title": "サイバーセキュリティツールの初期探求",
+          "title": "Eksplorasi Perdana Cyber Security Tools",
           "place": "SMP TEXMACO Semarang",
-          "description": "SMP TEXMACO Semarang中学校にてサイバーセキュリティツールの探索からITへの第一歩を踏み出す。"
+          "description": "Memulai eksplorasi awal di dunia IT dengan mempelajari cyber security tools di bangku SMP TEXMACO Semarang."
         }
       ]
     },
@@ -2733,6 +2737,7 @@ export const translations = {
             "status": "Aktif"
           },
           "deepDive": {
+            "architectureSchema": "[CLIENT: WEB & MOBILE BROWSERS]\n       │\n       ▼ HTTPS / TLS 1.3\n[LARAVEL ROUTING & TAILWIND BLADE ENGINE]\n       │\n       ├──► [ADMISSION CONTROLLER: JALUR & PRODI]\n       │           │\n       │           ├──► [FORM VALIDATION & SANITIZATION]\n       │           └──► [DOCUMENT UPLOAD & VERIF ENGINE]\n       │\n       ├──► [ADMIN DASHBOARD: PANITIA PMB ITESA]\n       │\n       ▼ ELOQUENT ORM / QUERY BUILDER\n[MYSQL DATABASE: CAMABA, PRODI, KUOTA, STATUS]",
             "problem": "Calon mahasiswa baru membutuhkan akses informasi pendaftaran yang akurat, lengkap, dan mudah diakses dari berbagai perangkat tanpa kendala.",
             "solution": "Membangun portal PMB terpadu berbasis Laravel dengan navigasi informatif seputar program studi, biaya, jalur pendaftaran, dan verifikasi berkas daring.",
             "benchmarks": [
@@ -2746,8 +2751,7 @@ export const translations = {
                 "target": "Terintegrasi",
                 "achieved": "Dashboard Admin"
               }
-            ],
-            "architectureSchema": "[CLIENT: WEB & MOBILE BROWSERS]\n       │\n       ▼ HTTPS / TLS 1.3\n[LARAVEL ROUTING & TAILWIND BLADE ENGINE]\n       │\n       ├──► [ADMISSION CONTROLLER: JALUR & PRODI]\n       │           │\n       │           ├──► [FORM VALIDATION & SANITIZATION]\n       │           └──► [DOCUMENT UPLOAD & VERIF ENGINE]\n       │\n       ├──► [ADMIN DASHBOARD: PANITIA PMB ITESA]\n       │\n       ▼ ELOQUENT ORM / QUERY BUILDER\n[MYSQL DATABASE: CAMABA, PRODI, KUOTA, STATUS]"
+            ]
           }
         },
         "proj-02": {
@@ -2767,6 +2771,7 @@ export const translations = {
             "tema": "Personalisasi"
           },
           "deepDive": {
+            "architectureSchema": "[USER INPUT: KEYBOARD & TOUCH NUMPAD]\n       │\n       ▼ EVENT LISTENER\n[PARSER & TOKENIZER: MATH EXPRESSION]\n       │\n       ├──► [MATH BOT ENGINE: AUTO-CORRECT & CALC]\n       │\n       ├──► [THEME ENGINE: DYNAMIC CSS VARIABLES]\n       │           │\n       │           └──► [LOCALSTORAGE STATE PERSISTENCE]\n       │\n       ▼ REAL-TIME DOM RENDERER\n[CANVAS / LCD DISPLAY: RESULT & HISTORY LOG]",
             "problem": "Banyak kalkulator web yang monoton, kaku tanpa interaksi asisten, dan tidak memungkinkan pengguna mengubah tema sesuai preferensi personal.",
             "solution": "Mengembangkan Mathicalc murni dengan HTML, CSS, dan JavaScript — memadukan bot asisten matematis dan tema personalisasi tanpa dependensi berat.",
             "benchmarks": [
@@ -2780,8 +2785,7 @@ export const translations = {
                 "target": "Fleksibel",
                 "achieved": "100% Personal"
               }
-            ],
-            "architectureSchema": "[USER INPUT: KEYBOARD & TOUCH NUMPAD]\n       │\n       ▼ EVENT LISTENER\n[PARSER & TOKENIZER: MATH EXPRESSION]\n       │\n       ├──► [MATH BOT ENGINE: AUTO-CORRECT & CALC]\n       │\n       ├──► [THEME ENGINE: DYNAMIC CSS VARIABLES]\n       │           │\n       │           └──► [LOCALSTORAGE STATE PERSISTENCE]\n       │\n       ▼ REAL-TIME DOM RENDERER\n[CANVAS / LCD DISPLAY: RESULT & HISTORY LOG]"
+            ]
           }
         },
         "proj-03": {
@@ -2801,6 +2805,7 @@ export const translations = {
             "basis": "Web App"
           },
           "deepDive": {
+            "architectureSchema": "[LEARNER / DEVELOPER UI]\n       │\n       ▼ HTTPS REST API\n[LARAVEL CORE: LEARNING ROADMAP ENGINE]\n       │\n       ├──► [MODULAR CURRICULUM: ZERO TO PRO]\n       │           │\n       │           ├──► [CODE PLAYGROUND & SANDBOX]\n       │           └──► [INTERACTIVE SYNTAX VALIDATOR]\n       │\n       ├──► [PROGRESSION & MILESTONE TRACKER]\n       │\n       ▼ ELOQUENT ORM\n[MYSQL DATABASE: USERS, LESSONS, COMPLETIONS]",
             "problem": "Banyak calon programmer pemula kesulitan belajar mandiri karena materi online yang terpecah-pecah tanpa panduan tahapan yang runtut.",
             "solution": "Membangun platform TurnCode di atas Laravel untuk menghadirkan alur belajar terpadu 'Zero to Pro' yang terarah dan mudah dipahami.",
             "benchmarks": [
@@ -2814,8 +2819,7 @@ export const translations = {
                 "target": "Tinggi",
                 "achieved": "Laravel MVC"
               }
-            ],
-            "architectureSchema": "[LEARNER / DEVELOPER UI]\n       │\n       ▼ HTTPS REST API\n[LARAVEL CORE: LEARNING ROADMAP ENGINE]\n       │\n       ├──► [MODULAR CURRICULUM: ZERO TO PRO]\n       │           │\n       │           ├──► [CODE PLAYGROUND & SANDBOX]\n       │           └──► [INTERACTIVE SYNTAX VALIDATOR]\n       │\n       ├──► [PROGRESSION & MILESTONE TRACKER]\n       │\n       ▼ ELOQUENT ORM\n[MYSQL DATABASE: USERS, LESSONS, COMPLETIONS]"
+            ]
           }
         },
         "proj-04": {
@@ -2835,6 +2839,7 @@ export const translations = {
             "analisis": "Kognitif"
           },
           "deepDive": {
+            "architectureSchema": "[CLINICAL ASSESSMENT / USER QUESTIONNAIRE]\n       │\n       ▼ WEBSOCKET / REST API\n[FASTAPI & LLM INTERFACE LAYER]\n       │\n       ├──► [LLM: SYMPTOM EXTRACTION & CONTEXT]\n       │           │\n       │           ▼\n       ├──► [FEATURE VECTOR PREPROCESSING]\n       │           │\n       │           ▼\n       ├──► [XGBOOST CLASSIFIER: ALZHEIMER RISK]\n       │           │\n       │           └──► [DECISION TREE ENSEMBLE SCORING]\n       │\n       ▼ JSON TELEMETRY RESPONSE\n[DIAGNOSTIC RADAR & RISK STRATIFICATION UI]",
             "problem": "Pemeriksaan gejala alzheimer pada fase awal sering terlambat karena keterbatasan akses skrining kognitif awal yang cepat dan terjangkau.",
             "solution": "Menggabungkan model LLM untuk ekstraksi interaksi bahasa dengan ketepatan algoritma tabular XGBoost guna mengkalkulasi indikasi gejala secara akurat.",
             "benchmarks": [
@@ -2848,8 +2853,7 @@ export const translations = {
                 "target": "Intuitif",
                 "achieved": "Asesmen Interaktif"
               }
-            ],
-            "architectureSchema": "[CLINICAL ASSESSMENT / USER QUESTIONNAIRE]\n       │\n       ▼ WEBSOCKET / REST API\n[FASTAPI & LLM INTERFACE LAYER]\n       │\n       ├──► [LLM: SYMPTOM EXTRACTION & CONTEXT]\n       │           │\n       │           ▼\n       ├──► [FEATURE VECTOR PREPROCESSING]\n       │           │\n       │           ▼\n       ├──► [XGBOOST CLASSIFIER: ALZHEIMER RISK]\n       │           │\n       │           └──► [DECISION TREE ENSEMBLE SCORING]\n       │\n       ▼ JSON TELEMETRY RESPONSE\n[DIAGNOSTIC RADAR & RISK STRATIFICATION UI]"
+            ]
           }
         },
         "proj-05": {
@@ -2869,6 +2873,7 @@ export const translations = {
             "status": "Selesai"
           },
           "deepDive": {
+            "architectureSchema": "[AGROTECH PORTAL USER]\n       │\n       ▼ HTTPS\n[PHP MVC FRAMEWORK & WEB RUNTIME]\n       │\n       ├──► [KATALOG PRODUK PERTANIAN & AGRIBISNIS]\n       │\n       ├──► [SISTEM INFORMASI KEMITRAAN PETANI]\n       │\n       ▼ MYSQL STORAGE\n[DATABASE PRODUK, ARTIKEL TANI & DATA MITRA]",
             "problem": "Petani tradisional menghadapi kesulitan dalam pencatatan siklus tanam, pemetaan lahan, dan pemantauan sumber daya karena masih mengandalkan pencatatan manual di kertas.",
             "solution": "Merancang Ladangku sebagai platform web ringan dengan navigasi sederhana, indikator status visual, dan aksesibilitas cepat melalui perangkat mobile para petani.",
             "benchmarks": [
@@ -2882,8 +2887,7 @@ export const translations = {
                 "target": "Responsif",
                 "achieved": "Optimal di HP"
               }
-            ],
-            "architectureSchema": "[AGROTECH PORTAL USER]\n       │\n       ▼ HTTPS\n[PHP MVC FRAMEWORK & WEB RUNTIME]\n       │\n       ├──► [KATALOG PRODUK PERTANIAN & AGRIBISNIS]\n       │\n       ├──► [SISTEM INFORMASI KEMITRAAN PETANI]\n       │\n       ▼ MYSQL STORAGE\n[DATABASE PRODUK, ARTIKEL TANI & DATA MITRA]"
+            ]
           }
         },
         "proj-06": {
@@ -2903,6 +2907,7 @@ export const translations = {
             "status": "Selesai"
           },
           "deepDive": {
+            "architectureSchema": "[CUSTOMER TABLE / MOBILE ORDER]\n       │\n       ▼\n[ORDER DISPATCHER & CART STATE]\n       │\n       ├──► [MENU SELECTOR & PRICING CALCULATOR]\n       │\n       ├──► [KITCHEN DISPLAY SYSTEM TICKETING]\n       │\n       ▼ TRANSACTION LOG\n[ORDER STATUS, PAYMENT RECEIPT & DATABASE]",
             "problem": "Buku menu fisik konvensional memicu antrean pesanan yang lambat, kesalahan perhitungan harga manual, dan repot saat memperbarui daftar menu harian.",
             "solution": "Membangun aplikasi menu digital yang responsif dengan kartu menu visual, perhitungan total harga otomatis, dan konfirmasi pesanan instan.",
             "benchmarks": [
@@ -2916,8 +2921,7 @@ export const translations = {
                 "target": "100%",
                 "achieved": "Otomatis"
               }
-            ],
-            "architectureSchema": "[CUSTOMER TABLE / MOBILE ORDER]\n       │\n       ▼\n[ORDER DISPATCHER & CART STATE]\n       │\n       ├──► [MENU SELECTOR & PRICING CALCULATOR]\n       │\n       ├──► [KITCHEN DISPLAY SYSTEM TICKETING]\n       │\n       ▼ TRANSACTION LOG\n[ORDER STATUS, PAYMENT RECEIPT & DATABASE]"
+            ]
           }
         },
         "proj-07": {
@@ -2937,6 +2941,7 @@ export const translations = {
             "status": "Selesai"
           },
           "deepDive": {
+            "architectureSchema": "[SISWA & PUSTAKAWAN INTERFACE]\n       │\n       ▼\n[LIBRARY MANAGEMENT CORE]\n       │\n       ├──► [OPAC: ONLINE CATALOG SEARCH]\n       │\n       ├──► [CIRCULATION: PINJAM, KEMBALI, DENDA]\n       │\n       ▼ RELATIONAL SCHEMA\n[DATABASE BUKU, MEMBER, & RIWAYAT PEMINJAMAN]",
             "problem": "Pencatatan buku pinjaman secara manual sering menyebabkan kehilangan buku, kekeliruan data peminjam, dan pencarian koleksi yang memakan waktu lama.",
             "solution": "Menghadirkan sistem web terpadu yang mengotomatisasi log sirkulasi, memantau tenggat waktu pengembalian, dan menyajikan katalog buku yang mudah dicari.",
             "benchmarks": [
@@ -2950,8 +2955,7 @@ export const translations = {
                 "target": "Akurat",
                 "achieved": "Otomatis"
               }
-            ],
-            "architectureSchema": "[SISWA & PUSTAKAWAN INTERFACE]\n       │\n       ▼\n[LIBRARY MANAGEMENT CORE]\n       │\n       ├──► [OPAC: ONLINE CATALOG SEARCH]\n       │\n       ├──► [CIRCULATION: PINJAM, KEMBALI, DENDA]\n       │\n       ▼ RELATIONAL SCHEMA\n[DATABASE BUKU, MEMBER, & RIWAYAT PEMINJAMAN]"
+            ]
           }
         },
         "proj-08": {
@@ -2971,6 +2975,7 @@ export const translations = {
             "status": "Selesai"
           },
           "deepDive": {
+            "architectureSchema": "[ADMIN KEUANGAN & SISWA PORTAL]\n       │\n       ▼\n[FINANCIAL LEDGER & BILLING SYSTEM]\n       │\n       ├──► [VERIFIKASI TAGIHAN BULANAN SISWA]\n       │\n       ├──► [CETAK BUKTI PEMBAYARAN & KWITANSI]\n       │\n       ▼ TRANSACTION ARCHIVE\n[DATABASE TRANSAKSI, REKAP KAS & LAPORAN SPP]",
             "problem": "Petugas keuangan sekolah kewalahan merekap pembayaran ratusan siswa secara manual di buku kas, menyulitkan pengecekan tunggakan secara akurat.",
             "solution": "Membangun portal administrasi berbasis framework Laravel dengan database relasional terstruktur, verifikasi kwitansi otomatis, dan pelaporan keuangan bulanan.",
             "benchmarks": [
@@ -2984,8 +2989,7 @@ export const translations = {
                 "target": "Relasional",
                 "achieved": "MySQL Terstruktur"
               }
-            ],
-            "architectureSchema": "[ADMIN KEUANGAN & SISWA PORTAL]\n       │\n       ▼\n[FINANCIAL LEDGER & BILLING SYSTEM]\n       │\n       ├──► [VERIFIKASI TAGIHAN BULANAN SISWA]\n       │\n       ├──► [CETAK BUKTI PEMBAYARAN & KWITANSI]\n       │\n       ▼ TRANSACTION ARCHIVE\n[DATABASE TRANSAKSI, REKAP KAS & LAPORAN SPP]"
+            ]
           }
         },
         "proj-09": {
@@ -3005,6 +3009,7 @@ export const translations = {
             "status": "Selesai"
           },
           "deepDive": {
+            "architectureSchema": "[USER TASK INPUT & GESTURE CONTROL]\n       │\n       ▼\n[TASK STATE MANAGER: CRUD & FILTERING]\n       │\n       ├──► [PRIORITY MATRIX: HIGH / MED / LOW]\n       │\n       ├──► [LOCALSTORAGE OFFLINE SYNC]\n       │\n       ▼ REACTIVE DOM\n[INTERACTIVE TASK LIST & COMPLETION TELEMETRY]",
             "problem": "Banyak aplikasi to-do dipenuhi fitur rumit dan iklan yang justru mengganggu fokus pengguna saat mencatat agenda penting harian.",
             "solution": "Merancang Mylist Todo App dengan tampilan bersih, fokus navigasi cepat, dan persistensi LocalStorage untuk akses kilat setiap saat.",
             "benchmarks": [
@@ -3018,8 +3023,7 @@ export const translations = {
                 "target": "Lokal",
                 "achieved": "Zero Jeda"
               }
-            ],
-            "architectureSchema": "[USER TASK INPUT & GESTURE CONTROL]\n       │\n       ▼\n[TASK STATE MANAGER: CRUD & FILTERING]\n       │\n       ├──► [PRIORITY MATRIX: HIGH / MED / LOW]\n       │\n       ├──► [LOCALSTORAGE OFFLINE SYNC]\n       │\n       ▼ REACTIVE DOM\n[INTERACTIVE TASK LIST & COMPLETION TELEMETRY]"
+            ]
           }
         }
       }
@@ -3281,6 +3285,7 @@ export const translations = {
       "about": "02.ABT",
       "skills": "03.SKL",
       "projects": "04.PRJ",
+      "certificates": "04.CRT",
       "another": "06.LAB",
       "github": "05.GIT"
     },
@@ -3361,34 +3366,34 @@ export const translations = {
       "timelineTitle": "Career Chronology & Practical Experience",
       "timeline": [
         {
-          "year": "2026 — GEGENWART",
-          "title": "Erweiterung von Frontend & Backend",
-          "place": "Semarang, Zentral-Java",
-          "description": "Erweiterung der Fachkenntnisse in modernen Frontend- und Backend-Architekturen und interaktiven Websystemen."
+          "year": "2026 — SEKARANG",
+          "title": "Pengembangan Lanjutan Frontend & Backend",
+          "place": "Semarang, Jawa Tengah",
+          "description": "Memperluas keilmuan di bidang frontend dan backend, merancang arsitektur sistem modern, serta memperdalam rekayasa web interaktif berkinerja tinggi."
         },
         {
           "year": "2025 — 2026",
-          "title": "Künstliche Intelligenz & Fullstack-Engineering",
+          "title": "Artificial Intelligence & Fullstack Engineering",
           "place": "ITESA Muhammadiyah Semarang",
-          "description": "Vertiefung der Kenntnisse in künstlicher Intelligenz und Fullstack-Entwicklung während des Hochschulstudiums an der ITESA Muhammadiyah Semarang."
+          "description": "Memperdalam keilmuan untuk memahami lebih dalam seputar artifisial inteligensi dan fullstack developer, sembari menempuh pendidikan perguruan tinggi di ITESA Muhammadiyah Semarang."
         },
         {
           "year": "2024 — 2025",
-          "title": "Coding-Entwicklung & Fullstack-Kompetenz",
-          "place": "Semarang, Zentral-Java",
-          "description": "Ausbau der Programmierfertigkeiten und umfassendes Verständnis von Frontend und Backend zur Etablierung des Profils als Fullstack-Entwickler."
+          "title": "Pengembangan Skill Coding & Fullstack Developer",
+          "place": "Semarang, Jawa Tengah",
+          "description": "Mengembangkan skill coding dan pemahaman mendalam di dunia frontend dan backend, serta membangun kapabilitas jobdesk fullstack developer."
         },
         {
           "year": "2022 — 2024",
-          "title": "Web-, App- & Software-Engineering",
+          "title": "Eksplorasi Web, Aplikasi & Software Engineering",
           "place": "SMK TEXMACO Semarang",
-          "description": "Erkundung der Website- und Anwendungsentwicklung sowie Aufbau der IT-Grundlagen an der Berufsschule SMK TEXMACO Semarang."
+          "description": "Memulai eksplorasi di dunia website dan aplikasi serta membangun background IT software engineering di bangku SMK TEXMACO Semarang."
         },
         {
           "year": "2020 — 2022",
-          "title": "Einstieg in Cyber-Security-Tools",
+          "title": "Eksplorasi Perdana Cyber Security Tools",
           "place": "SMP TEXMACO Semarang",
-          "description": "Erste IT-Erkundung mit Cyber-Security-Tools während der Mittelschulzeit an der SMP TEXMACO Semarang."
+          "description": "Memulai eksplorasi awal di dunia IT dengan mempelajari cyber security tools di bangku SMP TEXMACO Semarang."
         }
       ]
     },
@@ -3548,6 +3553,7 @@ export const translations = {
             "status": "Aktif"
           },
           "deepDive": {
+            "architectureSchema": "[CLIENT: WEB & MOBILE BROWSERS]\n       │\n       ▼ HTTPS / TLS 1.3\n[LARAVEL ROUTING & TAILWIND BLADE ENGINE]\n       │\n       ├──► [ADMISSION CONTROLLER: JALUR & PRODI]\n       │           │\n       │           ├──► [FORM VALIDATION & SANITIZATION]\n       │           └──► [DOCUMENT UPLOAD & VERIF ENGINE]\n       │\n       ├──► [ADMIN DASHBOARD: PANITIA PMB ITESA]\n       │\n       ▼ ELOQUENT ORM / QUERY BUILDER\n[MYSQL DATABASE: CAMABA, PRODI, KUOTA, STATUS]",
             "problem": "Calon mahasiswa baru membutuhkan akses informasi pendaftaran yang akurat, lengkap, dan mudah diakses dari berbagai perangkat tanpa kendala.",
             "solution": "Membangun portal PMB terpadu berbasis Laravel dengan navigasi informatif seputar program studi, biaya, jalur pendaftaran, dan verifikasi berkas daring.",
             "benchmarks": [
@@ -3561,8 +3567,7 @@ export const translations = {
                 "target": "Terintegrasi",
                 "achieved": "Dashboard Admin"
               }
-            ],
-            "architectureSchema": "[CLIENT: WEB & MOBILE BROWSERS]\n       │\n       ▼ HTTPS / TLS 1.3\n[LARAVEL ROUTING & TAILWIND BLADE ENGINE]\n       │\n       ├──► [ADMISSION CONTROLLER: JALUR & PRODI]\n       │           │\n       │           ├──► [FORM VALIDATION & SANITIZATION]\n       │           └──► [DOCUMENT UPLOAD & VERIF ENGINE]\n       │\n       ├──► [ADMIN DASHBOARD: PANITIA PMB ITESA]\n       │\n       ▼ ELOQUENT ORM / QUERY BUILDER\n[MYSQL DATABASE: CAMABA, PRODI, KUOTA, STATUS]"
+            ]
           }
         },
         "proj-02": {
@@ -3582,6 +3587,7 @@ export const translations = {
             "tema": "Personalisasi"
           },
           "deepDive": {
+            "architectureSchema": "[USER INPUT: KEYBOARD & TOUCH NUMPAD]\n       │\n       ▼ EVENT LISTENER\n[PARSER & TOKENIZER: MATH EXPRESSION]\n       │\n       ├──► [MATH BOT ENGINE: AUTO-CORRECT & CALC]\n       │\n       ├──► [THEME ENGINE: DYNAMIC CSS VARIABLES]\n       │           │\n       │           └──► [LOCALSTORAGE STATE PERSISTENCE]\n       │\n       ▼ REAL-TIME DOM RENDERER\n[CANVAS / LCD DISPLAY: RESULT & HISTORY LOG]",
             "problem": "Banyak kalkulator web yang monoton, kaku tanpa interaksi asisten, dan tidak memungkinkan pengguna mengubah tema sesuai preferensi personal.",
             "solution": "Mengembangkan Mathicalc murni dengan HTML, CSS, dan JavaScript — memadukan bot asisten matematis dan tema personalisasi tanpa dependensi berat.",
             "benchmarks": [
@@ -3595,8 +3601,7 @@ export const translations = {
                 "target": "Fleksibel",
                 "achieved": "100% Personal"
               }
-            ],
-            "architectureSchema": "[USER INPUT: KEYBOARD & TOUCH NUMPAD]\n       │\n       ▼ EVENT LISTENER\n[PARSER & TOKENIZER: MATH EXPRESSION]\n       │\n       ├──► [MATH BOT ENGINE: AUTO-CORRECT & CALC]\n       │\n       ├──► [THEME ENGINE: DYNAMIC CSS VARIABLES]\n       │           │\n       │           └──► [LOCALSTORAGE STATE PERSISTENCE]\n       │\n       ▼ REAL-TIME DOM RENDERER\n[CANVAS / LCD DISPLAY: RESULT & HISTORY LOG]"
+            ]
           }
         },
         "proj-03": {
@@ -3616,6 +3621,7 @@ export const translations = {
             "basis": "Web App"
           },
           "deepDive": {
+            "architectureSchema": "[LEARNER / DEVELOPER UI]\n       │\n       ▼ HTTPS REST API\n[LARAVEL CORE: LEARNING ROADMAP ENGINE]\n       │\n       ├──► [MODULAR CURRICULUM: ZERO TO PRO]\n       │           │\n       │           ├──► [CODE PLAYGROUND & SANDBOX]\n       │           └──► [INTERACTIVE SYNTAX VALIDATOR]\n       │\n       ├──► [PROGRESSION & MILESTONE TRACKER]\n       │\n       ▼ ELOQUENT ORM\n[MYSQL DATABASE: USERS, LESSONS, COMPLETIONS]",
             "problem": "Banyak calon programmer pemula kesulitan belajar mandiri karena materi online yang terpecah-pecah tanpa panduan tahapan yang runtut.",
             "solution": "Membangun platform TurnCode di atas Laravel untuk menghadirkan alur belajar terpadu 'Zero to Pro' yang terarah dan mudah dipahami.",
             "benchmarks": [
@@ -3629,8 +3635,7 @@ export const translations = {
                 "target": "Tinggi",
                 "achieved": "Laravel MVC"
               }
-            ],
-            "architectureSchema": "[LEARNER / DEVELOPER UI]\n       │\n       ▼ HTTPS REST API\n[LARAVEL CORE: LEARNING ROADMAP ENGINE]\n       │\n       ├──► [MODULAR CURRICULUM: ZERO TO PRO]\n       │           │\n       │           ├──► [CODE PLAYGROUND & SANDBOX]\n       │           └──► [INTERACTIVE SYNTAX VALIDATOR]\n       │\n       ├──► [PROGRESSION & MILESTONE TRACKER]\n       │\n       ▼ ELOQUENT ORM\n[MYSQL DATABASE: USERS, LESSONS, COMPLETIONS]"
+            ]
           }
         },
         "proj-04": {
@@ -3650,6 +3655,7 @@ export const translations = {
             "analisis": "Kognitif"
           },
           "deepDive": {
+            "architectureSchema": "[CLINICAL ASSESSMENT / USER QUESTIONNAIRE]\n       │\n       ▼ WEBSOCKET / REST API\n[FASTAPI & LLM INTERFACE LAYER]\n       │\n       ├──► [LLM: SYMPTOM EXTRACTION & CONTEXT]\n       │           │\n       │           ▼\n       ├──► [FEATURE VECTOR PREPROCESSING]\n       │           │\n       │           ▼\n       ├──► [XGBOOST CLASSIFIER: ALZHEIMER RISK]\n       │           │\n       │           └──► [DECISION TREE ENSEMBLE SCORING]\n       │\n       ▼ JSON TELEMETRY RESPONSE\n[DIAGNOSTIC RADAR & RISK STRATIFICATION UI]",
             "problem": "Pemeriksaan gejala alzheimer pada fase awal sering terlambat karena keterbatasan akses skrining kognitif awal yang cepat dan terjangkau.",
             "solution": "Menggabungkan model LLM untuk ekstraksi interaksi bahasa dengan ketepatan algoritma tabular XGBoost guna mengkalkulasi indikasi gejala secara akurat.",
             "benchmarks": [
@@ -3663,8 +3669,7 @@ export const translations = {
                 "target": "Intuitif",
                 "achieved": "Asesmen Interaktif"
               }
-            ],
-            "architectureSchema": "[CLINICAL ASSESSMENT / USER QUESTIONNAIRE]\n       │\n       ▼ WEBSOCKET / REST API\n[FASTAPI & LLM INTERFACE LAYER]\n       │\n       ├──► [LLM: SYMPTOM EXTRACTION & CONTEXT]\n       │           │\n       │           ▼\n       ├──► [FEATURE VECTOR PREPROCESSING]\n       │           │\n       │           ▼\n       ├──► [XGBOOST CLASSIFIER: ALZHEIMER RISK]\n       │           │\n       │           └──► [DECISION TREE ENSEMBLE SCORING]\n       │\n       ▼ JSON TELEMETRY RESPONSE\n[DIAGNOSTIC RADAR & RISK STRATIFICATION UI]"
+            ]
           }
         },
         "proj-05": {
@@ -3684,6 +3689,7 @@ export const translations = {
             "status": "Selesai"
           },
           "deepDive": {
+            "architectureSchema": "[AGROTECH PORTAL USER]\n       │\n       ▼ HTTPS\n[PHP MVC FRAMEWORK & WEB RUNTIME]\n       │\n       ├──► [KATALOG PRODUK PERTANIAN & AGRIBISNIS]\n       │\n       ├──► [SISTEM INFORMASI KEMITRAAN PETANI]\n       │\n       ▼ MYSQL STORAGE\n[DATABASE PRODUK, ARTIKEL TANI & DATA MITRA]",
             "problem": "Petani tradisional menghadapi kesulitan dalam pencatatan siklus tanam, pemetaan lahan, dan pemantauan sumber daya karena masih mengandalkan pencatatan manual di kertas.",
             "solution": "Merancang Ladangku sebagai platform web ringan dengan navigasi sederhana, indikator status visual, dan aksesibilitas cepat melalui perangkat mobile para petani.",
             "benchmarks": [
@@ -3697,8 +3703,7 @@ export const translations = {
                 "target": "Responsif",
                 "achieved": "Optimal di HP"
               }
-            ],
-            "architectureSchema": "[AGROTECH PORTAL USER]\n       │\n       ▼ HTTPS\n[PHP MVC FRAMEWORK & WEB RUNTIME]\n       │\n       ├──► [KATALOG PRODUK PERTANIAN & AGRIBISNIS]\n       │\n       ├──► [SISTEM INFORMASI KEMITRAAN PETANI]\n       │\n       ▼ MYSQL STORAGE\n[DATABASE PRODUK, ARTIKEL TANI & DATA MITRA]"
+            ]
           }
         },
         "proj-06": {
@@ -3718,6 +3723,7 @@ export const translations = {
             "status": "Selesai"
           },
           "deepDive": {
+            "architectureSchema": "[CUSTOMER TABLE / MOBILE ORDER]\n       │\n       ▼\n[ORDER DISPATCHER & CART STATE]\n       │\n       ├──► [MENU SELECTOR & PRICING CALCULATOR]\n       │\n       ├──► [KITCHEN DISPLAY SYSTEM TICKETING]\n       │\n       ▼ TRANSACTION LOG\n[ORDER STATUS, PAYMENT RECEIPT & DATABASE]",
             "problem": "Buku menu fisik konvensional memicu antrean pesanan yang lambat, kesalahan perhitungan harga manual, dan repot saat memperbarui daftar menu harian.",
             "solution": "Membangun aplikasi menu digital yang responsif dengan kartu menu visual, perhitungan total harga otomatis, dan konfirmasi pesanan instan.",
             "benchmarks": [
@@ -3731,8 +3737,7 @@ export const translations = {
                 "target": "100%",
                 "achieved": "Otomatis"
               }
-            ],
-            "architectureSchema": "[CUSTOMER TABLE / MOBILE ORDER]\n       │\n       ▼\n[ORDER DISPATCHER & CART STATE]\n       │\n       ├──► [MENU SELECTOR & PRICING CALCULATOR]\n       │\n       ├──► [KITCHEN DISPLAY SYSTEM TICKETING]\n       │\n       ▼ TRANSACTION LOG\n[ORDER STATUS, PAYMENT RECEIPT & DATABASE]"
+            ]
           }
         },
         "proj-07": {
@@ -3752,6 +3757,7 @@ export const translations = {
             "status": "Selesai"
           },
           "deepDive": {
+            "architectureSchema": "[SISWA & PUSTAKAWAN INTERFACE]\n       │\n       ▼\n[LIBRARY MANAGEMENT CORE]\n       │\n       ├──► [OPAC: ONLINE CATALOG SEARCH]\n       │\n       ├──► [CIRCULATION: PINJAM, KEMBALI, DENDA]\n       │\n       ▼ RELATIONAL SCHEMA\n[DATABASE BUKU, MEMBER, & RIWAYAT PEMINJAMAN]",
             "problem": "Pencatatan buku pinjaman secara manual sering menyebabkan kehilangan buku, kekeliruan data peminjam, dan pencarian koleksi yang memakan waktu lama.",
             "solution": "Menghadirkan sistem web terpadu yang mengotomatisasi log sirkulasi, memantau tenggat waktu pengembalian, dan menyajikan katalog buku yang mudah dicari.",
             "benchmarks": [
@@ -3765,8 +3771,7 @@ export const translations = {
                 "target": "Akurat",
                 "achieved": "Otomatis"
               }
-            ],
-            "architectureSchema": "[SISWA & PUSTAKAWAN INTERFACE]\n       │\n       ▼\n[LIBRARY MANAGEMENT CORE]\n       │\n       ├──► [OPAC: ONLINE CATALOG SEARCH]\n       │\n       ├──► [CIRCULATION: PINJAM, KEMBALI, DENDA]\n       │\n       ▼ RELATIONAL SCHEMA\n[DATABASE BUKU, MEMBER, & RIWAYAT PEMINJAMAN]"
+            ]
           }
         },
         "proj-08": {
@@ -3786,6 +3791,7 @@ export const translations = {
             "status": "Selesai"
           },
           "deepDive": {
+            "architectureSchema": "[ADMIN KEUANGAN & SISWA PORTAL]\n       │\n       ▼\n[FINANCIAL LEDGER & BILLING SYSTEM]\n       │\n       ├──► [VERIFIKASI TAGIHAN BULANAN SISWA]\n       │\n       ├──► [CETAK BUKTI PEMBAYARAN & KWITANSI]\n       │\n       ▼ TRANSACTION ARCHIVE\n[DATABASE TRANSAKSI, REKAP KAS & LAPORAN SPP]",
             "problem": "Petugas keuangan sekolah kewalahan merekap pembayaran ratusan siswa secara manual di buku kas, menyulitkan pengecekan tunggakan secara akurat.",
             "solution": "Membangun portal administrasi berbasis framework Laravel dengan database relasional terstruktur, verifikasi kwitansi otomatis, dan pelaporan keuangan bulanan.",
             "benchmarks": [
@@ -3799,8 +3805,7 @@ export const translations = {
                 "target": "Relasional",
                 "achieved": "MySQL Terstruktur"
               }
-            ],
-            "architectureSchema": "[ADMIN KEUANGAN & SISWA PORTAL]\n       │\n       ▼\n[FINANCIAL LEDGER & BILLING SYSTEM]\n       │\n       ├──► [VERIFIKASI TAGIHAN BULANAN SISWA]\n       │\n       ├──► [CETAK BUKTI PEMBAYARAN & KWITANSI]\n       │\n       ▼ TRANSACTION ARCHIVE\n[DATABASE TRANSAKSI, REKAP KAS & LAPORAN SPP]"
+            ]
           }
         },
         "proj-09": {
@@ -3820,6 +3825,7 @@ export const translations = {
             "status": "Selesai"
           },
           "deepDive": {
+            "architectureSchema": "[USER TASK INPUT & GESTURE CONTROL]\n       │\n       ▼\n[TASK STATE MANAGER: CRUD & FILTERING]\n       │\n       ├──► [PRIORITY MATRIX: HIGH / MED / LOW]\n       │\n       ├──► [LOCALSTORAGE OFFLINE SYNC]\n       │\n       ▼ REACTIVE DOM\n[INTERACTIVE TASK LIST & COMPLETION TELEMETRY]",
             "problem": "Banyak aplikasi to-do dipenuhi fitur rumit dan iklan yang justru mengganggu fokus pengguna saat mencatat agenda penting harian.",
             "solution": "Merancang Mylist Todo App dengan tampilan bersih, fokus navigasi cepat, dan persistensi LocalStorage untuk akses kilat setiap saat.",
             "benchmarks": [
@@ -3833,8 +3839,7 @@ export const translations = {
                 "target": "Lokal",
                 "achieved": "Zero Jeda"
               }
-            ],
-            "architectureSchema": "[USER TASK INPUT & GESTURE CONTROL]\n       │\n       ▼\n[TASK STATE MANAGER: CRUD & FILTERING]\n       │\n       ├──► [PRIORITY MATRIX: HIGH / MED / LOW]\n       │\n       ├──► [LOCALSTORAGE OFFLINE SYNC]\n       │\n       ▼ REACTIVE DOM\n[INTERACTIVE TASK LIST & COMPLETION TELEMETRY]"
+            ]
           }
         }
       }
