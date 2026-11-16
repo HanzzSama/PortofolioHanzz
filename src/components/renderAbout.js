@@ -19,12 +19,36 @@ export function renderAbout(data) {
         </h2>
       </div>
 
-      <div class="about-narrative-split">
-        <div class="narrative-col-1">
-          <p>${about.ethosParagraphs[0]}</p>
+      <!-- Authentic Profile Hero with Pacitan Photo & Narrative -->
+      <div class="about-profile-hero" data-stagger>
+        <div class="about-photo-card">
+          <div class="about-photo-frame">
+            <img 
+              src="${about.photo || meta.photo || './src/assets/Hanzz.jpeg'}" 
+              alt="${meta.fullName} - ${meta.role}" 
+              class="about-photo-img" 
+              loading="lazy"
+            />
+            <div class="about-photo-frame-border"></div>
+          </div>
+          <div class="about-photo-meta">
+            <div class="about-photo-caption">
+              <span>${about.photoCaption || 'Foto Haidar Rifky Andrianno — Pantai Pacitan'}</span>
+            </div>
+            <div class="about-geo-badge">
+              <span class="geo-dot"></span>
+              <span>${about.locationBadge || 'Indonesia | Jawa Tengah | Kota Semarang'}</span>
+            </div>
+          </div>
         </div>
-        <div class="narrative-col-2">
-          <p>${about.ethosParagraphs[1]}</p>
+
+        <div class="about-narrative-split">
+          <div class="narrative-col-1">
+            <p>${about.ethosParagraphs[0]}</p>
+          </div>
+          <div class="narrative-col-2">
+            <p>${about.ethosParagraphs[1]}</p>
+          </div>
         </div>
       </div>
 

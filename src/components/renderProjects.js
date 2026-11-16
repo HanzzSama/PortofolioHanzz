@@ -6,7 +6,8 @@
 export function renderProjects(data) {
   const { projects } = data;
 
-  const renderBlueprintSvg = (type) => {
+  const renderBlueprintSvg = (type, proj = {}) => {
+    const label = proj.title ? `${proj.title.toUpperCase()} // ${proj.year || '2024'}` : 'PROYEK // HANZZ';
     switch (type) {
       case 'topographic':
         return `
@@ -17,7 +18,7 @@ export function renderProjects(data) {
             <circle cx="200" cy="200" r="4" fill="currentColor"/>
             <line x1="180" y1="200" x2="220" y2="200" stroke-width="0.75"/>
             <line x1="200" y1="180" x2="200" y2="220" stroke-width="0.75"/>
-            <text x="210" y="195" font-family="'JetBrains Mono', monospace" font-size="8" fill="currentColor">60 FPS // BIO.GRID</text>
+            <text x="210" y="195" font-family="'JetBrains Mono', monospace" font-size="8" fill="currentColor">${label}</text>
           </svg>
         `;
       case 'matrix':
@@ -34,10 +35,11 @@ export function renderProjects(data) {
             <line x1="100" y1="120" x2="150" y2="250" stroke-width="0.75"/>
             <line x1="150" y1="250" x2="260" y2="270" stroke-width="0.75"/>
             <line x1="300" y1="150" x2="260" y2="270" stroke-width="0.75"/>
-            <text x="160" y="245" font-family="'JetBrains Mono', monospace" font-size="8" fill="currentColor">ITESA.NODE // 1.2M REC</text>
+            <text x="160" y="245" font-family="'JetBrains Mono', monospace" font-size="8" fill="currentColor">${label}</text>
           </svg>
         `;
       case 'contour':
+      case 'orbit':
         return `
           <svg viewBox="0 0 400 400" width="100%" height="100%" fill="none" stroke="currentColor">
             <ellipse cx="200" cy="200" rx="160" ry="120" stroke-width="0.75"/>
@@ -45,17 +47,17 @@ export function renderProjects(data) {
             <ellipse cx="200" cy="200" rx="80" ry="50" stroke-width="1.25"/>
             <circle cx="200" cy="200" r="3" fill="currentColor"/>
             <line x1="40" y1="200" x2="360" y2="200" stroke-width="0.5" stroke-dasharray="4 4"/>
-            <text x="210" y="195" font-family="'JetBrains Mono', monospace" font-size="8" fill="currentColor">SOIL.MOIST // 28ms</text>
+            <text x="210" y="195" font-family="'JetBrains Mono', monospace" font-size="8" fill="currentColor">${label}</text>
           </svg>
         `;
       default:
         return `
           <svg viewBox="0 0 400 400" width="100%" height="100%" fill="none" stroke="currentColor">
-            <circle cx="200" cy="200" rx="140" stroke-width="0.75"/>
+            <circle cx="200" cy="200" r="140" stroke-width="0.75"/>
             <polygon points="200,80 310,270 90,270" stroke-width="1"/>
             <rect x="150" y="150" width="100" height="100" stroke-width="1.2"/>
             <line x1="100" y1="100" x2="300" y2="300" stroke-width="0.5" stroke-dasharray="2 2"/>
-            <text x="210" y="195" font-family="'JetBrains Mono', monospace" font-size="8" fill="currentColor">TOKEN.M3 // 42K DL</text>
+            <text x="210" y="195" font-family="'JetBrains Mono', monospace" font-size="8" fill="currentColor">${label}</text>
           </svg>
         `;
     }
@@ -77,7 +79,7 @@ export function renderProjects(data) {
         ${projects.items
           .map(
             (proj) => `
-          <article class="project-architectural-card" data-stagger data-scroll-scale data-scale-from="0.88" data-scale-to="1.0">
+          <article class="project-architectural-card" data-scroll-scale data-scale-from="0.94" data-scale-to="1.0">
             <div class="project-details-panel">
               <div>
                 <div class="project-card-meta">
@@ -131,7 +133,7 @@ export function renderProjects(data) {
               </div>
 
               <div class="blueprint-canvas-container" style="color: ${proj.accent};" data-parallax-relative data-parallax-speed="0.12">
-                ${renderBlueprintSvg(proj.blueprintSvg)}
+                ${renderBlueprintSvg(proj.blueprintSvg, proj)}
               </div>
 
               <div class="blueprint-telemetry-badge">

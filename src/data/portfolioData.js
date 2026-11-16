@@ -12,165 +12,178 @@ export const portfolioData = {
   meta: {
     fullName: "Haidar Rifky Andrianno",
     shortName: "Haidar",
-    alias: "Hanzz",
-    callsign: "HANZZ // ARCH.01",
-    role: "FullStack Developer",
-    subRole: "FullStack Web & Systems Developer",
+    alias: "HanzzSama",
+    callsign: "HANZZ // DEV.01",
+    role: "Designer, Creative Collaborator & Web Developer",
+    subRole: "Web & Mobile UI/UX Designer • Web Developer",
+    experienceYears: "4 Tahun di Dunia IT",
+    photo: "./src/assets/Hanzz.jpeg",
+    photoCaption: "Foto Haidar Rifky Andrianno — Pantai Pacitan",
+    location: "Indonesia | Jawa Tengah | Kota Semarang",
     institution: {
       name: "ITESA Muhammadiyah Semarang",
       fullName: "Institut Teknologi Statistika dan Bisnis Muhammadiyah Semarang",
-      status: "Undergraduate Scholar // Computational Systems & Applied Tech",
-      period: "2023 — Present"
+      status: "Mahasiswa Aktif // Komputasi & Bisnis Terapan",
+      period: "2023 — Sekarang"
     },
     geoNodes: [
       {
         city: "Semarang",
-        region: "Central Java",
-        country: "ID",
+        region: "Jawa Tengah",
+        country: "Indonesia",
         coordinates: "6.9667° S, 110.4167° E",
-        type: "Primary Academic & Development Node",
+        type: "Base Pengembangan & Akademik",
         elevation: "82m ASL"
       }
     ],
     availability: {
-      status: "Available for High-Impact Commissions & FullStack Roles",
-      badge: "SYSTEM STATUS: OPERATIONAL",
-      responseLatency: "< 24 Hours",
-      timezone: "GMT+7 (Asia/Jakarta)"
+      status: "Terbuka untuk Kolaborasi Kreatif & Proyek Web",
+      badge: "STATUS: AVAILABLE FOR WORK",
+      responseLatency: "< 24 Jam",
+      timezone: "GMT+7 (WIB)"
     },
     socials: [
+      { name: "Instagram", handle: "@haidar.rifky", url: "https://instagram.com" },
+      { name: "LinkedIn", handle: "Haidar Rifky Andrianno", url: "https://linkedin.com" },
       { name: "GitHub", handle: "@HanzzSama", url: "https://github.com/HanzzSama" },
-      { name: "LinkedIn", handle: "in/haidar-rifky", url: "https://linkedin.com" },
-      { name: "Terminal / Email", handle: "haidarandrianno098@gmail.com", url: "mailto:haidarandrianno098@gmail.com" },
-      { name: "Portfolio / Repo", handle: "HanzzSama", url: "https://github.com/HanzzSama" }
+      { name: "Gmail", handle: "haidarandrianno098@gmail.com", url: "mailto:haidarandrianno098@gmail.com" }
     ]
   },
 
   welcome: {
-    systemTag: "SYS.01 // RECONSTRUCTION",
-    architecturalPreamble: "BIOPHILIC ARCHITECTURAL MINIMALISM × MATERIAL EXPRESSIVE",
+    systemTag: "PORTFOLIO // 2026",
+    architecturalPreamble: "DESIGNER • CREATIVE COLLABORATOR • WEB DEVELOPER",
     headlineLine1: "PORTFOLIO",
-    headlineLine2: "HANZZ",
-    headlineLine3: "FULLSTACK DEVELOPER.",
+    headlineLine2: "HANZZSAMA",
+    headlineLine3: "HAIDAR RIFKY.",
     leadParagraph:
-      "Saya adalah Haidar Rifky Andrianno (Hanzz), FullStack Developer yang berbasis di Semarang. Menempuh studi di ITESA Muhammadiyah Semarang, berfokus pada sintesis ruang digital bernapas — memadukan keteraturan arsitektural minimalis, rekayasa perangkat lunak skala tinggi, dan prinsip interaksi responsif modern.",
+      "Saya seorang desainer, kolaborator kreatif, dan perancang website dengan pengalaman 4 tahun dalam dunia IT. Berawal dari rasa penasaran yang tinggi hingga kini karya saya mencakup desain Web & Mobile UI/UX serta perancangan website yang interaktif dan inovatif.",
     telemetry: [
-      { label: "ACADEMIC BASE", value: "ITESA Muhammadiyah Semarang" },
-      { label: "COORDINATES", value: "6.9667° S, 110.4167° E" },
-      { label: "ENGINEERING DISCIPLINE", value: "FullStack Development & Systems" },
-      { label: "INTERFACE PHYSICS", value: "Lerp Parallax • 60 FPS Smooth Flow" }
+      { label: "PENGALAMAN", value: "4+ Tahun di Dunia IT" },
+      { label: "LOKASI", value: "Kota Semarang, Jawa Tengah" },
+      { label: "KAMPUS", value: "ITESA Muhammadiyah Semarang" },
+      { label: "SPESIALISASI", value: "UI/UX & Web Development" }
     ]
   },
 
   about: {
     sectionIndex: "02",
-    sectionTitle: "ARCHITECTURAL MANIFESTO",
-    sectionSub: "PHILOSOPHY // PEDAGOGY // RESILIENCE",
-    ethosTitle: "Mereduksi Kebisingan, Mengembalikan Ruang Bernapas",
+    sectionTitle: "TENTANG SAYA",
+    sectionSub: "HAIDAR RIFKY ANDRIANNO // KOTA SEMARANG",
+    ethosTitle: "Menciptakan Desain & Pengalaman Baru yang Bermanfaat",
+    photo: "./src/assets/Hanzz.jpeg",
+    photoCaption: "Foto Haidar Rifky Andrianno — Pantai Pacitan",
+    locationBadge: "Indonesia | Jawa Tengah | Kota Semarang",
     ethosParagraphs: [
-      "Di tengah lanskap digital yang penuh dengan gradien artifisial hiper-jenuh dan antarmuka SaaS yang seragam, saya mengambil jalur berlawanan: Biophilic Architectural Minimalism. Kami memperlakukan layar bukan sebagai kanvas datar yang statis, melainkan sebagai ruang tektonik arsitektur di mana cahaya, proporsi grid 1px, tipografi editorial, dan tekstur alami saling berinteraksi.",
-      "Sebagai mahasiswa di ITESA Muhammadiyah Semarang, pemahaman statistika komputasional dan teknologi membentuk ketajaman analisis saya. Kode yang saya tulis bukan sekadar untuk merender piksel, melainkan membangun infrastruktur data terukur, bebas dari bloatware, dan memiliki ketahanan struktural layaknya arsitektur batu kapur alami."
+      "Saya seorang desainer, kolaborator kreatif, dan perancang website sederhana dengan pengalaman 4 tahun dalam dunia IT. Menciptakan desain dan pengalaman yang baru adalah tujuan utama saya masuk dunia IT. Berawal dari rasa penasaran yang tinggi kini menjadi programmer yang diakui orang lain, karya saya mencakup desain web UI/UX maupun mobile UI/UX, serta merancang website sederhana dengan desain yang interaktif dan inovatif.",
+      "Merupakan suatu kehormatan untuk membangun karier yang beragam dan bermanfaat. Saya selalu bersemangat mempelajari keterampilan baru, mengeksplorasi pengalaman baru, dan menyambut berbagai tantangan kreatif baru yang membawa dampak positif."
     ],
     pillars: [
       {
-        code: "PIL-01",
-        title: "Tectonic Grid Structure",
-        desc: "Sistem grid presisi 1px hairline border dengan proporsi matematis rasio emas dan negative space lapang, menghilangkan dekorasi semu."
+        code: "FOKUS-01",
+        title: "Web & Mobile UI/UX",
+        desc: "Merancang tata letak antarmuka yang bersih, intuitif, dan nyaman digunakan untuk pengguna web maupun aplikasi mobile."
       },
       {
-        code: "PIL-02",
-        title: "Biophilic Materiality",
-        desc: "Palet warna yang diadaptasi dari alam nyata: Raw Limestone (#F4F3EF), Deep Obsidian Moss (#0D110E), dan Botanical Sage (#4A5D4E) dengan sentuhan grain subtil."
+        code: "FOKUS-02",
+        title: "Interactive Web Development",
+        desc: "Membangun website dengan struktur rapi, fungsionalitas andal, serta interaksi dinamis yang responsif di berbagai perangkat."
       },
       {
-        code: "PIL-03",
-        title: "Material Expressive Motion",
-        desc: "Kurva fisika cubic-bezier(0.2, 0, 0, 1) Google Material 3 dan velocity interpolation yang memberikan sensasi gravitasi organik pada tiap interaksi."
+        code: "FOKUS-03",
+        title: "Kolaborasi Kreatif",
+        desc: "Bekerja sama secara komunikatif dalam tim untuk menerjemahkan visi dan kebutuhan menjadi solusi produk digital nyata."
       },
       {
-        code: "PIL-04",
-        title: "Algorithmic Precision",
-        desc: "Kematangan backend microservices, caching multi-tier, dan pemrosesan data asinkron yang menjamin keandalan sistem berskala enterprise."
+        code: "FOKUS-04",
+        title: "Pembelajaran Berkelanjutan",
+        desc: "Selalu haus akan wawasan baru, mendalami kakas desain mutakhir, serta terus mengasah kemampuan pemrograman."
       }
     ],
+    timelineTitle: "Kronologi Karier & Pengalaman Nyata",
     timeline: [
       {
-        year: "2024 — PRESENT",
-        title: "FullStack Developer & Systems Architect",
-        place: "Independent & Open Source Practice // Semarang",
-        description: "Merancang arsitektur sistem skala penuh, aplikasi berbasis web modern, dan kakas pengembang mutakhir."
+        year: "2024 — SEKARANG",
+        title: "Pengembangan Portal & Web Interaktif",
+        place: "Semarang, Jawa Tengah",
+        description: "Merancang portal PMB ITESA serta aplikasi utilitas personal modern seperti Mylist Todo App."
       },
       {
-        year: "2023 — PRESENT",
-        title: "Applied Computer Science & Tech Studies",
+        year: "2023 — SEKARANG",
+        title: "Pendidikan Tinggi IT & Komputasi",
         place: "ITESA Muhammadiyah Semarang",
-        description: "Mendalami statistika komputasional, algoritma komputasi, dan rekayasa perangkat lunak berorientasi data."
+        description: "Menempuh studi akademik dan memperdalam logika komputasional, rekayasa web, dan kolaborasi sistem."
       },
       {
         year: "2022 — 2023",
-        title: "Web Systems & Interface Developer",
-        place: "Semarang Tech Community",
-        description: "Mengembangkan prototipe antarmuka berkinerja tinggi, modular design tokens, dan optimasi core web vitals."
+        title: "Perancangan Aplikasi & Kompetisi",
+        place: "Jawa Tengah",
+        description: "Membangun Website Ladangku untuk perlombaan agrotech, Sistem Perpustakaan Terpadu, dan Aplikasi Pembayaran SPP."
+      },
+      {
+        year: "2020 — 2022",
+        title: "Awal Mula Perjalanan IT (Desain & Web)",
+        place: "Semarang",
+        description: "Memulai eksplorasi intensif dasar web (HTML, CSS, JS, PHP) serta desain grafis (Canva, Figma, Photoshop)."
       }
     ]
   },
 
   skills: {
     sectionIndex: "03",
-    sectionTitle: "SYSTEMIC CAPABILITIES",
-    sectionSub: "STRUCTURAL TAXONOMY // ZERO PROGRESS BARS",
+    sectionTitle: "KEAHLIAN & KOMPETENSI",
+    sectionSub: "17 KEAHLIAN TEKNIK & VISUAL // TERUJI",
+    headline: "Keahlian & Penguasaan Perangkat",
     description:
-      "Kami menolak progress bar persentase yang arbitrari. Sebagai gantinya, kemampuan kami diklasifikasikan sebagai matriks arsitektur 4-lapisan: dari infrastruktur dasar hingga pengalaman spasial manusia.",
+      "Daftar 17 keahlian teknis dan visual yang dikembangkan selama 4 tahun berkarya di dunia IT, diklasifikasikan ke dalam 4 domain kompetensi terstruktur.",
     matrixTiers: [
       {
         tierId: "TIER-01",
-        layerName: "Distributed Systems & Cloud Core",
-        concept: "Subterranean Infrastructure",
+        layerName: "Frontend & Web Core",
+        concept: "Antarmuka & Pengalaman Web",
         colorAccent: "var(--color-botanical-sage)",
         nodes: [
-          { name: "Distributed Microservices", spec: "Event-driven, High-Throughput", tag: "CORE" },
-          { name: "PostgreSQL & Redis Topology", spec: "Connection Pooling, Caching Grids", tag: "DATA" },
-          { name: "Docker & Container Orchestration", spec: "Multi-stage Builds, Zero-downtime", tag: "INFRA" },
-          { name: "REST, GraphQL & gRPC APIs", spec: "Strict Contract, Protocol Buffers", tag: "PROTO" },
-          { name: "Cloudflare Workers & Edge Compute", spec: "Sub-50ms Global Edge Routing", tag: "EDGE" }
+          { name: "HTML", spec: "Semantik & Struktur Standar Web", tag: "CORE" },
+          { name: "CSS", spec: "Desain Responsif, Flexbox, Grid", tag: "STYLE" },
+          { name: "JavaScript", spec: "Interaktivitas Klien & DOM Dinamis", tag: "SCRIPT" },
+          { name: "Tailwind CSS", spec: "Utility-first Modern Styling", tag: "FRAMEWORK" },
+          { name: "Bootstrap", spec: "Komponen Cepat & Tata Letak Grid", tag: "UI KIT" }
         ]
       },
       {
         tierId: "TIER-02",
-        layerName: "Fullstack Synthesis & Engines",
-        concept: "Tectonic Middleware",
+        layerName: "Backend & Database",
+        concept: "Logika Server & Pengelolaan Data",
         colorAccent: "var(--color-warm-sand)",
         nodes: [
-          { name: "TypeScript & ECMAScript Next", spec: "Strict Typing, AST Transformations", tag: "LANG" },
-          { name: "Node.js & Bun Runtimes", spec: "Non-blocking I/O, High Concurrency", tag: "ENGINE" },
-          { name: "Go (Golang)", spec: "Goroutines, Low-latency Micro-daemons", tag: "LANG" },
-          { name: "Python for Data & Automation", spec: "NumPy, Pandas, Telemetry Scraping", tag: "DATA" },
-          { name: "Next.js & Modern SSR Pipelines", spec: "Streaming SSR, Server Components", tag: "FRAMEWORK" }
+          { name: "PHP", spec: "Pemrograman Server & Arsitektur MVC", tag: "BACKEND" },
+          { name: "Laravel", spec: "Framework PHP Modern & Elegan", tag: "FRAMEWORK" },
+          { name: "MySQL", spec: "Manajemen Database Relasional", tag: "DATABASE" },
+          { name: "Node JS", spec: "Runtime JavaScript & API Dasar", tag: "RUNTIME" },
+          { name: "Elixir & Phoenix", spec: "Eksplorasi Konkurensi & Backend", tag: "EXPLORE" }
         ]
       },
       {
         tierId: "TIER-03",
-        layerName: "Spatial UI & Material Motion",
-        concept: "Sensory Interface Layer",
+        layerName: "Desain UI/UX & Grafis",
+        concept: "Estetika Spasial & Kreativitas Visual",
         colorAccent: "var(--color-botanical-sage)",
         nodes: [
-          { name: "Material 3 Expressive Curves", spec: "cubic-bezier(0.2, 0, 0, 1), Elevation", tag: "MOTION" },
-          { name: "Smooth Lerp Parallax Physics", spec: "requestAnimationFrame, Fluid Scroll", tag: "PHYSICS" },
-          { name: "Canvas & Generative Topography", spec: "Organic Vector Fields, SVG Noise", tag: "CREATIVE" },
-          { name: "Architectural Grid Systems", spec: "Subpixel Hairline Borders, Clamp Scales", tag: "LAYOUT" },
-          { name: "Headless Design Tokens", spec: "CSS Variables, Semantic Color Spaces", tag: "SYSTEM" }
+          { name: "Figma", spec: "Desain Prototipe UI/UX Web & Mobile", tag: "DESIGN" },
+          { name: "Canva", spec: "Grafis Digital & Materi Presentasi", tag: "CREATIVE" },
+          { name: "Adobe Illustrator", spec: "Ilustrasi Vektor & Identitas Aset", tag: "VECTOR" },
+          { name: "3D Blender", spec: "Pemodelan Objek 3D Dasar", tag: "3D MOD" }
         ]
       },
       {
         tierId: "TIER-04",
-        layerName: "Human Experience & Ecological Resilience",
-        concept: "Atmospheric Envelope",
+        layerName: "Alat Produktivitas & Sistem",
+        concept: "Alur Kerja & Pengelolaan Proyek",
         colorAccent: "var(--color-charcoal-slate)",
         nodes: [
-          { name: "Universal Accessibility (WCAG AAA)", spec: "Keyboard Traversal, High Contrast", tag: "A11Y" },
-          { name: "Green Web & Carbon Efficiency", spec: "< 0.12g CO2/view, Zero Bloat", tag: "ECO" },
-          { name: "Core Web Vitals Engineering", spec: "LCP < 0.8s, INP < 50ms, CLS 0", tag: "PERF" },
-          { name: "Responsive Dynamic Viewports", spec: "Foldables, Ultra-wides, Mobile First", tag: "ADAPT" }
+          { name: "Git & GitHub", spec: "Version Control & Repositori Proyek", tag: "VCS" },
+          { name: "Microsoft Office", spec: "Dokumentasi & Administrasi Data", tag: "OFFICE" },
+          { name: "Kali Linux Tools", spec: "Pengenalan Jaringan & Keamanan Dasar", tag: "SECURITY" }
         ]
       }
     ]
@@ -178,167 +191,467 @@ export const portfolioData = {
 
   projects: {
     sectionIndex: "04",
-    sectionTitle: "SELECTED WORKS",
-    sectionSub: "ARCHITECTURAL PORTFOLIO // 2024—2026",
+    sectionTitle: "PROYEK KARYA",
+    sectionSub: "9 KARYA TERPILIH // WEB & APLIKASI",
+    headline: "Koleksi Proyek Unggulan",
     description:
-      "Katalog karya arsitektur perangkat lunak yang dibangun dengan standar estetika galeri dan integritas rekayasa sistem.",
+      "Koleksi 9 proyek karya yang mencakup portal informasi PMB ITESA, kalkulator Mathicalc berbot matematis, platform belajar coding TurnCode, sistem Neura AI untuk deteksi alzheimer, aplikasi agrotech, F&B, perpustakaan, hingga manajemen SPP.",
+    ui: {
+      problemLabel: "PERMASALAHAN",
+      solutionLabel: "SOLUSI KREATIF",
+      deliverablesLabel: "DELIVERABLES UTAMA",
+      architectureLabel: "IKHTISAR PROYEK",
+      githubCta: "LIHAT REPO",
+      inspectClose: "TUTUP DETAIL"
+    },
     items: [
-      {
-        id: "proj-01",
-        code: "PRJ // 01",
-        title: "Mathicalc",
-        subtitle: "High-Precision Mathematical & Computational Engine",
-        year: "2026",
-        client: "Scientific & Computational Tools",
-        category: "Fullstack / Computational Web",
-        role: "FullStack Developer",
-        description:
-          "Mesin komputasi matematika dan kalkulator analitik berbasis web yang mengintegrasikan evaluasi ekspresi matematis instan, rendering LaTeX dinamis, dan visualisasi kalkulasi bertahap berpresisi tinggi.",
-        deliverables: [
-          "Mesin parsing dan kalkulasi ekspresi matematis berkecepatan tinggi",
-          "Antarmuka reaktif minimalis dengan visualisasi formula real-time",
-          "Riwayat kalkulasi komputasional dan arsitektur modular WebAssembly"
-        ],
-        techStack: ["TypeScript", "Next.js", "WebAssembly", "Tailwind CSS", "KaTeX"],
-        metrics: {
-          latency: "2.8ms Compute",
-          precision: "64-bit Float",
-          bundle: "24KB Gzipped"
-        },
-        links: {
-          preview: "https://github.com/HanzzSama/Mathicalc",
-          code: "https://github.com/HanzzSama/Mathicalc"
-        },
-        accent: "var(--color-botanical-sage)",
-        blueprintSvg: "matrix",
-        deepDive: {
-          problem: "Kalkulator konvensional di peramban sering lambat, bergantung pada library bloated, dan gagal menyajikan penjabaran langkah matematis yang terstruktur.",
-          solution: "Mathicalc mengimplementasikan parser AST mandiri dengan evaluasi bertahap, alokasi memori minimal, dan rendering visual formula berbasis KaTeX tanpa latency.",
-          architectureSchema: `[ MATHEMATICAL EXPRESSION INPUT ]
-                 ↓
-[ LEXER & AST EXPRESSION PARSER ]
-                 ↓
-[ HIGH-PRECISION ALGORITHMIC CORE ]
-                 ↓
-[ STEP-BY-STEP KATEX VISUALIZER ]`,
-          benchmarks: [
-            { metric: "Parse & Solve Latency", target: "< 10ms", achieved: "2.8ms" },
-            { metric: "Precision Level", target: "64-bit Exact", achieved: "100% Passed" },
-            { metric: "Bundle Overhead", target: "< 40KB", achieved: "24KB" }
-          ],
-          sourceSnippet: `// Mathicalc Expression AST Evaluator Node
-export function evaluateMathAst(node, context = {}) {
-  switch (node.type) {
-    case 'BinaryOp': return applyOperator(node.op, evaluateMathAst(node.left, context), evaluateMathAst(node.right, context));
-    case 'FunctionCall': return executeMathFunction(node.name, node.args.map(a => evaluateMathAst(a, context)));
-    case 'Number': return node.value;
-  }
-}`
-        }
-      },
-      {
-        id: "proj-02",
-        code: "PRJ // 02",
-        title: "TurnCode",
-        subtitle: "Intelligent Code Translation & Developer Productivity Engine",
-        year: "2025",
-        client: "Developer Infrastructure & Tooling",
-        category: "Developer Tools / Code Intelligence",
-        role: "FullStack Developer",
-        description:
-          "Platform otomasi dan transformasi kode sumber multi-bahasa yang mempercepat migrasi sistem, refaktorisasi pola arsitektur, dan standardisasi kode secara deterministik.",
-        deliverables: [
-          "Pipeline translasi dan refactoring sintaks berbasis Abstract Syntax Tree (AST)",
-          "Antarmuka dual-pane dengan diff visual real-time dan inspeksi token",
-          "Backend eksekusi modular berlatensi rendah dengan isolasi proses aman"
-        ],
-        techStack: ["TypeScript", "Node.js", "AST Compilers", "Docker", "REST API", "Tailwind CSS"],
-        metrics: {
-          throughput: "12k LoC/sec",
-          errorRate: "0.01% Strict Syntax",
-          coverage: "98.5% Test Suite"
-        },
-        links: {
-          preview: "https://github.com/HanzzSama/TurnCode",
-          code: "https://github.com/HanzzSama/TurnCode"
-        },
-        accent: "var(--color-warm-sand)",
-        blueprintSvg: "geometry",
-        deepDive: {
-          problem: "Migrasi repositori skala besar lintas bahasa membutuhkan penyesuaian sintaks berulang yang rawan human error dan memakan waktu berhari-hari.",
-          solution: "TurnCode menyediakan aturan transformasi berbasis AST yang dapat diuji secara otomatis dalam sandbox terisolasi, memastikan semantik kode tetap konsisten.",
-          architectureSchema: `[ SOURCE REPOSITORY INPUT ] → [ MULTI-LANGUAGE LEXER ]
-                                  ↓
-                        [ AST NORMALIZER ENGINE ]
-                                  ↓
-                        [ PATTERN REWRITE RULES ]
-                                  ↓
-              [ TARGET EMITTER & REAL-TIME DIFF INSPECTOR ]`,
-          benchmarks: [
-            { metric: "Transformation Speed", target: "> 5k LoC/s", achieved: "12k LoC/s" },
-            { metric: "Syntax Preservation", target: "> 99%", achieved: "99.9% Clean AST" },
-            { metric: "Sandbox Isolation", target: "Zero Leakage", achieved: "Verified 100%" }
-          ],
-          sourceSnippet: `// TurnCode AST Migration Pipeline
-export async function transformSourcePipeline(sourceCode, ruleSet) {
-  const ast = parseSourceToAst(sourceCode);
-  const normalizedAst = applyRuleTransformers(ast, ruleSet);
-  return generateTargetCode(normalizedAst, { format: 'standard' });
-}`
-        }
-      },
-      {
-        id: "proj-03",
-        code: "PRJ // 03",
-        title: "Neura",
-        subtitle: "Neural Cognitive Interface & AI Orchestration Platform",
-        year: "2025",
-        client: "Cognitive Systems & AI Lab",
-        category: "AI & FullStack Engineering",
-        role: "FullStack Developer",
-        description:
-          "Platform orkestrasi model AI dan antarmuka kognitif cerdas dengan streaming respons real-time latensi rendah, penelusuran konteks adaptif, dan integrasi pangkalan pengetahuan terdistribusi.",
-        deliverables: [
-          "Arsitektur server-sent events (SSE) untuk streaming inferensi sub-50ms",
-          "Sistem retrieval kontekstual berbasis vektor database dan caching cerdas",
-          "Antarmuka biophilic modular berstandar ketenangan visual dan performa tinggi"
-        ],
-        techStack: ["Python", "TypeScript", "FastAPI", "Next.js", "Vector DB", "Redis"],
-        metrics: {
-          ttfb: "48ms First Token",
-          concurrency: "1,500 Streams",
-          uptime: "99.95%"
-        },
-        links: {
-          preview: "https://github.com/HanzzSama/Neura",
-          code: "https://github.com/HanzzSama/Neura"
-        },
-        accent: "var(--color-botanical-sage)",
-        blueprintSvg: "contour",
-        deepDive: {
-          problem: "Banyak antarmuka AI membebani pengguna dengan latensi respons tinggi, antarmuka generik yang bising, dan ketiadaan retensi konteks multi-sesi yang akurat.",
-          solution: "Neura mengkombinasikan backend streaming asinkron FastAPI berkecepatan tinggi dengan antarmuka front-end bertema tektonik yang hemat komputasi dan responsif.",
-          architectureSchema: `[ USER PROMPT / CONTEXT ]
-                 ↓
-[ HYBRID VECTOR RETRIEVAL (RAG) ]
-                 ↓
-[ STREAMING INFERENCE ORCHESTRATOR ]
-                 ↓
-[ ZERO-LATENCY SSE TO REACTIVE UI ]`,
-          benchmarks: [
-            { metric: "Time to First Token (TTFT)", target: "< 100ms", achieved: "48ms" },
-            { metric: "Stream Throughput", target: "> 60 tokens/s", achieved: "85 tokens/s" },
-            { metric: "Context Cache Hit Rate", target: "> 70%", achieved: "84.2%" }
-          ],
-          sourceSnippet: `// Neura Low-Latency SSE Dispatcher
-export async function streamNeuraInference(prompt, streamWriter) {
-  const context = await retrieveVectorContext(prompt);
-  for await (const chunk of executeModelStream(prompt, context)) {
-    streamWriter.write(formatSseEvent(chunk));
-  }
-}`
-        }
-      }
+          {
+                "id": "proj-01",
+                "code": "PRJ // 01",
+                "title": "PMB ITESA New 2026",
+                "subtitle": "Website Informasi Pendaftaran Mahasiswa Baru Kampus",
+                "year": "2026",
+                "category": "Portal Kampus / Web System",
+                "role": "FullStack Web Developer",
+                "client": "ITESA Muhammadiyah Semarang",
+                "description": "Website yang dibangun untuk memberi informasi tentang pendaftaran mahasiswa baru ITESA, dibangun dengan sistem Laravel.",
+                "deliverables": [
+                      "Penyajian informasi jalur pendaftaran mahasiswa baru dan program studi interaktif",
+                      "Sistem formulir daring dan dashboard verifikasi berkas calon mahasiswa",
+                      "Antarmuka responsif mobile-friendly yang memudahkan calon mahasiswa"
+                ],
+                "techStack": [
+                      "Laravel",
+                      "PHP",
+                      "MySQL",
+                      "Tailwind CSS",
+                      "JavaScript"
+                ],
+                "metrics": {
+                      "framework": "Laravel",
+                      "tahun": "2026",
+                      "status": "Aktif"
+                },
+                "links": {
+                      "preview": "#",
+                      "code": "https://github.com/HanzzSama"
+                },
+                "accent": "var(--color-botanical-sage)",
+                "blueprintSvg": "orbit",
+                "deepDive": {
+                      "problem": "Calon mahasiswa baru membutuhkan akses informasi pendaftaran yang akurat, lengkap, dan mudah diakses dari berbagai perangkat tanpa kendala.",
+                      "solution": "Membangun portal PMB terpadu berbasis Laravel dengan navigasi informatif seputar program studi, biaya, jalur pendaftaran, dan verifikasi berkas daring.",
+                      "benchmarks": [
+                            {
+                                  "metric": "Aksesibilitas Pendaftar",
+                                  "target": "Mudah",
+                                  "achieved": "Mobile-First"
+                            },
+                            {
+                                  "metric": "Verifikasi Berkas",
+                                  "target": "Terintegrasi",
+                                  "achieved": "Dashboard Admin"
+                            }
+                      ]
+                }
+          },
+          {
+                "id": "proj-02",
+                "code": "PRJ // 02",
+                "title": "Kalkulator Mathicalc",
+                "subtitle": "Kalkulator Basic dengan Bot Matematis & Personalisasi Tema",
+                "year": "2025",
+                "category": "Web Tool / Komputasi",
+                "role": "Frontend Developer",
+                "client": "Kakas Personal & Edukasi",
+                "description": "Kalkulator basic dengan dipadukan sistem bot matematis, dan sistem personalize tema sesuai selera, dibangun hanya memakai HTML, CSS, JS.",
+                "deliverables": [
+                      "Mesin kalkulasi matematika cepat dan responsif di browser",
+                      "Sistem bot matematis cerdas yang memandu perhitungan dan formula",
+                      "Fitur personalisasi tema visual dinamis yang dapat disesuaikan pengguna"
+                ],
+                "techStack": [
+                      "HTML5",
+                      "CSS3",
+                      "JavaScript",
+                      "LocalStorage"
+                ],
+                "metrics": {
+                      "stack": "HTML / CSS / JS",
+                      "bot": "Bot Matematis",
+                      "tema": "Personalisasi"
+                },
+                "links": {
+                      "preview": "https://github.com/HanzzSama/MathiCalc",
+                      "code": "https://github.com/HanzzSama/MathiCalc"
+                },
+                "accent": "var(--color-warm-sand)",
+                "blueprintSvg": "matrix",
+                "deepDive": {
+                      "problem": "Banyak kalkulator web yang monoton, kaku tanpa interaksi asisten, dan tidak memungkinkan pengguna mengubah tema sesuai preferensi personal.",
+                      "solution": "Mengembangkan Mathicalc murni dengan HTML, CSS, dan JavaScript — memadukan bot asisten matematis dan tema personalisasi tanpa dependensi berat.",
+                      "benchmarks": [
+                            {
+                                  "metric": "Waktu Muat",
+                                  "target": "< 100ms",
+                                  "achieved": "Instan"
+                            },
+                            {
+                                  "metric": "Kustomisasi Tema",
+                                  "target": "Fleksibel",
+                                  "achieved": "100% Personal"
+                            }
+                      ]
+                }
+          },
+          {
+                "id": "proj-03",
+                "code": "PRJ // 03",
+                "title": "TurnCode",
+                "subtitle": "Platform Belajar Coding dari Zero to Pro",
+                "year": "2025",
+                "category": "E-Learning / Developer Tools",
+                "role": "FullStack Developer",
+                "client": "Komunitas Belajar Coding",
+                "description": "Website yang dibangun untuk pengguna untuk belajar coding dari zero to pro, dibangun dengan lingkungan Laravel.",
+                "deliverables": [
+                      "Kurikulum materi pemrograman terstruktur dari level pemula hingga mahir",
+                      "Antarmuka belajar interaktif dengan latihan praktis dan evaluasi pemahaman",
+                      "Sistem manajemen pengguna dan pelacakan progres belajar berbasis Laravel"
+                ],
+                "techStack": [
+                      "Laravel",
+                      "PHP",
+                      "MySQL",
+                      "Tailwind CSS",
+                      "JavaScript"
+                ],
+                "metrics": {
+                      "lingkungan": "Laravel",
+                      "jalur": "Zero to Pro",
+                      "basis": "Web App"
+                },
+                "links": {
+                      "preview": "https://github.com/HanzzSama/TurnCode",
+                      "code": "https://github.com/HanzzSama/TurnCode"
+                },
+                "accent": "var(--color-botanical-sage)",
+                "blueprintSvg": "geometry",
+                "deepDive": {
+                      "problem": "Banyak calon programmer pemula kesulitan belajar mandiri karena materi online yang terpecah-pecah tanpa panduan tahapan yang runtut.",
+                      "solution": "Membangun platform TurnCode di atas Laravel untuk menghadirkan alur belajar terpadu 'Zero to Pro' yang terarah dan mudah dipahami.",
+                      "benchmarks": [
+                            {
+                                  "metric": "Alur Pembelajaran",
+                                  "target": "Terstruktur",
+                                  "achieved": "Zero to Pro"
+                            },
+                            {
+                                  "metric": "Keandalan Sistem",
+                                  "target": "Tinggi",
+                                  "achieved": "Laravel MVC"
+                            }
+                      ]
+                }
+          },
+          {
+                "id": "proj-04",
+                "code": "PRJ // 04",
+                "title": "Neura AI",
+                "subtitle": "Deteksi Gejala Alzheimer Berbasis LLM & XGBoost",
+                "year": "2025",
+                "category": "Healthcare AI / Web Intelligence",
+                "role": "AI & FullStack Developer",
+                "client": "Inisiatif Riset Kesehatan Kognitif",
+                "description": "Website untuk mendeteksi gejala alzheimer dengan base LLM dan kalkulasi algoritma XGBoost.",
+                "deliverables": [
+                      "Integrasi LLM untuk analisis pemahaman bahasa dan kuesioner kognitif pengguna",
+                      "Kalkulasi probabilitas klasifikasi gejala alzheimer dengan algoritma XGBoost",
+                      "Penyajian hasil evaluasi yang jelas, aman, dan mudah dipahami pengguna"
+                ],
+                "techStack": [
+                      "Python",
+                      "XGBoost",
+                      "LLM",
+                      "FastAPI / Web",
+                      "JavaScript",
+                      "Tailwind CSS"
+                ],
+                "metrics": {
+                      "base": "LLM + XGBoost",
+                      "fokus": "Deteksi Alzheimer",
+                      "analisis": "Kognitif"
+                },
+                "links": {
+                      "preview": "https://github.com/HanzzSama/Neura",
+                      "code": "https://github.com/HanzzSama/Neura"
+                },
+                "accent": "var(--color-warm-sand)",
+                "blueprintSvg": "contour",
+                "deepDive": {
+                      "problem": "Pemeriksaan gejala alzheimer pada fase awal sering terlambat karena keterbatasan akses skrining kognitif awal yang cepat dan terjangkau.",
+                      "solution": "Menggabungkan model LLM untuk ekstraksi interaksi bahasa dengan ketepatan algoritma tabular XGBoost guna mengkalkulasi indikasi gejala secara akurat.",
+                      "benchmarks": [
+                            {
+                                  "metric": "Akurasi Prediksi",
+                                  "target": "> 85%",
+                                  "achieved": "Optimal XGBoost"
+                            },
+                            {
+                                  "metric": "Kemudahan Evaluasi",
+                                  "target": "Intuitif",
+                                  "achieved": "Asesmen Interaktif"
+                            }
+                      ]
+                }
+          },
+          {
+                "id": "proj-05",
+                "code": "PRJ // 05",
+                "title": "Website Ladangku",
+                "subtitle": "Platform Pertanian Modern & Optimasi Lahan",
+                "year": "2022",
+                "category": "Agrotech / Perlombaan",
+                "role": "Web Designer & Developer",
+                "client": "Inisiatif Kompetisi Agroteknologi",
+                "description": "Membangun platform digital yang memadukan prinsip pertanian tradisional dengan teknologi modern untuk meningkatkan efisiensi dan produktivitas petani lokal.",
+                "deliverables": [
+                      "Perancangan antarmuka agrotech yang ramah pengguna",
+                      "Katalog informasi pertanian modern dan kiat peningkatan hasil tani",
+                      "Integrasi modul kalkulasi efisiensi panen berbasis web"
+                ],
+                "techStack": [
+                      "PHP",
+                      "HTML5",
+                      "CSS3",
+                      "JavaScript",
+                      "MySQL"
+                ],
+                "metrics": {
+                      "timeline": "2022",
+                      "type": "Kompetisi",
+                      "status": "Selesai"
+                },
+                "links": {
+                      "preview": "#",
+                      "code": "https://github.com/HanzzSama"
+                },
+                "accent": "var(--color-botanical-sage)",
+                "blueprintSvg": "matrix",
+                "deepDive": {
+                      "problem": "Petani tradisional menghadapi kesulitan dalam pencatatan siklus tanam, pemetaan lahan, dan pemantauan sumber daya karena masih mengandalkan pencatatan manual di kertas.",
+                      "solution": "Merancang Ladangku sebagai platform web ringan dengan navigasi sederhana, indikator status visual, dan aksesibilitas cepat melalui perangkat mobile para petani.",
+                      "benchmarks": [
+                            {
+                                  "metric": "Kemudahan Navigasi",
+                                  "target": "Intuitif",
+                                  "achieved": "100% Sederhana"
+                            },
+                            {
+                                  "metric": "Aksesibilitas Mobile",
+                                  "target": "Responsif",
+                                  "achieved": "Optimal di HP"
+                            }
+                      ]
+                }
+          },
+          {
+                "id": "proj-06",
+                "code": "PRJ // 06",
+                "title": "Pemesanan Makanan",
+                "subtitle": "Solusi Digital Pemesanan Restoran & F&B",
+                "year": "2022",
+                "category": "Web Application / F&B",
+                "role": "FullStack Developer",
+                "client": "Restoran & Mitra Kuliner",
+                "description": "Sistem pemesanan makanan online yang memudahkan pelanggan memilih menu hidangan secara instan dan mengoptimalkan alur manajemen pesanan kasir.",
+                "deliverables": [
+                      "Katalog menu makanan interaktif dengan filter kategori dan rincian harga",
+                      "Sistem keranjang belanja pesanan (order cart) real-time",
+                      "Ringkasan pesanan otomatis untuk meminimalisir kesalahan pelayan"
+                ],
+                "techStack": [
+                      "JavaScript",
+                      "PHP",
+                      "Bootstrap",
+                      "MySQL"
+                ],
+                "metrics": {
+                      "timeline": "2022",
+                      "type": "Web App",
+                      "status": "Selesai"
+                },
+                "links": {
+                      "preview": "#",
+                      "code": "https://github.com/HanzzSama"
+                },
+                "accent": "var(--color-warm-sand)",
+                "blueprintSvg": "geometry",
+                "deepDive": {
+                      "problem": "Buku menu fisik konvensional memicu antrean pesanan yang lambat, kesalahan perhitungan harga manual, dan repot saat memperbarui daftar menu harian.",
+                      "solution": "Membangun aplikasi menu digital yang responsif dengan kartu menu visual, perhitungan total harga otomatis, dan konfirmasi pesanan instan.",
+                      "benchmarks": [
+                            {
+                                  "metric": "Waktu Pemesanan",
+                                  "target": "< 1 Menit",
+                                  "achieved": "Instan"
+                            },
+                            {
+                                  "metric": "Akurasi Total Tagihan",
+                                  "target": "100%",
+                                  "achieved": "Otomatis"
+                            }
+                      ]
+                }
+          },
+          {
+                "id": "proj-07",
+                "code": "PRJ // 07",
+                "title": "Perpustakaan Buku",
+                "subtitle": "Sistem Manajemen Sirkulasi & Katalog Pustaka",
+                "year": "2023",
+                "category": "Management System / Education",
+                "role": "Backend & Database Developer",
+                "client": "Institusi Pendidikan & Perpustakaan",
+                "description": "Platform perpustakaan modern terpadu untuk memudahkan pencarian katalog buku, pengelolaan sirkulasi peminjaman, serta pendataan inventaris pustaka.",
+                "deliverables": [
+                      "Katalog buku dinamis dengan indikator ketersediaan real-time",
+                      "Pencatatan sirkulasi peminjaman dan penghitungan denda keterlambatan",
+                      "Dashboard administrasi untuk kontrol ketersediaan stok buku"
+                ],
+                "techStack": [
+                      "PHP",
+                      "MySQL",
+                      "JavaScript",
+                      "CSS3"
+                ],
+                "metrics": {
+                      "timeline": "2023",
+                      "type": "Sistem Informasi",
+                      "status": "Selesai"
+                },
+                "links": {
+                      "preview": "#",
+                      "code": "https://github.com/HanzzSama"
+                },
+                "accent": "var(--color-botanical-sage)",
+                "blueprintSvg": "orbit",
+                "deepDive": {
+                      "problem": "Pencatatan buku pinjaman secara manual sering menyebabkan kehilangan buku, kekeliruan data peminjam, dan pencarian koleksi yang memakan waktu lama.",
+                      "solution": "Menghadirkan sistem web terpadu yang mengotomatisasi log sirkulasi, memantau tenggat waktu pengembalian, dan menyajikan katalog buku yang mudah dicari.",
+                      "benchmarks": [
+                            {
+                                  "metric": "Kecepatan Temu Kembali",
+                                  "target": "< 3 Detik",
+                                  "achieved": "Real-time"
+                            },
+                            {
+                                  "metric": "Transparansi Denda",
+                                  "target": "Akurat",
+                                  "achieved": "Otomatis"
+                            }
+                      ]
+                }
+          },
+          {
+                "id": "proj-08",
+                "code": "PRJ // 08",
+                "title": "Pembayaran SPP",
+                "subtitle": "Portal Administrasi Keuangan Sekolah Terpadu",
+                "year": "2023",
+                "category": "FinTech / Administration",
+                "role": "Fullstack Developer",
+                "client": "Administrasi Sekolah",
+                "description": "Aplikasi pembayaran SPP online yang transparan, akuntabel, dan aman untuk memudahkan orang tua murid serta pihak administrasi sekolah memantau iuran bulanan.",
+                "deliverables": [
+                      "Pencatatan riwayat transaksi SPP dan tagihan siswa per periode",
+                      "Cetak bukti pembayaran/kwitansi digital transparan",
+                      "Manajemen otentikasi multi-peran (Admin, Petugas, Siswa)"
+                ],
+                "techStack": [
+                      "Laravel",
+                      "PHP",
+                      "MySQL",
+                      "Blade",
+                      "Tailwind CSS"
+                ],
+                "metrics": {
+                      "timeline": "2023",
+                      "type": "Laravel App",
+                      "status": "Selesai"
+                },
+                "links": {
+                      "preview": "#",
+                      "code": "https://github.com/HanzzSama/MySPP"
+                },
+                "accent": "var(--color-warm-sand)",
+                "blueprintSvg": "matrix",
+                "deepDive": {
+                      "problem": "Petugas keuangan sekolah kewalahan merekap pembayaran ratusan siswa secara manual di buku kas, menyulitkan pengecekan tunggakan secara akurat.",
+                      "solution": "Membangun portal administrasi berbasis framework Laravel dengan database relasional terstruktur, verifikasi kwitansi otomatis, dan pelaporan keuangan bulanan.",
+                      "benchmarks": [
+                            {
+                                  "metric": "Rekap Keuangan",
+                                  "target": "Instan",
+                                  "achieved": "Terpusat"
+                            },
+                            {
+                                  "metric": "Integritas Data",
+                                  "target": "Relasional",
+                                  "achieved": "MySQL Terstruktur"
+                            }
+                      ]
+                }
+          },
+          {
+                "id": "proj-09",
+                "code": "PRJ // 09",
+                "title": "Mylist Todo App",
+                "subtitle": "Aplikasi Manajemen Tugas Harian & Produktivitas",
+                "year": "2024",
+                "category": "Productivity / Web Tool",
+                "role": "Frontend Developer & UI Designer",
+                "client": "Aplikasi Personal & Komunitas",
+                "description": "Aplikasi produktivitas yang dirancang minimalis dan bersih untuk membantu pengguna melacak, menyusun prioritas, dan menyelesaikan tugas harian secara terorganisir.",
+                "deliverables": [
+                      "Antarmuka penambahan, checklist, dan penghapusan tugas instan",
+                      "Filter status tugas (Semua, Aktif, Selesai) secara responsif",
+                      "Penyimpanan lokal instan tanpa jeda pemuatan server"
+                ],
+                "techStack": [
+                      "JavaScript (ES6+)",
+                      "CSS Modern",
+                      "HTML5",
+                      "LocalStorage"
+                ],
+                "metrics": {
+                      "timeline": "2024",
+                      "type": "Produktivitas",
+                      "status": "Selesai"
+                },
+                "links": {
+                      "preview": "#",
+                      "code": "https://github.com/HanzzSama"
+                },
+                "accent": "var(--color-botanical-sage)",
+                "blueprintSvg": "geometry",
+                "deepDive": {
+                      "problem": "Banyak aplikasi to-do dipenuhi fitur rumit dan iklan yang justru mengganggu fokus pengguna saat mencatat agenda penting harian.",
+                      "solution": "Merancang Mylist Todo App dengan tampilan bersih, fokus navigasi cepat, dan persistensi LocalStorage untuk akses kilat setiap saat.",
+                      "benchmarks": [
+                            {
+                                  "metric": "Waktu Muat",
+                                  "target": "< 100ms",
+                                  "achieved": "Instan"
+                            },
+                            {
+                                  "metric": "Penyimpanan",
+                                  "target": "Lokal",
+                                  "achieved": "Zero Jeda"
+                            }
+                      ]
+                }
+          }
     ]
   },
 
@@ -474,36 +787,36 @@ export async function streamNeuraInference(prompt, streamWriter) {
 
   weather: {
     sectionIndex: "07",
-    sectionTitle: "ATMOSPHERE",
-    sectionSub: "METEOROLOGICAL TOPOLOGY & REAL-TIME BIOSPHERE",
-    headline: "Geodesic Meteorology & Contour Isobars",
-    description: "Sistem telemetri atmosfer real-time dan kontur isobar generatif yang disinkronisasikan langsung dengan biosfer geografis Semarang (07°00'S 110°25'E).",
-    topologyBadge: "+ [TOPOLOGY // 07°00'S 110°25'E • 82m ASL]",
+    sectionTitle: "SUASANA & CUACA",
+    sectionSub: "TELEMETRI CUACA KOTA SEMARANG // REAL-TIME",
+    headline: "Cuaca Real-Time & Suasana Atmosfer",
+    description: "Visualisasi interaktif cuaca real-time Kota Semarang (07°00'S 110°25'E) dengan suasana atmosfer dinamis, garis isobar topografi, dan nada harmonis.",
+    topologyBadge: "KOTA SEMARANG // 07°00'S 110°25'E • 82m ASL",
     ui: {
       isobars: "[ISOBARS]",
-      windStream: "[WIND STREAM]",
+      windStream: "[VEKTOR ANGIN]",
       nadaWave: "NADA WAVE // 432Hz",
       pressure: "Tekanan Barometrik",
       wind: "Vektor Angin",
       humidity: "Kelembapan Udara",
       cloudCover: "Tutupan Awan",
       apparent: "APPARENT:",
-      sync: "REFRESH TELEMETRY ↻",
-      biosphereFootprint: "CARBON IMPACT: < 0.12g CO₂ // BIOPHILIC OPTIMAL",
-      solarCycle: "SOLAR AZIMUTH // DIURNAL ARC"
+      sync: "REFRESH TELEMETRI ↻",
+      biosphereFootprint: "NODE: SEMARANG // JAWA TENGAH",
+      solarCycle: "SIKLUS MATAHARI // SUASANA REAL"
     }
   },
 
   pet: {
     name: "HanzzPet",
-    statusPrefix: "SYS.PET // NOMINAL",
-    defaultThought: "Menyelaraskan koordinat Semarang... [6.9667° S]",
+    statusPrefix: "HANZZ.BOT // AKTIF",
+    defaultThought: "Menghubungkan ke Node Semarang... [Haidar Rifky Andrianno]",
     tips: {
-      pet: "Elus / Pet",
+      pet: "Elus HanzzBot",
       crown: "Mahkota Royal",
       matcha: "Beri Matcha",
-      zoomies: "Zoomies!",
-      wisdom: "Celoteh Arsitektur",
+      zoomies: "Mode Lincah",
+      wisdom: "Celoteh HanzzBot",
       sleep: "Tidur / Bangun",
       toggle: "Ciutkan"
     }
@@ -511,78 +824,78 @@ export async function streamNeuraInference(prompt, streamWriter) {
 
   another: {
     sectionIndex: "06",
-    sectionTitle: "DIGITAL GARDEN & TRANSMISSION",
-    sectionSub: "LAB EXPERIMENTS // FREQUENCY SYNTH // DISPATCH",
+    sectionTitle: "REFLEKSI & CATATAN KREATIF",
+    sectionSub: "PENGALAMAN & EKSPLORASI TEKNOLOGI // HANZZ",
     description:
-      "Arsip pemikiran, eksperimen audio-spasial, dan saluran komunikasi langsung untuk kolaborasi arsitektural.",
+      "Kumpulan artikel, catatan pengalaman, dan refleksi proses kreatif dalam merancang antarmuka web, kolaborasi tim, dan eksplorasi teknologi.",
     gardenNotes: [
       {
         id: "note-01",
-        date: "OCT 2026",
-        tag: "MONOGRAPH // 01",
-        title: "Mengapa Antarmuka Modern Membutuhkan Sensasi Tektonik dan Gravitasi",
-        readTime: "6 min read",
+        date: "2026",
+        tag: "REFLEKSI // 01",
+        title: "4 Tahun di Dunia IT: Dari Rasa Penasaran Hingga Solusi Nyata",
+        readTime: "5 menit baca",
         excerpt:
-          "Eksplorasi mendalam tentang kejenuhan mata pengguna terhadap gradien sintetis dan bagaimana kurva Material 3 Expressive serta tekstur batu kapur alami membangkitkan ketenangan neurologis.",
+          "Perjalanan dari awal mula ketertarikan pada teknologi, belajar pemrograman mandiri, hingga merancang website dan aplikasi yang bermanfaat bagi sesama.",
         content: `
-          <h4>1. Kejenuhan Terhadap Estetika Artifisial</h4>
-          <p>Selama lima tahun terakhir, antarmuka digital dikuasai oleh gradien ungu/biru neon dan efek glassmorphism yang seragam. Ini menciptakan apa yang para arsitek sebut sebagai "visual fatigue" — kelelahan kognitif akibat rangsangan spektrum warna yang tidak pernah ditemui dalam alam biologis manusia.</p>
-          <h4>2. Sensasi Tektonik dan Bobot Fisik</h4>
-          <p>Dengan menerapkan prinsip Biophilic Architectural Minimalism, kita mengembalikan bobot tektonik pada layar. Garis 1px bukan sekadar pembatas, melainkan balok penopang struktur. Kurva gerak cubic-bezier(0.2, 0, 0, 1) Google Material 3 memberikan inersia alami — sebuah elemen tidak berhenti seketika layaknya saklar biner, melainkan memiliki perlambatan gravitasi.</p>
-          <h4>3. Ketenangan Neurologis melalui Palet Limestone</h4>
-          <p>Batu kapur (Raw Limestone) dan lumut obsidian (Obsidian Moss) memantulkan spektrum cahaya yang lebih ramah bagi retina. Menggabungkannya dengan tipografi editorial menghasilkan ruang digital yang tenang, terukur, dan menghormati fokus manusia.</p>
+          <h4>1. Awal Mula Ketertarikan</h4>
+          <p>Berawal dari rasa penasaran yang tinggi terhadap bagaimana sebuah website dan aplikasi digital bekerja, saya mulai mempelajari dasar-dasar pemrograman web. Dari HTML, CSS, hingga JavaScript, setiap baris kode membuka cara pandang baru tentang bagaimana teknologi dapat memecahkan masalah sehari-hari.</p>
+          <h4>2. Belajar Mandiri dan Membangun Portofolio</h4>
+          <p>Selama 4 tahun berkarya, saya konsisten mengeksplorasi ekosistem web modern — mulai dari PHP dan Laravel untuk backend, Tailwind dan Bootstrap untuk styling yang efisien, hingga kakas desain seperti Figma dan Illustrator untuk merancang antarmuka yang ramah pengguna.</p>
+          <h4>3. Dampak Nyata untuk Pengguna</h4>
+          <p>Tujuan utama saya masuk dunia IT adalah menciptakan desain dan pengalaman baru yang bermanfaat bagi orang lain. Karya yang baik bukan hanya tentang estetika visual, melainkan tentang kemudahan dan nilai manfaat yang dirasakan penggunanya.</p>
         `
       },
       {
         id: "note-02",
-        date: "AUG 2026",
-        tag: "SYSTEM LAB // 02",
-        title: "Arsitektur Zero-Overhead: Menyingkirkan Library Raksasa untuk Lerp Scroll Murni",
-        readTime: "4 min read",
+        date: "2026",
+        tag: "DESAIN & KODE // 02",
+        title: "Menghubungkan Desain UI/UX dengan Kode Web yang Interaktif",
+        readTime: "4 menit baca",
         excerpt:
-          "Bagaimana kalkulasi diferensial linear interpolation 40 baris kode dapat mengungguli performa library scroll 200KB pada perangkat mobile dengan refresh rate 120Hz.",
+          "Bagaimana desainer yang memahami kode dapat menciptakan pengalaman pengguna yang mulus tanpa batasan antara rancangan visual dan implementasi teknis.",
         content: `
-          <h4>1. Jebakan Bloatware Library Pihak Ketiga</h4>
-          <p>Banyak pengembang mengimpor library scroll berbobot ratusan kilobyte hanya untuk mendapatkan efek gerak halus. Hal ini mengorbankan metrik INP (Interaction to Next Paint) dan membebani memori browser.</p>
-          <h4>2. Matematika Lerp yang Elegan</h4>
-          <p>Formula lerp(start, end, factor) = start + (end - start) * factor yang dijalankan dalam loop requestAnimationFrame dengan nilai factor antara 0.08 hingga 0.1 memberikan kehalusan 60–120 FPS tanpa overhead.</p>
-          <h4>3. Momentum Parallax Halus</h4>
-          <p>Dengan menghitung delta scroll secara real-time, kita dapat menerapkan translasi koordinat berbasis kecepatan scroll pengguna, memberikan pengalaman interaksi yang bersih, stabil, dan presisi.</p>
+          <h4>1. Kolaborasi Desain dan Kode</h4>
+          <p>Sering kali ada jarak antara konsep visual di Figma dengan hasil akhir di browser. Dengan memiliki keahlian di bidang UI/UX sekaligus Web Development, proses penerjemahan rancangan menjadi kode berjalan lebih cepat, presisi, dan sesuai dengan visi interaksi awal.</p>
+          <h4>2. Kenyamanan Pengguna sebagai Prioritas</h4>
+          <p>Antarmuka yang bersih, hierarki tipografi yang jelas, dan navigasi yang intuitif adalah kunci. Interaksi yang responsif pada perangkat mobile memastikan pengguna merasa nyaman saat berinteraksi dengan produk digital.</p>
+          <h4>3. Detail Interaksi yang Menyenangkan</h4>
+          <p>Sentuhan mikro-interaksi seperti animasi hover, responsivitas elemen, dan feedback visual instan mengubah website biasa menjadi pengalaman digital yang hidup dan berkesan.</p>
         `
       },
       {
         id: "note-03",
-        date: "MAY 2026",
-        tag: "ACADEMIA // 03",
-        title: "Statistika Komputasional dalam Rekayasa Perangkat Lunak: Catatan dari ITESA",
-        readTime: "8 min read",
+        date: "2026",
+        tag: "AKADEMIK & STUDI // 03",
+        title: "Studi dan Kolaborasi Terapan di ITESA Muhammadiyah Semarang",
+        readTime: "5 menit baca",
         excerpt:
-          "Penerapan model probabilitas stokastik untuk mendeteksi bottleneck latensi pada arsitektur microservices terdistribusi.",
+          "Pengalaman belajar di kampus ITESA Muhammadiyah Semarang yang memperkaya wawasan logika komputasi, pemecahan masalah analitis, dan kerja sama tim.",
         content: `
-          <h4>1. Lensa Statistik dalam Pemodelan Sistem</h4>
-          <p>Sebagai akademisi di ITESA Muhammadiyah Semarang, saya melihat rekayasa perangkat lunak tidak hanya sebagai seni menulis kode, melainkan sebagai sistem probabilitas terbuka. Latensi p99 bukanlah angka acak, melainkan hasil distribusi ekor panjang (heavy-tailed distribution).</p>
-          <h4>2. Deteksi Bottleneck Berbasis Distribusi</h4>
-          <p>Dengan menerapkan estimasi quantil dinamis menggunakan algoritma T-Digest di dalam micro-daemon, kita dapat mendeteksi degradasi performa sebelum lonjakan error 5xx terjadi pada layer aplikasi.</p>
-          <h4>3. Sintesis Sains Data dan Arsitektur UI</h4>
-          <p>Data metrik yang akurat memungkinkan antarmuka menyajikan informasi telemetri yang jujur, bukan angka persentase fiktif. Inilah fondasi arsitektur data terpusat kami.</p>
+          <h4>1. Fondasi Akademik di ITESA</h4>
+          <p>Menempuh pendidikan di ITESA Muhammadiyah Semarang memberikan fondasi yang kuat dalam memahami logika komputasi, analisis data, dan perancangan sistem terstruktur. Teori yang dipelajari di kelas langsung diterapkan ke dalam proyek-proyek praktis.</p>
+          <h4>2. Semangat Kolaboratif</h4>
+          <p>Sebagai kolaborator kreatif, saya percaya bahwa proyek besar lahir dari komunikasi yang solid dan pembagian peran yang seimbang. Kolaborasi antar-mahasiswa dan dosen menghasilkan karya nyata seperti portal PMB ITESA dan berbagai proyek lainnya.</p>
+          <h4>3. Komitmen Terus Berkembang</h4>
+          <p>Dunia teknologi terus bergerak maju dengan cepat. Semangat untuk terus belajar keterampilan baru, mengeksplorasi teknologi baru, dan menyambut tantangan kreatif adalah modal utama untuk terus berkontribusi di masa depan.</p>
         `
       }
     ],
     audioSynth: {
-      title: "Biophilic Resonant Tone Generator",
-      tagline: "432Hz Nature Solfeggio • Interactive Web Audio Node",
+      title: "Generator Nada Resonansi Harmonis",
+      tagline: "Frekuensi Alami 432Hz • Node Audio Web Interaktif",
       frequencies: [
-        { label: "Ground (108Hz)", freq: 108, desc: "Tectonic Sub-Bass" },
-        { label: "Sage Earth (216Hz)", freq: 216, desc: "Harmonic Foundation" },
-        { label: "Natural Calm (432Hz)", freq: 432, desc: "Organic Resonant Tone" },
-        { label: "Canopy Air (864Hz)", freq: 864, desc: "High Atmospheric Shimmer" }
+        { label: "Ground (108Hz)", freq: 108, desc: "Nada Sub-Bass Alami" },
+        { label: "Sage Earth (216Hz)", freq: 216, desc: "Harmoni Fondasi Dasar" },
+        { label: "Natural Calm (432Hz)", freq: 432, desc: "Nada Resonansi Harmonis" },
+        { label: "Canopy Air (864Hz)", freq: 864, desc: "Nada Cerah Atmosfer" }
       ]
     },
     colophon: {
-      typography: "Syne (Display) • Instrument Serif (Editorial) • Plus Jakarta Sans (Body) • JetBrains Mono (Telemetry)",
-      gridSystem: "Tectonic 12-Column Hairline Modular Grid",
-      carbonEstimate: "Est. 0.09g CO2 per page view • Hosted on Edge Server",
-      license: "Architectural Design & Systems © 2026 Haidar Rifky Andrianno. Crafted with precision."
+      typography: "Syne • Instrument Serif • Plus Jakarta Sans • JetBrains Mono",
+      gridSystem: "Tata Letak Responsif & Desain Interaktif",
+      carbonEstimate: "Dioptimalkan untuk Performa Cepat & Aksesibilitas",
+      license: "Portofolio © 2026 Haidar Rifky Andrianno (Hanzz / HanzzSama). Semarang, Jawa Tengah, Indonesia."
     }
   }
 };

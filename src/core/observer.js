@@ -45,7 +45,7 @@ export class ArchitecturalObserver {
     }, options);
 
     const revealTargets = document.querySelectorAll(
-      '.architectural-section, .pillar-card, .matrix-tier-card, .project-architectural-card, .garden-note-card, [data-reveal]'
+      '.architectural-section, .pillar-card, .matrix-tier-card, .garden-note-card, [data-reveal]'
     );
 
     revealTargets.forEach((target) => {

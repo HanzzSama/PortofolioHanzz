@@ -53,6 +53,30 @@ export const EYE_TEMPLATES = {
   `
 };
 
+// 20 Authentic Bot Dialogues from Portofolio Source (lines 892-913)
+export const AUTHENTIC_BOT_DIALOGUES = [
+  { text: "Halo! Makasih ya udah sempetin mampir ke sini! 😊", expr: "happy" },
+  { text: "Kamu tahu nggak? Hanzz nulis kode CSS untuk mataku satu per satu lho! 👀", expr: "normal" },
+  { text: "Btw, coba deh seret aku ke atas atau kanan layar. Aku bisa otomatis nyesuain posisiku! 🌀", expr: "happy" },
+  { text: "Aduh! Jangan klik aku terlalu cepat, nanti aku pusing tujuh keliling! 😵", expr: "sleepy" },
+  { text: "Fun Fact: Kopi adalah bahan bakar utama Hanzz pas lagi ngoding portfolio ini! ☕", expr: "happy" },
+  { text: "Hei, kamu tipe orang yang suka dark mode atau light mode? Hanzz suka keduanya! 🌗", expr: "normal" },
+  { text: "Jangan lupa cek keahlian PHP & Laravel milik Hanzz di bawah ya! Keren abis! 🔥", expr: "happy" },
+  { text: "Udah lihat website Ladangku? Itu project yang dibikin buat kompetisi lho! 🚀", expr: "sparkle" },
+  { text: "Ada yang bilang programmer itu jarang tidur... padahal emang bener sih. Hehe 😴", expr: "sleepy" },
+  { text: "Hmm... Masih nge-klik aku terus ya? Penasaran banget sama apa yang bakal aku omongin? 🤔", expr: "curious" },
+  { text: "Oke, ini rahasia: Kalau kamu hover foto profil Hanzz di atas, aku bakal tersenyum manis! 😳", expr: "love" },
+  { text: "Kalau butuh bantuan buat website interaktif kayak gini, Hanzz siap bantu kok! 💼", expr: "happy" },
+  { text: "Aduh, jariku pegel nih diajak ngobrol mulu... Eh, kan aku nggak punya jari ya? 🤖", expr: "curious" },
+  { text: "Stop! Aku lagi konsentrasi memantau pergerakan kursor kamu... 🧐", expr: "normal" },
+  { text: "Kenapa programmer pake kacamata? Soalnya mereka gak bisa 'C#'! Hahaha garing ya... 😭", expr: "sleepy" },
+  { text: "Sudah, cukup! Aku lelah dipermainkan seperti ini! Jangan klik lagi! 😤", expr: "curious" },
+  { text: "Zzz... Aku mogok ngomong ah, mau tidur sejenak aja... 🥱", expr: "sleepy" },
+  { text: "Hayo lho, masih diklik juga? Kamu bandel ya! 😜", expr: "wink" },
+  { text: "Tapi serius deh, kalau kamu tertarik collab, langsung chat Hanzz via kontak di bawah ya! 📨", expr: "happy" },
+  { text: "Selamat! Kamu berhasil membuka seluruh 20 dialog interaktifku! Kamu luar biasa! 🎉🏆", expr: "sparkle" }
+];
+
 // 7 Section Personas Configuration
 export const SECTION_PERSONAS = {
   welcome: {
@@ -889,22 +913,19 @@ export class HanzzPetEngine {
     const clickY = e && e.clientY ? e.clientY - rect.top : rect.height / 2;
     this.spawnParticles(clickX, clickY, 6, '💖');
 
-    this.setEyeExpression('happy');
+    // Cycle authentic bot dialogues from Portofolio
+    const dialogue = AUTHENTIC_BOT_DIALOGUES[this.clickCount % AUTHENTIC_BOT_DIALOGUES.length];
+    this.clickCount++;
 
-    const happyQuotes = [
-      'Hehe, kenyal seperti mochi arsitektural! ✨',
-      'Purr purr... senangnya ditemani arsitek ramah!',
-      'Frekuensi harmonis 432Hz terkalibrasi 100%! 💚',
-      'Elusan kamu bikin komputasi makin elastis & lancar!'
-    ];
-    this.say("SYS.PET // HAPPY", happyQuotes[Math.floor(Math.random() * happyQuotes.length)]);
+    this.setEyeExpression(dialogue.expr || 'happy');
+    this.say("HANZZ.BOT", dialogue.text, 4500);
 
     setTimeout(() => {
       this.isPetting = false;
       this.dock.classList.remove('is-petted', 'is-happy');
       this.petBody.classList.remove('is-squished');
       if (!this.isSleepy) {
-        this.setEyeExpression(this.currentExpression === 'happy' ? 'normal' : this.currentExpression);
+        this.setEyeExpression(dialogue.expr === 'happy' ? 'normal' : dialogue.expr || 'normal');
       }
     }, 720);
   }
@@ -1136,31 +1157,31 @@ export class HanzzPetEngine {
   getQuote(key) {
     const quotes = {
       id: {
-        welcome: "Selamat datang di ruang digital Haidar Rifky Andrianno!",
-        about: "Menyelaraskan alam organik dengan kode presisi tanpa kompromi.",
-        skills: "Arsitektur murni tanpa bloatware. Setiap siklus komputasi dihitung.",
-        projects: "Sistem terdistribusi dan rekayasa antarmuka skala tinggi.",
-        github: "44+ komit riil di repositori @HanzzSama! Terbuka dan teruji.",
-        lab: "Mode wireframe 3D aktif! Menikmati inersia matematika Kanvas.",
+        welcome: "Selamat datang di ruang portofolio digital Haidar Rifky Andrianno!",
+        about: "Menciptakan desain dan pengalaman baru yang bermanfaat bagi banyak orang.",
+        skills: "17 keahlian teruji dari web development, UI/UX, hingga basis data.",
+        projects: "6 proyek nyata berfokus pada fungsionalitas dan kenyamanan pengguna.",
+        github: "Repositori dan kontribusi kode terbuka di GitHub @HanzzSama.",
+        lab: "Eksplorasi interaktif kanvas dan ide kreatif tanpa batas.",
         randomWisdom: [
-          "Garis 1px bukan sekadar pembatas, melainkan balok penopang struktur.",
-          "Estetika sejati lahir dari efisiensi komputasi, bukan library raksasa.",
-          "Semarang Node beroperasi pada frekuensi nominal 432Hz.",
-          "Kerapian kode adalah cerminan keteraturan pikiran sang arsitek."
+          "Desain yang baik adalah desain yang mempermudah kehidupan manusia.",
+          "Setiap baris kode dibangun dengan ketelitian dan rasa ingin tahu yang tinggi.",
+          "Kreativitas dan logika bekerja sama untuk menciptakan solusi digital nyata.",
+          "Terus belajar keterampilan baru adalah kunci pertumbuhan tanpa henti."
         ]
       },
       en: {
-        welcome: "Welcome to the digital sanctuary of Haidar Rifky Andrianno!",
-        about: "Harmonizing organic nature with rigid code without compromise.",
-        skills: "Pure architecture with zero bloatware. Every cycle counts.",
-        projects: "Distributed systems and high-throughput web architecture.",
-        github: "44+ annual commits on @HanzzSama! Open and verified.",
-        lab: "3D wireframe active! Savoring pure Canvas projection mathematics.",
+        welcome: "Welcome to the digital portfolio of Haidar Rifky Andrianno!",
+        about: "Creating fresh, meaningful designs and digital experiences.",
+        skills: "17 proven skills across web development, UI/UX, and databases.",
+        projects: "6 real-world projects focused on usability and solid engineering.",
+        github: "Open source repositories and contributions at GitHub @HanzzSama.",
+        lab: "Interactive canvas experiments and limitless creative exploration.",
         randomWisdom: [
-          "A 1px line is not merely a border, but a structural load-bearing beam.",
-          "True elegance stems from computational efficiency, not heavy libraries.",
-          "Semarang Node operating at nominal 432Hz harmonic frequency.",
-          "Code cleanliness mirrors the architectural order of its craftsman."
+          "Good design is design that empowers human workflows.",
+          "Every line of code is crafted with precision and curiosity.",
+          "Creativity and logic collaborate to build tangible digital products.",
+          "Continuous learning is the cornerstone of sustainable craft."
         ]
       }
     };

@@ -407,6 +407,12 @@ button {
   transform: translateY(0);
 }
 
+/* Ensure project cards are always visible without reveal blocking */
+.project-architectural-card {
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
 
 
 /* ==========================================================================

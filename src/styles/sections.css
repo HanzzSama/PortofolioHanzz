@@ -145,6 +145,118 @@
   max-width: 900px;
 }
 
+/* Authentic Profile Hero & Pacitan Photo Card */
+.about-profile-hero {
+  display: grid;
+  grid-template-columns: 340px 1fr;
+  gap: var(--column-gap);
+  margin-bottom: var(--space-3xl);
+  align-items: start;
+}
+
+.about-photo-card {
+  background-color: var(--bg-canvas);
+  border: var(--border-hairline);
+  padding: 0.75rem;
+  border-radius: var(--radius-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  box-shadow: var(--elevation-1);
+  transition: border-color var(--duration-fast) var(--ease-expressive),
+              box-shadow var(--duration-fast) var(--ease-expressive),
+              transform var(--duration-fast) var(--ease-expressive);
+}
+
+.about-photo-card:hover {
+  border-color: var(--accent-primary);
+  box-shadow: var(--elevation-2);
+  transform: translateY(-2px);
+}
+
+.about-photo-frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 4.8;
+  overflow: hidden;
+  border-radius: calc(var(--radius-sm) - 2px);
+  background: var(--bg-surface);
+}
+
+.about-photo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+  filter: contrast(1.03) saturate(1.02);
+  transition: transform var(--duration-normal) var(--ease-expressive);
+}
+
+.about-photo-card:hover .about-photo-img {
+  transform: scale(1.03);
+}
+
+.about-photo-frame-border {
+  position: absolute;
+  inset: 0;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  pointer-events: none;
+}
+
+.about-photo-meta {
+  padding: 0.35rem 0.2rem 0.15rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.about-photo-caption {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--text-secondary);
+  letter-spacing: 0.02em;
+  line-height: 1.45;
+}
+
+.about-geo-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--accent-primary);
+  background-color: var(--accent-tint);
+  border: 1px solid var(--accent-border, rgba(46, 125, 87, 0.25));
+  padding: 5px 12px;
+  border-radius: 999px;
+  width: fit-content;
+  max-width: 100%;
+  white-space: nowrap;
+  letter-spacing: 0.02em;
+  box-sizing: border-box;
+}
+
+.about-geo-badge .geo-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--accent-primary);
+  box-shadow: 0 0 6px var(--accent-primary);
+  flex-shrink: 0;
+  display: inline-block;
+  animation: geoDotPulse 2.5s infinite ease-in-out;
+}
+
+@keyframes geoDotPulse {
+  0%, 100% { opacity: 0.6; transform: scale(0.9); }
+  50% { opacity: 1; transform: scale(1.15); }
+}
+
+.about-profile-hero .about-narrative-split {
+  margin-bottom: 0;
+}
+
 .about-narrative-split {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -152,6 +264,20 @@
   margin-bottom: var(--space-3xl);
   font-size: var(--font-body-lg);
   line-height: 1.75;
+}
+
+@media (max-width: 900px) {
+  .about-profile-hero {
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+  }
+  .about-photo-card {
+    max-width: 360px;
+    margin: 0 auto;
+  }
+  .about-narrative-split {
+    grid-template-columns: 1fr;
+  }
 }
 
 .about-pillars-grid {
@@ -412,6 +538,8 @@
   background-color: var(--bg-surface);
   border-radius: var(--radius-sm);
   overflow: hidden;
+  opacity: 1 !important;
+  visibility: visible !important;
   transition: border-color var(--duration-fast) var(--ease-expressive),
               box-shadow var(--duration-fast) var(--ease-expressive);
 }
