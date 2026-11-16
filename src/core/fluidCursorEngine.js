@@ -33,6 +33,10 @@ export class FluidCursorEngine {
     this.animId = null;
     this.isThemeDark = true;
 
+    // Card hover state — amplifies wake intensity
+    this.isOnCard = false;
+    this.cardHoverIntensity = 0; // 0→1 spring for smooth transition
+
     this.init();
   }
 
@@ -107,6 +111,19 @@ export class FluidCursorEngine {
   bindEvents() {
     window.addEventListener('resize', () => this.resize(), { passive: true });
 
+    // Card hover detection — amplifies fluid wake when hovering interactive surfaces
+    const cardSelector = '.project-architectural-card, .pillar-card, .matrix-tier-card, .about-grid-card, .synth-freq-btn, .kinetic-control-card, .monolith-stage-container, .welcome-terminal-box, [data-cursor-target], .project-details-panel, .project-blueprint-panel, .weather-contour-card, .weather-primary-card, .weather-metric-tile';
+    document.addEventListener('mouseover', (e) => {
+      if (e.target.closest(cardSelector)) {
+        this.isOnCard = true;
+      }
+    }, { passive: true });
+    document.addEventListener('mouseout', (e) => {
+      if (e.target.closest(cardSelector)) {
+        this.isOnCard = false;
+      }
+    }, { passive: true });
+
     window.addEventListener('mousemove', (e) => {
       const now = performance.now();
       const dt = Math.max(1, now - this.lastMoveTime);
@@ -133,29 +150,41 @@ export class FluidCursorEngine {
   }
 
   spawnWakeParticles(x, y, speed) {
-    const count = Math.min(3, Math.max(1, Math.floor(speed * 2.2)));
+    // When hovering over cards, spawn more particles with larger spread & higher alpha
+    const onCard = this.isOnCard;
+    const baseCount = onCard ? Math.max(2, Math.floor(speed * 3)) : Math.max(1, Math.floor(speed * 2.2));
+    const count = Math.min(onCard ? 5 : 3, baseCount);
+
     for (let c = 0; c < count; c++) {
       const p = this.particles[this.poolIndex];
       this.poolIndex = (this.poolIndex + 1) % this.maxParticles;
 
-      // Jitter position along stroke
-      const spread = Math.min(18, speed * 4);
+      // Jitter position along stroke — wider spread on card hover
+      const spread = onCard ? Math.min(28, speed * 5 + 8) : Math.min(18, speed * 4);
       const angle = Math.random() * Math.PI * 2;
       const dist = Math.random() * spread;
 
       p.x = x + Math.cos(angle) * dist;
       p.y = y + Math.sin(angle) * dist;
-      p.vx = -this.mouse.vx * 0.15 + (Math.random() - 0.5) * 0.8;
-      p.vy = -this.mouse.vy * 0.15 + (Math.random() - 0.5) * 0.8;
+      p.vx = -this.mouse.vx * 0.15 + (Math.random() - 0.5) * (onCard ? 1.4 : 0.8);
+      p.vy = -this.mouse.vy * 0.15 + (Math.random() - 0.5) * (onCard ? 1.4 : 0.8);
 
-      p.radius = 4 + Math.random() * 6 + Math.min(14, speed * 3.5);
+      // Larger, brighter particles on card hover
+      const baseRadius = onCard ? 6 : 4;
+      const speedBonus = onCard ? Math.min(18, speed * 4.5) : Math.min(14, speed * 3.5);
+      p.radius = baseRadius + Math.random() * 6 + speedBonus;
       p.maxRadius = p.radius * (1.6 + Math.random() * 0.8);
-      p.maxAlpha = this.isThemeDark ? (0.28 + Math.random() * 0.22) : (0.18 + Math.random() * 0.14);
+
+      const alphaBoost = onCard ? 0.15 : 0;
+      p.maxAlpha = this.isThemeDark
+        ? (0.28 + alphaBoost + Math.random() * 0.22)
+        : (0.18 + alphaBoost + Math.random() * 0.14);
       p.alpha = p.maxAlpha;
-      p.maxLife = 28 + Math.random() * 24; // frames of life (~0.5 - 0.8s)
+      p.maxLife = onCard ? (35 + Math.random() * 30) : (28 + Math.random() * 24);
       p.life = p.maxLife;
       p.active = true;
       p.hueOffset = (Math.random() - 0.5) * 30;
+      p.isCardParticle = onCard;
     }
   }
 
@@ -176,7 +205,46 @@ export class FluidCursorEngine {
     this.lastFrameTime = now;
     const dt = dtMs / 16.667;
 
+    // Smooth card hover intensity ramp (spring interpolation)
+    const targetIntensity = this.isOnCard ? 1.0 : 0.0;
+    this.cardHoverIntensity += (targetIntensity - this.cardHoverIntensity) * Math.min(1, 0.16 * dt);
+
+    // Continuous subtle fluid pulse while hovering on cards even at low speed
+    this.idleFrameCounter = (this.idleFrameCounter || 0) + 1;
+    if (this.isOnCard && this.idleFrameCounter % 6 === 0) {
+      this.spawnWakeParticles(this.mouse.x, this.mouse.y, Math.max(0.35, this.mouse.speed));
+    }
+
     this.ctx.clearRect(0, 0, this.width, this.height);
+
+    // Draw active bioluminescent fluid core aura under cursor when hovering cards
+    if (this.cardHoverIntensity > 0.01) {
+      const coreAlpha = (this.isThemeDark ? 0.35 : 0.22) * this.cardHoverIntensity;
+      const pulse = Math.sin(now * 0.006) * 3.5;
+      const coreRadius = Math.max(18, 30 + pulse + Math.min(24, this.mouse.speed * 8));
+
+      const coreGrad = this.ctx.createRadialGradient(
+        this.mouse.x, this.mouse.y, 0,
+        this.mouse.x, this.mouse.y, coreRadius
+      );
+
+      if (this.isThemeDark) {
+        // Emerald to Sacred Moss living biophilic liquid
+        coreGrad.addColorStop(0, `rgba(50, 205, 135, ${coreAlpha})`);
+        coreGrad.addColorStop(0.4, `rgba(74, 140, 100, ${coreAlpha * 0.55})`);
+        coreGrad.addColorStop(1, `rgba(74, 93, 78, 0)`);
+      } else {
+        // Olive to sage slate liquid aura
+        coreGrad.addColorStop(0, `rgba(74, 93, 78, ${coreAlpha})`);
+        coreGrad.addColorStop(0.45, `rgba(110, 135, 118, ${coreAlpha * 0.45})`);
+        coreGrad.addColorStop(1, `rgba(74, 93, 78, 0)`);
+      }
+
+      this.ctx.fillStyle = coreGrad;
+      this.ctx.beginPath();
+      this.ctx.arc(this.mouse.x, this.mouse.y, coreRadius, 0, Math.PI * 2);
+      this.ctx.fill();
+    }
 
     for (let i = 0; i < this.maxParticles; i++) {
       const p = this.particles[i];
@@ -188,11 +256,19 @@ export class FluidCursorEngine {
         continue;
       }
 
-      // Physics update (Frame-rate independent friction)
+      // Physics update: when hovering on cards, particles dynamically track and flow with cursor
+      if (p.isCardParticle || this.cardHoverIntensity > 0.05) {
+        const pull = 0.048 * (p.isCardParticle ? 1.0 : this.cardHoverIntensity);
+        p.vx += (this.mouse.x - p.x) * pull * dt;
+        p.vy += (this.mouse.y - p.y) * pull * dt;
+        p.vx += this.mouse.vx * 0.08 * dt;
+        p.vy += this.mouse.vy * 0.08 * dt;
+      }
+
       p.x += p.vx * dt;
       p.y += p.vy * dt;
-      p.vx *= Math.pow(0.94, dt);
-      p.vy *= Math.pow(0.94, dt);
+      p.vx *= Math.pow(0.93, dt);
+      p.vy *= Math.pow(0.93, dt);
 
       const progress = 1 - (p.life / p.maxLife);
       const currentRadius = p.radius + (p.maxRadius - p.radius) * progress;
@@ -202,7 +278,9 @@ export class FluidCursorEngine {
       let r, g, b;
       if (this.isThemeDark) {
         // Obsidian mode: Sacred Moss green (74, 93, 78) to Spring Emerald (16, 185, 129) & Warm Gold
-        if (p.hueOffset > 0) {
+        if (p.isCardParticle) {
+          r = 45; g = 210; b = 140; // Vibrant luminous emerald when on cards
+        } else if (p.hueOffset > 0) {
           r = 74; g = 140; b = 100;
         } else {
           r = 50; g = 180; b = 130;

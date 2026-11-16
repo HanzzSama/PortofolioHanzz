@@ -510,6 +510,25 @@ export const translations = {
         "fps": "RENDER FPS"
       }
     },
+    "weather": {
+      "sectionIndex": "07",
+      "sectionTitle": "ATMOSPHERE",
+      "sectionSub": "METEOROLOGICAL TOPOLOGY & REAL-TIME BIOSPHERE",
+      "headline": "Geodesic Meteorology & Contour Isobars",
+      "description": "Sistem telemetri atmosfer real-time dan kontur isobar generatif yang disinkronisasikan langsung dengan biosfer geografis Semarang (07°00'S 110°25'E).",
+      "topologyBadge": "+ [TOPOLOGY // 07°00'S 110°25'E • 82m ASL]",
+      "ui": {
+            "isobars": "[ISOBARS]",
+            "windStream": "[VEKTOR ANGIN]",
+            "nadaWave": "NADA WAVE // 432Hz",
+            "pressure": "Tekanan Barometrik",
+            "wind": "Vektor Angin",
+            "humidity": "Kelembapan Udara",
+            "cloudCover": "Tutupan Awan",
+            "apparent": "APPARENT:",
+            "sync": "REFRESH TELEMETRI ↻"
+      }
+    },
     "pet": {
       "name": "HanzzPet",
       "statusPrefix": "SYS.PET // NOMINAL",
@@ -1033,6 +1052,25 @@ export const translations = {
         "vertexCount": "ACTIVE VERTICES",
         "inertia": "VELOCITY DAMPING",
         "fps": "RENDER FPS"
+      }
+    },
+    "weather": {
+      "sectionIndex": "07",
+      "sectionTitle": "ATMOSPHERE",
+      "sectionSub": "METEOROLOGICAL TOPOLOGY & REAL-TIME BIOSPHERE",
+      "headline": "Geodesic Meteorology & Contour Isobars",
+      "description": "Real-time atmospheric telemetry and generative topographic isobars synchronized with the local Semarang biosphere (07°00'S 110°25'E).",
+      "topologyBadge": "+ [TOPOLOGY // 07°00'S 110°25'E • 82m ASL]",
+      "ui": {
+            "isobars": "[ISOBARS]",
+            "windStream": "[WIND STREAM]",
+            "nadaWave": "NADA WAVE // 432Hz",
+            "pressure": "Barometric Pressure",
+            "wind": "Wind Vector",
+            "humidity": "Relative Humidity",
+            "cloudCover": "Cloud Canopy",
+            "apparent": "APPARENT:",
+            "sync": "REFRESH TELEMETRY ↻"
       }
     },
     "pet": {
@@ -1560,6 +1598,25 @@ export const translations = {
         "fps": "画布帧率 (FPS)"
       }
     },
+    "weather": {
+      "sectionIndex": "07",
+      "sectionTitle": "大气层",
+      "sectionSub": "气象拓扑与实时生物圈",
+      "headline": "测地线气象学与等压线等高线",
+      "description": "实时大气遥测系统和生成等压线等高线，与三宝垄地理生物圈（07°00'S 110°25'E）实时同步。",
+      "topologyBadge": "+ [TOPOLOGY // 07°00'S 110°25'E • 82m ASL]",
+      "ui": {
+            "isobars": "[等压线]",
+            "windStream": "[风矢量流]",
+            "nadaWave": "音波模式 // 432Hz",
+            "pressure": "气压",
+            "wind": "风向风速",
+            "humidity": "相对湿度",
+            "cloudCover": "云层覆盖",
+            "apparent": "体感温度:",
+            "sync": "刷新遥测 ↻"
+      }
+    },
     "pet": {
       "name": "HanzzPet",
       "statusPrefix": "SYS.PET // 运行正常",
@@ -2085,6 +2142,25 @@ export const translations = {
         "fps": "描画FPS"
       }
     },
+    "weather": {
+      "sectionIndex": "07",
+      "sectionTitle": "気象・大気",
+      "sectionSub": "気象トポロジーとリアルタイム生物圏",
+      "headline": "測地気象学と等圧等高線",
+      "description": "スマラン（07°00'S 110°25'E）の地理的生物圏とリアルタイムで同期する気象テレメトリおよび生成型等圧線システム。",
+      "topologyBadge": "+ [TOPOLOGY // 07°00'S 110°25'E • 82m ASL]",
+      "ui": {
+            "isobars": "[等圧線]",
+            "windStream": "[風向ベクトル流]",
+            "nadaWave": "音波モード // 432Hz",
+            "pressure": "気圧",
+            "wind": "風速・風向",
+            "humidity": "湿度",
+            "cloudCover": "雲量",
+            "apparent": "体感温度:",
+            "sync": "データ更新 ↻"
+      }
+    },
     "pet": {
       "name": "HanzzPet",
       "statusPrefix": "SYS.PET // 稼働中",
@@ -2608,6 +2684,25 @@ export const translations = {
         "vertexCount": "AKTIVE SCHEITELPUNKTE",
         "inertia": "GESCHWINDIGKEITSDÄMPFUNG",
         "fps": "RENDER-FPS"
+      }
+    },
+    "weather": {
+      "sectionIndex": "07",
+      "sectionTitle": "ATMOSPHÄRE",
+      "sectionSub": "METEOROLOGISCHE TOPOLOGIE & ECHTZEIT-BIOSPHÄRE",
+      "headline": "Geodätische Meteorologie & Isobaren-Konturen",
+      "description": "Echtzeit-Atmosphärentelemetrie und generative topografische Isobaren, synchronisiert mit der lokalen Biosphäre von Semarang (07°00'S 110°25'E).",
+      "topologyBadge": "+ [TOPOLOGY // 07°00'S 110°25'E • 82m ASL]",
+      "ui": {
+            "isobars": "[ISOBAREN]",
+            "windStream": "[WINDFLUSS]",
+            "nadaWave": "NADA-WELLE // 432Hz",
+            "pressure": "Luftdruck",
+            "wind": "Windvektor",
+            "humidity": "Luftfeuchtigkeit",
+            "cloudCover": "Wolkendecke",
+            "apparent": "GEFÜHLT:",
+            "sync": "AKTUALISIEREN ↻"
       }
     },
     "pet": {

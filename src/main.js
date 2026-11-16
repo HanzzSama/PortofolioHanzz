@@ -17,6 +17,7 @@ import { renderSkills } from './components/renderSkills.js';
 import { renderProjects } from './components/renderProjects.js';
 import { renderGithub } from './components/renderGithub.js';
 import { renderLab } from './components/renderLab.js';
+import { renderWeather } from './components/renderWeather.js';
 import { renderAnother } from './components/renderAnother.js';
 import { renderPet } from './components/renderPet.js';
 import { MonolithSimulator } from './core/monolithSimulator.js';
@@ -28,6 +29,7 @@ import { MagneticTiltEngine } from './core/magneticTilt.js';
 import { XRayBiosphereEngine } from './core/xrayBiosphere.js';
 import { KineticTypographyEngine } from './core/kineticTypography.js';
 import { BioTimeEngine } from './core/bioTimeEngine.js';
+import { WeatherContourEngine } from './core/weatherContourEngine.js';
 
 class PortfolioApp {
   constructor() {
@@ -46,6 +48,7 @@ class PortfolioApp {
     this.xrayEngine = null;
     this.kineticTypo = null;
     this.bioTime = null;
+    this.weatherEngine = null;
 
     // Internationalization State
     this.currentLang = localStorage.getItem('portfolio-language') || 'id';
@@ -69,6 +72,7 @@ class PortfolioApp {
     this.initMobileNav();
     this.initKineticTopographyCanvas();
     this.initMonolithSimulator();
+    this.initWeatherEngine();
     this.initHanzzPet();
     this.initScrollbarPill();
     this.initFluidCursor();
@@ -89,6 +93,7 @@ class PortfolioApp {
       renderProjects(this.data),
       renderGithub(this.data),
       renderLab(this.data),
+      renderWeather(this.data),
       renderAnother(this.data)
     ].join('\n');
 
@@ -162,6 +167,7 @@ class PortfolioApp {
         // Re-initialize dynamic component bindings after re-rendering
         this.initKineticTopographyCanvas();
         this.initMonolithSimulator();
+        this.initWeatherEngine();
         this.initHanzzPet();
         this.initParallaxAndObserver();
         this.initSmoothNavLinks();
@@ -290,6 +296,11 @@ class PortfolioApp {
           const metaThemeColor = document.querySelector('meta[name="theme-color"]');
           if (metaThemeColor) {
             metaThemeColor.setAttribute('content', newTheme === 'dark' ? '#0E1310' : '#F4F3EF');
+          }
+
+          // Trigger harmonic acoustic wave ripple on Weather contour canvas
+          if (this.weatherEngine) {
+            this.weatherEngine.triggerThemeWave();
           }
         };
 
@@ -1057,6 +1068,18 @@ class PortfolioApp {
   initBioTime() {
     if (!this.bioTime) {
       this.bioTime = new BioTimeEngine();
+    }
+  }
+
+  initWeatherEngine() {
+    if (this.weatherEngine) {
+      this.weatherEngine.destroy();
+      this.weatherEngine = null;
+    }
+    const canvas = document.getElementById('weather-contour-canvas');
+    if (canvas) {
+      this.weatherEngine = new WeatherContourEngine();
+      window.__weatherEngine = this.weatherEngine;
     }
   }
 }

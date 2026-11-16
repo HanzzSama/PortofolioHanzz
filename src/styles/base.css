@@ -223,7 +223,10 @@ body {
 .synth-freq-btn,
 .about-grid-card,
 .pillar-card,
-.matrix-tier-card {
+.matrix-tier-card,
+.weather-contour-card,
+.weather-primary-card,
+.weather-metric-tile {
   position: relative;
   overflow: hidden;
 }
@@ -232,7 +235,10 @@ body {
 .synth-freq-btn::after,
 .about-grid-card::after,
 .pillar-card::after,
-.matrix-tier-card::after {
+.matrix-tier-card::after,
+.weather-contour-card::after,
+.weather-primary-card::after,
+.weather-metric-tile::after {
   content: '';
   position: absolute;
   top: 0;
@@ -254,7 +260,10 @@ body {
 .synth-freq-btn:hover::after,
 .about-grid-card:hover::after,
 .pillar-card:hover::after,
-.matrix-tier-card:hover::after {
+.matrix-tier-card:hover::after,
+.weather-contour-card:hover::after,
+.weather-primary-card:hover::after,
+.weather-metric-tile:hover::after {
   opacity: 1;
 }
 
@@ -262,7 +271,10 @@ body {
 [data-theme="light"] .synth-freq-btn::after,
 [data-theme="light"] .about-grid-card::after,
 [data-theme="light"] .pillar-card::after,
-[data-theme="light"] .matrix-tier-card::after {
+[data-theme="light"] .matrix-tier-card::after,
+[data-theme="light"] .weather-contour-card::after,
+[data-theme="light"] .weather-primary-card::after,
+[data-theme="light"] .weather-metric-tile::after {
   background: radial-gradient(
     circle 260px at var(--glare-x, 50%) var(--glare-y, 50%),
     rgba(74, 93, 78, 0.06),

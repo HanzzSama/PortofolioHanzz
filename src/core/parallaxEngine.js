@@ -115,7 +115,7 @@ export class ParallaxEngine {
       this.mouse.normY = (e.clientY / window.innerHeight) * 2 - 1;
 
       if (this.cursorDot) {
-        this.cursorDot.style.transform = `translate3d(${e.clientX}px, ${e.clientY}px, 0)`;
+        this.cursorDot.style.transform = `translate3d(${e.clientX}px, ${e.clientY}px, 0) translate(-50%, -50%)`;
       }
     }, { passive: true });
 
@@ -174,7 +174,7 @@ export class ParallaxEngine {
     if (this.cursorRing) {
       this.cursorPos.ringX = this.lerp(this.cursorPos.ringX, this.mouse.targetX, 0.22, dt);
       this.cursorPos.ringY = this.lerp(this.cursorPos.ringY, this.mouse.targetY, 0.22, dt);
-      this.cursorRing.style.transform = `translate3d(${this.cursorPos.ringX - 16}px, ${this.cursorPos.ringY - 16}px, 0)`;
+      this.cursorRing.style.transform = `translate3d(${this.cursorPos.ringX}px, ${this.cursorPos.ringY}px, 0) translate(-50%, -50%)`;
     }
 
     // Parallax Layers calculation

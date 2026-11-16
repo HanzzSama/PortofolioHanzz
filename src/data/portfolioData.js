@@ -472,6 +472,28 @@ export async function streamNeuraInference(prompt, streamWriter) {
     }
   },
 
+  weather: {
+    sectionIndex: "07",
+    sectionTitle: "ATMOSPHERE",
+    sectionSub: "METEOROLOGICAL TOPOLOGY & REAL-TIME BIOSPHERE",
+    headline: "Geodesic Meteorology & Contour Isobars",
+    description: "Sistem telemetri atmosfer real-time dan kontur isobar generatif yang disinkronisasikan langsung dengan biosfer geografis Semarang (07°00'S 110°25'E).",
+    topologyBadge: "+ [TOPOLOGY // 07°00'S 110°25'E • 82m ASL]",
+    ui: {
+      isobars: "[ISOBARS]",
+      windStream: "[WIND STREAM]",
+      nadaWave: "NADA WAVE // 432Hz",
+      pressure: "Tekanan Barometrik",
+      wind: "Vektor Angin",
+      humidity: "Kelembapan Udara",
+      cloudCover: "Tutupan Awan",
+      apparent: "APPARENT:",
+      sync: "REFRESH TELEMETRY ↻",
+      biosphereFootprint: "CARBON IMPACT: < 0.12g CO₂ // BIOPHILIC OPTIMAL",
+      solarCycle: "SOLAR AZIMUTH // DIURNAL ARC"
+    }
+  },
+
   pet: {
     name: "HanzzPet",
     statusPrefix: "SYS.PET // NOMINAL",
@@ -688,6 +710,14 @@ export function getPortfolioData(lang = 'id') {
     localized.kineticLab = {
       ...localized.kineticLab,
       ...t.kineticLab
+    };
+  }
+
+  if (t.weather) {
+    localized.weather = {
+      ...localized.weather,
+      ...t.weather,
+      ui: { ...localized.weather.ui, ...t.weather.ui }
     };
   }
 

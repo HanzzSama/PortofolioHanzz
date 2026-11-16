@@ -5,7 +5,7 @@
  */
 
 export class MagneticTiltEngine {
-  constructor(selector = '.project-architectural-card, .synth-freq-btn, .about-grid-card, .pillar-card, .matrix-tier-card') {
+  constructor(selector = '.project-architectural-card, .synth-freq-btn, .about-grid-card, .pillar-card, .matrix-tier-card, .weather-contour-card, .weather-primary-card, .weather-metric-tile') {
     this.selector = selector;
     this.elements = [];
     this.maxTilt = 8.5; // degrees
