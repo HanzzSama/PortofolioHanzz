@@ -20,7 +20,7 @@ export function renderWeather(data) {
       humidity: "Kelembapan Udara",
       cloudCover: "Tutupan Awan",
       apparent: "APPARENT:",
-      sync: "REFRESH TELEMETRY ↻",
+      sync: "REFRESH TELEMETRY",
       biosphereFootprint: "CARBON IMPACT: < 0.12g CO₂ // BIOPHILIC OPTIMAL",
       solarCycle: "SOLAR AZIMUTH // DIURNAL ARC"
     }
@@ -190,7 +190,7 @@ export function renderWeather(data) {
               <span id="weather-sync-status">OPEN-METEO SYNCED // LIVE</span>
             </div>
             <button id="weather-sync-refresh-btn" class="weather-sync-btn" data-cursor-target title="Refresh Real-time Weather Data">
-              ${ui.sync || 'REFRESH ↻'}
+              ${ui.sync || 'REFRESH'}
             </button>
           </div>
         </div>

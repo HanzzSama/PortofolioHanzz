@@ -49,7 +49,7 @@ export function renderAbout(data) {
 
             <img 
               src="${about.photo || meta.photo || './src/assets/Hanzz.jpeg'}" 
-              alt="${meta.fullName} - ${meta.role}" 
+              alt="${meta.fullName}, ${meta.role}" 
               class="abstract-photo-img" 
               loading="lazy"
             />
@@ -76,7 +76,7 @@ export function renderAbout(data) {
             </div>
 
             <div class="abstract-context-row font-mono">
-              <span class="abstract-caption-text">${about.photoCaption || 'Foto Lapangan Pantai Pacitan — In Situ'}</span>
+              <span class="abstract-caption-text">${about.photoCaption || 'Foto di Pantai Pacitan'}</span>
             </div>
 
             <!-- Sleek Single-Line Telemetry Capsule (Never Wraps) -->

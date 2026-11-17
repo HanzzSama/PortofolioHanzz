@@ -55,26 +55,26 @@ export const EYE_TEMPLATES = {
 
 // 20 Authentic Bot Dialogues from Portofolio Source (lines 892-913)
 export const AUTHENTIC_BOT_DIALOGUES = [
-  { text: "Halo! Makasih ya udah sempetin mampir ke sini! 😊", expr: "happy" },
-  { text: "Kamu tahu nggak? Hanzz nulis kode CSS untuk mataku satu per satu lho! 👀", expr: "normal" },
-  { text: "Btw, coba deh seret aku ke atas atau kanan layar. Aku bisa otomatis nyesuain posisiku! 🌀", expr: "happy" },
-  { text: "Aduh! Jangan klik aku terlalu cepat, nanti aku pusing tujuh keliling! 😵", expr: "sleepy" },
-  { text: "Fun Fact: Kopi adalah bahan bakar utama Hanzz pas lagi ngoding portfolio ini! ☕", expr: "happy" },
-  { text: "Hei, kamu tipe orang yang suka dark mode atau light mode? Hanzz suka keduanya! 🌗", expr: "normal" },
-  { text: "Jangan lupa cek keahlian PHP & Laravel milik Hanzz di bawah ya! Keren abis! 🔥", expr: "happy" },
-  { text: "Udah lihat website Ladangku? Itu project yang dibikin buat kompetisi lho! 🚀", expr: "sparkle" },
-  { text: "Ada yang bilang programmer itu jarang tidur... padahal emang bener sih. Hehe 😴", expr: "sleepy" },
-  { text: "Hmm... Masih nge-klik aku terus ya? Penasaran banget sama apa yang bakal aku omongin? 🤔", expr: "curious" },
-  { text: "Oke, ini rahasia: Kalau kamu hover foto profil Hanzz di atas, aku bakal tersenyum manis! 😳", expr: "love" },
-  { text: "Kalau butuh bantuan buat website interaktif kayak gini, Hanzz siap bantu kok! 💼", expr: "happy" },
-  { text: "Aduh, jariku pegel nih diajak ngobrol mulu... Eh, kan aku nggak punya jari ya? 🤖", expr: "curious" },
-  { text: "Stop! Aku lagi konsentrasi memantau pergerakan kursor kamu... 🧐", expr: "normal" },
-  { text: "Kenapa programmer pake kacamata? Soalnya mereka gak bisa 'C#'! Hahaha garing ya... 😭", expr: "sleepy" },
-  { text: "Sudah, cukup! Aku lelah dipermainkan seperti ini! Jangan klik lagi! 😤", expr: "curious" },
-  { text: "Zzz... Aku mogok ngomong ah, mau tidur sejenak aja... 🥱", expr: "sleepy" },
-  { text: "Hayo lho, masih diklik juga? Kamu bandel ya! 😜", expr: "wink" },
-  { text: "Tapi serius deh, kalau kamu tertarik collab, langsung chat Hanzz via kontak di bawah ya! 📨", expr: "happy" },
-  { text: "Selamat! Kamu berhasil membuka seluruh 20 dialog interaktifku! Kamu luar biasa! 🎉🏆", expr: "sparkle" }
+  { text: "Halo! Makasih ya udah sempetin mampir ke sini!", expr: "happy" },
+  { text: "Kamu tahu nggak? Hanzz nulis kode CSS untuk mataku satu per satu lho!", expr: "normal" },
+  { text: "Btw, coba deh seret aku ke atas atau kanan layar. Aku bisa otomatis nyesuain posisiku!", expr: "happy" },
+  { text: "Aduh! Jangan klik aku terlalu cepat, nanti aku pusing tujuh keliling!", expr: "sleepy" },
+  { text: "Fun fact: Hanzz minum kopi saat mengerjakan portofolio ini.", expr: "happy" },
+  { text: "Hei, kamu tipe orang yang suka dark mode atau light mode? Hanzz suka keduanya!", expr: "normal" },
+  { text: "Jangan lupa cek keahlian PHP & Laravel milik Hanzz di bawah ya! Keren abis!", expr: "happy" },
+  { text: "Udah lihat website Ladangku? Itu project yang dibikin buat kompetisi lho!", expr: "sparkle" },
+  { text: "Ada yang bilang programmer itu jarang tidur... padahal emang bener sih. Hehe", expr: "sleepy" },
+  { text: "Hmm... Masih nge-klik aku terus ya? Penasaran banget sama apa yang bakal aku omongin?", expr: "curious" },
+  { text: "Oke, ini rahasia: Kalau kamu hover foto profil Hanzz di atas, aku bakal tersenyum manis!", expr: "love" },
+  { text: "Kalau butuh bantuan buat website interaktif kayak gini, Hanzz siap bantu kok!", expr: "happy" },
+  { text: "Aduh, jariku pegel nih diajak ngobrol mulu... Eh, kan aku nggak punya jari ya?", expr: "curious" },
+  { text: "Stop! Aku lagi konsentrasi memantau pergerakan kursor kamu...", expr: "normal" },
+  { text: "Kenapa programmer pake kacamata? Soalnya mereka gak bisa 'C#'! Hahaha garing ya...", expr: "sleepy" },
+  { text: "Sudah, cukup! Aku lelah dipermainkan seperti ini! Jangan klik lagi!", expr: "curious" },
+  { text: "Zzz... Aku mogok ngomong ah, mau tidur sejenak aja...", expr: "sleepy" },
+  { text: "Hayo lho, masih diklik juga? Kamu bandel ya!", expr: "wink" },
+  { text: "Tapi serius deh, kalau kamu tertarik collab, langsung chat Hanzz via kontak di bawah ya!", expr: "happy" },
+  { text: "Kamu sudah membuka seluruh 20 dialog interaktifku.", expr: "sparkle" }
 ];
 
 // 7 Section Personas Configuration
@@ -596,16 +596,16 @@ export class HanzzPetEngine {
     this.playSoundChirp(480, 640, 'triangle', 0.1);
 
     const labels = {
-      normal: "Normal (• •)",
-      happy: "Senang (^ ^)",
-      sleepy: "Tidur (- -)",
-      love: "Cinta (♥ ♥)",
-      curious: "Kepo (o O)",
-      wink: "Kedip (^ •)",
-      code: "Kode ({ })",
-      sparkle: "Bintang (✦ ✦)",
-      binary: "Biner (1 0)",
-      zen: "Zen (◡ ◡)"
+      normal: "Normal",
+      happy: "Senang",
+      sleepy: "Tidur",
+      love: "Cinta",
+      curious: "Kepo",
+      wink: "Kedip",
+      code: "Kode",
+      sparkle: "Bintang",
+      binary: "Biner",
+      zen: "Zen"
     };
     this.say("PET.EXPR", `Ekspresi mata: ${labels[nextExpr] || nextExpr}`, 2400);
   }
@@ -943,7 +943,7 @@ export class HanzzPetEngine {
     const rect = this.petBody.getBoundingClientRect();
     this.spawnParticles(rect.width / 2, rect.height / 2, 12, 'random');
     this.setEyeExpression('love');
-    this.say("SYS.PET // DANCE", "Yaaay! Joget arsitektural merayakan kode presisi! 🎶💃");
+    this.say("SYS.PET // DANCE", "Yaaay! Joget arsitektural merayakan kode presisi!");
 
     setTimeout(() => {
       this.isDancing = false;
@@ -960,7 +960,7 @@ export class HanzzPetEngine {
     const rect = this.petBody.getBoundingClientRect();
     this.spawnParticles(rect.width / 2, rect.height / 2, 7, '🍵');
     this.setEyeExpression('curious');
-    this.say("SYS.PET // MATCHA", "Slurp... Teh matcha hangat menenangkan memori sistem! 🍃");
+    this.say("SYS.PET // MATCHA", "Slurp... Teh matcha hangat menenangkan memori sistem!");
     setTimeout(() => this.setEyeExpression('happy'), 800);
     setTimeout(() => {
       if (!this.isSleepy) this.setEyeExpression('normal');

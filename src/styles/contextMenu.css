@@ -89,7 +89,7 @@
   color: var(--text-muted, #718096);
   letter-spacing: 0.06em;
   padding: 0.3rem 0.65rem 0.2rem;
-  text-transform: uppercase;
+  text-transform: none;
 }
 
 /* Items Group */

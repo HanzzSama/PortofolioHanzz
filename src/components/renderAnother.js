@@ -34,7 +34,7 @@ export function renderAnother(data) {
             </div>
             <div style="margin-top: var(--space-md); display: flex; justify-content: space-between; align-items: center; font-family: var(--font-mono); font-size: var(--font-mono-micro); color: var(--text-muted);">
               <span>${another.ui?.readTimeLabel || 'READ TIME:'} ${note.readTime}</span>
-              <span style="color: var(--accent-primary);">${another.ui?.inspectLabel || 'INSPECT MONOGRAPH ↗'}</span>
+              <span style="color: var(--accent-primary);">${another.ui?.inspectLabel || 'INSPECT MONOGRAPH'}</span>
             </div>
           </div>
         `
@@ -56,7 +56,6 @@ export function renderAnother(data) {
           </div>
           <div class="synth-header-actions">
             <button id="studio-open-console-btn" class="tactile-btn" title="Open Advanced Hardware Console" data-cursor-target>
-              <span>⚙</span>
               <span>CONSOLE [DSP]</span>
             </button>
             <button id="synth-mute-toggle" class="tactile-btn" data-cursor-target>
@@ -115,7 +114,7 @@ export function renderAnother(data) {
             <span id="studio-filter-readout" style="color: var(--accent-primary); font-weight: 600;">1400Hz</span>
           </div>
           <button id="studio-toggle-rain-btn" class="tactile-toggle-pill" data-cursor-target>
-            <span>🌧️ RAIN OVERLAY</span>
+            <span>RAIN OVERLAY</span>
           </button>
         </div>
       </div>
@@ -132,7 +131,6 @@ export function renderAnother(data) {
           </p>
 
           <button id="copy-email-btn" class="contact-quick-pill" data-email="${meta.socials[2].handle}" data-cursor-target>
-            <span>✉</span>
             <span>${meta.socials[2].handle}</span>
             <span style="opacity: 0.5;">${another.ui?.copyLabel || '[COPY]'}</span>
             <span id="copy-toast" class="copy-feedback-toast">${another.ui?.copiedToast || 'COPIED TO CLIPBOARD'}</span>

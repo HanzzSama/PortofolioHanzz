@@ -11,7 +11,7 @@ export function renderPet(data) {
   const t = pet || {
     name: "HanzzPet",
     statusPrefix: "SYS.PET // NOMINAL",
-    defaultThought: "Halo! Aku HanzzPet, asisten AI ruang digital Haidar Rifky. Elus aku ya! ✨",
+    defaultThought: "Halo! Aku HanzzPet, asisten AI ruang digital Haidar Rifky. Elus aku ya!",
     tips: {
       pet: "Elus HanzzPet",
       dance: "Joget Bersama",

@@ -13,9 +13,8 @@ export const translations = {
   "id": {
     "langName": "Bahasa Indonesia",
     "langCode": "ID",
-    "flag": "🇮🇩",
-    "documentTitle": "Portofolio Hanzz — Designer, Creative Collaborator & Web Developer",
-    "documentDesc": "Portofolio Haidar Rifky Andrianno (Hanzz / HanzzSama). Designer, Kolaborator Kreatif, dan Web Developer dengan 4 tahun pengalaman di dunia IT berbasis di Semarang, Indonesia.",
+    "documentTitle": "Portofolio Hanzz | Designer, Creative Collaborator & Web Developer",
+    "documentDesc": "Portofolio Haidar Rifky Andrianno, alias Hanzz atau HanzzSama. Designer, kolaborator kreatif, dan web developer dengan 4 tahun pengalaman di bidang IT, berbasis di Semarang, Indonesia.",
     "nav": {
       "welcome": "01.WEL",
       "about": "02.ABT",
@@ -46,7 +45,7 @@ export const translations = {
       "headlineLine1": "PORTFOLIO",
       "headlineLine2": "HANZZSAMA",
       "headlineLine3": "HAIDAR RIFKY.",
-      "leadParagraph": "Saya seorang desainer, kolaborator kreatif, dan perancang website dengan pengalaman 4 tahun dalam dunia IT. Berawal dari rasa penasaran yang tinggi hingga kini karya saya mencakup desain Web & Mobile UI/UX serta perancangan website yang interaktif dan inovatif.",
+      "leadParagraph": "Saya desainer, kolaborator kreatif, dan perancang website dengan pengalaman 4 tahun di bidang IT. Karya saya mencakup desain UI/UX web dan mobile serta website interaktif.",
       "telemetry": [
         {
           "label": "PENGALAMAN",
@@ -69,188 +68,188 @@ export const translations = {
     "about": {
       "sectionTitle": "TENTANG SAYA",
       "sectionSub": "HAIDAR RIFKY ANDRIANNO // KOTA SEMARANG",
-      "ethosTitle": "Menciptakan Desain & Pengalaman Baru yang Bermanfaat",
-      "photoCaption": "Foto Haidar Rifky Andrianno — Pantai Pacitan",
+      "ethosTitle": "Membuat desain dan pengalaman baru yang berguna",
+      "photoCaption": "Foto Haidar Rifky Andrianno di Pantai Pacitan",
       "locationBadge": "Indonesia | Jawa Tengah | Kota Semarang",
       "ethosParagraphs": [
-        "Saya seorang desainer, kolaborator kreatif, dan perancang website sederhana dengan pengalaman 4 tahun dalam dunia IT. Menciptakan desain dan pengalaman yang baru adalah tujuan utama saya masuk dunia IT. Berawal dari rasa penasaran yang tinggi kini menjadi programmer yang diakui orang lain, karya saya mencakup desain web UI/UX maupun mobile UI/UX, serta merancang website sederhana dengan desain yang interaktif dan inovatif.",
-        "Merupakan suatu kehormatan untuk membangun karier yang beragam dan bermanfaat. Saya selalu bersemangat mempelajari keterampilan baru, mengeksplorasi pengalaman baru, dan menyambut berbagai tantangan kreatif baru yang membawa dampak positif."
+        "Saya desainer, kolaborator kreatif, dan perancang website dengan pengalaman 4 tahun di bidang IT. Tujuan utama saya masuk dunia IT adalah membuat desain dan pengalaman baru. Karya saya mencakup desain UI/UX web dan mobile, serta website interaktif yang sederhana.",
+        "Saya terus mempelajari keterampilan baru dan menerima tantangan kreatif baru."
       ],
       "pillars": [
         {
           "code": "FOKUS-01",
           "title": "Web & Mobile UI/UX",
-          "desc": "Merancang tata letak antarmuka yang bersih, intuitif, dan nyaman digunakan untuk pengguna web maupun aplikasi mobile."
+          "desc": "Merancang tata letak antarmuka yang bersih dan mudah dipakai di web dan aplikasi mobile."
         },
         {
           "code": "FOKUS-02",
-          "title": "Interactive Web Development",
-          "desc": "Membangun website dengan struktur rapi, fungsionalitas andal, serta interaksi dinamis yang responsif di berbagai perangkat."
+          "title": "Interactive web development",
+          "desc": "Membangun website dengan kode yang rapi dan interaksi yang berjalan di ponsel, tablet, dan desktop."
         },
         {
           "code": "FOKUS-03",
-          "title": "Kolaborasi Kreatif",
-          "desc": "Bekerja sama secara komunikatif dalam tim untuk menerjemahkan visi dan kebutuhan menjadi solusi produk digital nyata."
+          "title": "Kolaborasi kreatif",
+          "desc": "Bekerja dalam tim untuk mengubah kebutuhan menjadi produk digital."
         },
         {
           "code": "FOKUS-04",
-          "title": "Pembelajaran Berkelanjutan",
-          "desc": "Selalu haus akan wawasan baru, mendalami kakas desain mutakhir, serta terus mengasah kemampuan pemrograman."
+          "title": "Pembelajaran berkelanjutan",
+          "desc": "Mempelajari kakas desain baru dan melatih kemampuan pemrograman secara rutin."
         }
       ],
-      "timelineTitle": "Kronologi Karier & Pengalaman Nyata",
+      "timelineTitle": "Kronologi karier dan pengalaman",
       "timeline": [
         {
-          "year": "2026 — SEKARANG",
-          "title": "Pengembangan Lanjutan Frontend & Backend",
+          "year": "2026 sampai sekarang",
+          "title": "Pengembangan lanjutan frontend dan backend",
           "place": "Semarang, Jawa Tengah",
-          "description": "Memperluas keilmuan di bidang frontend dan backend, merancang arsitektur sistem modern, serta memperdalam rekayasa web interaktif berkinerja tinggi."
+          "description": "Mempelajari frontend dan backend, merancang arsitektur sistem, dan mengembangkan web interaktif."
         },
         {
-          "year": "2025 — 2026",
-          "title": "Artificial Intelligence & Fullstack Engineering",
+          "year": "2025 sampai 2026",
+          "title": "Artificial intelligence dan fullstack engineering",
           "place": "ITESA Muhammadiyah Semarang",
-          "description": "Memperdalam keilmuan untuk memahami lebih dalam seputar artifisial inteligensi dan fullstack developer, sembari menempuh pendidikan perguruan tinggi di ITESA Muhammadiyah Semarang."
+          "description": "Mempelajari artificial intelligence dan fullstack development sambil kuliah di ITESA Muhammadiyah Semarang."
         },
         {
-          "year": "2024 — 2025",
-          "title": "Pengembangan Skill Coding & Fullstack Developer",
+          "year": "2024 sampai 2025",
+          "title": "Pengembangan keterampilan coding dan fullstack developer",
           "place": "Semarang, Jawa Tengah",
-          "description": "Mengembangkan skill coding dan pemahaman mendalam di dunia frontend dan backend, serta membangun kapabilitas jobdesk fullstack developer."
+          "description": "Melatih coding frontend dan backend untuk bekerja sebagai fullstack developer."
         },
         {
-          "year": "2022 — 2024",
-          "title": "Eksplorasi Web, Aplikasi & Software Engineering",
+          "year": "2022 sampai 2024",
+          "title": "Eksplorasi web, aplikasi, dan software engineering",
           "place": "SMK TEXMACO Semarang",
-          "description": "Memulai eksplorasi di dunia website dan aplikasi serta membangun background IT software engineering di bangku SMK TEXMACO Semarang."
+          "description": "Mulai membuat website dan aplikasi serta mempelajari software engineering di SMK TEXMACO Semarang."
         },
         {
-          "year": "2020 — 2022",
-          "title": "Eksplorasi Perdana Cyber Security Tools",
+          "year": "2020 sampai 2022",
+          "title": "Eksplorasi awal cyber security tools",
           "place": "SMP TEXMACO Semarang",
-          "description": "Memulai eksplorasi awal di dunia IT dengan mempelajari cyber security tools di bangku SMP TEXMACO Semarang."
+          "description": "Mulai mempelajari cyber security tools di SMP TEXMACO Semarang."
         }
       ]
     },
     "skills": {
       "sectionTitle": "KEAHLIAN & KOMPETENSI",
-      "sectionSub": "17 KEAHLIAN TEKNIK & VISUAL // TERUJI",
-      "headline": "Keahlian & Penguasaan Perangkat",
-      "description": "Daftar 17 keahlian teknis dan visual yang dikembangkan selama 4 tahun berkarya di dunia IT, diklasifikasikan ke dalam 4 domain kompetensi terstruktur.",
+      "sectionSub": "17 KEAHLIAN TEKNIS DAN VISUAL",
+      "headline": "Keahlian dan perangkat yang dikuasai",
+      "description": "17 keahlian teknis dan visual dari 4 tahun bekerja di bidang IT, dibagi dalam 4 kelompok.",
       "matrixTiers": [
         {
           "tierId": "TIER-01",
-          "layerName": "Frontend & Web Core",
-          "concept": "Antarmuka & Pengalaman Web",
+          "layerName": "Frontend & web core",
+          "concept": "Antarmuka & pengalaman web",
           "colorAccent": "var(--color-botanical-sage)",
           "nodes": [
             {
               "name": "HTML",
-              "spec": "Semantik & Struktur Standar Web",
+              "spec": "Semantik & struktur standar web",
               "tag": "CORE"
             },
             {
               "name": "CSS",
-              "spec": "Desain Responsif, Flexbox, Grid",
+              "spec": "Desain responsif, Flexbox, Grid",
               "tag": "STYLE"
             },
             {
               "name": "JavaScript",
-              "spec": "Interaktivitas Klien & DOM Dinamis",
+              "spec": "Interaktivitas klien & DOM dinamis",
               "tag": "SCRIPT"
             },
             {
               "name": "Tailwind CSS",
-              "spec": "Utility-first Modern Styling",
+              "spec": "Styling dengan utility class",
               "tag": "FRAMEWORK"
             },
             {
               "name": "Bootstrap",
-              "spec": "Komponen Cepat & Tata Letak Grid",
+              "spec": "Komponen cepat & tata letak Grid",
               "tag": "UI KIT"
             }
           ]
         },
         {
           "tierId": "TIER-02",
-          "layerName": "Backend & Database",
-          "concept": "Logika Server & Pengelolaan Data",
+          "layerName": "Backend & database",
+          "concept": "Logika server & pengelolaan data",
           "colorAccent": "var(--color-warm-sand)",
           "nodes": [
             {
               "name": "PHP",
-              "spec": "Pemrograman Server & Arsitektur MVC",
+              "spec": "Pemrograman server & arsitektur MVC",
               "tag": "BACKEND"
             },
             {
               "name": "Laravel",
-              "spec": "Framework PHP Modern & Elegan",
+              "spec": "Framework PHP",
               "tag": "FRAMEWORK"
             },
             {
               "name": "MySQL",
-              "spec": "Manajemen Database Relasional",
+              "spec": "Manajemen database relasional",
               "tag": "DATABASE"
             },
             {
               "name": "Node JS",
-              "spec": "Runtime JavaScript & API Dasar",
+              "spec": "Runtime JavaScript & API dasar",
               "tag": "RUNTIME"
             },
             {
               "name": "Elixir & Phoenix",
-              "spec": "Eksplorasi Konkurensi & Backend",
+              "spec": "Eksplorasi konkurensi & backend",
               "tag": "EXPLORE"
             }
           ]
         },
         {
           "tierId": "TIER-03",
-          "layerName": "Desain UI/UX & Grafis",
-          "concept": "Estetika Spasial & Kreativitas Visual",
+          "layerName": "Desain UI/UX & grafis",
+          "concept": "Estetika spasial & kreativitas visual",
           "colorAccent": "var(--color-botanical-sage)",
           "nodes": [
             {
               "name": "Figma",
-              "spec": "Desain Prototipe UI/UX Web & Mobile",
+              "spec": "Desain prototipe UI/UX web & mobile",
               "tag": "DESIGN"
             },
             {
               "name": "Canva",
-              "spec": "Grafis Digital & Materi Presentasi",
+              "spec": "Grafis digital & materi presentasi",
               "tag": "CREATIVE"
             },
             {
               "name": "Adobe Illustrator",
-              "spec": "Ilustrasi Vektor & Identitas Aset",
+              "spec": "Ilustrasi vektor & identitas aset",
               "tag": "VECTOR"
             },
             {
               "name": "3D Blender",
-              "spec": "Pemodelan Objek 3D Dasar",
+              "spec": "Pemodelan objek 3D dasar",
               "tag": "3D MOD"
             }
           ]
         },
         {
           "tierId": "TIER-04",
-          "layerName": "Alat Produktivitas & Sistem",
-          "concept": "Alur Kerja & Pengelolaan Proyek",
+          "layerName": "Alat produktivitas & sistem",
+          "concept": "Alur kerja & pengelolaan proyek",
           "colorAccent": "var(--color-charcoal-slate)",
           "nodes": [
             {
               "name": "Git & GitHub",
-              "spec": "Version Control & Repositori Proyek",
+              "spec": "Version control & repositori proyek",
               "tag": "VCS"
             },
             {
               "name": "Microsoft Office",
-              "spec": "Dokumentasi & Administrasi Data",
+              "spec": "Dokumentasi & administrasi data",
               "tag": "OFFICE"
             },
             {
               "name": "Kali Linux Tools",
-              "spec": "Pengenalan Jaringan & Keamanan Dasar",
+              "spec": "Pengenalan jaringan & keamanan dasar",
               "tag": "SECURITY"
             }
           ]
@@ -260,8 +259,8 @@ export const translations = {
     "projects": {
       "sectionTitle": "PROYEK KARYA",
       "sectionSub": "9 KARYA TERPILIH // WEB & APLIKASI",
-      "headline": "Koleksi Proyek Unggulan",
-      "description": "Koleksi 9 proyek karya yang mencakup portal informasi PMB ITESA, kalkulator Mathicalc berbot matematis, platform belajar coding TurnCode, sistem Neura AI untuk deteksi alzheimer, aplikasi agrotech, F&B, perpustakaan, hingga manajemen SPP.",
+      "headline": "Proyek terpilih",
+      "description": "9 proyek: portal informasi PMB ITESA, kalkulator Mathicalc dengan bot matematika, platform belajar coding TurnCode, sistem Neura AI untuk mendeteksi gejala alzheimer, aplikasi agrotech, aplikasi pemesanan makanan, sistem perpustakaan, aplikasi pembayaran SPP, dan aplikasi to-do.",
       "ui": {
         "problemLabel": "PERMASALAHAN",
         "solutionLabel": "SOLUSI KREATIF",
@@ -272,11 +271,11 @@ export const translations = {
       },
       "items": {
         "proj-01": {
-          "subtitle": "Website Informasi Pendaftaran Mahasiswa Baru Kampus",
+          "subtitle": "Website informasi pendaftaran mahasiswa baru kampus",
           "category": "Portal Kampus / Web System",
           "role": "FullStack Web Developer",
           "client": "ITESA Muhammadiyah Semarang",
-          "description": "Website yang dibangun untuk memberi informasi tentang pendaftaran mahasiswa baru ITESA, dibangun dengan sistem Laravel.",
+          "description": "Website informasi pendaftaran mahasiswa baru ITESA, dibangun dengan Laravel.",
           "deliverables": [
             "Penyajian informasi jalur pendaftaran mahasiswa baru dan program studi interaktif",
             "Sistem formulir daring dan dashboard verifikasi berkas calon mahasiswa",
@@ -306,14 +305,14 @@ export const translations = {
           }
         },
         "proj-02": {
-          "subtitle": "Kalkulator Basic dengan Bot Matematis & Personalisasi Tema",
+          "subtitle": "Kalkulator basic dengan bot matematis dan personalisasi tema",
           "category": "Web Tool / Komputasi",
           "role": "Frontend Developer",
           "client": "Kakas Personal & Edukasi",
-          "description": "Kalkulator basic dengan dipadukan sistem bot matematis, dan sistem personalize tema sesuai selera, dibangun hanya memakai HTML, CSS, JS.",
+          "description": "Kalkulator dengan bot matematika dan tema yang bisa diubah sesuai selera, dibuat hanya dengan HTML, CSS, dan JavaScript.",
           "deliverables": [
             "Mesin kalkulasi matematika cepat dan responsif di browser",
-            "Sistem bot matematis cerdas yang memandu perhitungan dan formula",
+            "Bot matematika yang memandu perhitungan dan formula",
             "Fitur personalisasi tema visual dinamis yang dapat disesuaikan pengguna"
           ],
           "metrics": {
@@ -324,7 +323,7 @@ export const translations = {
           "deepDive": {
             "architectureSchema": "[USER INPUT: KEYBOARD & TOUCH NUMPAD]\n       │\n       ▼ EVENT LISTENER\n[PARSER & TOKENIZER: MATH EXPRESSION]\n       │\n       ├──► [MATH BOT ENGINE: AUTO-CORRECT & CALC]\n       │\n       ├──► [THEME ENGINE: DYNAMIC CSS VARIABLES]\n       │           │\n       │           └──► [LOCALSTORAGE STATE PERSISTENCE]\n       │\n       ▼ REAL-TIME DOM RENDERER\n[CANVAS / LCD DISPLAY: RESULT & HISTORY LOG]",
             "problem": "Banyak kalkulator web yang monoton, kaku tanpa interaksi asisten, dan tidak memungkinkan pengguna mengubah tema sesuai preferensi personal.",
-            "solution": "Mengembangkan Mathicalc murni dengan HTML, CSS, dan JavaScript — memadukan bot asisten matematis dan tema personalisasi tanpa dependensi berat.",
+            "solution": "Mengembangkan Mathicalc dengan HTML, CSS, dan JavaScript saja. Mathicalc memiliki bot asisten matematika dan tema yang bisa diubah, tanpa dependensi tambahan.",
             "benchmarks": [
               {
                 "metric": "Waktu Muat",
@@ -340,11 +339,11 @@ export const translations = {
           }
         },
         "proj-03": {
-          "subtitle": "Platform Belajar Coding dari Zero to Pro",
+          "subtitle": "Platform belajar coding dari zero to pro",
           "category": "E-Learning / Developer Tools",
           "role": "FullStack Developer",
           "client": "Komunitas Belajar Coding",
-          "description": "Website yang dibangun untuk pengguna untuk belajar coding dari zero to pro, dibangun dengan lingkungan Laravel.",
+          "description": "Website untuk belajar coding dari zero to pro, dibangun dengan Laravel.",
           "deliverables": [
             "Kurikulum materi pemrograman terstruktur dari level pemula hingga mahir",
             "Antarmuka belajar interaktif dengan latihan praktis dan evaluasi pemahaman",
@@ -358,7 +357,7 @@ export const translations = {
           "deepDive": {
             "architectureSchema": "[LEARNER / DEVELOPER UI]\n       │\n       ▼ HTTPS REST API\n[LARAVEL CORE: LEARNING ROADMAP ENGINE]\n       │\n       ├──► [MODULAR CURRICULUM: ZERO TO PRO]\n       │           │\n       │           ├──► [CODE PLAYGROUND & SANDBOX]\n       │           └──► [INTERACTIVE SYNTAX VALIDATOR]\n       │\n       ├──► [PROGRESSION & MILESTONE TRACKER]\n       │\n       ▼ ELOQUENT ORM\n[MYSQL DATABASE: USERS, LESSONS, COMPLETIONS]",
             "problem": "Banyak calon programmer pemula kesulitan belajar mandiri karena materi online yang terpecah-pecah tanpa panduan tahapan yang runtut.",
-            "solution": "Membangun platform TurnCode di atas Laravel untuk menghadirkan alur belajar terpadu 'Zero to Pro' yang terarah dan mudah dipahami.",
+            "solution": "Membangun platform TurnCode dengan Laravel dan alur belajar bertahap dari zero to pro.",
             "benchmarks": [
               {
                 "metric": "Alur Pembelajaran",
@@ -374,7 +373,7 @@ export const translations = {
           }
         },
         "proj-04": {
-          "subtitle": "Deteksi Gejala Alzheimer Berbasis LLM & XGBoost",
+          "subtitle": "Deteksi gejala Alzheimer berbasis LLM dan XGBoost",
           "category": "Healthcare AI / Web Intelligence",
           "role": "AI & FullStack Developer",
           "client": "Inisiatif Riset Kesehatan Kognitif",
@@ -392,7 +391,7 @@ export const translations = {
           "deepDive": {
             "architectureSchema": "[CLINICAL ASSESSMENT / USER QUESTIONNAIRE]\n       │\n       ▼ WEBSOCKET / REST API\n[FASTAPI & LLM INTERFACE LAYER]\n       │\n       ├──► [LLM: SYMPTOM EXTRACTION & CONTEXT]\n       │           │\n       │           ▼\n       ├──► [FEATURE VECTOR PREPROCESSING]\n       │           │\n       │           ▼\n       ├──► [XGBOOST CLASSIFIER: ALZHEIMER RISK]\n       │           │\n       │           └──► [DECISION TREE ENSEMBLE SCORING]\n       │\n       ▼ JSON TELEMETRY RESPONSE\n[DIAGNOSTIC RADAR & RISK STRATIFICATION UI]",
             "problem": "Pemeriksaan gejala alzheimer pada fase awal sering terlambat karena keterbatasan akses skrining kognitif awal yang cepat dan terjangkau.",
-            "solution": "Menggabungkan model LLM untuk ekstraksi interaksi bahasa dengan ketepatan algoritma tabular XGBoost guna mengkalkulasi indikasi gejala secara akurat.",
+            "solution": "Menggabungkan model LLM untuk mengekstrak gejala dari bahasa pengguna dengan algoritma XGBoost untuk menghitung indikasi gejala.",
             "benchmarks": [
               {
                 "metric": "Akurasi Prediksi",
@@ -408,11 +407,11 @@ export const translations = {
           }
         },
         "proj-05": {
-          "subtitle": "Platform Pertanian Modern & Optimasi Lahan",
+          "subtitle": "Platform pertanian modern dan optimasi lahan",
           "category": "Agrotech / Perlombaan",
           "role": "Web Designer & Developer",
           "client": "Inisiatif Kompetisi Agroteknologi",
-          "description": "Membangun platform digital yang memadukan prinsip pertanian tradisional dengan teknologi modern untuk meningkatkan efisiensi dan produktivitas petani lokal.",
+          "description": "Platform web yang membantu petani lokal meningkatkan hasil tani dengan katalog informasi dan kalkulasi panen.",
           "deliverables": [
             "Perancangan antarmuka agrotech yang ramah pengguna",
             "Katalog informasi pertanian modern dan kiat peningkatan hasil tani",
@@ -442,14 +441,14 @@ export const translations = {
           }
         },
         "proj-06": {
-          "subtitle": "Solusi Digital Pemesanan Restoran & F&B",
+          "subtitle": "Solusi digital pemesanan restoran dan F&B",
           "category": "Web Application / F&B",
           "role": "FullStack Developer",
           "client": "Restoran & Mitra Kuliner",
-          "description": "Sistem pemesanan makanan online yang memudahkan pelanggan memilih menu hidangan secara instan dan mengoptimalkan alur manajemen pesanan kasir.",
+          "description": "Sistem pemesanan makanan online untuk memilih menu dan mengelola pesanan kasir.",
           "deliverables": [
             "Katalog menu makanan interaktif dengan filter kategori dan rincian harga",
-            "Sistem keranjang belanja pesanan (order cart) real-time",
+            "Keranjang pesanan real-time",
             "Ringkasan pesanan otomatis untuk meminimalisir kesalahan pelayan"
           ],
           "metrics": {
@@ -476,11 +475,11 @@ export const translations = {
           }
         },
         "proj-07": {
-          "subtitle": "Sistem Manajemen Sirkulasi & Katalog Pustaka",
+          "subtitle": "Sistem manajemen sirkulasi dan katalog pustaka",
           "category": "Management System / Education",
           "role": "Backend & Database Developer",
           "client": "Institusi Pendidikan & Perpustakaan",
-          "description": "Platform perpustakaan modern terpadu untuk memudahkan pencarian katalog buku, pengelolaan sirkulasi peminjaman, serta pendataan inventaris pustaka.",
+          "description": "Sistem perpustakaan untuk mencari katalog buku, mengelola peminjaman, dan mendata inventaris.",
           "deliverables": [
             "Katalog buku dinamis dengan indikator ketersediaan real-time",
             "Pencatatan sirkulasi peminjaman dan penghitungan denda keterlambatan",
@@ -510,15 +509,15 @@ export const translations = {
           }
         },
         "proj-08": {
-          "subtitle": "Portal Administrasi Keuangan Sekolah Terpadu",
+          "subtitle": "Portal administrasi keuangan sekolah terpadu",
           "category": "FinTech / Administration",
           "role": "Fullstack Developer",
           "client": "Administrasi Sekolah",
-          "description": "Aplikasi pembayaran SPP online yang transparan, akuntabel, dan aman untuk memudahkan orang tua murid serta pihak administrasi sekolah memantau iuran bulanan.",
+          "description": "Aplikasi pembayaran SPP online untuk orang tua murid dan administrasi sekolah memantau iuran bulanan.",
           "deliverables": [
             "Pencatatan riwayat transaksi SPP dan tagihan siswa per periode",
-            "Cetak bukti pembayaran/kwitansi digital transparan",
-            "Manajemen otentikasi multi-peran (Admin, Petugas, Siswa)"
+            "Cetak bukti pembayaran dan kwitansi digital",
+            "Autentikasi multi-peran: Admin, Petugas, dan Siswa"
           ],
           "metrics": {
             "timeline": "2023",
@@ -544,14 +543,14 @@ export const translations = {
           }
         },
         "proj-09": {
-          "subtitle": "Aplikasi Manajemen Tugas Harian & Produktivitas",
+          "subtitle": "Aplikasi manajemen tugas harian dan produktivitas",
           "category": "Productivity / Web Tool",
           "role": "Frontend Developer & UI Designer",
           "client": "Aplikasi Personal & Komunitas",
-          "description": "Aplikasi produktivitas yang dirancang minimalis dan bersih untuk membantu pengguna melacak, menyusun prioritas, dan menyelesaikan tugas harian secara terorganisir.",
+          "description": "Aplikasi to-do untuk mencatat, memprioritaskan, dan menyelesaikan tugas harian.",
           "deliverables": [
             "Antarmuka penambahan, checklist, dan penghapusan tugas instan",
-            "Filter status tugas (Semua, Aktif, Selesai) secara responsif",
+            "Filter status tugas: Semua, Aktif, dan Selesai",
             "Penyimpanan lokal instan tanpa jeda pemuatan server"
           ],
           "metrics": {
@@ -562,7 +561,7 @@ export const translations = {
           "deepDive": {
             "architectureSchema": "[USER TASK INPUT & GESTURE CONTROL]\n       │\n       ▼\n[TASK STATE MANAGER: CRUD & FILTERING]\n       │\n       ├──► [PRIORITY MATRIX: HIGH / MED / LOW]\n       │\n       ├──► [LOCALSTORAGE OFFLINE SYNC]\n       │\n       ▼ REACTIVE DOM\n[INTERACTIVE TASK LIST & COMPLETION TELEMETRY]",
             "problem": "Banyak aplikasi to-do dipenuhi fitur rumit dan iklan yang justru mengganggu fokus pengguna saat mencatat agenda penting harian.",
-            "solution": "Merancang Mylist Todo App dengan tampilan bersih, fokus navigasi cepat, dan persistensi LocalStorage untuk akses kilat setiap saat.",
+            "solution": "Merancang Mylist Todo App dengan tampilan bersih dan penyimpanan LocalStorage agar data tetap ada saat halaman dibuka lagi.",
             "benchmarks": [
               {
                 "metric": "Waktu Muat",
@@ -582,59 +581,59 @@ export const translations = {
     "another": {
       "sectionTitle": "REFLEKSI & CATATAN KREATIF",
       "sectionSub": "PENGALAMAN & EKSPLORASI TEKNOLOGI // HANZZ",
-      "headline": "Catatan Kreatif & Refleksi Pengembangan",
-      "description": "Kumpulan artikel, catatan pengalaman, dan refleksi proses kreatif dalam merancang antarmuka web, kolaborasi tim, dan eksplorasi teknologi.",
+      "headline": "Catatan kreatif dan refleksi pengembangan",
+      "description": "Catatan tentang merancang antarmuka web, bekerja dalam tim, dan mencoba teknologi baru.",
       "ui": {
         "readTimeLabel": "WAKTU BACA:",
-        "inspectLabel": "BACA CATATAN ↗",
+        "inspectLabel": "BACA CATATAN",
         "synthBtnPlay": "Aktifkan Nada Resonansi",
         "synthBtnStop": "Hentikan Resonansi",
         "dispatchTag": "KONTAK // KOLABORASI KREATIF",
-        "dispatchTitle": "Mulai Kolaborasi",
+        "dispatchTitle": "Mulai kolaborasi",
         "dispatchLead": "Terbuka untuk kolaborasi perancangan website, proyek desain UI/UX, diskusi teknis, atau peluang kerja sama kreatif lainnya.",
         "copyLabel": "[SALIN]",
         "copiedToast": "TERSALIN KE CLIPBOARD"
       },
       "gardenNotes": {
         "note-01": {
-          "title": "4 Tahun di Dunia IT: Dari Rasa Penasaran Hingga Solusi Nyata",
+          "title": "Empat tahun di dunia IT",
           "readTime": "5 menit baca",
-          "excerpt": "Perjalanan dari awal mula ketertarikan pada teknologi, belajar pemrograman mandiri, hingga merancang website dan aplikasi yang bermanfaat bagi sesama."
+          "excerpt": "Cerita tentang ketertarikan awal pada teknologi, belajar pemrograman secara mandiri, dan membuat website serta aplikasi."
         },
         "note-02": {
-          "title": "Menghubungkan Desain UI/UX dengan Kode Web yang Interaktif",
+          "title": "Menghubungkan desain UI/UX dengan kode web interaktif",
           "readTime": "4 menit baca",
-          "excerpt": "Bagaimana desainer yang memahami kode dapat menciptakan pengalaman pengguna yang mulus tanpa batasan antara rancangan visual dan implementasi teknis."
+          "excerpt": "Cara desainer yang memahami kode menjaga pengalaman pengguna tetap konsisten antara rancangan visual dan implementasi."
         },
         "note-03": {
-          "title": "Studi dan Kolaborasi Terapan di ITESA Muhammadiyah Semarang",
+          "title": "Studi dan kolaborasi terapan di ITESA Muhammadiyah Semarang",
           "readTime": "5 menit baca",
-          "excerpt": "Pengalaman belajar di kampus ITESA Muhammadiyah Semarang yang memperkaya wawasan logika komputasi, pemecahan masalah analitis, dan kerja sama tim."
+          "excerpt": "Pengalaman belajar di ITESA Muhammadiyah Semarang: logika komputasi, pemecahan masalah, dan kerja sama tim."
         }
       },
       "audioSynth": {
-        "title": "Generator Nada Resonansi Harmonis",
-        "tagline": "Frekuensi Alami 432Hz • Node Audio Web Interaktif",
+        "title": "Generator nada resonansi harmonis",
+        "tagline": "Frekuensi alami 432Hz • Node audio web interaktif",
         "frequencies": [
           {
-            "label": "Ground (108Hz)",
+            "label": "Ground 108Hz",
             "freq": 108,
-            "desc": "Nada Sub-Bass Alami"
+            "desc": "Nada sub-bass alami"
           },
           {
-            "label": "Sage Earth (216Hz)",
+            "label": "Sage Earth 216Hz",
             "freq": 216,
-            "desc": "Harmoni Fondasi Dasar"
+            "desc": "Harmoni fondasi dasar"
           },
           {
-            "label": "Natural Calm (432Hz)",
+            "label": "Natural Calm 432Hz",
             "freq": 432,
-            "desc": "Nada Resonansi Harmonis"
+            "desc": "Nada resonansi harmonis"
           },
           {
-            "label": "Canopy Air (864Hz)",
+            "label": "Canopy Air 864Hz",
             "freq": 864,
-            "desc": "Nada Cerah Atmosfer"
+            "desc": "Nada cerah atmosfer"
           }
         ]
       },
@@ -642,17 +641,17 @@ export const translations = {
         "typography": "Syne • Instrument Serif • Plus Jakarta Sans • JetBrains Mono",
         "gridSystem": "Tata Letak Responsif & Desain Interaktif",
         "carbonEstimate": "Dioptimalkan untuk Performa Cepat & Aksesibilitas",
-        "license": "Portofolio © 2026 Haidar Rifky Andrianno (Hanzz / HanzzSama). Semarang, Jawa Tengah, Indonesia."
+        "license": "Portofolio © 2026 Haidar Rifky Andrianno, alias Hanzz atau HanzzSama. Semarang, Jawa Tengah, Indonesia."
       }
     },
     "github": {
       "sectionTitle": "GIT TELEMETRY & VAULT",
       "sectionSub": "PUBLIC REPOSITORIES // CONTRIBUTION MATRIX",
-      "headline": "Repositori Terbuka & Matriks Kontribusi",
-      "description": "Arsip kode sumber publik, commit berkala, dan proyek rekayasa perangkat lunak mandiri yang didokumentasikan di ekosistem GitHub @HanzzSama.",
+      "headline": "Repositori terbuka dan kontribusi",
+      "description": "Kode sumber publik, commit rutin, dan proyek pribadi di GitHub @HanzzSama.",
       "profile": {
-        "bio": "Haidar Rifky Andrianno (Hanzz) // Designer & Web Developer. ITESA Muhammadiyah Semarang.",
-        "actionLabel": "KUNJUNGI GITHUB ↗",
+        "bio": "Haidar Rifky Andrianno, alias Hanzz. Designer dan web developer. Mahasiswa ITESA Muhammadiyah Semarang.",
+        "actionLabel": "KUNJUNGI GITHUB",
         "stats": [
           {
             "label": "PUBLIC REPOS",
@@ -694,32 +693,32 @@ export const translations = {
       },
       "repositories": {
         "repo-01": {
-          "description": "Mesin kalkulator komputasi presisi tinggi dengan evaluasi rumus matematika bertahap dan visualisasi ekspresi real-time.",
+          "description": "Mesin kalkulator dengan evaluasi rumus matematika bertahap dan visualisasi ekspresi real-time.",
           "badge": "CORE ENGINE",
           "tag": "COMPUTATION"
         },
         "repo-02": {
-          "description": "Inti pustaka parsing aljabar dan struktur data pohon sintaks matematika untuk evaluasi formula tanpa overhead.",
+          "description": "Pustaka parsing aljabar dan pohon sintaks matematika untuk mengevaluasi formula.",
           "badge": "LIBRARY",
           "tag": "ALGORITHM"
         },
         "repo-03": {
-          "description": "Sistem manajemen pembayaran SPP dan administrasi keuangan institusi pendidikan berbasis arsitektur MVC terstruktur.",
+          "description": "Sistem pembayaran SPP dan administrasi keuangan sekolah dengan arsitektur MVC.",
           "badge": "ENTERPRISE",
           "tag": "ACADEMIA"
         },
         "repo-04": {
-          "description": "Platform e-ticketing dan reservasi tiket terdistribusi dengan alur checkout instan dan validasi tiket QR aman.",
+          "description": "Platform e-ticketing dengan checkout dan validasi tiket QR.",
           "badge": "FULLSTACK",
           "tag": "COMMERCE"
         },
         "repo-05": {
-          "description": "Katalog e-commerce gaya hidup urban dengan sistem keranjang belanja modular, filter kategori dinamis, dan UI responsif.",
+          "description": "Katalog e-commerce dengan keranjang belanja, filter kategori, dan UI responsif.",
           "badge": "COMMERCE",
           "tag": "REACTIVE"
         },
         "repo-06": {
-          "description": "Pintu gerbang agregasi audio digital dan kurasi playlist berkinerja tinggi dengan antarmuka media taktil.",
+          "description": "Agregator audio digital dan kurasi playlist dengan antarmuka pemutar.",
           "badge": "STREAMING",
           "tag": "AUDIO WEB"
         }
@@ -729,7 +728,7 @@ export const translations = {
       "sectionIndex": "06.A",
       "title": "KINETIC MONOLITH SIMULATOR",
       "subtitle": "REAL-TIME 3D WIREFRAME // ROTATIONAL GRAVITY GYROSCOPE",
-      "description": "Eksperimen grafis komputasional 3D interaktif murni Canvas. Drag untuk merotasi geometri monolit, ubah topologi bentuk, dan amati pembelokan sumbu koordinat secara real-time.",
+      "description": "Eksperimen grafis 3D interaktif yang dibuat hanya dengan Canvas. Seret untuk memutar monolit, ganti bentuk, dan lihat sumbu koordinat berubah secara real-time.",
       "modes": [
         {
           "id": "monolith",
@@ -791,8 +790,8 @@ export const translations = {
       "sectionIndex": "07",
       "sectionTitle": "SUASANA & CUACA",
       "sectionSub": "TELEMETRI CUACA KOTA SEMARANG // REAL-TIME",
-      "headline": "Cuaca Real-Time & Suasana Atmosfer",
-      "description": "Visualisasi interaktif cuaca real-time Kota Semarang (07°00'S 110°25'E) dengan suasana atmosfer dinamis, garis isobar topografi, dan nada harmonis.",
+      "headline": "Cuaca real-time dan suasana atmosfer",
+      "description": "Cuaca real-time Kota Semarang di 07°00'S 110°25'E, dengan visual atmosfer, garis isobar, dan nada harmonis.",
       "topologyBadge": "KOTA SEMARANG // 07°00'S 110°25'E • 82m ASL",
       "ui": {
         "isobars": "[ISOBARS]",
@@ -803,7 +802,7 @@ export const translations = {
         "humidity": "Kelembapan Udara",
         "cloudCover": "Tutupan Awan",
         "apparent": "APPARENT:",
-        "sync": "REFRESH TELEMETRI ↻",
+        "sync": "REFRESH TELEMETRI",
         "biosphereFootprint": "NODE: SEMARANG // JAWA TENGAH",
         "solarCycle": "SIKLUS MATAHARI // SUASANA REAL"
       }
@@ -814,23 +813,22 @@ export const translations = {
       "defaultThought": "Menghubungkan ke Node Semarang... [Haidar Rifky Andrianno]",
       "tips": {
         "pet": "Elus HanzzBot",
-        "dance": "Joget Bersama",
-        "matcha": "Beri Kopi / Matcha",
-        "expr": "Ganti Ekspresi",
-        "crown": "Mahkota Royal",
-        "talk": "Ajak Bicara",
-        "sleep": "Tidur / Bangun",
-        "sound": "Suara On/Off",
-        "toggle": "Ciutkan / Buka"
+        "dance": "Joget bersama",
+        "matcha": "Beri kopi / matcha",
+        "expr": "Ganti ekspresi",
+        "crown": "Mahkota royal",
+        "talk": "Ajak bicara",
+        "sleep": "Tidur / bangun",
+        "sound": "Suara on/off",
+        "toggle": "Ciutkan / buka"
       }
     }
   },
   "en": {
     "langName": "English",
     "langCode": "EN",
-    "flag": "🇬🇧",
-    "documentTitle": "Hanzz Portfolio — Designer, Creative Collaborator & Web Developer",
-    "documentDesc": "Portfolio of Haidar Rifky Andrianno (Hanzz / HanzzSama). Designer, Creative Collaborator, and Web Developer with 4 years in IT based in Semarang, Indonesia.",
+    "documentTitle": "Hanzz Portfolio | Designer, Creative Collaborator & Web Developer",
+    "documentDesc": "Portfolio of Haidar Rifky Andrianno, also known as Hanzz or HanzzSama. Designer, creative collaborator, and web developer with 4 years in IT, based in Semarang, Indonesia.",
     "nav": {
       "welcome": "01.WEL",
       "about": "02.ABT",
@@ -861,7 +859,7 @@ export const translations = {
       "headlineLine1": "PORTFOLIO",
       "headlineLine2": "HANZZSAMA",
       "headlineLine3": "HAIDAR RIFKY.",
-      "leadParagraph": "I am a designer, creative collaborator, and website creator with 4 years of experience in the IT realm. Starting from deep curiosity to recognized craft, my work spans Web & Mobile UI/UX design and interactive, innovative web applications.",
+      "leadParagraph": "I am a designer, creative collaborator, and web developer with 4 years of experience in IT. My work covers web and mobile UI/UX design and interactive websites.",
       "telemetry": [
         {
           "label": "EXPERIENCE",
@@ -884,188 +882,188 @@ export const translations = {
     "about": {
       "sectionTitle": "ABOUT ME",
       "sectionSub": "HAIDAR RIFKY ANDRIANNO // SEMARANG CITY",
-      "ethosTitle": "Creating Fresh Designs & Meaningful Digital Experiences",
-      "photoCaption": "Photo of Haidar Rifky Andrianno — Pacitan Beach",
+      "ethosTitle": "Creating new designs and digital experiences",
+      "photoCaption": "Photo of Haidar Rifky Andrianno at Pacitan Beach",
       "locationBadge": "Indonesia | Central Java | Semarang City",
       "ethosParagraphs": [
-        "I am a designer, creative collaborator, and web developer with 4 years of experience in the IT world. Creating new designs and meaningful experiences was my primary goal entering the digital craft. Starting from intense curiosity to recognized development, my work encompasses web UI/UX and mobile UI/UX, as well as crafting clean, interactive web applications.",
-        "It is an honor to build a diverse and rewarding career path. I am always thrilled to learn new skills, explore fresh experiences, and welcome creative challenges that deliver a genuine positive impact."
+        "I am a designer, creative collaborator, and web developer with 4 years of experience in IT. I entered IT to create new designs and experiences. My work covers web and mobile UI/UX design and simple, interactive websites.",
+        "I keep learning new skills and taking on new creative challenges."
       ],
       "pillars": [
         {
           "code": "FOCUS-01",
           "title": "Web & Mobile UI/UX",
-          "desc": "Crafting clean, aesthetic, and intuitive visual interfaces, prioritizing user comfort and effortless navigation."
+          "desc": "Designing clean interface layouts that are easy to use on the web and in mobile apps."
         },
         {
           "code": "FOCUS-02",
-          "title": "Interactive Web Development",
-          "desc": "Building websites with clean codebases, fast performance, and rich, responsive interactivity across all devices."
+          "title": "Interactive web development",
+          "desc": "Building websites with tidy code and interactions that work on phones, tablets, and desktops."
         },
         {
           "code": "FOCUS-03",
-          "title": "Creative Collaboration",
-          "desc": "Working collaboratively across multidisciplinary teams to transform ideas into tangible digital solutions."
+          "title": "Creative collaboration",
+          "desc": "Working in teams to turn requirements into digital products."
         },
         {
           "code": "FOCUS-04",
-          "title": "Continuous Learning",
-          "desc": "Constantly eager to explore emerging technologies, interface trends, and modern tools for ongoing growth."
+          "title": "Continuous learning",
+          "desc": "Learning new design tools and practicing programming regularly."
         }
       ],
-      "timelineTitle": "Career Chronology & Practical Experience",
+      "timelineTitle": "Career timeline and experience",
       "timeline": [
         {
-          "year": "2026 — SEKARANG",
-          "title": "Pengembangan Lanjutan Frontend & Backend",
+          "year": "2026 to present",
+          "title": "Pengembangan lanjutan frontend dan backend",
           "place": "Semarang, Jawa Tengah",
-          "description": "Memperluas keilmuan di bidang frontend dan backend, merancang arsitektur sistem modern, serta memperdalam rekayasa web interaktif berkinerja tinggi."
+          "description": "Mempelajari frontend dan backend, merancang arsitektur sistem, dan mengembangkan web interaktif."
         },
         {
-          "year": "2025 — 2026",
-          "title": "Artificial Intelligence & Fullstack Engineering",
+          "year": "2025 to 2026",
+          "title": "Artificial intelligence dan fullstack engineering",
           "place": "ITESA Muhammadiyah Semarang",
-          "description": "Memperdalam keilmuan untuk memahami lebih dalam seputar artifisial inteligensi dan fullstack developer, sembari menempuh pendidikan perguruan tinggi di ITESA Muhammadiyah Semarang."
+          "description": "Mempelajari artificial intelligence dan fullstack development sambil kuliah di ITESA Muhammadiyah Semarang."
         },
         {
-          "year": "2024 — 2025",
-          "title": "Pengembangan Skill Coding & Fullstack Developer",
+          "year": "2024 to 2025",
+          "title": "Pengembangan keterampilan coding dan fullstack developer",
           "place": "Semarang, Jawa Tengah",
-          "description": "Mengembangkan skill coding dan pemahaman mendalam di dunia frontend dan backend, serta membangun kapabilitas jobdesk fullstack developer."
+          "description": "Melatih coding frontend dan backend untuk bekerja sebagai fullstack developer."
         },
         {
-          "year": "2022 — 2024",
-          "title": "Eksplorasi Web, Aplikasi & Software Engineering",
+          "year": "2022 to 2024",
+          "title": "Eksplorasi web, aplikasi, dan software engineering",
           "place": "SMK TEXMACO Semarang",
-          "description": "Memulai eksplorasi di dunia website dan aplikasi serta membangun background IT software engineering di bangku SMK TEXMACO Semarang."
+          "description": "Mulai membuat website dan aplikasi serta mempelajari software engineering di SMK TEXMACO Semarang."
         },
         {
-          "year": "2020 — 2022",
-          "title": "Eksplorasi Perdana Cyber Security Tools",
+          "year": "2020 to 2022",
+          "title": "Eksplorasi awal cyber security tools",
           "place": "SMP TEXMACO Semarang",
-          "description": "Memulai eksplorasi awal di dunia IT dengan mempelajari cyber security tools di bangku SMP TEXMACO Semarang."
+          "description": "Mulai mempelajari cyber security tools di SMP TEXMACO Semarang."
         }
       ]
     },
     "skills": {
       "sectionTitle": "SKILLS & COMPETENCIES",
-      "sectionSub": "17 TECHNICAL & VISUAL CAPABILITIES // TESTED",
-      "headline": "Skills & Tool Mastery",
-      "description": "17 technical and visual competencies developed across 4 years in the IT landscape, organized into four clean domains.",
+      "sectionSub": "17 TECHNICAL AND VISUAL SKILLS",
+      "headline": "Skills and tools",
+      "description": "17 technical and visual skills from 4 years of work in IT, grouped into 4 areas.",
       "matrixTiers": [
         {
           "tierId": "TIER-01",
-          "layerName": "Frontend & Web Core",
-          "concept": "Antarmuka & Pengalaman Web",
+          "layerName": "Frontend & web core",
+          "concept": "Antarmuka & pengalaman web",
           "colorAccent": "var(--color-botanical-sage)",
           "nodes": [
             {
               "name": "HTML",
-              "spec": "Semantik & Struktur Standar Web",
+              "spec": "Semantik & struktur standar web",
               "tag": "CORE"
             },
             {
               "name": "CSS",
-              "spec": "Desain Responsif, Flexbox, Grid",
+              "spec": "Desain responsif, Flexbox, Grid",
               "tag": "STYLE"
             },
             {
               "name": "JavaScript",
-              "spec": "Interaktivitas Klien & DOM Dinamis",
+              "spec": "Interaktivitas klien & DOM dinamis",
               "tag": "SCRIPT"
             },
             {
               "name": "Tailwind CSS",
-              "spec": "Utility-first Modern Styling",
+              "spec": "Styling dengan utility class",
               "tag": "FRAMEWORK"
             },
             {
               "name": "Bootstrap",
-              "spec": "Komponen Cepat & Tata Letak Grid",
+              "spec": "Komponen cepat & tata letak Grid",
               "tag": "UI KIT"
             }
           ]
         },
         {
           "tierId": "TIER-02",
-          "layerName": "Backend & Database",
-          "concept": "Logika Server & Pengelolaan Data",
+          "layerName": "Backend & database",
+          "concept": "Logika server & pengelolaan data",
           "colorAccent": "var(--color-warm-sand)",
           "nodes": [
             {
               "name": "PHP",
-              "spec": "Pemrograman Server & Arsitektur MVC",
+              "spec": "Pemrograman server & arsitektur MVC",
               "tag": "BACKEND"
             },
             {
               "name": "Laravel",
-              "spec": "Framework PHP Modern & Elegan",
+              "spec": "Framework PHP",
               "tag": "FRAMEWORK"
             },
             {
               "name": "MySQL",
-              "spec": "Manajemen Database Relasional",
+              "spec": "Manajemen database relasional",
               "tag": "DATABASE"
             },
             {
               "name": "Node JS",
-              "spec": "Runtime JavaScript & API Dasar",
+              "spec": "Runtime JavaScript & API dasar",
               "tag": "RUNTIME"
             },
             {
               "name": "Elixir & Phoenix",
-              "spec": "Eksplorasi Konkurensi & Backend",
+              "spec": "Eksplorasi konkurensi & backend",
               "tag": "EXPLORE"
             }
           ]
         },
         {
           "tierId": "TIER-03",
-          "layerName": "Desain UI/UX & Grafis",
-          "concept": "Estetika Spasial & Kreativitas Visual",
+          "layerName": "Desain UI/UX & grafis",
+          "concept": "Estetika spasial & kreativitas visual",
           "colorAccent": "var(--color-botanical-sage)",
           "nodes": [
             {
               "name": "Figma",
-              "spec": "Desain Prototipe UI/UX Web & Mobile",
+              "spec": "Desain prototipe UI/UX web & mobile",
               "tag": "DESIGN"
             },
             {
               "name": "Canva",
-              "spec": "Grafis Digital & Materi Presentasi",
+              "spec": "Grafis digital & materi presentasi",
               "tag": "CREATIVE"
             },
             {
               "name": "Adobe Illustrator",
-              "spec": "Ilustrasi Vektor & Identitas Aset",
+              "spec": "Ilustrasi vektor & identitas aset",
               "tag": "VECTOR"
             },
             {
               "name": "3D Blender",
-              "spec": "Pemodelan Objek 3D Dasar",
+              "spec": "Pemodelan objek 3D dasar",
               "tag": "3D MOD"
             }
           ]
         },
         {
           "tierId": "TIER-04",
-          "layerName": "Alat Produktivitas & Sistem",
-          "concept": "Alur Kerja & Pengelolaan Proyek",
+          "layerName": "Alat produktivitas & sistem",
+          "concept": "Alur kerja & pengelolaan proyek",
           "colorAccent": "var(--color-charcoal-slate)",
           "nodes": [
             {
               "name": "Git & GitHub",
-              "spec": "Version Control & Repositori Proyek",
+              "spec": "Version control & repositori proyek",
               "tag": "VCS"
             },
             {
               "name": "Microsoft Office",
-              "spec": "Dokumentasi & Administrasi Data",
+              "spec": "Dokumentasi & administrasi data",
               "tag": "OFFICE"
             },
             {
               "name": "Kali Linux Tools",
-              "spec": "Pengenalan Jaringan & Keamanan Dasar",
+              "spec": "Pengenalan jaringan & keamanan dasar",
               "tag": "SECURITY"
             }
           ]
@@ -1075,8 +1073,8 @@ export const translations = {
     "projects": {
       "sectionTitle": "PORTFOLIO PROJECTS",
       "sectionSub": "9 SELECTED WORKS // WEB & APPLICATIONS",
-      "headline": "Featured Projects Portfolio",
-      "description": "A showcase of 9 projects spanning university portals, interactive calculators, developer learning platforms, Alzheimer's symptom detection AI, and agrotechnology systems.",
+      "headline": "Selected projects",
+      "description": "9 projects: a university admissions portal, a calculator with a math bot, a coding learning platform, an Alzheimer symptom detection system, an agrotech app, a food ordering app, a library system, a school fee payment app, and a to-do app.",
       "ui": {
         "problemLabel": "PROBLEM STATEMENT",
         "solutionLabel": "CREATIVE SOLUTION",
@@ -1087,11 +1085,11 @@ export const translations = {
       },
       "items": {
         "proj-01": {
-          "subtitle": "Website Informasi Pendaftaran Mahasiswa Baru Kampus",
+          "subtitle": "Website informasi pendaftaran mahasiswa baru kampus",
           "category": "Portal Kampus / Web System",
           "role": "FullStack Web Developer",
           "client": "ITESA Muhammadiyah Semarang",
-          "description": "Website yang dibangun untuk memberi informasi tentang pendaftaran mahasiswa baru ITESA, dibangun dengan sistem Laravel.",
+          "description": "Website informasi pendaftaran mahasiswa baru ITESA, dibangun dengan Laravel.",
           "deliverables": [
             "Penyajian informasi jalur pendaftaran mahasiswa baru dan program studi interaktif",
             "Sistem formulir daring dan dashboard verifikasi berkas calon mahasiswa",
@@ -1121,14 +1119,14 @@ export const translations = {
           }
         },
         "proj-02": {
-          "subtitle": "Kalkulator Basic dengan Bot Matematis & Personalisasi Tema",
+          "subtitle": "Kalkulator basic dengan bot matematis dan personalisasi tema",
           "category": "Web Tool / Komputasi",
           "role": "Frontend Developer",
           "client": "Kakas Personal & Edukasi",
-          "description": "Kalkulator basic dengan dipadukan sistem bot matematis, dan sistem personalize tema sesuai selera, dibangun hanya memakai HTML, CSS, JS.",
+          "description": "Kalkulator dengan bot matematika dan tema yang bisa diubah sesuai selera, dibuat hanya dengan HTML, CSS, dan JavaScript.",
           "deliverables": [
             "Mesin kalkulasi matematika cepat dan responsif di browser",
-            "Sistem bot matematis cerdas yang memandu perhitungan dan formula",
+            "Bot matematika yang memandu perhitungan dan formula",
             "Fitur personalisasi tema visual dinamis yang dapat disesuaikan pengguna"
           ],
           "metrics": {
@@ -1139,7 +1137,7 @@ export const translations = {
           "deepDive": {
             "architectureSchema": "[USER INPUT: KEYBOARD & TOUCH NUMPAD]\n       │\n       ▼ EVENT LISTENER\n[PARSER & TOKENIZER: MATH EXPRESSION]\n       │\n       ├──► [MATH BOT ENGINE: AUTO-CORRECT & CALC]\n       │\n       ├──► [THEME ENGINE: DYNAMIC CSS VARIABLES]\n       │           │\n       │           └──► [LOCALSTORAGE STATE PERSISTENCE]\n       │\n       ▼ REAL-TIME DOM RENDERER\n[CANVAS / LCD DISPLAY: RESULT & HISTORY LOG]",
             "problem": "Banyak kalkulator web yang monoton, kaku tanpa interaksi asisten, dan tidak memungkinkan pengguna mengubah tema sesuai preferensi personal.",
-            "solution": "Mengembangkan Mathicalc murni dengan HTML, CSS, dan JavaScript — memadukan bot asisten matematis dan tema personalisasi tanpa dependensi berat.",
+            "solution": "Mengembangkan Mathicalc dengan HTML, CSS, dan JavaScript saja. Mathicalc memiliki bot asisten matematika dan tema yang bisa diubah, tanpa dependensi tambahan.",
             "benchmarks": [
               {
                 "metric": "Waktu Muat",
@@ -1155,11 +1153,11 @@ export const translations = {
           }
         },
         "proj-03": {
-          "subtitle": "Platform Belajar Coding dari Zero to Pro",
+          "subtitle": "Platform belajar coding dari zero to pro",
           "category": "E-Learning / Developer Tools",
           "role": "FullStack Developer",
           "client": "Komunitas Belajar Coding",
-          "description": "Website yang dibangun untuk pengguna untuk belajar coding dari zero to pro, dibangun dengan lingkungan Laravel.",
+          "description": "Website untuk belajar coding dari zero to pro, dibangun dengan Laravel.",
           "deliverables": [
             "Kurikulum materi pemrograman terstruktur dari level pemula hingga mahir",
             "Antarmuka belajar interaktif dengan latihan praktis dan evaluasi pemahaman",
@@ -1173,7 +1171,7 @@ export const translations = {
           "deepDive": {
             "architectureSchema": "[LEARNER / DEVELOPER UI]\n       │\n       ▼ HTTPS REST API\n[LARAVEL CORE: LEARNING ROADMAP ENGINE]\n       │\n       ├──► [MODULAR CURRICULUM: ZERO TO PRO]\n       │           │\n       │           ├──► [CODE PLAYGROUND & SANDBOX]\n       │           └──► [INTERACTIVE SYNTAX VALIDATOR]\n       │\n       ├──► [PROGRESSION & MILESTONE TRACKER]\n       │\n       ▼ ELOQUENT ORM\n[MYSQL DATABASE: USERS, LESSONS, COMPLETIONS]",
             "problem": "Banyak calon programmer pemula kesulitan belajar mandiri karena materi online yang terpecah-pecah tanpa panduan tahapan yang runtut.",
-            "solution": "Membangun platform TurnCode di atas Laravel untuk menghadirkan alur belajar terpadu 'Zero to Pro' yang terarah dan mudah dipahami.",
+            "solution": "Membangun platform TurnCode dengan Laravel dan alur belajar bertahap dari zero to pro.",
             "benchmarks": [
               {
                 "metric": "Alur Pembelajaran",
@@ -1189,7 +1187,7 @@ export const translations = {
           }
         },
         "proj-04": {
-          "subtitle": "Deteksi Gejala Alzheimer Berbasis LLM & XGBoost",
+          "subtitle": "Deteksi gejala Alzheimer berbasis LLM dan XGBoost",
           "category": "Healthcare AI / Web Intelligence",
           "role": "AI & FullStack Developer",
           "client": "Inisiatif Riset Kesehatan Kognitif",
@@ -1207,7 +1205,7 @@ export const translations = {
           "deepDive": {
             "architectureSchema": "[CLINICAL ASSESSMENT / USER QUESTIONNAIRE]\n       │\n       ▼ WEBSOCKET / REST API\n[FASTAPI & LLM INTERFACE LAYER]\n       │\n       ├──► [LLM: SYMPTOM EXTRACTION & CONTEXT]\n       │           │\n       │           ▼\n       ├──► [FEATURE VECTOR PREPROCESSING]\n       │           │\n       │           ▼\n       ├──► [XGBOOST CLASSIFIER: ALZHEIMER RISK]\n       │           │\n       │           └──► [DECISION TREE ENSEMBLE SCORING]\n       │\n       ▼ JSON TELEMETRY RESPONSE\n[DIAGNOSTIC RADAR & RISK STRATIFICATION UI]",
             "problem": "Pemeriksaan gejala alzheimer pada fase awal sering terlambat karena keterbatasan akses skrining kognitif awal yang cepat dan terjangkau.",
-            "solution": "Menggabungkan model LLM untuk ekstraksi interaksi bahasa dengan ketepatan algoritma tabular XGBoost guna mengkalkulasi indikasi gejala secara akurat.",
+            "solution": "Menggabungkan model LLM untuk mengekstrak gejala dari bahasa pengguna dengan algoritma XGBoost untuk menghitung indikasi gejala.",
             "benchmarks": [
               {
                 "metric": "Akurasi Prediksi",
@@ -1223,11 +1221,11 @@ export const translations = {
           }
         },
         "proj-05": {
-          "subtitle": "Platform Pertanian Modern & Optimasi Lahan",
+          "subtitle": "Platform pertanian modern dan optimasi lahan",
           "category": "Agrotech / Perlombaan",
           "role": "Web Designer & Developer",
           "client": "Inisiatif Kompetisi Agroteknologi",
-          "description": "Membangun platform digital yang memadukan prinsip pertanian tradisional dengan teknologi modern untuk meningkatkan efisiensi dan produktivitas petani lokal.",
+          "description": "Platform web yang membantu petani lokal meningkatkan hasil tani dengan katalog informasi dan kalkulasi panen.",
           "deliverables": [
             "Perancangan antarmuka agrotech yang ramah pengguna",
             "Katalog informasi pertanian modern dan kiat peningkatan hasil tani",
@@ -1257,14 +1255,14 @@ export const translations = {
           }
         },
         "proj-06": {
-          "subtitle": "Solusi Digital Pemesanan Restoran & F&B",
+          "subtitle": "Solusi digital pemesanan restoran dan F&B",
           "category": "Web Application / F&B",
           "role": "FullStack Developer",
           "client": "Restoran & Mitra Kuliner",
-          "description": "Sistem pemesanan makanan online yang memudahkan pelanggan memilih menu hidangan secara instan dan mengoptimalkan alur manajemen pesanan kasir.",
+          "description": "Sistem pemesanan makanan online untuk memilih menu dan mengelola pesanan kasir.",
           "deliverables": [
             "Katalog menu makanan interaktif dengan filter kategori dan rincian harga",
-            "Sistem keranjang belanja pesanan (order cart) real-time",
+            "Keranjang pesanan real-time",
             "Ringkasan pesanan otomatis untuk meminimalisir kesalahan pelayan"
           ],
           "metrics": {
@@ -1291,11 +1289,11 @@ export const translations = {
           }
         },
         "proj-07": {
-          "subtitle": "Sistem Manajemen Sirkulasi & Katalog Pustaka",
+          "subtitle": "Sistem manajemen sirkulasi dan katalog pustaka",
           "category": "Management System / Education",
           "role": "Backend & Database Developer",
           "client": "Institusi Pendidikan & Perpustakaan",
-          "description": "Platform perpustakaan modern terpadu untuk memudahkan pencarian katalog buku, pengelolaan sirkulasi peminjaman, serta pendataan inventaris pustaka.",
+          "description": "Sistem perpustakaan untuk mencari katalog buku, mengelola peminjaman, dan mendata inventaris.",
           "deliverables": [
             "Katalog buku dinamis dengan indikator ketersediaan real-time",
             "Pencatatan sirkulasi peminjaman dan penghitungan denda keterlambatan",
@@ -1325,15 +1323,15 @@ export const translations = {
           }
         },
         "proj-08": {
-          "subtitle": "Portal Administrasi Keuangan Sekolah Terpadu",
+          "subtitle": "Portal administrasi keuangan sekolah terpadu",
           "category": "FinTech / Administration",
           "role": "Fullstack Developer",
           "client": "Administrasi Sekolah",
-          "description": "Aplikasi pembayaran SPP online yang transparan, akuntabel, dan aman untuk memudahkan orang tua murid serta pihak administrasi sekolah memantau iuran bulanan.",
+          "description": "Aplikasi pembayaran SPP online untuk orang tua murid dan administrasi sekolah memantau iuran bulanan.",
           "deliverables": [
             "Pencatatan riwayat transaksi SPP dan tagihan siswa per periode",
-            "Cetak bukti pembayaran/kwitansi digital transparan",
-            "Manajemen otentikasi multi-peran (Admin, Petugas, Siswa)"
+            "Cetak bukti pembayaran dan kwitansi digital",
+            "Autentikasi multi-peran: Admin, Petugas, dan Siswa"
           ],
           "metrics": {
             "timeline": "2023",
@@ -1359,14 +1357,14 @@ export const translations = {
           }
         },
         "proj-09": {
-          "subtitle": "Aplikasi Manajemen Tugas Harian & Produktivitas",
+          "subtitle": "Aplikasi manajemen tugas harian dan produktivitas",
           "category": "Productivity / Web Tool",
           "role": "Frontend Developer & UI Designer",
           "client": "Aplikasi Personal & Komunitas",
-          "description": "Aplikasi produktivitas yang dirancang minimalis dan bersih untuk membantu pengguna melacak, menyusun prioritas, dan menyelesaikan tugas harian secara terorganisir.",
+          "description": "Aplikasi to-do untuk mencatat, memprioritaskan, dan menyelesaikan tugas harian.",
           "deliverables": [
             "Antarmuka penambahan, checklist, dan penghapusan tugas instan",
-            "Filter status tugas (Semua, Aktif, Selesai) secara responsif",
+            "Filter status tugas: Semua, Aktif, dan Selesai",
             "Penyimpanan lokal instan tanpa jeda pemuatan server"
           ],
           "metrics": {
@@ -1377,7 +1375,7 @@ export const translations = {
           "deepDive": {
             "architectureSchema": "[USER TASK INPUT & GESTURE CONTROL]\n       │\n       ▼\n[TASK STATE MANAGER: CRUD & FILTERING]\n       │\n       ├──► [PRIORITY MATRIX: HIGH / MED / LOW]\n       │\n       ├──► [LOCALSTORAGE OFFLINE SYNC]\n       │\n       ▼ REACTIVE DOM\n[INTERACTIVE TASK LIST & COMPLETION TELEMETRY]",
             "problem": "Banyak aplikasi to-do dipenuhi fitur rumit dan iklan yang justru mengganggu fokus pengguna saat mencatat agenda penting harian.",
-            "solution": "Merancang Mylist Todo App dengan tampilan bersih, fokus navigasi cepat, dan persistensi LocalStorage untuk akses kilat setiap saat.",
+            "solution": "Merancang Mylist Todo App dengan tampilan bersih dan penyimpanan LocalStorage agar data tetap ada saat halaman dibuka lagi.",
             "benchmarks": [
               {
                 "metric": "Waktu Muat",
@@ -1397,59 +1395,59 @@ export const translations = {
     "another": {
       "sectionTitle": "REFLECTIONS & CREATIVE NOTES",
       "sectionSub": "EXPERIENCE & TECH EXPLORATIONS // HANZZ",
-      "headline": "Creative Notes & Developer Reflections",
-      "description": "A collection of personal articles, reflections on creative processes, and insights from crafting web interfaces and collaborating.",
+      "headline": "Creative notes and developer reflections",
+      "description": "Notes on designing web interfaces, working in teams, and trying new technology.",
       "ui": {
         "readTimeLabel": "READ TIME:",
-        "inspectLabel": "READ ARTICLE ↗",
+        "inspectLabel": "READ ARTICLE",
         "synthBtnPlay": "Play Resonant Tone",
         "synthBtnStop": "Stop Tone",
         "dispatchTag": "CONTACT // CREATIVE COLLABORATION",
-        "dispatchTitle": "Start a Collaboration",
-        "dispatchLead": "Open for website development projects, UI/UX design discussions, technical exchanges, or exciting creative partnerships.",
+        "dispatchTitle": "Start a collaboration",
+        "dispatchLead": "Open for website projects, UI/UX design work, technical discussions, and other creative collaboration.",
         "copyLabel": "[COPY]",
         "copiedToast": "COPIED TO CLIPBOARD"
       },
       "gardenNotes": {
         "note-01": {
-          "title": "4 Tahun di Dunia IT: Dari Rasa Penasaran Hingga Solusi Nyata",
+          "title": "Empat tahun di dunia IT",
           "readTime": "5 menit baca",
-          "excerpt": "Perjalanan dari awal mula ketertarikan pada teknologi, belajar pemrograman mandiri, hingga merancang website dan aplikasi yang bermanfaat bagi sesama."
+          "excerpt": "Cerita tentang ketertarikan awal pada teknologi, belajar pemrograman secara mandiri, dan membuat website serta aplikasi."
         },
         "note-02": {
-          "title": "Menghubungkan Desain UI/UX dengan Kode Web yang Interaktif",
+          "title": "Menghubungkan desain UI/UX dengan kode web interaktif",
           "readTime": "4 menit baca",
-          "excerpt": "Bagaimana desainer yang memahami kode dapat menciptakan pengalaman pengguna yang mulus tanpa batasan antara rancangan visual dan implementasi teknis."
+          "excerpt": "Cara desainer yang memahami kode menjaga pengalaman pengguna tetap konsisten antara rancangan visual dan implementasi."
         },
         "note-03": {
-          "title": "Studi dan Kolaborasi Terapan di ITESA Muhammadiyah Semarang",
+          "title": "Studi dan kolaborasi terapan di ITESA Muhammadiyah Semarang",
           "readTime": "5 menit baca",
-          "excerpt": "Pengalaman belajar di kampus ITESA Muhammadiyah Semarang yang memperkaya wawasan logika komputasi, pemecahan masalah analitis, dan kerja sama tim."
+          "excerpt": "Pengalaman belajar di ITESA Muhammadiyah Semarang: logika komputasi, pemecahan masalah, dan kerja sama tim."
         }
       },
       "audioSynth": {
-        "title": "Generator Nada Resonansi Harmonis",
-        "tagline": "Frekuensi Alami 432Hz • Node Audio Web Interaktif",
+        "title": "Generator nada resonansi harmonis",
+        "tagline": "Frekuensi alami 432Hz • Node audio web interaktif",
         "frequencies": [
           {
-            "label": "Ground (108Hz)",
+            "label": "Ground 108Hz",
             "freq": 108,
-            "desc": "Nada Sub-Bass Alami"
+            "desc": "Nada sub-bass alami"
           },
           {
-            "label": "Sage Earth (216Hz)",
+            "label": "Sage Earth 216Hz",
             "freq": 216,
-            "desc": "Harmoni Fondasi Dasar"
+            "desc": "Harmoni fondasi dasar"
           },
           {
-            "label": "Natural Calm (432Hz)",
+            "label": "Natural Calm 432Hz",
             "freq": 432,
-            "desc": "Nada Resonansi Harmonis"
+            "desc": "Nada resonansi harmonis"
           },
           {
-            "label": "Canopy Air (864Hz)",
+            "label": "Canopy Air 864Hz",
             "freq": 864,
-            "desc": "Nada Cerah Atmosfer"
+            "desc": "Nada cerah atmosfer"
           }
         ]
       },
@@ -1457,17 +1455,17 @@ export const translations = {
         "typography": "Syne • Instrument Serif • Plus Jakarta Sans • JetBrains Mono",
         "gridSystem": "Tata Letak Responsif & Desain Interaktif",
         "carbonEstimate": "Dioptimalkan untuk Performa Cepat & Aksesibilitas",
-        "license": "Portofolio © 2026 Haidar Rifky Andrianno (Hanzz / HanzzSama). Semarang, Jawa Tengah, Indonesia."
+        "license": "Portofolio © 2026 Haidar Rifky Andrianno, alias Hanzz atau HanzzSama. Semarang, Jawa Tengah, Indonesia."
       }
     },
     "github": {
       "sectionTitle": "GIT TELEMETRY & VAULT",
       "sectionSub": "PUBLIC REPOSITORIES // CONTRIBUTION MATRIX",
-      "headline": "Open Repositories & Contribution Matrix",
-      "description": "Public source repositories, regular commits, and real software engineering projects documented on GitHub @HanzzSama.",
+      "headline": "Open repositories and contributions",
+      "description": "Public repositories, regular commits, and personal projects on GitHub @HanzzSama.",
       "profile": {
-        "bio": "Haidar Rifky Andrianno (Hanzz) // Designer & Web Developer. ITESA Muhammadiyah Semarang.",
-        "actionLabel": "VIEW GITHUB PROFILE ↗",
+        "bio": "Haidar Rifky Andrianno, also known as Hanzz. Designer and web developer. Student at ITESA Muhammadiyah Semarang.",
+        "actionLabel": "VIEW GITHUB PROFILE",
         "stats": [
           {
             "label": "PUBLIC REPOS",
@@ -1509,32 +1507,32 @@ export const translations = {
       },
       "repositories": {
         "repo-01": {
-          "description": "Mesin kalkulator komputasi presisi tinggi dengan evaluasi rumus matematika bertahap dan visualisasi ekspresi real-time.",
+          "description": "Mesin kalkulator dengan evaluasi rumus matematika bertahap dan visualisasi ekspresi real-time.",
           "badge": "CORE ENGINE",
           "tag": "COMPUTATION"
         },
         "repo-02": {
-          "description": "Inti pustaka parsing aljabar dan struktur data pohon sintaks matematika untuk evaluasi formula tanpa overhead.",
+          "description": "Pustaka parsing aljabar dan pohon sintaks matematika untuk mengevaluasi formula.",
           "badge": "LIBRARY",
           "tag": "ALGORITHM"
         },
         "repo-03": {
-          "description": "Sistem manajemen pembayaran SPP dan administrasi keuangan institusi pendidikan berbasis arsitektur MVC terstruktur.",
+          "description": "Sistem pembayaran SPP dan administrasi keuangan sekolah dengan arsitektur MVC.",
           "badge": "ENTERPRISE",
           "tag": "ACADEMIA"
         },
         "repo-04": {
-          "description": "Platform e-ticketing dan reservasi tiket terdistribusi dengan alur checkout instan dan validasi tiket QR aman.",
+          "description": "Platform e-ticketing dengan checkout dan validasi tiket QR.",
           "badge": "FULLSTACK",
           "tag": "COMMERCE"
         },
         "repo-05": {
-          "description": "Katalog e-commerce gaya hidup urban dengan sistem keranjang belanja modular, filter kategori dinamis, dan UI responsif.",
+          "description": "Katalog e-commerce dengan keranjang belanja, filter kategori, dan UI responsif.",
           "badge": "COMMERCE",
           "tag": "REACTIVE"
         },
         "repo-06": {
-          "description": "Pintu gerbang agregasi audio digital dan kurasi playlist berkinerja tinggi dengan antarmuka media taktil.",
+          "description": "Agregator audio digital dan kurasi playlist dengan antarmuka pemutar.",
           "badge": "STREAMING",
           "tag": "AUDIO WEB"
         }
@@ -1544,7 +1542,7 @@ export const translations = {
       "sectionIndex": "06.A",
       "title": "KINETIC MONOLITH SIMULATOR",
       "subtitle": "REAL-TIME 3D WIREFRAME // ROTATIONAL GRAVITY GYROSCOPE",
-      "description": "Eksperimen grafis komputasional 3D interaktif murni Canvas. Drag untuk merotasi geometri monolit, ubah topologi bentuk, dan amati pembelokan sumbu koordinat secara real-time.",
+      "description": "Eksperimen grafis 3D interaktif yang dibuat hanya dengan Canvas. Seret untuk memutar monolit, ganti bentuk, dan lihat sumbu koordinat berubah secara real-time.",
       "modes": [
         {
           "id": "monolith",
@@ -1606,8 +1604,8 @@ export const translations = {
       "sectionIndex": "07",
       "sectionTitle": "SUASANA & CUACA",
       "sectionSub": "TELEMETRI CUACA KOTA SEMARANG // REAL-TIME",
-      "headline": "Cuaca Real-Time & Suasana Atmosfer",
-      "description": "Visualisasi interaktif cuaca real-time Kota Semarang (07°00'S 110°25'E) dengan suasana atmosfer dinamis, garis isobar topografi, dan nada harmonis.",
+      "headline": "Cuaca real-time dan suasana atmosfer",
+      "description": "Cuaca real-time Kota Semarang di 07°00'S 110°25'E, dengan visual atmosfer, garis isobar, dan nada harmonis.",
       "topologyBadge": "KOTA SEMARANG // 07°00'S 110°25'E • 82m ASL",
       "ui": {
         "isobars": "[ISOBARS]",
@@ -1618,7 +1616,7 @@ export const translations = {
         "humidity": "Kelembapan Udara",
         "cloudCover": "Tutupan Awan",
         "apparent": "APPARENT:",
-        "sync": "REFRESH TELEMETRI ↻",
+        "sync": "REFRESH TELEMETRI",
         "biosphereFootprint": "NODE: SEMARANG // JAWA TENGAH",
         "solarCycle": "SIKLUS MATAHARI // SUASANA REAL"
       }
@@ -1629,23 +1627,22 @@ export const translations = {
       "defaultThought": "Connecting to Semarang Node... [Haidar Rifky Andrianno]",
       "tips": {
         "pet": "Pet HanzzBot",
-        "dance": "Dance Together",
-        "matcha": "Offer Coffee / Matcha",
-        "expr": "Change Expression",
-        "crown": "Royal Crown",
-        "talk": "Chat with Bot",
-        "sleep": "Sleep / Wake",
-        "sound": "Audio On/Off",
-        "toggle": "Collapse / Expand"
+        "dance": "Dance together",
+        "matcha": "Offer coffee / matcha",
+        "expr": "Change expression",
+        "crown": "Royal crown",
+        "talk": "Chat with bot",
+        "sleep": "Sleep / wake",
+        "sound": "Audio on/off",
+        "toggle": "Collapse / expand"
       }
     }
   },
   "zh": {
     "langName": "中文",
     "langCode": "ZH",
-    "flag": "🇨🇳",
-    "documentTitle": "Hanzz Portfolio — Designer, Creative Collaborator & Web Developer",
-    "documentDesc": "Portfolio of Haidar Rifky Andrianno (Hanzz / HanzzSama). Designer, Creative Collaborator, and Web Developer with 4 years in IT based in Semarang, Indonesia.",
+    "documentTitle": "Hanzz Portfolio | Designer, Creative Collaborator & Web Developer",
+    "documentDesc": "Portfolio of Haidar Rifky Andrianno, also known as Hanzz or HanzzSama. Designer, creative collaborator, and web developer with 4 years in IT, based in Semarang, Indonesia.",
     "nav": {
       "welcome": "01.WEL",
       "about": "02.ABT",
@@ -1700,187 +1697,187 @@ export const translations = {
       "sectionTitle": "关于我",
       "sectionSub": "HAIDAR RIFKY ANDRIANNO // SEMARANG CITY",
       "ethosTitle": "创造有价值的设计与全新数字体验",
-      "photoCaption": "Photo of Haidar Rifky Andrianno — Pacitan Beach",
+      "photoCaption": "Photo of Haidar Rifky Andrianno at Pacitan Beach",
       "locationBadge": "Indonesia | Central Java | Semarang City",
       "ethosParagraphs": [
-        "I am a designer, creative collaborator, and web developer with 4 years of experience in the IT world. Creating new designs and meaningful experiences was my primary goal entering the digital craft. Starting from intense curiosity to recognized development, my work encompasses web UI/UX and mobile UI/UX, as well as crafting clean, interactive web applications.",
-        "It is an honor to build a diverse and rewarding career path. I am always thrilled to learn new skills, explore fresh experiences, and welcome creative challenges that deliver a genuine positive impact."
+        "I am a designer, creative collaborator, and web developer with 4 years of experience in IT. I entered IT to create new designs and experiences. My work covers web and mobile UI/UX design and simple, interactive websites.",
+        "I keep learning new skills and taking on new creative challenges."
       ],
       "pillars": [
         {
           "code": "FOCUS-01",
           "title": "Web & Mobile UI/UX",
-          "desc": "Crafting clean, aesthetic, and intuitive visual interfaces, prioritizing user comfort and effortless navigation."
+          "desc": "Designing clean interface layouts that are easy to use on the web and in mobile apps."
         },
         {
           "code": "FOCUS-02",
-          "title": "Interactive Web Development",
-          "desc": "Building websites with clean codebases, fast performance, and rich, responsive interactivity across all devices."
+          "title": "Interactive web development",
+          "desc": "Building websites with tidy code and interactions that work on phones, tablets, and desktops."
         },
         {
           "code": "FOCUS-03",
-          "title": "Creative Collaboration",
-          "desc": "Working collaboratively across multidisciplinary teams to transform ideas into tangible digital solutions."
+          "title": "Creative collaboration",
+          "desc": "Working in teams to turn requirements into digital products."
         },
         {
           "code": "FOCUS-04",
-          "title": "Continuous Learning",
-          "desc": "Constantly eager to explore emerging technologies, interface trends, and modern tools for ongoing growth."
+          "title": "Continuous learning",
+          "desc": "Learning new design tools and practicing programming regularly."
         }
       ],
-      "timelineTitle": "Career Chronology & Practical Experience",
+      "timelineTitle": "Career timeline and experience",
       "timeline": [
         {
-          "year": "2026 — SEKARANG",
-          "title": "Pengembangan Lanjutan Frontend & Backend",
+          "year": "2026 to present",
+          "title": "Pengembangan lanjutan frontend dan backend",
           "place": "Semarang, Jawa Tengah",
-          "description": "Memperluas keilmuan di bidang frontend dan backend, merancang arsitektur sistem modern, serta memperdalam rekayasa web interaktif berkinerja tinggi."
+          "description": "Mempelajari frontend dan backend, merancang arsitektur sistem, dan mengembangkan web interaktif."
         },
         {
-          "year": "2025 — 2026",
-          "title": "Artificial Intelligence & Fullstack Engineering",
+          "year": "2025 to 2026",
+          "title": "Artificial intelligence dan fullstack engineering",
           "place": "ITESA Muhammadiyah Semarang",
-          "description": "Memperdalam keilmuan untuk memahami lebih dalam seputar artifisial inteligensi dan fullstack developer, sembari menempuh pendidikan perguruan tinggi di ITESA Muhammadiyah Semarang."
+          "description": "Mempelajari artificial intelligence dan fullstack development sambil kuliah di ITESA Muhammadiyah Semarang."
         },
         {
-          "year": "2024 — 2025",
-          "title": "Pengembangan Skill Coding & Fullstack Developer",
+          "year": "2024 to 2025",
+          "title": "Pengembangan keterampilan coding dan fullstack developer",
           "place": "Semarang, Jawa Tengah",
-          "description": "Mengembangkan skill coding dan pemahaman mendalam di dunia frontend dan backend, serta membangun kapabilitas jobdesk fullstack developer."
+          "description": "Melatih coding frontend dan backend untuk bekerja sebagai fullstack developer."
         },
         {
-          "year": "2022 — 2024",
-          "title": "Eksplorasi Web, Aplikasi & Software Engineering",
+          "year": "2022 to 2024",
+          "title": "Eksplorasi web, aplikasi, dan software engineering",
           "place": "SMK TEXMACO Semarang",
-          "description": "Memulai eksplorasi di dunia website dan aplikasi serta membangun background IT software engineering di bangku SMK TEXMACO Semarang."
+          "description": "Mulai membuat website dan aplikasi serta mempelajari software engineering di SMK TEXMACO Semarang."
         },
         {
-          "year": "2020 — 2022",
-          "title": "Eksplorasi Perdana Cyber Security Tools",
+          "year": "2020 to 2022",
+          "title": "Eksplorasi awal cyber security tools",
           "place": "SMP TEXMACO Semarang",
-          "description": "Memulai eksplorasi awal di dunia IT dengan mempelajari cyber security tools di bangku SMP TEXMACO Semarang."
+          "description": "Mulai mempelajari cyber security tools di SMP TEXMACO Semarang."
         }
       ]
     },
     "skills": {
       "sectionTitle": "技能与专长",
-      "sectionSub": "17 TECHNICAL & VISUAL CAPABILITIES // TESTED",
-      "headline": "Skills & Tool Mastery",
-      "description": "17 technical and visual competencies developed across 4 years in the IT landscape, organized into four clean domains.",
+      "sectionSub": "17 TECHNICAL AND VISUAL SKILLS",
+      "headline": "Skills and tools",
+      "description": "17 technical and visual skills from 4 years of work in IT, grouped into 4 areas.",
       "matrixTiers": [
         {
           "tierId": "TIER-01",
-          "layerName": "Frontend & Web Core",
-          "concept": "Antarmuka & Pengalaman Web",
+          "layerName": "Frontend & web core",
+          "concept": "Antarmuka & pengalaman web",
           "colorAccent": "var(--color-botanical-sage)",
           "nodes": [
             {
               "name": "HTML",
-              "spec": "Semantik & Struktur Standar Web",
+              "spec": "Semantik & struktur standar web",
               "tag": "CORE"
             },
             {
               "name": "CSS",
-              "spec": "Desain Responsif, Flexbox, Grid",
+              "spec": "Desain responsif, Flexbox, Grid",
               "tag": "STYLE"
             },
             {
               "name": "JavaScript",
-              "spec": "Interaktivitas Klien & DOM Dinamis",
+              "spec": "Interaktivitas klien & DOM dinamis",
               "tag": "SCRIPT"
             },
             {
               "name": "Tailwind CSS",
-              "spec": "Utility-first Modern Styling",
+              "spec": "Styling dengan utility class",
               "tag": "FRAMEWORK"
             },
             {
               "name": "Bootstrap",
-              "spec": "Komponen Cepat & Tata Letak Grid",
+              "spec": "Komponen cepat & tata letak Grid",
               "tag": "UI KIT"
             }
           ]
         },
         {
           "tierId": "TIER-02",
-          "layerName": "Backend & Database",
-          "concept": "Logika Server & Pengelolaan Data",
+          "layerName": "Backend & database",
+          "concept": "Logika server & pengelolaan data",
           "colorAccent": "var(--color-warm-sand)",
           "nodes": [
             {
               "name": "PHP",
-              "spec": "Pemrograman Server & Arsitektur MVC",
+              "spec": "Pemrograman server & arsitektur MVC",
               "tag": "BACKEND"
             },
             {
               "name": "Laravel",
-              "spec": "Framework PHP Modern & Elegan",
+              "spec": "Framework PHP",
               "tag": "FRAMEWORK"
             },
             {
               "name": "MySQL",
-              "spec": "Manajemen Database Relasional",
+              "spec": "Manajemen database relasional",
               "tag": "DATABASE"
             },
             {
               "name": "Node JS",
-              "spec": "Runtime JavaScript & API Dasar",
+              "spec": "Runtime JavaScript & API dasar",
               "tag": "RUNTIME"
             },
             {
               "name": "Elixir & Phoenix",
-              "spec": "Eksplorasi Konkurensi & Backend",
+              "spec": "Eksplorasi konkurensi & backend",
               "tag": "EXPLORE"
             }
           ]
         },
         {
           "tierId": "TIER-03",
-          "layerName": "Desain UI/UX & Grafis",
-          "concept": "Estetika Spasial & Kreativitas Visual",
+          "layerName": "Desain UI/UX & grafis",
+          "concept": "Estetika spasial & kreativitas visual",
           "colorAccent": "var(--color-botanical-sage)",
           "nodes": [
             {
               "name": "Figma",
-              "spec": "Desain Prototipe UI/UX Web & Mobile",
+              "spec": "Desain prototipe UI/UX web & mobile",
               "tag": "DESIGN"
             },
             {
               "name": "Canva",
-              "spec": "Grafis Digital & Materi Presentasi",
+              "spec": "Grafis digital & materi presentasi",
               "tag": "CREATIVE"
             },
             {
               "name": "Adobe Illustrator",
-              "spec": "Ilustrasi Vektor & Identitas Aset",
+              "spec": "Ilustrasi vektor & identitas aset",
               "tag": "VECTOR"
             },
             {
               "name": "3D Blender",
-              "spec": "Pemodelan Objek 3D Dasar",
+              "spec": "Pemodelan objek 3D dasar",
               "tag": "3D MOD"
             }
           ]
         },
         {
           "tierId": "TIER-04",
-          "layerName": "Alat Produktivitas & Sistem",
-          "concept": "Alur Kerja & Pengelolaan Proyek",
+          "layerName": "Alat produktivitas & sistem",
+          "concept": "Alur kerja & pengelolaan proyek",
           "colorAccent": "var(--color-charcoal-slate)",
           "nodes": [
             {
               "name": "Git & GitHub",
-              "spec": "Version Control & Repositori Proyek",
+              "spec": "Version control & repositori proyek",
               "tag": "VCS"
             },
             {
               "name": "Microsoft Office",
-              "spec": "Dokumentasi & Administrasi Data",
+              "spec": "Dokumentasi & administrasi data",
               "tag": "OFFICE"
             },
             {
               "name": "Kali Linux Tools",
-              "spec": "Pengenalan Jaringan & Keamanan Dasar",
+              "spec": "Pengenalan jaringan & keamanan dasar",
               "tag": "SECURITY"
             }
           ]
@@ -1890,8 +1887,8 @@ export const translations = {
     "projects": {
       "sectionTitle": "精选作品项目",
       "sectionSub": "9 SELECTED WORKS // WEB & APPLICATIONS",
-      "headline": "Featured Projects Portfolio",
-      "description": "A showcase of 9 projects spanning university portals, interactive calculators, developer learning platforms, Alzheimer's symptom detection AI, and agrotechnology systems.",
+      "headline": "Selected projects",
+      "description": "9 projects: a university admissions portal, a calculator with a math bot, a coding learning platform, an Alzheimer symptom detection system, an agrotech app, a food ordering app, a library system, a school fee payment app, and a to-do app.",
       "ui": {
         "problemLabel": "PROBLEM STATEMENT",
         "solutionLabel": "CREATIVE SOLUTION",
@@ -1902,11 +1899,11 @@ export const translations = {
       },
       "items": {
         "proj-01": {
-          "subtitle": "Website Informasi Pendaftaran Mahasiswa Baru Kampus",
+          "subtitle": "Website informasi pendaftaran mahasiswa baru kampus",
           "category": "Portal Kampus / Web System",
           "role": "FullStack Web Developer",
           "client": "ITESA Muhammadiyah Semarang",
-          "description": "Website yang dibangun untuk memberi informasi tentang pendaftaran mahasiswa baru ITESA, dibangun dengan sistem Laravel.",
+          "description": "Website informasi pendaftaran mahasiswa baru ITESA, dibangun dengan Laravel.",
           "deliverables": [
             "Penyajian informasi jalur pendaftaran mahasiswa baru dan program studi interaktif",
             "Sistem formulir daring dan dashboard verifikasi berkas calon mahasiswa",
@@ -1936,14 +1933,14 @@ export const translations = {
           }
         },
         "proj-02": {
-          "subtitle": "Kalkulator Basic dengan Bot Matematis & Personalisasi Tema",
+          "subtitle": "Kalkulator basic dengan bot matematis dan personalisasi tema",
           "category": "Web Tool / Komputasi",
           "role": "Frontend Developer",
           "client": "Kakas Personal & Edukasi",
-          "description": "Kalkulator basic dengan dipadukan sistem bot matematis, dan sistem personalize tema sesuai selera, dibangun hanya memakai HTML, CSS, JS.",
+          "description": "Kalkulator dengan bot matematika dan tema yang bisa diubah sesuai selera, dibuat hanya dengan HTML, CSS, dan JavaScript.",
           "deliverables": [
             "Mesin kalkulasi matematika cepat dan responsif di browser",
-            "Sistem bot matematis cerdas yang memandu perhitungan dan formula",
+            "Bot matematika yang memandu perhitungan dan formula",
             "Fitur personalisasi tema visual dinamis yang dapat disesuaikan pengguna"
           ],
           "metrics": {
@@ -1954,7 +1951,7 @@ export const translations = {
           "deepDive": {
             "architectureSchema": "[USER INPUT: KEYBOARD & TOUCH NUMPAD]\n       │\n       ▼ EVENT LISTENER\n[PARSER & TOKENIZER: MATH EXPRESSION]\n       │\n       ├──► [MATH BOT ENGINE: AUTO-CORRECT & CALC]\n       │\n       ├──► [THEME ENGINE: DYNAMIC CSS VARIABLES]\n       │           │\n       │           └──► [LOCALSTORAGE STATE PERSISTENCE]\n       │\n       ▼ REAL-TIME DOM RENDERER\n[CANVAS / LCD DISPLAY: RESULT & HISTORY LOG]",
             "problem": "Banyak kalkulator web yang monoton, kaku tanpa interaksi asisten, dan tidak memungkinkan pengguna mengubah tema sesuai preferensi personal.",
-            "solution": "Mengembangkan Mathicalc murni dengan HTML, CSS, dan JavaScript — memadukan bot asisten matematis dan tema personalisasi tanpa dependensi berat.",
+            "solution": "Mengembangkan Mathicalc dengan HTML, CSS, dan JavaScript saja. Mathicalc memiliki bot asisten matematika dan tema yang bisa diubah, tanpa dependensi tambahan.",
             "benchmarks": [
               {
                 "metric": "Waktu Muat",
@@ -1970,11 +1967,11 @@ export const translations = {
           }
         },
         "proj-03": {
-          "subtitle": "Platform Belajar Coding dari Zero to Pro",
+          "subtitle": "Platform belajar coding dari zero to pro",
           "category": "E-Learning / Developer Tools",
           "role": "FullStack Developer",
           "client": "Komunitas Belajar Coding",
-          "description": "Website yang dibangun untuk pengguna untuk belajar coding dari zero to pro, dibangun dengan lingkungan Laravel.",
+          "description": "Website untuk belajar coding dari zero to pro, dibangun dengan Laravel.",
           "deliverables": [
             "Kurikulum materi pemrograman terstruktur dari level pemula hingga mahir",
             "Antarmuka belajar interaktif dengan latihan praktis dan evaluasi pemahaman",
@@ -1988,7 +1985,7 @@ export const translations = {
           "deepDive": {
             "architectureSchema": "[LEARNER / DEVELOPER UI]\n       │\n       ▼ HTTPS REST API\n[LARAVEL CORE: LEARNING ROADMAP ENGINE]\n       │\n       ├──► [MODULAR CURRICULUM: ZERO TO PRO]\n       │           │\n       │           ├──► [CODE PLAYGROUND & SANDBOX]\n       │           └──► [INTERACTIVE SYNTAX VALIDATOR]\n       │\n       ├──► [PROGRESSION & MILESTONE TRACKER]\n       │\n       ▼ ELOQUENT ORM\n[MYSQL DATABASE: USERS, LESSONS, COMPLETIONS]",
             "problem": "Banyak calon programmer pemula kesulitan belajar mandiri karena materi online yang terpecah-pecah tanpa panduan tahapan yang runtut.",
-            "solution": "Membangun platform TurnCode di atas Laravel untuk menghadirkan alur belajar terpadu 'Zero to Pro' yang terarah dan mudah dipahami.",
+            "solution": "Membangun platform TurnCode dengan Laravel dan alur belajar bertahap dari zero to pro.",
             "benchmarks": [
               {
                 "metric": "Alur Pembelajaran",
@@ -2004,7 +2001,7 @@ export const translations = {
           }
         },
         "proj-04": {
-          "subtitle": "Deteksi Gejala Alzheimer Berbasis LLM & XGBoost",
+          "subtitle": "Deteksi gejala Alzheimer berbasis LLM dan XGBoost",
           "category": "Healthcare AI / Web Intelligence",
           "role": "AI & FullStack Developer",
           "client": "Inisiatif Riset Kesehatan Kognitif",
@@ -2022,7 +2019,7 @@ export const translations = {
           "deepDive": {
             "architectureSchema": "[CLINICAL ASSESSMENT / USER QUESTIONNAIRE]\n       │\n       ▼ WEBSOCKET / REST API\n[FASTAPI & LLM INTERFACE LAYER]\n       │\n       ├──► [LLM: SYMPTOM EXTRACTION & CONTEXT]\n       │           │\n       │           ▼\n       ├──► [FEATURE VECTOR PREPROCESSING]\n       │           │\n       │           ▼\n       ├──► [XGBOOST CLASSIFIER: ALZHEIMER RISK]\n       │           │\n       │           └──► [DECISION TREE ENSEMBLE SCORING]\n       │\n       ▼ JSON TELEMETRY RESPONSE\n[DIAGNOSTIC RADAR & RISK STRATIFICATION UI]",
             "problem": "Pemeriksaan gejala alzheimer pada fase awal sering terlambat karena keterbatasan akses skrining kognitif awal yang cepat dan terjangkau.",
-            "solution": "Menggabungkan model LLM untuk ekstraksi interaksi bahasa dengan ketepatan algoritma tabular XGBoost guna mengkalkulasi indikasi gejala secara akurat.",
+            "solution": "Menggabungkan model LLM untuk mengekstrak gejala dari bahasa pengguna dengan algoritma XGBoost untuk menghitung indikasi gejala.",
             "benchmarks": [
               {
                 "metric": "Akurasi Prediksi",
@@ -2038,11 +2035,11 @@ export const translations = {
           }
         },
         "proj-05": {
-          "subtitle": "Platform Pertanian Modern & Optimasi Lahan",
+          "subtitle": "Platform pertanian modern dan optimasi lahan",
           "category": "Agrotech / Perlombaan",
           "role": "Web Designer & Developer",
           "client": "Inisiatif Kompetisi Agroteknologi",
-          "description": "Membangun platform digital yang memadukan prinsip pertanian tradisional dengan teknologi modern untuk meningkatkan efisiensi dan produktivitas petani lokal.",
+          "description": "Platform web yang membantu petani lokal meningkatkan hasil tani dengan katalog informasi dan kalkulasi panen.",
           "deliverables": [
             "Perancangan antarmuka agrotech yang ramah pengguna",
             "Katalog informasi pertanian modern dan kiat peningkatan hasil tani",
@@ -2072,14 +2069,14 @@ export const translations = {
           }
         },
         "proj-06": {
-          "subtitle": "Solusi Digital Pemesanan Restoran & F&B",
+          "subtitle": "Solusi digital pemesanan restoran dan F&B",
           "category": "Web Application / F&B",
           "role": "FullStack Developer",
           "client": "Restoran & Mitra Kuliner",
-          "description": "Sistem pemesanan makanan online yang memudahkan pelanggan memilih menu hidangan secara instan dan mengoptimalkan alur manajemen pesanan kasir.",
+          "description": "Sistem pemesanan makanan online untuk memilih menu dan mengelola pesanan kasir.",
           "deliverables": [
             "Katalog menu makanan interaktif dengan filter kategori dan rincian harga",
-            "Sistem keranjang belanja pesanan (order cart) real-time",
+            "Keranjang pesanan real-time",
             "Ringkasan pesanan otomatis untuk meminimalisir kesalahan pelayan"
           ],
           "metrics": {
@@ -2106,11 +2103,11 @@ export const translations = {
           }
         },
         "proj-07": {
-          "subtitle": "Sistem Manajemen Sirkulasi & Katalog Pustaka",
+          "subtitle": "Sistem manajemen sirkulasi dan katalog pustaka",
           "category": "Management System / Education",
           "role": "Backend & Database Developer",
           "client": "Institusi Pendidikan & Perpustakaan",
-          "description": "Platform perpustakaan modern terpadu untuk memudahkan pencarian katalog buku, pengelolaan sirkulasi peminjaman, serta pendataan inventaris pustaka.",
+          "description": "Sistem perpustakaan untuk mencari katalog buku, mengelola peminjaman, dan mendata inventaris.",
           "deliverables": [
             "Katalog buku dinamis dengan indikator ketersediaan real-time",
             "Pencatatan sirkulasi peminjaman dan penghitungan denda keterlambatan",
@@ -2140,15 +2137,15 @@ export const translations = {
           }
         },
         "proj-08": {
-          "subtitle": "Portal Administrasi Keuangan Sekolah Terpadu",
+          "subtitle": "Portal administrasi keuangan sekolah terpadu",
           "category": "FinTech / Administration",
           "role": "Fullstack Developer",
           "client": "Administrasi Sekolah",
-          "description": "Aplikasi pembayaran SPP online yang transparan, akuntabel, dan aman untuk memudahkan orang tua murid serta pihak administrasi sekolah memantau iuran bulanan.",
+          "description": "Aplikasi pembayaran SPP online untuk orang tua murid dan administrasi sekolah memantau iuran bulanan.",
           "deliverables": [
             "Pencatatan riwayat transaksi SPP dan tagihan siswa per periode",
-            "Cetak bukti pembayaran/kwitansi digital transparan",
-            "Manajemen otentikasi multi-peran (Admin, Petugas, Siswa)"
+            "Cetak bukti pembayaran dan kwitansi digital",
+            "Autentikasi multi-peran: Admin, Petugas, dan Siswa"
           ],
           "metrics": {
             "timeline": "2023",
@@ -2174,14 +2171,14 @@ export const translations = {
           }
         },
         "proj-09": {
-          "subtitle": "Aplikasi Manajemen Tugas Harian & Produktivitas",
+          "subtitle": "Aplikasi manajemen tugas harian dan produktivitas",
           "category": "Productivity / Web Tool",
           "role": "Frontend Developer & UI Designer",
           "client": "Aplikasi Personal & Komunitas",
-          "description": "Aplikasi produktivitas yang dirancang minimalis dan bersih untuk membantu pengguna melacak, menyusun prioritas, dan menyelesaikan tugas harian secara terorganisir.",
+          "description": "Aplikasi to-do untuk mencatat, memprioritaskan, dan menyelesaikan tugas harian.",
           "deliverables": [
             "Antarmuka penambahan, checklist, dan penghapusan tugas instan",
-            "Filter status tugas (Semua, Aktif, Selesai) secara responsif",
+            "Filter status tugas: Semua, Aktif, dan Selesai",
             "Penyimpanan lokal instan tanpa jeda pemuatan server"
           ],
           "metrics": {
@@ -2192,7 +2189,7 @@ export const translations = {
           "deepDive": {
             "architectureSchema": "[USER TASK INPUT & GESTURE CONTROL]\n       │\n       ▼\n[TASK STATE MANAGER: CRUD & FILTERING]\n       │\n       ├──► [PRIORITY MATRIX: HIGH / MED / LOW]\n       │\n       ├──► [LOCALSTORAGE OFFLINE SYNC]\n       │\n       ▼ REACTIVE DOM\n[INTERACTIVE TASK LIST & COMPLETION TELEMETRY]",
             "problem": "Banyak aplikasi to-do dipenuhi fitur rumit dan iklan yang justru mengganggu fokus pengguna saat mencatat agenda penting harian.",
-            "solution": "Merancang Mylist Todo App dengan tampilan bersih, fokus navigasi cepat, dan persistensi LocalStorage untuk akses kilat setiap saat.",
+            "solution": "Merancang Mylist Todo App dengan tampilan bersih dan penyimpanan LocalStorage agar data tetap ada saat halaman dibuka lagi.",
             "benchmarks": [
               {
                 "metric": "Waktu Muat",
@@ -2212,59 +2209,59 @@ export const translations = {
     "another": {
       "sectionTitle": "心得与创意手记",
       "sectionSub": "EXPERIENCE & TECH EXPLORATIONS // HANZZ",
-      "headline": "Creative Notes & Developer Reflections",
-      "description": "A collection of personal articles, reflections on creative processes, and insights from crafting web interfaces and collaborating.",
+      "headline": "Creative notes and developer reflections",
+      "description": "Notes on designing web interfaces, working in teams, and trying new technology.",
       "ui": {
         "readTimeLabel": "READ TIME:",
-        "inspectLabel": "READ ARTICLE ↗",
+        "inspectLabel": "READ ARTICLE",
         "synthBtnPlay": "Play Resonant Tone",
         "synthBtnStop": "Stop Tone",
         "dispatchTag": "CONTACT // CREATIVE COLLABORATION",
-        "dispatchTitle": "Start a Collaboration",
-        "dispatchLead": "Open for website development projects, UI/UX design discussions, technical exchanges, or exciting creative partnerships.",
+        "dispatchTitle": "Start a collaboration",
+        "dispatchLead": "Open for website projects, UI/UX design work, technical discussions, and other creative collaboration.",
         "copyLabel": "[COPY]",
         "copiedToast": "COPIED TO CLIPBOARD"
       },
       "gardenNotes": {
         "note-01": {
-          "title": "4 Tahun di Dunia IT: Dari Rasa Penasaran Hingga Solusi Nyata",
+          "title": "Empat tahun di dunia IT",
           "readTime": "5 menit baca",
-          "excerpt": "Perjalanan dari awal mula ketertarikan pada teknologi, belajar pemrograman mandiri, hingga merancang website dan aplikasi yang bermanfaat bagi sesama."
+          "excerpt": "Cerita tentang ketertarikan awal pada teknologi, belajar pemrograman secara mandiri, dan membuat website serta aplikasi."
         },
         "note-02": {
-          "title": "Menghubungkan Desain UI/UX dengan Kode Web yang Interaktif",
+          "title": "Menghubungkan desain UI/UX dengan kode web interaktif",
           "readTime": "4 menit baca",
-          "excerpt": "Bagaimana desainer yang memahami kode dapat menciptakan pengalaman pengguna yang mulus tanpa batasan antara rancangan visual dan implementasi teknis."
+          "excerpt": "Cara desainer yang memahami kode menjaga pengalaman pengguna tetap konsisten antara rancangan visual dan implementasi."
         },
         "note-03": {
-          "title": "Studi dan Kolaborasi Terapan di ITESA Muhammadiyah Semarang",
+          "title": "Studi dan kolaborasi terapan di ITESA Muhammadiyah Semarang",
           "readTime": "5 menit baca",
-          "excerpt": "Pengalaman belajar di kampus ITESA Muhammadiyah Semarang yang memperkaya wawasan logika komputasi, pemecahan masalah analitis, dan kerja sama tim."
+          "excerpt": "Pengalaman belajar di ITESA Muhammadiyah Semarang: logika komputasi, pemecahan masalah, dan kerja sama tim."
         }
       },
       "audioSynth": {
-        "title": "Generator Nada Resonansi Harmonis",
-        "tagline": "Frekuensi Alami 432Hz • Node Audio Web Interaktif",
+        "title": "Generator nada resonansi harmonis",
+        "tagline": "Frekuensi alami 432Hz • Node audio web interaktif",
         "frequencies": [
           {
-            "label": "Ground (108Hz)",
+            "label": "Ground 108Hz",
             "freq": 108,
-            "desc": "Nada Sub-Bass Alami"
+            "desc": "Nada sub-bass alami"
           },
           {
-            "label": "Sage Earth (216Hz)",
+            "label": "Sage Earth 216Hz",
             "freq": 216,
-            "desc": "Harmoni Fondasi Dasar"
+            "desc": "Harmoni fondasi dasar"
           },
           {
-            "label": "Natural Calm (432Hz)",
+            "label": "Natural Calm 432Hz",
             "freq": 432,
-            "desc": "Nada Resonansi Harmonis"
+            "desc": "Nada resonansi harmonis"
           },
           {
-            "label": "Canopy Air (864Hz)",
+            "label": "Canopy Air 864Hz",
             "freq": 864,
-            "desc": "Nada Cerah Atmosfer"
+            "desc": "Nada cerah atmosfer"
           }
         ]
       },
@@ -2272,17 +2269,17 @@ export const translations = {
         "typography": "Syne • Instrument Serif • Plus Jakarta Sans • JetBrains Mono",
         "gridSystem": "Tata Letak Responsif & Desain Interaktif",
         "carbonEstimate": "Dioptimalkan untuk Performa Cepat & Aksesibilitas",
-        "license": "Portofolio © 2026 Haidar Rifky Andrianno (Hanzz / HanzzSama). Semarang, Jawa Tengah, Indonesia."
+        "license": "Portofolio © 2026 Haidar Rifky Andrianno, alias Hanzz atau HanzzSama. Semarang, Jawa Tengah, Indonesia."
       }
     },
     "github": {
       "sectionTitle": "GIT TELEMETRY & VAULT",
       "sectionSub": "PUBLIC REPOSITORIES // CONTRIBUTION MATRIX",
-      "headline": "Open Repositories & Contribution Matrix",
-      "description": "Public source repositories, regular commits, and real software engineering projects documented on GitHub @HanzzSama.",
+      "headline": "Open repositories and contributions",
+      "description": "Public repositories, regular commits, and personal projects on GitHub @HanzzSama.",
       "profile": {
-        "bio": "Haidar Rifky Andrianno (Hanzz) // Designer & Web Developer. ITESA Muhammadiyah Semarang.",
-        "actionLabel": "VIEW GITHUB PROFILE ↗",
+        "bio": "Haidar Rifky Andrianno, also known as Hanzz. Designer and web developer. Student at ITESA Muhammadiyah Semarang.",
+        "actionLabel": "VIEW GITHUB PROFILE",
         "stats": [
           {
             "label": "PUBLIC REPOS",
@@ -2324,32 +2321,32 @@ export const translations = {
       },
       "repositories": {
         "repo-01": {
-          "description": "Mesin kalkulator komputasi presisi tinggi dengan evaluasi rumus matematika bertahap dan visualisasi ekspresi real-time.",
+          "description": "Mesin kalkulator dengan evaluasi rumus matematika bertahap dan visualisasi ekspresi real-time.",
           "badge": "CORE ENGINE",
           "tag": "COMPUTATION"
         },
         "repo-02": {
-          "description": "Inti pustaka parsing aljabar dan struktur data pohon sintaks matematika untuk evaluasi formula tanpa overhead.",
+          "description": "Pustaka parsing aljabar dan pohon sintaks matematika untuk mengevaluasi formula.",
           "badge": "LIBRARY",
           "tag": "ALGORITHM"
         },
         "repo-03": {
-          "description": "Sistem manajemen pembayaran SPP dan administrasi keuangan institusi pendidikan berbasis arsitektur MVC terstruktur.",
+          "description": "Sistem pembayaran SPP dan administrasi keuangan sekolah dengan arsitektur MVC.",
           "badge": "ENTERPRISE",
           "tag": "ACADEMIA"
         },
         "repo-04": {
-          "description": "Platform e-ticketing dan reservasi tiket terdistribusi dengan alur checkout instan dan validasi tiket QR aman.",
+          "description": "Platform e-ticketing dengan checkout dan validasi tiket QR.",
           "badge": "FULLSTACK",
           "tag": "COMMERCE"
         },
         "repo-05": {
-          "description": "Katalog e-commerce gaya hidup urban dengan sistem keranjang belanja modular, filter kategori dinamis, dan UI responsif.",
+          "description": "Katalog e-commerce dengan keranjang belanja, filter kategori, dan UI responsif.",
           "badge": "COMMERCE",
           "tag": "REACTIVE"
         },
         "repo-06": {
-          "description": "Pintu gerbang agregasi audio digital dan kurasi playlist berkinerja tinggi dengan antarmuka media taktil.",
+          "description": "Agregator audio digital dan kurasi playlist dengan antarmuka pemutar.",
           "badge": "STREAMING",
           "tag": "AUDIO WEB"
         }
@@ -2359,7 +2356,7 @@ export const translations = {
       "sectionIndex": "06.A",
       "title": "KINETIC MONOLITH SIMULATOR",
       "subtitle": "REAL-TIME 3D WIREFRAME // ROTATIONAL GRAVITY GYROSCOPE",
-      "description": "Eksperimen grafis komputasional 3D interaktif murni Canvas. Drag untuk merotasi geometri monolit, ubah topologi bentuk, dan amati pembelokan sumbu koordinat secara real-time.",
+      "description": "Eksperimen grafis 3D interaktif yang dibuat hanya dengan Canvas. Seret untuk memutar monolit, ganti bentuk, dan lihat sumbu koordinat berubah secara real-time.",
       "modes": [
         {
           "id": "monolith",
@@ -2421,8 +2418,8 @@ export const translations = {
       "sectionIndex": "07",
       "sectionTitle": "SUASANA & CUACA",
       "sectionSub": "TELEMETRI CUACA KOTA SEMARANG // REAL-TIME",
-      "headline": "Cuaca Real-Time & Suasana Atmosfer",
-      "description": "Visualisasi interaktif cuaca real-time Kota Semarang (07°00'S 110°25'E) dengan suasana atmosfer dinamis, garis isobar topografi, dan nada harmonis.",
+      "headline": "Cuaca real-time dan suasana atmosfer",
+      "description": "Cuaca real-time Kota Semarang di 07°00'S 110°25'E, dengan visual atmosfer, garis isobar, dan nada harmonis.",
       "topologyBadge": "KOTA SEMARANG // 07°00'S 110°25'E • 82m ASL",
       "ui": {
         "isobars": "[ISOBARS]",
@@ -2433,7 +2430,7 @@ export const translations = {
         "humidity": "Kelembapan Udara",
         "cloudCover": "Tutupan Awan",
         "apparent": "APPARENT:",
-        "sync": "REFRESH TELEMETRI ↻",
+        "sync": "REFRESH TELEMETRI",
         "biosphereFootprint": "NODE: SEMARANG // JAWA TENGAH",
         "solarCycle": "SIKLUS MATAHARI // SUASANA REAL"
       }
@@ -2444,23 +2441,22 @@ export const translations = {
       "defaultThought": "Connecting to Semarang Node... [Haidar Rifky Andrianno]",
       "tips": {
         "pet": "Pet HanzzBot",
-        "dance": "Dance Together",
-        "matcha": "Offer Coffee / Matcha",
-        "expr": "Change Expression",
-        "crown": "Royal Crown",
-        "talk": "Chat with Bot",
-        "sleep": "Sleep / Wake",
-        "sound": "Audio On/Off",
-        "toggle": "Collapse / Expand"
+        "dance": "Dance together",
+        "matcha": "Offer coffee / matcha",
+        "expr": "Change expression",
+        "crown": "Royal crown",
+        "talk": "Chat with bot",
+        "sleep": "Sleep / wake",
+        "sound": "Audio on/off",
+        "toggle": "Collapse / expand"
       }
     }
   },
   "ja": {
     "langName": "日本語",
     "langCode": "JA",
-    "flag": "🇯🇵",
-    "documentTitle": "Hanzz Portfolio — Designer, Creative Collaborator & Web Developer",
-    "documentDesc": "Portfolio of Haidar Rifky Andrianno (Hanzz / HanzzSama). Designer, Creative Collaborator, and Web Developer with 4 years in IT based in Semarang, Indonesia.",
+    "documentTitle": "Hanzz Portfolio | Designer, Creative Collaborator & Web Developer",
+    "documentDesc": "Portfolio of Haidar Rifky Andrianno, also known as Hanzz or HanzzSama. Designer, creative collaborator, and web developer with 4 years in IT, based in Semarang, Indonesia.",
     "nav": {
       "welcome": "01.WEL",
       "about": "02.ABT",
@@ -2515,187 +2511,187 @@ export const translations = {
       "sectionTitle": "自己紹介",
       "sectionSub": "HAIDAR RIFKY ANDRIANNO // SEMARANG CITY",
       "ethosTitle": "人々の役に立つ新しいデザインと体験を創る",
-      "photoCaption": "Photo of Haidar Rifky Andrianno — Pacitan Beach",
+      "photoCaption": "Photo of Haidar Rifky Andrianno at Pacitan Beach",
       "locationBadge": "Indonesia | Central Java | Semarang City",
       "ethosParagraphs": [
-        "I am a designer, creative collaborator, and web developer with 4 years of experience in the IT world. Creating new designs and meaningful experiences was my primary goal entering the digital craft. Starting from intense curiosity to recognized development, my work encompasses web UI/UX and mobile UI/UX, as well as crafting clean, interactive web applications.",
-        "It is an honor to build a diverse and rewarding career path. I am always thrilled to learn new skills, explore fresh experiences, and welcome creative challenges that deliver a genuine positive impact."
+        "I am a designer, creative collaborator, and web developer with 4 years of experience in IT. I entered IT to create new designs and experiences. My work covers web and mobile UI/UX design and simple, interactive websites.",
+        "I keep learning new skills and taking on new creative challenges."
       ],
       "pillars": [
         {
           "code": "FOCUS-01",
           "title": "Web & Mobile UI/UX",
-          "desc": "Crafting clean, aesthetic, and intuitive visual interfaces, prioritizing user comfort and effortless navigation."
+          "desc": "Designing clean interface layouts that are easy to use on the web and in mobile apps."
         },
         {
           "code": "FOCUS-02",
-          "title": "Interactive Web Development",
-          "desc": "Building websites with clean codebases, fast performance, and rich, responsive interactivity across all devices."
+          "title": "Interactive web development",
+          "desc": "Building websites with tidy code and interactions that work on phones, tablets, and desktops."
         },
         {
           "code": "FOCUS-03",
-          "title": "Creative Collaboration",
-          "desc": "Working collaboratively across multidisciplinary teams to transform ideas into tangible digital solutions."
+          "title": "Creative collaboration",
+          "desc": "Working in teams to turn requirements into digital products."
         },
         {
           "code": "FOCUS-04",
-          "title": "Continuous Learning",
-          "desc": "Constantly eager to explore emerging technologies, interface trends, and modern tools for ongoing growth."
+          "title": "Continuous learning",
+          "desc": "Learning new design tools and practicing programming regularly."
         }
       ],
-      "timelineTitle": "Career Chronology & Practical Experience",
+      "timelineTitle": "Career timeline and experience",
       "timeline": [
         {
-          "year": "2026 — SEKARANG",
-          "title": "Pengembangan Lanjutan Frontend & Backend",
+          "year": "2026 to present",
+          "title": "Pengembangan lanjutan frontend dan backend",
           "place": "Semarang, Jawa Tengah",
-          "description": "Memperluas keilmuan di bidang frontend dan backend, merancang arsitektur sistem modern, serta memperdalam rekayasa web interaktif berkinerja tinggi."
+          "description": "Mempelajari frontend dan backend, merancang arsitektur sistem, dan mengembangkan web interaktif."
         },
         {
-          "year": "2025 — 2026",
-          "title": "Artificial Intelligence & Fullstack Engineering",
+          "year": "2025 to 2026",
+          "title": "Artificial intelligence dan fullstack engineering",
           "place": "ITESA Muhammadiyah Semarang",
-          "description": "Memperdalam keilmuan untuk memahami lebih dalam seputar artifisial inteligensi dan fullstack developer, sembari menempuh pendidikan perguruan tinggi di ITESA Muhammadiyah Semarang."
+          "description": "Mempelajari artificial intelligence dan fullstack development sambil kuliah di ITESA Muhammadiyah Semarang."
         },
         {
-          "year": "2024 — 2025",
-          "title": "Pengembangan Skill Coding & Fullstack Developer",
+          "year": "2024 to 2025",
+          "title": "Pengembangan keterampilan coding dan fullstack developer",
           "place": "Semarang, Jawa Tengah",
-          "description": "Mengembangkan skill coding dan pemahaman mendalam di dunia frontend dan backend, serta membangun kapabilitas jobdesk fullstack developer."
+          "description": "Melatih coding frontend dan backend untuk bekerja sebagai fullstack developer."
         },
         {
-          "year": "2022 — 2024",
-          "title": "Eksplorasi Web, Aplikasi & Software Engineering",
+          "year": "2022 to 2024",
+          "title": "Eksplorasi web, aplikasi, dan software engineering",
           "place": "SMK TEXMACO Semarang",
-          "description": "Memulai eksplorasi di dunia website dan aplikasi serta membangun background IT software engineering di bangku SMK TEXMACO Semarang."
+          "description": "Mulai membuat website dan aplikasi serta mempelajari software engineering di SMK TEXMACO Semarang."
         },
         {
-          "year": "2020 — 2022",
-          "title": "Eksplorasi Perdana Cyber Security Tools",
+          "year": "2020 to 2022",
+          "title": "Eksplorasi awal cyber security tools",
           "place": "SMP TEXMACO Semarang",
-          "description": "Memulai eksplorasi awal di dunia IT dengan mempelajari cyber security tools di bangku SMP TEXMACO Semarang."
+          "description": "Mulai mempelajari cyber security tools di SMP TEXMACO Semarang."
         }
       ]
     },
     "skills": {
       "sectionTitle": "スキル＆技術",
-      "sectionSub": "17 TECHNICAL & VISUAL CAPABILITIES // TESTED",
-      "headline": "Skills & Tool Mastery",
-      "description": "17 technical and visual competencies developed across 4 years in the IT landscape, organized into four clean domains.",
+      "sectionSub": "17 TECHNICAL AND VISUAL SKILLS",
+      "headline": "Skills and tools",
+      "description": "17 technical and visual skills from 4 years of work in IT, grouped into 4 areas.",
       "matrixTiers": [
         {
           "tierId": "TIER-01",
-          "layerName": "Frontend & Web Core",
-          "concept": "Antarmuka & Pengalaman Web",
+          "layerName": "Frontend & web core",
+          "concept": "Antarmuka & pengalaman web",
           "colorAccent": "var(--color-botanical-sage)",
           "nodes": [
             {
               "name": "HTML",
-              "spec": "Semantik & Struktur Standar Web",
+              "spec": "Semantik & struktur standar web",
               "tag": "CORE"
             },
             {
               "name": "CSS",
-              "spec": "Desain Responsif, Flexbox, Grid",
+              "spec": "Desain responsif, Flexbox, Grid",
               "tag": "STYLE"
             },
             {
               "name": "JavaScript",
-              "spec": "Interaktivitas Klien & DOM Dinamis",
+              "spec": "Interaktivitas klien & DOM dinamis",
               "tag": "SCRIPT"
             },
             {
               "name": "Tailwind CSS",
-              "spec": "Utility-first Modern Styling",
+              "spec": "Styling dengan utility class",
               "tag": "FRAMEWORK"
             },
             {
               "name": "Bootstrap",
-              "spec": "Komponen Cepat & Tata Letak Grid",
+              "spec": "Komponen cepat & tata letak Grid",
               "tag": "UI KIT"
             }
           ]
         },
         {
           "tierId": "TIER-02",
-          "layerName": "Backend & Database",
-          "concept": "Logika Server & Pengelolaan Data",
+          "layerName": "Backend & database",
+          "concept": "Logika server & pengelolaan data",
           "colorAccent": "var(--color-warm-sand)",
           "nodes": [
             {
               "name": "PHP",
-              "spec": "Pemrograman Server & Arsitektur MVC",
+              "spec": "Pemrograman server & arsitektur MVC",
               "tag": "BACKEND"
             },
             {
               "name": "Laravel",
-              "spec": "Framework PHP Modern & Elegan",
+              "spec": "Framework PHP",
               "tag": "FRAMEWORK"
             },
             {
               "name": "MySQL",
-              "spec": "Manajemen Database Relasional",
+              "spec": "Manajemen database relasional",
               "tag": "DATABASE"
             },
             {
               "name": "Node JS",
-              "spec": "Runtime JavaScript & API Dasar",
+              "spec": "Runtime JavaScript & API dasar",
               "tag": "RUNTIME"
             },
             {
               "name": "Elixir & Phoenix",
-              "spec": "Eksplorasi Konkurensi & Backend",
+              "spec": "Eksplorasi konkurensi & backend",
               "tag": "EXPLORE"
             }
           ]
         },
         {
           "tierId": "TIER-03",
-          "layerName": "Desain UI/UX & Grafis",
-          "concept": "Estetika Spasial & Kreativitas Visual",
+          "layerName": "Desain UI/UX & grafis",
+          "concept": "Estetika spasial & kreativitas visual",
           "colorAccent": "var(--color-botanical-sage)",
           "nodes": [
             {
               "name": "Figma",
-              "spec": "Desain Prototipe UI/UX Web & Mobile",
+              "spec": "Desain prototipe UI/UX web & mobile",
               "tag": "DESIGN"
             },
             {
               "name": "Canva",
-              "spec": "Grafis Digital & Materi Presentasi",
+              "spec": "Grafis digital & materi presentasi",
               "tag": "CREATIVE"
             },
             {
               "name": "Adobe Illustrator",
-              "spec": "Ilustrasi Vektor & Identitas Aset",
+              "spec": "Ilustrasi vektor & identitas aset",
               "tag": "VECTOR"
             },
             {
               "name": "3D Blender",
-              "spec": "Pemodelan Objek 3D Dasar",
+              "spec": "Pemodelan objek 3D dasar",
               "tag": "3D MOD"
             }
           ]
         },
         {
           "tierId": "TIER-04",
-          "layerName": "Alat Produktivitas & Sistem",
-          "concept": "Alur Kerja & Pengelolaan Proyek",
+          "layerName": "Alat produktivitas & sistem",
+          "concept": "Alur kerja & pengelolaan proyek",
           "colorAccent": "var(--color-charcoal-slate)",
           "nodes": [
             {
               "name": "Git & GitHub",
-              "spec": "Version Control & Repositori Proyek",
+              "spec": "Version control & repositori proyek",
               "tag": "VCS"
             },
             {
               "name": "Microsoft Office",
-              "spec": "Dokumentasi & Administrasi Data",
+              "spec": "Dokumentasi & administrasi data",
               "tag": "OFFICE"
             },
             {
               "name": "Kali Linux Tools",
-              "spec": "Pengenalan Jaringan & Keamanan Dasar",
+              "spec": "Pengenalan jaringan & keamanan dasar",
               "tag": "SECURITY"
             }
           ]
@@ -2705,8 +2701,8 @@ export const translations = {
     "projects": {
       "sectionTitle": "制作プロジェクト",
       "sectionSub": "9 SELECTED WORKS // WEB & APPLICATIONS",
-      "headline": "Featured Projects Portfolio",
-      "description": "A showcase of 9 projects spanning university portals, interactive calculators, developer learning platforms, Alzheimer's symptom detection AI, and agrotechnology systems.",
+      "headline": "Selected projects",
+      "description": "9 projects: a university admissions portal, a calculator with a math bot, a coding learning platform, an Alzheimer symptom detection system, an agrotech app, a food ordering app, a library system, a school fee payment app, and a to-do app.",
       "ui": {
         "problemLabel": "PROBLEM STATEMENT",
         "solutionLabel": "CREATIVE SOLUTION",
@@ -2717,11 +2713,11 @@ export const translations = {
       },
       "items": {
         "proj-01": {
-          "subtitle": "Website Informasi Pendaftaran Mahasiswa Baru Kampus",
+          "subtitle": "Website informasi pendaftaran mahasiswa baru kampus",
           "category": "Portal Kampus / Web System",
           "role": "FullStack Web Developer",
           "client": "ITESA Muhammadiyah Semarang",
-          "description": "Website yang dibangun untuk memberi informasi tentang pendaftaran mahasiswa baru ITESA, dibangun dengan sistem Laravel.",
+          "description": "Website informasi pendaftaran mahasiswa baru ITESA, dibangun dengan Laravel.",
           "deliverables": [
             "Penyajian informasi jalur pendaftaran mahasiswa baru dan program studi interaktif",
             "Sistem formulir daring dan dashboard verifikasi berkas calon mahasiswa",
@@ -2751,14 +2747,14 @@ export const translations = {
           }
         },
         "proj-02": {
-          "subtitle": "Kalkulator Basic dengan Bot Matematis & Personalisasi Tema",
+          "subtitle": "Kalkulator basic dengan bot matematis dan personalisasi tema",
           "category": "Web Tool / Komputasi",
           "role": "Frontend Developer",
           "client": "Kakas Personal & Edukasi",
-          "description": "Kalkulator basic dengan dipadukan sistem bot matematis, dan sistem personalize tema sesuai selera, dibangun hanya memakai HTML, CSS, JS.",
+          "description": "Kalkulator dengan bot matematika dan tema yang bisa diubah sesuai selera, dibuat hanya dengan HTML, CSS, dan JavaScript.",
           "deliverables": [
             "Mesin kalkulasi matematika cepat dan responsif di browser",
-            "Sistem bot matematis cerdas yang memandu perhitungan dan formula",
+            "Bot matematika yang memandu perhitungan dan formula",
             "Fitur personalisasi tema visual dinamis yang dapat disesuaikan pengguna"
           ],
           "metrics": {
@@ -2769,7 +2765,7 @@ export const translations = {
           "deepDive": {
             "architectureSchema": "[USER INPUT: KEYBOARD & TOUCH NUMPAD]\n       │\n       ▼ EVENT LISTENER\n[PARSER & TOKENIZER: MATH EXPRESSION]\n       │\n       ├──► [MATH BOT ENGINE: AUTO-CORRECT & CALC]\n       │\n       ├──► [THEME ENGINE: DYNAMIC CSS VARIABLES]\n       │           │\n       │           └──► [LOCALSTORAGE STATE PERSISTENCE]\n       │\n       ▼ REAL-TIME DOM RENDERER\n[CANVAS / LCD DISPLAY: RESULT & HISTORY LOG]",
             "problem": "Banyak kalkulator web yang monoton, kaku tanpa interaksi asisten, dan tidak memungkinkan pengguna mengubah tema sesuai preferensi personal.",
-            "solution": "Mengembangkan Mathicalc murni dengan HTML, CSS, dan JavaScript — memadukan bot asisten matematis dan tema personalisasi tanpa dependensi berat.",
+            "solution": "Mengembangkan Mathicalc dengan HTML, CSS, dan JavaScript saja. Mathicalc memiliki bot asisten matematika dan tema yang bisa diubah, tanpa dependensi tambahan.",
             "benchmarks": [
               {
                 "metric": "Waktu Muat",
@@ -2785,11 +2781,11 @@ export const translations = {
           }
         },
         "proj-03": {
-          "subtitle": "Platform Belajar Coding dari Zero to Pro",
+          "subtitle": "Platform belajar coding dari zero to pro",
           "category": "E-Learning / Developer Tools",
           "role": "FullStack Developer",
           "client": "Komunitas Belajar Coding",
-          "description": "Website yang dibangun untuk pengguna untuk belajar coding dari zero to pro, dibangun dengan lingkungan Laravel.",
+          "description": "Website untuk belajar coding dari zero to pro, dibangun dengan Laravel.",
           "deliverables": [
             "Kurikulum materi pemrograman terstruktur dari level pemula hingga mahir",
             "Antarmuka belajar interaktif dengan latihan praktis dan evaluasi pemahaman",
@@ -2803,7 +2799,7 @@ export const translations = {
           "deepDive": {
             "architectureSchema": "[LEARNER / DEVELOPER UI]\n       │\n       ▼ HTTPS REST API\n[LARAVEL CORE: LEARNING ROADMAP ENGINE]\n       │\n       ├──► [MODULAR CURRICULUM: ZERO TO PRO]\n       │           │\n       │           ├──► [CODE PLAYGROUND & SANDBOX]\n       │           └──► [INTERACTIVE SYNTAX VALIDATOR]\n       │\n       ├──► [PROGRESSION & MILESTONE TRACKER]\n       │\n       ▼ ELOQUENT ORM\n[MYSQL DATABASE: USERS, LESSONS, COMPLETIONS]",
             "problem": "Banyak calon programmer pemula kesulitan belajar mandiri karena materi online yang terpecah-pecah tanpa panduan tahapan yang runtut.",
-            "solution": "Membangun platform TurnCode di atas Laravel untuk menghadirkan alur belajar terpadu 'Zero to Pro' yang terarah dan mudah dipahami.",
+            "solution": "Membangun platform TurnCode dengan Laravel dan alur belajar bertahap dari zero to pro.",
             "benchmarks": [
               {
                 "metric": "Alur Pembelajaran",
@@ -2819,7 +2815,7 @@ export const translations = {
           }
         },
         "proj-04": {
-          "subtitle": "Deteksi Gejala Alzheimer Berbasis LLM & XGBoost",
+          "subtitle": "Deteksi gejala Alzheimer berbasis LLM dan XGBoost",
           "category": "Healthcare AI / Web Intelligence",
           "role": "AI & FullStack Developer",
           "client": "Inisiatif Riset Kesehatan Kognitif",
@@ -2837,7 +2833,7 @@ export const translations = {
           "deepDive": {
             "architectureSchema": "[CLINICAL ASSESSMENT / USER QUESTIONNAIRE]\n       │\n       ▼ WEBSOCKET / REST API\n[FASTAPI & LLM INTERFACE LAYER]\n       │\n       ├──► [LLM: SYMPTOM EXTRACTION & CONTEXT]\n       │           │\n       │           ▼\n       ├──► [FEATURE VECTOR PREPROCESSING]\n       │           │\n       │           ▼\n       ├──► [XGBOOST CLASSIFIER: ALZHEIMER RISK]\n       │           │\n       │           └──► [DECISION TREE ENSEMBLE SCORING]\n       │\n       ▼ JSON TELEMETRY RESPONSE\n[DIAGNOSTIC RADAR & RISK STRATIFICATION UI]",
             "problem": "Pemeriksaan gejala alzheimer pada fase awal sering terlambat karena keterbatasan akses skrining kognitif awal yang cepat dan terjangkau.",
-            "solution": "Menggabungkan model LLM untuk ekstraksi interaksi bahasa dengan ketepatan algoritma tabular XGBoost guna mengkalkulasi indikasi gejala secara akurat.",
+            "solution": "Menggabungkan model LLM untuk mengekstrak gejala dari bahasa pengguna dengan algoritma XGBoost untuk menghitung indikasi gejala.",
             "benchmarks": [
               {
                 "metric": "Akurasi Prediksi",
@@ -2853,11 +2849,11 @@ export const translations = {
           }
         },
         "proj-05": {
-          "subtitle": "Platform Pertanian Modern & Optimasi Lahan",
+          "subtitle": "Platform pertanian modern dan optimasi lahan",
           "category": "Agrotech / Perlombaan",
           "role": "Web Designer & Developer",
           "client": "Inisiatif Kompetisi Agroteknologi",
-          "description": "Membangun platform digital yang memadukan prinsip pertanian tradisional dengan teknologi modern untuk meningkatkan efisiensi dan produktivitas petani lokal.",
+          "description": "Platform web yang membantu petani lokal meningkatkan hasil tani dengan katalog informasi dan kalkulasi panen.",
           "deliverables": [
             "Perancangan antarmuka agrotech yang ramah pengguna",
             "Katalog informasi pertanian modern dan kiat peningkatan hasil tani",
@@ -2887,14 +2883,14 @@ export const translations = {
           }
         },
         "proj-06": {
-          "subtitle": "Solusi Digital Pemesanan Restoran & F&B",
+          "subtitle": "Solusi digital pemesanan restoran dan F&B",
           "category": "Web Application / F&B",
           "role": "FullStack Developer",
           "client": "Restoran & Mitra Kuliner",
-          "description": "Sistem pemesanan makanan online yang memudahkan pelanggan memilih menu hidangan secara instan dan mengoptimalkan alur manajemen pesanan kasir.",
+          "description": "Sistem pemesanan makanan online untuk memilih menu dan mengelola pesanan kasir.",
           "deliverables": [
             "Katalog menu makanan interaktif dengan filter kategori dan rincian harga",
-            "Sistem keranjang belanja pesanan (order cart) real-time",
+            "Keranjang pesanan real-time",
             "Ringkasan pesanan otomatis untuk meminimalisir kesalahan pelayan"
           ],
           "metrics": {
@@ -2921,11 +2917,11 @@ export const translations = {
           }
         },
         "proj-07": {
-          "subtitle": "Sistem Manajemen Sirkulasi & Katalog Pustaka",
+          "subtitle": "Sistem manajemen sirkulasi dan katalog pustaka",
           "category": "Management System / Education",
           "role": "Backend & Database Developer",
           "client": "Institusi Pendidikan & Perpustakaan",
-          "description": "Platform perpustakaan modern terpadu untuk memudahkan pencarian katalog buku, pengelolaan sirkulasi peminjaman, serta pendataan inventaris pustaka.",
+          "description": "Sistem perpustakaan untuk mencari katalog buku, mengelola peminjaman, dan mendata inventaris.",
           "deliverables": [
             "Katalog buku dinamis dengan indikator ketersediaan real-time",
             "Pencatatan sirkulasi peminjaman dan penghitungan denda keterlambatan",
@@ -2955,15 +2951,15 @@ export const translations = {
           }
         },
         "proj-08": {
-          "subtitle": "Portal Administrasi Keuangan Sekolah Terpadu",
+          "subtitle": "Portal administrasi keuangan sekolah terpadu",
           "category": "FinTech / Administration",
           "role": "Fullstack Developer",
           "client": "Administrasi Sekolah",
-          "description": "Aplikasi pembayaran SPP online yang transparan, akuntabel, dan aman untuk memudahkan orang tua murid serta pihak administrasi sekolah memantau iuran bulanan.",
+          "description": "Aplikasi pembayaran SPP online untuk orang tua murid dan administrasi sekolah memantau iuran bulanan.",
           "deliverables": [
             "Pencatatan riwayat transaksi SPP dan tagihan siswa per periode",
-            "Cetak bukti pembayaran/kwitansi digital transparan",
-            "Manajemen otentikasi multi-peran (Admin, Petugas, Siswa)"
+            "Cetak bukti pembayaran dan kwitansi digital",
+            "Autentikasi multi-peran: Admin, Petugas, dan Siswa"
           ],
           "metrics": {
             "timeline": "2023",
@@ -2989,14 +2985,14 @@ export const translations = {
           }
         },
         "proj-09": {
-          "subtitle": "Aplikasi Manajemen Tugas Harian & Produktivitas",
+          "subtitle": "Aplikasi manajemen tugas harian dan produktivitas",
           "category": "Productivity / Web Tool",
           "role": "Frontend Developer & UI Designer",
           "client": "Aplikasi Personal & Komunitas",
-          "description": "Aplikasi produktivitas yang dirancang minimalis dan bersih untuk membantu pengguna melacak, menyusun prioritas, dan menyelesaikan tugas harian secara terorganisir.",
+          "description": "Aplikasi to-do untuk mencatat, memprioritaskan, dan menyelesaikan tugas harian.",
           "deliverables": [
             "Antarmuka penambahan, checklist, dan penghapusan tugas instan",
-            "Filter status tugas (Semua, Aktif, Selesai) secara responsif",
+            "Filter status tugas: Semua, Aktif, dan Selesai",
             "Penyimpanan lokal instan tanpa jeda pemuatan server"
           ],
           "metrics": {
@@ -3007,7 +3003,7 @@ export const translations = {
           "deepDive": {
             "architectureSchema": "[USER TASK INPUT & GESTURE CONTROL]\n       │\n       ▼\n[TASK STATE MANAGER: CRUD & FILTERING]\n       │\n       ├──► [PRIORITY MATRIX: HIGH / MED / LOW]\n       │\n       ├──► [LOCALSTORAGE OFFLINE SYNC]\n       │\n       ▼ REACTIVE DOM\n[INTERACTIVE TASK LIST & COMPLETION TELEMETRY]",
             "problem": "Banyak aplikasi to-do dipenuhi fitur rumit dan iklan yang justru mengganggu fokus pengguna saat mencatat agenda penting harian.",
-            "solution": "Merancang Mylist Todo App dengan tampilan bersih, fokus navigasi cepat, dan persistensi LocalStorage untuk akses kilat setiap saat.",
+            "solution": "Merancang Mylist Todo App dengan tampilan bersih dan penyimpanan LocalStorage agar data tetap ada saat halaman dibuka lagi.",
             "benchmarks": [
               {
                 "metric": "Waktu Muat",
@@ -3027,59 +3023,59 @@ export const translations = {
     "another": {
       "sectionTitle": "考察と開発ノート",
       "sectionSub": "EXPERIENCE & TECH EXPLORATIONS // HANZZ",
-      "headline": "Creative Notes & Developer Reflections",
-      "description": "A collection of personal articles, reflections on creative processes, and insights from crafting web interfaces and collaborating.",
+      "headline": "Creative notes and developer reflections",
+      "description": "Notes on designing web interfaces, working in teams, and trying new technology.",
       "ui": {
         "readTimeLabel": "READ TIME:",
-        "inspectLabel": "READ ARTICLE ↗",
+        "inspectLabel": "READ ARTICLE",
         "synthBtnPlay": "Play Resonant Tone",
         "synthBtnStop": "Stop Tone",
         "dispatchTag": "CONTACT // CREATIVE COLLABORATION",
-        "dispatchTitle": "Start a Collaboration",
-        "dispatchLead": "Open for website development projects, UI/UX design discussions, technical exchanges, or exciting creative partnerships.",
+        "dispatchTitle": "Start a collaboration",
+        "dispatchLead": "Open for website projects, UI/UX design work, technical discussions, and other creative collaboration.",
         "copyLabel": "[COPY]",
         "copiedToast": "COPIED TO CLIPBOARD"
       },
       "gardenNotes": {
         "note-01": {
-          "title": "4 Tahun di Dunia IT: Dari Rasa Penasaran Hingga Solusi Nyata",
+          "title": "Empat tahun di dunia IT",
           "readTime": "5 menit baca",
-          "excerpt": "Perjalanan dari awal mula ketertarikan pada teknologi, belajar pemrograman mandiri, hingga merancang website dan aplikasi yang bermanfaat bagi sesama."
+          "excerpt": "Cerita tentang ketertarikan awal pada teknologi, belajar pemrograman secara mandiri, dan membuat website serta aplikasi."
         },
         "note-02": {
-          "title": "Menghubungkan Desain UI/UX dengan Kode Web yang Interaktif",
+          "title": "Menghubungkan desain UI/UX dengan kode web interaktif",
           "readTime": "4 menit baca",
-          "excerpt": "Bagaimana desainer yang memahami kode dapat menciptakan pengalaman pengguna yang mulus tanpa batasan antara rancangan visual dan implementasi teknis."
+          "excerpt": "Cara desainer yang memahami kode menjaga pengalaman pengguna tetap konsisten antara rancangan visual dan implementasi."
         },
         "note-03": {
-          "title": "Studi dan Kolaborasi Terapan di ITESA Muhammadiyah Semarang",
+          "title": "Studi dan kolaborasi terapan di ITESA Muhammadiyah Semarang",
           "readTime": "5 menit baca",
-          "excerpt": "Pengalaman belajar di kampus ITESA Muhammadiyah Semarang yang memperkaya wawasan logika komputasi, pemecahan masalah analitis, dan kerja sama tim."
+          "excerpt": "Pengalaman belajar di ITESA Muhammadiyah Semarang: logika komputasi, pemecahan masalah, dan kerja sama tim."
         }
       },
       "audioSynth": {
-        "title": "Generator Nada Resonansi Harmonis",
-        "tagline": "Frekuensi Alami 432Hz • Node Audio Web Interaktif",
+        "title": "Generator nada resonansi harmonis",
+        "tagline": "Frekuensi alami 432Hz • Node audio web interaktif",
         "frequencies": [
           {
-            "label": "Ground (108Hz)",
+            "label": "Ground 108Hz",
             "freq": 108,
-            "desc": "Nada Sub-Bass Alami"
+            "desc": "Nada sub-bass alami"
           },
           {
-            "label": "Sage Earth (216Hz)",
+            "label": "Sage Earth 216Hz",
             "freq": 216,
-            "desc": "Harmoni Fondasi Dasar"
+            "desc": "Harmoni fondasi dasar"
           },
           {
-            "label": "Natural Calm (432Hz)",
+            "label": "Natural Calm 432Hz",
             "freq": 432,
-            "desc": "Nada Resonansi Harmonis"
+            "desc": "Nada resonansi harmonis"
           },
           {
-            "label": "Canopy Air (864Hz)",
+            "label": "Canopy Air 864Hz",
             "freq": 864,
-            "desc": "Nada Cerah Atmosfer"
+            "desc": "Nada cerah atmosfer"
           }
         ]
       },
@@ -3087,17 +3083,17 @@ export const translations = {
         "typography": "Syne • Instrument Serif • Plus Jakarta Sans • JetBrains Mono",
         "gridSystem": "Tata Letak Responsif & Desain Interaktif",
         "carbonEstimate": "Dioptimalkan untuk Performa Cepat & Aksesibilitas",
-        "license": "Portofolio © 2026 Haidar Rifky Andrianno (Hanzz / HanzzSama). Semarang, Jawa Tengah, Indonesia."
+        "license": "Portofolio © 2026 Haidar Rifky Andrianno, alias Hanzz atau HanzzSama. Semarang, Jawa Tengah, Indonesia."
       }
     },
     "github": {
       "sectionTitle": "GIT TELEMETRY & VAULT",
       "sectionSub": "PUBLIC REPOSITORIES // CONTRIBUTION MATRIX",
-      "headline": "Open Repositories & Contribution Matrix",
-      "description": "Public source repositories, regular commits, and real software engineering projects documented on GitHub @HanzzSama.",
+      "headline": "Open repositories and contributions",
+      "description": "Public repositories, regular commits, and personal projects on GitHub @HanzzSama.",
       "profile": {
-        "bio": "Haidar Rifky Andrianno (Hanzz) // Designer & Web Developer. ITESA Muhammadiyah Semarang.",
-        "actionLabel": "VIEW GITHUB PROFILE ↗",
+        "bio": "Haidar Rifky Andrianno, also known as Hanzz. Designer and web developer. Student at ITESA Muhammadiyah Semarang.",
+        "actionLabel": "VIEW GITHUB PROFILE",
         "stats": [
           {
             "label": "PUBLIC REPOS",
@@ -3139,32 +3135,32 @@ export const translations = {
       },
       "repositories": {
         "repo-01": {
-          "description": "Mesin kalkulator komputasi presisi tinggi dengan evaluasi rumus matematika bertahap dan visualisasi ekspresi real-time.",
+          "description": "Mesin kalkulator dengan evaluasi rumus matematika bertahap dan visualisasi ekspresi real-time.",
           "badge": "CORE ENGINE",
           "tag": "COMPUTATION"
         },
         "repo-02": {
-          "description": "Inti pustaka parsing aljabar dan struktur data pohon sintaks matematika untuk evaluasi formula tanpa overhead.",
+          "description": "Pustaka parsing aljabar dan pohon sintaks matematika untuk mengevaluasi formula.",
           "badge": "LIBRARY",
           "tag": "ALGORITHM"
         },
         "repo-03": {
-          "description": "Sistem manajemen pembayaran SPP dan administrasi keuangan institusi pendidikan berbasis arsitektur MVC terstruktur.",
+          "description": "Sistem pembayaran SPP dan administrasi keuangan sekolah dengan arsitektur MVC.",
           "badge": "ENTERPRISE",
           "tag": "ACADEMIA"
         },
         "repo-04": {
-          "description": "Platform e-ticketing dan reservasi tiket terdistribusi dengan alur checkout instan dan validasi tiket QR aman.",
+          "description": "Platform e-ticketing dengan checkout dan validasi tiket QR.",
           "badge": "FULLSTACK",
           "tag": "COMMERCE"
         },
         "repo-05": {
-          "description": "Katalog e-commerce gaya hidup urban dengan sistem keranjang belanja modular, filter kategori dinamis, dan UI responsif.",
+          "description": "Katalog e-commerce dengan keranjang belanja, filter kategori, dan UI responsif.",
           "badge": "COMMERCE",
           "tag": "REACTIVE"
         },
         "repo-06": {
-          "description": "Pintu gerbang agregasi audio digital dan kurasi playlist berkinerja tinggi dengan antarmuka media taktil.",
+          "description": "Agregator audio digital dan kurasi playlist dengan antarmuka pemutar.",
           "badge": "STREAMING",
           "tag": "AUDIO WEB"
         }
@@ -3174,7 +3170,7 @@ export const translations = {
       "sectionIndex": "06.A",
       "title": "KINETIC MONOLITH SIMULATOR",
       "subtitle": "REAL-TIME 3D WIREFRAME // ROTATIONAL GRAVITY GYROSCOPE",
-      "description": "Eksperimen grafis komputasional 3D interaktif murni Canvas. Drag untuk merotasi geometri monolit, ubah topologi bentuk, dan amati pembelokan sumbu koordinat secara real-time.",
+      "description": "Eksperimen grafis 3D interaktif yang dibuat hanya dengan Canvas. Seret untuk memutar monolit, ganti bentuk, dan lihat sumbu koordinat berubah secara real-time.",
       "modes": [
         {
           "id": "monolith",
@@ -3236,8 +3232,8 @@ export const translations = {
       "sectionIndex": "07",
       "sectionTitle": "SUASANA & CUACA",
       "sectionSub": "TELEMETRI CUACA KOTA SEMARANG // REAL-TIME",
-      "headline": "Cuaca Real-Time & Suasana Atmosfer",
-      "description": "Visualisasi interaktif cuaca real-time Kota Semarang (07°00'S 110°25'E) dengan suasana atmosfer dinamis, garis isobar topografi, dan nada harmonis.",
+      "headline": "Cuaca real-time dan suasana atmosfer",
+      "description": "Cuaca real-time Kota Semarang di 07°00'S 110°25'E, dengan visual atmosfer, garis isobar, dan nada harmonis.",
       "topologyBadge": "KOTA SEMARANG // 07°00'S 110°25'E • 82m ASL",
       "ui": {
         "isobars": "[ISOBARS]",
@@ -3248,7 +3244,7 @@ export const translations = {
         "humidity": "Kelembapan Udara",
         "cloudCover": "Tutupan Awan",
         "apparent": "APPARENT:",
-        "sync": "REFRESH TELEMETRI ↻",
+        "sync": "REFRESH TELEMETRI",
         "biosphereFootprint": "NODE: SEMARANG // JAWA TENGAH",
         "solarCycle": "SIKLUS MATAHARI // SUASANA REAL"
       }
@@ -3259,23 +3255,22 @@ export const translations = {
       "defaultThought": "Connecting to Semarang Node... [Haidar Rifky Andrianno]",
       "tips": {
         "pet": "Pet HanzzBot",
-        "dance": "Dance Together",
-        "matcha": "Offer Coffee / Matcha",
-        "expr": "Change Expression",
-        "crown": "Royal Crown",
-        "talk": "Chat with Bot",
-        "sleep": "Sleep / Wake",
-        "sound": "Audio On/Off",
-        "toggle": "Collapse / Expand"
+        "dance": "Dance together",
+        "matcha": "Offer coffee / matcha",
+        "expr": "Change expression",
+        "crown": "Royal crown",
+        "talk": "Chat with bot",
+        "sleep": "Sleep / wake",
+        "sound": "Audio on/off",
+        "toggle": "Collapse / expand"
       }
     }
   },
   "de": {
     "langName": "Deutsch",
     "langCode": "DE",
-    "flag": "🇩🇪",
-    "documentTitle": "Hanzz Portfolio — Designer, Creative Collaborator & Web Developer",
-    "documentDesc": "Portfolio of Haidar Rifky Andrianno (Hanzz / HanzzSama). Designer, Creative Collaborator, and Web Developer with 4 years in IT based in Semarang, Indonesia.",
+    "documentTitle": "Hanzz Portfolio | Designer, Creative Collaborator & Web Developer",
+    "documentDesc": "Portfolio of Haidar Rifky Andrianno, also known as Hanzz or HanzzSama. Designer, creative collaborator, and web developer with 4 years in IT, based in Semarang, Indonesia.",
     "nav": {
       "welcome": "01.WEL",
       "about": "02.ABT",
@@ -3330,187 +3325,187 @@ export const translations = {
       "sectionTitle": "ÜBER MICH",
       "sectionSub": "HAIDAR RIFKY ANDRIANNO // SEMARANG CITY",
       "ethosTitle": "Wertvolles Design und neue Erfahrungen schaffen",
-      "photoCaption": "Photo of Haidar Rifky Andrianno — Pacitan Beach",
+      "photoCaption": "Photo of Haidar Rifky Andrianno at Pacitan Beach",
       "locationBadge": "Indonesia | Central Java | Semarang City",
       "ethosParagraphs": [
-        "I am a designer, creative collaborator, and web developer with 4 years of experience in the IT world. Creating new designs and meaningful experiences was my primary goal entering the digital craft. Starting from intense curiosity to recognized development, my work encompasses web UI/UX and mobile UI/UX, as well as crafting clean, interactive web applications.",
-        "It is an honor to build a diverse and rewarding career path. I am always thrilled to learn new skills, explore fresh experiences, and welcome creative challenges that deliver a genuine positive impact."
+        "I am a designer, creative collaborator, and web developer with 4 years of experience in IT. I entered IT to create new designs and experiences. My work covers web and mobile UI/UX design and simple, interactive websites.",
+        "I keep learning new skills and taking on new creative challenges."
       ],
       "pillars": [
         {
           "code": "FOCUS-01",
           "title": "Web & Mobile UI/UX",
-          "desc": "Crafting clean, aesthetic, and intuitive visual interfaces, prioritizing user comfort and effortless navigation."
+          "desc": "Designing clean interface layouts that are easy to use on the web and in mobile apps."
         },
         {
           "code": "FOCUS-02",
-          "title": "Interactive Web Development",
-          "desc": "Building websites with clean codebases, fast performance, and rich, responsive interactivity across all devices."
+          "title": "Interactive web development",
+          "desc": "Building websites with tidy code and interactions that work on phones, tablets, and desktops."
         },
         {
           "code": "FOCUS-03",
-          "title": "Creative Collaboration",
-          "desc": "Working collaboratively across multidisciplinary teams to transform ideas into tangible digital solutions."
+          "title": "Creative collaboration",
+          "desc": "Working in teams to turn requirements into digital products."
         },
         {
           "code": "FOCUS-04",
-          "title": "Continuous Learning",
-          "desc": "Constantly eager to explore emerging technologies, interface trends, and modern tools for ongoing growth."
+          "title": "Continuous learning",
+          "desc": "Learning new design tools and practicing programming regularly."
         }
       ],
-      "timelineTitle": "Career Chronology & Practical Experience",
+      "timelineTitle": "Career timeline and experience",
       "timeline": [
         {
-          "year": "2026 — SEKARANG",
-          "title": "Pengembangan Lanjutan Frontend & Backend",
+          "year": "2026 to present",
+          "title": "Pengembangan lanjutan frontend dan backend",
           "place": "Semarang, Jawa Tengah",
-          "description": "Memperluas keilmuan di bidang frontend dan backend, merancang arsitektur sistem modern, serta memperdalam rekayasa web interaktif berkinerja tinggi."
+          "description": "Mempelajari frontend dan backend, merancang arsitektur sistem, dan mengembangkan web interaktif."
         },
         {
-          "year": "2025 — 2026",
-          "title": "Artificial Intelligence & Fullstack Engineering",
+          "year": "2025 to 2026",
+          "title": "Artificial intelligence dan fullstack engineering",
           "place": "ITESA Muhammadiyah Semarang",
-          "description": "Memperdalam keilmuan untuk memahami lebih dalam seputar artifisial inteligensi dan fullstack developer, sembari menempuh pendidikan perguruan tinggi di ITESA Muhammadiyah Semarang."
+          "description": "Mempelajari artificial intelligence dan fullstack development sambil kuliah di ITESA Muhammadiyah Semarang."
         },
         {
-          "year": "2024 — 2025",
-          "title": "Pengembangan Skill Coding & Fullstack Developer",
+          "year": "2024 to 2025",
+          "title": "Pengembangan keterampilan coding dan fullstack developer",
           "place": "Semarang, Jawa Tengah",
-          "description": "Mengembangkan skill coding dan pemahaman mendalam di dunia frontend dan backend, serta membangun kapabilitas jobdesk fullstack developer."
+          "description": "Melatih coding frontend dan backend untuk bekerja sebagai fullstack developer."
         },
         {
-          "year": "2022 — 2024",
-          "title": "Eksplorasi Web, Aplikasi & Software Engineering",
+          "year": "2022 to 2024",
+          "title": "Eksplorasi web, aplikasi, dan software engineering",
           "place": "SMK TEXMACO Semarang",
-          "description": "Memulai eksplorasi di dunia website dan aplikasi serta membangun background IT software engineering di bangku SMK TEXMACO Semarang."
+          "description": "Mulai membuat website dan aplikasi serta mempelajari software engineering di SMK TEXMACO Semarang."
         },
         {
-          "year": "2020 — 2022",
-          "title": "Eksplorasi Perdana Cyber Security Tools",
+          "year": "2020 to 2022",
+          "title": "Eksplorasi awal cyber security tools",
           "place": "SMP TEXMACO Semarang",
-          "description": "Memulai eksplorasi awal di dunia IT dengan mempelajari cyber security tools di bangku SMP TEXMACO Semarang."
+          "description": "Mulai mempelajari cyber security tools di SMP TEXMACO Semarang."
         }
       ]
     },
     "skills": {
       "sectionTitle": "FÄHIGKEITEN & TOOLS",
-      "sectionSub": "17 TECHNICAL & VISUAL CAPABILITIES // TESTED",
-      "headline": "Skills & Tool Mastery",
-      "description": "17 technical and visual competencies developed across 4 years in the IT landscape, organized into four clean domains.",
+      "sectionSub": "17 TECHNICAL AND VISUAL SKILLS",
+      "headline": "Skills and tools",
+      "description": "17 technical and visual skills from 4 years of work in IT, grouped into 4 areas.",
       "matrixTiers": [
         {
           "tierId": "TIER-01",
-          "layerName": "Frontend & Web Core",
-          "concept": "Antarmuka & Pengalaman Web",
+          "layerName": "Frontend & web core",
+          "concept": "Antarmuka & pengalaman web",
           "colorAccent": "var(--color-botanical-sage)",
           "nodes": [
             {
               "name": "HTML",
-              "spec": "Semantik & Struktur Standar Web",
+              "spec": "Semantik & struktur standar web",
               "tag": "CORE"
             },
             {
               "name": "CSS",
-              "spec": "Desain Responsif, Flexbox, Grid",
+              "spec": "Desain responsif, Flexbox, Grid",
               "tag": "STYLE"
             },
             {
               "name": "JavaScript",
-              "spec": "Interaktivitas Klien & DOM Dinamis",
+              "spec": "Interaktivitas klien & DOM dinamis",
               "tag": "SCRIPT"
             },
             {
               "name": "Tailwind CSS",
-              "spec": "Utility-first Modern Styling",
+              "spec": "Styling dengan utility class",
               "tag": "FRAMEWORK"
             },
             {
               "name": "Bootstrap",
-              "spec": "Komponen Cepat & Tata Letak Grid",
+              "spec": "Komponen cepat & tata letak Grid",
               "tag": "UI KIT"
             }
           ]
         },
         {
           "tierId": "TIER-02",
-          "layerName": "Backend & Database",
-          "concept": "Logika Server & Pengelolaan Data",
+          "layerName": "Backend & database",
+          "concept": "Logika server & pengelolaan data",
           "colorAccent": "var(--color-warm-sand)",
           "nodes": [
             {
               "name": "PHP",
-              "spec": "Pemrograman Server & Arsitektur MVC",
+              "spec": "Pemrograman server & arsitektur MVC",
               "tag": "BACKEND"
             },
             {
               "name": "Laravel",
-              "spec": "Framework PHP Modern & Elegan",
+              "spec": "Framework PHP",
               "tag": "FRAMEWORK"
             },
             {
               "name": "MySQL",
-              "spec": "Manajemen Database Relasional",
+              "spec": "Manajemen database relasional",
               "tag": "DATABASE"
             },
             {
               "name": "Node JS",
-              "spec": "Runtime JavaScript & API Dasar",
+              "spec": "Runtime JavaScript & API dasar",
               "tag": "RUNTIME"
             },
             {
               "name": "Elixir & Phoenix",
-              "spec": "Eksplorasi Konkurensi & Backend",
+              "spec": "Eksplorasi konkurensi & backend",
               "tag": "EXPLORE"
             }
           ]
         },
         {
           "tierId": "TIER-03",
-          "layerName": "Desain UI/UX & Grafis",
-          "concept": "Estetika Spasial & Kreativitas Visual",
+          "layerName": "Desain UI/UX & grafis",
+          "concept": "Estetika spasial & kreativitas visual",
           "colorAccent": "var(--color-botanical-sage)",
           "nodes": [
             {
               "name": "Figma",
-              "spec": "Desain Prototipe UI/UX Web & Mobile",
+              "spec": "Desain prototipe UI/UX web & mobile",
               "tag": "DESIGN"
             },
             {
               "name": "Canva",
-              "spec": "Grafis Digital & Materi Presentasi",
+              "spec": "Grafis digital & materi presentasi",
               "tag": "CREATIVE"
             },
             {
               "name": "Adobe Illustrator",
-              "spec": "Ilustrasi Vektor & Identitas Aset",
+              "spec": "Ilustrasi vektor & identitas aset",
               "tag": "VECTOR"
             },
             {
               "name": "3D Blender",
-              "spec": "Pemodelan Objek 3D Dasar",
+              "spec": "Pemodelan objek 3D dasar",
               "tag": "3D MOD"
             }
           ]
         },
         {
           "tierId": "TIER-04",
-          "layerName": "Alat Produktivitas & Sistem",
-          "concept": "Alur Kerja & Pengelolaan Proyek",
+          "layerName": "Alat produktivitas & sistem",
+          "concept": "Alur kerja & pengelolaan proyek",
           "colorAccent": "var(--color-charcoal-slate)",
           "nodes": [
             {
               "name": "Git & GitHub",
-              "spec": "Version Control & Repositori Proyek",
+              "spec": "Version control & repositori proyek",
               "tag": "VCS"
             },
             {
               "name": "Microsoft Office",
-              "spec": "Dokumentasi & Administrasi Data",
+              "spec": "Dokumentasi & administrasi data",
               "tag": "OFFICE"
             },
             {
               "name": "Kali Linux Tools",
-              "spec": "Pengenalan Jaringan & Keamanan Dasar",
+              "spec": "Pengenalan jaringan & keamanan dasar",
               "tag": "SECURITY"
             }
           ]
@@ -3520,8 +3515,8 @@ export const translations = {
     "projects": {
       "sectionTitle": "PROJEKTE",
       "sectionSub": "9 SELECTED WORKS // WEB & APPLICATIONS",
-      "headline": "Featured Projects Portfolio",
-      "description": "A showcase of 9 projects spanning university portals, interactive calculators, developer learning platforms, Alzheimer's symptom detection AI, and agrotechnology systems.",
+      "headline": "Selected projects",
+      "description": "9 projects: a university admissions portal, a calculator with a math bot, a coding learning platform, an Alzheimer symptom detection system, an agrotech app, a food ordering app, a library system, a school fee payment app, and a to-do app.",
       "ui": {
         "problemLabel": "PROBLEM STATEMENT",
         "solutionLabel": "CREATIVE SOLUTION",
@@ -3532,11 +3527,11 @@ export const translations = {
       },
       "items": {
         "proj-01": {
-          "subtitle": "Website Informasi Pendaftaran Mahasiswa Baru Kampus",
+          "subtitle": "Website informasi pendaftaran mahasiswa baru kampus",
           "category": "Portal Kampus / Web System",
           "role": "FullStack Web Developer",
           "client": "ITESA Muhammadiyah Semarang",
-          "description": "Website yang dibangun untuk memberi informasi tentang pendaftaran mahasiswa baru ITESA, dibangun dengan sistem Laravel.",
+          "description": "Website informasi pendaftaran mahasiswa baru ITESA, dibangun dengan Laravel.",
           "deliverables": [
             "Penyajian informasi jalur pendaftaran mahasiswa baru dan program studi interaktif",
             "Sistem formulir daring dan dashboard verifikasi berkas calon mahasiswa",
@@ -3566,14 +3561,14 @@ export const translations = {
           }
         },
         "proj-02": {
-          "subtitle": "Kalkulator Basic dengan Bot Matematis & Personalisasi Tema",
+          "subtitle": "Kalkulator basic dengan bot matematis dan personalisasi tema",
           "category": "Web Tool / Komputasi",
           "role": "Frontend Developer",
           "client": "Kakas Personal & Edukasi",
-          "description": "Kalkulator basic dengan dipadukan sistem bot matematis, dan sistem personalize tema sesuai selera, dibangun hanya memakai HTML, CSS, JS.",
+          "description": "Kalkulator dengan bot matematika dan tema yang bisa diubah sesuai selera, dibuat hanya dengan HTML, CSS, dan JavaScript.",
           "deliverables": [
             "Mesin kalkulasi matematika cepat dan responsif di browser",
-            "Sistem bot matematis cerdas yang memandu perhitungan dan formula",
+            "Bot matematika yang memandu perhitungan dan formula",
             "Fitur personalisasi tema visual dinamis yang dapat disesuaikan pengguna"
           ],
           "metrics": {
@@ -3584,7 +3579,7 @@ export const translations = {
           "deepDive": {
             "architectureSchema": "[USER INPUT: KEYBOARD & TOUCH NUMPAD]\n       │\n       ▼ EVENT LISTENER\n[PARSER & TOKENIZER: MATH EXPRESSION]\n       │\n       ├──► [MATH BOT ENGINE: AUTO-CORRECT & CALC]\n       │\n       ├──► [THEME ENGINE: DYNAMIC CSS VARIABLES]\n       │           │\n       │           └──► [LOCALSTORAGE STATE PERSISTENCE]\n       │\n       ▼ REAL-TIME DOM RENDERER\n[CANVAS / LCD DISPLAY: RESULT & HISTORY LOG]",
             "problem": "Banyak kalkulator web yang monoton, kaku tanpa interaksi asisten, dan tidak memungkinkan pengguna mengubah tema sesuai preferensi personal.",
-            "solution": "Mengembangkan Mathicalc murni dengan HTML, CSS, dan JavaScript — memadukan bot asisten matematis dan tema personalisasi tanpa dependensi berat.",
+            "solution": "Mengembangkan Mathicalc dengan HTML, CSS, dan JavaScript saja. Mathicalc memiliki bot asisten matematika dan tema yang bisa diubah, tanpa dependensi tambahan.",
             "benchmarks": [
               {
                 "metric": "Waktu Muat",
@@ -3600,11 +3595,11 @@ export const translations = {
           }
         },
         "proj-03": {
-          "subtitle": "Platform Belajar Coding dari Zero to Pro",
+          "subtitle": "Platform belajar coding dari zero to pro",
           "category": "E-Learning / Developer Tools",
           "role": "FullStack Developer",
           "client": "Komunitas Belajar Coding",
-          "description": "Website yang dibangun untuk pengguna untuk belajar coding dari zero to pro, dibangun dengan lingkungan Laravel.",
+          "description": "Website untuk belajar coding dari zero to pro, dibangun dengan Laravel.",
           "deliverables": [
             "Kurikulum materi pemrograman terstruktur dari level pemula hingga mahir",
             "Antarmuka belajar interaktif dengan latihan praktis dan evaluasi pemahaman",
@@ -3618,7 +3613,7 @@ export const translations = {
           "deepDive": {
             "architectureSchema": "[LEARNER / DEVELOPER UI]\n       │\n       ▼ HTTPS REST API\n[LARAVEL CORE: LEARNING ROADMAP ENGINE]\n       │\n       ├──► [MODULAR CURRICULUM: ZERO TO PRO]\n       │           │\n       │           ├──► [CODE PLAYGROUND & SANDBOX]\n       │           └──► [INTERACTIVE SYNTAX VALIDATOR]\n       │\n       ├──► [PROGRESSION & MILESTONE TRACKER]\n       │\n       ▼ ELOQUENT ORM\n[MYSQL DATABASE: USERS, LESSONS, COMPLETIONS]",
             "problem": "Banyak calon programmer pemula kesulitan belajar mandiri karena materi online yang terpecah-pecah tanpa panduan tahapan yang runtut.",
-            "solution": "Membangun platform TurnCode di atas Laravel untuk menghadirkan alur belajar terpadu 'Zero to Pro' yang terarah dan mudah dipahami.",
+            "solution": "Membangun platform TurnCode dengan Laravel dan alur belajar bertahap dari zero to pro.",
             "benchmarks": [
               {
                 "metric": "Alur Pembelajaran",
@@ -3634,7 +3629,7 @@ export const translations = {
           }
         },
         "proj-04": {
-          "subtitle": "Deteksi Gejala Alzheimer Berbasis LLM & XGBoost",
+          "subtitle": "Deteksi gejala Alzheimer berbasis LLM dan XGBoost",
           "category": "Healthcare AI / Web Intelligence",
           "role": "AI & FullStack Developer",
           "client": "Inisiatif Riset Kesehatan Kognitif",
@@ -3652,7 +3647,7 @@ export const translations = {
           "deepDive": {
             "architectureSchema": "[CLINICAL ASSESSMENT / USER QUESTIONNAIRE]\n       │\n       ▼ WEBSOCKET / REST API\n[FASTAPI & LLM INTERFACE LAYER]\n       │\n       ├──► [LLM: SYMPTOM EXTRACTION & CONTEXT]\n       │           │\n       │           ▼\n       ├──► [FEATURE VECTOR PREPROCESSING]\n       │           │\n       │           ▼\n       ├──► [XGBOOST CLASSIFIER: ALZHEIMER RISK]\n       │           │\n       │           └──► [DECISION TREE ENSEMBLE SCORING]\n       │\n       ▼ JSON TELEMETRY RESPONSE\n[DIAGNOSTIC RADAR & RISK STRATIFICATION UI]",
             "problem": "Pemeriksaan gejala alzheimer pada fase awal sering terlambat karena keterbatasan akses skrining kognitif awal yang cepat dan terjangkau.",
-            "solution": "Menggabungkan model LLM untuk ekstraksi interaksi bahasa dengan ketepatan algoritma tabular XGBoost guna mengkalkulasi indikasi gejala secara akurat.",
+            "solution": "Menggabungkan model LLM untuk mengekstrak gejala dari bahasa pengguna dengan algoritma XGBoost untuk menghitung indikasi gejala.",
             "benchmarks": [
               {
                 "metric": "Akurasi Prediksi",
@@ -3668,11 +3663,11 @@ export const translations = {
           }
         },
         "proj-05": {
-          "subtitle": "Platform Pertanian Modern & Optimasi Lahan",
+          "subtitle": "Platform pertanian modern dan optimasi lahan",
           "category": "Agrotech / Perlombaan",
           "role": "Web Designer & Developer",
           "client": "Inisiatif Kompetisi Agroteknologi",
-          "description": "Membangun platform digital yang memadukan prinsip pertanian tradisional dengan teknologi modern untuk meningkatkan efisiensi dan produktivitas petani lokal.",
+          "description": "Platform web yang membantu petani lokal meningkatkan hasil tani dengan katalog informasi dan kalkulasi panen.",
           "deliverables": [
             "Perancangan antarmuka agrotech yang ramah pengguna",
             "Katalog informasi pertanian modern dan kiat peningkatan hasil tani",
@@ -3702,14 +3697,14 @@ export const translations = {
           }
         },
         "proj-06": {
-          "subtitle": "Solusi Digital Pemesanan Restoran & F&B",
+          "subtitle": "Solusi digital pemesanan restoran dan F&B",
           "category": "Web Application / F&B",
           "role": "FullStack Developer",
           "client": "Restoran & Mitra Kuliner",
-          "description": "Sistem pemesanan makanan online yang memudahkan pelanggan memilih menu hidangan secara instan dan mengoptimalkan alur manajemen pesanan kasir.",
+          "description": "Sistem pemesanan makanan online untuk memilih menu dan mengelola pesanan kasir.",
           "deliverables": [
             "Katalog menu makanan interaktif dengan filter kategori dan rincian harga",
-            "Sistem keranjang belanja pesanan (order cart) real-time",
+            "Keranjang pesanan real-time",
             "Ringkasan pesanan otomatis untuk meminimalisir kesalahan pelayan"
           ],
           "metrics": {
@@ -3736,11 +3731,11 @@ export const translations = {
           }
         },
         "proj-07": {
-          "subtitle": "Sistem Manajemen Sirkulasi & Katalog Pustaka",
+          "subtitle": "Sistem manajemen sirkulasi dan katalog pustaka",
           "category": "Management System / Education",
           "role": "Backend & Database Developer",
           "client": "Institusi Pendidikan & Perpustakaan",
-          "description": "Platform perpustakaan modern terpadu untuk memudahkan pencarian katalog buku, pengelolaan sirkulasi peminjaman, serta pendataan inventaris pustaka.",
+          "description": "Sistem perpustakaan untuk mencari katalog buku, mengelola peminjaman, dan mendata inventaris.",
           "deliverables": [
             "Katalog buku dinamis dengan indikator ketersediaan real-time",
             "Pencatatan sirkulasi peminjaman dan penghitungan denda keterlambatan",
@@ -3770,15 +3765,15 @@ export const translations = {
           }
         },
         "proj-08": {
-          "subtitle": "Portal Administrasi Keuangan Sekolah Terpadu",
+          "subtitle": "Portal administrasi keuangan sekolah terpadu",
           "category": "FinTech / Administration",
           "role": "Fullstack Developer",
           "client": "Administrasi Sekolah",
-          "description": "Aplikasi pembayaran SPP online yang transparan, akuntabel, dan aman untuk memudahkan orang tua murid serta pihak administrasi sekolah memantau iuran bulanan.",
+          "description": "Aplikasi pembayaran SPP online untuk orang tua murid dan administrasi sekolah memantau iuran bulanan.",
           "deliverables": [
             "Pencatatan riwayat transaksi SPP dan tagihan siswa per periode",
-            "Cetak bukti pembayaran/kwitansi digital transparan",
-            "Manajemen otentikasi multi-peran (Admin, Petugas, Siswa)"
+            "Cetak bukti pembayaran dan kwitansi digital",
+            "Autentikasi multi-peran: Admin, Petugas, dan Siswa"
           ],
           "metrics": {
             "timeline": "2023",
@@ -3804,14 +3799,14 @@ export const translations = {
           }
         },
         "proj-09": {
-          "subtitle": "Aplikasi Manajemen Tugas Harian & Produktivitas",
+          "subtitle": "Aplikasi manajemen tugas harian dan produktivitas",
           "category": "Productivity / Web Tool",
           "role": "Frontend Developer & UI Designer",
           "client": "Aplikasi Personal & Komunitas",
-          "description": "Aplikasi produktivitas yang dirancang minimalis dan bersih untuk membantu pengguna melacak, menyusun prioritas, dan menyelesaikan tugas harian secara terorganisir.",
+          "description": "Aplikasi to-do untuk mencatat, memprioritaskan, dan menyelesaikan tugas harian.",
           "deliverables": [
             "Antarmuka penambahan, checklist, dan penghapusan tugas instan",
-            "Filter status tugas (Semua, Aktif, Selesai) secara responsif",
+            "Filter status tugas: Semua, Aktif, dan Selesai",
             "Penyimpanan lokal instan tanpa jeda pemuatan server"
           ],
           "metrics": {
@@ -3822,7 +3817,7 @@ export const translations = {
           "deepDive": {
             "architectureSchema": "[USER TASK INPUT & GESTURE CONTROL]\n       │\n       ▼\n[TASK STATE MANAGER: CRUD & FILTERING]\n       │\n       ├──► [PRIORITY MATRIX: HIGH / MED / LOW]\n       │\n       ├──► [LOCALSTORAGE OFFLINE SYNC]\n       │\n       ▼ REACTIVE DOM\n[INTERACTIVE TASK LIST & COMPLETION TELEMETRY]",
             "problem": "Banyak aplikasi to-do dipenuhi fitur rumit dan iklan yang justru mengganggu fokus pengguna saat mencatat agenda penting harian.",
-            "solution": "Merancang Mylist Todo App dengan tampilan bersih, fokus navigasi cepat, dan persistensi LocalStorage untuk akses kilat setiap saat.",
+            "solution": "Merancang Mylist Todo App dengan tampilan bersih dan penyimpanan LocalStorage agar data tetap ada saat halaman dibuka lagi.",
             "benchmarks": [
               {
                 "metric": "Waktu Muat",
@@ -3842,59 +3837,59 @@ export const translations = {
     "another": {
       "sectionTitle": "KREATIVE NOTIZEN",
       "sectionSub": "EXPERIENCE & TECH EXPLORATIONS // HANZZ",
-      "headline": "Creative Notes & Developer Reflections",
-      "description": "A collection of personal articles, reflections on creative processes, and insights from crafting web interfaces and collaborating.",
+      "headline": "Creative notes and developer reflections",
+      "description": "Notes on designing web interfaces, working in teams, and trying new technology.",
       "ui": {
         "readTimeLabel": "READ TIME:",
-        "inspectLabel": "READ ARTICLE ↗",
+        "inspectLabel": "READ ARTICLE",
         "synthBtnPlay": "Play Resonant Tone",
         "synthBtnStop": "Stop Tone",
         "dispatchTag": "CONTACT // CREATIVE COLLABORATION",
-        "dispatchTitle": "Start a Collaboration",
-        "dispatchLead": "Open for website development projects, UI/UX design discussions, technical exchanges, or exciting creative partnerships.",
+        "dispatchTitle": "Start a collaboration",
+        "dispatchLead": "Open for website projects, UI/UX design work, technical discussions, and other creative collaboration.",
         "copyLabel": "[COPY]",
         "copiedToast": "COPIED TO CLIPBOARD"
       },
       "gardenNotes": {
         "note-01": {
-          "title": "4 Tahun di Dunia IT: Dari Rasa Penasaran Hingga Solusi Nyata",
+          "title": "Empat tahun di dunia IT",
           "readTime": "5 menit baca",
-          "excerpt": "Perjalanan dari awal mula ketertarikan pada teknologi, belajar pemrograman mandiri, hingga merancang website dan aplikasi yang bermanfaat bagi sesama."
+          "excerpt": "Cerita tentang ketertarikan awal pada teknologi, belajar pemrograman secara mandiri, dan membuat website serta aplikasi."
         },
         "note-02": {
-          "title": "Menghubungkan Desain UI/UX dengan Kode Web yang Interaktif",
+          "title": "Menghubungkan desain UI/UX dengan kode web interaktif",
           "readTime": "4 menit baca",
-          "excerpt": "Bagaimana desainer yang memahami kode dapat menciptakan pengalaman pengguna yang mulus tanpa batasan antara rancangan visual dan implementasi teknis."
+          "excerpt": "Cara desainer yang memahami kode menjaga pengalaman pengguna tetap konsisten antara rancangan visual dan implementasi."
         },
         "note-03": {
-          "title": "Studi dan Kolaborasi Terapan di ITESA Muhammadiyah Semarang",
+          "title": "Studi dan kolaborasi terapan di ITESA Muhammadiyah Semarang",
           "readTime": "5 menit baca",
-          "excerpt": "Pengalaman belajar di kampus ITESA Muhammadiyah Semarang yang memperkaya wawasan logika komputasi, pemecahan masalah analitis, dan kerja sama tim."
+          "excerpt": "Pengalaman belajar di ITESA Muhammadiyah Semarang: logika komputasi, pemecahan masalah, dan kerja sama tim."
         }
       },
       "audioSynth": {
-        "title": "Generator Nada Resonansi Harmonis",
-        "tagline": "Frekuensi Alami 432Hz • Node Audio Web Interaktif",
+        "title": "Generator nada resonansi harmonis",
+        "tagline": "Frekuensi alami 432Hz • Node audio web interaktif",
         "frequencies": [
           {
-            "label": "Ground (108Hz)",
+            "label": "Ground 108Hz",
             "freq": 108,
-            "desc": "Nada Sub-Bass Alami"
+            "desc": "Nada sub-bass alami"
           },
           {
-            "label": "Sage Earth (216Hz)",
+            "label": "Sage Earth 216Hz",
             "freq": 216,
-            "desc": "Harmoni Fondasi Dasar"
+            "desc": "Harmoni fondasi dasar"
           },
           {
-            "label": "Natural Calm (432Hz)",
+            "label": "Natural Calm 432Hz",
             "freq": 432,
-            "desc": "Nada Resonansi Harmonis"
+            "desc": "Nada resonansi harmonis"
           },
           {
-            "label": "Canopy Air (864Hz)",
+            "label": "Canopy Air 864Hz",
             "freq": 864,
-            "desc": "Nada Cerah Atmosfer"
+            "desc": "Nada cerah atmosfer"
           }
         ]
       },
@@ -3902,17 +3897,17 @@ export const translations = {
         "typography": "Syne • Instrument Serif • Plus Jakarta Sans • JetBrains Mono",
         "gridSystem": "Tata Letak Responsif & Desain Interaktif",
         "carbonEstimate": "Dioptimalkan untuk Performa Cepat & Aksesibilitas",
-        "license": "Portofolio © 2026 Haidar Rifky Andrianno (Hanzz / HanzzSama). Semarang, Jawa Tengah, Indonesia."
+        "license": "Portofolio © 2026 Haidar Rifky Andrianno, alias Hanzz atau HanzzSama. Semarang, Jawa Tengah, Indonesia."
       }
     },
     "github": {
       "sectionTitle": "GIT TELEMETRY & VAULT",
       "sectionSub": "PUBLIC REPOSITORIES // CONTRIBUTION MATRIX",
-      "headline": "Open Repositories & Contribution Matrix",
-      "description": "Public source repositories, regular commits, and real software engineering projects documented on GitHub @HanzzSama.",
+      "headline": "Open repositories and contributions",
+      "description": "Public repositories, regular commits, and personal projects on GitHub @HanzzSama.",
       "profile": {
-        "bio": "Haidar Rifky Andrianno (Hanzz) // Designer & Web Developer. ITESA Muhammadiyah Semarang.",
-        "actionLabel": "VIEW GITHUB PROFILE ↗",
+        "bio": "Haidar Rifky Andrianno, also known as Hanzz. Designer and web developer. Student at ITESA Muhammadiyah Semarang.",
+        "actionLabel": "VIEW GITHUB PROFILE",
         "stats": [
           {
             "label": "PUBLIC REPOS",
@@ -3954,32 +3949,32 @@ export const translations = {
       },
       "repositories": {
         "repo-01": {
-          "description": "Mesin kalkulator komputasi presisi tinggi dengan evaluasi rumus matematika bertahap dan visualisasi ekspresi real-time.",
+          "description": "Mesin kalkulator dengan evaluasi rumus matematika bertahap dan visualisasi ekspresi real-time.",
           "badge": "CORE ENGINE",
           "tag": "COMPUTATION"
         },
         "repo-02": {
-          "description": "Inti pustaka parsing aljabar dan struktur data pohon sintaks matematika untuk evaluasi formula tanpa overhead.",
+          "description": "Pustaka parsing aljabar dan pohon sintaks matematika untuk mengevaluasi formula.",
           "badge": "LIBRARY",
           "tag": "ALGORITHM"
         },
         "repo-03": {
-          "description": "Sistem manajemen pembayaran SPP dan administrasi keuangan institusi pendidikan berbasis arsitektur MVC terstruktur.",
+          "description": "Sistem pembayaran SPP dan administrasi keuangan sekolah dengan arsitektur MVC.",
           "badge": "ENTERPRISE",
           "tag": "ACADEMIA"
         },
         "repo-04": {
-          "description": "Platform e-ticketing dan reservasi tiket terdistribusi dengan alur checkout instan dan validasi tiket QR aman.",
+          "description": "Platform e-ticketing dengan checkout dan validasi tiket QR.",
           "badge": "FULLSTACK",
           "tag": "COMMERCE"
         },
         "repo-05": {
-          "description": "Katalog e-commerce gaya hidup urban dengan sistem keranjang belanja modular, filter kategori dinamis, dan UI responsif.",
+          "description": "Katalog e-commerce dengan keranjang belanja, filter kategori, dan UI responsif.",
           "badge": "COMMERCE",
           "tag": "REACTIVE"
         },
         "repo-06": {
-          "description": "Pintu gerbang agregasi audio digital dan kurasi playlist berkinerja tinggi dengan antarmuka media taktil.",
+          "description": "Agregator audio digital dan kurasi playlist dengan antarmuka pemutar.",
           "badge": "STREAMING",
           "tag": "AUDIO WEB"
         }
@@ -3989,7 +3984,7 @@ export const translations = {
       "sectionIndex": "06.A",
       "title": "KINETIC MONOLITH SIMULATOR",
       "subtitle": "REAL-TIME 3D WIREFRAME // ROTATIONAL GRAVITY GYROSCOPE",
-      "description": "Eksperimen grafis komputasional 3D interaktif murni Canvas. Drag untuk merotasi geometri monolit, ubah topologi bentuk, dan amati pembelokan sumbu koordinat secara real-time.",
+      "description": "Eksperimen grafis 3D interaktif yang dibuat hanya dengan Canvas. Seret untuk memutar monolit, ganti bentuk, dan lihat sumbu koordinat berubah secara real-time.",
       "modes": [
         {
           "id": "monolith",
@@ -4051,8 +4046,8 @@ export const translations = {
       "sectionIndex": "07",
       "sectionTitle": "SUASANA & CUACA",
       "sectionSub": "TELEMETRI CUACA KOTA SEMARANG // REAL-TIME",
-      "headline": "Cuaca Real-Time & Suasana Atmosfer",
-      "description": "Visualisasi interaktif cuaca real-time Kota Semarang (07°00'S 110°25'E) dengan suasana atmosfer dinamis, garis isobar topografi, dan nada harmonis.",
+      "headline": "Cuaca real-time dan suasana atmosfer",
+      "description": "Cuaca real-time Kota Semarang di 07°00'S 110°25'E, dengan visual atmosfer, garis isobar, dan nada harmonis.",
       "topologyBadge": "KOTA SEMARANG // 07°00'S 110°25'E • 82m ASL",
       "ui": {
         "isobars": "[ISOBARS]",
@@ -4063,7 +4058,7 @@ export const translations = {
         "humidity": "Kelembapan Udara",
         "cloudCover": "Tutupan Awan",
         "apparent": "APPARENT:",
-        "sync": "REFRESH TELEMETRI ↻",
+        "sync": "REFRESH TELEMETRI",
         "biosphereFootprint": "NODE: SEMARANG // JAWA TENGAH",
         "solarCycle": "SIKLUS MATAHARI // SUASANA REAL"
       }
@@ -4074,14 +4069,14 @@ export const translations = {
       "defaultThought": "Connecting to Semarang Node... [Haidar Rifky Andrianno]",
       "tips": {
         "pet": "Pet HanzzBot",
-        "dance": "Dance Together",
-        "matcha": "Offer Coffee / Matcha",
-        "expr": "Change Expression",
-        "crown": "Royal Crown",
-        "talk": "Chat with Bot",
-        "sleep": "Sleep / Wake",
-        "sound": "Audio On/Off",
-        "toggle": "Collapse / Expand"
+        "dance": "Dance together",
+        "matcha": "Offer coffee / matcha",
+        "expr": "Change expression",
+        "crown": "Royal crown",
+        "talk": "Chat with bot",
+        "sleep": "Sleep / wake",
+        "sound": "Audio on/off",
+        "toggle": "Collapse / expand"
       }
     }
   }

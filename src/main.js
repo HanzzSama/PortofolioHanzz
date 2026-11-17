@@ -215,11 +215,11 @@ class PortfolioApp {
     const mobileTitles = document.querySelectorAll('.mobile-nav-title');
     if (mobileTitles.length >= 6) {
       const titles = {
-        id: ['Welcome', 'Manifesto', 'Architecture', 'Selected Works', 'GitHub Vault', 'Kinetic Lab', 'Atmosphere'],
-        en: ['Welcome', 'Manifesto', 'Capabilities', 'Selected Works', 'GitHub Vault', 'Kinetic Lab', 'Atmosphere'],
-        zh: ['首页', '建筑宣言', '能力矩阵', '精选作品', '开源仓库', '动能实验室', '气象站'],
-        ja: ['冒頭', '建築宣言', '能力一覧', '選定実績', '開発拠点', '動的実験室', '気象観測'],
-        de: ['Willkommen', 'Manifest', 'Fähigkeiten', 'Ausgewählte Arbeiten', 'GitHub Tresor', 'Kinetisches Labor', 'Atmosphäre']
+        id: ['Beranda', 'Tentang saya', 'Keahlian', 'Proyek', 'GitHub', 'Lab', 'Cuaca'],
+        en: ['Welcome', 'About', 'Skills', 'Projects', 'GitHub', 'Lab', 'Weather'],
+        zh: ['首页', '关于我', '技能', '项目', 'GitHub', '实验室', '天气'],
+        ja: ['トップ', '自己紹介', 'スキル', 'プロジェクト', 'GitHub', 'ラボ', '天気'],
+        de: ['Willkommen', 'Über mich', 'Fähigkeiten', 'Projekte', 'GitHub', 'Labor', 'Wetter']
       };
       const curTitles = titles[lang] || titles.id;
       mobileTitles.forEach((el, idx) => {
@@ -849,27 +849,27 @@ class PortfolioApp {
       </div>
 
       <div class="drawer-section-block">
-        <div class="drawer-section-heading">01 // PROBLEM STATEMENT</div>
+        <div class="drawer-section-heading">01 // Problem</div>
         <p style="font-size: var(--font-body-md); line-height: 1.65; color: var(--text-secondary);">
           ${deepDive.problem || proj.description || 'Penyediaan sistem informasi terstruktur dan efisien.'}
         </p>
       </div>
 
       <div class="drawer-section-block">
-        <div class="drawer-section-heading">02 // ARCHITECTURAL SOLUTION</div>
+        <div class="drawer-section-heading">02 // Solution</div>
         <p style="font-size: var(--font-body-md); line-height: 1.65; color: var(--text-secondary);">
           ${deepDive.solution || proj.description || 'Perancangan arsitektur modular dengan performa andal.'}
         </p>
       </div>
 
       <div class="drawer-section-block">
-        <div class="drawer-section-heading">03 // SYSTEM TOPOLOGY SCHEMA</div>
+        <div class="drawer-section-heading">03 // System diagram</div>
         <pre class="drawer-schema-box"><code>${schemaText}</code></pre>
       </div>
 
       ${deepDive.benchmarks && deepDive.benchmarks.length > 0 ? `
       <div class="drawer-section-block">
-        <div class="drawer-section-heading">04 // PRODUCTION BENCHMARKS</div>
+        <div class="drawer-section-heading">04 // Benchmarks</div>
         <div class="drawer-benchmarks-grid">
           ${deepDive.benchmarks
             .map(
@@ -888,7 +888,7 @@ class PortfolioApp {
 
       ${deepDive.sourceSnippet ? `
       <div class="drawer-section-block">
-        <div class="drawer-section-heading">05 // CODE IMPLEMENTATION KERNEL</div>
+        <div class="drawer-section-heading">05 // Code</div>
         <pre class="drawer-code-preview"><code>${deepDive.sourceSnippet}</code></pre>
       </div>
       ` : ''}
@@ -896,7 +896,7 @@ class PortfolioApp {
       <div style="display: flex; gap: var(--space-md); margin-top: var(--space-md);">
         ${proj.links?.preview && proj.links.preview !== '#' ? `
         <a href="${proj.links.preview}" target="_blank" rel="noopener noreferrer" class="project-btn-primary" data-cursor-target>
-          <span>Live Deployment</span> <span>↗</span>
+          <span>Live Deployment</span>
         </a>
         ` : ''}
         ${proj.links?.code ? `
@@ -928,21 +928,21 @@ class PortfolioApp {
       </div>
 
       <div class="drawer-section-block">
-        <div class="drawer-section-heading">ARCHITECTURAL SPECIFICATION</div>
+        <div class="drawer-section-heading">Specification</div>
         <p style="font-family: var(--font-mono); font-size: 1rem; color: var(--accent-primary); font-weight: 500;">
           ${spec}
         </p>
       </div>
 
       <div class="drawer-section-block">
-        <div class="drawer-section-heading">DESIGN SYSTEM PRINCIPLE</div>
+        <div class="drawer-section-heading">Design principle</div>
         <p style="font-size: var(--font-body-md); line-height: 1.65; color: var(--text-secondary);">
           Node ini diintegrasikan ke dalam metodologi rekayasa sistem Haidar Rifky Andrianno. Menolak pendekatan statis atau library bloatware pihak ketiga; setiap implementasi mengedepankan efisiensi siklus komputasi, kebersihan antarmuka, dan keselarasan biofilik alami.
         </p>
       </div>
 
       <div class="drawer-section-block">
-        <div class="drawer-section-heading">ACADEMIC & ENTERPRISE CONTEXT</div>
+        <div class="drawer-section-heading">Academic and enterprise context</div>
         <p style="font-size: var(--font-body-md); line-height: 1.65; color: var(--text-secondary);">
           Diaplikasikan dalam riset analitik skala institusi pada <strong>ITESA Muhammadiyah Semarang</strong> serta arsitektur antarmuka dan rekayasa FullStack di Semarang.
         </p>

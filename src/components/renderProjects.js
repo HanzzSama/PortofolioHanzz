@@ -346,7 +346,6 @@ export function renderProjects(data) {
               <div class="project-card-actions">
                 <button class="project-btn-primary" data-inspect-project="${proj.id}" data-cursor-target>
                   <span>${projects.ui?.inspect || 'Deep-Dive Topology'}</span>
-                  <span>↗</span>
                 </button>
                 <a href="${proj.links.code}" target="_blank" rel="noopener noreferrer" class="project-btn-secondary" data-cursor-target>
                   <span>${projects.ui?.github || 'GitHub Node'}</span>
@@ -407,7 +406,7 @@ export function renderProjects(data) {
                 <!-- Floating Interactive Hover Capsule (Clean & Non-Colliding) -->
                 <div class="preview-hover-tag font-mono" aria-hidden="true">
                   <span class="hover-tag-dot"></span>
-                  <span>DEEP INSPECT ↗</span>
+                  <span>DEEP INSPECT</span>
                 </div>
               </div>
 

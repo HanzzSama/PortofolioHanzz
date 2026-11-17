@@ -742,7 +742,7 @@ body::before {
   font-family: var(--font-mono);
   font-size: var(--font-mono-micro);
   color: var(--text-muted);
-  text-transform: uppercase;
+  text-transform: none;
   letter-spacing: var(--kerning-mono);
   margin-bottom: 0.65rem;
 }
@@ -767,7 +767,7 @@ body::before {
   font-family: var(--font-mono);
   font-size: var(--font-mono-micro);
   color: var(--text-muted);
-  text-transform: uppercase;
+  text-transform: none;
   letter-spacing: var(--kerning-mono);
   margin-top: 1.25rem;
   margin-bottom: 0.65rem;

@@ -273,7 +273,7 @@
   color: var(--text-muted);
   letter-spacing: 0.06em;
   padding: 0.85rem 1.25rem 0.4rem;
-  text-transform: uppercase;
+  text-transform: none;
 }
 
 .console-tracks-grid {

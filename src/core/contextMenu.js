@@ -35,20 +35,17 @@ export class ContextMenuEngine {
         <span class="context-menu-coord font-mono">07°00'S</span>
       </div>
 
-      <div class="context-menu-section-title font-mono">01 // TELEMETRY &amp; SYSTEM</div>
+      <div class="context-menu-section-title font-mono">01 // Telemetry and system</div>
       <div class="context-menu-items">
         <button class="context-menu-item" data-action="xray" role="menuitem" data-cursor-target>
-          <span class="menu-item-icon">⚡</span>
           <span class="menu-item-text">Buka Telemetri X-Ray</span>
           <span class="menu-item-badge font-mono">[X]</span>
         </button>
         <button class="context-menu-item" data-action="theme" role="menuitem" data-cursor-target>
-          <span class="menu-item-icon">◐</span>
           <span class="menu-item-text">Ganti Tema Biosphere</span>
           <span class="menu-item-badge font-mono" id="context-theme-label">THEME</span>
         </button>
         <button class="context-menu-item" data-action="audio" role="menuitem" data-cursor-target>
-          <span class="menu-item-icon">🎵</span>
           <span class="menu-item-text">Konsol Audio DSP</span>
           <span class="menu-item-badge font-mono">[432Hz]</span>
         </button>
@@ -56,7 +53,7 @@ export class ContextMenuEngine {
 
       <div class="context-menu-divider"></div>
 
-      <div class="context-menu-section-title font-mono">02 // FAST NAVIGATION</div>
+      <div class="context-menu-section-title font-mono">02 // Fast navigation</div>
       <div class="context-menu-items">
         <button class="context-menu-item" data-action="nav" data-target="#welcome" role="menuitem" data-cursor-target>
           <span class="menu-item-index font-mono">01</span>
@@ -90,25 +87,21 @@ export class ContextMenuEngine {
 
       <div class="context-menu-divider"></div>
 
-      <div class="context-menu-section-title font-mono">03 // UTILITIES &amp; SHARE</div>
+      <div class="context-menu-section-title font-mono">03 // Utilities and share</div>
       <div class="context-menu-items">
         <button class="context-menu-item" data-action="copy-url" role="menuitem" data-cursor-target>
-          <span class="menu-item-icon">📋</span>
           <span class="menu-item-text">Salin Tautan Portofolio</span>
           <span class="menu-item-badge font-mono">[URL]</span>
         </button>
         <button class="context-menu-item" data-action="copy-coord" role="menuitem" data-cursor-target>
-          <span class="menu-item-icon">📍</span>
           <span class="menu-item-text">Salin Koordinat Geodesik</span>
           <span class="menu-item-badge font-mono">[GPS]</span>
         </button>
         <button class="context-menu-item" data-action="scroll-top" role="menuitem" data-cursor-target>
-          <span class="menu-item-icon">↑</span>
           <span class="menu-item-text">Kembali ke Paling Atas</span>
           <span class="menu-item-badge font-mono">[TOP]</span>
         </button>
         <button class="context-menu-item" data-action="reload" role="menuitem" data-cursor-target>
-          <span class="menu-item-icon">↻</span>
           <span class="menu-item-text">Muat Ulang Halaman</span>
           <span class="menu-item-badge font-mono">[R]</span>
         </button>
@@ -335,7 +328,7 @@ export class ContextMenuEngine {
 
   showToast(message) {
     if (!this.toastEl) return;
-    this.toastEl.textContent = `[✔] ${message}`;
+    this.toastEl.textContent = message;
     this.toastEl.classList.add('is-visible');
 
     if (this._toastTimer) {
