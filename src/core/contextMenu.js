@@ -108,7 +108,7 @@ export class ContextMenuEngine {
       </div>
 
       <div class="context-menu-footer font-mono">
-        <span>SHIFT + KLIK KANAN // DEFAULT BROWSER MENU</span>
+        <span>Shift + klik kanan untuk menu peramban bawaan</span>
       </div>
     `;
 
@@ -264,7 +264,7 @@ export class ContextMenuEngine {
           document.documentElement.setAttribute('data-theme', next);
           localStorage.setItem('portfolio-theme', next);
         }
-        this.showToast('TEMA BIOSPHERE DIPERBARUI');
+        this.showToast('Tema visual diperbarui');
         break;
 
       case 'audio':
@@ -294,18 +294,18 @@ export class ContextMenuEngine {
       case 'copy-url':
         const currentUrl = window.location.href;
         navigator.clipboard.writeText(currentUrl).then(() => {
-          this.showToast('TAUTAN PORTOFOLIO TERSALIN KE CLIPBOARD');
+          this.showToast('Tautan portofolio tersalin');
         }).catch(() => {
-          this.showToast('GAGAL MENYALIN TAUTAN');
+          this.showToast('Gagal menyalin tautan');
         });
         break;
 
       case 'copy-coord':
         const coordText = "07°00'S, 110°25'E // Semarang, ID";
         navigator.clipboard.writeText(coordText).then(() => {
-          this.showToast('KOORDINAT GEODESIK TERSALIN [07°00\'S 110°25\'E]');
+          this.showToast('Koordinat lokasi tersalin [07°00\'S 110°25\'E]');
         }).catch(() => {
-          this.showToast('GAGAL MENYALIN KOORDINAT');
+          this.showToast('Gagal menyalin koordinat');
         });
         break;
 

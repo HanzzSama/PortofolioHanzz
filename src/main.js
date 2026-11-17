@@ -944,7 +944,7 @@ class PortfolioApp {
       <div class="drawer-section-block">
         <div class="drawer-section-heading">Academic and enterprise context</div>
         <p style="font-size: var(--font-body-md); line-height: 1.65; color: var(--text-secondary);">
-          Diaplikasikan dalam riset analitik skala institusi pada <strong>ITESA Muhammadiyah Semarang</strong> serta arsitektur antarmuka dan rekayasa FullStack di Semarang.
+          Diaplikasikan dalam riset analitik skala institusi pada ITESA Muhammadiyah Semarang serta arsitektur antarmuka dan rekayasa FullStack di Semarang.
         </p>
       </div>
     `;
@@ -963,7 +963,10 @@ class PortfolioApp {
       if (h4s.length > 0) {
         h4s.forEach((h4, idx) => {
           let title = h4.textContent.trim();
-          title = title.replace(/^\d+[\.\s\-]+/, '').trim().toUpperCase();
+          title = title.replace(/^\d+[\.\s\-]+/, '').trim();
+          if (title.length > 0) {
+            title = title.charAt(0).toUpperCase() + title.slice(1);
+          }
 
           let bodyHtml = '';
           let sibling = h4.nextElementSibling;

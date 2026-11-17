@@ -89,7 +89,7 @@ export const SECTION_PERSONAS = {
       <circle cx="8" cy="8" r="3" stroke="currentColor" stroke-width="1.3"/>
       <path d="M8 1V3M8 13V15M1 8H3M13 8H15" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
     `,
-    particle: '✨'
+    particle: '✦'
   },
   about: {
     name: 'Biophilic Dryad',
@@ -101,7 +101,7 @@ export const SECTION_PERSONAS = {
       <path d="M8 2C8 2 4 6.5 4 9.5C4 11.7 5.8 13.5 8 13.5C10.2 13.5 12 11.7 12 9.5C12 6.5 8 2 8 2Z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/>
       <path d="M8 8V11M6.5 9.5L8 11L9.5 9.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
     `,
-    particle: '🍃'
+    particle: '·'
   },
   skills: {
     name: 'Master Artisan',
@@ -113,7 +113,7 @@ export const SECTION_PERSONAS = {
       <circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.3"/>
       <path d="M8 4V12M4 8H12M8 6L10 8L8 10" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
     `,
-    particle: '📐'
+    particle: '•'
   },
   projects: {
     name: 'Hardhat Architect',
@@ -125,7 +125,7 @@ export const SECTION_PERSONAS = {
       <path d="M3 13V6C3 4.5 5 3 8 3C11 3 13 4.5 13 6V13" stroke="currentColor" stroke-width="1.3"/>
       <path d="M2 13H14M6 6H10" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
     `,
-    particle: '⭐'
+    particle: '⋆'
   },
   github: {
     name: 'Cyber Terminal Node',
@@ -139,7 +139,7 @@ export const SECTION_PERSONAS = {
       <circle cx="11" cy="8" r="2" stroke="currentColor" stroke-width="1.2"/>
       <path d="M5 7V9M7 5.5L9 7M7 10.5L9 9" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
     `,
-    particle: '💻'
+    particle: '°'
   },
   lab: {
     name: 'Holographic Polyhedron',
@@ -151,7 +151,7 @@ export const SECTION_PERSONAS = {
       <path d="M8 2L13 5V11L8 14L3 11V5L8 2Z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/>
       <path d="M8 2V14M3 5L13 11M3 11L13 5" stroke="currentColor" stroke-width="0.9" stroke-linecap="round"/>
     `,
-    particle: '🔮'
+    particle: '×'
   },
   another: {
     name: 'Zen Sound Harmonizer',
@@ -163,7 +163,7 @@ export const SECTION_PERSONAS = {
       <circle cx="8" cy="8" r="3.5" stroke="currentColor" stroke-width="1.3"/>
       <path d="M4.5 4.5C3 6 3 10 4.5 11.5M11.5 4.5C13 6 13 10 11.5 11.5M2 2C-0.5 4.5 -0.5 11.5 2 14M14 2C16.5 4.5 16.5 11.5 14 14" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/>
     `,
-    particle: '🎶'
+    particle: '+'
   }
 };
 
@@ -711,7 +711,7 @@ export class HanzzPetEngine {
 
   pingBeacon() {
     this.playSonarPingSound();
-    this.spawnParticles(50, 20, 8, '✨');
+    this.spawnParticles(50, 20, 8, '✦');
     this.setEyeExpression('curious');
     this.say("SYS.BEACON", "Radar suar aktif! Koordinat menyambut Anda di portal arsitektural Haidar Rifky.");
     setTimeout(() => {
@@ -721,7 +721,7 @@ export class HanzzPetEngine {
 
   waterSprout() {
     this.playDropletSound();
-    this.spawnParticles(50, 10, 8, '🍃');
+    this.spawnParticles(50, 10, 8, '·');
     const blossom = document.getElementById('sprout-blossom');
     if (blossom) {
       blossom.setAttribute('r', '2.8');
@@ -736,7 +736,7 @@ export class HanzzPetEngine {
 
   scanSkills() {
     this.playScannerBlipSound();
-    this.spawnParticles(50, 44, 7, '📐');
+    this.spawnParticles(50, 44, 7, '•');
     this.setEyeExpression('code');
     this.say("SYS.SKILL // MATRIX", "Komputasi Stack: Node, React, Cloud & Zero Bloatware terverifikasi 100%!");
     setTimeout(() => {
@@ -746,7 +746,7 @@ export class HanzzPetEngine {
 
   inspectBlueprint() {
     this.playMetalClinkSound();
-    this.spawnParticles(50, 20, 8, '⭐');
+    this.spawnParticles(50, 20, 8, '⋆');
     this.setEyeExpression('sparkle');
     this.say("SYS.BUILD // BLUEPRINT", "Membuka cetak biru: Sistem terdistribusi berdaya tahan tinggi!");
     setTimeout(() => {
@@ -756,7 +756,7 @@ export class HanzzPetEngine {
 
   pulseGitCommits() {
     this.playDataModemSound();
-    this.spawnParticles(50, 44, 9, '💻');
+    this.spawnParticles(50, 44, 9, '°');
     this.setEyeExpression('binary');
     this.say("SYS.GIT // RADAR", "44+ komit riil tahunan di repositori @HanzzSama! Teruji dan transparan.");
     setTimeout(() => {
@@ -766,7 +766,7 @@ export class HanzzPetEngine {
 
   invertGravity() {
     this.playSciFiGlitchSound();
-    this.spawnParticles(50, 40, 10, '🔮');
+    this.spawnParticles(50, 40, 10, '×');
     this.setEyeExpression('curious');
     if (this.petBody) {
       this.petBody.style.transform = 'translateY(-28px) rotate(360deg) scale(1.15)';
@@ -786,7 +786,7 @@ export class HanzzPetEngine {
 
   resonate432Hz() {
     this.playSingingBowl432Sound();
-    this.spawnParticles(50, 10, 8, '🎶');
+    this.spawnParticles(50, 10, 8, '+');
     this.setEyeExpression('zen');
     this.say("SYS.ZEN // 432HZ", "Resonansi gelombang 432Hz menenangkan memori komputasi.");
     setTimeout(() => {
@@ -865,14 +865,14 @@ export class HanzzPetEngine {
   /* ==========================================================================
      PARTICLE CLOUD GENERATOR
      ========================================================================== */
-  spawnParticles(x, y, count = 6, emoji = '💖') {
+  spawnParticles(x, y, count = 6, emoji = '✦') {
     if (!this.particleCloud) return;
-    const emojis = ['💖', '✨', '⭐', '🌸', '💫', '🍃'];
+    const glyphs = ['✦', '·', '•', '⋆', '°', '×', '+'];
 
     for (let i = 0; i < count; i++) {
       const p = document.createElement('div');
       p.className = 'floating-heart';
-      p.textContent = emoji === 'random' ? emojis[Math.floor(Math.random() * emojis.length)] : emoji;
+      p.textContent = emoji === 'random' ? glyphs[Math.floor(Math.random() * glyphs.length)] : emoji;
 
       const offsetX = (Math.random() - 0.5) * 70;
       const offsetY = (Math.random() - 0.5) * 35;
@@ -911,7 +911,7 @@ export class HanzzPetEngine {
     const rect = this.petBody.getBoundingClientRect();
     const clickX = e && e.clientX ? e.clientX - rect.left : rect.width / 2;
     const clickY = e && e.clientY ? e.clientY - rect.top : rect.height / 2;
-    this.spawnParticles(clickX, clickY, 6, '💖');
+    this.spawnParticles(clickX, clickY, 6, '✦');
 
     // Cycle authentic bot dialogues from Portofolio
     const dialogue = AUTHENTIC_BOT_DIALOGUES[this.clickCount % AUTHENTIC_BOT_DIALOGUES.length];
@@ -958,7 +958,7 @@ export class HanzzPetEngine {
   feedMatcha() {
     this.playSoundChirp(600, 950, 'triangle', 0.2);
     const rect = this.petBody.getBoundingClientRect();
-    this.spawnParticles(rect.width / 2, rect.height / 2, 7, '🍵');
+    this.spawnParticles(rect.width / 2, rect.height / 2, 7, '·');
     this.setEyeExpression('curious');
     this.say("SYS.PET // MATCHA", "Slurp... Teh matcha hangat menenangkan memori sistem!");
     setTimeout(() => this.setEyeExpression('happy'), 800);
@@ -977,7 +977,7 @@ export class HanzzPetEngine {
       this.playHappyArpeggio();
       this.setEyeExpression('curious');
       this.say("SYS.PET // ROYAL", "Mahkota arsitektural terpasang! Baginda HanzzPet siap memerintah.");
-      this.spawnParticles(50, 10, 8, '👑');
+      this.spawnParticles(50, 10, 8, '⋆');
     } else {
       this.say("SYS.PET // CASUAL", "Mahkota disimpan di brankas kode.");
       this.setEyeExpression('normal');
@@ -1097,7 +1097,7 @@ export class HanzzPetEngine {
 
     if (hasBounced && impactVelocity > 1.2) {
       this.playMochiBounceSound(impactVelocity);
-      this.spawnParticles(60, 45, Math.min(Math.floor(impactVelocity * 0.8) + 1, 6), '✨');
+      this.spawnParticles(60, 45, Math.min(Math.floor(impactVelocity * 0.8) + 1, 6), '✦');
     }
 
     this.updatePosition(nextX, nextY);

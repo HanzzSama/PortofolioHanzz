@@ -66,7 +66,7 @@ export const translations = {
       ]
     },
     "about": {
-      "sectionTitle": "TENTANG SAYA",
+      "sectionTitle": "Tentang saya",
       "sectionSub": "HAIDAR RIFKY ANDRIANNO // KOTA SEMARANG",
       "ethosTitle": "Membuat desain dan pengalaman baru yang berguna",
       "photoCaption": "Foto Haidar Rifky Andrianno di Pantai Pacitan",
@@ -132,7 +132,7 @@ export const translations = {
       ]
     },
     "skills": {
-      "sectionTitle": "KEAHLIAN & KOMPETENSI",
+      "sectionTitle": "Keahlian dan kompetensi",
       "sectionSub": "17 KEAHLIAN TEKNIS DAN VISUAL",
       "headline": "Keahlian dan perangkat yang dikuasai",
       "description": "17 keahlian teknis dan visual dari 4 tahun bekerja di bidang IT, dibagi dalam 4 kelompok.",
@@ -257,7 +257,7 @@ export const translations = {
       ]
     },
     "projects": {
-      "sectionTitle": "PROYEK KARYA",
+      "sectionTitle": "Proyek karya",
       "sectionSub": "9 KARYA TERPILIH // WEB & APLIKASI",
       "headline": "Proyek terpilih",
       "description": "9 proyek: portal informasi PMB ITESA, kalkulator Mathicalc dengan bot matematika, platform belajar coding TurnCode, sistem Neura AI untuk mendeteksi gejala alzheimer, aplikasi agrotech, aplikasi pemesanan makanan, sistem perpustakaan, aplikasi pembayaran SPP, dan aplikasi to-do.",
@@ -579,7 +579,7 @@ export const translations = {
       }
     },
     "another": {
-      "sectionTitle": "REFLEKSI & CATATAN KREATIF",
+      "sectionTitle": "Refleksi dan catatan kreatif",
       "sectionSub": "PENGALAMAN & EKSPLORASI TEKNOLOGI // HANZZ",
       "headline": "Catatan kreatif dan refleksi pengembangan",
       "description": "Catatan tentang merancang antarmuka web, bekerja dalam tim, dan mencoba teknologi baru.",
@@ -645,7 +645,7 @@ export const translations = {
       }
     },
     "github": {
-      "sectionTitle": "GIT TELEMETRY & VAULT",
+      "sectionTitle": "Telemetri dan repositori Git",
       "sectionSub": "PUBLIC REPOSITORIES // CONTRIBUTION MATRIX",
       "headline": "Repositori terbuka dan kontribusi",
       "description": "Kode sumber publik, commit rutin, dan proyek pribadi di GitHub @HanzzSama.",
@@ -788,7 +788,7 @@ export const translations = {
     },
     "weather": {
       "sectionIndex": "07",
-      "sectionTitle": "SUASANA & CUACA",
+      "sectionTitle": "Suasana dan cuaca",
       "sectionSub": "TELEMETRI CUACA KOTA SEMARANG // REAL-TIME",
       "headline": "Cuaca real-time dan suasana atmosfer",
       "description": "Cuaca real-time Kota Semarang di 07°00'S 110°25'E, dengan visual atmosfer, garis isobar, dan nada harmonis.",
@@ -880,7 +880,7 @@ export const translations = {
       ]
     },
     "about": {
-      "sectionTitle": "ABOUT ME",
+      "sectionTitle": "About me",
       "sectionSub": "HAIDAR RIFKY ANDRIANNO // SEMARANG CITY",
       "ethosTitle": "Creating new designs and digital experiences",
       "photoCaption": "Photo of Haidar Rifky Andrianno at Pacitan Beach",
@@ -946,7 +946,7 @@ export const translations = {
       ]
     },
     "skills": {
-      "sectionTitle": "SKILLS & COMPETENCIES",
+      "sectionTitle": "Skills and competencies",
       "sectionSub": "17 TECHNICAL AND VISUAL SKILLS",
       "headline": "Skills and tools",
       "description": "17 technical and visual skills from 4 years of work in IT, grouped into 4 areas.",
@@ -1071,7 +1071,7 @@ export const translations = {
       ]
     },
     "projects": {
-      "sectionTitle": "PORTFOLIO PROJECTS",
+      "sectionTitle": "Portfolio projects",
       "sectionSub": "9 SELECTED WORKS // WEB & APPLICATIONS",
       "headline": "Selected projects",
       "description": "9 projects: a university admissions portal, a calculator with a math bot, a coding learning platform, an Alzheimer symptom detection system, an agrotech app, a food ordering app, a library system, a school fee payment app, and a to-do app.",
@@ -1393,7 +1393,7 @@ export const translations = {
       }
     },
     "another": {
-      "sectionTitle": "REFLECTIONS & CREATIVE NOTES",
+      "sectionTitle": "Reflections and creative notes",
       "sectionSub": "EXPERIENCE & TECH EXPLORATIONS // HANZZ",
       "headline": "Creative notes and developer reflections",
       "description": "Notes on designing web interfaces, working in teams, and trying new technology.",
@@ -1459,7 +1459,7 @@ export const translations = {
       }
     },
     "github": {
-      "sectionTitle": "GIT TELEMETRY & VAULT",
+      "sectionTitle": "Telemetri dan repositori Git",
       "sectionSub": "PUBLIC REPOSITORIES // CONTRIBUTION MATRIX",
       "headline": "Open repositories and contributions",
       "description": "Public repositories, regular commits, and personal projects on GitHub @HanzzSama.",
@@ -1602,7 +1602,7 @@ export const translations = {
     },
     "weather": {
       "sectionIndex": "07",
-      "sectionTitle": "SUASANA & CUACA",
+      "sectionTitle": "Suasana dan cuaca",
       "sectionSub": "TELEMETRI CUACA KOTA SEMARANG // REAL-TIME",
       "headline": "Cuaca real-time dan suasana atmosfer",
       "description": "Cuaca real-time Kota Semarang di 07°00'S 110°25'E, dengan visual atmosfer, garis isobar, dan nada harmonis.",
@@ -2273,7 +2273,7 @@ export const translations = {
       }
     },
     "github": {
-      "sectionTitle": "GIT TELEMETRY & VAULT",
+      "sectionTitle": "Telemetri dan repositori Git",
       "sectionSub": "PUBLIC REPOSITORIES // CONTRIBUTION MATRIX",
       "headline": "Open repositories and contributions",
       "description": "Public repositories, regular commits, and personal projects on GitHub @HanzzSama.",
@@ -2416,7 +2416,7 @@ export const translations = {
     },
     "weather": {
       "sectionIndex": "07",
-      "sectionTitle": "SUASANA & CUACA",
+      "sectionTitle": "Suasana dan cuaca",
       "sectionSub": "TELEMETRI CUACA KOTA SEMARANG // REAL-TIME",
       "headline": "Cuaca real-time dan suasana atmosfer",
       "description": "Cuaca real-time Kota Semarang di 07°00'S 110°25'E, dengan visual atmosfer, garis isobar, dan nada harmonis.",
@@ -3087,7 +3087,7 @@ export const translations = {
       }
     },
     "github": {
-      "sectionTitle": "GIT TELEMETRY & VAULT",
+      "sectionTitle": "Telemetri dan repositori Git",
       "sectionSub": "PUBLIC REPOSITORIES // CONTRIBUTION MATRIX",
       "headline": "Open repositories and contributions",
       "description": "Public repositories, regular commits, and personal projects on GitHub @HanzzSama.",
@@ -3230,7 +3230,7 @@ export const translations = {
     },
     "weather": {
       "sectionIndex": "07",
-      "sectionTitle": "SUASANA & CUACA",
+      "sectionTitle": "Suasana dan cuaca",
       "sectionSub": "TELEMETRI CUACA KOTA SEMARANG // REAL-TIME",
       "headline": "Cuaca real-time dan suasana atmosfer",
       "description": "Cuaca real-time Kota Semarang di 07°00'S 110°25'E, dengan visual atmosfer, garis isobar, dan nada harmonis.",
@@ -3322,7 +3322,7 @@ export const translations = {
       ]
     },
     "about": {
-      "sectionTitle": "ÜBER MICH",
+      "sectionTitle": "Über mich",
       "sectionSub": "HAIDAR RIFKY ANDRIANNO // SEMARANG CITY",
       "ethosTitle": "Wertvolles Design und neue Erfahrungen schaffen",
       "photoCaption": "Photo of Haidar Rifky Andrianno at Pacitan Beach",
@@ -3388,7 +3388,7 @@ export const translations = {
       ]
     },
     "skills": {
-      "sectionTitle": "FÄHIGKEITEN & TOOLS",
+      "sectionTitle": "Fähigkeiten und Tools",
       "sectionSub": "17 TECHNICAL AND VISUAL SKILLS",
       "headline": "Skills and tools",
       "description": "17 technical and visual skills from 4 years of work in IT, grouped into 4 areas.",
@@ -3513,7 +3513,7 @@ export const translations = {
       ]
     },
     "projects": {
-      "sectionTitle": "PROJEKTE",
+      "sectionTitle": "Projekte",
       "sectionSub": "9 SELECTED WORKS // WEB & APPLICATIONS",
       "headline": "Selected projects",
       "description": "9 projects: a university admissions portal, a calculator with a math bot, a coding learning platform, an Alzheimer symptom detection system, an agrotech app, a food ordering app, a library system, a school fee payment app, and a to-do app.",
@@ -3835,7 +3835,7 @@ export const translations = {
       }
     },
     "another": {
-      "sectionTitle": "KREATIVE NOTIZEN",
+      "sectionTitle": "Kreative Notizen",
       "sectionSub": "EXPERIENCE & TECH EXPLORATIONS // HANZZ",
       "headline": "Creative notes and developer reflections",
       "description": "Notes on designing web interfaces, working in teams, and trying new technology.",
@@ -3901,7 +3901,7 @@ export const translations = {
       }
     },
     "github": {
-      "sectionTitle": "GIT TELEMETRY & VAULT",
+      "sectionTitle": "Telemetri dan repositori Git",
       "sectionSub": "PUBLIC REPOSITORIES // CONTRIBUTION MATRIX",
       "headline": "Open repositories and contributions",
       "description": "Public repositories, regular commits, and personal projects on GitHub @HanzzSama.",
@@ -4044,7 +4044,7 @@ export const translations = {
     },
     "weather": {
       "sectionIndex": "07",
-      "sectionTitle": "SUASANA & CUACA",
+      "sectionTitle": "Suasana dan cuaca",
       "sectionSub": "TELEMETRI CUACA KOTA SEMARANG // REAL-TIME",
       "headline": "Cuaca real-time dan suasana atmosfer",
       "description": "Cuaca real-time Kota Semarang di 07°00'S 110°25'E, dengan visual atmosfer, garis isobar, dan nada harmonis.",

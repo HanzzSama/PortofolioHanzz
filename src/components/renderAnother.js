@@ -68,27 +68,27 @@ export function renderAnother(data) {
         <!-- 6 Track Architecture Nodes -->
         <div class="synth-controls-cluster" id="studio-track-buttons">
           <button class="synth-freq-btn active-track active-tone" data-track-select="01_sanctuary" data-cursor-target>
-            <strong>01 // Terra Sanctuary</strong>
+            <span class="synth-track-title">01 // Terra Sanctuary</span>
             <span class="synth-sub-desc">Nature Song &amp; Warm Rhodes</span>
           </button>
           <button class="synth-freq-btn" data-track-select="02_solfeggio" data-cursor-target>
-            <strong>02 // 528Hz Solfeggio</strong>
+            <span class="synth-track-title">02 // 528Hz Solfeggio</span>
             <span class="synth-sub-desc">Miracle Chords &amp; Warmth</span>
           </button>
           <button class="synth-freq-btn" data-track-select="03_rain_lofi" data-cursor-target>
-            <strong>03 // Semarang Rain</strong>
+            <span class="synth-track-title">03 // Semarang Rain</span>
             <span class="synth-sub-desc">Biophilic Pink Noise &amp; Rhodes</span>
           </button>
           <button class="synth-freq-btn" data-track-select="04_cyber_pulse" data-cursor-target>
-            <strong>04 // Cyber Pulse</strong>
+            <span class="synth-track-title">04 // Cyber Pulse</span>
             <span class="synth-sub-desc">90 BPM Modular Ostinato</span>
           </button>
           <button class="synth-freq-btn" data-track-select="05_binaural_theta" data-cursor-target>
-            <strong>05 // 6Hz Theta Flow</strong>
+            <span class="synth-track-title">05 // 6Hz Theta Flow</span>
             <span class="synth-sub-desc">Binaural Deep Focus</span>
           </button>
           <button class="synth-freq-btn" data-track-select="06_custom" data-cursor-target>
-            <strong>06 // Custom Stream</strong>
+            <span class="synth-track-title">06 // Custom Stream</span>
             <span class="synth-sub-desc">User Stream &amp; Audio File</span>
           </button>
         </div>

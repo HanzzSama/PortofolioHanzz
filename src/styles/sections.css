@@ -95,7 +95,7 @@
   font-family: var(--font-mono);
   font-size: var(--font-mono-micro);
   color: var(--text-muted);
-  text-transform: uppercase;
+  text-transform: none;
   margin-bottom: 0.25rem;
 }
 
@@ -346,7 +346,7 @@
   font-size: 0.62rem;
   letter-spacing: 0.08em;
   color: var(--accent-primary);
-  text-transform: uppercase;
+  text-transform: none;
   font-weight: 600;
   display: block;
   margin-bottom: 2px;
@@ -685,7 +685,7 @@
   font-family: var(--font-mono);
   font-size: var(--font-mono-micro);
   color: var(--text-muted);
-  text-transform: uppercase;
+  text-transform: none;
 }
 
 .tier-title {

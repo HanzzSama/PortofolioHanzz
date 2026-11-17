@@ -49,7 +49,7 @@ export class XRayBiosphereEngine {
             <span class="xray-title font-mono">SYS.XRAY // BIOSPHERE ARCHITECTURAL TELEMETRY</span>
           </div>
           <button class="xray-close-btn font-mono" id="xray-close-btn" data-cursor-target>
-            <span>[ESC] CLOSE HUD ×</span>
+            <span>[Esc] Tutup ×</span>
           </button>
         </div>
 
@@ -58,15 +58,15 @@ export class XRayBiosphereEngine {
           <!-- Module 1: DSP Audio FFT Vector -->
           <div class="xray-module">
             <div class="module-header font-mono">
-              <span>01 // DSP FREQUENCY MATRIX (FFT: 512)</span>
+              <span>01 // DSP frequency matrix (FFT: 512)</span>
               <span id="xray-track-name" class="module-tag">432Hz TERRA</span>
             </div>
             <div class="module-body">
               <canvas id="xray-fft-canvas" class="xray-fft-canvas" width="380" height="95"></canvas>
               <div class="xray-metrics-row font-mono">
-                <div>BASS: <span id="xray-bass-val">0.00</span></div>
-                <div>MID: <span id="xray-mid-val">0.00</span></div>
-                <div>ENERGY: <span id="xray-energy-val">0.00</span></div>
+                <div>Bass: <span id="xray-bass-val">0.00</span></div>
+                <div>Mid: <span id="xray-mid-val">0.00</span></div>
+                <div>Energy: <span id="xray-energy-val">0.00</span></div>
               </div>
             </div>
           </div>
@@ -74,15 +74,15 @@ export class XRayBiosphereEngine {
           <!-- Module 2: Framerate & Cycle Performance -->
           <div class="xray-module">
             <div class="module-header font-mono">
-              <span>02 // COMPUTATION CADENCE & FPS</span>
+              <span>02 // Computation cadence and FPS</span>
               <span id="xray-fps-readout" class="module-tag">-- FPS</span>
             </div>
             <div class="module-body">
               <canvas id="xray-fps-canvas" class="xray-fps-canvas" width="380" height="95"></canvas>
               <div class="xray-metrics-row font-mono">
-                <div>REFRESH: <span id="xray-dpr">1.0x DPR</span></div>
-                <div>FRAME TIME: <span id="xray-frametime">--ms</span></div>
-                <div>CADENCE: <span id="xray-stability" class="tag-success">UNLOCKED</span></div>
+                <div>Refresh: <span id="xray-dpr">1.0x DPR</span></div>
+                <div>Frame time: <span id="xray-frametime">--ms</span></div>
+                <div>Cadence: <span id="xray-stability" class="tag-success">UNLOCKED</span></div>
               </div>
             </div>
           </div>
@@ -90,69 +90,68 @@ export class XRayBiosphereEngine {
           <!-- Module 3: Viewport Physics & DOM Metrics -->
           <div class="xray-module">
             <div class="module-header font-mono">
-              <span>03 // KINETIC VIEWPORT & DOM LOAD</span>
+              <span>03 // Kinetic viewport and DOM load</span>
               <span class="module-tag">LENIS MOMENTUM</span>
             </div>
             <div class="module-body font-mono xray-data-list">
-              <div class="data-item"><span>SCROLL VELOCITY:</span> <span id="xray-scroll-vel">0.00 px/f</span></div>
-              <div class="data-item"><span>VIEWPORT COORD:</span> <span id="xray-viewport-pos">Y: 0px</span></div>
-              <div class="data-item"><span>ACTIVE DOM NODES:</span> <span id="xray-dom-count">--</span></div>
-              <div class="data-item"><span>BROWSER RUNTIME:</span> <span>VANILLA ES6+</span></div>
+              <div class="data-item"><span>Scroll velocity:</span> <span id="xray-scroll-vel">0.00 px/f</span></div>
+              <div class="data-item"><span>Viewport coord:</span> <span id="xray-viewport-pos">Y: 0px</span></div>
+              <div class="data-item"><span>Active DOM nodes:</span> <span id="xray-dom-count">--</span></div>
+              <div class="data-item"><span>Browser runtime:</span> <span>VANILLA ES6+</span></div>
             </div>
           </div>
 
           <!-- Module 4: Spatial Geography & Astronomical Arc -->
           <div class="xray-module">
             <div class="module-header font-mono">
-              <span>04 // GEODESIC NODE & SOLAR CYCLE</span>
+              <span>04 // Geodesic node and solar cycle</span>
               <span class="module-tag">SEMARANG, ID</span>
             </div>
             <div class="module-body font-mono xray-data-list">
-              <div class="data-item"><span>COORDINATES:</span> <span>07°00'S, 110°25'E</span></div>
-              <div class="data-item"><span>ALTITUDE / NODE:</span> <span>18m ASL // ITESA</span></div>
-              <div class="data-item"><span>THEME BIOSPHERE:</span> <span id="xray-theme-state">OBSIDIAN NIGHT</span></div>
-              <div class="data-item"><span>SESSION ENTROPY:</span> <span id="xray-session-seed">#432-TERRA</span></div>
+              <div class="data-item"><span>Coordinates:</span> <span>07°00'S, 110°25'E</span></div>
+              <div class="data-item"><span>Altitude / node:</span> <span>18m ASL // ITESA</span></div>
+              <div class="data-item"><span>Theme:</span> <span id="xray-theme-state">OBSIDIAN NIGHT</span></div>
+              <div class="data-item"><span>Session seed:</span> <span id="xray-session-seed">#432-TERRA</span></div>
             </div>
           </div>
 
           <!-- Module 5: Silicon Architecture & Hardware -->
           <div class="xray-module">
             <div class="module-header font-mono">
-              <span>05 // SILICON ARCHITECTURE & HARDWARE</span>
+              <span>05 // Silicon architecture and hardware</span>
               <span id="xray-hw-tier" class="module-tag">ONLINE // ACCELERATED</span>
             </div>
             <div class="module-body font-mono xray-data-list">
-              <div class="data-item"><span>PROCESSOR (CPU):</span> <span id="xray-cpu-cores">DETECTING...</span></div>
-              <div class="data-item"><span>CPU GENERATION:</span> <span id="xray-cpu-gen">DETECTING...</span></div>
-              <div class="data-item"><span>DISCRETE (dGPU):</span> <span id="xray-dgpu-name">DETECTING...</span></div>
-              <div class="data-item"><span>dGPU GENERATION:</span> <span id="xray-dgpu-gen">DETECTING...</span></div>
-              <div class="data-item"><span>INTEGRATED (iGPU):</span> <span id="xray-igpu-name">DETECTING...</span></div>
-              <div class="data-item"><span>iGPU GENERATION:</span> <span id="xray-igpu-gen">DETECTING...</span></div>
-              <div class="data-item"><span>SYSTEM MEMORY (RAM):</span> <span id="xray-ram-val">DETECTING...</span></div>
-              <div class="data-item"><span>LOCAL STORAGE (SSD):</span> <span id="xray-ssd-quota">CALCULATING...</span></div>
+              <div class="data-item"><span>Processor (CPU):</span> <span id="xray-cpu-cores">DETECTING...</span></div>
+              <div class="data-item"><span>CPU generation:</span> <span id="xray-cpu-gen">DETECTING...</span></div>
+              <div class="data-item"><span>Discrete (dGPU):</span> <span id="xray-dgpu-name">DETECTING...</span></div>
+              <div class="data-item"><span>dGPU generation:</span> <span id="xray-dgpu-gen">DETECTING...</span></div>
+              <div class="data-item"><span>Integrated (iGPU):</span> <span id="xray-igpu-name">DETECTING...</span></div>
+              <div class="data-item"><span>iGPU generation:</span> <span id="xray-igpu-gen">DETECTING...</span></div>
+              <div class="data-item"><span>System memory (RAM):</span> <span id="xray-ram-val">DETECTING...</span></div>
+              <div class="data-item"><span>Local storage (SSD):</span> <span id="xray-ssd-quota">CALCULATING...</span></div>
             </div>
           </div>
 
           <!-- Module 6: Client Matrix & Display Biosphere -->
           <div class="xray-module">
             <div class="module-header font-mono">
-              <span>06 // CLIENT MATRIX & DISPLAY BIOSPHERE</span>
+              <span>06 // Client matrix and display specifications</span>
               <span id="xray-form-tag" class="module-tag">CLIENT // MATRIX</span>
             </div>
             <div class="module-body font-mono xray-data-list">
-              <div class="data-item"><span>DEVICE FORM FACTOR:</span> <span id="xray-form-factor">DETECTING...</span></div>
-              <div class="data-item"><span>OPERATING SYSTEM:</span> <span id="xray-os-platform">DETECTING...</span></div>
-              <div class="data-item"><span>NATIVE RESOLUTION:</span> <span id="xray-display-res">DETECTING...</span></div>
-              <div class="data-item"><span>COLOR GAMUT:</span> <span id="xray-color-gamut">DETECTING...</span></div>
-              <div class="data-item"><span>NETWORK CADENCE:</span> <span id="xray-net-cadence">ONLINE</span></div>
+              <div class="data-item"><span>Device form factor:</span> <span id="xray-form-factor">DETECTING...</span></div>
+              <div class="data-item"><span>Operating system:</span> <span id="xray-os-platform">DETECTING...</span></div>
+              <div class="data-item"><span>Native resolution:</span> <span id="xray-display-res">DETECTING...</span></div>
+              <div class="data-item"><span>Color gamut:</span> <span id="xray-color-gamut">DETECTING...</span></div>
+              <div class="data-item"><span>Network status:</span> <span id="xray-net-cadence">ONLINE</span></div>
             </div>
           </div>
         </div>
 
         <!-- Footer Command Strip -->
         <div class="xray-footer font-mono">
-          <span>PRESS [X] OR [ESC] TO TOGGLE // BIOPHILIC ARCHITECTURE v3.0</span>
-          <span>HAIDAR RIFKY ANDRIANNO // 2026</span>
+          <span>Tekan [X] atau [Esc] untuk menutup // Haidar Rifky Andrianno, 2026</span>
         </div>
       </div>
     `;

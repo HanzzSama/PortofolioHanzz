@@ -68,7 +68,7 @@ export const portfolioData = {
 
   about: {
     sectionIndex: "02",
-    sectionTitle: "TENTANG SAYA",
+    sectionTitle: "Tentang saya",
     sectionSub: "HAIDAR RIFKY ANDRIANNO // KOTA SEMARANG",
     ethosTitle: "Membuat desain dan pengalaman baru yang berguna",
     photo: "./src/assets/Hanzz.jpeg",
@@ -137,7 +137,7 @@ export const portfolioData = {
 
   skills: {
     sectionIndex: "03",
-    sectionTitle: "KEAHLIAN & KOMPETENSI",
+    sectionTitle: "Keahlian dan kompetensi",
     sectionSub: "17 KEAHLIAN TEKNIS DAN VISUAL",
     headline: "Keahlian dan perangkat yang dikuasai",
     description:
@@ -197,7 +197,7 @@ export const portfolioData = {
 
   projects: {
     sectionIndex: "04",
-    sectionTitle: "PROYEK KARYA",
+    sectionTitle: "Proyek karya",
     sectionSub: "9 KARYA TERPILIH // WEB & APLIKASI",
     headline: "Proyek terpilih",
     description:
@@ -672,7 +672,7 @@ export const portfolioData = {
 
   github: {
     sectionIndex: "05",
-    sectionTitle: "GIT TELEMETRY & VAULT",
+    sectionTitle: "Telemetri dan repositori Git",
     sectionSub: "PUBLIC REPOSITORIES // CONTRIBUTION MATRIX",
     headline: "Repositori terbuka dan kontribusi",
     description: "Kode sumber publik, commit rutin, dan proyek pribadi di GitHub @HanzzSama.",
@@ -779,8 +779,8 @@ export const portfolioData = {
 
   kineticLab: {
     sectionIndex: "06.A",
-    title: "KINETIC MONOLITH SIMULATOR",
-    subtitle: "REAL-TIME 3D WIREFRAME // ROTATIONAL GRAVITY GYROSCOPE",
+    title: "Kinetic monolith simulator",
+    subtitle: "Wireframe 3D real-time, gyroscope gravitasi rotasional",
     description: "Eksperimen grafis 3D interaktif yang dibuat hanya dengan Canvas. Seret untuk memutar monolit, ganti bentuk, dan lihat sumbu koordinat berubah secara real-time.",
     modes: [
       { id: "monolith", label: "Tectonic Monolith", vertices: 8, edges: 12 },
@@ -802,7 +802,7 @@ export const portfolioData = {
 
   weather: {
     sectionIndex: "07",
-    sectionTitle: "SUASANA & CUACA",
+    sectionTitle: "Suasana dan cuaca",
     sectionSub: "TELEMETRI CUACA KOTA SEMARANG // REAL-TIME",
     headline: "Cuaca real-time dan suasana atmosfer",
     description: "Cuaca real-time Kota Semarang di 07°00'S 110°25'E, dengan visual atmosfer, garis isobar, dan nada harmonis.",
@@ -839,7 +839,7 @@ export const portfolioData = {
 
   another: {
     sectionIndex: "06",
-    sectionTitle: "REFLEKSI & CATATAN KREATIF",
+    sectionTitle: "Refleksi dan catatan kreatif",
     sectionSub: "PENGALAMAN & EKSPLORASI TEKNOLOGI // HANZZ",
     description:
       "Catatan tentang merancang antarmuka web, bekerja dalam tim, dan mencoba teknologi baru.",

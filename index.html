@@ -313,21 +313,21 @@
           <span class="monolith-play-label">ACTIVATE SOUND</span>
         </button>
         <div class="console-track-display">
-          <span class="console-now-playing-label">ACTIVE SOUNDSCAPE NODE:</span>
-          <span id="console-now-playing-name" class="console-now-playing-title">Terra Sanctuary 432Hz (Nature Song &amp; Warm Rhodes)</span>
+          <span class="console-now-playing-label">Arsitektur suara aktif:</span>
+          <span id="console-now-playing-name" class="console-now-playing-title">Terra Sanctuary 432Hz</span>
         </div>
       </div>
 
       <!-- Curated Track Matrix -->
-      <div class="console-section-title">Select soundscape</div>
+      <div class="console-section-title">Pilih arsitektur suara</div>
       <div class="console-tracks-grid" id="console-tracks-grid"></div>
 
       <!-- Audiophile Faders & Knobs -->
-      <div class="console-section-title">DSP faders and analog saturation</div>
+      <div class="console-section-title">Fader DSP dan saturasi analog</div>
       <div class="console-tuning-cluster">
         <div class="fader-group">
           <div class="fader-label-row">
-            <span>MASTER GAIN</span>
+            <span>Penguatan utama (gain)</span>
             <span id="fader-gain-readout" class="fader-val-readout">35%</span>
           </div>
           <input type="range" id="fader-volume" class="monolith-range-slider" min="0" max="1" step="0.01" value="0.35">
@@ -335,7 +335,7 @@
 
         <div class="fader-group">
           <div class="fader-label-row">
-            <span>LPF FILTER CUTOFF</span>
+            <span>Batas frekuensi filter LPF</span>
             <span id="fader-filter-readout" class="fader-val-readout">1400 Hz</span>
           </div>
           <input type="range" id="fader-filter" class="monolith-range-slider" min="200" max="8000" step="50" value="1400">
@@ -345,18 +345,18 @@
       <!-- Toggles & Options -->
       <div class="console-options-row">
         <button id="btn-toggle-rain-overlay" class="tactile-toggle-pill" data-cursor-target>
-          <span>BIOPHILIC RAIN LAYER</span>
+          <span>Lapisan suara hujan</span>
         </button>
         <label class="tactile-toggle-pill" style="cursor: pointer;" data-cursor-target>
-          <span>LOAD CUSTOM AUDIO FILE</span>
+          <span>Muat berkas audio kustom</span>
           <input type="file" id="custom-audio-file-input" accept="audio/*" style="display:none;">
         </label>
       </div>
 
       <!-- Custom Stream URL Ingestion -->
       <div class="console-custom-stream-bar">
-        <input type="text" id="custom-stream-url-input" class="custom-url-input" placeholder="Paste custom MP3 or Lo-Fi audio stream URL...">
-        <button id="btn-load-stream-url" class="tactile-btn" style="padding: 0.38rem 0.75rem; font-size: 0.68rem;" data-cursor-target>LOAD STREAM</button>
+        <input type="text" id="custom-stream-url-input" class="custom-url-input" placeholder="Tautan audio stream...">
+        <button id="btn-load-stream-url" class="tactile-btn" style="padding: 0.38rem 0.75rem; font-size: 0.68rem;" data-cursor-target>Muat stream</button>
       </div>
     </div>
   </div>

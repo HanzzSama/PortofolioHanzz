@@ -406,13 +406,13 @@ export function renderProjects(data) {
                 <!-- Floating Interactive Hover Capsule (Clean & Non-Colliding) -->
                 <div class="preview-hover-tag font-mono" aria-hidden="true">
                   <span class="hover-tag-dot"></span>
-                  <span>DEEP INSPECT</span>
+                  <span>Deep inspect</span>
                 </div>
               </div>
 
               <div class="blueprint-telemetry-badge font-mono">
                 ${Object.entries(proj.metrics)
-                  .map(([key, val]) => `<span><strong>${key.toUpperCase()}:</strong> ${val}</span>`)
+                  .map(([key, val]) => `<span>${key}: ${val}</span>`)
                   .join('<span style="opacity: 0.4;">|</span>')}
               </div>
             </div>
