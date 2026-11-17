@@ -1505,10 +1505,16 @@
   .project-architectural-card:nth-child(even) {
     grid-template-columns: 1fr;
   }
+  .project-details-panel {
+    padding: var(--space-xl) var(--space-lg);
+  }
   .project-blueprint-panel {
     border-left: none;
     border-top: var(--border-hairline);
-    min-height: 280px;
+    min-height: 260px;
+  }
+  .matrix-tier-card {
+    padding: var(--space-lg);
   }
   .transmission-terminal {
     grid-template-columns: 1fr;
@@ -1517,6 +1523,42 @@
     flex-direction: column;
     gap: var(--space-sm);
     text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .project-details-panel {
+    padding: 1.25rem 1rem;
+  }
+  .project-blueprint-panel {
+    min-height: 220px;
+  }
+  .project-title {
+    font-size: 1.3rem;
+  }
+  .project-subtitle {
+    font-size: 0.95rem;
+  }
+  .matrix-tier-card {
+    padding: 1rem 0.85rem;
+  }
+  .tier-title {
+    font-size: 1.15rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .project-details-panel {
+    padding: 1rem 0.75rem;
+  }
+  .project-blueprint-panel {
+    min-height: 190px;
+  }
+  .project-title {
+    font-size: 1.15rem;
+  }
+  .matrix-tier-card {
+    padding: 0.85rem 0.65rem;
   }
 }
 
