@@ -6,6 +6,7 @@
 
 import { monolithAudio } from './monolithAudioEngine.js';
 import { hapticAudio } from './hapticAudioEngine.js';
+import { deviceTelemetry } from './deviceTelemetry.js';
 
 export class XRayBiosphereEngine {
   constructor() {
@@ -29,6 +30,7 @@ export class XRayBiosphereEngine {
   init() {
     this.createHUDDOM();
     this.bindTriggers();
+    this.updateDeviceTelemetry();
   }
 
   createHUDDOM() {
@@ -112,6 +114,36 @@ export class XRayBiosphereEngine {
               <div class="data-item"><span>SESSION ENTROPY:</span> <span id="xray-session-seed">#432-TERRA</span></div>
             </div>
           </div>
+
+          <!-- Module 5: Silicon Architecture & Hardware -->
+          <div class="xray-module">
+            <div class="module-header font-mono">
+              <span>05 // SILICON ARCHITECTURE & HARDWARE</span>
+              <span id="xray-hw-tier" class="module-tag">ONLINE // ACCELERATED</span>
+            </div>
+            <div class="module-body font-mono xray-data-list">
+              <div class="data-item"><span>PROCESSOR (CPU):</span> <span id="xray-cpu-cores">DETECTING...</span></div>
+              <div class="data-item"><span>GRAPHICS ADAPTER:</span> <span id="xray-gpu-renderer">DETECTING...</span></div>
+              <div class="data-item"><span>SYSTEM MEMORY (RAM):</span> <span id="xray-ram-val">DETECTING...</span></div>
+              <div class="data-item"><span>LOCAL STORAGE (SSD):</span> <span id="xray-ssd-quota">CALCULATING...</span></div>
+              <div class="data-item"><span>GRAPHICS PIPELINE:</span> <span id="xray-gfx-pipeline">WEBGL ACCELERATED</span></div>
+            </div>
+          </div>
+
+          <!-- Module 6: Client Matrix & Display Biosphere -->
+          <div class="xray-module">
+            <div class="module-header font-mono">
+              <span>06 // CLIENT MATRIX & DISPLAY BIOSPHERE</span>
+              <span id="xray-form-tag" class="module-tag">CLIENT // MATRIX</span>
+            </div>
+            <div class="module-body font-mono xray-data-list">
+              <div class="data-item"><span>DEVICE FORM FACTOR:</span> <span id="xray-form-factor">DETECTING...</span></div>
+              <div class="data-item"><span>OPERATING SYSTEM:</span> <span id="xray-os-platform">DETECTING...</span></div>
+              <div class="data-item"><span>NATIVE RESOLUTION:</span> <span id="xray-display-res">DETECTING...</span></div>
+              <div class="data-item"><span>COLOR GAMUT:</span> <span id="xray-color-gamut">DETECTING...</span></div>
+              <div class="data-item"><span>NETWORK CADENCE:</span> <span id="xray-net-cadence">ONLINE</span></div>
+            </div>
+          </div>
         </div>
 
         <!-- Footer Command Strip -->
@@ -139,10 +171,10 @@ export class XRayBiosphereEngine {
   }
 
   bindTriggers() {
-    // 1. Click on Header Seed Badge
+    // 1. Click on Header Seed Badge or Telemetry Bar
     document.addEventListener('click', (e) => {
-      const seedBadge = e.target.closest('#session-seed-badge, .session-seed-badge');
-      if (seedBadge) {
+      const trigger = e.target.closest('#session-seed-badge, .session-seed-badge, #telemetry-status, .header-telemetry');
+      if (trigger) {
         e.preventDefault();
         this.toggle();
       }
@@ -193,8 +225,55 @@ export class XRayBiosphereEngine {
     // Lock page scroll
     document.body.style.overflow = 'hidden';
 
+    // Refresh hardware & environment telemetry
+    this.updateDeviceTelemetry();
+
     // Start RAF telemetry loop
     this.startLoop();
+  }
+
+  async updateDeviceTelemetry() {
+    try {
+      const data = await deviceTelemetry.gatherFullTelemetry();
+      
+      const cpuEl = document.getElementById('xray-cpu-cores');
+      const gpuEl = document.getElementById('xray-gpu-renderer');
+      const ramEl = document.getElementById('xray-ram-val');
+      const ssdEl = document.getElementById('xray-ssd-quota');
+      const gfxPipeEl = document.getElementById('xray-gfx-pipeline');
+      const hwTierEl = document.getElementById('xray-hw-tier');
+
+      const formFactorEl = document.getElementById('xray-form-factor');
+      const osEl = document.getElementById('xray-os-platform');
+      const displayEl = document.getElementById('xray-display-res');
+      const gamutEl = document.getElementById('xray-color-gamut');
+      const netEl = document.getElementById('xray-net-cadence');
+      const formTagEl = document.getElementById('xray-form-tag');
+
+      if (cpuEl) cpuEl.textContent = data.cpu.description;
+      if (gpuEl) {
+        gpuEl.textContent = data.gpu.renderer;
+        gpuEl.title = `${data.gpu.vendor} - ${data.gpu.renderer}`;
+      }
+      if (ramEl) ramEl.textContent = data.memory.fullDisplay;
+      if (ssdEl) ssdEl.textContent = data.storage;
+      if (gfxPipeEl) gfxPipeEl.textContent = data.gpu.apiVersion;
+      if (hwTierEl) {
+        hwTierEl.textContent = data.cpu.cores >= 8 ? 'ONLINE // HIGH-TIER' : 'ONLINE // EFFICIENCY';
+      }
+
+      if (formFactorEl) formFactorEl.textContent = data.formFactor.label;
+      if (osEl) osEl.textContent = data.os.display;
+      if (displayEl) displayEl.textContent = data.display.nativeRes;
+      if (gamutEl) gamutEl.textContent = data.display.gamut;
+      if (netEl) netEl.textContent = data.network;
+      if (formTagEl) formTagEl.textContent = data.formFactor.type;
+
+      const themeStateEl = document.getElementById('xray-theme-state');
+      if (themeStateEl) themeStateEl.textContent = data.themeStatus;
+    } catch (err) {
+      console.warn('Telemetry gather error:', err);
+    }
   }
 
   close() {
