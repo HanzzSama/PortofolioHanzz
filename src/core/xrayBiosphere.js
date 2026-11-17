@@ -123,10 +123,13 @@ export class XRayBiosphereEngine {
             </div>
             <div class="module-body font-mono xray-data-list">
               <div class="data-item"><span>PROCESSOR (CPU):</span> <span id="xray-cpu-cores">DETECTING...</span></div>
-              <div class="data-item"><span>GRAPHICS ADAPTER:</span> <span id="xray-gpu-renderer">DETECTING...</span></div>
+              <div class="data-item"><span>CPU GENERATION:</span> <span id="xray-cpu-gen">DETECTING...</span></div>
+              <div class="data-item"><span>DISCRETE (dGPU):</span> <span id="xray-dgpu-name">DETECTING...</span></div>
+              <div class="data-item"><span>dGPU GENERATION:</span> <span id="xray-dgpu-gen">DETECTING...</span></div>
+              <div class="data-item"><span>INTEGRATED (iGPU):</span> <span id="xray-igpu-name">DETECTING...</span></div>
+              <div class="data-item"><span>iGPU GENERATION:</span> <span id="xray-igpu-gen">DETECTING...</span></div>
               <div class="data-item"><span>SYSTEM MEMORY (RAM):</span> <span id="xray-ram-val">DETECTING...</span></div>
               <div class="data-item"><span>LOCAL STORAGE (SSD):</span> <span id="xray-ssd-quota">CALCULATING...</span></div>
-              <div class="data-item"><span>GRAPHICS PIPELINE:</span> <span id="xray-gfx-pipeline">WEBGL ACCELERATED</span></div>
             </div>
           </div>
 
@@ -237,10 +240,13 @@ export class XRayBiosphereEngine {
       const data = await deviceTelemetry.gatherFullTelemetry();
       
       const cpuEl = document.getElementById('xray-cpu-cores');
-      const gpuEl = document.getElementById('xray-gpu-renderer');
+      const cpuGenEl = document.getElementById('xray-cpu-gen');
+      const dgpuNameEl = document.getElementById('xray-dgpu-name');
+      const dgpuGenEl = document.getElementById('xray-dgpu-gen');
+      const igpuNameEl = document.getElementById('xray-igpu-name');
+      const igpuGenEl = document.getElementById('xray-igpu-gen');
       const ramEl = document.getElementById('xray-ram-val');
       const ssdEl = document.getElementById('xray-ssd-quota');
-      const gfxPipeEl = document.getElementById('xray-gfx-pipeline');
       const hwTierEl = document.getElementById('xray-hw-tier');
 
       const formFactorEl = document.getElementById('xray-form-factor');
@@ -251,15 +257,35 @@ export class XRayBiosphereEngine {
       const formTagEl = document.getElementById('xray-form-tag');
 
       if (cpuEl) cpuEl.textContent = data.cpu.description;
-      if (gpuEl) {
-        gpuEl.textContent = data.gpu.renderer;
-        gpuEl.title = `${data.gpu.vendor} - ${data.gpu.renderer}`;
+      if (cpuGenEl) {
+        cpuGenEl.textContent = data.cpu.generation;
+        cpuGenEl.title = data.cpu.generation;
       }
+      
+      if (dgpuNameEl) {
+        dgpuNameEl.textContent = data.gpus.dgpu?.renderer || 'N/A';
+        dgpuNameEl.title = data.gpus.dgpu?.renderer || '';
+      }
+      if (dgpuGenEl) {
+        dgpuGenEl.textContent = data.gpus.dgpu?.generation || 'GENERIC HARDWARE ACCEL';
+        dgpuGenEl.title = data.gpus.dgpu?.generation || '';
+      }
+
+      if (igpuNameEl) {
+        igpuNameEl.textContent = data.gpus.igpu?.renderer || 'N/A';
+        igpuNameEl.title = data.gpus.igpu?.renderer || '';
+      }
+      if (igpuGenEl) {
+        igpuGenEl.textContent = data.gpus.igpu?.generation || 'SYSTEM INTEGRATED CORE';
+        igpuGenEl.title = data.gpus.igpu?.generation || '';
+      }
+
       if (ramEl) ramEl.textContent = data.memory.fullDisplay;
       if (ssdEl) ssdEl.textContent = data.storage;
-      if (gfxPipeEl) gfxPipeEl.textContent = data.gpu.apiVersion;
       if (hwTierEl) {
-        hwTierEl.textContent = data.cpu.cores >= 8 ? 'ONLINE // HIGH-TIER' : 'ONLINE // EFFICIENCY';
+        hwTierEl.textContent = data.gpus.hasDualGPU 
+          ? 'DUAL-GPU HYBRID // ACCELERATED' 
+          : (data.cpu.cores >= 8 ? 'ONLINE // HIGH-TIER' : 'ONLINE // EFFICIENCY');
       }
 
       if (formFactorEl) formFactorEl.textContent = data.formFactor.label;
