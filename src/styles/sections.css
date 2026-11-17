@@ -640,8 +640,9 @@
 
 .skills-matrix-container {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: var(--space-lg);
+  align-items: stretch;
 }
 
 .matrix-tier-card {
@@ -653,6 +654,8 @@
   flex-direction: column;
   position: relative;
   overflow: hidden;
+  height: 100%;
+  box-sizing: border-box;
   transition: border-color var(--duration-fast) var(--ease-expressive),
               box-shadow var(--duration-fast) var(--ease-expressive);
 }
@@ -695,6 +698,7 @@
   display: flex;
   flex-direction: column;
   gap: var(--space-sm);
+  flex: 1;
 }
 
 .node-item {
@@ -1731,12 +1735,10 @@
 
 
 /* ==========================================================================
-   SKILLS MATRIX — Column Drift Parallax Support
-   Column kiri (odd) dan kanan (even) bergerak relatif berbeda
-   Data attribute di-set oleh renderSkills.js
+   SKILLS MATRIX — Stabilized Uniform Architectural Grid
    ========================================================================== */
-.skills-matrix-container > *[data-parallax-slide] {
-  will-change: transform;
+.skills-matrix-container > .matrix-tier-card {
+  will-change: auto;
 }
 
 /* ==========================================================================

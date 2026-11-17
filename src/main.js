@@ -30,6 +30,7 @@ import { XRayBiosphereEngine } from './core/xrayBiosphere.js';
 import { KineticTypographyEngine } from './core/kineticTypography.js';
 import { BioTimeEngine } from './core/bioTimeEngine.js';
 import { WeatherContourEngine } from './core/weatherContourEngine.js';
+import { ContextMenuEngine } from './core/contextMenu.js';
 import { 
   initProjectImageDetector, 
   getProjectImageCandidates
@@ -53,6 +54,7 @@ class PortfolioApp {
     this.kineticTypo = null;
     this.bioTime = null;
     this.weatherEngine = null;
+    this.contextMenu = null;
 
     // Internationalization State
     this.currentLang = localStorage.getItem('portfolio-language') || 'id';
@@ -85,6 +87,11 @@ class PortfolioApp {
     this.initKineticTypography();
     this.initXRayBiosphere();
     this.initBioTime();
+    this.initContextMenu();
+  }
+
+  initContextMenu() {
+    this.contextMenu = new ContextMenuEngine(this);
   }
 
   renderDOM() {
@@ -946,6 +953,48 @@ class PortfolioApp {
   }
 
   openNoteInspection(note) {
+    let sectionsHtml = '';
+
+    if (note.content) {
+      const temp = document.createElement('div');
+      temp.innerHTML = note.content;
+      const h4s = temp.querySelectorAll('h4');
+
+      if (h4s.length > 0) {
+        h4s.forEach((h4, idx) => {
+          let title = h4.textContent.trim();
+          title = title.replace(/^\d+[\.\s\-]+/, '').trim().toUpperCase();
+
+          let bodyHtml = '';
+          let sibling = h4.nextElementSibling;
+          while (sibling && sibling.tagName !== 'H4') {
+            bodyHtml += sibling.outerHTML || `<p>${sibling.textContent}</p>`;
+            sibling = sibling.nextElementSibling;
+          }
+          if (!bodyHtml) {
+            bodyHtml = '<p></p>';
+          }
+
+          sectionsHtml += `
+            <div class="drawer-section-block">
+              <div class="drawer-section-heading">0${idx + 1} // ${title}</div>
+              <div class="drawer-section-body">
+                ${bodyHtml}
+              </div>
+            </div>
+          `;
+        });
+      } else {
+        sectionsHtml = `
+          <div class="drawer-section-block">
+            <div class="drawer-section-body">
+              ${note.content}
+            </div>
+          </div>
+        `;
+      }
+    }
+
     const html = `
       <div class="drawer-title-group">
         <div style="font-family: var(--font-mono); font-size: var(--font-mono-tag); color: var(--accent-primary); margin-bottom: 0.25rem;">
@@ -954,9 +1003,7 @@ class PortfolioApp {
         <h2 style="line-height: 1.25;">${note.title}</h2>
       </div>
 
-      <div class="drawer-section-block" style="font-size: var(--font-body-md); line-height: 1.75; color: var(--text-secondary);">
-        ${note.content}
-      </div>
+      ${sectionsHtml}
 
       <div class="drawer-section-block" style="font-family: var(--font-mono); font-size: var(--font-mono-micro); color: var(--text-muted);">
         PUBLISHED BY: Haidar Rifky Andrianno • ITESA Muhammadiyah Semarang Node

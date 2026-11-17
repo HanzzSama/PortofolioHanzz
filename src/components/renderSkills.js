@@ -21,8 +21,8 @@ export function renderSkills(data) {
       <div class="skills-matrix-container">
         ${skills.matrixTiers
           .map(
-            (tier, index) => `
-          <div class="matrix-tier-card" data-stagger data-parallax-slide="${index % 2 === 0 ? 'up' : 'down'}" data-parallax-speed="0.04">
+            (tier) => `
+          <div class="matrix-tier-card" data-stagger>
             <div class="tier-card-header">
               <span class="tier-id">${tier.tierId}</span>
               <span class="tier-concept">${tier.concept}</span>
