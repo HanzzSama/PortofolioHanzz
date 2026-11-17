@@ -4,6 +4,9 @@
  * Identity: Haidar Rifky Andrianno // HanzzSama 2026
  */
 
+import { adminStorage } from './adminStorageManager.js';
+import { portfolioData } from '../data/portfolioData.js';
+
 export class AdminTerminalEngine {
   constructor(appRef, securityEngine) {
     this.app = appRef;
@@ -25,6 +28,11 @@ export class AdminTerminalEngine {
 
     this.commands = {
       help: { desc: 'Menampilkan daftar seluruh perintah yang tersedia', usage: 'help' },
+      project: { desc: 'Manajemen proyek portofolio [list|view|add|edit|delete|order|reset]', usage: 'project <list|view|add|edit|delete|order|reset>' },
+      profile: { desc: 'Manajemen data profil [show|set|bio|reset]', usage: 'profile <show|set|bio|reset>' },
+      backup: { desc: 'Manajemen cadangan konfigurasi [export|import|reset]', usage: 'backup <export|import|reset>' },
+      stats: { desc: 'Menampilkan statistik konten portofolio dan distribusi teknologi', usage: 'stats' },
+      search: { desc: 'Pencarian kata kunci di proyek, keahlian, dan catatan', usage: 'search <kata_kunci>' },
       status: { desc: 'Menampilkan status performa, memori, dan lingkungan sistem', usage: 'status' },
       telemetry: { desc: 'Membuka atau menutup HUD telemetri hardware X-Ray', usage: 'telemetry' },
       security: { desc: 'Menampilkan log keamanan, status device fingerprint & izin notifikasi', usage: 'security' },
@@ -407,15 +415,37 @@ export class AdminTerminalEngine {
     // Echo input
     this.printLine(`hanzz@root:~$ ${raw}`, 'normal');
 
-    const parts = raw.split(/\s+/);
-    const cmd = parts[0].toLowerCase();
-    const args = parts.slice(1);
+    const tokens = this.tokenizeCommandLine(raw);
+    const cmd = tokens[0].toLowerCase();
+    const args = tokens.slice(1);
 
     switch (cmd) {
       case 'help':
         this.printLine('--- DAFTAR PERINTAH ADMIN TERSEDIA ---', 'accent');
         const rows = Object.entries(this.commands).map(([name, meta]) => [meta.usage, meta.desc]);
         this.printTable(['Syntax', 'Fungsi'], rows);
+        break;
+
+      case 'project':
+      case 'proj':
+        this.handleProjectCommand(args);
+        break;
+
+      case 'profile':
+      case 'prof':
+        this.handleProfileCommand(args);
+        break;
+
+      case 'backup':
+        this.handleBackupCommand(args);
+        break;
+
+      case 'stats':
+        this.handleStatsCommand();
+        break;
+
+      case 'search':
+        this.handleSearchCommand(args.join(' '));
         break;
 
       case 'status':
@@ -607,6 +637,614 @@ export class AdminTerminalEngine {
       default:
         this.printLine(`Perintah "${cmd}" tidak dikenali. Ketik "help" untuk melihat panduan.`, 'error');
         break;
+    }
+  }
+
+  tokenizeCommandLine(text) {
+    const tokens = [];
+    let current = '';
+    let inQuotes = false;
+    let quoteChar = '';
+
+    for (let i = 0; i < text.length; i++) {
+      const char = text[i];
+      if ((char === '"' || char === "'") && !inQuotes) {
+        inQuotes = true;
+        quoteChar = char;
+      } else if (char === quoteChar && inQuotes) {
+        inQuotes = false;
+        quoteChar = '';
+      } else if (char === ' ' && !inQuotes) {
+        if (current.trim()) {
+          tokens.push(current.trim());
+          current = '';
+        }
+      } else {
+        current += char;
+      }
+    }
+
+    if (current.trim()) {
+      tokens.push(current.trim());
+    }
+
+    return tokens;
+  }
+
+  parseFlags(tokens) {
+    const flags = {};
+    const positional = [];
+
+    for (let i = 0; i < tokens.length; i++) {
+      const token = tokens[i];
+      if (token.startsWith('--')) {
+        const key = token.slice(2).toLowerCase();
+        if (i + 1 < tokens.length && !tokens[i + 1].startsWith('--')) {
+          flags[key] = tokens[i + 1];
+          i++;
+        } else {
+          flags[key] = true;
+        }
+      } else {
+        positional.push(token);
+      }
+    }
+
+    return { flags, positional };
+  }
+
+  handleProjectCommand(args) {
+    const sub = args[0] ? args[0].toLowerCase() : 'list';
+    const subArgs = args.slice(1);
+
+    const currentProjects = (this.app && this.app.data && this.app.data.projects && Array.isArray(this.app.data.projects.items))
+      ? JSON.parse(JSON.stringify(this.app.data.projects.items))
+      : (adminStorage.getCustomProjects() || JSON.parse(JSON.stringify(portfolioData.projects.items)));
+
+    switch (sub) {
+      case 'list':
+      case 'ls': {
+        const catFilter = subArgs[0] ? subArgs[0].toLowerCase() : null;
+        let list = currentProjects;
+        if (catFilter) {
+          list = list.filter(p => (p.category || '').toLowerCase().includes(catFilter));
+        }
+
+        if (list.length === 0) {
+          this.printLine(`Tidak ada proyek yang cocok dengan filter "${catFilter || ''}".`, 'warning');
+          return;
+        }
+
+        this.printLine(`--- DAFTAR PROYEK PORTOFOLIO (${list.length} ITEM) ---`, 'accent');
+        const rows = list.map((p, idx) => [
+          p.id || `proj-${idx + 1}`,
+          p.code || `PRJ // ${String(idx + 1).padStart(2, '0')}`,
+          (p.title || 'Untitled').slice(0, 24),
+          p.year || '2026',
+          (p.category || 'General').slice(0, 22),
+          Array.isArray(p.techStack) ? p.techStack.slice(0, 3).join(', ') : (p.techStack || '-')
+        ]);
+        this.printTable(['ID', 'Kode', 'Judul', 'Tahun', 'Kategori', 'Teknologi'], rows);
+        break;
+      }
+
+      case 'view':
+      case 'show': {
+        const id = subArgs[0];
+        if (!id) {
+          this.printLine('Format salah. Gunakan: project view <id_proyek>', 'error');
+          return;
+        }
+        const p = currentProjects.find(item => item.id.toLowerCase() === id.toLowerCase() || (item.code && item.code.toLowerCase().includes(id.toLowerCase())));
+        if (!p) {
+          this.printLine(`Proyek dengan ID "${id}" tidak ditemukan.`, 'error');
+          return;
+        }
+
+        this.printLine(`--- RINCIAN PROYEK: ${p.title.toUpperCase()} ---`, 'accent');
+        this.printTable(['Atribut', 'Nilai'], [
+          ['ID / Kode', `${p.id} (${p.code || '-'})`],
+          ['Judul', p.title || '-'],
+          ['Subjudul', p.subtitle || '-'],
+          ['Tahun', p.year || '-'],
+          ['Kategori', p.category || '-'],
+          ['Peran', p.role || '-'],
+          ['Klien / Mitra', p.client || '-'],
+          ['Deskripsi', p.description || '-'],
+          ['Teknologi', Array.isArray(p.techStack) ? p.techStack.join(', ') : (p.techStack || '-')],
+          ['Tautan Repositori', p.links?.code || '-'],
+          ['Tautan Pratinjau', p.links?.preview || '-'],
+          ['Masalah Utama', p.deepDive?.problem || '-'],
+          ['Solusi Arsitektural', p.deepDive?.solution || '-']
+        ]);
+        break;
+      }
+
+      case 'add': {
+        const { flags } = this.parseFlags(subArgs);
+        if (!flags.title) {
+          this.printLine('Format salah. Minimal sertakan --title. Contoh sintaks:', 'error');
+          this.printLine('project add --title "Nama Proyek" --year "2026" --cat "Web System" --tech "Vue, Node" --desc "Deskripsi singkat"', 'info');
+          return;
+        }
+
+        const newId = `proj-${Date.now().toString(36)}`;
+        const nextNum = currentProjects.length + 1;
+        const newCode = `PRJ // ${String(nextNum).padStart(2, '0')}`;
+
+        const techArray = flags.tech
+          ? (typeof flags.tech === 'string' ? flags.tech.split(',').map(s => s.trim()).filter(Boolean) : ['JavaScript'])
+          : ['JavaScript', 'CSS', 'HTML'];
+
+        const newProject = {
+          id: newId,
+          code: newCode,
+          title: flags.title,
+          subtitle: flags.subtitle || flags.title,
+          year: flags.year || new Date().getFullYear().toString(),
+          category: flags.cat || flags.category || 'Web Application',
+          role: flags.role || 'Web Developer & Designer',
+          client: flags.client || 'Personal Project',
+          description: flags.desc || flags.description || 'Proyek portofolio kustom dibuat melalui Command Prompt Admin.',
+          deliverables: [
+            'Antarmuka responsif ramah pengguna',
+            'Integrasi sistem data dinamis',
+            'Optimalisasi performa web'
+          ],
+          techStack: techArray,
+          metrics: {
+            framework: techArray[0] || 'Web',
+            tahun: flags.year || '2026',
+            status: 'Aktif'
+          },
+          links: {
+            preview: flags.preview || '#',
+            code: flags.repo || flags.code || 'https://github.com/HanzzSama'
+          },
+          accent: 'var(--color-botanical-sage)',
+          blueprintSvg: 'orbit',
+          deepDive: {
+            problem: flags.problem || 'Permasalahan operasional digital yang membutuhkan solusi web terpadu.',
+            solution: flags.solution || 'Membangun aplikasi digital responsif dengan arsitektur modular yang stabil.',
+            architectureSchema: '[CLIENT: BROWSERS]\n       │\n       ▼\n[MODULAR ENGINE & UI]'
+          }
+        };
+
+        currentProjects.push(newProject);
+        adminStorage.saveCustomProjects(currentProjects);
+
+        if (this.app && typeof this.app.refreshPortfolioUI === 'function') {
+          this.app.refreshPortfolioUI();
+        }
+
+        this.printLine(`Proyek baru berhasil ditambahkan! ID: ${newId} | Kode: ${newCode}`, 'success');
+        this.printLine(`Judul: "${newProject.title}" | Kategori: "${newProject.category}"`, 'info');
+        break;
+      }
+
+      case 'edit':
+      case 'update': {
+        const id = subArgs[0];
+        const field = subArgs[1] ? subArgs[1].toLowerCase() : null;
+        const value = subArgs.slice(2).join(' ');
+
+        if (!id || !field || !value) {
+          this.printLine('Format salah. Gunakan: project edit <id> <field> <value>', 'error');
+          this.printLine('Field yang didukung: title, subtitle, year, category, role, client, desc, tech, repo, preview, problem, solution', 'info');
+          return;
+        }
+
+        const projectIndex = currentProjects.findIndex(p => p.id.toLowerCase() === id.toLowerCase() || (p.code && p.code.toLowerCase().includes(id.toLowerCase())));
+        if (projectIndex === -1) {
+          this.printLine(`Proyek dengan ID "${id}" tidak ditemukan.`, 'error');
+          return;
+        }
+
+        const target = currentProjects[projectIndex];
+        switch (field) {
+          case 'title':
+            target.title = value;
+            break;
+          case 'subtitle':
+            target.subtitle = value;
+            break;
+          case 'year':
+            target.year = value;
+            if (target.metrics) target.metrics.tahun = value;
+            break;
+          case 'cat':
+          case 'category':
+            target.category = value;
+            break;
+          case 'role':
+            target.role = value;
+            break;
+          case 'client':
+            target.client = value;
+            break;
+          case 'desc':
+          case 'description':
+            target.description = value;
+            break;
+          case 'tech':
+          case 'techstack':
+            target.techStack = value.split(',').map(s => s.trim()).filter(Boolean);
+            if (target.metrics && target.techStack[0]) target.metrics.framework = target.techStack[0];
+            break;
+          case 'repo':
+          case 'code':
+            if (!target.links) target.links = {};
+            target.links.code = value;
+            break;
+          case 'preview':
+            if (!target.links) target.links = {};
+            target.links.preview = value;
+            break;
+          case 'problem':
+            if (!target.deepDive) target.deepDive = {};
+            target.deepDive.problem = value;
+            break;
+          case 'solution':
+            if (!target.deepDive) target.deepDive = {};
+            target.deepDive.solution = value;
+            break;
+          default:
+            this.printLine(`Field "${field}" tidak dikenali.`, 'error');
+            return;
+        }
+
+        adminStorage.saveCustomProjects(currentProjects);
+
+        if (this.app && typeof this.app.refreshPortfolioUI === 'function') {
+          this.app.refreshPortfolioUI();
+        }
+
+        this.printLine(`Proyek "${target.title}" (ID: ${target.id}) berhasil diperbarui!`, 'success');
+        this.printLine(`Field [${field}] diubah menjadi: "${value}"`, 'info');
+        break;
+      }
+
+      case 'delete':
+      case 'rm': {
+        const id = subArgs[0];
+        if (!id) {
+          this.printLine('Format salah. Gunakan: project delete <id_proyek>', 'error');
+          return;
+        }
+
+        const projectIndex = currentProjects.findIndex(p => p.id.toLowerCase() === id.toLowerCase() || (p.code && p.code.toLowerCase().includes(id.toLowerCase())));
+        if (projectIndex === -1) {
+          this.printLine(`Proyek dengan ID "${id}" tidak ditemukan.`, 'error');
+          return;
+        }
+
+        const deleted = currentProjects.splice(projectIndex, 1)[0];
+        adminStorage.saveCustomProjects(currentProjects);
+
+        if (this.app && typeof this.app.refreshPortfolioUI === 'function') {
+          this.app.refreshPortfolioUI();
+        }
+
+        this.printLine(`Proyek "${deleted.title}" (ID: ${deleted.id}) berhasil dihapus dari portofolio.`, 'success');
+        break;
+      }
+
+      case 'order': {
+        const id = subArgs[0];
+        const newPos = parseInt(subArgs[1], 10);
+        if (!id || isNaN(newPos) || newPos < 1 || newPos > currentProjects.length) {
+          this.printLine(`Format salah. Gunakan: project order <id> <urutan (1-${currentProjects.length})>`, 'error');
+          return;
+        }
+
+        const oldIndex = currentProjects.findIndex(p => p.id.toLowerCase() === id.toLowerCase() || (p.code && p.code.toLowerCase().includes(id.toLowerCase())));
+        if (oldIndex === -1) {
+          this.printLine(`Proyek dengan ID "${id}" tidak ditemukan.`, 'error');
+          return;
+        }
+
+        const [item] = currentProjects.splice(oldIndex, 1);
+        currentProjects.splice(newPos - 1, 0, item);
+
+        currentProjects.forEach((p, idx) => {
+          p.code = `PRJ // ${String(idx + 1).padStart(2, '0')}`;
+        });
+
+        adminStorage.saveCustomProjects(currentProjects);
+
+        if (this.app && typeof this.app.refreshPortfolioUI === 'function') {
+          this.app.refreshPortfolioUI();
+        }
+
+        this.printLine(`Urutan proyek "${item.title}" dipindahkan ke posisi ${newPos}.`, 'success');
+        break;
+      }
+
+      case 'reset': {
+        adminStorage.resetProjects();
+        if (this.app && typeof this.app.refreshPortfolioUI === 'function') {
+          this.app.refreshPortfolioUI();
+        }
+        this.printLine('Daftar proyek berhasil dipulihkan ke versi bawaan sistem.', 'success');
+        break;
+      }
+
+      default:
+        this.printLine(`Sub-perintah "${sub}" tidak dikenal. Gunakan: project <list|view|add|edit|delete|order|reset>`, 'error');
+        break;
+    }
+  }
+
+  handleProfileCommand(args) {
+    const sub = args[0] ? args[0].toLowerCase() : 'show';
+    const subArgs = args.slice(1);
+
+    const currentMeta = (this.app && this.app.data && this.app.data.meta)
+      ? this.app.data.meta
+      : portfolioData.meta;
+
+    const customProfile = adminStorage.getCustomProfile() || {};
+
+    switch (sub) {
+      case 'show':
+      case 'view': {
+        this.printLine('--- PROFIL IDENTITAS PORTOFOLIO ---', 'accent');
+        const rows = [
+          ['Nama Lengkap', currentMeta.fullName || '-'],
+          ['Alias / Callsign', `${currentMeta.alias || '-'} // ${currentMeta.callsign || '-'}`],
+          ['Peran Utama', currentMeta.role || '-'],
+          ['Pengalaman', currentMeta.experienceYears || '-'],
+          ['Lokasi', currentMeta.location || '-'],
+          ['Kampus / Institusi', currentMeta.institution?.name || '-'],
+          ['Ketersediaan Kerja', currentMeta.availability?.status || '-'],
+          ['GitHub', currentMeta.socials?.find(s => s.name === 'GitHub')?.handle || '-'],
+          ['LinkedIn', currentMeta.socials?.find(s => s.name === 'LinkedIn')?.handle || '-'],
+          ['Email Kontak', currentMeta.socials?.find(s => s.name === 'Gmail')?.handle || '-']
+        ];
+        this.printTable(['Parameter', 'Nilai'], rows);
+
+        const bio = (this.app && this.app.data && this.app.data.about && Array.isArray(this.app.data.about.ethosParagraphs))
+          ? this.app.data.about.ethosParagraphs[0]
+          : '-';
+        this.printLine(`Bio Singkat: "${bio}"`, 'info');
+        break;
+      }
+
+      case 'set': {
+        const field = subArgs[0] ? subArgs[0].toLowerCase() : null;
+        const value = subArgs.slice(1).join(' ');
+
+        if (!field || !value) {
+          this.printLine('Format salah. Gunakan: profile set <field> <value>', 'error');
+          this.printLine('Field yang didukung: role, subrole, experience, location, status, github, linkedin, instagram, email', 'info');
+          return;
+        }
+
+        switch (field) {
+          case 'role':
+            customProfile.role = value;
+            break;
+          case 'subrole':
+            customProfile.subRole = value;
+            break;
+          case 'experience':
+            customProfile.experienceYears = value;
+            break;
+          case 'location':
+            customProfile.location = value;
+            break;
+          case 'status':
+          case 'availability':
+            customProfile.availability = value;
+            break;
+          case 'github':
+          case 'linkedin':
+          case 'instagram':
+          case 'email': {
+            if (!customProfile.socials) {
+              customProfile.socials = JSON.parse(JSON.stringify(currentMeta.socials || []));
+            }
+            const sName = field === 'email' ? 'Gmail' : (field.charAt(0).toUpperCase() + field.slice(1));
+            const sItem = customProfile.socials.find(s => s.name.toLowerCase() === sName.toLowerCase());
+            if (sItem) {
+              sItem.handle = value;
+              if (field === 'github') sItem.url = `https://github.com/${value.replace('@', '')}`;
+              if (field === 'linkedin') sItem.url = `https://linkedin.com/in/${value}`;
+              if (field === 'instagram') sItem.url = `https://instagram.com/${value.replace('@', '')}`;
+              if (field === 'email') sItem.url = `mailto:${value}`;
+            }
+            break;
+          }
+          default:
+            this.printLine(`Field profil "${field}" tidak didukung.`, 'error');
+            return;
+        }
+
+        adminStorage.saveCustomProfile(customProfile);
+        if (this.app && typeof this.app.refreshPortfolioUI === 'function') {
+          this.app.refreshPortfolioUI();
+        }
+
+        this.printLine(`Profil berhasil diperbarui! Field [${field}] diatur ke: "${value}"`, 'success');
+        break;
+      }
+
+      case 'bio': {
+        const bioText = subArgs.join(' ');
+        if (!bioText) {
+          this.printLine('Format salah. Gunakan: profile bio <teks perkenalan baru>', 'error');
+          return;
+        }
+
+        customProfile.bio = bioText;
+        adminStorage.saveCustomProfile(customProfile);
+
+        if (this.app && typeof this.app.refreshPortfolioUI === 'function') {
+          this.app.refreshPortfolioUI();
+        }
+
+        this.printLine('Bio dan narasi profil berhasil diperbarui!', 'success');
+        break;
+      }
+
+      case 'reset': {
+        adminStorage.resetProfile();
+        if (this.app && typeof this.app.refreshPortfolioUI === 'function') {
+          this.app.refreshPortfolioUI();
+        }
+        this.printLine('Data profil berhasil dipulihkan ke versi bawaan sistem.', 'success');
+        break;
+      }
+
+      default:
+        this.printLine(`Sub-perintah "${sub}" tidak dikenal. Gunakan: profile <show|set|bio|reset>`, 'error');
+        break;
+    }
+  }
+
+  handleBackupCommand(args) {
+    const sub = args[0] ? args[0].toLowerCase() : 'export';
+    const subArgs = args.slice(1);
+
+    switch (sub) {
+      case 'export': {
+        const json = adminStorage.exportBackup();
+        if (typeof window !== 'undefined' && typeof document !== 'undefined') {
+          try {
+            const blob = new Blob([json], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            const dateStr = new Date().toISOString().slice(0, 10);
+            a.href = url;
+            a.download = `hanzz-portfolio-backup-${dateStr}.json`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            this.printLine(`Cadangan berhasil diekspor dan diunduh sebagai "hanzz-portfolio-backup-${dateStr}.json".`, 'success');
+          } catch (e) {
+            this.printLine('Gagal mengunduh berkas cadangan langsung. Menampilkan isi JSON:', 'warning');
+            this.printLine(json.slice(0, 300) + '...', 'info');
+          }
+        } else {
+          this.printLine(json, 'normal');
+        }
+        break;
+      }
+
+      case 'import': {
+        const jsonStr = subArgs.join(' ');
+        if (!jsonStr) {
+          this.printLine('Format salah. Gunakan: backup import <string_json>', 'error');
+          return;
+        }
+
+        const res = adminStorage.importBackup(jsonStr);
+        if (res.success) {
+          if (this.app && typeof this.app.refreshPortfolioUI === 'function') {
+            this.app.refreshPortfolioUI();
+          }
+          this.printLine(res.message, 'success');
+        } else {
+          this.printLine(res.message, 'error');
+        }
+        break;
+      }
+
+      case 'reset': {
+        adminStorage.resetAll();
+        if (this.app && typeof this.app.refreshPortfolioUI === 'function') {
+          this.app.refreshPortfolioUI();
+        }
+        this.printLine('Seluruh konfigurasi proyek dan profil kustom telah dihapus dan dipulihkan.', 'success');
+        break;
+      }
+
+      default:
+        this.printLine(`Sub-perintah "${sub}" tidak dikenal. Gunakan: backup <export|import|reset>`, 'error');
+        break;
+    }
+  }
+
+  handleStatsCommand() {
+    this.printLine('--- STATISTIK KONTEN PORTOFOLIO ---', 'accent');
+    const projects = (this.app && this.app.data && this.app.data.projects && Array.isArray(this.app.data.projects.items))
+      ? this.app.data.projects.items
+      : portfolioData.projects.items;
+
+    const techFrequency = {};
+    projects.forEach(p => {
+      if (Array.isArray(p.techStack)) {
+        p.techStack.forEach(t => {
+          techFrequency[t] = (techFrequency[t] || 0) + 1;
+        });
+      }
+    });
+
+    const topTech = Object.entries(techFrequency)
+      .sort((a, b) => b[1] - a[1])
+      .slice(0, 5)
+      .map(([tech, count]) => `${tech} (${count})`)
+      .join(', ');
+
+    const usage = adminStorage.getStorageUsage();
+    const domCount = typeof document !== 'undefined' ? document.querySelectorAll('*').length : 0;
+
+    this.printTable(['Parameter', 'Nilai'], [
+      ['Total Proyek Aktif', `${projects.length} item`],
+      ['Total Teknologi Terdata', `${Object.keys(techFrequency).length} teknologi`],
+      ['Top Teknologi Proyek', topTech || '-'],
+      ['Penggunaan Penyimpanan', usage.formatted],
+      ['Komponen DOM Halaman', `${domCount} elemen`],
+      ['Status Ketersediaan', this.app?.data?.meta?.availability?.status || 'Tersedia']
+    ]);
+  }
+
+  handleSearchCommand(query) {
+    if (!query) {
+      this.printLine('Format salah. Gunakan: search <kata_kunci>', 'error');
+      return;
+    }
+    const q = query.toLowerCase();
+    this.printLine(`--- HASIL PENCARIAN KATA KUNCI: "${query}" ---`, 'accent');
+
+    const results = [];
+
+    const projects = (this.app && this.app.data && this.app.data.projects && Array.isArray(this.app.data.projects.items))
+      ? this.app.data.projects.items
+      : portfolioData.projects.items;
+
+    projects.forEach(p => {
+      const matchTitle = (p.title || '').toLowerCase().includes(q);
+      const matchDesc = (p.description || '').toLowerCase().includes(q);
+      const matchTech = Array.isArray(p.techStack) && p.techStack.some(t => t.toLowerCase().includes(q));
+      if (matchTitle || matchDesc || matchTech) {
+        results.push(['Proyek', p.title, p.category || 'Web', p.id]);
+      }
+    });
+
+    const skillTiers = this.app?.data?.skills?.tiers || portfolioData.skills?.tiers || [];
+    skillTiers.forEach(tier => {
+      if (Array.isArray(tier.nodes)) {
+        tier.nodes.forEach(node => {
+          if ((node.name || '').toLowerCase().includes(q) || (node.spec || '').toLowerCase().includes(q)) {
+            results.push(['Keahlian', node.name, tier.layerName || 'Skill', node.tag || '-']);
+          }
+        });
+      }
+    });
+
+    const notes = this.app?.data?.another?.gardenNotes || portfolioData.another?.gardenNotes || [];
+    notes.forEach(note => {
+      if ((note.title || '').toLowerCase().includes(q) || (note.excerpt || '').toLowerCase().includes(q)) {
+        results.push(['Catatan Lab', note.title, note.topic || 'Article', note.id || '-']);
+      }
+    });
+
+    if (results.length === 0) {
+      this.printLine(`Tidak ditemukan hasil yang cocok untuk "${query}".`, 'warning');
+    } else {
+      this.printTable(['Kategori', 'Nama / Judul', 'Konteks', 'Pengenal'], results);
     }
   }
 }

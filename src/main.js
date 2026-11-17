@@ -195,6 +195,22 @@ class PortfolioApp {
     }
   }
 
+  refreshPortfolioUI() {
+    this.data = getPortfolioData(this.currentLang);
+    if (this.appContainer) {
+      this.renderDOM();
+      this.applyLanguageUI(this.currentLang);
+      this.initKineticTopographyCanvas();
+      this.initMonolithSimulator();
+      this.initWeatherEngine();
+      this.initHanzzPet();
+      this.initParallaxAndObserver();
+      this.initSmoothNavLinks();
+      this.initAudioSynthesizer();
+      this.initClipboard();
+    }
+  }
+
   applyLanguageUI(lang) {
     const t = translations[lang] || translations.id;
 

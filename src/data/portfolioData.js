@@ -7,6 +7,7 @@
  */
 
 import { translations } from './translations.js';
+import { adminStorage } from '../core/adminStorageManager.js';
 
 export const portfolioData = {
   meta: {
@@ -1096,6 +1097,30 @@ export function getPortfolioData(lang = 'id') {
       institution: t.meta.institution ? { ...localized.meta.institution, ...t.meta.institution } : localized.meta.institution,
       availability: t.meta.availability ? { ...localized.meta.availability, ...t.meta.availability } : localized.meta.availability
     };
+  }
+
+  // Apply admin custom projects if stored in local persistence
+  const customProjects = adminStorage.getCustomProjects();
+  if (customProjects && Array.isArray(customProjects) && customProjects.length > 0) {
+    localized.projects.items = customProjects;
+  }
+
+  // Apply admin custom profile if stored in local persistence
+  const customProfile = adminStorage.getCustomProfile();
+  if (customProfile && typeof customProfile === 'object') {
+    localized.meta = {
+      ...localized.meta,
+      ...customProfile,
+      institution: customProfile.institution ? { ...localized.meta.institution, ...customProfile.institution } : localized.meta.institution,
+      availability: customProfile.availability ? (typeof customProfile.availability === 'object' ? { ...localized.meta.availability, ...customProfile.availability } : { ...localized.meta.availability, status: customProfile.availability }) : localized.meta.availability
+    };
+    if (customProfile.role) {
+      localized.welcome.architecturalPreamble = customProfile.role;
+    }
+    if (customProfile.bio) {
+      const remainingParagraphs = Array.isArray(localized.about.ethosParagraphs) ? localized.about.ethosParagraphs.slice(1) : [];
+      localized.about.ethosParagraphs = [customProfile.bio, ...remainingParagraphs];
+    }
   }
 
   localized.currentLang = lang;
