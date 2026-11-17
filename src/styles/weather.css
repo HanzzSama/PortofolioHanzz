@@ -626,3 +626,226 @@
   color: var(--accent-primary);
 }
 
+/* ==========================================================================
+   WEATHER SECTION RESPONSIVE DESIGN (MOBILE & SMALL SCREENS)
+   ========================================================================== */
+@media (max-width: 768px) {
+  .weather-stage-grid {
+    gap: var(--space-lg);
+  }
+
+  .weather-contour-card {
+    min-height: 420px;
+  }
+
+  .weather-contour-canvas-wrap {
+    min-height: 340px;
+  }
+}
+
+@media (max-width: 640px) {
+  .weather-stage-grid {
+    gap: 1rem;
+  }
+
+  .weather-contour-card {
+    min-height: 380px;
+  }
+
+  .weather-contour-canvas-wrap {
+    min-height: 300px;
+  }
+
+  /* Diurnal Time Phase Bar (Header) */
+  .weather-diurnal-bar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.5rem;
+    padding: 0.65rem 0.75rem;
+  }
+
+  .diurnal-title {
+    font-size: 0.6rem;
+    letter-spacing: 0.06em;
+  }
+
+  /* 3x2 Symmetrical Grid for 6 Phase Buttons */
+  .diurnal-btn-group {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.35rem;
+    width: 100%;
+  }
+
+  .diurnal-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 0.35rem 0.25rem;
+    font-size: 0.6rem;
+    white-space: nowrap;
+  }
+
+  /* Canvas Overlay Badges - Separation to Prevent Clashing */
+  .weather-canvas-crosshairs {
+    top: 0.65rem;
+    left: 0.65rem;
+    right: 0.65rem;
+    max-width: calc(100% - 1.3rem);
+    padding: 0.4rem 0.6rem;
+    font-size: 0.58rem;
+    line-height: 1.45;
+    word-break: break-word;
+  }
+
+  .weather-wave-status {
+    top: auto;
+    bottom: 0.65rem;
+    right: 0.65rem;
+    padding: 0.28rem 0.55rem;
+    font-size: 0.56rem;
+  }
+
+  /* Controls Bar */
+  .weather-controls-bar {
+    padding: 0.65rem 0.75rem;
+    gap: 0.5rem;
+  }
+
+  .weather-mode-btn {
+    padding: 0.3rem 0.5rem;
+    font-size: 0.6rem;
+  }
+
+  .weather-nada-wave-btn {
+    padding: 0.32rem 0.65rem;
+    font-size: 0.6rem;
+  }
+
+  /* Telemetry HUD */
+  .weather-primary-card {
+    padding: 1rem 0.85rem;
+  }
+
+  .weather-temp-hero {
+    font-size: clamp(2.35rem, 8vw, 3.25rem);
+  }
+
+  .weather-meta-header {
+    font-size: 0.6rem;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+
+  .weather-desc-badge {
+    font-size: 0.7rem;
+    word-break: break-word;
+  }
+
+  .weather-apparent-temp {
+    font-size: 0.65rem;
+  }
+
+  .weather-metrics-grid {
+    gap: 0.5rem;
+  }
+
+  .weather-metric-tile {
+    padding: 0.75rem 0.75rem;
+    min-width: 0;
+  }
+
+  .metric-label {
+    font-size: 0.56rem;
+  }
+
+  .metric-value {
+    font-size: 1.15rem;
+  }
+
+  .metric-sub {
+    font-size: 0.58rem;
+    word-break: break-word;
+  }
+
+  .weather-solar-strip {
+    padding: 0.65rem 0.85rem;
+    font-size: 0.6rem;
+  }
+}
+
+@media (max-width: 400px) {
+  .weather-controls-bar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.5rem;
+  }
+
+  .weather-layer-btn-group {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.35rem;
+    width: 100%;
+  }
+
+  .weather-layer-btn-group .weather-mode-btn {
+    text-align: center;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .weather-nada-wave-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 360px) {
+  .diurnal-btn-group {
+    gap: 0.25rem;
+  }
+
+  .diurnal-btn {
+    font-size: 0.54rem;
+    padding: 0.3rem 0.15rem;
+  }
+
+  .weather-canvas-crosshairs {
+    top: 0.5rem;
+    left: 0.5rem;
+    right: 0.5rem;
+    max-width: calc(100% - 1rem);
+    padding: 0.35rem 0.45rem;
+    font-size: 0.53rem;
+  }
+
+  .weather-wave-status {
+    bottom: 0.5rem;
+    right: 0.5rem;
+    font-size: 0.53rem;
+    padding: 0.25rem 0.45rem;
+  }
+
+  .weather-primary-card {
+    padding: 0.85rem 0.65rem;
+  }
+
+  .weather-temp-hero {
+    font-size: 2.2rem;
+  }
+
+  .weather-metric-tile {
+    padding: 0.65rem 0.5rem;
+  }
+
+  .metric-value {
+    font-size: 1rem;
+  }
+
+  .weather-solar-strip {
+    padding: 0.55rem 0.65rem;
+    font-size: 0.56rem;
+  }
+}
+

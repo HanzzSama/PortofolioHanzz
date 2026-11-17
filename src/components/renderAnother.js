@@ -54,7 +54,7 @@ export function renderAnother(data) {
               ${another.audioSynth.tagline || '432Hz Nature Solfeggio • Binaural Theta • Biophilic Rain Audio Suite'}
             </p>
           </div>
-          <div style="display: flex; gap: 8px; align-items: center;">
+          <div class="synth-header-actions">
             <button id="studio-open-console-btn" class="tactile-btn" title="Open Advanced Hardware Console" data-cursor-target>
               <span>⚙</span>
               <span>CONSOLE [DSP]</span>
@@ -103,13 +103,13 @@ export function renderAnother(data) {
         </div>
 
         <!-- Quick Faders Row -->
-        <div style="display: flex; gap: 16px; align-items: center; justify-content: space-between; font-family: var(--font-mono); font-size: 0.65rem; color: var(--text-muted); flex-wrap: wrap;">
-          <div style="display: flex; align-items: center; gap: 8px; flex: 1; min-width: 180px;">
+        <div class="synth-faders-row">
+          <div class="synth-fader-item">
             <span>VOL:</span>
             <input type="range" id="studio-volume-slider" class="monolith-range-slider" min="0" max="1" step="0.01" value="0.35">
             <span id="studio-vol-readout" style="color: var(--accent-primary); font-weight: 600;">35%</span>
           </div>
-          <div style="display: flex; align-items: center; gap: 8px; flex: 1; min-width: 180px;">
+          <div class="synth-fader-item">
             <span>LPF:</span>
             <input type="range" id="studio-filter-slider" class="monolith-range-slider" min="200" max="8000" step="50" value="1400">
             <span id="studio-filter-readout" style="color: var(--accent-primary); font-weight: 600;">1400Hz</span>

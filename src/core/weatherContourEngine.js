@@ -249,6 +249,41 @@ export class WeatherContourEngine {
         this.triggerWaveRipple(x, y, 1.2);
         this.playChordStrike();
       });
+
+      // Mobile Touch Interaction
+      this.canvas.addEventListener('touchstart', (e) => {
+        if (e.touches && e.touches[0]) {
+          const rect = this.canvas.getBoundingClientRect();
+          const x = e.touches[0].clientX - rect.left;
+          const y = e.touches[0].clientY - rect.top;
+          this.triggerWaveRipple(x, y, 1.2);
+          this.playChordStrike();
+        }
+      }, { passive: true });
+
+      this.canvas.addEventListener('touchmove', (e) => {
+        if (e.touches && e.touches[0]) {
+          const rect = this.canvas.getBoundingClientRect();
+          this.mouse.targetX = e.touches[0].clientX - rect.left;
+          this.mouse.targetY = e.touches[0].clientY - rect.top;
+          this.mouse.isHovered = true;
+          if (this.isNadaWaveActive) {
+            this.playElevationTone(this.mouse.targetX, this.mouse.targetY);
+          }
+          const coordEl = document.getElementById('weather-cursor-coord');
+          if (coordEl) {
+            const latOffset = ((this.mouse.targetY / this.height) * 0.04 - 0.02).toFixed(4);
+            const lonOffset = ((this.mouse.targetX / this.width) * 0.04 - 0.02).toFixed(4);
+            coordEl.textContent = `07°00.${Math.abs(Math.round(latOffset * 1000))}S 110°25.${Math.abs(Math.round(lonOffset * 1000))}E`;
+          }
+        }
+      }, { passive: true });
+
+      this.canvas.addEventListener('touchend', () => {
+        this.mouse.isHovered = false;
+        this.mouse.targetX = -1000;
+        this.mouse.targetY = -1000;
+      }, { passive: true });
     }
 
     // Nada Wave Mode Toggle Button
