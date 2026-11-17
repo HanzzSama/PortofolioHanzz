@@ -853,7 +853,8 @@ export const translations = {
       "toastCopyUrl": "Tautan portofolio tersalin",
       "toastCopyUrlFail": "Gagal menyalin tautan",
       "toastCopyCoord": "Koordinat lokasi tersalin [07°00'S 110°25'E]",
-      "toastCopyCoordFail": "Gagal menyalin koordinat"
+      "toastCopyCoordFail": "Gagal menyalin koordinat",
+      "adminTerminal": "Command Prompt Admin"
     }
   },
   "en": {
@@ -1710,7 +1711,8 @@ export const translations = {
       "toastCopyUrl": "Portfolio link copied",
       "toastCopyUrlFail": "Failed to copy link",
       "toastCopyCoord": "Coordinates copied [07°00'S 110°25'E]",
-      "toastCopyCoordFail": "Failed to copy coordinates"
+      "toastCopyCoordFail": "Failed to copy coordinates",
+      "adminTerminal": "Command Prompt (Admin)"
     }
   },
   "zh": {
@@ -2567,7 +2569,8 @@ export const translations = {
       "toastCopyUrl": "作品集链接已复制",
       "toastCopyUrlFail": "复制链接失败",
       "toastCopyCoord": "地理坐标已复制 [07°00'S 110°25'E]",
-      "toastCopyCoordFail": "复制坐标失败"
+      "toastCopyCoordFail": "复制坐标失败",
+      "adminTerminal": "命令提示符 (管理员)"
     }
   },
   "ja": {
@@ -3424,7 +3427,8 @@ export const translations = {
       "toastCopyUrl": "ポートフォリオのリンクをコピーしました",
       "toastCopyUrlFail": "リンクのコピーに失敗しました",
       "toastCopyCoord": "座標をコピーしました [07°00'S 110°25'E]",
-      "toastCopyCoordFail": "座標のコピーに失敗しました"
+      "toastCopyCoordFail": "座標のコピーに失敗しました",
+      "adminTerminal": "コマンドプロンプト (管理者)"
     }
   },
   "de": {
@@ -4281,7 +4285,8 @@ export const translations = {
       "toastCopyUrl": "Portfolio-Link kopiert",
       "toastCopyUrlFail": "Link konnte nicht kopiert werden",
       "toastCopyCoord": "Koordinaten kopiert [07°00'S 110°25'E]",
-      "toastCopyCoordFail": "Koordinaten konnten nicht kopiert werden"
+      "toastCopyCoordFail": "Koordinaten konnten nicht kopiert werden",
+      "adminTerminal": "Eingabeaufforderung (Admin)"
     }
   }
 };

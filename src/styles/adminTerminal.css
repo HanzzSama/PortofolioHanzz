@@ -1,0 +1,492 @@
+/**
+ * ADMIN TERMINAL & SECURITY GUARD STYLES
+ * Biophilic Monolithic Obsidian Terminal & OTP Verification Modal
+ * Shortcut: Alt + Ctrl + Shift + C
+ */
+
+/* ==========================================================================
+   1. OTP AUTHENTICATION MODAL BACKDROP & DIALOG
+   ========================================================================== */
+.admin-auth-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 12, 11, 0.78);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.28s cubic-bezier(0.2, 0, 0, 1);
+  padding: 1.25rem;
+}
+
+.admin-auth-backdrop.is-active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.admin-auth-dialog {
+  background: var(--bg-surface, #141715);
+  border: var(--border-hairline, 1px solid rgba(255, 255, 255, 0.12));
+  border-radius: 8px;
+  width: 100%;
+  max-width: 480px;
+  padding: 2rem 2.25rem;
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.65), 0 0 0 1px rgba(184, 115, 87, 0.2);
+  position: relative;
+  transform: translateY(16px) scale(0.97);
+  transition: transform 0.28s cubic-bezier(0.2, 0, 0, 1);
+  color: var(--text-primary, #F4F3EF);
+}
+
+.admin-auth-backdrop.is-active .admin-auth-dialog {
+  transform: translateY(0) scale(1);
+}
+
+.auth-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+  border-bottom: var(--border-faint, 1px solid rgba(255, 255, 255, 0.08));
+  padding-bottom: 1rem;
+}
+
+.auth-title-cluster {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.auth-tagline {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.65rem;
+  color: var(--accent-primary, #B87357);
+  letter-spacing: 0.08em;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.auth-status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #34D399;
+  box-shadow: 0 0 8px #34D399;
+  display: inline-block;
+}
+
+.auth-status-dot.danger {
+  background: #F87171;
+  box-shadow: 0 0 8px #F87171;
+}
+
+.auth-heading {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+.auth-close-btn {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--text-muted, #8F9489);
+  padding: 0.35rem 0.65rem;
+  font-size: 0.72rem;
+  font-family: var(--font-mono, monospace);
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.18s ease;
+}
+
+.auth-close-btn:hover {
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.auth-body-text {
+  font-size: 0.88rem;
+  line-height: 1.55;
+  color: var(--text-secondary, #B8BCB2);
+  margin-bottom: 1.5rem;
+}
+
+.auth-target-email {
+  color: var(--text-primary, #F4F3EF);
+  font-family: var(--font-mono, monospace);
+  font-size: 0.82rem;
+  background: rgba(184, 115, 87, 0.12);
+  padding: 0.15rem 0.45rem;
+  border-radius: 3px;
+  border: 1px solid rgba(184, 115, 87, 0.25);
+  word-break: break-all;
+}
+
+/* 6-Digit OTP Box Grid */
+.auth-otp-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.otp-digit-input {
+  width: 100%;
+  max-width: 58px;
+  height: 64px;
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 6px;
+  font-family: var(--font-mono, monospace);
+  font-size: 1.75rem;
+  font-weight: 600;
+  text-align: center;
+  color: var(--text-primary, #F4F3EF);
+  transition: all 0.18s ease;
+  outline: none;
+}
+
+.otp-digit-input:focus {
+  border-color: var(--accent-primary, #B87357);
+  box-shadow: 0 0 0 2px rgba(184, 115, 87, 0.25);
+  background: rgba(0, 0, 0, 0.55);
+}
+
+.otp-digit-input.is-error {
+  border-color: #F87171;
+  color: #F87171;
+}
+
+.auth-meta-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.72rem;
+  color: var(--text-muted, #8F9489);
+  margin-bottom: 1.25rem;
+}
+
+.auth-timer {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.auth-timer-val {
+  color: var(--text-primary, #F4F3EF);
+  font-weight: 500;
+}
+
+.auth-resend-btn {
+  background: none;
+  border: none;
+  color: var(--accent-primary, #B87357);
+  font-family: var(--font-mono, monospace);
+  font-size: 0.72rem;
+  cursor: pointer;
+  padding: 0;
+  text-decoration: underline;
+  transition: opacity 0.18s ease;
+}
+
+.auth-resend-btn:disabled {
+  color: var(--text-muted, #8F9489);
+  text-decoration: none;
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.auth-action-row {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.auth-btn-primary {
+  flex: 1;
+  background: var(--accent-primary, #B87357);
+  color: #fff;
+  border: none;
+  padding: 0.75rem 1rem;
+  border-radius: 6px;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  transition: all 0.18s ease;
+}
+
+.auth-btn-primary:hover {
+  background: #C48267;
+  transform: translateY(-1px);
+}
+
+.auth-btn-primary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.auth-security-notice {
+  margin-top: 1.25rem;
+  padding: 0.65rem 0.85rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px dashed rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.65rem;
+  line-height: 1.45;
+  color: var(--text-muted, #8F9489);
+}
+
+/* ==========================================================================
+   2. ADMIN COMMAND PROMPT FLOATING TERMINAL WINDOW
+   ========================================================================== */
+.admin-terminal-window {
+  position: fixed;
+  top: 8%;
+  left: 50%;
+  transform: translateX(-50%) translateY(20px) scale(0.97);
+  width: 92%;
+  max-width: 960px;
+  height: 600px;
+  max-height: 84vh;
+  background: #0C0F0D;
+  border: 1px solid rgba(184, 115, 87, 0.35);
+  border-radius: 8px;
+  box-shadow: 0 28px 80px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 255, 255, 0.08);
+  z-index: 10001;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.28s cubic-bezier(0.2, 0, 0, 1);
+  color: #DDE2D5;
+}
+
+.admin-terminal-window.is-open {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateX(-50%) translateY(0) scale(1);
+}
+
+.admin-terminal-window.is-maximized {
+  top: 0 !important;
+  left: 0 !important;
+  width: 100vw !important;
+  max-width: 100vw !important;
+  height: 100vh !important;
+  max-height: 100vh !important;
+  border-radius: 0;
+  transform: none !important;
+}
+
+/* Terminal Title Bar */
+.terminal-titlebar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #141815;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 0.55rem 1rem;
+  user-select: none;
+  cursor: move;
+}
+
+.terminal-title-left {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.72rem;
+  color: #B87357;
+  letter-spacing: 0.06em;
+}
+
+.terminal-badge-chip {
+  background: rgba(184, 115, 87, 0.18);
+  border: 1px solid rgba(184, 115, 87, 0.35);
+  color: #F4F3EF;
+  font-size: 0.62rem;
+  padding: 0.12rem 0.4rem;
+  border-radius: 3px;
+}
+
+.terminal-window-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.win-control-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-muted, #8F9489);
+  width: 22px;
+  height: 22px;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 0.75rem;
+  font-family: var(--font-mono, monospace);
+  transition: all 0.15s ease;
+}
+
+.win-control-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+
+.win-control-btn.close:hover {
+  background: #EF4444;
+  color: #fff;
+}
+
+/* Terminal Screen / Output Body */
+.terminal-body {
+  flex: 1;
+  padding: 1.25rem 1.4rem;
+  overflow-y: auto;
+  font-family: var(--font-mono, 'JetBrains Mono', monospace);
+  font-size: 0.82rem;
+  line-height: 1.6;
+  background: radial-gradient(circle at 50% 0%, rgba(20, 24, 21, 0.75), transparent 70%), #0A0D0B;
+  display: flex;
+  flex-direction: column;
+}
+
+.terminal-output {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  margin-bottom: 0.5rem;
+}
+
+.term-line {
+  word-break: break-word;
+  white-space: pre-wrap;
+}
+
+.term-line.system {
+  color: #9CA3AF;
+}
+
+.term-line.info {
+  color: #60A5FA;
+}
+
+.term-line.success {
+  color: #34D399;
+}
+
+.term-line.warning {
+  color: #FBBF24;
+}
+
+.term-line.error {
+  color: #F87171;
+}
+
+.term-line.accent {
+  color: #B87357;
+  font-weight: 500;
+}
+
+.term-table {
+  display: table;
+  width: 100%;
+  margin: 0.5rem 0;
+  border-collapse: collapse;
+}
+
+.term-table-row {
+  display: table-row;
+}
+
+.term-table-cell {
+  display: table-cell;
+  padding: 0.2rem 1rem 0.2rem 0;
+  color: #D1D5DB;
+}
+
+.term-table-cell.header {
+  color: #B87357;
+  font-weight: 600;
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.15);
+  padding-bottom: 0.35rem;
+}
+
+/* Terminal Input Line */
+.terminal-input-row {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  margin-top: auto;
+  padding-top: 0.5rem;
+}
+
+.terminal-prompt-prefix {
+  color: #34D399;
+  font-weight: 600;
+  user-select: none;
+  white-space: nowrap;
+}
+
+.terminal-cmd-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #F4F3EF;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  caret-color: #34D399;
+  padding: 0;
+}
+
+/* Terminal Status Footer Strip */
+.terminal-footer-strip {
+  background: #111412;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 0.35rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.65rem;
+  color: var(--text-muted, #8F9489);
+}
+
+.terminal-footer-left {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+@media (max-width: 640px) {
+  .admin-auth-dialog {
+    padding: 1.5rem 1.25rem;
+  }
+  .otp-digit-input {
+    height: 52px;
+    font-size: 1.4rem;
+  }
+  .admin-terminal-window {
+    top: 2%;
+    width: 96%;
+    height: 92vh;
+    max-height: 96vh;
+  }
+}
+

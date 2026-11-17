@@ -31,6 +31,7 @@ import { KineticTypographyEngine } from './core/kineticTypography.js';
 import { BioTimeEngine } from './core/bioTimeEngine.js';
 import { WeatherContourEngine } from './core/weatherContourEngine.js';
 import { ContextMenuEngine } from './core/contextMenu.js';
+import { AdminShortcutTrigger } from './core/adminShortcutTrigger.js';
 import { 
   initProjectImageDetector, 
   getProjectImageCandidates
@@ -88,10 +89,15 @@ class PortfolioApp {
     this.initXRayBiosphere();
     this.initBioTime();
     this.initContextMenu();
+    this.initAdminTrigger();
   }
 
   initContextMenu() {
     this.contextMenu = new ContextMenuEngine(this);
+  }
+
+  initAdminTrigger() {
+    this.adminTrigger = new AdminShortcutTrigger(this);
   }
 
   renderDOM() {

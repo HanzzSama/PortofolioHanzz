@@ -50,6 +50,10 @@ export class ContextMenuEngine {
           <span class="menu-item-text">Konsol Audio DSP</span>
           <span class="menu-item-badge font-mono">[432Hz]</span>
         </button>
+        <button class="context-menu-item" data-action="admin-terminal" role="menuitem" data-cursor-target>
+          <span class="menu-item-text">Command Prompt Admin</span>
+          <span class="menu-item-badge font-mono">[Ctrl+Alt+Shift+C]</span>
+        </button>
       </div>
 
       <div class="context-menu-divider"></div>
@@ -208,6 +212,7 @@ export class ContextMenuEngine {
       'xray': cm.xray,
       'theme': cm.theme,
       'audio': cm.audio,
+      'admin-terminal': cm.adminTerminal || 'Command Prompt Admin',
       'copy-url': cm.copyUrl,
       'copy-coord': cm.copyCoord,
       'scroll-top': cm.scrollTop,
@@ -337,6 +342,12 @@ export class ContextMenuEngine {
         } else {
           const synthToggle = document.getElementById('synth-mute-toggle');
           if (synthToggle) synthToggle.click();
+        }
+        break;
+
+      case 'admin-terminal':
+        if (this.app && this.app.adminTrigger) {
+          this.app.adminTrigger.openAdminPrompt();
         }
         break;
 
