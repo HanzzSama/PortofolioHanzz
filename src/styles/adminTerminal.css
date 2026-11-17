@@ -251,9 +251,6 @@
    ========================================================================== */
 .admin-terminal-window {
   position: fixed;
-  top: 8%;
-  left: 50%;
-  transform: translateX(-50%) translateY(20px) scale(0.97);
   width: 92%;
   max-width: 960px;
   height: 600px;
@@ -268,14 +265,19 @@
   overflow: hidden;
   opacity: 0;
   pointer-events: none;
-  transition: all 0.28s cubic-bezier(0.2, 0, 0, 1);
+  transition: opacity 0.22s cubic-bezier(0.2, 0, 0, 1);
   color: #DDE2D5;
 }
 
 .admin-terminal-window.is-open {
   opacity: 1;
   pointer-events: auto;
-  transform: translateX(-50%) translateY(0) scale(1);
+}
+
+.admin-terminal-window.is-dragging {
+  user-select: none;
+  transition: none !important;
+  box-shadow: 0 36px 96px rgba(0, 0, 0, 0.92), 0 0 0 1px rgba(184, 115, 87, 0.5);
 }
 
 .admin-terminal-window.is-maximized {
@@ -289,7 +291,7 @@
   transform: none !important;
 }
 
-/* Terminal Title Bar */
+/* Terminal Title Bar (Draggable Handle) */
 .terminal-titlebar {
   display: flex;
   align-items: center;
@@ -298,7 +300,15 @@
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   padding: 0.55rem 1rem;
   user-select: none;
-  cursor: move;
+  cursor: grab;
+  touch-action: none;
+  transition: background 0.15s ease;
+}
+
+.terminal-titlebar:active,
+.admin-terminal-window.is-dragging .terminal-titlebar {
+  cursor: grabbing;
+  background: #1B211C;
 }
 
 .terminal-title-left {

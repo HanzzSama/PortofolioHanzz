@@ -13,6 +13,13 @@ export class AdminTerminalEngine {
     this.inputEl = null;
     this.isOpen = false;
     this.isMaximized = false;
+    this.isDragging = false;
+    this.dragStartX = 0;
+    this.dragStartY = 0;
+    this.windowStartX = 0;
+    this.windowStartY = 0;
+    this.hasCustomPosition = false;
+    this.savedBounds = null;
     this.commandHistory = [];
     this.historyIndex = -1;
 
@@ -35,6 +42,7 @@ export class AdminTerminalEngine {
 
     this.createDOM();
     this.bindEvents();
+    this.initDraggable();
   }
 
   createDOM() {
@@ -128,6 +136,31 @@ export class AdminTerminalEngine {
       });
     }
 
+    // Titlebar double click to toggle maximize
+    const titlebar = document.getElementById('terminal-titlebar');
+    if (titlebar) {
+      titlebar.addEventListener('dblclick', (e) => {
+        if (!e.target.closest('.win-control-btn')) {
+          this.toggleMaximize();
+        }
+      });
+    }
+
+    // Keep window inside screen bounds on resize
+    window.addEventListener('resize', () => {
+      if (this.isOpen && !this.isMaximized && this.hasCustomPosition && this.windowEl) {
+        const width = this.windowEl.offsetWidth;
+        const height = this.windowEl.offsetHeight;
+        const maxLeft = Math.max(0, window.innerWidth - width);
+        const maxTop = Math.max(0, window.innerHeight - height);
+        const curLeft = parseInt(this.windowEl.style.left, 10) || 0;
+        const curTop = parseInt(this.windowEl.style.top, 10) || 0;
+
+        if (curLeft > maxLeft) this.windowEl.style.left = `${maxLeft}px`;
+        if (curTop > maxTop) this.windowEl.style.top = `${maxTop}px`;
+      }
+    });
+
     // Update terminal clock
     setInterval(() => {
       const clock = document.getElementById('term-clock-readout');
@@ -137,8 +170,96 @@ export class AdminTerminalEngine {
     }, 1000);
   }
 
+  initDraggable() {
+    const titlebar = document.getElementById('terminal-titlebar');
+    if (!titlebar || !this.windowEl) return;
+
+    titlebar.addEventListener('pointerdown', (e) => {
+      if (e.target.closest('.win-control-btn') || this.isMaximized) {
+        return;
+      }
+
+      this.isDragging = true;
+      this.dragStartX = e.clientX;
+      this.dragStartY = e.clientY;
+
+      const rect = this.windowEl.getBoundingClientRect();
+      this.windowStartX = rect.left;
+      this.windowStartY = rect.top;
+
+      this.windowEl.style.left = `${rect.left}px`;
+      this.windowEl.style.top = `${rect.top}px`;
+      this.windowEl.style.margin = '0';
+      this.windowEl.style.transform = 'none';
+
+      this.windowEl.classList.add('is-dragging');
+
+      try {
+        titlebar.setPointerCapture(e.pointerId);
+      } catch (err) {
+        // Fallback for environments where setPointerCapture is unsupported
+      }
+    });
+
+    titlebar.addEventListener('pointermove', (e) => {
+      if (!this.isDragging || this.isMaximized) return;
+
+      const dx = e.clientX - this.dragStartX;
+      const dy = e.clientY - this.dragStartY;
+
+      const width = this.windowEl.offsetWidth;
+      const height = this.windowEl.offsetHeight;
+      const maxLeft = Math.max(0, window.innerWidth - width);
+      const maxTop = Math.max(0, window.innerHeight - height);
+
+      const targetLeft = Math.max(0, Math.min(this.windowStartX + dx, maxLeft));
+      const targetTop = Math.max(0, Math.min(this.windowStartY + dy, maxTop));
+
+      this.windowEl.style.left = `${targetLeft}px`;
+      this.windowEl.style.top = `${targetTop}px`;
+      this.hasCustomPosition = true;
+    });
+
+    const stopDragging = (e) => {
+      if (this.isDragging) {
+        this.isDragging = false;
+        this.windowEl.classList.remove('is-dragging');
+        try {
+          if (titlebar.hasPointerCapture && titlebar.hasPointerCapture(e.pointerId)) {
+            titlebar.releasePointerCapture(e.pointerId);
+          }
+        } catch (err) {
+          // Ignore
+        }
+      }
+    };
+
+    titlebar.addEventListener('pointerup', stopDragging);
+    titlebar.addEventListener('pointercancel', stopDragging);
+  }
+
+  centerWindow() {
+    if (!this.windowEl || this.isMaximized) return;
+    const viewportWidth = window.innerWidth;
+    const viewportHeight = window.innerHeight;
+
+    const width = this.windowEl.offsetWidth || Math.min(viewportWidth * 0.92, 960);
+    const height = this.windowEl.offsetHeight || Math.min(viewportHeight * 0.84, 600);
+
+    const left = Math.max(10, Math.round((viewportWidth - width) / 2));
+    const top = Math.max(10, Math.round((viewportHeight - height) / 2));
+
+    this.windowEl.style.left = `${left}px`;
+    this.windowEl.style.top = `${top}px`;
+    this.windowEl.style.margin = '0';
+    this.windowEl.style.transform = 'none';
+  }
+
   open() {
     if (!this.windowEl) return;
+    if (!this.hasCustomPosition && !this.isMaximized) {
+      this.centerWindow();
+    }
     this.windowEl.classList.add('is-open');
     this.isOpen = true;
 
@@ -161,7 +282,21 @@ export class AdminTerminalEngine {
   toggleMaximize() {
     if (!this.windowEl) return;
     this.isMaximized = !this.isMaximized;
-    this.windowEl.classList.toggle('is-maximized', this.isMaximized);
+    if (this.isMaximized) {
+      this.savedBounds = {
+        left: this.windowEl.style.left,
+        top: this.windowEl.style.top
+      };
+      this.windowEl.classList.add('is-maximized');
+    } else {
+      this.windowEl.classList.remove('is-maximized');
+      if (this.savedBounds && this.savedBounds.left) {
+        this.windowEl.style.left = this.savedBounds.left;
+        this.windowEl.style.top = this.savedBounds.top;
+      } else {
+        this.centerWindow();
+      }
+    }
   }
 
   updateSessionChip() {
