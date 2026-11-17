@@ -14,7 +14,8 @@ export const SUPPORTED_EXTENSIONS = ['webp', 'png', 'jpg', 'jpeg', 'gif', 'svg']
 export const KNOWN_PROJECT_IMAGES = [
   './src/assets/projects/pmb-itesa-new.png',
   './src/assets/projects/kalkulator-mathicalc.png',
-  './src/assets/projects/neura-ai.png'
+  './src/assets/projects/neura-ai.png',
+  './src/assets/projects/turncode.jpg'
 ];
 
 /**

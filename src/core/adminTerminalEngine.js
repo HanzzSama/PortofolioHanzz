@@ -6,6 +6,7 @@
 
 import { adminStorage } from './adminStorageManager.js';
 import { portfolioData } from '../data/portfolioData.js';
+import { shortcutManager } from './shortcutManager.js';
 
 export class AdminTerminalEngine {
   constructor(appRef, securityEngine) {
@@ -28,6 +29,7 @@ export class AdminTerminalEngine {
 
     this.commands = {
       help: { desc: 'Menampilkan daftar seluruh perintah yang tersedia', usage: 'help' },
+      shortcut: { desc: 'Manajemen pintasan peramban [list|block|unblock|remap|reset|test]', usage: 'shortcut <list|block|unblock|remap|reset|test>' },
       project: { desc: 'Manajemen proyek portofolio [list|view|add|edit|delete|order|reset]', usage: 'project <list|view|add|edit|delete|order|reset>' },
       profile: { desc: 'Manajemen data profil [show|set|bio|reset]', usage: 'profile <show|set|bio|reset>' },
       backup: { desc: 'Manajemen cadangan konfigurasi [export|import|reset]', usage: 'backup <export|import|reset>' },
@@ -424,6 +426,12 @@ export class AdminTerminalEngine {
         this.printLine('--- DAFTAR PERINTAH ADMIN TERSEDIA ---', 'accent');
         const rows = Object.entries(this.commands).map(([name, meta]) => [meta.usage, meta.desc]);
         this.printTable(['Syntax', 'Fungsi'], rows);
+        break;
+
+      case 'shortcut':
+      case 'bind':
+      case 'keys':
+        this.handleShortcutCommand(args);
         break;
 
       case 'project':
@@ -1250,6 +1258,112 @@ export class AdminTerminalEngine {
       this.printLine(`Tidak ditemukan hasil yang cocok untuk "${query}".`, 'warning');
     } else {
       this.printTable(['Kategori', 'Nama / Judul', 'Konteks', 'Pengenal'], results);
+    }
+  }
+
+  handleShortcutCommand(args) {
+    const sub = args[0] ? args[0].toLowerCase() : 'list';
+    const subArgs = args.slice(1);
+
+    switch (sub) {
+      case 'list':
+      case 'ls': {
+        this.printLine('--- DAFTAR PINTASAN TOMBOL PERAMBAN & SISTEM ---', 'accent');
+        const list = shortcutManager.list();
+        const rows = list.map(item => [
+          item.id,
+          item.name,
+          item.keys.join(', '),
+          item.category.toUpperCase(),
+          item.blocked ? 'DIBLOKIR' : 'DIIZINKAN',
+          item.description
+        ]);
+        this.printTable(['ID', 'Nama', 'Tombol', 'Kategori', 'Status', 'Fungsi'], rows);
+        this.printLine('Gunakan: shortcut block <id|all> untuk mematikan aksi tombol bawaan.', 'info');
+        this.printLine('Gunakan: shortcut remap <id> <kombinasi> untuk memetakan tombol baru.', 'info');
+        break;
+      }
+
+      case 'block': {
+        const targetId = subArgs[0] ? subArgs[0].toLowerCase() : '';
+        if (!targetId) {
+          this.printLine('Format salah. Gunakan: shortcut block <id|all>', 'error');
+          this.printLine('Contoh: shortcut block devtools (memblokir F12 dan Ctrl+Shift+I)', 'info');
+          return;
+        }
+
+        const res = shortcutManager.block(targetId);
+        if (res.success) {
+          this.printLine(res.message, 'success');
+        } else {
+          this.printLine(res.message, 'error');
+        }
+        break;
+      }
+
+      case 'unblock': {
+        const targetId = subArgs[0] ? subArgs[0].toLowerCase() : '';
+        if (!targetId) {
+          this.printLine('Format salah. Gunakan: shortcut unblock <id|all>', 'error');
+          return;
+        }
+
+        const res = shortcutManager.unblock(targetId);
+        if (res.success) {
+          this.printLine(res.message, 'success');
+        } else {
+          this.printLine(res.message, 'error');
+        }
+        break;
+      }
+
+      case 'remap':
+      case 'bind': {
+        const targetId = subArgs[0] ? subArgs[0].toLowerCase() : '';
+        const newCombo = subArgs.slice(1).join(' ').trim();
+
+        if (!targetId || !newCombo) {
+          this.printLine('Format salah. Gunakan: shortcut remap <id> <kombinasi_baru>', 'error');
+          this.printLine('Contoh: shortcut remap admin-cli "Ctrl+Shift+T"', 'info');
+          return;
+        }
+
+        const res = shortcutManager.remap(targetId, newCombo);
+        if (res.success) {
+          this.printLine(res.message, 'success');
+        } else {
+          this.printLine(res.message, 'error');
+        }
+        break;
+      }
+
+      case 'reset': {
+        const res = shortcutManager.reset();
+        this.printLine(res.message, 'success');
+        break;
+      }
+
+      case 'test': {
+        this.printLine('--- MODE PENGUJIAN DETEKSI TOMBOL AKTIF ---', 'accent');
+        this.printLine('Tekan tombol apapun (misalnya F12, F5, Ctrl+S) pada keyboard Anda.', 'info');
+        this.printLine('Hasil deteksi kombinasi tombol akan dicetak di bawah ini secara langsung.', 'info');
+        this.printLine('Ketik "shortcut stop" untuk menghentikan pengujian.', 'warning');
+
+        shortcutManager.setTestCallback((combo, e) => {
+          this.printLine(`[Deteksi Input]: ${combo} // Kode fisik: ${e.code || '-'} // Karakter: ${e.key || '-'}`, 'info');
+        });
+        break;
+      }
+
+      case 'stop': {
+        shortcutManager.setTestCallback(null);
+        this.printLine('Mode pengujian deteksi tombol telah dinonaktifkan.', 'success');
+        break;
+      }
+
+      default:
+        this.printLine(`Sub-perintah "${sub}" tidak dikenal. Gunakan: shortcut <list|block|unblock|remap|reset|test>`, 'error');
+        break;
     }
   }
 }

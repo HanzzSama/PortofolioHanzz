@@ -7,6 +7,7 @@
 import { monolithAudio } from './monolithAudioEngine.js';
 import { hapticAudio } from './hapticAudioEngine.js';
 import { deviceTelemetry } from './deviceTelemetry.js';
+import { shortcutManager } from './shortcutManager.js';
 
 export class XRayBiosphereEngine {
   constructor() {
@@ -183,11 +184,19 @@ export class XRayBiosphereEngine {
     });
 
     // 2. Keyboard Hotkey [X]
+    shortcutManager.setActionHandler('xray-hud', () => {
+      this.toggle();
+    });
+
     window.addEventListener('keydown', (e) => {
       // Ignore if typing in input/textarea
       if (['INPUT', 'TEXTAREA'].includes(e.target.tagName)) return;
 
       if (e.key === 'x' || e.key === 'X') {
+        const xrayItem = shortcutManager.shortcuts.find(s => s.id === 'xray-hud');
+        if (xrayItem && !xrayItem.keys.some(k => k.toLowerCase() === 'keyx' || k.toLowerCase() === 'x')) {
+          return;
+        }
         e.preventDefault();
         this.toggle();
       } else if (e.key === 'Escape' && this.isOpen) {
