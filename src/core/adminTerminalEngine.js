@@ -8,11 +8,13 @@ import { adminStorage } from './adminStorageManager.js';
 import { portfolioData } from '../data/portfolioData.js';
 import { shortcutManager } from './shortcutManager.js';
 import { contentProtection } from './contentProtectionEngine.js';
+import { QrScannerEngine } from './qrScannerEngine.js';
 
 export class AdminTerminalEngine {
   constructor(appRef, securityEngine) {
     this.app = appRef;
     this.sec = securityEngine;
+    this.qrScanner = new QrScannerEngine();
     this.windowEl = null;
     this.outputEl = null;
     this.inputEl = null;
@@ -31,6 +33,8 @@ export class AdminTerminalEngine {
     this.commands = {
       help: { desc: 'Menampilkan daftar seluruh perintah yang tersedia', usage: 'help' },
       guard: { desc: 'Manajemen proteksi konten dan aset portofolio [status|copy|image|paste|screen|print|all|reset]', usage: 'guard <status|copy|image|paste|screen|print|all|reset> [on|off]' },
+      passwd: { desc: 'Mengubah password root admin [passwd <old_password> <new_password>]', usage: 'passwd <old_password> <new_password>' },
+      password: { desc: 'Manajemen password & QR token [status|set|reset|qr]', usage: 'password <status|set|reset|qr>' },
       shortcut: { desc: 'Manajemen pintasan peramban [list|block|unblock|remap|reset|test]', usage: 'shortcut <list|block|unblock|remap|reset|test>' },
       project: { desc: 'Manajemen proyek portofolio [list|view|add|edit|delete|order|reset]', usage: 'project <list|view|add|edit|delete|order|reset>' },
       profile: { desc: 'Manajemen data profil [show|set|bio|reset]', usage: 'profile <show|set|bio|reset>' },
@@ -441,6 +445,15 @@ export class AdminTerminalEngine {
       case 'protect':
       case 'defense':
         this.handleGuardCommand(args);
+        break;
+
+      case 'passwd':
+        await this.handlePasswdCommand(args);
+        break;
+
+      case 'password':
+      case 'pass':
+        await this.handlePasswordCommand(args);
         break;
 
       case 'project':
@@ -1479,6 +1492,98 @@ export class AdminTerminalEngine {
 
       default:
         this.printLine(`Sub-perintah "${sub}" tidak dikenal. Gunakan: guard <status|copy|image|paste|screen|print|all|reset>`, 'error');
+        break;
+    }
+  }
+
+  /* ==========================================================================
+     12. ROOT PASSWORD & QR TOKEN CLI COMMANDS
+     ========================================================================== */
+  async handlePasswdCommand(args) {
+    if (args.length < 2) {
+      this.printLine('Syntax: passwd <password_lama> <password_baru>', 'error');
+      this.printLine('Contoh: passwd RootUser=0 MyNewSecretPass123', 'normal');
+      return;
+    }
+
+    const [oldPass, newPass] = args;
+    try {
+      await this.sec.updateRootPassword(newPass, oldPass);
+      this.printLine('Password root admin berhasil diperbarui.', 'success');
+      this.printLine('Password baru kini aktif untuk verifikasi opsi scan QR-code.', 'normal');
+    } catch (err) {
+      this.printLine('Gagal memperbarui password: ' + err.message, 'error');
+    }
+  }
+
+  async handlePasswordCommand(args) {
+    const sub = (args[0] || 'status').toLowerCase();
+
+    switch (sub) {
+      case 'status': {
+        this.printLine('--- STATUS PASSWORD ROOT ADMIN ---', 'accent');
+        const status = this.sec.getRootPasswordStatus();
+        const dateStr = status.updatedAt
+          ? new Date(status.updatedAt).toLocaleString('id-ID')
+          : 'Belum pernah diubah (Default: RootUser=0)';
+
+        this.printTable(['Parameter', 'Keterangan'], [
+          ['Status Kredensial', status.isDefault ? 'MENGGUNAKAN DEFAULT (RootUser=0)' : 'CUSTOM PASSWORD TERSETEL'],
+          ['Terakhir Diperbarui', dateStr],
+          ['Enkripsi Penyimpanan', 'SHA-256 + 128-bit Cryptographic Salt'],
+          ['Opsi Verifikasi', '1. OTP 6-Digit (Email) | 2. Scan QR-Code + Password']
+        ]);
+        break;
+      }
+
+      case 'set':
+      case 'update': {
+        const newPass = args[1];
+        if (!newPass) {
+          this.printLine('Syntax: password set <password_baru>', 'error');
+          return;
+        }
+        try {
+          await this.sec.updateRootPassword(newPass);
+          this.printLine('Password root admin berhasil diubah.', 'success');
+          this.printLine('Password baru kini aktif untuk verifikasi opsi scan QR-code.', 'normal');
+        } catch (err) {
+          this.printLine('Gagal mengubah password: ' + err.message, 'error');
+        }
+        break;
+      }
+
+      case 'reset': {
+        try {
+          const res = await this.sec.resetRootPassword();
+          this.printLine(`Password root admin berhasil direset ke default: "${res.defaultPass}".`, 'success');
+        } catch (err) {
+          this.printLine('Gagal mereset password: ' + err.message, 'error');
+        }
+        break;
+      }
+
+      case 'qr':
+      case 'token': {
+        this.printLine('--- TOKEN & BADGE QR ADMIN ---', 'accent');
+        const token = this.sec.generateQrChallengeToken();
+        this.printLine('Token Tantangan: ' + token, 'success');
+
+        const svg = this.qrScanner.generateQrSvg(token, 160);
+        if (typeof document !== 'undefined') {
+          const container = document.createElement('div');
+          container.style.cssText = 'margin: 0.75rem 0; padding: 0.5rem; background: #0A0D0B; border: 1px solid rgba(52, 211, 153, 0.3); border-radius: 6px; display: inline-block;';
+          container.innerHTML = svg;
+          if (this.outputEl) {
+            this.outputEl.appendChild(container);
+            this.scrollOutputToBottom();
+          }
+        }
+        break;
+      }
+
+      default:
+        this.printLine(`Sub-perintah "${sub}" tidak dikenal. Gunakan: password <status|set|reset|qr>`, 'error');
         break;
     }
   }

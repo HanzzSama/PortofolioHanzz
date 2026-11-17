@@ -1,8 +1,11 @@
 /**
- * ADMIN OTP AUTHENTICATION GATEWAY MODAL
- * 6-Digit Email Verification Code to haidarandrianno098@gmail.com
- * Lockout Protection & Native OS Alert Trigger
+ * ADMIN OTP & QR-CODE AUTHENTICATION GATEWAY MODAL
+ * Dual Verification:
+ * Option 1: 6-Digit Email Verification Code to haidarandrianno098@gmail.com
+ * Option 2: QR-Code Scanner / Image Drop + Root Admin Password (Default: RootUser=0)
  */
+
+import { QrScannerEngine } from './qrScannerEngine.js';
 
 export class AdminAuthModal {
   constructor(securityEngine, onSuccess) {
@@ -15,6 +18,12 @@ export class AdminAuthModal {
     this.timerInterval = null;
     this.resendCooldownUntil = 0;
     this.resendInterval = null;
+
+    // QR-code state
+    this.qrScanner = new QrScannerEngine();
+    this.activeTab = 'otp'; // 'otp' | 'qr'
+    this.detectedQrToken = null;
+    this.isCameraActive = false;
 
     this.createDOM();
     this.bindEvents();
@@ -30,56 +39,144 @@ export class AdminAuthModal {
 
     backdrop.innerHTML = `
       <div class="admin-auth-dialog" data-cursor-target>
+        <div class="auth-chassis-strip font-mono">
+          <span>NODE // 07°00'S 110°25'E</span>
+          <span>SYS // DUAL_FACTOR</span>
+          <span>LVL // ROOT</span>
+        </div>
+
         <div class="auth-header">
           <div class="auth-title-cluster">
             <span class="auth-tagline">
               <span class="auth-status-dot" id="auth-status-dot"></span>
               SECURITY GATEWAY // ROOT ACCESS
             </span>
-            <h3 class="auth-heading font-display">Verifikasi Kode Admin</h3>
+            <h3 class="auth-heading font-display">Verifikasi Akses Admin</h3>
           </div>
           <button class="auth-close-btn" id="auth-close-btn" title="Tutup [Esc]">
             [ESC] ✕
           </button>
         </div>
 
-        <div id="auth-lockout-banner" style="display: none; background: rgba(239, 68, 68, 0.15); border: 1px solid #EF4444; color: #FCA5A5; padding: 0.75rem 1rem; border-radius: 6px; margin-bottom: 1.25rem; font-family: var(--font-mono); font-size: 0.78rem;">
+        <div id="auth-lockout-banner" style="display: none; background: rgba(239, 68, 68, 0.12); border: 1px solid #EF4444; color: #EF4444; padding: 0.75rem 1rem; border-radius: 4px; margin-bottom: 1.25rem; font-family: var(--font-mono); font-size: 0.75rem;">
           <strong>PERINGATAN KEAMANAN:</strong> Terlalu banyak percobaan salah. Akses dikunci sementara selama <span id="lockout-time-readout">--</span> detik.
         </div>
 
         <div id="auth-normal-content">
-          <p class="auth-body-text">
-            Sistem mendeteksi permintaan akses Command Prompt tingkat root. Masukkan 6-digit kode verifikasi yang dikirimkan ke:
-            <br>
-            <span class="auth-target-email">${this.sec.adminEmail}</span>
-          </p>
+          <!-- Abstract Architectural Segmented Track -->
+          <div class="auth-tabs-track font-mono" role="tablist">
+            <button type="button" class="auth-tab-btn active" id="auth-tab-otp" data-tab="otp" role="tab" aria-selected="true">
+              <span class="tab-index">01</span>
+              <span class="tab-label">KODE OTP</span>
+            </button>
+            <button type="button" class="auth-tab-btn" id="auth-tab-qr" data-tab="qr" role="tab" aria-selected="false">
+              <span class="tab-index">02</span>
+              <span class="tab-label">SCAN QR-CODE</span>
+            </button>
+          </div>
 
-          <form id="auth-otp-form" onsubmit="return false;">
-            <div class="auth-otp-row">
-              <input type="text" inputmode="numeric" maxlength="1" class="otp-digit-input" data-index="0" autocomplete="off" />
-              <input type="text" inputmode="numeric" maxlength="1" class="otp-digit-input" data-index="1" autocomplete="off" />
-              <input type="text" inputmode="numeric" maxlength="1" class="otp-digit-input" data-index="2" autocomplete="off" />
-              <input type="text" inputmode="numeric" maxlength="1" class="otp-digit-input" data-index="3" autocomplete="off" />
-              <input type="text" inputmode="numeric" maxlength="1" class="otp-digit-input" data-index="4" autocomplete="off" />
-              <input type="text" inputmode="numeric" maxlength="1" class="otp-digit-input" data-index="5" autocomplete="off" />
-            </div>
+          <!-- TAB PANEL 1: KODE OTP -->
+          <div id="auth-tab-panel-otp" class="auth-tab-panel active">
+            <p class="auth-body-text">
+              Sistem mendeteksi permintaan akses Command Prompt tingkat root. Masukkan 6-digit kode verifikasi yang dikirimkan ke:
+              <br>
+              <span class="auth-target-email font-mono">${this.sec.adminEmail}</span>
+            </p>
 
-            <div class="auth-meta-row">
-              <div class="auth-timer font-mono">
-                <span>Kedaluwarsa:</span>
-                <span id="auth-countdown-val" class="auth-timer-val">05:00</span>
+            <form id="auth-otp-form" onsubmit="return false;">
+              <div class="auth-otp-row">
+                <input type="text" inputmode="numeric" maxlength="1" class="otp-digit-input font-mono" data-index="0" autocomplete="off" />
+                <input type="text" inputmode="numeric" maxlength="1" class="otp-digit-input font-mono" data-index="1" autocomplete="off" />
+                <input type="text" inputmode="numeric" maxlength="1" class="otp-digit-input font-mono" data-index="2" autocomplete="off" />
+                <input type="text" inputmode="numeric" maxlength="1" class="otp-digit-input font-mono" data-index="3" autocomplete="off" />
+                <input type="text" inputmode="numeric" maxlength="1" class="otp-digit-input font-mono" data-index="4" autocomplete="off" />
+                <input type="text" inputmode="numeric" maxlength="1" class="otp-digit-input font-mono" data-index="5" autocomplete="off" />
               </div>
-              <button type="button" id="auth-resend-btn" class="auth-resend-btn">
-                Kirim ulang kode
-              </button>
+
+              <div class="auth-meta-row font-mono">
+                <div class="auth-timer font-mono">
+                  <span>Kedaluwarsa:</span>
+                  <span id="auth-countdown-val" class="auth-timer-val">05:00</span>
+                </div>
+                <button type="button" id="auth-resend-btn" class="auth-resend-btn font-mono">
+                  Kirim ulang kode
+                </button>
+              </div>
+
+              <div class="auth-action-row">
+                <button type="button" id="auth-verify-btn" class="auth-btn-primary font-mono" disabled>
+                  VERIFIKASI &amp; BUKA TERMINAL
+                </button>
+              </div>
+            </form>
+          </div>
+
+          <!-- TAB PANEL 2: SCAN QR-CODE & ROOT PASSWORD -->
+          <div id="auth-tab-panel-qr" class="auth-tab-panel">
+            <p class="auth-body-text">
+              Pindai QR-code autentikasi admin atau unggah berkas gambar QR, lalu masukkan Password Root yang telah disetel.
+            </p>
+
+            <!-- Scanner Viewfinder -->
+            <div class="qr-viewfinder-container" id="qr-viewfinder-box">
+              <video id="qr-video-stream" class="qr-video-stream" playsinline muted></video>
+              <div class="qr-placeholder-state" id="qr-placeholder-state">
+                <div class="qr-aperture-reticle">
+                  <span class="aperture-corner tl"></span>
+                  <span class="aperture-corner tr"></span>
+                  <span class="aperture-corner bl"></span>
+                  <span class="aperture-corner br"></span>
+                  <span class="aperture-center-dot"></span>
+                </div>
+                <span class="qr-placeholder-title font-mono">OPTICAL APERTURE // STANDBY</span>
+                <span class="qr-placeholder-desc font-mono">Buka kamera atau unggah gambar QR token</span>
+              </div>
+              <div class="qr-scan-line" id="qr-scan-line" style="display: none;"></div>
+              <div class="qr-corner-bracket qr-corner-tl"></div>
+              <div class="qr-corner-bracket qr-corner-tr"></div>
+              <div class="qr-corner-bracket qr-corner-bl"></div>
+              <div class="qr-corner-bracket qr-corner-br"></div>
             </div>
 
-            <div class="auth-action-row">
-              <button type="button" id="auth-verify-btn" class="auth-btn-primary" disabled>
-                VERIFIKASI &amp; BUKA TERMINAL
+            <!-- Status readout badge -->
+            <div class="qr-status-badge font-mono" id="qr-status-badge">
+              <span class="qr-status-tag">// STATUS:</span>
+              <span id="qr-status-text">Menunggu pemindaian QR code...</span>
+            </div>
+
+            <!-- Scanner Controls -->
+            <div class="qr-controls-row">
+              <button type="button" class="qr-sub-btn font-mono" id="btn-toggle-camera">[ Buka Kamera ]</button>
+              <button type="button" class="qr-sub-btn font-mono" id="btn-upload-qr">[ Unggah Berkas QR ]</button>
+              <input type="file" id="qr-file-input" accept="image/*,.svg" style="display: none;" />
+              <button type="button" class="qr-sub-btn font-mono" id="btn-generate-badge">[ Tampilkan QR Token ]</button>
+            </div>
+
+            <!-- QR Token SVG Preview Box -->
+            <div class="qr-badge-preview-container" id="qr-badge-preview-container">
+              <div id="qr-badge-svg-slot"></div>
+              <div class="font-mono" style="font-size: 0.65rem; color: var(--accent-primary); margin-top: 0.5rem;" id="qr-badge-token-text"></div>
+            </div>
+
+            <!-- Root Password Form Section -->
+            <div class="auth-password-group">
+              <label for="auth-qr-password-input" class="auth-password-label">KREDENSIAL ROOT ADMIN:</label>
+              <div class="auth-password-row">
+                <input type="password" id="auth-qr-password-input" class="auth-password-input font-mono" placeholder="Masukkan password root..." autocomplete="current-password" />
+                <button type="button" id="auth-toggle-pwd-btn" class="auth-toggle-pwd-btn font-mono">LIHAT</button>
+              </div>
+              <div class="auth-password-hint font-mono">
+                <span>Default password: <code>RootUser=0</code> (Dapat diubah via terminal: <code>passwd</code>)</span>
+              </div>
+            </div>
+
+            <!-- QR Action Row -->
+            <div class="auth-action-row" style="margin-top: 0.75rem;">
+              <button type="button" id="auth-qr-verify-btn" class="auth-btn-primary font-mono">
+                VERIFIKASI QR &amp; BUKA TERMINAL
               </button>
             </div>
-          </form>
+          </div>
 
           <div class="auth-security-notice font-mono">
             <strong>PERINGATAN SISTEM:</strong> Setiap akses dan percobaan login diverifikasi dengan sidik jari perangkat dan dicatat secara permanen. Notifikasi keamanan sistem OS akan dipicu saat sesi aktif.
@@ -154,16 +251,275 @@ export class AdminAuthModal {
       });
     });
 
-    // Verify button
+    // Verify button (OTP)
     const verifyBtn = document.getElementById('auth-verify-btn');
     if (verifyBtn) {
       verifyBtn.addEventListener('click', () => this.attemptVerify());
     }
 
-    // Resend button
+    // Resend button (OTP)
     const resendBtn = document.getElementById('auth-resend-btn');
     if (resendBtn) {
       resendBtn.addEventListener('click', () => this.resendOtp());
+    }
+
+    // --- TAB SWITCHER EVENTS ---
+    const tabOtpBtn = document.getElementById('auth-tab-otp');
+    if (tabOtpBtn) {
+      tabOtpBtn.addEventListener('click', () => this.switchTab('otp'));
+    }
+
+    const tabQrBtn = document.getElementById('auth-tab-qr');
+    if (tabQrBtn) {
+      tabQrBtn.addEventListener('click', () => this.switchTab('qr'));
+    }
+
+    // --- QR-CODE SCANNER EVENTS ---
+    const cameraToggleBtn = document.getElementById('btn-toggle-camera');
+    if (cameraToggleBtn) {
+      cameraToggleBtn.addEventListener('click', () => this.toggleCamera());
+    }
+
+    const uploadQrBtn = document.getElementById('btn-upload-qr');
+    const qrFileInput = document.getElementById('qr-file-input');
+    if (uploadQrBtn && qrFileInput) {
+      uploadQrBtn.addEventListener('click', () => qrFileInput.click());
+      qrFileInput.addEventListener('change', (e) => this.handleQrFileUpload(e));
+    }
+
+    const generateBadgeBtn = document.getElementById('btn-generate-badge');
+    if (generateBadgeBtn) {
+      generateBadgeBtn.addEventListener('click', () => this.showQrBadge());
+    }
+
+    const togglePwdBtn = document.getElementById('auth-toggle-pwd-btn');
+    if (togglePwdBtn) {
+      togglePwdBtn.addEventListener('click', () => this.togglePasswordVisibility());
+    }
+
+    const qrPwdInput = document.getElementById('auth-qr-password-input');
+    if (qrPwdInput) {
+      qrPwdInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          this.attemptVerifyQr();
+        }
+      });
+      qrPwdInput.addEventListener('input', () => {
+        if (qrPwdInput.classList.contains('is-error')) {
+          qrPwdInput.classList.remove('is-error');
+        }
+      });
+    }
+
+    const qrVerifyBtn = document.getElementById('auth-qr-verify-btn');
+    if (qrVerifyBtn) {
+      qrVerifyBtn.addEventListener('click', () => this.attemptVerifyQr());
+    }
+  }
+
+  /* ==========================================================================
+     TAB SWITCHING & QR WORKFLOWS
+     ========================================================================== */
+  switchTab(tab) {
+    this.activeTab = tab;
+    const tabOtpBtn = document.getElementById('auth-tab-otp');
+    const tabQrBtn = document.getElementById('auth-tab-qr');
+    const panelOtp = document.getElementById('auth-tab-panel-otp');
+    const panelQr = document.getElementById('auth-tab-panel-qr');
+
+    if (tab === 'otp') {
+      if (tabOtpBtn) tabOtpBtn.classList.add('active');
+      if (tabQrBtn) tabQrBtn.classList.remove('active');
+      if (panelOtp) panelOtp.classList.add('active');
+      if (panelQr) panelQr.classList.remove('active');
+      this.stopCamera();
+      setTimeout(() => {
+        if (this.inputs[0]?.focus) this.inputs[0].focus();
+      }, 80);
+    } else {
+      if (tabQrBtn) tabQrBtn.classList.add('active');
+      if (tabOtpBtn) tabOtpBtn.classList.remove('active');
+      if (panelQr) panelQr.classList.add('active');
+      if (panelOtp) panelOtp.classList.remove('active');
+      const pwdInput = document.getElementById('auth-qr-password-input');
+      setTimeout(() => {
+        if (pwdInput) pwdInput.focus();
+      }, 80);
+    }
+  }
+
+  async toggleCamera() {
+    const videoEl = document.getElementById('qr-video-stream');
+    const placeholder = document.getElementById('qr-placeholder-state');
+    const scanLine = document.getElementById('qr-scan-line');
+    const btn = document.getElementById('btn-toggle-camera');
+
+    if (this.isCameraActive) {
+      this.stopCamera();
+    } else {
+      try {
+        this.updateQrStatus('Memulai kamera...');
+        await this.qrScanner.startCamera(videoEl, (token) => {
+          this.onQrDetected(token);
+        });
+        this.isCameraActive = true;
+        if (btn) btn.textContent = 'Matikan Kamera';
+        if (videoEl) videoEl.classList.add('is-live');
+        if (placeholder) placeholder.style.display = 'none';
+        if (scanLine) scanLine.style.display = 'block';
+        this.updateQrStatus('Kamera aktif. Arahkan ke QR-code...', 'normal');
+      } catch (err) {
+        this.stopCamera();
+        this.updateQrStatus('Gagal mengakses kamera: ' + (err.message || 'Izin ditolak'), 'error');
+      }
+    }
+  }
+
+  stopCamera() {
+    this.qrScanner.stopCamera();
+    this.isCameraActive = false;
+    const videoEl = document.getElementById('qr-video-stream');
+    const placeholder = document.getElementById('qr-placeholder-state');
+    const scanLine = document.getElementById('qr-scan-line');
+    const btn = document.getElementById('btn-toggle-camera');
+
+    if (btn) btn.textContent = 'Buka Kamera';
+    if (videoEl) videoEl.classList.remove('is-live');
+    if (placeholder) placeholder.style.display = 'flex';
+    if (scanLine) scanLine.style.display = 'none';
+  }
+
+  onQrDetected(token) {
+    this.detectedQrToken = token;
+    this.sec.playSecurityAlertTone();
+    this.updateQrStatus('QR code terdeteksi: ' + token.slice(0, 22) + '...', 'success');
+    this.stopCamera();
+
+    const pwdInput = document.getElementById('auth-qr-password-input');
+    if (pwdInput && !pwdInput.value) {
+      pwdInput.focus();
+    }
+  }
+
+  async handleQrFileUpload(e) {
+    const file = e.target.files && e.target.files[0];
+    if (!file) return;
+
+    this.updateQrStatus('Menganalisis gambar QR...', 'normal');
+    try {
+      const token = await this.qrScanner.scanImageFile(file);
+      if (token) {
+        this.onQrDetected(token);
+      } else {
+        this.updateQrStatus('Pola QR tidak ditemukan pada berkas.', 'error');
+      }
+    } catch (err) {
+      this.updateQrStatus('Gagal membaca gambar: ' + (err.message || 'Format tidak didukung'), 'error');
+    }
+    e.target.value = '';
+  }
+
+  showQrBadge() {
+    const previewContainer = document.getElementById('qr-badge-preview-container');
+    const svgSlot = document.getElementById('qr-badge-svg-slot');
+    const tokenText = document.getElementById('qr-badge-token-text');
+    if (!previewContainer || !svgSlot) return;
+
+    const isVisible = previewContainer.classList.contains('is-active');
+    if (isVisible) {
+      previewContainer.classList.remove('is-active');
+      return;
+    }
+
+    const token = this.sec.generateQrChallengeToken();
+    const svg = this.qrScanner.generateQrSvg(token, 150);
+    svgSlot.innerHTML = svg;
+    if (tokenText) tokenText.textContent = token;
+    previewContainer.classList.add('is-active');
+
+    // Auto-arm the detected token for this session
+    this.detectedQrToken = token;
+    this.updateQrStatus('QR Token Admin aktif dan siap diverifikasi.', 'success');
+
+    const pwdInput = document.getElementById('auth-qr-password-input');
+    if (pwdInput && !pwdInput.value) {
+      pwdInput.focus();
+    }
+  }
+
+  togglePasswordVisibility() {
+    const pwdInput = document.getElementById('auth-qr-password-input');
+    const btn = document.getElementById('auth-toggle-pwd-btn');
+    if (!pwdInput || !btn) return;
+
+    if (pwdInput.type === 'password') {
+      pwdInput.type = 'text';
+      btn.textContent = 'SEMBUNYIKAN';
+    } else {
+      pwdInput.type = 'password';
+      btn.textContent = 'LIHAT';
+    }
+  }
+
+  updateQrStatus(msg, state = 'normal') {
+    const statusText = document.getElementById('qr-status-text');
+    const badge = document.getElementById('qr-status-badge');
+    if (statusText) statusText.textContent = msg;
+    if (badge) {
+      badge.classList.remove('success', 'error');
+      if (state === 'success') badge.classList.add('success');
+      if (state === 'error') badge.classList.add('error');
+    }
+  }
+
+  async attemptVerifyQr() {
+    const lockout = this.sec.checkLockoutStatus();
+    if (lockout.isLocked) {
+      this.showLockoutMode(lockout.remainingSec);
+      return;
+    }
+
+    const pwdInput = document.getElementById('auth-qr-password-input');
+    const pwd = pwdInput ? pwdInput.value.trim() : '';
+
+    if (!pwd) {
+      if (pwdInput) pwdInput.classList.add('is-error');
+      this.updateQrStatus('Wajib memasukkan Password Root Admin.', 'error');
+      this.sec.playSecurityAlertTone();
+      return;
+    }
+
+    if (!this.detectedQrToken) {
+      this.updateQrStatus('Silakan pindai QR code atau klik "Tampilkan QR Token" terlebih dahulu.', 'error');
+      this.sec.playSecurityAlertTone();
+      return;
+    }
+
+    // Validate token and password
+    const isTokenValid = this.sec.verifyQrToken(this.detectedQrToken);
+    const isPasswordValid = await this.sec.verifyRootPassword(pwd);
+
+    if (isTokenValid && isPasswordValid) {
+      // SUCCESS!
+      this.stopCamera();
+      this.sec.resetAttempts();
+      await this.sec.createSession();
+      this.close();
+      if (typeof this.onSuccess === 'function') {
+        this.onSuccess();
+      }
+    } else {
+      // FAILED
+      const result = this.sec.recordFailedAttempt();
+      if (pwdInput) pwdInput.classList.add('is-error');
+      this.sec.playSecurityAlertTone();
+
+      if (result.isLocked) {
+        this.showLockoutMode(15 * 60);
+      } else {
+        const reason = !isPasswordValid ? 'Password root salah' : 'Token QR tidak valid';
+        this.updateQrStatus(`${reason}. Sisa kesempatan: ${result.remainingAttempts}/3.`, 'error');
+      }
     }
   }
 
@@ -198,12 +554,13 @@ export class AdminAuthModal {
 
     // Focus first input box
     setTimeout(() => {
-      if (this.inputs[0]) this.inputs[0].focus();
+      if (this.inputs[0]?.focus) this.inputs[0].focus();
     }, 120);
   }
 
   close() {
     if (!this.backdropEl) return;
+    this.stopCamera();
     this.backdropEl.classList.remove('is-active');
     this.backdropEl.setAttribute('aria-hidden', 'true');
     this.stopCountdown();
@@ -213,10 +570,21 @@ export class AdminAuthModal {
   clearInputs() {
     this.inputs.forEach(input => {
       input.value = '';
-      input.classList.remove('is-error');
+      if (input.classList?.remove) {
+        input.classList.remove('is-error');
+      }
     });
     const verifyBtn = document.getElementById('auth-verify-btn');
     if (verifyBtn) verifyBtn.disabled = true;
+
+    // Reset QR inputs & status
+    const pwdInput = document.getElementById('auth-qr-password-input');
+    if (pwdInput) {
+      pwdInput.value = '';
+      if (pwdInput.classList?.remove) pwdInput.classList.remove('is-error');
+    }
+    this.detectedQrToken = null;
+    this.updateQrStatus('Menunggu pemindaian QR code...');
   }
 
   checkInputsFilled() {
@@ -356,7 +724,9 @@ export class AdminAuthModal {
     } else {
       // FAILED
       const result = this.sec.recordFailedAttempt();
-      this.inputs.forEach(inp => inp.classList.add('is-error'));
+      this.inputs.forEach(inp => {
+        if (inp.classList?.add) inp.classList.add('is-error');
+      });
 
       if (result.isLocked) {
         this.showLockoutMode(15 * 60);
@@ -380,7 +750,9 @@ export class AdminAuthModal {
 
     setTimeout(() => {
       if (errBanner) errBanner.textContent = '';
-      this.inputs.forEach(inp => inp.classList.remove('is-error'));
+      this.inputs.forEach(inp => {
+        if (inp.classList?.remove) inp.classList.remove('is-error');
+      });
     }, 3200);
   }
 

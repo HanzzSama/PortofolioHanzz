@@ -294,4 +294,127 @@ export class AdminSecurityEngine {
       return [];
     }
   }
+
+  /* ==========================================================================
+     5. ROOT PASSWORD & QR TOKEN MANAGEMENT
+     ========================================================================== */
+  getDefaultRootPassword() {
+    return 'RootUser=0';
+  }
+
+  generateSalt() {
+    if (typeof crypto !== 'undefined' && crypto.getRandomValues) {
+      const bytes = new Uint8Array(16);
+      crypto.getRandomValues(bytes);
+      return Array.from(bytes).map(b => b.toString(16).padStart(2, '0')).join('');
+    }
+    return Math.random().toString(36).slice(2) + Date.now().toString(36);
+  }
+
+  async verifyRootPassword(enteredPassword) {
+    if (!enteredPassword || typeof enteredPassword !== 'string') return false;
+    try {
+      const storedHash = localStorage.getItem(this.storageKeyPrefix + 'qr_pass_hash');
+      const storedSalt = localStorage.getItem(this.storageKeyPrefix + 'qr_pass_salt');
+
+      if (!storedHash || !storedSalt) {
+        // Initial state: verify against default root password
+        const isMatch = enteredPassword === this.getDefaultRootPassword();
+        if (isMatch) {
+          // Auto-migrate to hashed format
+          const salt = this.generateSalt();
+          const hash = await this.hashString(salt + ':' + enteredPassword);
+          localStorage.setItem(this.storageKeyPrefix + 'qr_pass_salt', salt);
+          localStorage.setItem(this.storageKeyPrefix + 'qr_pass_hash', hash);
+        }
+        return isMatch;
+      }
+
+      const computedHash = await this.hashString(storedSalt + ':' + enteredPassword);
+      return computedHash === storedHash;
+    } catch (_) {
+      return enteredPassword === this.getDefaultRootPassword();
+    }
+  }
+
+  async updateRootPassword(newPassword, oldPassword = null) {
+    if (!newPassword || typeof newPassword !== 'string' || newPassword.length < 4) {
+      throw new Error('Password baru minimal 4 karakter.');
+    }
+
+    if (oldPassword !== null) {
+      const isValidOld = await this.verifyRootPassword(oldPassword);
+      if (!isValidOld) {
+        throw new Error('Password lama tidak sesuai.');
+      }
+    }
+
+    const salt = this.generateSalt();
+    const hash = await this.hashString(salt + ':' + newPassword);
+    const now = Date.now();
+
+    localStorage.setItem(this.storageKeyPrefix + 'qr_pass_salt', salt);
+    localStorage.setItem(this.storageKeyPrefix + 'qr_pass_hash', hash);
+    localStorage.setItem(this.storageKeyPrefix + 'qr_pass_updated', now.toString());
+
+    this.recordSecurityIncident(
+      'password_change',
+      await this.getDeviceFingerprint(),
+      new Date().toLocaleTimeString('id-ID', { hour12: false }) + ' WIB',
+      'Root admin password successfully updated'
+    );
+
+    return { success: true, updatedAt: now };
+  }
+
+  async resetRootPassword() {
+    const defaultPass = this.getDefaultRootPassword();
+    const salt = this.generateSalt();
+    const hash = await this.hashString(salt + ':' + defaultPass);
+
+    localStorage.setItem(this.storageKeyPrefix + 'qr_pass_salt', salt);
+    localStorage.setItem(this.storageKeyPrefix + 'qr_pass_hash', hash);
+    localStorage.removeItem(this.storageKeyPrefix + 'qr_pass_updated');
+
+    this.recordSecurityIncident(
+      'password_reset',
+      await this.getDeviceFingerprint(),
+      new Date().toLocaleTimeString('id-ID', { hour12: false }) + ' WIB',
+      'Root admin password reset to default'
+    );
+
+    return { success: true, defaultPass };
+  }
+
+  getRootPasswordStatus() {
+    try {
+      const updated = localStorage.getItem(this.storageKeyPrefix + 'qr_pass_updated');
+      return {
+        isDefault: !Boolean(updated),
+        updatedAt: updated ? parseInt(updated, 10) : null
+      };
+    } catch (_) {
+      return { isDefault: true, updatedAt: null };
+    }
+  }
+
+  generateQrChallengeToken() {
+    const timestamp = Date.now();
+    const nonce = Math.random().toString(36).slice(2, 10);
+    return `HRA-ADMIN-TOKEN:ROOT:${timestamp}:${nonce}`;
+  }
+
+  verifyQrToken(token) {
+    if (!token || typeof token !== 'string') return false;
+    const clean = token.trim();
+    // Accept valid format tokens
+    if (clean.startsWith('HRA-ADMIN-TOKEN:') || clean.startsWith('HRA-ROOT:') || clean.startsWith('PORTOFOLIO-HANZZ-ADMIN')) {
+      return true;
+    }
+    // Also accept generic root user token
+    if (clean.toLowerCase().includes('rootuser') || clean.toLowerCase().includes('hanzz-admin')) {
+      return true;
+    }
+    return false;
+  }
 }

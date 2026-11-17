@@ -158,6 +158,8 @@ export class ShortcutManager {
   }
 
   handleKeyEvent(e) {
+    if (e.repeat) return;
+
     // If interactive test callback is active, forward the key detection
     if (typeof this.testCallback === 'function') {
       const comboName = this.formatEventToCombo(e);
@@ -175,6 +177,9 @@ export class ShortcutManager {
       if (item.blocked) {
         e.preventDefault();
         e.stopPropagation();
+        if (typeof e.stopImmediatePropagation === 'function') {
+          e.stopImmediatePropagation();
+        }
         return;
       }
 
@@ -186,6 +191,9 @@ export class ShortcutManager {
         }
         e.preventDefault();
         e.stopPropagation();
+        if (typeof e.stopImmediatePropagation === 'function') {
+          e.stopImmediatePropagation();
+        }
         const handler = this.actionHandlers.get(item.id);
         try {
           handler(e);

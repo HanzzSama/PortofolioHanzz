@@ -17,6 +17,7 @@ export class AdminShortcutTrigger {
     this.authModal = new AdminAuthModal(this.security, () => {
       this.terminal.open();
     });
+    this.lastTriggerTime = 0;
 
     this.bindShortcut();
   }
@@ -25,50 +26,59 @@ export class AdminShortcutTrigger {
     shortcutManager.setActionHandler('admin-cli', async () => {
       await this.handleTrigger();
     });
-
-    window.addEventListener('keydown', async (e) => {
-      const isAlt = e.altKey;
-      const isCtrl = e.ctrlKey || e.metaKey;
-      const isShift = e.shiftKey;
-      const isKeyC = e.code === 'KeyC' || (e.key && e.key.toLowerCase() === 'c');
-
-      if (isAlt && isCtrl && isShift && isKeyC) {
-        const adminItem = shortcutManager.shortcuts.find(s => s.id === 'admin-cli');
-        if (adminItem && !adminItem.keys.some(k => k.toLowerCase().includes('alt+ctrl+shift+c') || k.toLowerCase().includes('ctrl+alt+shift+c'))) {
-          return;
-        }
-        e.preventDefault();
-        e.stopPropagation();
-        await this.handleTrigger();
-      }
-    }, true);
   }
 
   async handleTrigger() {
+    const now = Date.now();
+    if (this.lastTriggerTime && now - this.lastTriggerTime < 350) {
+      return;
+    }
+    this.lastTriggerTime = now;
+
     // 1. If terminal is already open, toggle close
-    if (this.terminal.isOpen) {
+    if (this.terminal && this.terminal.isOpen) {
       this.terminal.close();
       return;
     }
 
     // 2. If auth modal is already open, close it
-    if (this.authModal.isOpen()) {
+    if (this.authModal && this.authModal.isOpen()) {
       this.authModal.close();
       return;
     }
 
     // 3. Check if active admin session is still valid on this device
-    const isValid = await this.security.isSessionValid();
-    if (isValid) {
-      this.terminal.open();
-    } else {
-      this.authModal.open();
+    try {
+      const isValid = await this.security.isSessionValid();
+      if (isValid) {
+        if (this.terminal) this.terminal.open();
+      } else {
+        if (this.authModal) this.authModal.open();
+      }
+    } catch (err) {
+      console.warn('Gagal memeriksa status sesi admin, membuka modal verifikasi:', err);
+      if (this.authModal) this.authModal.open();
     }
   }
 
-  // Programmatic launch helper
+  // Programmatic launch helper (e.g. from context menu)
   async openAdminPrompt() {
-    await this.handleTrigger();
+    try {
+      const isValid = await this.security.isSessionValid();
+      if (isValid) {
+        if (this.terminal && !this.terminal.isOpen) {
+          this.terminal.open();
+        }
+      } else {
+        if (this.authModal && !this.authModal.isOpen()) {
+          this.authModal.open();
+        }
+      }
+    } catch (err) {
+      if (this.authModal && !this.authModal.isOpen()) {
+        this.authModal.open();
+      }
+    }
   }
 }
 
