@@ -7,6 +7,7 @@
 import { adminStorage } from './adminStorageManager.js';
 import { portfolioData } from '../data/portfolioData.js';
 import { shortcutManager } from './shortcutManager.js';
+import { contentProtection } from './contentProtectionEngine.js';
 
 export class AdminTerminalEngine {
   constructor(appRef, securityEngine) {
@@ -29,6 +30,7 @@ export class AdminTerminalEngine {
 
     this.commands = {
       help: { desc: 'Menampilkan daftar seluruh perintah yang tersedia', usage: 'help' },
+      guard: { desc: 'Manajemen proteksi konten dan aset portofolio [status|copy|image|paste|screen|print|all|reset]', usage: 'guard <status|copy|image|paste|screen|print|all|reset> [on|off]' },
       shortcut: { desc: 'Manajemen pintasan peramban [list|block|unblock|remap|reset|test]', usage: 'shortcut <list|block|unblock|remap|reset|test>' },
       project: { desc: 'Manajemen proyek portofolio [list|view|add|edit|delete|order|reset]', usage: 'project <list|view|add|edit|delete|order|reset>' },
       profile: { desc: 'Manajemen data profil [show|set|bio|reset]', usage: 'profile <show|set|bio|reset>' },
@@ -432,6 +434,13 @@ export class AdminTerminalEngine {
       case 'bind':
       case 'keys':
         this.handleShortcutCommand(args);
+        break;
+
+      case 'guard':
+      case 'shield':
+      case 'protect':
+      case 'defense':
+        this.handleGuardCommand(args);
         break;
 
       case 'project':
@@ -1363,6 +1372,113 @@ export class AdminTerminalEngine {
 
       default:
         this.printLine(`Sub-perintah "${sub}" tidak dikenal. Gunakan: shortcut <list|block|unblock|remap|reset|test>`, 'error');
+        break;
+    }
+  }
+
+  handleGuardCommand(args) {
+    const sub = args[0] ? args[0].toLowerCase() : 'status';
+    const stateArg = args[1] ? args[1].toLowerCase() : '';
+
+    switch (sub) {
+      case 'status':
+      case 'ls': {
+        this.printLine('--- STATUS PROTEKSI KONTEN & KEAMANAN ASET ---', 'accent');
+        const st = contentProtection.getStatus();
+        const rows = [
+          ['Salin Teks (Copy)', st.blockCopyText ? 'AKTIF' : 'NONAKTIF', 'Teks dapat dipilih, penyalinan dicegat'],
+          ['Penempelan Teks (Paste)', st.blockPasteText ? 'AKTIF' : 'NONAKTIF', 'Dibatasi pada area non-input'],
+          ['Seleksi Gambar', st.blockImageSelect ? 'AKTIF' : 'NONAKTIF', 'Pencegahan seleksi visual gambar'],
+          ['Penarikan Gambar (Drag)', st.blockImageDrag ? 'AKTIF' : 'NONAKTIF', 'Pencegahan seret gambar ke desktop'],
+          ['Mitigasi Tangkapan Layar', st.antiScreenshot ? 'AKTIF' : 'NONAKTIF', 'Perisai tombol PrintScreen & Win+Shift+S'],
+          ['Proteksi Pencetakan (Print)', st.blockPrint ? 'AKTIF' : 'NONAKTIF', 'Penyembunyian dokumen saat dicetak']
+        ];
+        this.printTable(['Fitur Proteksi', 'Status', 'Efek Perilaku'], rows);
+        this.printLine('Gunakan: guard <copy|image|paste|screen|print|all> <on|off> untuk mengubah setelan.', 'info');
+        break;
+      }
+
+      case 'copy': {
+        const isEnable = stateArg === 'on' || stateArg === '1' || stateArg === 'true';
+        const isDisable = stateArg === 'off' || stateArg === '0' || stateArg === 'false';
+        if (!isEnable && !isDisable) {
+          this.printLine('Format salah. Gunakan: guard copy <on|off>', 'error');
+          return;
+        }
+        const res = contentProtection.setRule('copy', isEnable);
+        this.printLine(res.message, res.success ? 'success' : 'error');
+        break;
+      }
+
+      case 'image': {
+        const isEnable = stateArg === 'on' || stateArg === '1' || stateArg === 'true';
+        const isDisable = stateArg === 'off' || stateArg === '0' || stateArg === 'false';
+        if (!isEnable && !isDisable) {
+          this.printLine('Format salah. Gunakan: guard image <on|off>', 'error');
+          return;
+        }
+        const res = contentProtection.setRule('image', isEnable);
+        this.printLine(res.message, res.success ? 'success' : 'error');
+        break;
+      }
+
+      case 'paste': {
+        const isEnable = stateArg === 'on' || stateArg === '1' || stateArg === 'true';
+        const isDisable = stateArg === 'off' || stateArg === '0' || stateArg === 'false';
+        if (!isEnable && !isDisable) {
+          this.printLine('Format salah. Gunakan: guard paste <on|off>', 'error');
+          return;
+        }
+        const res = contentProtection.setRule('paste', isEnable);
+        this.printLine(res.message, res.success ? 'success' : 'error');
+        break;
+      }
+
+      case 'screen':
+      case 'screenshot': {
+        const isEnable = stateArg === 'on' || stateArg === '1' || stateArg === 'true';
+        const isDisable = stateArg === 'off' || stateArg === '0' || stateArg === 'false';
+        if (!isEnable && !isDisable) {
+          this.printLine('Format salah. Gunakan: guard screen <on|off>', 'error');
+          return;
+        }
+        const res = contentProtection.setRule('screen', isEnable);
+        this.printLine(res.message, res.success ? 'success' : 'error');
+        break;
+      }
+
+      case 'print': {
+        const isEnable = stateArg === 'on' || stateArg === '1' || stateArg === 'true';
+        const isDisable = stateArg === 'off' || stateArg === '0' || stateArg === 'false';
+        if (!isEnable && !isDisable) {
+          this.printLine('Format salah. Gunakan: guard print <on|off>', 'error');
+          return;
+        }
+        const res = contentProtection.setRule('print', isEnable);
+        this.printLine(res.message, res.success ? 'success' : 'error');
+        break;
+      }
+
+      case 'all': {
+        const isEnable = stateArg === 'on' || stateArg === '1' || stateArg === 'true';
+        const isDisable = stateArg === 'off' || stateArg === '0' || stateArg === 'false';
+        if (!isEnable && !isDisable) {
+          this.printLine('Format salah. Gunakan: guard all <on|off>', 'error');
+          return;
+        }
+        const res = contentProtection.setAll(isEnable);
+        this.printLine(res.message, res.success ? 'success' : 'error');
+        break;
+      }
+
+      case 'reset': {
+        const res = contentProtection.reset();
+        this.printLine(res.message, 'success');
+        break;
+      }
+
+      default:
+        this.printLine(`Sub-perintah "${sub}" tidak dikenal. Gunakan: guard <status|copy|image|paste|screen|print|all|reset>`, 'error');
         break;
     }
   }

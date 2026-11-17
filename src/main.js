@@ -32,6 +32,7 @@ import { BioTimeEngine } from './core/bioTimeEngine.js';
 import { WeatherContourEngine } from './core/weatherContourEngine.js';
 import { ContextMenuEngine } from './core/contextMenu.js';
 import { AdminShortcutTrigger } from './core/adminShortcutTrigger.js';
+import { contentProtection } from './core/contentProtectionEngine.js';
 import { 
   initProjectImageDetector, 
   getProjectImageCandidates
@@ -97,6 +98,7 @@ class PortfolioApp {
   }
 
   initAdminTrigger() {
+    this.contentProtection = contentProtection;
     this.adminTrigger = new AdminShortcutTrigger(this);
   }
 
