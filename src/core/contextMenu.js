@@ -5,6 +5,7 @@
  */
 
 import { hapticAudio } from './hapticAudioEngine.js';
+import { translations } from '../data/translations.js';
 
 export class ContextMenuEngine {
   constructor(appRef = null) {
@@ -184,11 +185,69 @@ export class ContextMenuEngine {
     }
   }
 
+  getCurrentLang() {
+    return document.documentElement.getAttribute('lang') || localStorage.getItem('portfolio-language') || 'id';
+  }
+
+  updateMenuLanguage() {
+    const lang = this.getCurrentLang();
+    const t = translations[lang] || translations.id;
+    const cm = t.contextMenu || translations.id.contextMenu;
+    if (!cm || !this.menuEl) return;
+
+    // Section titles
+    const secTitles = this.menuEl.querySelectorAll('.context-menu-section-title');
+    if (secTitles.length >= 3) {
+      if (cm.sectionTelemetry) secTitles[0].textContent = cm.sectionTelemetry;
+      if (cm.sectionNav) secTitles[1].textContent = cm.sectionNav;
+      if (cm.sectionUtils) secTitles[2].textContent = cm.sectionUtils;
+    }
+
+    // Action items
+    const itemMap = {
+      'xray': cm.xray,
+      'theme': cm.theme,
+      'audio': cm.audio,
+      'copy-url': cm.copyUrl,
+      'copy-coord': cm.copyCoord,
+      'scroll-top': cm.scrollTop,
+      'reload': cm.reload
+    };
+
+    for (const [action, label] of Object.entries(itemMap)) {
+      const btn = this.menuEl.querySelector(`[data-action="${action}"] .menu-item-text`);
+      if (btn && label) btn.textContent = label;
+    }
+
+    // Nav items
+    const navMap = {
+      '#welcome': cm.navWelcome,
+      '#about': cm.navAbout,
+      '#skills': cm.navSkills,
+      '#projects': cm.navProjects,
+      '#github': cm.navGithub,
+      '#lab': cm.navLab,
+      '#weather': cm.navWeather
+    };
+
+    for (const [target, label] of Object.entries(navMap)) {
+      const btn = this.menuEl.querySelector(`[data-target="${target}"] .menu-item-text`);
+      if (btn && label) btn.textContent = label;
+    }
+
+    // Footer hint
+    const footer = this.menuEl.querySelector('.context-menu-footer span');
+    if (footer && cm.footerHint) {
+      footer.textContent = cm.footerHint;
+    }
+  }
+
   open(clientX, clientY) {
     if (!this.menuEl) return;
 
-    // Update dynamic labels (e.g. current theme)
+    // Update dynamic labels and language
     this.updateThemeLabel();
+    this.updateMenuLanguage();
 
     // Show menu hidden first to measure dimensions accurately
     this.menuEl.style.visibility = 'hidden';
@@ -242,6 +301,10 @@ export class ContextMenuEngine {
   }
 
   handleAction(action, item) {
+    const lang = this.getCurrentLang();
+    const t = translations[lang] || translations.id;
+    const cm = t.contextMenu || translations.id.contextMenu || {};
+
     switch (action) {
       case 'xray':
         if (this.app && this.app.xrayEngine) {
@@ -264,7 +327,7 @@ export class ContextMenuEngine {
           document.documentElement.setAttribute('data-theme', next);
           localStorage.setItem('portfolio-theme', next);
         }
-        this.showToast('Tema visual diperbarui');
+        this.showToast(cm.toastTheme || 'Tema visual diperbarui');
         break;
 
       case 'audio':
@@ -294,18 +357,18 @@ export class ContextMenuEngine {
       case 'copy-url':
         const currentUrl = window.location.href;
         navigator.clipboard.writeText(currentUrl).then(() => {
-          this.showToast('Tautan portofolio tersalin');
+          this.showToast(cm.toastCopyUrl || 'Tautan portofolio tersalin');
         }).catch(() => {
-          this.showToast('Gagal menyalin tautan');
+          this.showToast(cm.toastCopyUrlFail || 'Gagal menyalin tautan');
         });
         break;
 
       case 'copy-coord':
         const coordText = "07°00'S, 110°25'E // Semarang, ID";
         navigator.clipboard.writeText(coordText).then(() => {
-          this.showToast('Koordinat lokasi tersalin [07°00\'S 110°25\'E]');
+          this.showToast(cm.toastCopyCoord || 'Koordinat lokasi tersalin [07°00\'S 110°25\'E]');
         }).catch(() => {
-          this.showToast('Gagal menyalin koordinat');
+          this.showToast(cm.toastCopyCoordFail || 'Gagal menyalin koordinat');
         });
         break;
 

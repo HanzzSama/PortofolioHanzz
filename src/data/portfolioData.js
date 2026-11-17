@@ -938,6 +938,8 @@ export function getPortfolioData(lang = 'id') {
     if (t.about.timelineTitle) localized.about.timelineTitle = t.about.timelineTitle;
     if (t.about.pillars) localized.about.pillars = t.about.pillars;
     if (t.about.timeline) localized.about.timeline = t.about.timeline;
+    if (t.about.photoCaption) localized.about.photoCaption = t.about.photoCaption;
+    if (t.about.locationBadge) localized.about.locationBadge = t.about.locationBadge;
   }
 
   if (t.skills) {
@@ -1088,7 +1090,12 @@ export function getPortfolioData(lang = 'id') {
   }
 
   if (t.meta) {
-    localized.meta = { ...localized.meta, ...t.meta };
+    localized.meta = {
+      ...localized.meta,
+      ...t.meta,
+      institution: t.meta.institution ? { ...localized.meta.institution, ...t.meta.institution } : localized.meta.institution,
+      availability: t.meta.availability ? { ...localized.meta.availability, ...t.meta.availability } : localized.meta.availability
+    };
   }
 
   localized.currentLang = lang;
