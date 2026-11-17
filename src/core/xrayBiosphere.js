@@ -175,7 +175,7 @@ export class XRayBiosphereEngine {
   bindTriggers() {
     // 1. Click on Header Seed Badge or Telemetry Bar
     document.addEventListener('click', (e) => {
-      const trigger = e.target.closest('#session-seed-badge, .session-seed-badge, #telemetry-status, .header-telemetry');
+      const trigger = e.target?.closest?.('#session-seed-badge, .session-seed-badge, #telemetry-status, .header-telemetry');
       if (trigger) {
         e.preventDefault();
         this.toggle();

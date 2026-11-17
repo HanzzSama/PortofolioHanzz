@@ -4,7 +4,7 @@
  * Abstract, Minimalist & Expressive Project Previews with Auto-Detection & Fallback
  */
 
-import { getProjectImageCandidates } from '../utils/imageDetector.js';
+import { resolveProjectImage } from '../utils/imageDetector.js';
 
 export function renderProjects(data) {
   const { projects } = data;
@@ -303,8 +303,8 @@ export function renderProjects(data) {
       <div class="projects-list">
         ${projects.items
           .map((proj) => {
-            const candidates = getProjectImageCandidates(proj);
-            const firstCandidate = candidates[0] || '';
+            const projectImage = resolveProjectImage(proj);
+            const hasImage = Boolean(projectImage);
 
             return `
           <article class="project-architectural-card" data-scroll-scale data-scale-from="0.94" data-scale-to="1.0">
@@ -354,7 +354,7 @@ export function renderProjects(data) {
             </div>
 
             <!-- Abstract, Minimalist & Expressive Project Preview Panel -->
-            <div class="project-blueprint-panel" data-inspect-project="${proj.id}" data-cursor-target title="${projects.ui?.inspectTooltip || 'Klik untuk inspeksi detail arsitektur'}">
+            <div class="project-blueprint-panel ${hasImage ? 'has-active-image' : 'has-no-image'}" data-inspect-project="${proj.id}" data-cursor-target title="${projects.ui?.inspectTooltip || 'Klik untuk inspeksi detail arsitektur'}">
               <!-- 4 Drafting Registration Crosshairs -->
               <span class="drafting-crosshair ch-tl" aria-hidden="true">+</span>
               <span class="drafting-crosshair ch-tr" aria-hidden="true">+</span>
@@ -372,7 +372,7 @@ export function renderProjects(data) {
               </div>
 
               <!-- Refined Architectural Preview Chassis (Passe-Partout Matting) -->
-              <div class="project-preview-viewport">
+              <div class="project-preview-viewport ${hasImage ? 'has-active-image' : 'has-no-image'}">
                 <!-- Optical Reticle Brackets (Cleanly Positioned on the Chassis Mat) -->
                 <span class="reticle-bracket rb-tl" aria-hidden="true"></span>
                 <span class="reticle-bracket rb-tr" aria-hidden="true"></span>
@@ -381,17 +381,16 @@ export function renderProjects(data) {
 
                 <!-- Inner Media Canvas: Clean Frame & Shadow -->
                 <div class="preview-media-inner">
-                  <!-- Image Candidate with Auto-Detect & Cascade Fallback -->
+                  ${hasImage ? `
                   <img 
-                    src="${firstCandidate}" 
+                    src="${projectImage}" 
                     alt="${proj.title} Preview" 
                     class="project-preview-img"
                     loading="lazy"
-                    data-candidates='${JSON.stringify(candidates)}'
-                    data-candidate-idx="0"
                     onload="window.__handleProjectImgLoad && window.__handleProjectImgLoad(this)"
                     onerror="window.__handleProjectImgError && window.__handleProjectImgError(this)"
                   />
+                  ` : ''}
 
                   <!-- Abstract Non-Image Thumbnail (Vector Blueprint Matrix) -->
                   <div class="non-image-blueprint-chassis" style="color: ${proj.accent};" data-parallax-relative data-parallax-speed="0.12">

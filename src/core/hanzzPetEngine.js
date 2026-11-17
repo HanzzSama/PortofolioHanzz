@@ -1242,7 +1242,7 @@ export class HanzzPetEngine {
     // Pointer Drag & Toss on Stage
     if (this.stage) {
       this.stage.addEventListener('pointerdown', (e) => {
-        if (e.target.closest('.pet-action-btn')) return;
+        if (e.target?.closest?.('.pet-action-btn')) return;
 
         this.isDragging = true;
         this.isTossed = false;

@@ -133,20 +133,22 @@ export class HapticAudioEngine {
 
   bindInteractiveListeners() {
     // Delegated hover listener for interactive elements
-    document.addEventListener('mouseenter', (e) => {
+    document.addEventListener('mouseover', (e) => {
+      if (!e.target || typeof e.target.closest !== 'function') return;
       const target = e.target.closest('a, button, [data-cursor-target], [data-drawer-trigger], .project-architectural-card, .synth-freq-btn, .theme-toggle-btn');
       if (target) {
         this.playTick();
       }
-    }, { capture: true, passive: true });
+    }, { passive: true });
 
     // Delegated click listener
     document.addEventListener('click', (e) => {
+      if (!e.target || typeof e.target.closest !== 'function') return;
       const target = e.target.closest('button, [data-drawer-trigger], .synth-freq-btn, .theme-toggle-btn, .system-pill');
       if (target) {
         this.playDrop();
       }
-    }, { capture: true, passive: true });
+    }, { passive: true });
   }
 }
 

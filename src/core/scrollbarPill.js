@@ -177,7 +177,7 @@ export class ScrollbarPillEngine {
     // Close on click outside HUD
     document.addEventListener('click', (e) => {
       if (!this.isActive) return;
-      const insideHUD = e.target.closest('#scrollbar-capsule-hud');
+      const insideHUD = e.target?.closest?.('#scrollbar-capsule-hud');
       if (!insideHUD) {
         this.toggleActive(false);
       }

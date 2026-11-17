@@ -168,7 +168,7 @@ export class ContextMenuEngine {
     // Handle menu button actions
     if (this.menuEl) {
       this.menuEl.addEventListener('click', (e) => {
-        const item = e.target.closest('.context-menu-item');
+        const item = e.target?.closest?.('.context-menu-item');
         if (!item) return;
 
         e.stopPropagation();
@@ -179,7 +179,7 @@ export class ContextMenuEngine {
 
       // Sound feedback on item hover
       this.menuEl.addEventListener('mouseover', (e) => {
-        const item = e.target.closest('.context-menu-item');
+        const item = e.target?.closest?.('.context-menu-item');
         if (item && hapticAudio) {
           try {
             hapticAudio.playHover();

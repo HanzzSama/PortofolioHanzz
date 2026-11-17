@@ -161,7 +161,7 @@ export class SmoothScroller {
         return;
       }
 
-      const link = e.target.closest('a[href^="#"]');
+      const link = e.target?.closest?.('a[href^="#"]');
       if (!link) return;
 
       const hash = link.getAttribute('href');
@@ -191,7 +191,7 @@ export class SmoothScroller {
 
   bindAnchorLinksNative() {
     document.addEventListener('click', (e) => {
-      const link = e.target.closest('a[href^="#"]');
+      const link = e.target?.closest?.('a[href^="#"]');
       if (!link) return;
       const hash = link.getAttribute('href');
       if (!hash || hash === '#') return;

@@ -1,13 +1,26 @@
 /**
- * PROJECT IMAGE AUTO-DETECTION & CASCADE FALLBACK ENGINE
- * Generates candidate paths based on project slug & handles client-side probing
- * Format support: *nama-project*.[webp|png|jpg|jpeg|gif|svg]
+ * PROJECT IMAGE AUTO-DETECTION & RESOLVER ENGINE
+ * Resolves verified project preview images without blind cascading network 404 requests.
+ * Format support: webp, png, jpg, jpeg, gif, svg
+ * Identity: Haidar Rifky Andrianno // HanzzSama 2026
  */
 
 export const SUPPORTED_EXTENSIONS = ['webp', 'png', 'jpg', 'jpeg', 'gif', 'svg'];
 
 /**
+ * Verified repository assets registry for project preview images.
+ * Keeps network calls deterministic and prevents console 404 waterfalls.
+ */
+export const KNOWN_PROJECT_IMAGES = [
+  './src/assets/projects/pmb-itesa-new.png',
+  './src/assets/projects/kalkulator-mathicalc.png',
+  './src/assets/projects/neura-ai.png'
+];
+
+/**
  * Convert string to clean URL-friendly slug
+ * @param {string} str
+ * @returns {string}
  */
 export function slugify(str) {
   if (!str) return '';
@@ -19,70 +32,61 @@ export function slugify(str) {
 }
 
 /**
- * Generate prioritized candidate image paths for a given project
+ * Resolves a valid image path for a given project.
+ * Checks explicit project image property first, then matches against known assets.
+ * Returns null if no verified image exists, allowing immediate blueprint fallback.
  * @param {Object} proj - Project data object
- * @returns {string[]} Array of candidate image URL paths
+ * @returns {string|null} Resolved image path or null
  */
-export function getProjectImageCandidates(proj) {
-  const candidates = [];
+export function resolveProjectImage(proj) {
+  if (!proj) return null;
 
-  // 1. Explicit image property if provided in portfolioData
-  if (proj.image) {
-    candidates.push(proj.image);
+  // 1. Explicit image property if provided (e.g. in portfolioData or admin storage)
+  if (proj.image && typeof proj.image === 'string' && proj.image.trim()) {
+    return proj.image.trim();
   }
 
-  // 2. Slug from title
+  // 2. Derive potential slugs
   const titleSlug = slugify(proj.title);
-  // 3. Short slug without year (e.g. pmb-itesa-new instead of pmb-itesa-new-2026)
   const baseTitleSlug = slugify(proj.title.replace(/\b20\d{2}\b/g, ''));
-  // 4. Project ID slug (e.g. proj-01)
   const idSlug = proj.id ? slugify(proj.id) : '';
 
   const slugs = Array.from(new Set([titleSlug, baseTitleSlug, idSlug].filter(Boolean)));
 
-  const directories = ['./src/assets/projects/', './src/assets/'];
+  // 3. Match against verified known project images
+  for (const known of KNOWN_PROJECT_IMAGES) {
+    const knownLower = known.toLowerCase();
+    for (const slug of slugs) {
+      if (knownLower.includes(`/${slug}.`) || knownLower.includes(`${slug}.`)) {
+        return known;
+      }
+    }
+  }
 
-  directories.forEach((dir) => {
-    slugs.forEach((slug) => {
-      SUPPORTED_EXTENSIONS.forEach((ext) => {
-        const path = `${dir}${slug}.${ext}`;
-        if (!candidates.includes(path)) {
-          candidates.push(path);
-        }
-      });
-    });
-  });
-
-  return candidates;
+  return null;
 }
 
 /**
- * Global client-side fallback handler for project preview images
- * Installed onto window for seamless inline onerror integration
+ * Generate candidate image paths for compatibility.
+ * Returns single verified image or empty array.
+ * @param {Object} proj - Project data object
+ * @returns {string[]}
+ */
+export function getProjectImageCandidates(proj) {
+  const resolved = resolveProjectImage(proj);
+  return resolved ? [resolved] : [];
+}
+
+/**
+ * Global client-side fallback handler for project preview images.
+ * Installed onto window for inline onload/onerror handling.
  */
 export function initProjectImageDetector() {
   if (typeof window === 'undefined') return;
 
   window.__handleProjectImgError = function (imgEl) {
     if (!imgEl) return;
-    try {
-      const candidatesRaw = imgEl.getAttribute('data-candidates');
-      if (!candidatesRaw) {
-        fallbackToNonImage(imgEl);
-        return;
-      }
-      const candidates = JSON.parse(candidatesRaw);
-      let nextIdx = parseInt(imgEl.getAttribute('data-candidate-idx') || '0', 10) + 1;
-
-      if (Array.isArray(candidates) && nextIdx < candidates.length) {
-        imgEl.setAttribute('data-candidate-idx', String(nextIdx));
-        imgEl.src = candidates[nextIdx];
-      } else {
-        fallbackToNonImage(imgEl);
-      }
-    } catch (e) {
-      fallbackToNonImage(imgEl);
-    }
+    fallbackToNonImage(imgEl);
   };
 
   window.__handleProjectImgLoad = function (imgEl) {
@@ -115,5 +119,3 @@ export function initProjectImageDetector() {
     }
   }
 }
-
-

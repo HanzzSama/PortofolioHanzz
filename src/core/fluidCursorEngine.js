@@ -114,12 +114,12 @@ export class FluidCursorEngine {
     // Card hover detection — amplifies fluid wake when hovering interactive surfaces
     const cardSelector = '.project-architectural-card, .pillar-card, .matrix-tier-card, .about-grid-card, .synth-freq-btn, .kinetic-control-card, .monolith-stage-container, .welcome-terminal-box, [data-cursor-target], .project-details-panel, .project-blueprint-panel, .weather-contour-card, .weather-primary-card, .weather-metric-tile';
     document.addEventListener('mouseover', (e) => {
-      if (e.target.closest(cardSelector)) {
+      if (e.target?.closest?.(cardSelector)) {
         this.isOnCard = true;
       }
     }, { passive: true });
     document.addEventListener('mouseout', (e) => {
-      if (e.target.closest(cardSelector)) {
+      if (e.target?.closest?.(cardSelector)) {
         this.isOnCard = false;
       }
     }, { passive: true });

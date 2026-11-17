@@ -148,7 +148,7 @@ export class AdminTerminalEngine {
     const titlebar = document.getElementById('terminal-titlebar');
     if (titlebar) {
       titlebar.addEventListener('dblclick', (e) => {
-        if (!e.target.closest('.win-control-btn')) {
+        if (!e.target?.closest?.('.win-control-btn')) {
           this.toggleMaximize();
         }
       });
@@ -183,7 +183,7 @@ export class AdminTerminalEngine {
     if (!titlebar || !this.windowEl) return;
 
     titlebar.addEventListener('pointerdown', (e) => {
-      if (e.target.closest('.win-control-btn') || this.isMaximized) {
+      if (e.target?.closest?.('.win-control-btn') || this.isMaximized) {
         return;
       }
 
@@ -801,6 +801,7 @@ export class AdminTerminalEngine {
             preview: flags.preview || '#',
             code: flags.repo || flags.code || 'https://github.com/HanzzSama'
           },
+          image: flags.image || flags.img || null,
           accent: 'var(--color-botanical-sage)',
           blueprintSvg: 'orbit',
           deepDive: {
@@ -879,6 +880,10 @@ export class AdminTerminalEngine {
           case 'preview':
             if (!target.links) target.links = {};
             target.links.preview = value;
+            break;
+          case 'img':
+          case 'image':
+            target.image = value;
             break;
           case 'problem':
             if (!target.deepDive) target.deepDive = {};

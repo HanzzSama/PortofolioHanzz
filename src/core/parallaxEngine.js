@@ -121,6 +121,7 @@ export class ParallaxEngine {
 
     // Cursor magnetic and hover interactions
     document.addEventListener('mouseover', (e) => {
+      if (!e.target || typeof e.target.closest !== 'function') return;
       const target = e.target.closest('a, button, [data-cursor-target], .project-architectural-card, .pillar-card, .matrix-tier-card');
       if (target && this.cursorRing) {
         this.cursorRing.classList.add('cursor-hover');
@@ -128,6 +129,7 @@ export class ParallaxEngine {
     });
 
     document.addEventListener('mouseout', (e) => {
+      if (!e.target || typeof e.target.closest !== 'function') return;
       const target = e.target.closest('a, button, [data-cursor-target], .project-architectural-card, .pillar-card, .matrix-tier-card');
       if (target && this.cursorRing) {
         this.cursorRing.classList.remove('cursor-hover');
