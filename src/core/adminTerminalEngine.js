@@ -79,7 +79,7 @@ export class AdminTerminalEngine {
         <div class="terminal-window-controls font-mono">
           <button class="win-control-btn" id="term-btn-min" title="Kecilkan">_</button>
           <button class="win-control-btn" id="term-btn-max" title="Perbesar">□</button>
-          <button class="win-control-btn close" id="term-btn-close" title="Tutup [Esc]">✕</button>
+          <button class="win-control-btn close" id="term-btn-close" title="Tutup [Esc]">X</button>
         </div>
       </div>
 

@@ -18,14 +18,16 @@ export class AdminSecurityEngine {
      1. DEVICE FINGERPRINT GENERATOR
      ========================================================================== */
   async getDeviceFingerprint() {
+    const nav = typeof navigator !== 'undefined' ? navigator : {};
+    const scr = typeof screen !== 'undefined' ? screen : {};
     const glInfo = this.getWebGLRenderer();
     const components = [
-      navigator.userAgent,
-      navigator.language,
-      screen.width + 'x' + screen.height + 'x' + screen.colorDepth,
-      navigator.hardwareConcurrency || 'unknown_cores',
-      navigator.deviceMemory || 'unknown_ram',
-      Intl.DateTimeFormat().resolvedOptions().timeZone || 'UTC',
+      nav.userAgent || 'unknown_agent',
+      nav.language || 'id-ID',
+      (scr.width || 1920) + 'x' + (scr.height || 1080) + 'x' + (scr.colorDepth || 24),
+      nav.hardwareConcurrency || 'unknown_cores',
+      nav.deviceMemory || 'unknown_ram',
+      (typeof Intl !== 'undefined' && Intl.DateTimeFormat) ? (Intl.DateTimeFormat().resolvedOptions().timeZone || 'UTC') : 'UTC',
       glInfo
     ];
 

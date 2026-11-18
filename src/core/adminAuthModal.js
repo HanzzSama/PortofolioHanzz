@@ -21,9 +21,14 @@ export class AdminAuthModal {
 
     // QR-code state
     this.qrScanner = new QrScannerEngine();
-    this.activeTab = 'otp'; // 'otp' | 'qr'
+    this.activeTab = 'qr'; // Default view: QR-code
     this.detectedQrToken = null;
     this.isCameraActive = false;
+    this.activeQrSessionId = null;
+    this.activeQrToken = null;
+    this.authChannel = null;
+    this.storageListener = null;
+    this.pollApprovalInterval = null;
 
     this.createDOM();
     this.bindEvents();
@@ -53,8 +58,8 @@ export class AdminAuthModal {
             </span>
             <h3 class="auth-heading font-display">Verifikasi Akses Admin</h3>
           </div>
-          <button class="auth-close-btn" id="auth-close-btn" title="Tutup [Esc]">
-            [ESC] ✕
+          <button class="auth-close-btn font-mono" id="auth-close-btn" title="Tutup [Esc]">
+            [ESC] X
           </button>
         </div>
 
@@ -65,18 +70,79 @@ export class AdminAuthModal {
         <div id="auth-normal-content">
           <!-- Abstract Architectural Segmented Track -->
           <div class="auth-tabs-track font-mono" role="tablist">
-            <button type="button" class="auth-tab-btn active" id="auth-tab-otp" data-tab="otp" role="tab" aria-selected="true">
+            <button type="button" class="auth-tab-btn active" id="auth-tab-qr" data-tab="qr" role="tab" aria-selected="true">
               <span class="tab-index">01</span>
-              <span class="tab-label">KODE OTP</span>
-            </button>
-            <button type="button" class="auth-tab-btn" id="auth-tab-qr" data-tab="qr" role="tab" aria-selected="false">
-              <span class="tab-index">02</span>
               <span class="tab-label">SCAN QR-CODE</span>
+            </button>
+            <button type="button" class="auth-tab-btn" id="auth-tab-otp" data-tab="otp" role="tab" aria-selected="false">
+              <span class="tab-index">02</span>
+              <span class="tab-label">KODE OTP</span>
             </button>
           </div>
 
-          <!-- TAB PANEL 1: KODE OTP -->
-          <div id="auth-tab-panel-otp" class="auth-tab-panel active">
+          <!-- TAB PANEL 1: SCAN QR-CODE & MOBILE PAIRING (DEFAULT SPLIT LAYOUT) -->
+          <div id="auth-tab-panel-qr" class="auth-tab-panel active">
+            <div class="auth-qr-split-grid">
+              <!-- SISI KIRI: Visual QR-Code Utama (Default Display) -->
+              <div class="auth-qr-left-pane">
+                <div class="qr-code-frame">
+                  <div class="qr-corner-bracket tl"></div>
+                  <div class="qr-corner-bracket tr"></div>
+                  <div class="qr-corner-bracket bl"></div>
+                  <div class="qr-corner-bracket br"></div>
+                  <div class="qr-ambient-scan-line"></div>
+                  <div id="qr-live-svg-slot" class="qr-svg-holder">
+                    <!-- Standard ISO QR SVG rendered here by default -->
+                  </div>
+                </div>
+                <div class="qr-telemetry-badge font-mono">
+                  <span class="auth-status-dot"></span>
+                  <span id="qr-session-sync-text">MOBILE PAIRING ACTIVE</span>
+                </div>
+              </div>
+
+              <!-- SISI KANAN: Deskripsi, Instruksi & Aksi -->
+              <div class="auth-qr-right-pane">
+                <div class="qr-instruction-block">
+                  <h4 class="qr-section-title font-display">Pindai QR via Mobile</h4>
+                  <p class="auth-body-text">
+                    Pindai kode QR di sebelah kiri menggunakan kamera ponsel untuk membuka portal verifikasi, memasukkan password root, atau unggah gambar QR.
+                  </p>
+                </div>
+
+                <!-- Quick Action Controls -->
+                <div class="qr-controls-row">
+                  <button type="button" class="qr-sub-btn font-mono" id="btn-upload-qr" title="Unggah berkas gambar QR">[ Unggah QR ]</button>
+                  <input type="file" id="qr-file-input" accept="image/*,.svg" style="display: none;" />
+                  <button type="button" class="qr-sub-btn font-mono" id="btn-refresh-qr" title="Segarkan QR Token">[ Segarkan ]</button>
+                  <button type="button" class="qr-sub-btn font-mono" id="btn-open-direct" title="Buka Halaman Portal Langsung">[ Buka Portal ]</button>
+                </div>
+
+                <!-- Desktop Direct Password Input -->
+                <div class="auth-password-group">
+                  <label for="auth-qr-password-input" class="auth-password-label">KREDENSIAL ROOT ADMIN (DESKTOP):</label>
+                  <div class="auth-password-row">
+                    <input type="password" id="auth-qr-password-input" class="auth-password-input font-mono" placeholder="Password root..." autocomplete="current-password" />
+                    <button type="button" id="auth-toggle-pwd-btn" class="auth-toggle-pwd-btn font-mono">LIHAT</button>
+                  </div>
+                  <div class="auth-password-hint font-mono">
+                    <span>Default: <code>RootUser=0</code> (Dapat diubah via: <code>passwd</code>)</span>
+                  </div>
+                  <div id="qr-status-text" class="auth-status-msg font-mono" style="min-height: 1.1rem; margin-top: 0.35rem; font-size: 0.68rem; color: #EF4444;"></div>
+                </div>
+
+                <!-- Action Button -->
+                <div class="auth-action-row" style="margin-top: 0.25rem;">
+                  <button type="button" id="auth-qr-verify-btn" class="auth-btn-primary font-mono">
+                    VERIFIKASI &amp; BUKA TERMINAL
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- TAB PANEL 2: KODE OTP -->
+          <div id="auth-tab-panel-otp" class="auth-tab-panel">
             <p class="auth-body-text">
               Sistem mendeteksi permintaan akses Command Prompt tingkat root. Masukkan 6-digit kode verifikasi yang dikirimkan ke:
               <br>
@@ -109,73 +175,6 @@ export class AdminAuthModal {
                 </button>
               </div>
             </form>
-          </div>
-
-          <!-- TAB PANEL 2: SCAN QR-CODE & ROOT PASSWORD -->
-          <div id="auth-tab-panel-qr" class="auth-tab-panel">
-            <p class="auth-body-text">
-              Pindai QR-code autentikasi admin atau unggah berkas gambar QR, lalu masukkan Password Root yang telah disetel.
-            </p>
-
-            <!-- Scanner Viewfinder -->
-            <div class="qr-viewfinder-container" id="qr-viewfinder-box">
-              <video id="qr-video-stream" class="qr-video-stream" playsinline muted></video>
-              <div class="qr-placeholder-state" id="qr-placeholder-state">
-                <div class="qr-aperture-reticle">
-                  <span class="aperture-corner tl"></span>
-                  <span class="aperture-corner tr"></span>
-                  <span class="aperture-corner bl"></span>
-                  <span class="aperture-corner br"></span>
-                  <span class="aperture-center-dot"></span>
-                </div>
-                <span class="qr-placeholder-title font-mono">OPTICAL APERTURE // STANDBY</span>
-                <span class="qr-placeholder-desc font-mono">Buka kamera atau unggah gambar QR token</span>
-              </div>
-              <div class="qr-scan-line" id="qr-scan-line" style="display: none;"></div>
-              <div class="qr-corner-bracket qr-corner-tl"></div>
-              <div class="qr-corner-bracket qr-corner-tr"></div>
-              <div class="qr-corner-bracket qr-corner-bl"></div>
-              <div class="qr-corner-bracket qr-corner-br"></div>
-            </div>
-
-            <!-- Status readout badge -->
-            <div class="qr-status-badge font-mono" id="qr-status-badge">
-              <span class="qr-status-tag">// STATUS:</span>
-              <span id="qr-status-text">Menunggu pemindaian QR code...</span>
-            </div>
-
-            <!-- Scanner Controls -->
-            <div class="qr-controls-row">
-              <button type="button" class="qr-sub-btn font-mono" id="btn-toggle-camera">[ Buka Kamera ]</button>
-              <button type="button" class="qr-sub-btn font-mono" id="btn-upload-qr">[ Unggah Berkas QR ]</button>
-              <input type="file" id="qr-file-input" accept="image/*,.svg" style="display: none;" />
-              <button type="button" class="qr-sub-btn font-mono" id="btn-generate-badge">[ Tampilkan QR Token ]</button>
-            </div>
-
-            <!-- QR Token SVG Preview Box -->
-            <div class="qr-badge-preview-container" id="qr-badge-preview-container">
-              <div id="qr-badge-svg-slot"></div>
-              <div class="font-mono" style="font-size: 0.65rem; color: var(--accent-primary); margin-top: 0.5rem;" id="qr-badge-token-text"></div>
-            </div>
-
-            <!-- Root Password Form Section -->
-            <div class="auth-password-group">
-              <label for="auth-qr-password-input" class="auth-password-label">KREDENSIAL ROOT ADMIN:</label>
-              <div class="auth-password-row">
-                <input type="password" id="auth-qr-password-input" class="auth-password-input font-mono" placeholder="Masukkan password root..." autocomplete="current-password" />
-                <button type="button" id="auth-toggle-pwd-btn" class="auth-toggle-pwd-btn font-mono">LIHAT</button>
-              </div>
-              <div class="auth-password-hint font-mono">
-                <span>Default password: <code>RootUser=0</code> (Dapat diubah via terminal: <code>passwd</code>)</span>
-              </div>
-            </div>
-
-            <!-- QR Action Row -->
-            <div class="auth-action-row" style="margin-top: 0.75rem;">
-              <button type="button" id="auth-qr-verify-btn" class="auth-btn-primary font-mono">
-                VERIFIKASI QR &amp; BUKA TERMINAL
-              </button>
-            </div>
           </div>
 
           <div class="auth-security-notice font-mono">
@@ -274,12 +273,7 @@ export class AdminAuthModal {
       tabQrBtn.addEventListener('click', () => this.switchTab('qr'));
     }
 
-    // --- QR-CODE SCANNER EVENTS ---
-    const cameraToggleBtn = document.getElementById('btn-toggle-camera');
-    if (cameraToggleBtn) {
-      cameraToggleBtn.addEventListener('click', () => this.toggleCamera());
-    }
-
+    // --- QR-CODE WORKFLOW & CONTROLS ---
     const uploadQrBtn = document.getElementById('btn-upload-qr');
     const qrFileInput = document.getElementById('qr-file-input');
     if (uploadQrBtn && qrFileInput) {
@@ -287,9 +281,17 @@ export class AdminAuthModal {
       qrFileInput.addEventListener('change', (e) => this.handleQrFileUpload(e));
     }
 
-    const generateBadgeBtn = document.getElementById('btn-generate-badge');
-    if (generateBadgeBtn) {
-      generateBadgeBtn.addEventListener('click', () => this.showQrBadge());
+    const refreshQrBtn = document.getElementById('btn-refresh-qr');
+    if (refreshQrBtn) {
+      refreshQrBtn.addEventListener('click', () => this.renderDefaultQrCode());
+    }
+
+    const openDirectBtn = document.getElementById('btn-open-direct');
+    if (openDirectBtn) {
+      openDirectBtn.addEventListener('click', () => {
+        const portalUrl = this.getVerificationPortalUrl();
+        window.open(portalUrl, '_blank');
+      });
     }
 
     const togglePwdBtn = document.getElementById('auth-toggle-pwd-btn');
@@ -308,6 +310,7 @@ export class AdminAuthModal {
         if (qrPwdInput.classList.contains('is-error')) {
           qrPwdInput.classList.remove('is-error');
         }
+        this.updateQrStatus('');
       });
     }
 
@@ -328,8 +331,14 @@ export class AdminAuthModal {
     const panelQr = document.getElementById('auth-tab-panel-qr');
 
     if (tab === 'otp') {
-      if (tabOtpBtn) tabOtpBtn.classList.add('active');
-      if (tabQrBtn) tabQrBtn.classList.remove('active');
+      if (tabOtpBtn) {
+        tabOtpBtn.classList.add('active');
+        tabOtpBtn.setAttribute('aria-selected', 'true');
+      }
+      if (tabQrBtn) {
+        tabQrBtn.classList.remove('active');
+        tabQrBtn.setAttribute('aria-selected', 'false');
+      }
       if (panelOtp) panelOtp.classList.add('active');
       if (panelQr) panelQr.classList.remove('active');
       this.stopCamera();
@@ -337,10 +346,19 @@ export class AdminAuthModal {
         if (this.inputs[0]?.focus) this.inputs[0].focus();
       }, 80);
     } else {
-      if (tabQrBtn) tabQrBtn.classList.add('active');
-      if (tabOtpBtn) tabOtpBtn.classList.remove('active');
+      if (tabQrBtn) {
+        tabQrBtn.classList.add('active');
+        tabQrBtn.setAttribute('aria-selected', 'true');
+      }
+      if (tabOtpBtn) {
+        tabOtpBtn.classList.remove('active');
+        tabOtpBtn.setAttribute('aria-selected', 'false');
+      }
       if (panelQr) panelQr.classList.add('active');
       if (panelOtp) panelOtp.classList.remove('active');
+      if (!this.activeQrSessionId) {
+        this.renderDefaultQrCode();
+      }
       const pwdInput = document.getElementById('auth-qr-password-input');
       setTimeout(() => {
         if (pwdInput) pwdInput.focus();
@@ -348,68 +366,138 @@ export class AdminAuthModal {
     }
   }
 
-  async toggleCamera() {
-    const videoEl = document.getElementById('qr-video-stream');
-    const placeholder = document.getElementById('qr-placeholder-state');
-    const scanLine = document.getElementById('qr-scan-line');
-    const btn = document.getElementById('btn-toggle-camera');
+  getVerificationPortalUrl() {
+    const origin = window.location.origin || '';
+    const pathname = window.location.pathname || '';
+    const baseDir = pathname.substring(0, pathname.lastIndexOf('/') + 1);
+    const portalPath = `${origin}${baseDir}admin-verify.html`;
+    return `${portalPath}?session=${encodeURIComponent(this.activeQrSessionId || '')}&token=${encodeURIComponent(this.activeQrToken || '')}`;
+  }
 
-    if (this.isCameraActive) {
-      this.stopCamera();
-    } else {
+  renderDefaultQrCode() {
+    this.activeQrSessionId = this.sec.generateQrChallengeToken();
+    this.activeQrToken = this.sec.generateQrChallengeToken();
+    this.detectedQrToken = this.activeQrToken;
+
+    const portalUrl = this.getVerificationPortalUrl();
+    const qrSvg = this.qrScanner.generateQrSvg(portalUrl, 168);
+
+    const slot = document.getElementById('qr-live-svg-slot');
+    if (slot) {
+      slot.innerHTML = qrSvg;
+    }
+
+    const syncText = document.getElementById('qr-session-sync-text');
+    if (syncText) {
+      syncText.textContent = 'MOBILE PAIRING ACTIVE';
+    }
+
+    this.startMobileApprovalListener();
+  }
+
+  startMobileApprovalListener() {
+    this.stopMobileApprovalListener();
+
+    if (typeof BroadcastChannel !== 'undefined') {
       try {
-        this.updateQrStatus('Memulai kamera...');
-        await this.qrScanner.startCamera(videoEl, (token) => {
-          this.onQrDetected(token);
-        });
-        this.isCameraActive = true;
-        if (btn) btn.textContent = 'Matikan Kamera';
-        if (videoEl) videoEl.classList.add('is-live');
-        if (placeholder) placeholder.style.display = 'none';
-        if (scanLine) scanLine.style.display = 'block';
-        this.updateQrStatus('Kamera aktif. Arahkan ke QR-code...', 'normal');
+        this.authChannel = new BroadcastChannel('hra_auth_channel');
+        this.authChannel.onmessage = (e) => {
+          if (e.data && e.data.type === 'ADMIN_AUTH_APPROVED') {
+            if (!this.activeQrSessionId || e.data.sessionId === this.activeQrSessionId) {
+              this.handleMobileApprovalSuccess(e.data);
+            }
+          }
+        };
       } catch (err) {
-        this.stopCamera();
-        this.updateQrStatus('Gagal mengakses kamera: ' + (err.message || 'Izin ditolak'), 'error');
+        console.warn('BroadcastChannel error:', err);
       }
     }
+
+    this.storageListener = (e) => {
+      if (e.key === 'hra_sec_mobile_auth_approved' && e.newValue) {
+        try {
+          const data = JSON.parse(e.newValue);
+          if (data && (!this.activeQrSessionId || data.sessionId === this.activeQrSessionId)) {
+            this.handleMobileApprovalSuccess(data);
+          }
+        } catch (err) {
+          console.error('Storage sync parse error:', err);
+        }
+      }
+    };
+    window.addEventListener('storage', this.storageListener);
+
+    this.pollApprovalInterval = setInterval(() => {
+      const raw = localStorage.getItem('hra_sec_mobile_auth_approved');
+      if (raw) {
+        try {
+          const data = JSON.parse(raw);
+          if (data && (!this.activeQrSessionId || data.sessionId === this.activeQrSessionId)) {
+            if (Date.now() - (data.timestamp || 0) < 60000) {
+              this.handleMobileApprovalSuccess(data);
+            }
+          }
+        } catch (err) {}
+      }
+    }, 800);
   }
 
-  stopCamera() {
-    this.qrScanner.stopCamera();
-    this.isCameraActive = false;
-    const videoEl = document.getElementById('qr-video-stream');
-    const placeholder = document.getElementById('qr-placeholder-state');
-    const scanLine = document.getElementById('qr-scan-line');
-    const btn = document.getElementById('btn-toggle-camera');
-
-    if (btn) btn.textContent = 'Buka Kamera';
-    if (videoEl) videoEl.classList.remove('is-live');
-    if (placeholder) placeholder.style.display = 'flex';
-    if (scanLine) scanLine.style.display = 'none';
-  }
-
-  onQrDetected(token) {
-    this.detectedQrToken = token;
-    this.sec.playSecurityAlertTone();
-    this.updateQrStatus('QR code terdeteksi: ' + token.slice(0, 22) + '...', 'success');
-    this.stopCamera();
-
-    const pwdInput = document.getElementById('auth-qr-password-input');
-    if (pwdInput && !pwdInput.value) {
-      pwdInput.focus();
+  stopMobileApprovalListener() {
+    if (this.authChannel) {
+      try {
+        this.authChannel.close();
+      } catch (err) {}
+      this.authChannel = null;
     }
+    if (this.storageListener) {
+      window.removeEventListener('storage', this.storageListener);
+      this.storageListener = null;
+    }
+    if (this.pollApprovalInterval) {
+      clearInterval(this.pollApprovalInterval);
+      this.pollApprovalInterval = null;
+    }
+  }
+
+  async handleMobileApprovalSuccess(payload) {
+    this.stopMobileApprovalListener();
+
+    const syncText = document.getElementById('qr-session-sync-text');
+    if (syncText) {
+      syncText.textContent = 'MOBILE APPROVED // ROOT';
+    }
+
+    this.sec.playSecurityAlertTone();
+    this.sec.resetAttempts();
+    await this.sec.createSession();
+
+    try {
+      localStorage.removeItem('hra_sec_mobile_auth_approved');
+    } catch (err) {}
+
+    setTimeout(() => {
+      this.close();
+      if (typeof this.onSuccess === 'function') {
+        this.onSuccess();
+      }
+    }, 350);
   }
 
   async handleQrFileUpload(e) {
     const file = e.target.files && e.target.files[0];
     if (!file) return;
 
-    this.updateQrStatus('Menganalisis gambar QR...', 'normal');
+    this.updateQrStatus('Menganalisis berkas QR...', 'normal');
     try {
       const token = await this.qrScanner.scanImageFile(file);
       if (token) {
-        this.onQrDetected(token);
+        this.detectedQrToken = token;
+        this.sec.playSecurityAlertTone();
+        this.updateQrStatus('QR code valid terdeteksi. Masukkan password root.', 'success');
+        const pwdInput = document.getElementById('auth-qr-password-input');
+        if (pwdInput && !pwdInput.value) {
+          pwdInput.focus();
+        }
       } else {
         this.updateQrStatus('Pola QR tidak ditemukan pada berkas.', 'error');
       }
@@ -417,34 +505,6 @@ export class AdminAuthModal {
       this.updateQrStatus('Gagal membaca gambar: ' + (err.message || 'Format tidak didukung'), 'error');
     }
     e.target.value = '';
-  }
-
-  showQrBadge() {
-    const previewContainer = document.getElementById('qr-badge-preview-container');
-    const svgSlot = document.getElementById('qr-badge-svg-slot');
-    const tokenText = document.getElementById('qr-badge-token-text');
-    if (!previewContainer || !svgSlot) return;
-
-    const isVisible = previewContainer.classList.contains('is-active');
-    if (isVisible) {
-      previewContainer.classList.remove('is-active');
-      return;
-    }
-
-    const token = this.sec.generateQrChallengeToken();
-    const svg = this.qrScanner.generateQrSvg(token, 150);
-    svgSlot.innerHTML = svg;
-    if (tokenText) tokenText.textContent = token;
-    previewContainer.classList.add('is-active');
-
-    // Auto-arm the detected token for this session
-    this.detectedQrToken = token;
-    this.updateQrStatus('QR Token Admin aktif dan siap diverifikasi.', 'success');
-
-    const pwdInput = document.getElementById('auth-qr-password-input');
-    if (pwdInput && !pwdInput.value) {
-      pwdInput.focus();
-    }
   }
 
   togglePasswordVisibility() {
@@ -463,12 +523,15 @@ export class AdminAuthModal {
 
   updateQrStatus(msg, state = 'normal') {
     const statusText = document.getElementById('qr-status-text');
-    const badge = document.getElementById('qr-status-badge');
-    if (statusText) statusText.textContent = msg;
-    if (badge) {
-      badge.classList.remove('success', 'error');
-      if (state === 'success') badge.classList.add('success');
-      if (state === 'error') badge.classList.add('error');
+    if (statusText) {
+      statusText.textContent = msg;
+      if (state === 'success') {
+        statusText.style.color = '#059669';
+      } else if (state === 'error') {
+        statusText.style.color = '#EF4444';
+      } else {
+        statusText.style.color = 'var(--text-secondary, #40443E)';
+      }
     }
   }
 
@@ -489,19 +552,12 @@ export class AdminAuthModal {
       return;
     }
 
-    if (!this.detectedQrToken) {
-      this.updateQrStatus('Silakan pindai QR code atau klik "Tampilkan QR Token" terlebih dahulu.', 'error');
-      this.sec.playSecurityAlertTone();
-      return;
-    }
-
-    // Validate token and password
-    const isTokenValid = this.sec.verifyQrToken(this.detectedQrToken);
+    // Verify root password
     const isPasswordValid = await this.sec.verifyRootPassword(pwd);
 
-    if (isTokenValid && isPasswordValid) {
+    if (isPasswordValid) {
       // SUCCESS!
-      this.stopCamera();
+      this.stopMobileApprovalListener();
       this.sec.resetAttempts();
       await this.sec.createSession();
       this.close();
@@ -517,10 +573,14 @@ export class AdminAuthModal {
       if (result.isLocked) {
         this.showLockoutMode(15 * 60);
       } else {
-        const reason = !isPasswordValid ? 'Password root salah' : 'Token QR tidak valid';
-        this.updateQrStatus(`${reason}. Sisa kesempatan: ${result.remainingAttempts}/3.`, 'error');
+        this.updateQrStatus(`Password root salah. Sisa kesempatan: ${result.remainingAttempts}/3.`, 'error');
       }
     }
+  }
+
+  stopCamera() {
+    this.qrScanner.stopCamera();
+    this.isCameraActive = false;
   }
 
   isOpen() {
@@ -549,17 +609,23 @@ export class AdminAuthModal {
     // Reset inputs
     this.clearInputs();
 
-    // Generate & Dispatch OTP
+    // Generate & Dispatch OTP (in background for tab 2)
     this.generateAndDispatchOtp();
 
-    // Focus first input box
+    // Default view: QR Code on left pane & start mobile listener
+    this.switchTab('qr');
+    this.renderDefaultQrCode();
+
+    // Focus password input
     setTimeout(() => {
-      if (this.inputs[0]?.focus) this.inputs[0].focus();
+      const pwdInput = document.getElementById('auth-qr-password-input');
+      if (pwdInput) pwdInput.focus();
     }, 120);
   }
 
   close() {
     if (!this.backdropEl) return;
+    this.stopMobileApprovalListener();
     this.stopCamera();
     this.backdropEl.classList.remove('is-active');
     this.backdropEl.setAttribute('aria-hidden', 'true');

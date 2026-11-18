@@ -33,7 +33,7 @@
   border: 1px solid var(--border-hairline, rgba(26, 28, 25, 0.12));
   border-radius: 4px;
   width: 100%;
-  max-width: 480px;
+  max-width: 580px;
   padding: 1.75rem 2rem;
   box-shadow: 0 24px 64px rgba(0, 0, 0, 0.35), 0 0 0 1px var(--border-faint, rgba(26, 28, 25, 0.06));
   position: relative;
@@ -620,161 +620,144 @@
   display: block;
 }
 
-/* Abstract Optical Viewfinder */
-.qr-viewfinder-container {
-  position: relative;
-  width: 100%;
-  height: 185px;
-  background: var(--bg-surface-sunken, #ECEAE4);
-  border: 1px solid var(--border-hairline, rgba(26, 28, 25, 0.12));
-  border-radius: 4px;
-  overflow: hidden;
-  margin-bottom: 0.85rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-image:
-    linear-gradient(var(--border-faint, rgba(26, 28, 25, 0.05)) 1px, transparent 1px),
-    linear-gradient(90deg, var(--border-faint, rgba(26, 28, 25, 0.05)) 1px, transparent 1px);
-  background-size: 20px 20px;
+/* ==========================================================================
+   8. QR-CODE SPLIT LAYOUT & MOBILE PAIRING STYLES (ABSTRACT MINIMALISM)
+   ========================================================================== */
+.auth-qr-split-grid {
+  display: grid;
+  grid-template-columns: 190px 1fr;
+  gap: 1.25rem;
+  align-items: start;
+  margin-bottom: 0.5rem;
 }
 
-.qr-video-stream {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: none;
+@media (max-width: 620px) {
+  .auth-qr-split-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
 }
 
-.qr-video-stream.is-live {
-  display: block;
-}
-
-.qr-placeholder-state {
+/* Sisi Kiri: Visual Frame QR-Code */
+.auth-qr-left-pane {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  gap: 0.4rem;
-  color: var(--text-muted, #6B7169);
-  text-align: center;
-  padding: 1rem;
+  gap: 0.65rem;
 }
 
-.qr-aperture-reticle {
+.qr-code-frame {
   position: relative;
-  width: 44px;
-  height: 44px;
-  margin-bottom: 0.25rem;
+  width: 180px;
+  height: 180px;
+  background: var(--bg-surface-elevated, #FFFFFF);
+  border: 1px solid var(--border-hairline, rgba(26, 28, 25, 0.12));
+  border-radius: 4px;
+  padding: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+  overflow: hidden;
 }
 
-.aperture-corner {
-  position: absolute;
-  width: 8px;
-  height: 8px;
-  border-color: var(--accent-primary, #4A5D4E);
+.qr-svg-holder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.aperture-corner.tl { top: 0; left: 0; border-top: 1.5px solid var(--accent-primary, #4A5D4E); border-left: 1.5px solid var(--accent-primary, #4A5D4E); }
-.aperture-corner.tr { top: 0; right: 0; border-top: 1.5px solid var(--accent-primary, #4A5D4E); border-right: 1.5px solid var(--accent-primary, #4A5D4E); }
-.aperture-corner.bl { bottom: 0; left: 0; border-bottom: 1.5px solid var(--accent-primary, #4A5D4E); border-left: 1.5px solid var(--accent-primary, #4A5D4E); }
-.aperture-corner.br { bottom: 0; right: 0; border-bottom: 1.5px solid var(--accent-primary, #4A5D4E); border-right: 1.5px solid var(--accent-primary, #4A5D4E); }
-
-.aperture-center-dot {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--accent-primary, #4A5D4E);
-  transform: translate(-50%, -50%);
+.qr-svg-holder svg {
+  width: 100%;
+  height: 100%;
+  border: none !important;
+  box-shadow: none !important;
 }
 
-.qr-placeholder-title {
-  font-size: 0.72rem;
-  letter-spacing: 0.08em;
-  color: var(--text-primary, #1A1C19);
-  font-weight: 600;
-}
-
-.qr-placeholder-desc {
-  font-size: 0.65rem;
-  color: var(--text-muted, #6B7169);
-  max-width: 280px;
-  line-height: 1.4;
-}
-
-.qr-scan-line {
+.qr-ambient-scan-line {
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   height: 2px;
   background: linear-gradient(90deg, transparent, var(--accent-primary, #4A5D4E), transparent);
-  box-shadow: 0 0 10px var(--accent-primary, #4A5D4E);
-  animation: qrScanAnim 2.2s ease-in-out infinite alternate;
+  box-shadow: 0 0 8px var(--accent-primary, #4A5D4E);
+  animation: qrScanAnim 2.4s ease-in-out infinite alternate;
   pointer-events: none;
+  opacity: 0.85;
 }
 
 @keyframes qrScanAnim {
-  0% { top: 6%; opacity: 0.3; }
-  50% { opacity: 1; }
-  100% { top: 92%; opacity: 0.3; }
+  0% { top: 4%; opacity: 0.3; }
+  50% { opacity: 0.95; }
+  100% { top: 94%; opacity: 0.3; }
 }
 
 .qr-corner-bracket {
   position: absolute;
-  width: 14px;
-  height: 14px;
+  width: 12px;
+  height: 12px;
   border-color: var(--accent-primary, #4A5D4E);
   pointer-events: none;
 }
 
-.qr-corner-tl { top: 8px; left: 8px; border-top: 1.5px solid var(--accent-primary, #4A5D4E); border-left: 1.5px solid var(--accent-primary, #4A5D4E); }
-.qr-corner-tr { top: 8px; right: 8px; border-top: 1.5px solid var(--accent-primary, #4A5D4E); border-right: 1.5px solid var(--accent-primary, #4A5D4E); }
-.qr-corner-bl { bottom: 8px; left: 8px; border-bottom: 1.5px solid var(--accent-primary, #4A5D4E); border-left: 1.5px solid var(--accent-primary, #4A5D4E); }
-.qr-corner-br { bottom: 8px; right: 8px; border-bottom: 1.5px solid var(--accent-primary, #4A5D4E); border-right: 1.5px solid var(--accent-primary, #4A5D4E); }
+.qr-corner-bracket.tl { top: 4px; left: 4px; border-top: 1.5px solid var(--accent-primary, #4A5D4E); border-left: 1.5px solid var(--accent-primary, #4A5D4E); }
+.qr-corner-bracket.tr { top: 4px; right: 4px; border-top: 1.5px solid var(--accent-primary, #4A5D4E); border-right: 1.5px solid var(--accent-primary, #4A5D4E); }
+.qr-corner-bracket.bl { bottom: 4px; left: 4px; border-bottom: 1.5px solid var(--accent-primary, #4A5D4E); border-left: 1.5px solid var(--accent-primary, #4A5D4E); }
+.qr-corner-bracket.br { bottom: 4px; right: 4px; border-bottom: 1.5px solid var(--accent-primary, #4A5D4E); border-right: 1.5px solid var(--accent-primary, #4A5D4E); }
 
-/* Status readout badge */
-.qr-status-badge {
-  font-family: var(--font-mono, monospace);
-  font-size: 0.7rem;
-  padding: 0.4rem 0.75rem;
-  border-radius: 3px;
+.qr-telemetry-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  padding: 0.35rem 0.65rem;
   background: var(--bg-surface-sunken, #ECEAE4);
   border: 1px solid var(--border-hairline, rgba(26, 28, 25, 0.12));
-  color: var(--text-secondary, #40443E);
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  margin-bottom: 0.85rem;
-}
-
-.qr-status-tag {
-  color: var(--text-muted, #6B7169);
+  border-radius: 3px;
+  font-family: var(--font-mono, monospace);
   font-size: 0.65rem;
+  color: var(--text-secondary, #40443E);
+  letter-spacing: 0.05em;
+  width: 180px;
+  text-align: center;
 }
 
-.qr-status-badge.success {
-  background: rgba(52, 211, 153, 0.12);
-  border-color: #34D399;
-  color: #059669;
+/* Sisi Kanan: Deskripsi, Instruksi & Aksi */
+.auth-qr-right-pane {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.qr-instruction-block {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.qr-section-title {
+  font-family: var(--font-display, sans-serif);
+  font-size: 1.05rem;
   font-weight: 600;
+  color: var(--text-primary, #1A1C19);
+  margin: 0;
+  letter-spacing: -0.01em;
 }
 
-.qr-status-badge.error {
-  background: rgba(239, 68, 68, 0.12);
-  border-color: #EF4444;
-  color: #DC2626;
-  font-weight: 600;
+.auth-qr-right-pane .auth-body-text {
+  font-size: 0.82rem;
+  line-height: 1.5;
+  color: var(--text-secondary, #40443E);
+  margin: 0;
 }
 
-/* Controls row */
+/* Quick Action Controls Row */
 .qr-controls-row {
   display: flex;
-  gap: 0.45rem;
-  margin-bottom: 1.25rem;
+  gap: 0.4rem;
 }
 
 .qr-sub-btn {
@@ -782,14 +765,15 @@
   background: var(--bg-surface-sunken, #ECEAE4);
   border: 1px solid var(--border-hairline, rgba(26, 28, 25, 0.12));
   color: var(--text-secondary, #40443E);
-  padding: 0.5rem 0.4rem;
-  font-size: 0.68rem;
+  padding: 0.45rem 0.35rem;
+  font-size: 0.66rem;
   font-family: var(--font-mono, monospace);
   border-radius: 3px;
   cursor: pointer;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.03em;
   transition: all 0.2s cubic-bezier(0.2, 0, 0, 1);
   text-align: center;
+  white-space: nowrap;
 }
 
 .qr-sub-btn:hover {
@@ -798,38 +782,24 @@
   color: var(--text-primary, #1A1C19) !important;
 }
 
-.qr-badge-preview-container {
-  display: none;
-  text-align: center;
-  background: var(--bg-surface-sunken, #ECEAE4);
-  border: 1px dashed var(--accent-primary, #4A5D4E);
-  padding: 1rem;
-  border-radius: 4px;
-  margin-bottom: 1.25rem;
-}
-
-.qr-badge-preview-container.is-active {
-  display: block;
-}
-
-/* Password Row */
+/* Password Form Group */
 .auth-password-group {
-  margin-bottom: 1.25rem;
+  margin-top: 0.25rem;
 }
 
 .auth-password-label {
   display: block;
   font-family: var(--font-mono, monospace);
-  font-size: 0.68rem;
+  font-size: 0.65rem;
   color: var(--text-secondary, #40443E);
-  margin-bottom: 0.4rem;
+  margin-bottom: 0.35rem;
   letter-spacing: 0.06em;
   font-weight: 600;
 }
 
 .auth-password-row {
   display: flex;
-  gap: 0.45rem;
+  gap: 0.4rem;
 }
 
 .auth-password-input {
@@ -837,8 +807,8 @@
   background: var(--bg-surface-sunken, #ECEAE4);
   border: 1px solid var(--border-hairline, rgba(26, 28, 25, 0.12));
   color: var(--text-primary, #1A1C19);
-  padding: 0.65rem 0.85rem;
-  font-size: 0.88rem;
+  padding: 0.6rem 0.75rem;
+  font-size: 0.85rem;
   font-family: var(--font-mono, monospace);
   border-radius: 3px;
   outline: none;
@@ -866,8 +836,8 @@
   background: var(--bg-surface-sunken, #ECEAE4);
   border: 1px solid var(--border-hairline, rgba(26, 28, 25, 0.12));
   color: var(--text-secondary, #40443E);
-  padding: 0 0.85rem;
-  font-size: 0.68rem;
+  padding: 0 0.75rem;
+  font-size: 0.65rem;
   font-family: var(--font-mono, monospace);
   border-radius: 3px;
   cursor: pointer;
@@ -883,9 +853,9 @@
 
 .auth-password-hint {
   font-family: var(--font-mono, monospace);
-  font-size: 0.68rem;
+  font-size: 0.65rem;
   color: var(--text-muted, #6B7169);
-  margin-top: 0.4rem;
+  margin-top: 0.35rem;
 }
 
 .auth-password-hint code {
