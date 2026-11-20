@@ -130,14 +130,55 @@ export class AdminTerminalEngine {
 
   bindEvents() {
     // Window controls
-    const closeBtn = document.getElementById('term-btn-close');
-    if (closeBtn) closeBtn.addEventListener('click', () => this.close());
+    const handleBtn = (id, action) => {
+      const btn = document.getElementById(id);
+      if (!btn) return;
+      btn.addEventListener('pointerdown', (e) => {
+        e.stopPropagation();
+      });
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        action();
+      });
+    };
 
-    const maxBtn = document.getElementById('term-btn-max');
-    if (maxBtn) maxBtn.addEventListener('click', () => this.toggleMaximize());
+    handleBtn('term-btn-close', () => this.close());
+    handleBtn('term-btn-max', () => this.toggleMaximize());
+    handleBtn('term-btn-min', () => this.close());
 
-    const minBtn = document.getElementById('term-btn-min');
-    if (minBtn) minBtn.addEventListener('click', () => this.close());
+    // Infallible delegated click & pointer handler on terminal window
+    if (this.windowEl) {
+      this.windowEl.addEventListener('pointerdown', (e) => {
+        if (e.target.closest('#term-btn-close, #term-btn-min, #term-btn-max, .mac-btn, .terminal-mac-controls')) {
+          e.stopPropagation();
+        }
+      });
+
+      this.windowEl.addEventListener('click', (e) => {
+        const closeBtn = e.target.closest('#term-btn-close, .mac-close');
+        if (closeBtn) {
+          e.preventDefault();
+          e.stopPropagation();
+          this.close();
+          return;
+        }
+        const minBtn = e.target.closest('#term-btn-min, .mac-min');
+        if (minBtn) {
+          e.preventDefault();
+          e.stopPropagation();
+          this.close();
+          return;
+        }
+        const maxBtn = e.target.closest('#term-btn-max, .mac-max');
+        if (maxBtn) {
+          e.preventDefault();
+          e.stopPropagation();
+          this.toggleMaximize();
+          return;
+        }
+      });
+    }
 
     // Input Keydown (Enter, History, Tab autocomplete)
     if (this.inputEl) {
@@ -174,7 +215,7 @@ export class AdminTerminalEngine {
     const titlebar = document.getElementById('terminal-titlebar');
     if (titlebar) {
       titlebar.addEventListener('dblclick', (e) => {
-        if (!e.target?.closest?.('.win-control-btn')) {
+        if (!e.target?.closest?.('.mac-btn, .win-control-btn, .terminal-mac-controls, button')) {
           this.toggleMaximize();
         }
       });
@@ -209,7 +250,7 @@ export class AdminTerminalEngine {
     if (!titlebar || !this.windowEl) return;
 
     titlebar.addEventListener('pointerdown', (e) => {
-      if (e.target?.closest?.('.win-control-btn') || this.isMaximized) {
+      if (e.target?.closest?.('.mac-btn, .win-control-btn, .terminal-mac-controls, button') || this.isMaximized) {
         return;
       }
 

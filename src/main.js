@@ -707,6 +707,14 @@ class PortfolioApp {
 
     // Delegated click listeners
     document.addEventListener('click', (e) => {
+      // 0. Close Drawer Button
+      if (e.target.closest('#drawer-close-btn, .drawer-close-btn')) {
+        e.preventDefault();
+        e.stopPropagation();
+        this.closeDrawer();
+        return;
+      }
+
       // 1. Inspect Project
       const projectTarget = e.target.closest('[data-inspect-project]');
       if (projectTarget) {

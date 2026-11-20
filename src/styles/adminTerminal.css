@@ -367,7 +367,21 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  pointer-events: auto;
+  z-index: 10;
+  touch-action: manipulation;
   transition: transform 0.12s ease, filter 0.15s ease;
+}
+
+/* Expanded invisible hit target */
+.mac-btn::after {
+  content: '';
+  position: absolute;
+  top: -6px;
+  bottom: -6px;
+  left: -6px;
+  right: -6px;
+  pointer-events: auto;
 }
 
 .mac-btn:active {
@@ -394,6 +408,7 @@
 .mac-btn::before {
   content: '';
   opacity: 0;
+  pointer-events: none;
   transition: opacity 0.12s ease;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   font-size: 8px;
