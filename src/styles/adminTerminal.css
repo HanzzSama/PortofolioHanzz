@@ -400,8 +400,10 @@
   flex: 1;
   padding: 1.25rem 1.4rem;
   overflow-y: auto;
+  overflow-x: hidden !important;
   overscroll-behavior-y: contain;
   -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
   font-family: var(--font-mono, 'JetBrains Mono', monospace);
   font-size: 0.82rem;
   line-height: 1.6;
@@ -412,6 +414,13 @@
 
 .terminal-body::-webkit-scrollbar {
   width: 6px;
+  height: 0px !important;
+}
+
+.terminal-body::-webkit-scrollbar:horizontal {
+  display: none !important;
+  height: 0px !important;
+  width: 0px !important;
 }
 
 .terminal-body::-webkit-scrollbar-track {
@@ -467,6 +476,8 @@
 .term-table {
   display: table;
   width: 100%;
+  max-width: 100%;
+  table-layout: fixed;
   margin: 0.5rem 0;
   border-collapse: collapse;
 }
@@ -479,6 +490,8 @@
   display: table-cell;
   padding: 0.2rem 1rem 0.2rem 0;
   color: #D1D5DB;
+  word-break: break-word;
+  overflow-wrap: anywhere;
 }
 
 .term-table-cell.header {
