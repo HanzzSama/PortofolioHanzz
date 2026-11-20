@@ -42,7 +42,19 @@ class MockElement {
   getAttribute(k) { return this.attributes[k]; }
   addEventListener(event, handler) {}
   querySelector(sel) { return null; }
-  querySelectorAll(sel) { return []; }
+  querySelectorAll(sel) {
+    const results = [];
+    const check = (node) => {
+      if (sel.startsWith('.') && node.className && node.className.includes(sel.slice(1))) {
+        results.push(node);
+      }
+      if (node.children) {
+        node.children.forEach(check);
+      }
+    };
+    check(this);
+    return results;
+  }
   appendChild(child) { this.children.push(child); }
   focus() {}
 }
@@ -99,14 +111,14 @@ async function runTests() {
   const qrEngine = new QrScannerEngine();
   const testUrl = 'http://localhost:5173/admin-verify.html?session=test-sess-123&token=test-tok-456';
   const qrSvg = qrEngine.generateQrSvg(testUrl, 168);
-  assert(qrSvg.includes('<svg') && qrSvg.includes('<rect') && qrSvg.includes('viewBox="0 0 168 168"'), 'ISO QR SVG renders valid XML with quiet zone');
+  assert(qrSvg.includes('<svg') && qrSvg.includes('<rect') && qrSvg.includes('viewBox="0 0 '), 'ISO QR SVG renders valid scalable XML with quiet zone');
 
-  // TEST 4: Modal Initialization & Default QR Tab
+  // TEST 4: Modal Initialization & Three-View Navigation
   let successCalled = false;
   const modal = new AdminAuthModal(sec, () => { successCalled = true; });
 
-  assert(modal.activeTab === 'qr', 'Active tab defaults to "qr"');
-  assert(typeof modal.renderDefaultQrCode === 'function', 'renderDefaultQrCode method exists');
+  assert(modal.currentView === 'qr', 'Active view defaults to "qr" (Gambar 1)');
+  assert(typeof modal.switchView === 'function', 'switchView method exists');
 
   // TEST 5: Render Default QR and Verify Portal URL
   modal.renderDefaultQrCode();
@@ -116,17 +128,40 @@ async function runTests() {
   const portalUrl = modal.getVerificationPortalUrl();
   assert(portalUrl.includes('admin-verify.html') && portalUrl.includes('session=') && portalUrl.includes('token='), 'Verification portal URL correctly formatted');
 
-  // TEST 6: Direct Desktop Password Authentication
-  const pwdInput = document.getElementById('auth-qr-password-input');
-  pwdInput.value = 'RootUser=0';
-  await modal.attemptVerifyQr();
-  assert(successCalled === true, 'Direct desktop verification with root password opens session');
+  // TEST 6: Navigation to View 2 (Options Hub - Gambar 2)
+  modal.switchView('options');
+  assert(modal.currentView === 'options', 'Switched to "options" view (Gambar 2)');
 
-  // TEST 7: Mobile Approval Broadcast Synchronization
+  // TEST 7: Navigation to View 3 (OTP Verification - Gambar 3)
+  modal.switchView('otp');
+  assert(modal.currentView === 'otp', 'Switched to "otp" view (Gambar 3)');
+
+  // TEST 8: Return to View 1 (QR - Gambar 1)
+  modal.switchView('qr');
+  assert(modal.currentView === 'qr', 'Switched back to "qr" view (Gambar 1)');
+
+  // TEST 9: Mobile Approval Broadcast Synchronization
   successCalled = false;
   await modal.handleMobileApprovalSuccess({ sessionId: modal.activeQrSessionId, token: modal.activeQrToken });
   await new Promise(resolve => setTimeout(resolve, 400));
   assert(successCalled === true, 'Mobile approval successfully completes authentication and calls onSuccess');
+
+  // TEST 10: OTP Verification Flow
+  successCalled = false;
+  modal.generateAndDispatchOtp();
+  assert(modal.currentOtp !== null, 'OTP successfully generated in background');
+  
+  // Ensure inputs array has mock inputs if running in headless node
+  if (modal.inputs.length === 0) {
+    modal.inputs = Array.from({ length: 6 }, () => new MockElement('input'));
+  }
+  
+  // Fill inputs with current OTP
+  modal.inputs.forEach((inp, idx) => {
+    inp.value = modal.currentOtp[idx];
+  });
+  await modal.attemptVerify();
+  assert(successCalled === true, 'Submitting correct OTP verification opens session');
 
   console.log(`\nResults: ${passed}/${total} tests passed.`);
   if (passed === total) {

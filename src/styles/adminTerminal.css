@@ -33,8 +33,8 @@
   border: 1px solid var(--border-hairline, rgba(26, 28, 25, 0.12));
   border-radius: 4px;
   width: 100%;
-  max-width: 580px;
-  padding: 1.75rem 2rem;
+  max-width: 660px;
+  padding: 2rem 2.25rem;
   box-shadow: 0 24px 64px rgba(0, 0, 0, 0.35), 0 0 0 1px var(--border-faint, rgba(26, 28, 25, 0.06));
   position: relative;
   transform: translateY(16px) scale(0.98);
@@ -534,107 +534,49 @@
 }
 
 /* ==========================================================================
-   8. QR-CODE AUTHENTICATION & ROOT PASSWORD STYLES (ABSTRACT MINIMALISM)
+   8. ADMIN AUTHENTICATION THREE-VIEW ARCHITECTURE (ABSTRACT MINIMALISM)
+   View 1: QR Verification (Gambar 1 - Default)
+   View 2: Options Menu Selection Hub (Gambar 2)
+   View 3: OTP Code Verification View (Gambar 3)
    ========================================================================== */
-.auth-tabs-track {
-  display: flex;
-  gap: 0.35rem;
-  background: var(--bg-surface-sunken, #ECEAE4);
-  border: 1px solid var(--border-hairline, rgba(26, 28, 25, 0.12));
-  padding: 0.3rem;
-  border-radius: 4px;
-  margin-bottom: 1.35rem;
-}
 
-.auth-tab-btn {
-  flex: 1;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.45rem;
-  background: transparent;
-  border: 1px solid transparent;
-  color: var(--text-secondary, #40443E);
-  padding: 0.55rem 0.75rem;
-  font-size: 0.72rem;
-  font-family: var(--font-mono, monospace);
-  border-radius: 3px;
-  cursor: pointer;
-  transition: all 0.2s cubic-bezier(0.2, 0, 0, 1);
-  letter-spacing: 0.05em;
-  position: relative;
-}
-
-.auth-tab-btn .tab-index {
-  font-size: 0.62rem;
-  opacity: 0.65;
-  color: var(--text-muted, #6B7169);
-  transition: all 0.2s ease;
-}
-
-.auth-tab-btn .tab-label {
-  font-weight: 500;
-  transition: all 0.2s ease;
-}
-
-/* Hover state: NEVER merges with background in either theme! */
-.auth-tab-btn:hover {
-  color: var(--text-primary, #1A1C19) !important;
-  background: var(--accent-tint, rgba(74, 93, 78, 0.12)) !important;
-  border-color: var(--border-faint, rgba(26, 28, 25, 0.08));
-}
-
-.auth-tab-btn:hover .tab-index {
-  opacity: 1;
-  color: var(--accent-primary, #4A5D4E);
-}
-
-.auth-tab-btn:hover .tab-label {
-  color: var(--text-primary, #1A1C19);
-}
-
-/* Active tab */
-.auth-tab-btn.active {
-  color: var(--text-primary, #1A1C19);
-  background: var(--bg-surface-elevated, #FFFFFF);
-  border: 1px solid var(--accent-primary, #4A5D4E);
-  font-weight: 600;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-}
-
-.auth-tab-btn.active .tab-index {
-  opacity: 1;
-  color: var(--accent-primary, #4A5D4E);
-  font-weight: 700;
-}
-
-.auth-tab-btn.active .tab-label {
-  color: var(--text-primary, #1A1C19);
-}
-
-.auth-tab-panel {
+/* Sub-views Container & Animation */
+.auth-sub-view {
   display: none;
 }
 
-.auth-tab-panel.active {
+.auth-sub-view.active {
   display: block;
+  animation: authFadeIn 0.22s cubic-bezier(0.2, 0, 0, 1) both;
+}
+
+@keyframes authFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* ==========================================================================
-   8. QR-CODE SPLIT LAYOUT & MOBILE PAIRING STYLES (ABSTRACT MINIMALISM)
+   VIEW 1: QR-CODE VERIFICATION SPLIT GRID (GAMBAR 1)
    ========================================================================== */
 .auth-qr-split-grid {
   display: grid;
-  grid-template-columns: 190px 1fr;
-  gap: 1.25rem;
-  align-items: start;
+  grid-template-columns: 220px 1fr;
+  gap: 2rem;
+  align-items: stretch;
+  margin-top: 1rem;
   margin-bottom: 0.5rem;
 }
 
-@media (max-width: 620px) {
+@media (max-width: 640px) {
   .auth-qr-split-grid {
     grid-template-columns: 1fr;
-    gap: 1rem;
+    gap: 1.25rem;
   }
 }
 
@@ -643,17 +585,17 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.65rem;
+  gap: 0.75rem;
 }
 
 .qr-code-frame {
   position: relative;
-  width: 180px;
-  height: 180px;
-  background: var(--bg-surface-elevated, #FFFFFF);
+  width: 220px;
+  height: 220px;
+  background: #FFFFFF;
   border: 1px solid var(--border-hairline, rgba(26, 28, 25, 0.12));
   border-radius: 4px;
-  padding: 6px;
+  padding: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -684,7 +626,7 @@
   height: 2px;
   background: linear-gradient(90deg, transparent, var(--accent-primary, #4A5D4E), transparent);
   box-shadow: 0 0 8px var(--accent-primary, #4A5D4E);
-  animation: qrScanAnim 2.4s ease-in-out infinite alternate;
+  animation: qrScanAnim 2.6s ease-in-out infinite alternate;
   pointer-events: none;
   opacity: 0.85;
 }
@@ -697,172 +639,299 @@
 
 .qr-corner-bracket {
   position: absolute;
-  width: 12px;
-  height: 12px;
-  border-color: var(--accent-primary, #4A5D4E);
+  width: 14px;
+  height: 14px;
+  border-color: #1A1C19;
   pointer-events: none;
 }
 
-.qr-corner-bracket.tl { top: 4px; left: 4px; border-top: 1.5px solid var(--accent-primary, #4A5D4E); border-left: 1.5px solid var(--accent-primary, #4A5D4E); }
-.qr-corner-bracket.tr { top: 4px; right: 4px; border-top: 1.5px solid var(--accent-primary, #4A5D4E); border-right: 1.5px solid var(--accent-primary, #4A5D4E); }
-.qr-corner-bracket.bl { bottom: 4px; left: 4px; border-bottom: 1.5px solid var(--accent-primary, #4A5D4E); border-left: 1.5px solid var(--accent-primary, #4A5D4E); }
-.qr-corner-bracket.br { bottom: 4px; right: 4px; border-bottom: 1.5px solid var(--accent-primary, #4A5D4E); border-right: 1.5px solid var(--accent-primary, #4A5D4E); }
+.qr-corner-bracket.tl { top: 2px; left: 2px; border-top: 2px solid #1A1C19; border-left: 2px solid #1A1C19; }
+.qr-corner-bracket.tr { top: 2px; right: 2px; border-top: 2px solid #1A1C19; border-right: 2px solid #1A1C19; }
+.qr-corner-bracket.bl { bottom: 2px; left: 2px; border-bottom: 2px solid #1A1C19; border-left: 2px solid #1A1C19; }
+.qr-corner-bracket.br { bottom: 2px; right: 2px; border-bottom: 2px solid #1A1C19; border-right: 2px solid #1A1C19; }
 
-.qr-telemetry-badge {
+.qr-host-bar {
   display: inline-flex;
   align-items: center;
-  justify-content: center;
   gap: 0.45rem;
-  padding: 0.35rem 0.65rem;
+  background: var(--bg-surface-sunken, #ECEAE4);
+  border: 1px solid var(--border-hairline, rgba(26, 28, 25, 0.12));
+  padding: 0.25rem 0.55rem;
+  border-radius: 3px;
+  font-size: 0.65rem;
+  color: var(--text-secondary, #40443E);
+  margin-top: 0.25rem;
+  width: fit-content;
+}
+
+.qr-host-label {
+  color: var(--text-muted, #6B7169);
+  font-weight: 500;
+}
+
+.qr-host-val {
+  color: var(--accent-primary, #4A5D4E);
+  font-weight: 600;
+}
+
+.qr-host-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-muted, #6B7169);
+  cursor: pointer;
+  padding: 0 0.25rem;
+  font-size: 0.65rem;
+  transition: color 0.15s ease;
+}
+
+.qr-host-btn:hover {
+  color: var(--text-primary, #1A1C19);
+  text-decoration: underline;
+}
+
+.qr-telemetry-badge {
+  width: 220px;
+  padding: 0.55rem 0.65rem;
   background: var(--bg-surface-sunken, #ECEAE4);
   border: 1px solid var(--border-hairline, rgba(26, 28, 25, 0.12));
   border-radius: 3px;
   font-family: var(--font-mono, monospace);
-  font-size: 0.65rem;
-  color: var(--text-secondary, #40443E);
-  letter-spacing: 0.05em;
-  width: 180px;
+  font-size: 0.68rem;
+  color: var(--text-muted, #6B7169);
+  letter-spacing: 0.08em;
   text-align: center;
+  font-weight: 500;
 }
 
-/* Sisi Kanan: Deskripsi, Instruksi & Aksi */
+/* Sisi Kanan: Deskripsi & Tombol Aksi */
 .auth-qr-right-pane {
   display: flex;
   flex-direction: column;
-  gap: 0.85rem;
+  justify-content: space-between;
+  gap: 1.25rem;
 }
 
 .qr-instruction-block {
   display: flex;
   flex-direction: column;
-  gap: 0.25rem;
+  gap: 0.75rem;
 }
 
 .qr-section-title {
   font-family: var(--font-display, sans-serif);
-  font-size: 1.05rem;
+  font-size: 1.25rem;
   font-weight: 600;
   color: var(--text-primary, #1A1C19);
   margin: 0;
   letter-spacing: -0.01em;
 }
 
-.auth-qr-right-pane .auth-body-text {
+.auth-body-subtext {
+  color: var(--text-muted, #6B7169) !important;
+  font-size: 0.8rem;
+  line-height: 1.5;
+}
+
+.auth-qr-action-bottom {
+  margin-top: auto;
+  padding-top: 0.5rem;
+}
+
+/* Solid Dark Monolithic Button (Verifikasi dengan cara lain) */
+.auth-btn-dark {
+  width: 100%;
+  background: #1A1C19;
+  color: #FFFFFF !important;
+  border: 1px solid transparent;
+  border-radius: 3px;
+  padding: 0.85rem 1.25rem;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.2, 0, 0, 1);
+  text-align: center;
+  white-space: nowrap;
+}
+
+.auth-btn-dark:hover {
+  background: #2D322B;
+  color: #FFFFFF !important;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* ==========================================================================
+   VIEW 2: VERIFICATION OPTIONS SELECTION HUB (GAMBAR 2)
+   ========================================================================== */
+.auth-options-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.15rem;
+  margin-top: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.auth-option-card {
+  background: var(--bg-surface-elevated, #FFFFFF);
+  border: 1px solid var(--border-hairline, rgba(26, 28, 25, 0.12));
+  border-radius: 4px;
+  padding: 1.35rem 1.6rem;
+  cursor: pointer;
+  transition: all 0.22s cubic-bezier(0.2, 0, 0, 1);
+  position: relative;
+  user-select: none;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+}
+
+.auth-option-card:hover {
+  border-color: var(--accent-primary, #4A5D4E) !important;
+  background: var(--accent-tint, rgba(74, 93, 78, 0.06)) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+.auth-option-card:active {
+  transform: scale(0.99);
+}
+
+.auth-option-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.65rem;
+  color: var(--text-muted, #6B7169);
+  letter-spacing: 0.08em;
+  border-bottom: 1px solid var(--border-faint, rgba(26, 28, 25, 0.06));
+  padding-bottom: 0.45rem;
+  margin-bottom: 0.75rem;
+}
+
+.auth-option-tagline {
+  font-size: 0.65rem;
+  color: var(--accent-primary, #4A5D4E);
+  letter-spacing: 0.1em;
+  font-weight: 600;
+  margin-bottom: 0.35rem;
+}
+
+.auth-option-title {
+  font-family: var(--font-display, sans-serif);
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--text-primary, #1A1C19);
+  margin: 0 0 0.45rem 0;
+  letter-spacing: -0.015em;
+}
+
+.auth-option-desc {
+  font-family: var(--font-body, sans-serif);
   font-size: 0.82rem;
   line-height: 1.5;
   color: var(--text-secondary, #40443E);
   margin: 0;
 }
 
-/* Quick Action Controls Row */
-.qr-controls-row {
+.auth-header-actions {
   display: flex;
-  gap: 0.4rem;
+  gap: 0.5rem;
+  align-items: center;
 }
 
-.qr-sub-btn {
-  flex: 1;
+.auth-back-btn {
   background: var(--bg-surface-sunken, #ECEAE4);
   border: 1px solid var(--border-hairline, rgba(26, 28, 25, 0.12));
   color: var(--text-secondary, #40443E);
-  padding: 0.45rem 0.35rem;
-  font-size: 0.66rem;
+  padding: 0.35rem 0.75rem;
+  font-size: 0.68rem;
   font-family: var(--font-mono, monospace);
   border-radius: 3px;
   cursor: pointer;
-  letter-spacing: 0.03em;
-  transition: all 0.2s cubic-bezier(0.2, 0, 0, 1);
-  text-align: center;
-  white-space: nowrap;
+  transition: all 0.18s ease;
 }
 
-.qr-sub-btn:hover {
-  background: var(--accent-tint, rgba(74, 93, 78, 0.12)) !important;
-  border-color: var(--accent-primary, #4A5D4E) !important;
-  color: var(--text-primary, #1A1C19) !important;
-}
-
-/* Password Form Group */
-.auth-password-group {
-  margin-top: 0.25rem;
-}
-
-.auth-password-label {
-  display: block;
-  font-family: var(--font-mono, monospace);
-  font-size: 0.65rem;
-  color: var(--text-secondary, #40443E);
-  margin-bottom: 0.35rem;
-  letter-spacing: 0.06em;
-  font-weight: 600;
-}
-
-.auth-password-row {
-  display: flex;
-  gap: 0.4rem;
-}
-
-.auth-password-input {
-  flex: 1;
-  background: var(--bg-surface-sunken, #ECEAE4);
-  border: 1px solid var(--border-hairline, rgba(26, 28, 25, 0.12));
+.auth-back-btn:hover {
   color: var(--text-primary, #1A1C19);
-  padding: 0.6rem 0.75rem;
-  font-size: 0.85rem;
-  font-family: var(--font-mono, monospace);
-  border-radius: 3px;
-  outline: none;
-  transition: all 0.2s ease;
-}
-
-.auth-password-input:hover {
-  border-color: var(--border-strong, rgba(26, 28, 25, 0.28));
-  background: var(--bg-surface-elevated, #FFFFFF);
-}
-
-.auth-password-input:focus {
   border-color: var(--accent-primary, #4A5D4E);
+  background: var(--accent-tint, rgba(74, 93, 78, 0.12));
+}
+
+/* ==========================================================================
+   VIEW 3: OTP VERIFICATION & DUAL ACTION BUTTONS (GAMBAR 3)
+   ========================================================================== */
+.auth-otp-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+  margin-top: 0.5rem;
+}
+
+.otp-digit-input {
+  flex: 1;
+  height: 72px;
+  max-width: 86px;
+  background: var(--bg-surface-sunken, #ECEAE4);
+  border: 1px solid var(--border-faint, rgba(26, 28, 25, 0.08));
+  border-radius: 4px;
+  text-align: center;
+  font-size: 1.65rem;
+  font-family: var(--font-mono, monospace);
+  font-weight: 600;
+  color: var(--text-primary, #1A1C19);
+  outline: none;
+  transition: all 0.2s cubic-bezier(0.2, 0, 0, 1);
+}
+
+.otp-digit-input:hover {
+  border-color: var(--border-strong, rgba(26, 28, 25, 0.28));
+}
+
+.otp-digit-input:focus {
+  border-color: var(--text-primary, #1A1C19);
   background: var(--bg-surface-elevated, #FFFFFF);
   box-shadow: 0 0 0 2px var(--accent-tint, rgba(74, 93, 78, 0.15));
 }
 
-.auth-password-input.is-error {
+.otp-digit-input.is-error {
   border-color: #EF4444;
   box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.2);
   animation: authShake 0.3s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
 }
 
-.auth-toggle-pwd-btn {
-  background: var(--bg-surface-sunken, #ECEAE4);
-  border: 1px solid var(--border-hairline, rgba(26, 28, 25, 0.12));
-  color: var(--text-secondary, #40443E);
-  padding: 0 0.75rem;
-  font-size: 0.65rem;
-  font-family: var(--font-mono, monospace);
-  border-radius: 3px;
-  cursor: pointer;
-  transition: all 0.18s ease;
-  letter-spacing: 0.05em;
+.auth-otp-actions-row {
+  display: grid;
+  grid-template-columns: 1fr 1.3fr;
+  gap: 0.75rem;
+  margin-top: 1.25rem;
 }
 
-.auth-toggle-pwd-btn:hover {
-  background: var(--accent-tint, rgba(74, 93, 78, 0.12)) !important;
-  border-color: var(--accent-primary, #4A5D4E) !important;
-  color: var(--text-primary, #1A1C19) !important;
+@media (max-width: 580px) {
+  .auth-otp-actions-row {
+    grid-template-columns: 1fr;
+  }
 }
 
-.auth-password-hint {
-  font-family: var(--font-mono, monospace);
-  font-size: 0.65rem;
-  color: var(--text-muted, #6B7169);
-  margin-top: 0.35rem;
+/* ==========================================================================
+   OBSIDIAN THEME ADAPTATIONS
+   ========================================================================== */
+[data-theme="obsidian"] .auth-btn-dark {
+  background: #F4F3EF;
+  color: #141915 !important;
 }
 
-.auth-password-hint code {
-  color: var(--accent-primary, #4A5D4E);
-  background: var(--accent-tint, rgba(74, 93, 78, 0.12));
-  padding: 0.1rem 0.35rem;
-  border-radius: 2px;
-  font-weight: 600;
+[data-theme="obsidian"] .auth-btn-dark:hover {
+  background: #E5E4DC;
+  color: #141915 !important;
 }
+
+[data-theme="obsidian"] .qr-corner-bracket {
+  border-color: #F4F3EF;
+}
+
+[data-theme="obsidian"] .qr-corner-bracket.tl { border-top-color: #F4F3EF; border-left-color: #F4F3EF; }
+[data-theme="obsidian"] .qr-corner-bracket.tr { border-top-color: #F4F3EF; border-right-color: #F4F3EF; }
+[data-theme="obsidian"] .qr-corner-bracket.bl { border-bottom-color: #F4F3EF; border-left-color: #F4F3EF; }
+[data-theme="obsidian"] .qr-corner-bracket.br { border-bottom-color: #F4F3EF; border-right-color: #F4F3EF; }
 

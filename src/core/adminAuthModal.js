@@ -19,9 +19,10 @@ export class AdminAuthModal {
     this.resendCooldownUntil = 0;
     this.resendInterval = null;
 
-    // QR-code state
+    // View state: 'qr' | 'options' | 'otp'
     this.qrScanner = new QrScannerEngine();
-    this.activeTab = 'qr'; // Default view: QR-code
+    this.currentView = 'qr'; // Default view: QR-code (Gambar 1)
+    this.activeTab = 'qr'; // Backwards compatibility alias
     this.detectedQrToken = null;
     this.isCameraActive = false;
     this.activeQrSessionId = null;
@@ -29,6 +30,13 @@ export class AdminAuthModal {
     this.authChannel = null;
     this.storageListener = null;
     this.pollApprovalInterval = null;
+
+    // Default LAN IP fallback for local development scanning
+    try {
+      if (!localStorage.getItem('hra_detected_lan_ip')) {
+        localStorage.setItem('hra_detected_lan_ip', '10.57.119.96');
+      }
+    } catch (_) {}
 
     this.createDOM();
     this.bindEvents();
@@ -44,23 +52,10 @@ export class AdminAuthModal {
 
     backdrop.innerHTML = `
       <div class="admin-auth-dialog" data-cursor-target>
-        <div class="auth-chassis-strip font-mono">
-          <span>NODE // 07°00'S 110°25'E</span>
-          <span>SYS // DUAL_FACTOR</span>
-          <span>LVL // ROOT</span>
-        </div>
-
-        <div class="auth-header">
-          <div class="auth-title-cluster">
-            <span class="auth-tagline">
-              <span class="auth-status-dot" id="auth-status-dot"></span>
-              SECURITY GATEWAY // ROOT ACCESS
-            </span>
-            <h3 class="auth-heading font-display">Verifikasi Akses Admin</h3>
-          </div>
-          <button class="auth-close-btn font-mono" id="auth-close-btn" title="Tutup [Esc]">
-            [ESC] X
-          </button>
+        <div class="auth-chassis-strip font-mono" id="auth-chassis-strip">
+          <span id="auth-chassis-left">NODE // 07°00'S 110°25'E</span>
+          <span id="auth-chassis-mid">SYS // DUAL_FACTOR</span>
+          <span id="auth-chassis-right">LVL // ROOT</span>
         </div>
 
         <div id="auth-lockout-banner" style="display: none; background: rgba(239, 68, 68, 0.12); border: 1px solid #EF4444; color: #EF4444; padding: 0.75rem 1rem; border-radius: 4px; margin-bottom: 1.25rem; font-family: var(--font-mono); font-size: 0.75rem;">
@@ -68,22 +63,25 @@ export class AdminAuthModal {
         </div>
 
         <div id="auth-normal-content">
-          <!-- Abstract Architectural Segmented Track -->
-          <div class="auth-tabs-track font-mono" role="tablist">
-            <button type="button" class="auth-tab-btn active" id="auth-tab-qr" data-tab="qr" role="tab" aria-selected="true">
-              <span class="tab-index">01</span>
-              <span class="tab-label">SCAN QR-CODE</span>
-            </button>
-            <button type="button" class="auth-tab-btn" id="auth-tab-otp" data-tab="otp" role="tab" aria-selected="false">
-              <span class="tab-index">02</span>
-              <span class="tab-label">KODE OTP</span>
-            </button>
-          </div>
+          <!-- ==============================================================
+               VIEW 1: QR CODE VERIFICATION (GAMBAR 1 - DEFAULT VIEW)
+               ============================================================== -->
+          <div id="auth-view-qr" class="auth-sub-view active">
+            <div class="auth-header">
+              <div class="auth-title-cluster">
+                <span class="auth-tagline font-mono">
+                  <span class="auth-status-dot"></span>
+                  SECURITY GATEWAY // ROOT ACCESS
+                </span>
+                <h3 class="auth-heading font-display">Verifikasi Akses Admin</h3>
+              </div>
+              <button type="button" class="auth-close-btn font-mono" id="auth-close-btn-qr" title="Tutup [Esc]">
+                [ESC] X
+              </button>
+            </div>
 
-          <!-- TAB PANEL 1: SCAN QR-CODE & MOBILE PAIRING (DEFAULT SPLIT LAYOUT) -->
-          <div id="auth-tab-panel-qr" class="auth-tab-panel active">
             <div class="auth-qr-split-grid">
-              <!-- SISI KIRI: Visual QR-Code Utama (Default Display) -->
+              <!-- SISI KIRI: QR-Code Frame & Status Badge -->
               <div class="auth-qr-left-pane">
                 <div class="qr-code-frame">
                   <div class="qr-corner-bracket tl"></div>
@@ -92,58 +90,117 @@ export class AdminAuthModal {
                   <div class="qr-corner-bracket br"></div>
                   <div class="qr-ambient-scan-line"></div>
                   <div id="qr-live-svg-slot" class="qr-svg-holder">
-                    <!-- Standard ISO QR SVG rendered here by default -->
+                    <!-- Standard ISO QR SVG rendered dynamically -->
                   </div>
                 </div>
                 <div class="qr-telemetry-badge font-mono">
-                  <span class="auth-status-dot"></span>
                   <span id="qr-session-sync-text">MOBILE PAIRING ACTIVE</span>
                 </div>
               </div>
 
-              <!-- SISI KANAN: Deskripsi, Instruksi & Aksi -->
+              <!-- SISI KANAN: Deskripsi & Tombol Verifikasi dengan cara lain -->
               <div class="auth-qr-right-pane">
                 <div class="qr-instruction-block">
                   <h4 class="qr-section-title font-display">Pindai QR via Mobile</h4>
                   <p class="auth-body-text">
                     Pindai kode QR di sebelah kiri menggunakan kamera ponsel untuk membuka portal verifikasi, memasukkan password root, atau unggah gambar QR.
                   </p>
-                </div>
-
-                <!-- Quick Action Controls -->
-                <div class="qr-controls-row">
-                  <button type="button" class="qr-sub-btn font-mono" id="btn-upload-qr" title="Unggah berkas gambar QR">[ Unggah QR ]</button>
-                  <input type="file" id="qr-file-input" accept="image/*,.svg" style="display: none;" />
-                  <button type="button" class="qr-sub-btn font-mono" id="btn-refresh-qr" title="Segarkan QR Token">[ Segarkan ]</button>
-                  <button type="button" class="qr-sub-btn font-mono" id="btn-open-direct" title="Buka Halaman Portal Langsung">[ Buka Portal ]</button>
-                </div>
-
-                <!-- Desktop Direct Password Input -->
-                <div class="auth-password-group">
-                  <label for="auth-qr-password-input" class="auth-password-label">KREDENSIAL ROOT ADMIN (DESKTOP):</label>
-                  <div class="auth-password-row">
-                    <input type="password" id="auth-qr-password-input" class="auth-password-input font-mono" placeholder="Password root..." autocomplete="current-password" />
-                    <button type="button" id="auth-toggle-pwd-btn" class="auth-toggle-pwd-btn font-mono">LIHAT</button>
+                  <p class="auth-body-text auth-body-subtext">
+                    Sistem mendeteksi autentikasi perangkat secara instan. Setelah disetujui di ponsel, sesi terminal root aktif otomatis.
+                  </p>
+                  <div class="qr-host-bar font-mono" id="qr-host-bar">
+                    <span class="qr-host-label">TARGET:</span>
+                    <span class="qr-host-val" id="qr-host-display-val">10.57.119.96:3000</span>
+                    <button type="button" class="qr-host-btn font-mono" id="btn-edit-qr-host" title="Atur IP Wi-Fi agar ponsel bisa terhubung">[ Ubah IP ]</button>
                   </div>
-                  <div class="auth-password-hint font-mono">
-                    <span>Default: <code>RootUser=0</code> (Dapat diubah via: <code>passwd</code>)</span>
-                  </div>
-                  <div id="qr-status-text" class="auth-status-msg font-mono" style="min-height: 1.1rem; margin-top: 0.35rem; font-size: 0.68rem; color: #EF4444;"></div>
                 </div>
 
-                <!-- Action Button -->
-                <div class="auth-action-row" style="margin-top: 0.25rem;">
-                  <button type="button" id="auth-qr-verify-btn" class="auth-btn-primary font-mono">
-                    VERIFIKASI &amp; BUKA TERMINAL
+                <div class="auth-qr-action-bottom">
+                  <button type="button" class="auth-btn-dark font-mono" id="btn-qr-to-options">
+                    Verifikasi dengan cara lain
                   </button>
                 </div>
               </div>
             </div>
           </div>
 
-          <!-- TAB PANEL 2: KODE OTP -->
-          <div id="auth-tab-panel-otp" class="auth-tab-panel">
-            <p class="auth-body-text">
+          <!-- ==============================================================
+               VIEW 2: VERIFICATION OPTIONS MENU (GAMBAR 2 - SELECTION HUB)
+               ============================================================== -->
+          <div id="auth-view-options" class="auth-sub-view">
+            <div class="auth-header" style="margin-bottom: 1.25rem;">
+              <div class="auth-title-cluster">
+                <span class="auth-tagline font-mono">
+                  <span class="auth-status-dot"></span>
+                  SECURITY GATEWAY // ROOT ACCESS
+                </span>
+                <h3 class="auth-heading font-display">Pilih Metode Verifikasi</h3>
+              </div>
+              <div class="auth-header-actions">
+                <button type="button" class="auth-back-btn font-mono" id="btn-options-back" title="Kembali ke QR Code">
+                  [ &lt; ] KEMBALI
+                </button>
+                <button type="button" class="auth-close-btn font-mono" id="auth-close-btn-options" title="Tutup [Esc]">
+                  [ESC] X
+                </button>
+              </div>
+            </div>
+
+            <div class="auth-options-container">
+              <!-- OPTION 01: OTP EMAIL -->
+              <div class="auth-option-card" id="opt-card-otp" data-cursor-target tabindex="0" role="button">
+                <div class="auth-option-card-top font-mono">
+                  <span>OPTION // 01</span>
+                  <span>LVL // ROOT</span>
+                </div>
+                <div class="auth-option-tagline font-mono">
+                  SECURITY GATEWAY // ROOT ACCESS
+                </div>
+                <h4 class="auth-option-title font-display">
+                  Verifikasi lewat Code OTP Email
+                </h4>
+                <p class="auth-option-desc">
+                  Pindai kode QR di sebelah kiri menggunakan kamera ponsel untuk membuka portal verifikasi, memasukkan password root, atau unggah gambar QR.
+                </p>
+              </div>
+
+              <!-- OPTION 02: QR CODE MOBILE -->
+              <div class="auth-option-card" id="opt-card-qr" data-cursor-target tabindex="0" role="button">
+                <div class="auth-option-card-top font-mono">
+                  <span>OPTION // 02</span>
+                  <span>LVL // ROOT</span>
+                </div>
+                <div class="auth-option-tagline font-mono">
+                  SECURITY GATEWAY // ROOT ACCESS
+                </div>
+                <h4 class="auth-option-title font-display">
+                  Verifikasi lewat QR - Code Mobile
+                </h4>
+                <p class="auth-option-desc">
+                  Pindai kode QR di sebelah kiri menggunakan kamera ponsel untuk membuka portal verifikasi, memasukkan password root, atau unggah gambar QR.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- ==============================================================
+               VIEW 3: OTP VERIFICATION VIEW (GAMBAR 3)
+               ============================================================== -->
+          <div id="auth-view-otp" class="auth-sub-view">
+            <div class="auth-header">
+              <div class="auth-title-cluster">
+                <span class="auth-tagline font-mono">
+                  <span class="auth-status-dot"></span>
+                  SECURITY GATEWAY // ROOT ACCESS
+                </span>
+                <h3 class="auth-heading font-display">Verifikasi Akses Admin</h3>
+              </div>
+              <button type="button" class="auth-close-btn font-mono" id="auth-close-btn-otp" title="Tutup [Esc]">
+                [ESC] X
+              </button>
+            </div>
+
+            <p class="auth-body-text" style="margin-bottom: 0.85rem;">
               Sistem mendeteksi permintaan akses Command Prompt tingkat root. Masukkan 6-digit kode verifikasi yang dikirimkan ke:
               <br>
               <span class="auth-target-email font-mono">${this.sec.adminEmail}</span>
@@ -169,16 +226,15 @@ export class AdminAuthModal {
                 </button>
               </div>
 
-              <div class="auth-action-row">
+              <div class="auth-otp-actions-row">
+                <button type="button" class="auth-btn-dark font-mono" id="btn-otp-to-options">
+                  Verifikasi dengan cara lain
+                </button>
                 <button type="button" id="auth-verify-btn" class="auth-btn-primary font-mono" disabled>
                   VERIFIKASI &amp; BUKA TERMINAL
                 </button>
               </div>
             </form>
-          </div>
-
-          <div class="auth-security-notice font-mono">
-            <strong>PERINGATAN SISTEM:</strong> Setiap akses dan percobaan login diverifikasi dengan sidik jari perangkat dan dicatat secara permanen. Notifikasi keamanan sistem OS akan dipicu saat sesi aktif.
           </div>
         </div>
       </div>
@@ -190,9 +246,15 @@ export class AdminAuthModal {
   }
 
   bindEvents() {
-    // Close button & backdrop click
-    const closeBtn = document.getElementById('auth-close-btn');
-    if (closeBtn) closeBtn.addEventListener('click', () => this.close());
+    // Close buttons & backdrop click
+    const closeBtns = [
+      document.getElementById('auth-close-btn-qr'),
+      document.getElementById('auth-close-btn-options'),
+      document.getElementById('auth-close-btn-otp')
+    ];
+    closeBtns.forEach(btn => {
+      if (btn) btn.addEventListener('click', () => this.close());
+    });
 
     this.backdropEl.addEventListener('click', (e) => {
       if (e.target === this.backdropEl) this.close();
@@ -205,9 +267,66 @@ export class AdminAuthModal {
       }
     });
 
-    // Handle Digit Inputs Navigation
+    // --- NAVIGATION EVENTS BETWEEN THE THREE VIEWS ---
+    const btnQrToOptions = document.getElementById('btn-qr-to-options');
+    if (btnQrToOptions) {
+      btnQrToOptions.addEventListener('click', () => this.switchView('options'));
+    }
+
+    const btnOtpToOptions = document.getElementById('btn-otp-to-options');
+    if (btnOtpToOptions) {
+      btnOtpToOptions.addEventListener('click', () => this.switchView('options'));
+    }
+
+    const btnOptionsBack = document.getElementById('btn-options-back');
+    if (btnOptionsBack) {
+      btnOptionsBack.addEventListener('click', () => this.switchView('qr'));
+    }
+
+    const optCardOtp = document.getElementById('opt-card-otp');
+    if (optCardOtp) {
+      optCardOtp.addEventListener('click', () => this.switchView('otp'));
+      optCardOtp.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          this.switchView('otp');
+        }
+      });
+    }
+
+    const optCardQr = document.getElementById('opt-card-qr');
+    if (optCardQr) {
+      optCardQr.addEventListener('click', () => this.switchView('qr'));
+      optCardQr.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          this.switchView('qr');
+        }
+      });
+    }
+
+    // Host configuration trigger for LAN / Wi-Fi scanning
+    const editHostBtn = document.getElementById('btn-edit-qr-host');
+    if (editHostBtn) {
+      editHostBtn.addEventListener('click', () => {
+        let currentHost = '10.57.119.96:3000';
+        try {
+          currentHost = new URL(this.getVerificationPortalUrl()).host;
+        } catch (_) {}
+        const entered = prompt(
+          'Masukkan IP Komputer & Port di jaringan Wi-Fi agar ponsel bisa membuka halaman verifikasi (contoh: 10.57.119.96:3000):',
+          currentHost
+        );
+        if (entered && entered.trim()) {
+          const clean = entered.trim().replace(/^https?:\/\//, '').replace(/\/.*$/, '');
+          localStorage.setItem('hra_admin_network_host', clean);
+          this.renderDefaultQrCode();
+        }
+      });
+    }
+
+    // --- OTP DIGITS NAVIGATION ---
     this.inputs.forEach((input, index) => {
-      // Input event: keep only numbers and auto-advance
       input.addEventListener('input', (e) => {
         const val = e.target.value.replace(/[^0-9]/g, '');
         e.target.value = val ? val[val.length - 1] : '';
@@ -218,7 +337,6 @@ export class AdminAuthModal {
         this.checkInputsFilled();
       });
 
-      // Keydown: backspace navigation
       input.addEventListener('keydown', (e) => {
         if (e.key === 'Backspace' && !input.value && index > 0) {
           this.inputs[index - 1].focus();
@@ -231,7 +349,6 @@ export class AdminAuthModal {
         }
       });
 
-      // Paste: split 6 digits across boxes
       input.addEventListener('paste', (e) => {
         e.preventDefault();
         const pasted = (e.clipboardData || window.clipboardData).getData('text');
@@ -261,115 +378,60 @@ export class AdminAuthModal {
     if (resendBtn) {
       resendBtn.addEventListener('click', () => this.resendOtp());
     }
-
-    // --- TAB SWITCHER EVENTS ---
-    const tabOtpBtn = document.getElementById('auth-tab-otp');
-    if (tabOtpBtn) {
-      tabOtpBtn.addEventListener('click', () => this.switchTab('otp'));
-    }
-
-    const tabQrBtn = document.getElementById('auth-tab-qr');
-    if (tabQrBtn) {
-      tabQrBtn.addEventListener('click', () => this.switchTab('qr'));
-    }
-
-    // --- QR-CODE WORKFLOW & CONTROLS ---
-    const uploadQrBtn = document.getElementById('btn-upload-qr');
-    const qrFileInput = document.getElementById('qr-file-input');
-    if (uploadQrBtn && qrFileInput) {
-      uploadQrBtn.addEventListener('click', () => qrFileInput.click());
-      qrFileInput.addEventListener('change', (e) => this.handleQrFileUpload(e));
-    }
-
-    const refreshQrBtn = document.getElementById('btn-refresh-qr');
-    if (refreshQrBtn) {
-      refreshQrBtn.addEventListener('click', () => this.renderDefaultQrCode());
-    }
-
-    const openDirectBtn = document.getElementById('btn-open-direct');
-    if (openDirectBtn) {
-      openDirectBtn.addEventListener('click', () => {
-        const portalUrl = this.getVerificationPortalUrl();
-        window.open(portalUrl, '_blank');
-      });
-    }
-
-    const togglePwdBtn = document.getElementById('auth-toggle-pwd-btn');
-    if (togglePwdBtn) {
-      togglePwdBtn.addEventListener('click', () => this.togglePasswordVisibility());
-    }
-
-    const qrPwdInput = document.getElementById('auth-qr-password-input');
-    if (qrPwdInput) {
-      qrPwdInput.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter') {
-          this.attemptVerifyQr();
-        }
-      });
-      qrPwdInput.addEventListener('input', () => {
-        if (qrPwdInput.classList.contains('is-error')) {
-          qrPwdInput.classList.remove('is-error');
-        }
-        this.updateQrStatus('');
-      });
-    }
-
-    const qrVerifyBtn = document.getElementById('auth-qr-verify-btn');
-    if (qrVerifyBtn) {
-      qrVerifyBtn.addEventListener('click', () => this.attemptVerifyQr());
-    }
   }
 
   /* ==========================================================================
-     TAB SWITCHING & QR WORKFLOWS
+     VIEW SWITCHING (GAMBAR 1 -> GAMBAR 2 -> GAMBAR 3)
      ========================================================================== */
-  switchTab(tab) {
-    this.activeTab = tab;
-    const tabOtpBtn = document.getElementById('auth-tab-otp');
-    const tabQrBtn = document.getElementById('auth-tab-qr');
-    const panelOtp = document.getElementById('auth-tab-panel-otp');
-    const panelQr = document.getElementById('auth-tab-panel-qr');
+  switchView(viewName) {
+    this.currentView = viewName;
+    this.activeTab = viewName; // Backwards compatibility alias
 
-    if (tab === 'otp') {
-      if (tabOtpBtn) {
-        tabOtpBtn.classList.add('active');
-        tabOtpBtn.setAttribute('aria-selected', 'true');
-      }
-      if (tabQrBtn) {
-        tabQrBtn.classList.remove('active');
-        tabQrBtn.setAttribute('aria-selected', 'false');
-      }
-      if (panelOtp) panelOtp.classList.add('active');
-      if (panelQr) panelQr.classList.remove('active');
-      this.stopCamera();
+    const viewQr = document.getElementById('auth-view-qr');
+    const viewOptions = document.getElementById('auth-view-options');
+    const viewOtp = document.getElementById('auth-view-otp');
+    const chassisMid = document.getElementById('auth-chassis-mid');
+
+    if (viewQr) viewQr.classList.remove('active');
+    if (viewOptions) viewOptions.classList.remove('active');
+    if (viewOtp) viewOtp.classList.remove('active');
+
+    if (viewName === 'qr') {
+      if (viewQr) viewQr.classList.add('active');
+      if (chassisMid) chassisMid.textContent = 'SYS // DUAL_FACTOR';
+      this.renderDefaultQrCode();
+    } else if (viewName === 'options') {
+      if (viewOptions) viewOptions.classList.add('active');
+      if (chassisMid) chassisMid.textContent = 'SYS // SELECTOR';
+    } else if (viewName === 'otp') {
+      if (viewOtp) viewOtp.classList.add('active');
+      if (chassisMid) chassisMid.textContent = 'SYS // EMAIL_OTP';
       setTimeout(() => {
         if (this.inputs[0]?.focus) this.inputs[0].focus();
-      }, 80);
-    } else {
-      if (tabQrBtn) {
-        tabQrBtn.classList.add('active');
-        tabQrBtn.setAttribute('aria-selected', 'true');
-      }
-      if (tabOtpBtn) {
-        tabOtpBtn.classList.remove('active');
-        tabOtpBtn.setAttribute('aria-selected', 'false');
-      }
-      if (panelQr) panelQr.classList.add('active');
-      if (panelOtp) panelOtp.classList.remove('active');
-      if (!this.activeQrSessionId) {
-        this.renderDefaultQrCode();
-      }
-      const pwdInput = document.getElementById('auth-qr-password-input');
-      setTimeout(() => {
-        if (pwdInput) pwdInput.focus();
-      }, 80);
+      }, 100);
     }
   }
 
+  // Alias for backwards compatibility with tests / callers
+  switchTab(tab) {
+    this.switchView(tab);
+  }
+
   getVerificationPortalUrl() {
-    const origin = window.location.origin || '';
+    let origin = window.location.origin || '';
     const pathname = window.location.pathname || '';
     const baseDir = pathname.substring(0, pathname.lastIndexOf('/') + 1);
+
+    const savedHost = localStorage.getItem('hra_admin_network_host');
+    if (savedHost) {
+      const proto = (window.location.protocol && window.location.protocol.startsWith('http')) ? window.location.protocol : 'http:';
+      origin = `${proto}//${savedHost}`;
+    } else if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' || !origin.startsWith('http')) {
+      const cachedIp = localStorage.getItem('hra_detected_lan_ip') || '10.57.119.96';
+      const port = window.location.port ? `:${window.location.port}` : ':3000';
+      origin = `http://${cachedIp}${port}`;
+    }
+
     const portalPath = `${origin}${baseDir}admin-verify.html`;
     return `${portalPath}?session=${encodeURIComponent(this.activeQrSessionId || '')}&token=${encodeURIComponent(this.activeQrToken || '')}`;
   }
@@ -380,11 +442,21 @@ export class AdminAuthModal {
     this.detectedQrToken = this.activeQrToken;
 
     const portalUrl = this.getVerificationPortalUrl();
-    const qrSvg = this.qrScanner.generateQrSvg(portalUrl, 168);
+    const qrSvg = this.qrScanner.generateQrSvg(portalUrl, 200);
 
     const slot = document.getElementById('qr-live-svg-slot');
     if (slot) {
       slot.innerHTML = qrSvg;
+    }
+
+    const hostVal = document.getElementById('qr-host-display-val');
+    if (hostVal) {
+      try {
+        const parsed = new URL(portalUrl);
+        hostVal.textContent = parsed.host;
+      } catch (_) {
+        hostVal.textContent = '10.57.119.96:3000';
+      }
     }
 
     const syncText = document.getElementById('qr-session-sync-text');
@@ -612,15 +684,8 @@ export class AdminAuthModal {
     // Generate & Dispatch OTP (in background for tab 2)
     this.generateAndDispatchOtp();
 
-    // Default view: QR Code on left pane & start mobile listener
-    this.switchTab('qr');
-    this.renderDefaultQrCode();
-
-    // Focus password input
-    setTimeout(() => {
-      const pwdInput = document.getElementById('auth-qr-password-input');
-      if (pwdInput) pwdInput.focus();
-    }, 120);
+    // Default view: QR Code on left pane (Gambar 1) & start mobile listener
+    this.switchView('qr');
   }
 
   close() {

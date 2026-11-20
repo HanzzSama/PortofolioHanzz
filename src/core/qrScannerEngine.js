@@ -190,277 +190,476 @@ export class QrScannerEngine {
      3. STANDARD ISO/IEC 18004 QR CODE GENERATOR (ZERO EXTERNAL DEPENDENCIES)
      Generates valid ISO-compliant QR Code Matrix decodable by any smartphone
      ========================================================================== */
-  generateQrSvg(text, size = 180) {
-    const matrix = QrMatrixEncoder.encodeText(text);
-    const N = matrix.length;
-    const quietZone = 2; // Standard quiet zone
-    const totalModules = N + quietZone * 2;
-    const cellSize = size / totalModules;
-
-    let rects = '';
-    for (let r = 0; r < N; r++) {
-      for (let c = 0; c < N; c++) {
-        if (matrix[r][c] === 1) {
-          const x = ((c + quietZone) * cellSize).toFixed(2);
-          const y = ((r + quietZone) * cellSize).toFixed(2);
-          const w = (cellSize + 0.05).toFixed(2); // Prevent pixel gaps
-          const h = (cellSize + 0.05).toFixed(2);
-          rects += `<rect x="${x}" y="${y}" width="${w}" height="${h}" fill="currentColor"/>`;
-        }
-      }
-    }
-
-    return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${size} ${size}" width="${size}" height="${size}" data-token="${text}" style="background:var(--bg-surface-elevated, #FFFFFF); border:1px solid var(--border-hairline, rgba(26,28,25,0.12)); border-radius:4px; padding:4px; box-sizing:border-box; color:var(--color-charcoal-slate, #1A1C19); display:block;">
-      <rect width="${size}" height="${size}" fill="var(--bg-surface-elevated, #FFFFFF)" rx="4"/>
-      ${rects}
-    </svg>`;
+  generateQrSvg(text, size = 200) {
+    const qr = QrCode.encodeText(text, QrCode.Ecc.LOW);
+    return qr.toSvgString(4);
   }
 }
 
 /**
- * Standard ISO/IEC 18004 QR Matrix Encoder
- * Byte mode with Reed-Solomon Error Correction (Level L)
+ * Standard ISO/IEC 18004:2006 QR Code Generator
+ * High-reliability mathematical engine based on Nayuki's MIT-licensed QR Code engine
  */
-export class QrMatrixEncoder {
-  static get EXP_TABLE() {
-    if (!this._exp) this._initGF();
-    return this._exp;
+export class QrCode {
+  static Ecc = {
+    LOW: { ordinal: 0, formatBits: 1 },
+    MEDIUM: { ordinal: 1, formatBits: 0 },
+    QUARTILE: { ordinal: 2, formatBits: 3 },
+    HIGH: { ordinal: 3, formatBits: 2 }
+  };
+
+  static encodeText(text, ecl = QrCode.Ecc.LOW) {
+    const seg = QrSegment.makeBytes(new TextEncoder().encode(text));
+    return QrCode.encodeSegments([seg], ecl);
   }
 
-  static get LOG_TABLE() {
-    if (!this._log) this._initGF();
-    return this._log;
+  static encodeSegments(segs, ecl, minVersion = 1, maxVersion = 40, mask = -1, boostEcl = true) {
+    if (!(1 <= minVersion && minVersion <= maxVersion && maxVersion <= 40) || mask < -1 || mask > 7) {
+      throw new RangeError("Invalid value");
+    }
+
+    let version, dataUsedBits;
+    for (version = minVersion; ; version++) {
+      const dataCapacityBits = QrCode.getNumDataCodewords(version, ecl) * 8;
+      const usedBits = QrSegment.getTotalBits(segs, version);
+      if (usedBits <= dataCapacityBits) {
+        dataUsedBits = usedBits;
+        break;
+      }
+      if (version >= maxVersion) {
+        throw new RangeError("Data too long for QR Code");
+      }
+    }
+
+    if (boostEcl) {
+      for (const newEcl of [QrCode.Ecc.MEDIUM, QrCode.Ecc.QUARTILE, QrCode.Ecc.HIGH]) {
+        if (dataUsedBits <= QrCode.getNumDataCodewords(version, newEcl) * 8) {
+          ecl = newEcl;
+        }
+      }
+    }
+
+    // Concatenate all segments into bits
+    const bb = [];
+    for (const seg of segs) {
+      appendBits(seg.mode.modeBits, 4, bb);
+      appendBits(seg.numChars, seg.mode.numCharCountBits(version), bb);
+      for (const b of seg.getData()) bb.push(b);
+    }
+
+    // Terminator
+    const dataCapacityBits = QrCode.getNumDataCodewords(version, ecl) * 8;
+    appendBits(0, Math.min(4, dataCapacityBits - bb.length), bb);
+    // Align to byte
+    appendBits(0, (8 - (bb.length % 8)) % 8, bb);
+    // Pad bytes
+    for (let padByte = 0xEC; bb.length < dataCapacityBits; padByte ^= 0xEC ^ 0x11) {
+      appendBits(padByte, 8, bb);
+    }
+
+    // Pack bits into bytes
+    const dataCodewords = [];
+    while (dataCodewords.length * 8 < bb.length) dataCodewords.push(0);
+    bb.forEach((b, i) => (dataCodewords[i >>> 3] |= b << (7 - (i & 7))));
+
+    return new QrCode(version, ecl, dataCodewords, mask);
   }
 
-  static _initGF() {
-    this._exp = new Uint8Array(512);
-    this._log = new Uint8Array(256);
-    let x = 1;
-    for (let i = 0; i < 255; i++) {
-      this._exp[i] = x;
-      this._exp[i + 255] = x;
-      this._log[x] = i;
-      x <<= 1;
-      if (x & 256) x ^= 0x11D;
+  constructor(version, errorCorrectionLevel, dataCodewords, msk) {
+    this.version = version;
+    this.errorCorrectionLevel = errorCorrectionLevel;
+    this.size = version * 4 + 17;
+
+    const row = [];
+    for (let i = 0; i < this.size; i++) row.push(false);
+    this.modules = [];
+    this.isFunction = [];
+    for (let i = 0; i < this.size; i++) {
+      this.modules.push(row.slice());
+      this.isFunction.push(row.slice());
+    }
+
+    this._drawFunctionPatterns();
+    const allCodewords = this._addEccAndInterleave(dataCodewords);
+    this._drawCodewords(allCodewords);
+
+    // Auto-select optimal mask if mask is -1
+    if (msk === -1) {
+      let minPenalty = 1e9;
+      for (let i = 0; i < 8; i++) {
+        this._applyMask(i);
+        this._drawFormatBits(i);
+        const penalty = this._getPenaltyScore();
+        if (penalty < minPenalty) {
+          minPenalty = penalty;
+          msk = i;
+        }
+        this._applyMask(i); // Undoes mask
+      }
+    }
+    this.mask = msk;
+    this._applyMask(msk);
+    this._drawFormatBits(msk);
+  }
+
+  getModule(x, y) {
+    return 0 <= x && x < this.size && 0 <= y && y < this.size && this.modules[y][x];
+  }
+
+  toSvgString(border = 4) {
+    if (border < 0) throw new RangeError("Border must be non-negative");
+    const fullSize = this.size + border * 2;
+    let parts = [];
+    for (let y = 0; y < this.size; y++) {
+      for (let x = 0; x < this.size; x++) {
+        if (this.getModule(x, y)) {
+          parts.push(`M${x + border},${y + border}h1v1h-1z`);
+        }
+      }
+    }
+    return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${fullSize} ${fullSize}" width="100%" height="100%" shape-rendering="crispEdges" style="background:#FFFFFF; display:block; border-radius:3px;">
+      <rect width="100%" height="100%" fill="#FFFFFF"/>
+      <path d="${parts.join("")}" fill="#000000"/>
+    </svg>`;
+  }
+
+  _drawFunctionPatterns() {
+    for (let i = 0; i < this.size; i++) {
+      this._setFunctionModule(6, i, i % 2 === 0);
+      this._setFunctionModule(i, 6, i % 2 === 0);
+    }
+
+    this._drawFinderPattern(3, 3);
+    this._drawFinderPattern(this.size - 4, 3);
+    this._drawFinderPattern(3, this.size - 4);
+
+    const alignPatPos = QrCode.getAlignmentPatternPositions(this.version);
+    const numAlign = alignPatPos.length;
+    for (let i = 0; i < numAlign; i++) {
+      for (let j = 0; j < numAlign; j++) {
+        if ((i === 0 && j === 0) || (i === 0 && j === numAlign - 1) || (i === numAlign - 1 && j === 0)) {
+          continue;
+        }
+        this._drawAlignmentPattern(alignPatPos[i], alignPatPos[j]);
+      }
+    }
+
+    this._drawFormatBits(0);
+    this._drawVersion();
+  }
+
+  _drawFormatBits(mask) {
+    const data = (this.errorCorrectionLevel.formatBits << 3) | mask;
+    let rem = data;
+    for (let i = 0; i < 10; i++) rem = (rem << 1) ^ ((rem >>> 9) * 0x537);
+    const bits = ((data << 10) | rem) ^ 0x5412;
+
+    for (let i = 0; i <= 5; i++) this._setFunctionModule(8, i, getBit(bits, i));
+    this._setFunctionModule(8, 7, getBit(bits, 6));
+    this._setFunctionModule(8, 8, getBit(bits, 7));
+    this._setFunctionModule(7, 8, getBit(bits, 8));
+    for (let i = 9; i < 15; i++) this._setFunctionModule(14 - i, 8, getBit(bits, i));
+
+    for (let i = 0; i < 8; i++) this._setFunctionModule(this.size - 1 - i, 8, getBit(bits, i));
+    for (let i = 8; i < 15; i++) this._setFunctionModule(8, this.size - 15 + i, getBit(bits, i));
+    this._setFunctionModule(8, this.size - 8, true); // Dark module
+  }
+
+  _drawVersion() {
+    if (this.version < 7) return;
+    let rem = this.version;
+    for (let i = 0; i < 12; i++) rem = (rem << 1) ^ ((rem >>> 11) * 0x1F25);
+    const bits = (this.version << 12) | rem;
+    for (let i = 0; i < 18; i++) {
+      const bit = getBit(bits, i);
+      const a = this.size - 11 + (i % 3);
+      const b = Math.floor(i / 3);
+      this._setFunctionModule(a, b, bit);
+      this._setFunctionModule(b, a, bit);
     }
   }
 
-  static gMul(a, b) {
-    if (a === 0 || b === 0) return 0;
-    return this.EXP_TABLE[this.LOG_TABLE[a] + this.LOG_TABLE[b]];
+  _drawFinderPattern(x, y) {
+    for (let dy = -4; dy <= 4; dy++) {
+      for (let dx = -4; dx <= 4; dx++) {
+        const dist = Math.max(Math.abs(dx), Math.abs(dy));
+        const xx = x + dx;
+        const yy = y + dy;
+        if (0 <= xx && xx < this.size && 0 <= yy && yy < this.size) {
+          this._setFunctionModule(xx, yy, dist !== 2 && dist !== 4);
+        }
+      }
+    }
   }
 
-  static rsPoly(degree) {
-    let poly = [1];
+  _drawAlignmentPattern(x, y) {
+    for (let dy = -2; dy <= 2; dy++) {
+      for (let dx = -2; dx <= 2; dx++) {
+        this._setFunctionModule(x + dx, y + dy, Math.max(Math.abs(dx), Math.abs(dy)) !== 1);
+      }
+    }
+  }
+
+  _setFunctionModule(x, y, isDark) {
+    this.modules[y][x] = isDark;
+    this.isFunction[y][x] = true;
+  }
+
+  _addEccAndInterleave(data) {
+    const ver = this.version;
+    const ecl = this.errorCorrectionLevel;
+    const numBlocks = QrCode.NUM_ERROR_CORRECTION_BLOCKS[ecl.ordinal][ver];
+    const blockEccLen = QrCode.ECC_CODEWORDS_PER_BLOCK[ecl.ordinal][ver];
+    const rawCodewords = Math.floor(QrCode.getNumRawDataModules(ver) / 8);
+    const numShortBlocks = numBlocks - (rawCodewords % numBlocks);
+    const shortBlockLen = Math.floor(rawCodewords / numBlocks);
+
+    const blocks = [];
+    const rsDiv = QrCode._reedSolomonComputeDivisor(blockEccLen);
+    for (let i = 0, k = 0; i < numBlocks; i++) {
+      const dat = data.slice(k, k + shortBlockLen - blockEccLen + (i >= numShortBlocks ? 1 : 0));
+      k += dat.length;
+      const ecc = QrCode._reedSolomonComputeRemainder(dat, rsDiv);
+      blocks.push(dat.concat(ecc));
+    }
+
+    const result = [];
+    for (let i = 0; i < blocks[0].length; i++) {
+      for (let j = 0; j < blocks.length; j++) {
+        if (i < blocks[j].length) result.push(blocks[j][i]);
+      }
+    }
+    return result;
+  }
+
+  _drawCodewords(data) {
+    let i = 0;
+    for (let right = this.size - 1; right >= 1; right -= 2) {
+      if (right === 6) right = 5;
+      for (let vert = 0; vert < this.size; vert++) {
+        for (let j = 0; j < 2; j++) {
+          const x = right - j;
+          const upward = ((right + 1) & 2) === 0;
+          const y = upward ? this.size - 1 - vert : vert;
+          if (!this.isFunction[y][x] && i < data.length * 8) {
+            this.modules[y][x] = getBit(data[i >>> 3], 7 - (i & 7));
+            i++;
+          }
+        }
+      }
+    }
+  }
+
+  _applyMask(mask) {
+    for (let y = 0; y < this.size; y++) {
+      for (let x = 0; x < this.size; x++) {
+        let invert;
+        switch (mask) {
+          case 0: invert = (x + y) % 2 === 0; break;
+          case 1: invert = y % 2 === 0; break;
+          case 2: invert = x % 3 === 0; break;
+          case 3: invert = (x + y) % 3 === 0; break;
+          case 4: invert = (Math.floor(x / 3) + Math.floor(y / 2)) % 2 === 0; break;
+          case 5: invert = ((x * y) % 2) + ((x * y) % 3) === 0; break;
+          case 6: invert = (((x * y) % 2) + ((x * y) % 3)) % 2 === 0; break;
+          case 7: invert = (((x + y) % 2) + ((x * y) % 3)) % 2 === 0; break;
+          default: throw new RangeError("Unreachable");
+        }
+        if (!this.isFunction[y][x] && invert) {
+          this.modules[y][x] = !this.modules[y][x];
+        }
+      }
+    }
+  }
+
+  _getPenaltyScore() {
+    let result = 0;
+    const size = this.size;
+
+    for (let y = 0; y < size; y++) {
+      let runColor = false;
+      let runVal = 0;
+      for (let x = 0; x < size; x++) {
+        if (this.modules[y][x] === runColor) {
+          runVal++;
+          if (runVal === 5) result += 3;
+          else if (runVal > 5) result++;
+        } else {
+          runColor = this.modules[y][x];
+          runVal = 1;
+        }
+      }
+    }
+
+    for (let x = 0; x < size; x++) {
+      let runColor = false;
+      let runVal = 0;
+      for (let y = 0; y < size; y++) {
+        if (this.modules[y][x] === runColor) {
+          runVal++;
+          if (runVal === 5) result += 3;
+          else if (runVal > 5) result++;
+        } else {
+          runColor = this.modules[y][x];
+          runVal = 1;
+        }
+      }
+    }
+
+    for (let y = 0; y < size - 1; y++) {
+      for (let x = 0; x < size - 1; x++) {
+        const color = this.modules[y][x];
+        if (color === this.modules[y][x + 1] && color === this.modules[y + 1][x] && color === this.modules[y + 1][x + 1]) {
+          result += 3;
+        }
+      }
+    }
+
+    let totalDark = 0;
+    for (const row of this.modules) {
+      for (const val of row) {
+        if (val) totalDark++;
+      }
+    }
+    const total = size * size;
+    const k = Math.ceil(Math.abs(totalDark * 20 - total * 10) / total) - 1;
+    result += k * 10;
+    return result;
+  }
+
+  static _reedSolomonComputeDivisor(degree) {
+    const result = [];
+    for (let i = 0; i < degree - 1; i++) result.push(0);
+    result.push(1);
+    let root = 1;
     for (let i = 0; i < degree; i++) {
-      const factor = [1, this.EXP_TABLE[i]];
-      const next = new Array(poly.length + 1).fill(0);
-      for (let j = 0; j < poly.length; j++) {
-        next[j] ^= this.gMul(poly[j], factor[0]);
-        next[j + 1] ^= this.gMul(poly[j], factor[1]);
+      for (let j = 0; j < result.length; j++) {
+        result[j] = QrCode._reedSolomonMultiply(result[j], root);
+        if (j + 1 < result.length) result[j] ^= result[j + 1];
       }
-      poly = next;
+      root = QrCode._reedSolomonMultiply(root, 0x02);
     }
-    return poly;
+    return result;
   }
 
-  static rsEncode(data, ecCount) {
-    const gen = this.rsPoly(ecCount);
-    const rem = new Array(ecCount).fill(0);
-    for (let i = 0; i < data.length; i++) {
-      const factor = data[i] ^ rem[0];
-      rem.shift();
-      rem.push(0);
-      if (factor !== 0) {
-        for (let j = 0; j < ecCount; j++) {
-          rem[j] ^= this.gMul(gen[j + 1], factor);
-        }
+  static _reedSolomonComputeRemainder(data, divisor) {
+    const result = divisor.map(() => 0);
+    for (const b of data) {
+      const factor = b ^ result.shift();
+      result.push(0);
+      for (let i = 0; i < divisor.length; i++) {
+        result[i] ^= QrCode._reedSolomonMultiply(divisor[i], factor);
       }
     }
-    return rem;
+    return result;
   }
 
-  static getVersionInfo(len) {
-    // Versions 1 to 6 (Level L)
-    // [version, totalCodewords, dataCodewords, ecCodewords, alignmentPos]
-    const versions = [
-      [1, 26, 19, 7, []],
-      [2, 44, 34, 10, [6, 18]],
-      [3, 70, 55, 15, [6, 22]],
-      [4, 100, 80, 20, [6, 26]],
-      [5, 134, 108, 26, [6, 30]],
-      [6, 172, 136, 36, [6, 34]]
-    ];
-    for (const v of versions) {
-      if (len + 3 <= v[2]) return v;
+  static _reedSolomonMultiply(x, y) {
+    let z = 0;
+    for (let i = 7; i >= 0; i--) {
+      z = (z << 1) ^ ((z >>> 7) * 0x11D);
+      z ^= ((y >>> i) & 1) * x;
     }
-    return versions[versions.length - 1];
+    return z;
   }
 
+  static getNumDataCodewords(ver, ecl) {
+    return Math.floor(QrCode.getNumRawDataModules(ver) / 8) -
+      QrCode.ECC_CODEWORDS_PER_BLOCK[ecl.ordinal][ver] *
+      QrCode.NUM_ERROR_CORRECTION_BLOCKS[ecl.ordinal][ver];
+  }
+
+  static getNumRawDataModules(ver) {
+    let result = (16 * ver + 128) * ver + 64;
+    if (ver >= 2) {
+      const numAlign = Math.floor(ver / 7) + 2;
+      result -= (25 * numAlign - 10) * numAlign - 55;
+      if (ver >= 7) result -= 36;
+    }
+    return result;
+  }
+
+  static getAlignmentPatternPositions(ver) {
+    if (ver === 1) return [];
+    const numAlign = Math.floor(ver / 7) + 2;
+    const step = ver === 32 ? 26 : Math.ceil((ver * 4 + 4) / (numAlign * 2 - 2)) * 2;
+    const result = [6];
+    for (let pos = ver * 4 + 10; result.length < numAlign; pos -= step) {
+      result.splice(1, 0, pos);
+    }
+    return result;
+  }
+
+  static ECC_CODEWORDS_PER_BLOCK = [
+    [-1,  7, 10, 15, 20, 26, 18, 20, 24, 30, 18, 20, 24, 26, 30, 22, 24, 28, 30, 28, 28, 28, 28, 30, 30, 26, 28, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30],
+    [-1, 10, 16, 26, 18, 24, 16, 18, 22, 22, 26, 30, 22, 22, 24, 24, 28, 28, 26, 26, 26, 26, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28, 28],
+    [-1, 13, 22, 18, 26, 18, 24, 18, 22, 20, 24, 28, 26, 24, 20, 30, 24, 28, 28, 26, 30, 28, 30, 30, 30, 30, 28, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30],
+    [-1, 17, 28, 22, 16, 22, 28, 26, 26, 24, 28, 24, 28, 22, 24, 24, 30, 28, 28, 26, 28, 30, 24, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30]
+  ];
+
+  static NUM_ERROR_CORRECTION_BLOCKS = [
+    [-1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 4, 4, 4, 4, 4, 6, 6, 6, 6, 7, 8, 8, 9, 9, 10, 12, 12, 12, 13, 14, 15, 16, 17, 18, 19, 19, 20, 21, 22, 24, 25],
+    [-1, 1, 1, 1, 2, 2, 4, 4, 4, 5, 5, 5, 8, 9, 9, 10, 10, 11, 13, 14, 16, 17, 17, 18, 20, 21, 23, 25, 26, 28, 29, 31, 33, 35, 37, 38, 40, 43, 45, 47, 49],
+    [-1, 1, 1, 2, 2, 4, 4, 6, 6, 8, 8, 8, 10, 12, 16, 12, 17, 16, 18, 21, 20, 23, 23, 25, 27, 29, 34, 34, 35, 38, 40, 43, 45, 48, 51, 53, 56, 59, 62, 65, 68],
+    [-1, 1, 1, 2, 4, 4, 4, 5, 6, 8, 8, 11, 11, 16, 16, 18, 16, 19, 21, 25, 25, 25, 34, 30, 32, 35, 37, 40, 42, 45, 48, 51, 54, 57, 60, 63, 66, 70, 72, 74, 79]
+  ];
+}
+
+export class QrSegment {
+  static Mode = {
+    BYTE: {
+      modeBits: 0x4,
+      numCharCountBits: (ver) => (ver <= 9 ? 8 : 16)
+    }
+  };
+
+  static makeBytes(data) {
+    const bb = [];
+    for (const b of data) appendBits(b, 8, bb);
+    return new QrSegment(QrSegment.Mode.BYTE, data.length, bb);
+  }
+
+  static getTotalBits(segs, version) {
+    let result = 0;
+    for (const seg of segs) {
+      result += 4 + seg.mode.numCharCountBits(version) + seg.bitLength;
+    }
+    return result;
+  }
+
+  constructor(mode, numChars, bitData) {
+    this.mode = mode;
+    this.numChars = numChars;
+    this.bitData = bitData.slice();
+    this.bitLength = bitData.length;
+  }
+
+  getData() {
+    return this.bitData.slice();
+  }
+}
+
+function appendBits(val, len, bb) {
+  for (let i = len - 1; i >= 0; i--) {
+    bb.push((val >>> i) & 1);
+  }
+}
+
+function getBit(x, i) {
+  return ((x >>> i) & 1) !== 0;
+}
+
+export class QrMatrixEncoder {
   static encodeText(text) {
-    const bytes = new TextEncoder().encode(text);
-    const [ver, totalCw, dataCw, ecCw, alignPos] = this.getVersionInfo(bytes.length);
-
-    // Build Bit Stream: 4 bits mode (0100 for Byte) + 8 bits length + data
-    const bits = [];
-    const addBits = (val, count) => {
-      for (let i = count - 1; i >= 0; i--) {
-        bits.push((val >> i) & 1);
+    const qr = QrCode.encodeText(text, QrCode.Ecc.LOW);
+    const matrix = [];
+    for (let y = 0; y < qr.size; y++) {
+      const row = [];
+      for (let x = 0; x < qr.size; x++) {
+        row.push(qr.getModule(x, y) ? 1 : 0);
       }
-    };
-
-    addBits(4, 4); // Byte mode indicator
-    addBits(bytes.length, 8); // Character count (8 bits for versions 1-9)
-    for (let i = 0; i < bytes.length; i++) {
-      addBits(bytes[i], 8);
+      matrix.push(row);
     }
-
-    // Terminator (up to 4 zeroes)
-    const cap = dataCw * 8;
-    const termLen = Math.min(4, cap - bits.length);
-    for (let i = 0; i < termLen; i++) bits.push(0);
-
-    // Align to byte boundary
-    while (bits.length % 8 !== 0) bits.push(0);
-
-    // Pad bytes 0xEC, 0x11
-    const pad = [0xEC, 0x11];
-    let padIdx = 0;
-    while (bits.length < cap) {
-      addBits(pad[padIdx % 2], 8);
-      padIdx++;
-    }
-
-    // Convert bits to data codewords
-    const dataWords = [];
-    for (let i = 0; i < bits.length; i += 8) {
-      let b = 0;
-      for (let j = 0; j < 8; j++) b = (b << 1) | bits[i + j];
-      dataWords.push(b);
-    }
-
-    // Compute Error Correction Codewords
-    const ecWords = this.rsEncode(dataWords, ecCw);
-    const allCodewords = [...dataWords, ...ecWords];
-
-    // Build Matrix
-    const N = 17 + 4 * ver;
-    const matrix = Array.from({ length: N }, () => Array(N).fill(-1));
-
-    // 1. Finder patterns at 3 corners
-    const placeFinder = (r0, c0) => {
-      for (let r = -1; r <= 7; r++) {
-        for (let c = -1; c <= 7; c++) {
-          const row = r0 + r;
-          const col = c0 + c;
-          if (row < 0 || row >= N || col < 0 || col >= N) continue;
-          if (r >= 0 && r <= 6 && c >= 0 && c <= 6) {
-            if (r === 0 || r === 6 || c === 0 || c === 6 || (r >= 2 && r <= 4 && c >= 2 && c <= 4)) {
-              matrix[row][col] = 1;
-            } else {
-              matrix[row][col] = 0;
-            }
-          } else {
-            matrix[row][col] = 0;
-          }
-        }
-      }
-    };
-
-    placeFinder(0, 0);
-    placeFinder(0, N - 7);
-    placeFinder(N - 7, 0);
-
-    // 2. Alignment patterns
-    if (alignPos.length > 0) {
-      for (const r of alignPos) {
-        for (const c of alignPos) {
-          if (matrix[r][c] !== -1) continue;
-          for (let dr = -2; dr <= 2; dr++) {
-            for (let dc = -2; dc <= 2; dc++) {
-              if (Math.abs(dr) === 2 || Math.abs(dc) === 2 || (dr === 0 && dc === 0)) {
-                matrix[r + dr][c + dc] = 1;
-              } else {
-                matrix[r + dr][c + dc] = 0;
-              }
-            }
-          }
-        }
-      }
-    }
-
-    // 3. Timing patterns
-    for (let i = 8; i < N - 8; i++) {
-      if (matrix[6][i] === -1) matrix[6][i] = (i % 2 === 0) ? 1 : 0;
-      if (matrix[i][6] === -1) matrix[i][6] = (i % 2 === 0) ? 1 : 0;
-    }
-
-    // Dark module
-    matrix[4 * ver + 9][8] = 1;
-
-    // Reserve format information areas
-    for (let i = 0; i < 9; i++) {
-      if (matrix[8][i] === -1) matrix[8][i] = -2;
-      if (matrix[i][8] === -1) matrix[i][8] = -2;
-    }
-    for (let i = N - 8; i < N; i++) {
-      if (matrix[8][i] === -1) matrix[8][i] = -2;
-      if (matrix[i][8] === -1) matrix[i][8] = -2;
-    }
-
-    // 4. Place Data Bits
-    const allBits = [];
-    for (const byte of allCodewords) {
-      for (let b = 7; b >= 0; b--) {
-        allBits.push((byte >> b) & 1);
-      }
-    }
-
-    let bitIdx = 0;
-    let upward = true;
-    for (let right = N - 1; right > 0; right -= 2) {
-      if (right === 6) right--; // Skip vertical timing column
-      const cols = [right, right - 1];
-      const rows = upward
-        ? Array.from({ length: N }, (_, k) => N - 1 - k)
-        : Array.from({ length: N }, (_, k) => k);
-
-      for (const r of rows) {
-        for (const c of cols) {
-          if (matrix[r][c] === -1) {
-            let bit = (bitIdx < allBits.length) ? allBits[bitIdx++] : 0;
-            // Mask pattern 0: (row + col) % 2 === 0
-            if ((r + c) % 2 === 0) bit ^= 1;
-            matrix[r][c] = bit;
-          }
-        }
-      }
-      upward = !upward;
-    }
-
-    // 5. Format info for Mask 0 + EC Level L (01 000 BCH encoded: 0x77C4)
-    const formatBits = [1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1, 0, 0];
-    // Place format bits top-left
-    let fIdx = 0;
-    for (let c = 0; c <= 8; c++) {
-      if (c === 6) continue;
-      matrix[8][c] = formatBits[fIdx++];
-    }
-    for (let r = 7; r >= 0; r--) {
-      if (r === 6) continue;
-      matrix[r][8] = formatBits[fIdx++];
-    }
-
-    // Place format bits split (bottom-left and top-right)
-    fIdx = 0;
-    for (let r = N - 1; r >= N - 7; r--) {
-      matrix[r][8] = formatBits[fIdx++];
-    }
-    matrix[N - 8][8] = formatBits[fIdx++];
-    for (let c = N - 8; c < N; c++) {
-      matrix[8][c] = formatBits[fIdx++];
-    }
-
     return matrix;
   }
 }
