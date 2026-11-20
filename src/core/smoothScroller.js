@@ -9,13 +9,13 @@ import Lenis from '../vendor/lenis.js';
 export class SmoothScroller {
   constructor(options = {}) {
     this.options = {
-      lerp: options.lerp !== undefined ? options.lerp : 0.04, // Ultra-cinematic heavy floating mass — long deceleration tail
-      duration: options.duration !== undefined ? options.duration : undefined,
+      lerp: options.lerp !== undefined ? options.lerp : 0.045, // Fluid cinematic glide with responsive initiation
+      duration: options.duration !== undefined ? options.duration : 1.2,
       headerOffset: options.headerOffset || 72,
-      wheelMultiplier: options.wheelMultiplier !== undefined ? options.wheelMultiplier : 1.2,
-      touchMultiplier: options.touchMultiplier !== undefined ? options.touchMultiplier : 2.0,
+      wheelMultiplier: options.wheelMultiplier !== undefined ? options.wheelMultiplier : 1.25,
+      touchMultiplier: options.touchMultiplier !== undefined ? options.touchMultiplier : 1.8,
       smoothWheel: true,
-      smoothTouch: false,
+      smoothTouch: true,
       ...options
     };
 
@@ -41,14 +41,14 @@ export class SmoothScroller {
     this.lenis = new Lenis({
       lerp: this.options.lerp,
       duration: this.options.duration,
-      // Exponential ease-out curve (identical to Google Antigravity & high-end physics showcases)
+      // Exponential ease-out curve matching high-end motion showcases
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
       orientation: 'vertical',
       gestureOrientation: 'vertical',
       smoothWheel: this.options.smoothWheel,
-      syncTouch: false,
-      syncTouchLerp: 0.075,
-      touchInertiaMultiplier: 35,
+      syncTouch: true,
+      syncTouchLerp: 0.08,
+      touchInertiaMultiplier: 28,
       wheelMultiplier: this.options.wheelMultiplier,
       touchMultiplier: this.options.touchMultiplier,
       infinite: false,

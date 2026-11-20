@@ -28,6 +28,13 @@ export class ParallaxEngine {
     this.layers = [];
     this.textSliders = [];
     this.scrollScaleTargets = [];
+    this.imagePanels = [];
+    this.camera = {
+      pitch: 0,
+      yaw: 0,
+      roll: 0,
+      dolly: 0
+    };
     this.isRunning = false;
     this.rafId = null;
 
@@ -77,6 +84,12 @@ export class ParallaxEngine {
 
     // Scroll-scale elements
     this.scrollScaleTargets = this.collectScrollScaleTargets();
+
+    // Image aperture parallax elements
+    this.imagePanels = Array.from(document.querySelectorAll('.project-preview-img, .non-image-blueprint-chassis')).map(el => ({
+      element: el,
+      parent: el.closest('.project-blueprint-panel') || el.parentElement
+    }));
   }
 
   collectTextSliders() {
@@ -205,7 +218,8 @@ export class ParallaxEngine {
       el.style.transform = `translate3d(${moveX.toFixed(2)}px, ${moveY.toFixed(2)}px, 0)`;
     });
 
-    // New render passes
+    // Cinematic render passes
+    this.renderKineticCamera(dt);
     this.renderTextSliders();
     this.renderRelativeParallax();
     this.renderScrollScale();
@@ -216,16 +230,44 @@ export class ParallaxEngine {
     }
   }
 
+  renderKineticCamera(dt = 1.0) {
+    if (!this.viewport || window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches) return;
+
+    // Smooth camera pitch: tilt slightly forward when scrolling down, backward when scrolling up
+    const targetPitch = Math.max(-2.0, Math.min(2.0, this.scroll.velocity * -0.012));
+    this.cameraPitch = this.lerp(this.cameraPitch, targetPitch, 0.12, dt);
+
+    // Subtle anamorphic vertical squeeze during rapid acceleration
+    const targetStretch = 1 + Math.min(0.015, Math.abs(this.scroll.velocity) * 0.0001);
+    this.cameraStretch = this.lerp(this.cameraStretch, targetStretch, 0.12, dt);
+
+    if (Math.abs(this.cameraPitch) > 0.005) {
+      this.viewport.style.setProperty('--camera-pitch', `${this.cameraPitch.toFixed(3)}deg`);
+    } else {
+      this.viewport.style.setProperty('--camera-pitch', '0deg');
+    }
+
+    if (Math.abs(this.cameraStretch - 1) > 0.001) {
+      this.viewport.style.setProperty('--camera-stretch', `${this.cameraStretch.toFixed(4)}`);
+    } else {
+      this.viewport.style.setProperty('--camera-stretch', '1');
+    }
+  }
+
   renderTextSliders() {
     if (!this.textSliders || this.textSliders.length === 0) return;
-    const currentScrollY = this.scroll.current;
+    const windowH = window.innerHeight;
+
     this.textSliders.forEach(slider => {
       const rect = slider.element.getBoundingClientRect();
-      const inView = rect.top < window.innerHeight * 1.5 && rect.bottom > -window.innerHeight * 0.5;
+      const inView = rect.top < windowH * 1.3 && rect.bottom > -windowH * 0.3;
       if (!inView) return;
-      // Offset relatif terhadap posisi awal elemen
-      const relativeScroll = currentScrollY - slider.initialY + window.innerHeight * 0.5;
-      const offset = relativeScroll * slider.speed;
+
+      const elemCenter = rect.top + rect.height / 2;
+      const vhCenter = windowH / 2;
+      const distFromCenter = elemCenter - vhCenter;
+      const offset = distFromCenter * slider.speed;
+
       let transform = '';
       switch (slider.direction) {
         case 'left': transform = `translate3d(${(-offset).toFixed(2)}px, 0, 0)`; break;

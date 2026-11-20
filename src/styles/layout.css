@@ -313,12 +313,41 @@ body::before {
   transition: width 0.1s linear;
 }
 
-/* Main Parallax Viewport */
+/* Main Parallax Viewport - 35mm Motion-Control Camera Rig */
 #parallax-viewport {
   position: relative;
   width: 100%;
   overflow: visible;
+  perspective: 1400px;
+  perspective-origin: 50% 50%;
+  transform-origin: 50% var(--camera-pivot-y, 50vh);
+  transform: rotateX(var(--camera-pitch, 0deg)) rotateY(var(--camera-yaw, 0deg)) rotateZ(var(--camera-roll, 0deg)) translate3d(0, 0, var(--camera-dolly, 0px));
   will-change: transform;
+}
+
+/* Cinematic Film Vignette & Lens Atmosphere */
+.cinematic-film-vignette {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9998;
+  box-shadow: inset 0 0 110px rgba(0, 0, 0, 0.05);
+  opacity: var(--vignette-intensity, 0.55);
+  transition: opacity 0.25s ease-out;
+}
+
+[data-theme="obsidian"] .cinematic-film-vignette {
+  box-shadow: inset 0 0 150px rgba(0, 0, 0, 0.5);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #parallax-viewport {
+    perspective: none;
+    transform: none !important;
+  }
+  .cinematic-film-vignette {
+    display: none;
+  }
 }
 
 /* Section Shell */
