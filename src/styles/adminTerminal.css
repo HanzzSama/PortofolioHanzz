@@ -400,12 +400,31 @@
   flex: 1;
   padding: 1.25rem 1.4rem;
   overflow-y: auto;
+  overscroll-behavior-y: contain;
+  -webkit-overflow-scrolling: touch;
   font-family: var(--font-mono, 'JetBrains Mono', monospace);
   font-size: 0.82rem;
   line-height: 1.6;
   background: radial-gradient(circle at 50% 0%, rgba(20, 24, 21, 0.75), transparent 70%), #0A0D0B;
   display: flex;
   flex-direction: column;
+}
+
+.terminal-body::-webkit-scrollbar {
+  width: 6px;
+}
+
+.terminal-body::-webkit-scrollbar-track {
+  background: rgba(10, 13, 11, 0.85);
+}
+
+.terminal-body::-webkit-scrollbar-thumb {
+  background: rgba(52, 211, 153, 0.35);
+  border-radius: 3px;
+}
+
+.terminal-body::-webkit-scrollbar-thumb:hover {
+  background: rgba(52, 211, 153, 0.75);
 }
 
 .terminal-output {

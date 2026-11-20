@@ -265,7 +265,7 @@
   <!-- Architectural Deep-Dive System Drawer & Modal -->
   <div id="drawer-backdrop" class="drawer-backdrop" aria-hidden="true"></div>
   <aside id="system-drawer" class="architectural-drawer" role="dialog" aria-modal="true"
-    aria-label="System Deep-Dive Drawer">
+    aria-label="System Deep-Dive Drawer" data-lenis-prevent>
     <div class="drawer-header">
       <div id="drawer-callsign" class="drawer-callsign">SYS.INSPECT // 00</div>
       <button id="drawer-close-btn" class="drawer-close-btn" aria-label="Close Drawer" data-cursor-target>
@@ -273,7 +273,7 @@
         <span>CLOSE [ESC]</span>
       </button>
     </div>
-    <div id="drawer-body" class="drawer-content">
+    <div id="drawer-body" class="drawer-content" data-lenis-prevent>
       <!-- Dynamic deep-dive injected via main.js -->
     </div>
   </aside>

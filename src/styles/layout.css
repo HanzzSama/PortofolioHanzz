@@ -631,6 +631,7 @@ body::before {
   flex-direction: column;
   overflow-y: auto;
   overflow-x: hidden;
+  overscroll-behavior-y: contain;
   -webkit-overflow-scrolling: touch;
   pointer-events: none;
   visibility: hidden;
@@ -656,6 +657,23 @@ body::before {
   transition: transform 0.48s cubic-bezier(0.16, 1, 0.3, 1),
               box-shadow 0.48s cubic-bezier(0.16, 1, 0.3, 1),
               visibility 0s 0s;
+}
+
+.architectural-drawer::-webkit-scrollbar {
+  width: 6px;
+}
+
+.architectural-drawer::-webkit-scrollbar-track {
+  background: var(--bg-surface);
+}
+
+.architectural-drawer::-webkit-scrollbar-thumb {
+  background: var(--border-medium, rgba(74, 93, 78, 0.35));
+  border-radius: 3px;
+}
+
+.architectural-drawer::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-primary, rgba(74, 93, 78, 0.7));
 }
 
 .drawer-header {

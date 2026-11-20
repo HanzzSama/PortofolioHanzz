@@ -67,6 +67,7 @@ export class AdminTerminalEngine {
     term.className = 'admin-terminal-window';
     term.setAttribute('role', 'region');
     term.setAttribute('aria-label', 'Command Prompt Admin');
+    term.setAttribute('data-lenis-prevent', '');
 
     term.innerHTML = `
       <!-- Title Bar -->
@@ -84,7 +85,7 @@ export class AdminTerminalEngine {
       </div>
 
       <!-- Terminal Output Screen -->
-      <div class="terminal-body" id="terminal-screen-body">
+      <div class="terminal-body" id="terminal-screen-body" data-lenis-prevent>
         <div class="terminal-output" id="terminal-output-container"></div>
 
         <div class="terminal-input-row font-mono">

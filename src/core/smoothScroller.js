@@ -53,7 +53,14 @@ export class SmoothScroller {
       touchMultiplier: this.options.touchMultiplier,
       infinite: false,
       autoResize: true,
-      autoRaf: false // Driven via dedicated high-frequency RAF loop
+      autoRaf: false, // Driven via dedicated high-frequency RAF loop
+      prevent: (node) => {
+        if (!node || !(node instanceof HTMLElement)) return false;
+        return Boolean(
+          node.hasAttribute?.('data-lenis-prevent') ||
+          node.closest?.('[data-lenis-prevent], #system-drawer, .architectural-drawer, #drawer-body, .drawer-content, #admin-terminal-window, .admin-terminal-window, #terminal-screen-body, .terminal-body, #monolith-audio-console, .monolith-audio-console, .xray-overlay, .admin-auth-modal')
+        );
+      }
     });
 
     // Make instance accessible globally for components
