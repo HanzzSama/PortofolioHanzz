@@ -288,10 +288,12 @@
   max-width: 960px;
   height: 600px;
   max-height: 84vh;
-  background: #0C0F0D;
-  border: 1px solid rgba(184, 115, 87, 0.35);
-  border-radius: 8px;
-  box-shadow: 0 28px 80px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 255, 255, 0.08);
+  background: rgba(15, 18, 16, 0.92);
+  backdrop-filter: blur(28px) saturate(180%);
+  -webkit-backdrop-filter: blur(28px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
+  box-shadow: 0 30px 90px rgba(0, 0, 0, 0.75), 0 0 0 1px rgba(255, 255, 255, 0.08);
   z-index: 10001;
   display: flex;
   flex-direction: column;
@@ -310,7 +312,7 @@
 .admin-terminal-window.is-dragging {
   user-select: none;
   transition: none !important;
-  box-shadow: 0 36px 96px rgba(0, 0, 0, 0.92), 0 0 0 1px rgba(184, 115, 87, 0.5);
+  box-shadow: 0 40px 100px rgba(0, 0, 0, 0.9), 0 0 0 1px rgba(255, 255, 255, 0.18);
 }
 
 .admin-terminal-window.is-maximized {
@@ -324,14 +326,14 @@
   transform: none !important;
 }
 
-/* Terminal Title Bar (Draggable Handle) */
+/* Apple macOS Style Titlebar (3-Column Layout) */
 .terminal-titlebar {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
   align-items: center;
-  justify-content: space-between;
-  background: #141815;
+  background: linear-gradient(180deg, rgba(38, 42, 39, 0.85) 0%, rgba(24, 28, 25, 0.92) 100%);
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  padding: 0.55rem 1rem;
+  padding: 0.65rem 1rem;
   user-select: none;
   cursor: grab;
   touch-action: none;
@@ -341,58 +343,116 @@
 .terminal-titlebar:active,
 .admin-terminal-window.is-dragging .terminal-titlebar {
   cursor: grabbing;
-  background: #1B211C;
+  background: linear-gradient(180deg, rgba(46, 51, 47, 0.92) 0%, rgba(30, 35, 31, 0.96) 100%);
 }
 
-.terminal-title-left {
+/* macOS Window Traffic Lights (Left Column) */
+.terminal-mac-controls {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
-  font-family: var(--font-mono, monospace);
-  font-size: 0.72rem;
-  color: #B87357;
-  letter-spacing: 0.06em;
+  gap: 8px;
+  justify-self: start;
 }
 
-.terminal-badge-chip {
-  background: rgba(184, 115, 87, 0.18);
-  border: 1px solid rgba(184, 115, 87, 0.35);
-  color: #F4F3EF;
-  font-size: 0.62rem;
-  padding: 0.12rem 0.4rem;
-  border-radius: 3px;
-}
-
-.terminal-window-controls {
-  display: flex;
-  align-items: center;
-  gap: 0.45rem;
-}
-
-.win-control-btn {
-  background: transparent;
+.mac-btn {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
   border: none;
-  color: var(--text-muted, #8F9489);
-  width: 22px;
-  height: 22px;
-  border-radius: 3px;
+  outline: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.12s ease, filter 0.15s ease;
+}
+
+.mac-btn:active {
+  transform: scale(0.92);
+  filter: brightness(0.85);
+}
+
+.mac-close {
+  background: #FF5F56;
+  box-shadow: inset 0 0 0 1px rgba(224, 68, 62, 0.9);
+}
+
+.mac-min {
+  background: #FFBD2E;
+  box-shadow: inset 0 0 0 1px rgba(222, 161, 35, 0.9);
+}
+
+.mac-max {
+  background: #27C93F;
+  box-shadow: inset 0 0 0 1px rgba(26, 171, 41, 0.9);
+}
+
+/* Subtle macOS traffic light glyphs on group hover */
+.mac-btn::before {
+  content: '';
+  opacity: 0;
+  transition: opacity 0.12s ease;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 8px;
+  font-weight: 700;
+  line-height: 1;
+  color: rgba(0, 0, 0, 0.55);
+}
+
+.terminal-mac-controls:hover .mac-btn::before {
+  opacity: 1;
+}
+
+.mac-close::before {
+  content: 'x';
+  margin-top: -1px;
+}
+
+.mac-min::before {
+  content: '-';
+  margin-top: -2px;
+  font-size: 10px;
+}
+
+.mac-max::before {
+  content: '+';
+  margin-top: -1px;
+}
+
+/* Center Column macOS Title */
+.terminal-mac-title {
+  justify-self: center;
   display: flex;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
-  font-size: 0.75rem;
-  font-family: var(--font-mono, monospace);
-  transition: all 0.15s ease;
+  font-family: var(--font-mono, 'JetBrains Mono', monospace);
+  font-size: 0.74rem;
+  font-weight: 500;
+  color: #B5BBB0;
+  letter-spacing: 0.03em;
+  white-space: nowrap;
+  pointer-events: none;
 }
 
-.win-control-btn:hover {
-  background: rgba(255, 255, 255, 0.1);
-  color: #fff;
+/* Right Column Meta / Session Chip */
+.terminal-mac-meta {
+  justify-self: end;
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
 }
 
-.win-control-btn.close:hover {
-  background: #EF4444;
-  color: #fff;
+.terminal-badge-chip {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  color: #D2D7CD;
+  font-size: 0.62rem;
+  padding: 0.12rem 0.45rem;
+  border-radius: 4px;
+  letter-spacing: 0.04em;
 }
 
 /* Terminal Screen / Output Body */

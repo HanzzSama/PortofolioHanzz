@@ -70,17 +70,19 @@ export class AdminTerminalEngine {
     term.setAttribute('data-lenis-prevent', '');
 
     term.innerHTML = `
-      <!-- Title Bar -->
+      <!-- macOS Monterey / Sonoma Aesthetic Titlebar -->
       <div class="terminal-titlebar" id="terminal-titlebar">
-        <div class="terminal-title-left">
-          <span class="auth-status-dot"></span>
-          <span>HANZZ // ADMIN TERMINAL [ROOT]</span>
-          <span class="terminal-badge-chip font-mono" id="terminal-session-chip">SESSION: 30M</span>
+        <div class="terminal-mac-controls" aria-label="Window Controls">
+          <button class="mac-btn mac-close" id="term-btn-close" title="Tutup [Esc]" aria-label="Close"></button>
+          <button class="mac-btn mac-min" id="term-btn-min" title="Kecilkan" aria-label="Minimize"></button>
+          <button class="mac-btn mac-max" id="term-btn-max" title="Perbesar" aria-label="Zoom / Fullscreen"></button>
         </div>
-        <div class="terminal-window-controls font-mono">
-          <button class="win-control-btn" id="term-btn-min" title="Kecilkan">_</button>
-          <button class="win-control-btn" id="term-btn-max" title="Perbesar">□</button>
-          <button class="win-control-btn close" id="term-btn-close" title="Tutup [Esc]">X</button>
+        <div class="terminal-mac-title font-mono">
+          <span class="mac-title-text">hanzz - zsh - admin@root (90x28)</span>
+        </div>
+        <div class="terminal-mac-meta">
+          <span class="auth-status-dot"></span>
+          <span class="terminal-badge-chip font-mono" id="terminal-session-chip">SESSION: 30M</span>
         </div>
       </div>
 
