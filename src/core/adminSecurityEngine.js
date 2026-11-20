@@ -12,6 +12,12 @@ export class AdminSecurityEngine {
     this.sessionDurationMs = 30 * 60 * 1000; // 30 minutes session
     this.adminEmail = 'haidarandrianno098@gmail.com';
     this.audioCtx = null;
+
+    if (typeof navigator !== 'undefined' && 'serviceWorker' in navigator && typeof window !== 'undefined') {
+      try {
+        navigator.serviceWorker.register('./sw.js').catch(() => {});
+      } catch (_) {}
+    }
   }
 
   /* ==========================================================================
@@ -188,29 +194,151 @@ export class AdminSecurityEngine {
     return Notification.permission;
   }
 
-  dispatchNativeNotification(title, body, tag = 'admin-guard') {
-    if (typeof window === 'undefined') return;
-    // 1. Web Notifications API
-    if ('Notification' in window && Notification.permission === 'granted') {
-      try {
-        new Notification(title, {
-          body: body,
-          icon: './src/assets/hanzz-avatar.png',
-          tag: tag,
-          requireInteraction: true
-        });
-      } catch (_) {}
+  _escapeHtml(str) {
+    if (!str) return '';
+    return String(str)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#039;');
+  }
+
+  showDeviceNotificationHUD(title, body) {
+    if (typeof document === 'undefined') return;
+
+    let container = document.getElementById('hra-device-notify-hud');
+    if (!container) {
+      container = document.createElement('div');
+      container.id = 'hra-device-notify-hud';
+      container.className = 'hra-device-notify-hud';
+      container.setAttribute('role', 'alert');
+      container.setAttribute('aria-live', 'assertive');
+      document.body.appendChild(container);
     }
 
-    // 2. Device Haptic Vibration API
+    const otpMatch = body.match(/\b\d{6}\b/);
+    const otpCode = otpMatch ? otpMatch[0] : null;
+
+    const toast = document.createElement('div');
+    toast.className = 'hra-device-toast-item';
+    toast.innerHTML = `
+      <div class="hra-toast-header font-mono">
+        <span class="hra-toast-tag">
+          <span class="hra-toast-pulse"></span>
+          SECURITY ALERT // DEVICE_PUSH
+        </span>
+        <button type="button" class="hra-toast-close" title="Tutup">&times;</button>
+      </div>
+      <div class="hra-toast-title font-display">${this._escapeHtml(title)}</div>
+      <div class="hra-toast-body font-mono">${this._escapeHtml(body)}</div>
+      ${otpCode ? `
+        <div class="hra-toast-actions">
+          <button type="button" class="hra-toast-copy-btn font-mono" data-code="${otpCode}">
+            Salin Kode OTP [${otpCode}]
+          </button>
+        </div>
+      ` : ''}
+    `;
+
+    const closeBtn = toast.querySelector('.hra-toast-close');
+    if (closeBtn) {
+      closeBtn.addEventListener('click', () => {
+        toast.classList.remove('is-active');
+        setTimeout(() => toast.remove(), 250);
+      });
+    }
+
+    const copyBtn = toast.querySelector('.hra-toast-copy-btn');
+    if (copyBtn) {
+      copyBtn.addEventListener('click', async () => {
+        try {
+          await navigator.clipboard.writeText(otpCode);
+          copyBtn.textContent = 'KODE TERSALIN!';
+          copyBtn.style.background = '#059669';
+          copyBtn.style.color = '#fff';
+          setTimeout(() => {
+            if (copyBtn) copyBtn.textContent = `Salin Kode OTP [${otpCode}]`;
+          }, 2000);
+        } catch (_) {}
+      });
+    }
+
+    container.appendChild(toast);
+
+    if (typeof requestAnimationFrame !== 'undefined') {
+      requestAnimationFrame(() => toast.classList.add('is-active'));
+    } else {
+      toast.classList.add('is-active');
+    }
+
+    setTimeout(() => {
+      if (toast.parentElement) {
+        toast.classList.remove('is-active');
+        setTimeout(() => toast.remove(), 250);
+      }
+    }, 12000);
+  }
+
+  async dispatchNativeNotification(title, body, tag = 'admin-guard') {
+    if (typeof window === 'undefined') return;
+
+    // 1. Guaranteed In-App HUD Toast Banner on Device Screen
+    this.showDeviceNotificationHUD(title, body);
+
+    // 2. Synthesized Web Audio Security Alert Chime
+    this.playSecurityAlertTone();
+
+    // 3. Device Haptic Vibration API
     if (typeof navigator !== 'undefined' && navigator.vibrate) {
       try {
         navigator.vibrate([200, 100, 200, 100, 400]);
       } catch (_) {}
     }
 
-    // 3. Synthesized Web Audio Security Beep
-    this.playSecurityAlertTone();
+    // 4. Native Web Push / OS Notification (Service Worker on mobile or window.Notification)
+    if ('Notification' in window && Notification.permission === 'granted') {
+      let shownViaSW = false;
+      if (typeof navigator !== 'undefined' && 'serviceWorker' in navigator) {
+        try {
+          const reg = await navigator.serviceWorker.ready;
+          if (reg && reg.showNotification) {
+            await reg.showNotification(title, {
+              body: body,
+              icon: './src/assets/hanzz-avatar.png',
+              badge: './src/assets/hanzz-avatar.png',
+              tag: tag,
+              requireInteraction: true
+            });
+            shownViaSW = true;
+          }
+        } catch (_) {}
+      }
+
+      if (!shownViaSW) {
+        try {
+          new Notification(title, {
+            body: body,
+            icon: './src/assets/hanzz-avatar.png',
+            tag: tag,
+            requireInteraction: true
+          });
+        } catch (_) {}
+      }
+    }
+
+    // 5. Cloud Push to ntfy.sh (Instant Push to Paired Mobile/Desktop)
+    try {
+      fetch('https://ntfy.sh/hra_admin_alerts', {
+        method: 'POST',
+        body: `${title}\n\n${body}`,
+        headers: {
+          'Title': title,
+          'Priority': 'urgent',
+          'Tags': 'warning,key'
+        }
+      }).catch(() => {});
+    } catch (_) {}
   }
 
   playSecurityAlertTone() {

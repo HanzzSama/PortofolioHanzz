@@ -207,6 +207,13 @@ export class AdminAuthModal {
               <span class="auth-target-email font-mono">${this.sec.adminEmail}</span>
             </p>
 
+            <div class="auth-notify-status-bar font-mono" id="auth-notify-status-bar">
+              <span class="notify-status-label">NOTIFIKASI PERANGKAT:</span>
+              <button type="button" class="auth-notify-perm-btn font-mono" id="btn-request-notify-perm" title="Klik untuk mengaktifkan notifikasi pop-up pada perangkat">
+                [ Aktifkan Notifikasi Device ]
+              </button>
+            </div>
+
             <form id="auth-otp-form" onsubmit="return false;">
               <div class="auth-otp-row">
                 <input type="text" inputmode="numeric" maxlength="1" class="otp-digit-input font-mono" data-index="0" autocomplete="off" />
@@ -379,6 +386,27 @@ export class AdminAuthModal {
     if (resendBtn) {
       resendBtn.addEventListener('click', () => this.resendOtp());
     }
+
+    // Device notification permission button
+    const notifyPermBtn = document.getElementById('btn-request-notify-perm');
+    if (notifyPermBtn) {
+      notifyPermBtn.addEventListener('click', async () => {
+        notifyPermBtn.textContent = 'Meminta izin...';
+        const res = await this.sec.requestNotificationPermission();
+        if (res === 'granted') {
+          notifyPermBtn.textContent = '[ OK ] Notifikasi Device Aktif';
+          notifyPermBtn.style.color = '#059669';
+          notifyPermBtn.style.borderColor = '#059669';
+          this.sec.dispatchNativeNotification(
+            'Notifikasi Device Aktif',
+            'Perangkat ini sekarang terhubung dan siap menerima kode verifikasi OTP serta peringatan keamanan admin.'
+          );
+        } else {
+          notifyPermBtn.textContent = '[ Ditolak / Diblokir ]';
+          notifyPermBtn.style.color = '#EF4444';
+        }
+      });
+    }
   }
 
   /* ==========================================================================
@@ -407,6 +435,24 @@ export class AdminAuthModal {
     } else if (viewName === 'otp') {
       if (viewOtp) viewOtp.classList.add('active');
       if (chassisMid) chassisMid.textContent = 'SYS // EMAIL_OTP';
+
+      const notifyPermBtn = document.getElementById('btn-request-notify-perm');
+      if (notifyPermBtn && typeof Notification !== 'undefined') {
+        if (Notification.permission === 'granted') {
+          notifyPermBtn.textContent = '[ OK ] Notifikasi Device Aktif';
+          notifyPermBtn.style.color = '#059669';
+          notifyPermBtn.style.borderColor = '#059669';
+        } else if (Notification.permission === 'denied') {
+          notifyPermBtn.textContent = '[ Izin Diblokir Browser ]';
+          notifyPermBtn.style.color = '#EF4444';
+          notifyPermBtn.style.borderColor = '#EF4444';
+        } else {
+          notifyPermBtn.textContent = '[ + Aktifkan Notifikasi Device ]';
+          notifyPermBtn.style.color = '';
+          notifyPermBtn.style.borderColor = '';
+        }
+      }
+
       setTimeout(() => {
         if (this.inputs[0]?.focus) this.inputs[0].focus();
       }, 100);

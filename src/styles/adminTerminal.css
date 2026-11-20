@@ -860,6 +860,38 @@
 /* ==========================================================================
    VIEW 3: OTP VERIFICATION & DUAL ACTION BUTTONS (GAMBAR 3)
    ========================================================================== */
+.auth-notify-status-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  background: var(--bg-surface-sunken, #ECEAE4);
+  border: 1px solid var(--border-hairline, rgba(26, 28, 25, 0.12));
+  border-radius: 3px;
+  padding: 0.45rem 0.75rem;
+  font-size: 0.65rem;
+  color: var(--text-secondary, #40443E);
+  margin-bottom: 1rem;
+}
+
+.auth-notify-perm-btn {
+  background: transparent;
+  border: 1px solid var(--border-hairline, rgba(26, 28, 25, 0.18));
+  color: var(--accent-primary, #4A5D4E);
+  padding: 0.2rem 0.55rem;
+  border-radius: 2px;
+  font-size: 0.65rem;
+  font-family: var(--font-mono, monospace);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.auth-notify-perm-btn:hover {
+  background: var(--accent-tint, rgba(74, 93, 78, 0.12));
+  border-color: var(--accent-primary, #4A5D4E);
+}
+
 .auth-otp-row {
   display: flex;
   justify-content: space-between;
@@ -911,6 +943,129 @@
   .auth-otp-actions-row {
     grid-template-columns: 1fr;
   }
+}
+
+/* ==========================================================================
+   DEVICE NOTIFICATION HUD (MONOLITHIC PUSH BANNER)
+   ========================================================================== */
+.hra-device-notify-hud {
+  position: fixed;
+  top: 1.25rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 999999;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  width: calc(100% - 2rem);
+  max-width: 480px;
+  pointer-events: none;
+}
+
+.hra-device-toast-item {
+  background: var(--bg-surface, #FAF9F6);
+  border: 1px solid var(--border-hairline, rgba(26, 28, 25, 0.12));
+  border-left: 4px solid var(--accent-primary, #4A5D4E);
+  border-radius: 4px;
+  padding: 1rem 1.15rem;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.22), 0 0 0 1px rgba(0, 0, 0, 0.05);
+  pointer-events: auto;
+  opacity: 0;
+  transform: translateY(-16px) scale(0.97);
+  transition: all 0.26s cubic-bezier(0.2, 0, 0, 1);
+  color: var(--text-primary, #1A1C19);
+}
+
+.hra-device-toast-item.is-active {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.hra-toast-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.65rem;
+  margin-bottom: 0.45rem;
+  border-bottom: 1px solid var(--border-faint, rgba(26, 28, 25, 0.06));
+  padding-bottom: 0.35rem;
+}
+
+.hra-toast-tag {
+  color: var(--accent-primary, #4A5D4E);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.hra-toast-pulse {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #34D399;
+  box-shadow: 0 0 6px #34D399;
+  animation: hudPulse 1.8s infinite;
+}
+
+@keyframes hudPulse {
+  0% { transform: scale(0.95); opacity: 0.8; }
+  50% { transform: scale(1.3); opacity: 1; }
+  100% { transform: scale(0.95); opacity: 0.8; }
+}
+
+.hra-toast-close {
+  background: transparent;
+  border: none;
+  color: var(--text-muted, #6B7169);
+  font-size: 1.1rem;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0 0.25rem;
+  transition: color 0.15s ease;
+}
+
+.hra-toast-close:hover {
+  color: var(--text-primary, #1A1C19);
+}
+
+.hra-toast-title {
+  font-family: var(--font-display, sans-serif);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary, #1A1C19);
+  margin-bottom: 0.35rem;
+  letter-spacing: -0.01em;
+}
+
+.hra-toast-body {
+  font-family: var(--font-mono, monospace);
+  font-size: 0.76rem;
+  line-height: 1.5;
+  color: var(--text-secondary, #40443E);
+}
+
+.hra-toast-actions {
+  margin-top: 0.65rem;
+}
+
+.hra-toast-copy-btn {
+  background: var(--text-primary, #1A1C19);
+  color: var(--bg-surface, #FAF9F6);
+  border: 1px solid transparent;
+  border-radius: 3px;
+  padding: 0.45rem 0.85rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  cursor: pointer;
+  letter-spacing: 0.04em;
+  transition: all 0.18s ease;
+}
+
+.hra-toast-copy-btn:hover {
+  background: var(--accent-primary, #4A5D4E);
+  color: #fff;
 }
 
 /* ==========================================================================
