@@ -156,20 +156,26 @@
     }
 
     .password-row {
+      position: relative;
       display: flex;
-      gap: 0.45rem;
+      align-items: center;
+      width: 100%;
+      box-sizing: border-box;
     }
 
     .password-input {
-      flex: 1;
+      width: 100%;
+      min-width: 0;
+      flex: 1 1 auto;
       background: var(--bg-surface-sunken);
       border: var(--border-hairline);
       color: var(--text-primary);
-      padding: 0.75rem 0.85rem;
+      padding: 0.75rem 4.75rem 0.75rem 0.85rem;
       font-size: 0.95rem;
       font-family: var(--font-mono);
       border-radius: 3px;
       outline: none;
+      box-sizing: border-box;
       transition: all 0.2s ease;
     }
 
@@ -193,14 +199,32 @@
     }
 
     .toggle-pwd-btn {
-      background: var(--bg-surface-sunken);
+      position: absolute;
+      right: 4px;
+      top: 4px;
+      bottom: 4px;
+      background: var(--bg-surface-elevated);
       border: var(--border-hairline);
       color: var(--text-secondary);
-      padding: 0 0.85rem;
-      font-size: 0.68rem;
+      padding: 0 0.65rem;
+      font-size: 0.65rem;
       font-family: var(--font-mono);
-      border-radius: 3px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      border-radius: 2px;
       cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      white-space: nowrap;
+      z-index: 2;
+      transition: all 0.15s ease;
+    }
+
+    .toggle-pwd-btn:hover {
+      background: var(--bg-surface-sunken);
+      color: var(--text-primary);
+      border-color: var(--border-strong);
     }
 
     .hint-text {
@@ -335,6 +359,76 @@
       color: var(--text-muted);
       text-align: center;
       letter-spacing: 0.04em;
+    }
+
+    /* Small Mobile Screen Responsiveness */
+    @media (max-width: 480px) {
+      body {
+        padding: 0.85rem 0.65rem;
+      }
+      .verify-card {
+        padding: 1.35rem 1.15rem;
+        max-width: 100%;
+        border-radius: 4px;
+      }
+      .title {
+        font-size: 1.2rem;
+      }
+      .password-input {
+        font-size: 0.88rem;
+        padding: 0.7rem 4.4rem 0.7rem 0.75rem;
+      }
+      .session-badge {
+        font-size: 0.68rem;
+        padding: 0.55rem 0.75rem;
+      }
+      .btn-submit {
+        padding: 0.8rem 1rem;
+        font-size: 0.74rem;
+      }
+      .upload-section {
+        padding: 0.75rem;
+      }
+      .upload-title {
+        font-size: 0.62rem;
+      }
+      .upload-btn {
+        font-size: 0.68rem;
+        padding: 0.45rem 0.65rem;
+      }
+    }
+
+    @media (max-width: 360px) {
+      body {
+        padding: 0.5rem 0.35rem;
+      }
+      .verify-card {
+        padding: 1.15rem 0.85rem;
+      }
+      .telemetry-strip {
+        font-size: 0.58rem;
+        flex-wrap: wrap;
+        gap: 0.25rem;
+      }
+      .title {
+        font-size: 1.1rem;
+      }
+      .password-input {
+        font-size: 0.82rem;
+        padding: 0.65rem 4.2rem 0.65rem 0.65rem;
+      }
+      .toggle-pwd-btn {
+        font-size: 0.6rem;
+        padding: 0 0.5rem;
+      }
+      .btn-submit {
+        font-size: 0.7rem;
+        letter-spacing: 0.04em;
+        padding: 0.75rem 0.85rem;
+      }
+      .footer-note {
+        font-size: 0.58rem;
+      }
     }
   </style>
 </head>
@@ -537,20 +631,42 @@
       }
 
       // SUCCESS: Broadcast Approval to Desktop
+      const now = Date.now();
       const approvalData = {
         type: 'AUTH_APPROVED',
         sessionId: sessionId,
         token: qrToken,
-        approvedAt: Date.now()
+        timestamp: now,
+        approvedAt: now
       };
 
-      // 1. BroadcastChannel (for same origin / tabs)
+      // 1. Cloud Realtime Relay (ntfy.sh) - Cross-device sync over Internet / GitHub Pages
+      try {
+        const syncTopic = ('hra_auth_' + String(sessionId).replace(/[^a-zA-Z0-9_-]/g, '_')).slice(0, 64);
+        fetch(`https://ntfy.sh/${syncTopic}`, {
+          method: 'POST',
+          body: JSON.stringify(approvalData),
+          headers: { 'Title': 'HRA Admin Auth Approved' }
+        }).catch(() => {});
+      } catch (_) {}
+
+      // 2. Local Server Relay (for local dev server / LAN)
+      try {
+        fetch('/api/auth/approve', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(approvalData)
+        }).catch(() => {});
+      } catch (_) {}
+
+      // 3. BroadcastChannel (for same origin / tabs)
       try {
         const channel = new BroadcastChannel('hra_auth_channel');
         channel.postMessage(approvalData);
+        channel.postMessage({ ...approvalData, type: 'ADMIN_AUTH_APPROVED' });
       } catch (_) {}
 
-      // 2. LocalStorage Event (cross-window on same origin)
+      // 4. LocalStorage Event (cross-window on same origin)
       try {
         localStorage.setItem('hra_sec_mobile_auth_approved', JSON.stringify(approvalData));
       } catch (_) {}

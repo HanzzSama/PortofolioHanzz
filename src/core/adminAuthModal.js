@@ -29,6 +29,7 @@ export class AdminAuthModal {
     this.activeQrToken = null;
     this.authChannel = null;
     this.storageListener = null;
+    this.cloudEventSource = null;
     this.pollApprovalInterval = null;
 
     // Default LAN IP fallback for local development scanning
@@ -437,7 +438,7 @@ export class AdminAuthModal {
   }
 
   renderDefaultQrCode() {
-    this.activeQrSessionId = this.sec.generateQrChallengeToken();
+    this.activeQrSessionId = 'hra_sess_' + Date.now().toString(36) + '_' + Math.random().toString(36).slice(2, 8);
     this.activeQrToken = this.sec.generateQrChallengeToken();
     this.detectedQrToken = this.activeQrToken;
 
@@ -470,11 +471,12 @@ export class AdminAuthModal {
   startMobileApprovalListener() {
     this.stopMobileApprovalListener();
 
+    // 1. BroadcastChannel (for same origin / tabs)
     if (typeof BroadcastChannel !== 'undefined') {
       try {
         this.authChannel = new BroadcastChannel('hra_auth_channel');
         this.authChannel.onmessage = (e) => {
-          if (e.data && e.data.type === 'ADMIN_AUTH_APPROVED') {
+          if (e.data && (e.data.type === 'ADMIN_AUTH_APPROVED' || e.data.type === 'AUTH_APPROVED')) {
             if (!this.activeQrSessionId || e.data.sessionId === this.activeQrSessionId) {
               this.handleMobileApprovalSuccess(e.data);
             }
@@ -485,6 +487,7 @@ export class AdminAuthModal {
       }
     }
 
+    // 2. LocalStorage Event (cross-window on same origin)
     this.storageListener = (e) => {
       if (e.key === 'hra_sec_mobile_auth_approved' && e.newValue) {
         try {
@@ -499,22 +502,102 @@ export class AdminAuthModal {
     };
     window.addEventListener('storage', this.storageListener);
 
-    this.pollApprovalInterval = setInterval(() => {
+    // 3. Global Cloud Relay via ntfy.sh Server-Sent Events (instant cross-device sync)
+    if (this.activeQrSessionId && typeof EventSource !== 'undefined') {
+      try {
+        const syncTopic = ('hra_auth_' + String(this.activeQrSessionId).replace(/[^a-zA-Z0-9_-]/g, '_')).slice(0, 64);
+        this.cloudEventSource = new EventSource(`https://ntfy.sh/${syncTopic}/sse`);
+        this.cloudEventSource.onmessage = (event) => {
+          try {
+            const raw = JSON.parse(event.data);
+            if (raw && raw.event === 'message' && raw.message) {
+              const payload = JSON.parse(raw.message);
+              if (payload && (payload.type === 'AUTH_APPROVED' || payload.type === 'ADMIN_AUTH_APPROVED')) {
+                if (!this.activeQrSessionId || payload.sessionId === this.activeQrSessionId) {
+                  this.handleMobileApprovalSuccess(payload);
+                }
+              }
+            }
+          } catch (_) {}
+        };
+      } catch (err) {
+        console.warn('EventSource sync warning:', err);
+      }
+    }
+
+    // 4. Polling Fallback (tri-mode: local storage + local server + cloud relay poll)
+    let pollCount = 0;
+    this.pollApprovalInterval = setInterval(async () => {
+      pollCount++;
+
+      // A. Check localStorage
       const raw = localStorage.getItem('hra_sec_mobile_auth_approved');
       if (raw) {
         try {
           const data = JSON.parse(raw);
           if (data && (!this.activeQrSessionId || data.sessionId === this.activeQrSessionId)) {
-            if (Date.now() - (data.timestamp || 0) < 60000) {
+            const ts = data.timestamp || data.approvedAt || 0;
+            if (Date.now() - ts < 60000) {
               this.handleMobileApprovalSuccess(data);
+              return;
             }
           }
         } catch (err) {}
+      }
+
+      // B. Check Local Server API (if hosted on HTTP/HTTPS)
+      if (window.location && window.location.protocol && window.location.protocol.startsWith('http')) {
+        try {
+          const res = await fetch(`/api/auth/status?session=${encodeURIComponent(this.activeQrSessionId)}`);
+          if (res.ok) {
+            const status = await res.json();
+            if (status && status.approved) {
+              this.handleMobileApprovalSuccess({
+                type: 'AUTH_APPROVED',
+                sessionId: this.activeQrSessionId
+              });
+              return;
+            }
+          }
+        } catch (_) {}
+      }
+
+      // C. Check Cloud Relay via ntfy.sh JSON poll (every 2nd tick ~ 1.6s)
+      if (this.activeQrSessionId && pollCount % 2 === 0) {
+        try {
+          const syncTopic = ('hra_auth_' + String(this.activeQrSessionId).replace(/[^a-zA-Z0-9_-]/g, '_')).slice(0, 64);
+          const cloudRes = await fetch(`https://ntfy.sh/${syncTopic}/json?poll=1&since=all`);
+          if (cloudRes.ok) {
+            const text = await cloudRes.text();
+            const lines = text.trim().split('\n');
+            for (const line of lines) {
+              if (!line) continue;
+              try {
+                const msg = JSON.parse(line);
+                if (msg && msg.event === 'message' && msg.message) {
+                  const payload = JSON.parse(msg.message);
+                  if (payload && (payload.type === 'AUTH_APPROVED' || payload.type === 'ADMIN_AUTH_APPROVED')) {
+                    if (!this.activeQrSessionId || payload.sessionId === this.activeQrSessionId) {
+                      this.handleMobileApprovalSuccess(payload);
+                      return;
+                    }
+                  }
+                }
+              } catch (_) {}
+            }
+          }
+        } catch (_) {}
       }
     }, 800);
   }
 
   stopMobileApprovalListener() {
+    if (this.cloudEventSource) {
+      try {
+        this.cloudEventSource.close();
+      } catch (err) {}
+      this.cloudEventSource = null;
+    }
     if (this.authChannel) {
       try {
         this.authChannel.close();

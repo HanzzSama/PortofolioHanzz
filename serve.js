@@ -40,10 +40,13 @@ function getLocalIp() {
   return 'localhost';
 }
 
+const approvedSessions = new Map();
+
 const server = http.createServer((req, res) => {
   // CORS headers for local LAN testing
   res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'GET, HEAD, OPTIONS');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, HEAD, POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
   if (req.method === 'OPTIONS') {
     res.writeHead(204);
@@ -51,7 +54,45 @@ const server = http.createServer((req, res) => {
     return;
   }
 
-  let cleanUrl = req.url.split('?')[0].split('#')[0];
+  const cleanUrl = req.url.split('?')[0].split('#')[0];
+
+  // API Endpoint: Mobile approvals dispatch
+  if (req.method === 'POST' && cleanUrl === '/api/auth/approve') {
+    let body = '';
+    req.on('data', chunk => { body += chunk; });
+    req.on('end', () => {
+      try {
+        const data = JSON.parse(body || '{}');
+        if (data && data.sessionId) {
+          approvedSessions.set(data.sessionId, {
+            token: data.token || '',
+            approvedAt: Date.now()
+          });
+        }
+        res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
+        res.end(JSON.stringify({ success: true, sessionId: data ? data.sessionId : null }));
+      } catch (_) {
+        res.writeHead(400, { 'Content-Type': 'application/json; charset=utf-8' });
+        res.end(JSON.stringify({ error: 'Invalid JSON body' }));
+      }
+    });
+    return;
+  }
+
+  // API Endpoint: Desktop status polling
+  if (req.method === 'GET' && cleanUrl === '/api/auth/status') {
+    const urlObj = new URL(req.url, `http://${req.headers.host || 'localhost'}`);
+    const sess = urlObj.searchParams.get('session');
+    const record = sess ? approvedSessions.get(sess) : null;
+    res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8' });
+    if (record && (Date.now() - record.approvedAt < 600000)) {
+      res.end(JSON.stringify({ approved: true, sessionId: sess, approvedAt: record.approvedAt }));
+    } else {
+      res.end(JSON.stringify({ approved: false }));
+    }
+    return;
+  }
+
   let safePath = path.normalize(decodeURIComponent(cleanUrl)).replace(/^(\.\.[\/\\])+/, '');
   if (safePath === '/' || safePath === '\\' || !safePath) {
     safePath = '/index.html';

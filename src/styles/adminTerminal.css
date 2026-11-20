@@ -935,3 +935,77 @@
 [data-theme="obsidian"] .qr-corner-bracket.bl { border-bottom-color: #F4F3EF; border-left-color: #F4F3EF; }
 [data-theme="obsidian"] .qr-corner-bracket.br { border-bottom-color: #F4F3EF; border-right-color: #F4F3EF; }
 
+/* ==========================================================================
+   SMALL MOBILE SCREEN RATIO RESPONSIVENESS (<= 480px, <= 360px)
+   ========================================================================== */
+@media (max-width: 480px) {
+  .admin-auth-backdrop {
+    padding: 0.65rem 0.5rem;
+  }
+  .admin-auth-dialog {
+    padding: 1.25rem 1rem;
+    max-width: 100%;
+  }
+  .auth-heading {
+    font-size: 1.15rem;
+  }
+  .qr-code-frame {
+    width: 180px;
+    height: 180px;
+    padding: 6px;
+  }
+  .qr-telemetry-badge {
+    width: 180px;
+    font-size: 0.62rem;
+    padding: 0.45rem 0.55rem;
+  }
+  .auth-btn-dark {
+    padding: 0.75rem 1rem;
+    font-size: 0.72rem;
+  }
+  .auth-option-card {
+    padding: 1rem 1.15rem;
+  }
+  .auth-option-title {
+    font-size: 1.05rem;
+  }
+  .otp-digit-input {
+    height: 52px;
+    max-width: 44px;
+    font-size: 1.25rem;
+  }
+}
+
+@media (max-width: 360px) {
+  .admin-auth-backdrop {
+    padding: 0.35rem 0.25rem;
+  }
+  .admin-auth-dialog {
+    padding: 1rem 0.75rem;
+  }
+  .auth-chassis-strip {
+    font-size: 0.55rem;
+    flex-wrap: wrap;
+    gap: 0.2rem;
+  }
+  .auth-heading {
+    font-size: 1.05rem;
+  }
+  .qr-code-frame {
+    width: 160px;
+    height: 160px;
+  }
+  .qr-telemetry-badge {
+    width: 160px;
+  }
+  .auth-btn-dark {
+    font-size: 0.68rem;
+    padding: 0.7rem 0.85rem;
+  }
+  .otp-digit-input {
+    height: 44px;
+    max-width: 38px;
+    font-size: 1.1rem;
+  }
+}
+
