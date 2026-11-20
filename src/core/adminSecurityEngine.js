@@ -45,7 +45,8 @@ export class AdminSecurityEngine {
     try {
       if (typeof document === 'undefined') return 'headless_node';
       const canvas = document.createElement('canvas');
-      const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+      const gl = canvas.getContext('webgl', { powerPreference: 'high-performance' }) || 
+                 canvas.getContext('experimental-webgl', { powerPreference: 'high-performance' });
       if (!gl) return 'no_webgl';
       const ext = gl.getExtension('WEBGL_debug_renderer_info');
       if (!ext) return 'webgl_no_debug_info';

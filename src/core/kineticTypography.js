@@ -45,6 +45,9 @@ export class KineticTypographyEngine {
     window.addEventListener('mousemove', (e) => {
       this.mouse.x = e.clientX;
       this.mouse.y = e.clientY;
+      if (!this.rafId) {
+        this.startLoop();
+      }
     }, { passive: true });
 
     window.addEventListener('scroll', () => {
@@ -94,12 +97,18 @@ export class KineticTypographyEngine {
         // Apply if changing
         if (Math.abs(item.currentSpacing) > 0.02 || item.targetSpacing > 0) {
           item.el.style.letterSpacing = `${(item.defaultSpacing + item.currentSpacing).toFixed(2)}px`;
+          activeDisplacement = true;
         }
       });
 
-      this.rafId = requestAnimationFrame(loop);
+      if (activeDisplacement) {
+        this.rafId = requestAnimationFrame(loop);
+      } else {
+        this.rafId = null;
+      }
     };
 
+    let activeDisplacement = true;
     this.rafId = requestAnimationFrame(loop);
   }
 

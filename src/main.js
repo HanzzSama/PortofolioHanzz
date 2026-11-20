@@ -33,6 +33,7 @@ import { WeatherContourEngine } from './core/weatherContourEngine.js';
 import { ContextMenuEngine } from './core/contextMenu.js';
 import { AdminShortcutTrigger } from './core/adminShortcutTrigger.js';
 import { contentProtection } from './core/contentProtectionEngine.js';
+import { gpuOptimizer } from './core/gpuOptimizer.js';
 import { 
   initProjectImageDetector, 
   getProjectImageCandidates
@@ -91,6 +92,11 @@ class PortfolioApp {
     this.initBioTime();
     this.initContextMenu();
     this.initAdminTrigger();
+    this.initGPUOptimizer();
+  }
+
+  initGPUOptimizer() {
+    this.gpuOptimizer = gpuOptimizer;
   }
 
   initContextMenu() {

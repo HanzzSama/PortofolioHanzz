@@ -53,6 +53,8 @@ export class MonolithSimulator {
     this.particles = [];
     this.initParticleCloud();
 
+    this.isVisible = true;
+    this.observer = null;
     this.init();
   }
 
@@ -78,7 +80,32 @@ export class MonolithSimulator {
   init() {
     this.resize();
     this.bindEvents();
+    this.setupVisibilityObserver();
     this.startLoop();
+  }
+
+  setupVisibilityObserver() {
+    if (typeof IntersectionObserver === 'undefined') {
+      this.isVisible = true;
+      return;
+    }
+    this.observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        this.isVisible = entry.isIntersecting;
+        if (this.isVisible) {
+          this.lastFrameTime = performance.now();
+          this.startLoop();
+        } else if (this.rafId) {
+          cancelAnimationFrame(this.rafId);
+          this.rafId = null;
+        }
+      });
+    }, { threshold: 0.05 });
+
+    const target = this.viewport || this.canvas;
+    if (target) {
+      this.observer.observe(target);
+    }
   }
 
   resize() {
@@ -531,7 +558,7 @@ export class MonolithSimulator {
   }
 
   render(timestamp) {
-    if (!this.ctx) return;
+    if (!this.ctx || !this.isVisible) return;
 
     // Delta-Time Calculation (Frame-rate independent physics for 60/120/144/240+ Hz displays)
     const now = timestamp || performance.now();
@@ -647,7 +674,9 @@ export class MonolithSimulator {
     // Update Telemetry DOM with audio status
     this.updateTelemetry(geom.vertices.length, audio, isCymatics);
 
-    this.rafId = requestAnimationFrame((t) => this.render(t));
+    if (this.isVisible) {
+      this.rafId = requestAnimationFrame((t) => this.render(t));
+    }
   }
 
   renderParticleCloud(audio, isDark, dt = 1.0) {
@@ -825,6 +854,10 @@ export class MonolithSimulator {
   }
 
   destroy() {
+    if (this.observer) {
+      this.observer.disconnect();
+      this.observer = null;
+    }
     if (this.rafId) {
       cancelAnimationFrame(this.rafId);
       this.rafId = null;

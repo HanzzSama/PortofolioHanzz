@@ -66,6 +66,8 @@ export class WeatherContourEngine {
 
     // Theme state
     this.isDark = true;
+    this.isVisible = true;
+    this.observer = null;
 
     if (this.canvas) {
       this.init();
@@ -76,9 +78,34 @@ export class WeatherContourEngine {
     this.resize();
     this.checkTheme();
     this.bindEvents();
+    this.setupVisibilityObserver();
     this.fetchRealtimeWeather();
     this.resolveDiurnalPhase();
     this.startLoop();
+  }
+
+  setupVisibilityObserver() {
+    if (typeof IntersectionObserver === 'undefined') {
+      this.isVisible = true;
+      return;
+    }
+    const target = this.canvas?.parentElement || this.canvas;
+    this.observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        this.isVisible = entry.isIntersecting;
+        if (this.isVisible) {
+          this.lastFrameTime = performance.now();
+          this.startLoop();
+        } else if (this.animId) {
+          cancelAnimationFrame(this.animId);
+          this.animId = null;
+        }
+      });
+    }, { threshold: 0.05 });
+
+    if (target) {
+      this.observer.observe(target);
+    }
   }
 
   initAmbientParticles() {
@@ -665,8 +692,13 @@ export class WeatherContourEngine {
   // GENERATIVE TOPOGRAPHIC CONTOUR & DIURNAL RENDERING ENGINE
   // =========================================================================
   startLoop() {
+    if (!this.isVisible || this.animId) return;
     this.lastFrameTime = performance.now();
     const render = (timestamp) => {
+      if (!this.isVisible) {
+        this.animId = null;
+        return;
+      }
       this.renderFrame(timestamp);
       this.animId = requestAnimationFrame(render);
     };
