@@ -218,8 +218,9 @@ export class ParallaxEngine {
       el.style.transform = `translate3d(${moveX.toFixed(2)}px, ${moveY.toFixed(2)}px, 0)`;
     });
 
-    // Cinematic render passes
-    this.renderKineticCamera(dt);
+    // Cinematic camera and multi-plane render passes
+    this.renderKineticCamera(dt, now);
+    this.renderImageAperture();
     this.renderTextSliders();
     this.renderRelativeParallax();
     this.renderScrollScale();
@@ -230,28 +231,64 @@ export class ParallaxEngine {
     }
   }
 
-  renderKineticCamera(dt = 1.0) {
+  renderKineticCamera(dt = 1.0, now = performance.now()) {
     if (!this.viewport || window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches) return;
 
-    // Smooth camera pitch: tilt slightly forward when scrolling down, backward when scrolling up
-    const targetPitch = Math.max(-2.0, Math.min(2.0, this.scroll.velocity * -0.012));
-    this.cameraPitch = this.lerp(this.cameraPitch, targetPitch, 0.12, dt);
+    const vel = this.scroll.velocity || 0;
+    const windowH = window.innerHeight;
+    const currentScrollY = this.scroll.current;
 
-    // Subtle anamorphic vertical squeeze during rapid acceleration
-    const targetStretch = 1 + Math.min(0.015, Math.abs(this.scroll.velocity) * 0.0001);
-    this.cameraStretch = this.lerp(this.cameraStretch, targetStretch, 0.12, dt);
+    // 1. Camera Pitch: tilt forward on downscroll, backward on upscroll
+    const targetPitch = Math.max(-3.5, Math.min(3.5, vel * -0.018));
+    this.camera.pitch = this.lerp(this.camera.pitch, targetPitch, 0.1, dt);
 
-    if (Math.abs(this.cameraPitch) > 0.005) {
-      this.viewport.style.setProperty('--camera-pitch', `${this.cameraPitch.toFixed(3)}deg`);
-    } else {
-      this.viewport.style.setProperty('--camera-pitch', '0deg');
+    // 2. Camera Yaw (Pan): subtle horizontal tracking with mouse
+    const targetYaw = this.mouse.normX * 1.2;
+    this.camera.yaw = this.lerp(this.camera.yaw, targetYaw, 0.08, dt);
+
+    // 3. Camera Roll (Dutch Angle): kinetic tilt during rapid acceleration + subtle breathing
+    const breathingRoll = Math.sin(now * 0.0008) * 0.15;
+    const targetRoll = Math.max(-1.0, Math.min(1.0, vel * -0.004)) + breathingRoll;
+    this.camera.roll = this.lerp(this.camera.roll, targetRoll, 0.08, dt);
+
+    // 4. Camera Dolly (Push-in / Pull-out): camera pulls back into wide FOV on rapid scroll
+    const targetDolly = Math.max(-60, Math.min(0, -Math.abs(vel) * 0.28));
+    this.camera.dolly = this.lerp(this.camera.dolly, targetDolly, 0.09, dt);
+
+    // 5. Dynamic Eye-Level Pivot: Always locked to the center of the user's screen
+    const pivotY = currentScrollY + windowH * 0.5;
+
+    this.viewport.style.setProperty('--camera-pivot-y', `${pivotY.toFixed(1)}px`);
+    this.viewport.style.setProperty('--camera-pitch', `${this.camera.pitch.toFixed(3)}deg`);
+    this.viewport.style.setProperty('--camera-yaw', `${this.camera.yaw.toFixed(3)}deg`);
+    this.viewport.style.setProperty('--camera-roll', `${this.camera.roll.toFixed(3)}deg`);
+    this.viewport.style.setProperty('--camera-dolly', `${this.camera.dolly.toFixed(2)}px`);
+
+    // 6. Dynamic Vignette intensity on high velocity
+    const vignette = document.querySelector('.cinematic-film-vignette');
+    if (vignette) {
+      const speedFactor = Math.min(1, Math.abs(vel) / 40);
+      vignette.style.setProperty('--vignette-intensity', (0.55 + speedFactor * 0.35).toFixed(2));
     }
+  }
 
-    if (Math.abs(this.cameraStretch - 1) > 0.001) {
-      this.viewport.style.setProperty('--camera-stretch', `${this.cameraStretch.toFixed(4)}`);
-    } else {
-      this.viewport.style.setProperty('--camera-stretch', '1');
-    }
+  renderImageAperture() {
+    if (!this.imagePanels || this.imagePanels.length === 0) return;
+    const windowH = window.innerHeight;
+
+    this.imagePanels.forEach(item => {
+      if (!item.parent) return;
+      const rect = item.parent.getBoundingClientRect();
+      const inView = rect.top < windowH && rect.bottom > 0;
+      if (!inView) return;
+
+      const parentCenter = rect.top + rect.height * 0.5;
+      const vhCenter = windowH * 0.5;
+      const distRatio = (parentCenter - vhCenter) / windowH; // -0.5 to 0.5
+      const offset = distRatio * 32; // ±16px cinematic pan
+
+      item.element.style.transform = `translate3d(0, ${offset.toFixed(2)}px, 0) scale(1.04)`;
+    });
   }
 
   renderTextSliders() {
