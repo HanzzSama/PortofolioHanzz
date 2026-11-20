@@ -78,6 +78,7 @@ export class ScrollbarPillEngine {
     const availableTrack = Math.max(50, vh - this.config.marginTop - this.config.marginBottom - maxPillHeight);
 
     this.springY.target = this.config.marginTop + progress * availableTrack;
+    this.wakeLoop();
   }
 
   toggleActive(forceState) {
@@ -88,6 +89,7 @@ export class ScrollbarPillEngine {
     this.springMorph.target = this.isActive ? 1 : 0;
     this.pill.classList.toggle('is-active', this.isActive);
     this.pill.setAttribute('aria-expanded', String(this.isActive));
+    this.wakeLoop();
   }
 
   bindEvents() {
@@ -205,6 +207,15 @@ export class ScrollbarPillEngine {
     if (Math.abs(spring.velocity) < 0.0001 && Math.abs(displacement) < 0.0001) {
       spring.current = spring.target;
       spring.velocity = 0;
+      return true;
+    }
+    return false;
+  }
+
+  wakeLoop() {
+    if (!this.rafId) {
+      this.lastTime = performance.now();
+      this.startLoop();
     }
   }
 
@@ -229,19 +240,23 @@ export class ScrollbarPillEngine {
   }
 
   startLoop() {
+    if (this.rafId) return;
     const loop = (timestamp) => {
       // Clamp dt to prevent frame bursts after tab switch
       const dt = Math.min((timestamp - this.lastTime) / 1000, 0.033);
       this.lastTime = timestamp;
 
-      // Step Vertical Tracking Spring
-      this.stepSpring(this.springY, dt);
-
-      // Step Morphing Expansion Spring
-      this.stepSpring(this.springMorph, dt);
+      // Step Vertical Tracking Spring & Morphing Spring
+      const restY = this.stepSpring(this.springY, dt);
+      const restMorph = this.stepSpring(this.springMorph, dt);
 
       // Render updated frame
       this.renderFrame(this.springMorph.current);
+
+      if (restY && restMorph) {
+        this.rafId = null;
+        return;
+      }
 
       this.rafId = requestAnimationFrame(loop);
     };

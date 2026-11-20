@@ -37,6 +37,9 @@ export class ParallaxEngine {
     };
     this.isRunning = false;
     this.rafId = null;
+    this.lastRenderedScroll = -9999;
+    this.mouseElements = [];
+    this.vignetteElement = null;
 
     // Custom cursor elements
     this.cursorDot = document.querySelector('.custom-cursor-dot');
@@ -90,6 +93,15 @@ export class ParallaxEngine {
       element: el,
       parent: el.closest('.project-blueprint-panel') || el.parentElement
     }));
+
+    // Mouse Parallax elements (cached for zero-allocation 60/120fps render)
+    this.mouseElements = Array.from(document.querySelectorAll('[data-mouse-parallax]')).map((el) => ({
+      element: el,
+      depth: parseFloat(el.getAttribute('data-mouse-depth')) || 20
+    }));
+
+    // Film vignette element (cached)
+    this.vignetteElement = document.querySelector('.cinematic-film-vignette');
   }
 
   collectTextSliders() {
@@ -209,22 +221,28 @@ export class ParallaxEngine {
       }
     });
 
-    // Mouse Parallax for elements marked with [data-mouse-parallax]
-    const mouseElements = document.querySelectorAll('[data-mouse-parallax]');
-    mouseElements.forEach((el) => {
-      const depth = parseFloat(el.getAttribute('data-mouse-depth')) || 20;
-      const moveX = this.mouse.normX * depth;
-      const moveY = this.mouse.normY * depth;
-      el.style.transform = `translate3d(${moveX.toFixed(2)}px, ${moveY.toFixed(2)}px, 0)`;
-    });
+    // Mouse Parallax for elements marked with [data-mouse-parallax] (Zero DOM query allocation)
+    if (this.mouseElements && this.mouseElements.length > 0) {
+      this.mouseElements.forEach((item) => {
+        const moveX = this.mouse.normX * item.depth;
+        const moveY = this.mouse.normY * item.depth;
+        item.element.style.transform = `translate3d(${moveX.toFixed(2)}px, ${moveY.toFixed(2)}px, 0)`;
+      });
+    }
 
-    // Cinematic camera and multi-plane render passes
+    // Cinematic camera pass
     this.renderKineticCamera(dt, now);
-    this.renderImageAperture();
-    this.renderTextSliders();
-    this.renderRelativeParallax();
-    this.renderScrollScale();
-    this.renderRotateParallax();
+
+    // Multi-plane render passes (only execute layout measurements when scroll actively moves)
+    const isScrollMoving = Math.abs(this.scroll.velocity) > 0.005 || Math.abs(currentScrollY - this.lastRenderedScroll) > 0.15;
+    if (isScrollMoving) {
+      this.lastRenderedScroll = currentScrollY;
+      this.renderImageAperture();
+      this.renderTextSliders();
+      this.renderRelativeParallax();
+      this.renderScrollScale();
+      this.renderRotateParallax();
+    }
 
     if (this.isRunning) {
       this.rafId = requestAnimationFrame((t) => this.render(t));
@@ -264,11 +282,10 @@ export class ParallaxEngine {
     this.viewport.style.setProperty('--camera-roll', `${this.camera.roll.toFixed(3)}deg`);
     this.viewport.style.setProperty('--camera-dolly', `${this.camera.dolly.toFixed(2)}px`);
 
-    // 6. Dynamic Vignette intensity on high velocity
-    const vignette = document.querySelector('.cinematic-film-vignette');
-    if (vignette) {
+    // 6. Dynamic Vignette intensity on high velocity (cached element)
+    if (this.vignetteElement) {
       const speedFactor = Math.min(1, Math.abs(vel) / 40);
-      vignette.style.setProperty('--vignette-intensity', (0.55 + speedFactor * 0.35).toFixed(2));
+      this.vignetteElement.style.setProperty('--vignette-intensity', (0.55 + speedFactor * 0.35).toFixed(2));
     }
   }
 

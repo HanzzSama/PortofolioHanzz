@@ -1084,17 +1084,28 @@ class PortfolioApp {
     if (!canvas) return;
 
     const ctx = canvas.getContext('2d');
-    let width = (canvas.width = 580);
-    let height = (canvas.height = 580);
+    const width = (canvas.width = 580);
+    const height = (canvas.height = 580);
     let time = 0;
+    let isVisible = false;
+    let rafId = null;
 
     let mouseX = width / 2;
     let mouseY = height / 2;
+    let canvasRect = canvas.getBoundingClientRect();
+
+    const updateRect = () => {
+      if (isVisible) {
+        canvasRect = canvas.getBoundingClientRect();
+      }
+    };
+
+    window.addEventListener('resize', updateRect, { passive: true });
+    window.addEventListener('scroll', updateRect, { passive: true });
 
     window.addEventListener('mousemove', (e) => {
-      const rect = canvas.getBoundingClientRect();
-      mouseX = e.clientX - rect.left;
-      mouseY = e.clientY - rect.top;
+      mouseX = e.clientX - canvasRect.left;
+      mouseY = e.clientY - canvasRect.top;
     }, { passive: true });
 
     const rings = 7;
@@ -1102,6 +1113,11 @@ class PortfolioApp {
     const step = 28;
 
     const render = () => {
+      if (!isVisible) {
+        rafId = null;
+        return;
+      }
+
       ctx.clearRect(0, 0, width, height);
 
       time += 0.012;
@@ -1142,10 +1158,26 @@ class PortfolioApp {
         ctx.stroke();
       }
 
-      requestAnimationFrame(render);
+      rafId = requestAnimationFrame(render);
     };
 
-    render();
+    if (typeof IntersectionObserver !== 'undefined') {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          isVisible = entry.isIntersecting;
+          if (isVisible) {
+            canvasRect = canvas.getBoundingClientRect();
+            if (!rafId) {
+              rafId = requestAnimationFrame(render);
+            }
+          }
+        });
+      }, { threshold: 0.05 });
+      observer.observe(canvas);
+    } else {
+      isVisible = true;
+      rafId = requestAnimationFrame(render);
+    }
   }
 
   initMonolithSimulator() {

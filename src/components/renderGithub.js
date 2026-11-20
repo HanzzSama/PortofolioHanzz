@@ -78,6 +78,7 @@ export function renderGithub(data) {
                 alt="${profile.username} Avatar" 
                 class="github-avatar-img"
                 loading="eager"
+                decoding="async"
                 onerror="this.src='./src/assets/hanzz-avatar.png'; this.onerror=null;"
               />
             </div>

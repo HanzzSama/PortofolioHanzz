@@ -1043,6 +1043,20 @@ export class HanzzPetEngine {
     }
   }
 
+  startTossPhysics() {
+    this.isTossed = true;
+    if (this.physicsRaf) return;
+    const physicsLoop = () => {
+      if (this.isTossed) {
+        this.updateTossPhysics();
+        this.physicsRaf = requestAnimationFrame(physicsLoop);
+      } else {
+        this.physicsRaf = null;
+      }
+    };
+    this.physicsRaf = requestAnimationFrame(physicsLoop);
+  }
+
   updateTossPhysics() {
     this.vy += this.gravity;
     this.vx *= this.friction;
@@ -1213,14 +1227,7 @@ export class HanzzPetEngine {
       });
     }, { passive: true });
 
-    // Physics Loop for Toss
-    const physicsLoop = () => {
-      if (this.isTossed) {
-        this.updateTossPhysics();
-      }
-      requestAnimationFrame(physicsLoop);
-    };
-    requestAnimationFrame(physicsLoop);
+    // Toss physics is event-driven via startTossPhysics()
 
     // Multi-click & Click on Character Body
     if (this.petBody) {
@@ -1305,9 +1312,9 @@ export class HanzzPetEngine {
           const avgVy = this.velocityHistory.reduce((s, v) => s + v.vy, 0) / this.velocityHistory.length;
 
           if (Math.hypot(avgVx, avgVy) > 4.5) {
-            this.isTossed = true;
             this.vx = avgVx * 0.9;
             this.vy = avgVy * 0.9;
+            this.startTossPhysics();
             this.playMochiBounceSound(Math.hypot(avgVx, avgVy));
             this.say("SYS.PET // TOSS", "Wheee! Fisika lemparan bebas!");
           } else {

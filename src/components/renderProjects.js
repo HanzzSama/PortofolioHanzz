@@ -387,6 +387,7 @@ export function renderProjects(data) {
                     alt="${proj.title} Preview" 
                     class="project-preview-img"
                     loading="lazy"
+                    decoding="async"
                     onload="window.__handleProjectImgLoad && window.__handleProjectImgLoad(this)"
                     onerror="window.__handleProjectImgError && window.__handleProjectImgError(this)"
                   />

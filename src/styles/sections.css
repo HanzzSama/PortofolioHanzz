@@ -1762,6 +1762,16 @@
    PROJECT ARCHITECTURAL CARD — Scroll Scale Entry
    Cards masuk dari bawah dengan scale
    ========================================================================== */
+.project-architectural-card {
+  contain: layout style;
+}
+
+.pillar-card,
+.matrix-tier-card,
+.about-grid-card {
+  contain: layout style;
+}
+
 .project-architectural-card[data-scroll-scale] {
   will-change: transform;
 }

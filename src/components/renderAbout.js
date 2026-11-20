@@ -52,6 +52,7 @@ export function renderAbout(data) {
               alt="${meta.fullName}, ${meta.role}" 
               class="abstract-photo-img" 
               loading="lazy"
+              decoding="async"
             />
             
             <!-- Expressive architectural kinetic overlay on hover -->

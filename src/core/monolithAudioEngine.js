@@ -184,6 +184,7 @@ export class MonolithAudioEngine {
       this.stopActiveVoices();
       this.isPlaying = false;
       this.updateUIPerPlayback(false);
+      this.drawIdleState();
       const petDock = document.getElementById('hanzz-pet-dock');
       if (petDock) petDock.classList.remove('is-bobbing');
     }, 260);
@@ -862,20 +863,28 @@ export class MonolithAudioEngine {
   }
 
   startVisualizerLoop() {
-    if (this.animId) cancelAnimationFrame(this.animId);
+    if (this.animId) {
+      cancelAnimationFrame(this.animId);
+      this.animId = null;
+    }
 
-    const bufferLength = this.analyser ? this.analyser.frequencyBinCount : 256;
+    if (!this.analyser || !this.isPlaying) {
+      this.drawIdleState();
+      return;
+    }
+
+    const bufferLength = this.analyser.frequencyBinCount || 256;
     const dataArray = new Uint8Array(bufferLength);
     const timeDomain = new Uint8Array(bufferLength);
 
     const draw = () => {
-      this.animId = requestAnimationFrame(draw);
-
       if (!this.analyser || !this.isPlaying) {
-        // Idle flatline animation
         this.drawIdleState();
+        this.animId = null;
         return;
       }
+
+      this.animId = requestAnimationFrame(draw);
 
       this.analyser.getByteFrequencyData(dataArray);
       this.analyser.getByteTimeDomainData(timeDomain);
