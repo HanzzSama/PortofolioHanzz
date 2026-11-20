@@ -56,9 +56,12 @@ export class AdminTerminalEngine {
       reboot: { desc: 'Memuat ulang aplikasi portofolio secara halus', usage: 'reboot' }
     };
 
-    this.createDOM();
-    this.bindEvents();
-    this.initDraggable();
+    if (typeof document !== 'undefined') {
+      this.createDOM();
+      this.bindEvents();
+      this.initDraggable();
+      this.initCustomScroller();
+    }
   }
 
   createDOM() {
@@ -86,13 +89,25 @@ export class AdminTerminalEngine {
         </div>
       </div>
 
-      <!-- Terminal Output Screen -->
-      <div class="terminal-body" id="terminal-screen-body" data-lenis-prevent>
-        <div class="terminal-output" id="terminal-output-container"></div>
+      <!-- Terminal Viewport Area with Bespoke Custom Scroller -->
+      <div class="terminal-viewport-wrapper">
+        <!-- Terminal Output Screen -->
+        <div class="terminal-body" id="terminal-screen-body" data-lenis-prevent>
+          <div class="terminal-output" id="terminal-output-container"></div>
 
-        <div class="terminal-input-row font-mono">
-          <span class="terminal-prompt-prefix" id="term-prompt-prefix">hanzz@root:~$</span>
-          <input type="text" class="terminal-cmd-input" id="terminal-cli-input" autocomplete="off" spellcheck="false" />
+          <div class="terminal-input-row font-mono">
+            <span class="terminal-prompt-prefix" id="term-prompt-prefix">hanzz@root:~$</span>
+            <input type="text" class="terminal-cmd-input" id="terminal-cli-input" autocomplete="off" spellcheck="false" />
+          </div>
+        </div>
+
+        <!-- Terminal Custom Scroller Capsule HUD -->
+        <div class="terminal-custom-scroller" id="term-custom-scroller" aria-label="Terminal Scrollbar" role="scrollbar">
+          <div class="term-scroller-track" id="term-scroller-track">
+            <div class="term-scroller-thumb" id="term-scroller-thumb" tabindex="0" title="Geser untuk scroll terminal">
+              <span class="term-scroller-pct font-mono" id="term-scroller-pct">100%</span>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -257,6 +272,126 @@ export class AdminTerminalEngine {
     titlebar.addEventListener('pointercancel', stopDragging);
   }
 
+  initCustomScroller() {
+    const scroller = document.getElementById('term-custom-scroller');
+    const track = document.getElementById('term-scroller-track');
+    const thumb = document.getElementById('term-scroller-thumb');
+    const pct = document.getElementById('term-scroller-pct');
+    const body = document.getElementById('terminal-screen-body');
+
+    if (!scroller || !track || !thumb || !body) return;
+
+    let isDragging = false;
+    let startY = 0;
+    let startScrollTop = 0;
+    let scrollTimeout = null;
+
+    const updateScroller = () => {
+      const scrollHeight = body.scrollHeight;
+      const clientHeight = body.clientHeight;
+      const maxScroll = scrollHeight - clientHeight;
+
+      if (maxScroll <= 4) {
+        scroller.classList.remove('is-visible');
+        return;
+      }
+
+      scroller.classList.add('is-visible');
+
+      const trackHeight = track.clientHeight || (body.clientHeight - 16);
+      const thumbHeight = Math.max(30, Math.min(trackHeight * (clientHeight / scrollHeight), trackHeight * 0.45));
+      thumb.style.height = `${thumbHeight}px`;
+
+      const progress = Math.max(0, Math.min(1, body.scrollTop / maxScroll));
+      const availableTrack = Math.max(0, trackHeight - thumbHeight);
+      const thumbTop = progress * availableTrack;
+
+      thumb.style.transform = `translate3d(0, ${thumbTop.toFixed(1)}px, 0)`;
+
+      if (pct) {
+        const pctVal = Math.round(progress * 100);
+        pct.textContent = pctVal >= 99 ? 'END' : pctVal <= 1 ? 'TOP' : `${pctVal}%`;
+      }
+    };
+
+    this.updateCustomScroller = updateScroller;
+
+    body.addEventListener('scroll', () => {
+      updateScroller();
+      scroller.classList.add('is-scrolling');
+      clearTimeout(scrollTimeout);
+      scrollTimeout = setTimeout(() => {
+        scroller.classList.remove('is-scrolling');
+      }, 700);
+    }, { passive: true });
+
+    track.addEventListener('pointerdown', (e) => {
+      if (e.target === thumb || thumb.contains(e.target)) return;
+      const rect = track.getBoundingClientRect();
+      const clickY = e.clientY - rect.top;
+      const trackHeight = rect.height;
+      const ratio = Math.max(0, Math.min(1, clickY / trackHeight));
+      const maxScroll = body.scrollHeight - body.clientHeight;
+      body.scrollTo({
+        top: ratio * maxScroll,
+        behavior: 'smooth'
+      });
+    });
+
+    thumb.addEventListener('pointerdown', (e) => {
+      e.stopPropagation();
+      isDragging = true;
+      startY = e.clientY;
+      startScrollTop = body.scrollTop;
+      scroller.classList.add('is-dragging');
+
+      try {
+        thumb.setPointerCapture(e.pointerId);
+      } catch (err) {
+        // Fallback for environments where setPointerCapture is unsupported
+      }
+    });
+
+    window.addEventListener('pointermove', (e) => {
+      if (!isDragging) return;
+      const deltaY = e.clientY - startY;
+      const trackHeight = track.clientHeight;
+      const thumbHeight = thumb.offsetHeight || 30;
+      const availableTrack = Math.max(20, trackHeight - thumbHeight);
+      const maxScroll = body.scrollHeight - body.clientHeight;
+      const scrollRatio = maxScroll / availableTrack;
+
+      body.scrollTop = Math.max(0, Math.min(maxScroll, startScrollTop + deltaY * scrollRatio));
+      updateScroller();
+    });
+
+    const stopDrag = (e) => {
+      if (isDragging) {
+        isDragging = false;
+        scroller.classList.remove('is-dragging');
+        try {
+          if (thumb.hasPointerCapture && thumb.hasPointerCapture(e.pointerId)) {
+            thumb.releasePointerCapture(e.pointerId);
+          }
+        } catch (err) {
+          // Ignore
+        }
+      }
+    };
+
+    window.addEventListener('pointerup', stopDrag);
+    window.addEventListener('pointercancel', stopDrag);
+
+    if (typeof ResizeObserver !== 'undefined') {
+      const ro = new ResizeObserver(() => updateScroller());
+      ro.observe(body);
+      const out = document.getElementById('terminal-output-container');
+      if (out) ro.observe(out);
+    }
+
+    updateScroller();
+  }
+
   centerWindow() {
     if (!this.windowEl || this.isMaximized) return;
     const viewportWidth = window.innerWidth;
@@ -289,6 +424,7 @@ export class AdminTerminalEngine {
     this.updateSessionChip();
     setTimeout(() => {
       if (this.inputEl) this.inputEl.focus();
+      this.updateCustomScroller?.();
     }, 100);
   }
 
@@ -316,6 +452,7 @@ export class AdminTerminalEngine {
         this.centerWindow();
       }
     }
+    setTimeout(() => this.updateCustomScroller?.(), 60);
   }
 
   updateSessionChip() {
@@ -384,6 +521,7 @@ export class AdminTerminalEngine {
     if (body) {
       body.scrollTop = body.scrollHeight;
     }
+    this.updateCustomScroller?.();
   }
 
   navigateHistory(dir) {
@@ -654,6 +792,7 @@ export class AdminTerminalEngine {
 
       case 'clear':
         if (this.outputEl) this.outputEl.innerHTML = '';
+        this.updateCustomScroller?.();
         break;
 
       case 'exit':
@@ -1579,7 +1718,7 @@ export class AdminTerminalEngine {
           container.innerHTML = svg;
           if (this.outputEl) {
             this.outputEl.appendChild(container);
-            this.scrollOutputToBottom();
+            this.scrollToBottom();
           }
         }
         break;
