@@ -3025,13 +3025,14 @@
 
 .certificates-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  grid-template-columns: repeat(2, 1fr);
   gap: var(--space-xl);
 }
 
-@media (max-width: 768px) {
+@media (max-width: 860px) {
   .certificates-grid {
     grid-template-columns: 1fr;
+    gap: var(--space-lg);
   }
 }
 
@@ -3060,7 +3061,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0.65rem 0.95rem;
+  padding: 0.75rem 1.15rem;
   background: var(--bg-surface-sunken);
   border-bottom: var(--border-hairline);
   font-size: var(--font-mono-tag);
@@ -3069,47 +3070,83 @@
 .cert-code-group {
   display: inline-flex;
   align-items: center;
-  gap: 0.45rem;
+  gap: 0.5rem;
 }
 
 .cert-code-tag {
   color: var(--accent-primary);
   font-weight: 600;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.06em;
 }
 
 .cert-cat-pill {
   color: var(--text-muted);
-  font-size: 0.65rem;
+  font-size: 0.68rem;
   border-left: var(--border-hairline);
-  padding-left: 0.45rem;
+  padding-left: 0.5rem;
+  letter-spacing: 0.04em;
 }
 
+/* Redesigned Verification Badge - Theme-Native Architectural Verification Tag */
 .cert-status-pill {
   display: inline-flex;
   align-items: center;
-  gap: 0.35rem;
-  font-size: 0.62rem;
+  gap: 0.42rem;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
   font-weight: 600;
-  color: #34D399;
-  background: rgba(52, 211, 153, 0.1);
-  border: 1px solid rgba(52, 211, 153, 0.3);
-  padding: 0.15rem 0.45rem;
+  letter-spacing: 0.08em;
+  color: var(--badge-text, var(--accent-primary));
+  background: var(--badge-bg, rgba(74, 93, 78, 0.08));
+  border: 1px solid var(--accent-tint, rgba(74, 93, 78, 0.22));
+  padding: 0.24rem 0.58rem;
   border-radius: var(--radius-xs);
+  transition: all var(--duration-fast) var(--ease-expressive);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02);
 }
 
 .cert-status-dot {
   width: 5px;
   height: 5px;
   border-radius: 50%;
-  background: #34D399;
-  box-shadow: 0 0 6px #34D399;
+  background-color: var(--accent-primary);
+  box-shadow: 0 0 0 2px var(--accent-tint, rgba(74, 93, 78, 0.2));
+  animation: certPulseGlow 2.4s infinite ease-in-out;
+  flex-shrink: 0;
+}
+
+@keyframes certPulseGlow {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.85;
+  }
+  50% {
+    transform: scale(1.3);
+    opacity: 1;
+    box-shadow: 0 0 0 3px var(--accent-tint, rgba(74, 93, 78, 0.3));
+  }
+}
+
+.certificate-architectural-card:hover .cert-status-pill {
+  border-color: var(--accent-primary);
+  background: var(--accent-tint, rgba(74, 93, 78, 0.14));
+}
+
+[data-theme="dark"] .cert-status-pill {
+  color: var(--badge-text, #B4CEB8);
+  background: var(--badge-bg, rgba(117, 146, 122, 0.16));
+  border-color: rgba(117, 146, 122, 0.3);
+}
+
+[data-theme="dark"] .cert-status-dot {
+  background-color: var(--accent-primary, #75927A);
+  box-shadow: 0 0 0 2px rgba(117, 146, 122, 0.25);
 }
 
 /* Chassis Preview */
 .certificate-thumb-chassis {
   position: relative;
-  height: 165px;
+  height: 200px;
   background: var(--bg-surface-sunken);
   border-bottom: var(--border-hairline);
   overflow: hidden;
@@ -3117,6 +3154,12 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
+}
+
+@media (max-width: 640px) {
+  .certificate-thumb-chassis {
+    height: 165px;
+  }
 }
 
 .certificate-canvas-viewport {
@@ -3185,23 +3228,23 @@
 
 /* Details Panel */
 .certificate-details-panel {
-  padding: var(--space-lg);
+  padding: 1.5rem;
   display: flex;
   flex-direction: column;
   flex: 1;
-  gap: 0.75rem;
+  gap: 0.9rem;
 }
 
 .cert-title-block {
   display: flex;
   flex-direction: column;
-  gap: 0.3rem;
+  gap: 0.35rem;
 }
 
 .cert-meta-row {
   display: flex;
   align-items: center;
-  gap: 0.4rem;
+  gap: 0.45rem;
   font-size: var(--font-mono-tag);
   color: var(--text-muted);
 }
@@ -3216,17 +3259,17 @@
 }
 
 .cert-valid-tag {
-  font-size: 0.65rem;
+  font-size: 0.68rem;
 }
 
 .certificate-title {
   font-family: var(--font-display);
-  font-size: 1.05rem;
+  font-size: 1.15rem;
   font-weight: 600;
   line-height: 1.35;
   margin: 0;
   color: var(--text-primary);
-  min-height: 2.85rem;
+  min-height: 3.1rem;
   display: -webkit-box;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
@@ -3234,23 +3277,35 @@
 }
 
 .cert-meta-fields {
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
-  font-size: 0.7rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem 1rem;
+  padding: 0.65rem 0.85rem;
+  background: var(--bg-surface-sunken);
+  border: var(--border-hairline);
+  border-radius: var(--radius-xs);
+  font-size: 0.72rem;
+}
+
+@media (max-width: 600px) {
+  .cert-meta-fields {
+    grid-template-columns: 1fr;
+    gap: 0.35rem;
+  }
 }
 
 .cert-field-row {
   display: flex;
   align-items: baseline;
-  gap: 0.4rem;
+  gap: 0.45rem;
   color: var(--text-secondary);
+  overflow: hidden;
 }
 
 .cert-field-label {
   color: var(--text-muted);
   flex-shrink: 0;
-  font-size: 0.65rem;
+  font-size: 0.66rem;
 }
 
 .cert-field-val {
@@ -3267,36 +3322,31 @@
 .certificate-tags-wrap {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.35rem;
+  gap: 0.4rem;
   min-height: 1.6rem;
 }
 
 .cert-tech-chip {
   font-family: var(--font-mono);
-  font-size: 0.63rem;
-  padding: 0.15rem 0.42rem;
+  font-size: 0.65rem;
+  padding: 0.18rem 0.48rem;
   background: var(--bg-surface-sunken);
   border: var(--border-hairline);
   border-radius: var(--radius-xs);
   color: var(--text-secondary);
 }
 
-.cert-tech-chip-more {
-  color: var(--accent-primary);
-  font-weight: 600;
-}
-
 .certificate-actions-row {
   display: flex;
-  gap: 0.5rem;
+  gap: 0.6rem;
   margin-top: auto;
-  padding-top: 0.75rem;
+  padding-top: 0.9rem;
   border-top: var(--border-hairline);
 }
 
 .cert-btn-primary {
   flex: 1;
-  padding: 0.45rem 0.75rem;
+  padding: 0.55rem 0.95rem;
   font-family: var(--font-mono);
   font-size: var(--font-mono-tag);
   font-weight: 500;
@@ -3317,7 +3367,7 @@
 }
 
 .cert-btn-secondary {
-  padding: 0.45rem 0.75rem;
+  padding: 0.55rem 0.95rem;
   font-family: var(--font-mono);
   font-size: var(--font-mono-tag);
   color: var(--text-secondary);
@@ -3329,7 +3379,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 0.3rem;
+  gap: 0.35rem;
   transition: all var(--duration-fast) var(--ease-expressive);
 }
 

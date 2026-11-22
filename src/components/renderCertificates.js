@@ -239,10 +239,8 @@ export function renderCertificates(data) {
 
                   <div class="certificate-tags-wrap">
                     ${cert.skills
-                      .slice(0, 4)
                       .map((skill) => `<span class="cert-tech-chip">${skill}</span>`)
                       .join('')}
-                    ${cert.skills.length > 4 ? `<span class="cert-tech-chip cert-tech-chip-more">+${cert.skills.length - 4}</span>` : ''}
                   </div>
 
                   <div class="certificate-actions-row">
@@ -252,7 +250,7 @@ export function renderCertificates(data) {
                     ${
                       cert.credentialUrl
                         ? `<a href="${cert.credentialUrl}" target="_blank" rel="noopener noreferrer" class="cert-btn-secondary" data-cursor-target title="${ui.verify || 'Validasi Resmi'}">
-                            <span>${ui.verify || 'Validasi'}</span>
+                            <span>${ui.verify || 'Validasi Resmi'}</span>
                             <span class="cert-ext-icon" aria-hidden="true">↗</span>
                           </a>`
                         : ''
