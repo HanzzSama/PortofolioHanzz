@@ -15,6 +15,7 @@ import { renderWelcome } from './components/renderWelcome.js';
 import { renderAbout } from './components/renderAbout.js';
 import { renderSkills } from './components/renderSkills.js';
 import { renderProjects } from './components/renderProjects.js';
+import { renderCertificates } from './components/renderCertificates.js';
 import { renderGithub } from './components/renderGithub.js';
 import { renderLab } from './components/renderLab.js';
 import { renderWeather } from './components/renderWeather.js';
@@ -36,7 +37,8 @@ import { contentProtection } from './core/contentProtectionEngine.js';
 import { gpuOptimizer } from './core/gpuOptimizer.js';
 import { 
   initProjectImageDetector, 
-  getProjectImageCandidates
+  getProjectImageCandidates,
+  resolveCertificateImage
 } from './utils/imageDetector.js';
 
 class PortfolioApp {
@@ -79,6 +81,7 @@ class PortfolioApp {
     this.initClipboard();
     this.initSmoothNavLinks();
     this.initSystemDrawer();
+    this.initCertificateFilter();
     this.initMobileNav();
     this.initKineticTopographyCanvas();
     this.initMonolithSimulator();
@@ -117,6 +120,7 @@ class PortfolioApp {
       renderAbout(this.data),
       renderSkills(this.data),
       renderProjects(this.data),
+      renderCertificates(this.data),
       renderGithub(this.data),
       renderLab(this.data),
       renderWeather(this.data),
@@ -231,25 +235,26 @@ class PortfolioApp {
 
     // Update header nav labels
     const navLinks = document.querySelectorAll('.nav-links .nav-label-text');
-    if (navLinks.length >= 6 && t.nav) {
+    if (navLinks.length >= 7 && t.nav) {
       navLinks[0].textContent = t.nav.welcome;
       navLinks[1].textContent = t.nav.about;
       navLinks[2].textContent = t.nav.skills;
       navLinks[3].textContent = t.nav.projects;
-      if (navLinks[4]) navLinks[4].textContent = t.nav.github || '05.GIT';
-      if (navLinks[5]) navLinks[5].textContent = t.nav.another || '06.LAB';
-      if (navLinks[6]) navLinks[6].textContent = t.nav.weather || '07.ATM';
+      if (navLinks[4]) navLinks[4].textContent = t.nav.certificates || '05.CRT';
+      if (navLinks[5]) navLinks[5].textContent = t.nav.github || '06.GIT';
+      if (navLinks[6]) navLinks[6].textContent = t.nav.another || '07.LAB';
+      if (navLinks[7]) navLinks[7].textContent = t.nav.weather || '08.ATM';
     }
 
     // Update mobile nav labels
     const mobileTitles = document.querySelectorAll('.mobile-nav-title');
-    if (mobileTitles.length >= 6) {
+    if (mobileTitles.length >= 7) {
       const titles = {
-        id: ['Beranda', 'Tentang saya', 'Keahlian', 'Proyek', 'GitHub', 'Lab', 'Cuaca'],
-        en: ['Welcome', 'About', 'Skills', 'Projects', 'GitHub', 'Lab', 'Weather'],
-        zh: ['首页', '关于我', '技能', '项目', 'GitHub', '实验室', '天气'],
-        ja: ['トップ', '自己紹介', 'スキル', 'プロジェクト', 'GitHub', 'ラボ', '天気'],
-        de: ['Willkommen', 'Über mich', 'Fähigkeiten', 'Projekte', 'GitHub', 'Labor', 'Wetter']
+        id: ['Beranda', 'Tentang saya', 'Keahlian', 'Proyek', 'Sertifikat', 'GitHub', 'Lab', 'Cuaca'],
+        en: ['Welcome', 'About', 'Skills', 'Projects', 'Certificates', 'GitHub', 'Lab', 'Weather'],
+        zh: ['首页', '关于我', '技能', '项目', '证书', 'GitHub', '实验室', '天气'],
+        ja: ['トップ', '自己紹介', 'スキル', 'プロジェクト', '資格', 'GitHub', 'ラボ', '天気'],
+        de: ['Willkommen', 'Über mich', 'Fähigkeiten', 'Projekte', 'Zertifikate', 'GitHub', 'Labor', 'Wetter']
       };
       const curTitles = titles[lang] || titles.id;
       mobileTitles.forEach((el, idx) => {
@@ -750,6 +755,18 @@ class PortfolioApp {
         }
         return;
       }
+
+      // 4. Inspect Official Certificate Credential
+      const certTarget = e.target.closest('[data-inspect-certificate]');
+      if (certTarget) {
+        e.preventDefault();
+        const certId = certTarget.getAttribute('data-inspect-certificate');
+        const cert = this.data.certificates?.items?.find((c) => c.id === certId);
+        if (cert) {
+          this.openCertificateInspection(cert);
+        }
+        return;
+      }
     });
   }
 
@@ -1052,6 +1069,121 @@ class PortfolioApp {
     `;
 
     this.openDrawer(note.tag, html);
+  }
+
+  openCertificateInspection(cert) {
+    const deepDive = cert.deepDive || {};
+    const certImage = resolveCertificateImage(cert);
+
+    const curriculumHtml = deepDive.curriculum && Array.isArray(deepDive.curriculum)
+      ? deepDive.curriculum.map((c) => `
+          <div class="deliverable-item" style="margin-bottom: 0.45rem;">
+            <span class="deliverable-bullet"></span>
+            <span>${c}</span>
+          </div>
+        `).join('')
+      : '';
+
+    const html = `
+      <div class="drawer-title-group">
+        <div style="font-family: var(--font-mono); font-size: var(--font-mono-tag); color: var(--accent-primary); margin-bottom: 0.25rem;">
+          ${cert.code} // ${cert.categoryLabel} [${cert.year}]
+        </div>
+        <h2>${cert.title}</h2>
+        <div class="drawer-subtitle">${cert.issuer}</div>
+      </div>
+
+      <!-- Certificate Preview Hero in Drawer -->
+      <div class="drawer-preview-hero project-preview-viewport">
+        <span class="drafting-crosshair ch-tl" aria-hidden="true">+</span>
+        <span class="drafting-crosshair ch-tr" aria-hidden="true">+</span>
+        <span class="drafting-crosshair ch-bl" aria-hidden="true">+</span>
+        <span class="drafting-crosshair ch-br" aria-hidden="true">+</span>
+        <span class="reticle-bracket rb-tl" aria-hidden="true"></span>
+        <span class="reticle-bracket rb-tr" aria-hidden="true"></span>
+        <span class="reticle-bracket rb-bl" aria-hidden="true"></span>
+        <span class="reticle-bracket rb-br" aria-hidden="true"></span>
+
+        <div class="preview-media-inner">
+          ${certImage ? `<img src="${certImage}" alt="${cert.title}" class="project-preview-img" style="opacity: 1;" />` : ''}
+          <div class="non-image-blueprint-chassis" style="color: var(--accent-primary);">
+            <div class="drawer-blueprint-graphic font-mono">
+              <span class="blueprint-code-tag">${cert.code} // OFFICIAL VERIFICATION</span>
+              <div class="blueprint-spec-grid">
+                <span>ISSUER: ${cert.issuer}</span>
+                <span>ID: ${cert.credentialId}</span>
+                <span>VALIDITY: ${cert.issueDate} to ${cert.expiryDate}</span>
+              </div>
+            </div>
+          </div>
+          <div class="abstract-shimmer-sweep" aria-hidden="true"></div>
+        </div>
+      </div>
+
+      <!-- Specification & Overview -->
+      <div class="drawer-section-block">
+        <div class="drawer-section-heading">01 // Specification and Overview</div>
+        <p style="font-size: var(--font-body-md); line-height: 1.65; color: var(--text-secondary);">
+          ${deepDive.abstract || cert.title}
+        </p>
+      </div>
+
+      ${curriculumHtml ? `
+        <div class="drawer-section-block">
+          <div class="drawer-section-heading">02 // Tested Curriculum and Competencies</div>
+          <div style="margin-top: 0.5rem;">
+            ${curriculumHtml}
+          </div>
+        </div>
+      ` : ''}
+
+      <div class="drawer-section-block">
+        <div class="drawer-section-heading">03 // Verification Hash and Record</div>
+        <p style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--accent-primary); letter-spacing: 0.05em;">
+          ${deepDive.authenticityHash || 'SHA256: 7F12-441A-99BC-0043-ED11'}
+        </p>
+      </div>
+
+      <div style="display: flex; gap: var(--space-md); margin-top: var(--space-md);">
+        ${cert.credentialUrl ? `
+          <a href="${cert.credentialUrl}" target="_blank" rel="noopener noreferrer" class="project-btn-primary" data-cursor-target>
+            <span>Buka Portal Verifikasi Resmi ↗</span>
+          </a>
+        ` : ''}
+      </div>
+    `;
+
+    this.openDrawer(`${cert.code} // CREDENTIAL INSPECT`, html);
+  }
+
+  initCertificateFilter() {
+    document.addEventListener('click', (e) => {
+      const btn = e.target.closest('.cert-filter-btn');
+      if (!btn) return;
+
+      const filter = btn.getAttribute('data-cert-filter');
+      const allBtns = document.querySelectorAll('.cert-filter-btn');
+      allBtns.forEach(b => {
+        const isCurrent = b === btn;
+        b.classList.toggle('active', isCurrent);
+        b.setAttribute('aria-selected', String(isCurrent));
+      });
+
+      const cards = document.querySelectorAll('.certificate-architectural-card');
+      cards.forEach(card => {
+        const cat = card.getAttribute('data-category');
+        if (filter === 'all' || cat === filter) {
+          card.style.display = '';
+          card.style.opacity = '1';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+
+      if (window.lenis) {
+        window.lenis.resize();
+      }
+    });
   }
 
   /* ==========================================================================

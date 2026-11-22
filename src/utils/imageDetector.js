@@ -19,6 +19,16 @@ export const KNOWN_PROJECT_IMAGES = [
 ];
 
 /**
+ * Verified repository assets registry for certificate preview images.
+ */
+export const KNOWN_CERTIFICATE_IMAGES = [
+  './src/assets/certificates/cert-fullstack.png',
+  './src/assets/certificates/cert-uiux.png',
+  './src/assets/certificates/cert-cloud.png',
+  './src/assets/certificates/cert-itesa.png'
+];
+
+/**
  * Convert string to clean URL-friendly slug
  * @param {string} str
  * @returns {string}
@@ -68,6 +78,45 @@ export function resolveProjectImage(proj) {
 }
 
 /**
+ * Resolves a valid image path for a given certificate.
+ * Checks explicit image property first, then matches against known assets.
+ * Returns null if no verified image exists, allowing immediate blueprint fallback.
+ * @param {Object} cert - Certificate data object
+ * @returns {string|null} Resolved image path or null
+ */
+export function resolveCertificateImage(cert) {
+  if (!cert) return null;
+
+  if (cert.image && typeof cert.image === 'string' && cert.image.trim()) {
+    // Only return if image is an explicit string and exists in known list or is a data/external URL
+    if (cert.image.startsWith('data:') || cert.image.startsWith('http')) {
+      return cert.image;
+    }
+    const cleanImg = cert.image.trim().toLowerCase();
+    for (const known of KNOWN_CERTIFICATE_IMAGES) {
+      if (known.toLowerCase() === cleanImg) {
+        return known;
+      }
+    }
+  }
+
+  const titleSlug = slugify(cert.title);
+  const idSlug = cert.id ? slugify(cert.id) : '';
+  const slugs = Array.from(new Set([titleSlug, idSlug].filter(Boolean)));
+
+  for (const known of KNOWN_CERTIFICATE_IMAGES) {
+    const knownLower = known.toLowerCase();
+    for (const slug of slugs) {
+      if (knownLower.includes(`/${slug}.`) || knownLower.includes(`${slug}.`)) {
+        return known;
+      }
+    }
+  }
+
+  return null;
+}
+
+/**
  * Generate candidate image paths for compatibility.
  * Returns single verified image or empty array.
  * @param {Object} proj - Project data object
@@ -79,7 +128,7 @@ export function getProjectImageCandidates(proj) {
 }
 
 /**
- * Global client-side fallback handler for project preview images.
+ * Global client-side fallback handler for project and certificate preview images.
  * Installed onto window for inline onload/onerror handling.
  */
 export function initProjectImageDetector() {
@@ -101,6 +150,27 @@ export function initProjectImageDetector() {
     if (viewport) {
       viewport.classList.add('has-active-image');
       viewport.classList.remove('has-no-image');
+    }
+    imgEl.style.opacity = '1';
+    imgEl.style.visibility = 'visible';
+  };
+
+  window.__handleCertificateImgError = function (imgEl) {
+    if (!imgEl) return;
+    imgEl.style.display = 'none';
+    const chassis = imgEl.closest('.certificate-thumb-chassis');
+    if (chassis) {
+      chassis.classList.remove('has-active-image');
+      chassis.classList.add('has-no-image');
+    }
+  };
+
+  window.__handleCertificateImgLoad = function (imgEl) {
+    if (!imgEl) return;
+    const chassis = imgEl.closest('.certificate-thumb-chassis');
+    if (chassis) {
+      chassis.classList.add('has-active-image');
+      chassis.classList.remove('has-no-image');
     }
     imgEl.style.opacity = '1';
     imgEl.style.visibility = 'visible';

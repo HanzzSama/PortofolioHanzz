@@ -37,6 +37,7 @@ export class AdminTerminalEngine {
       password: { desc: 'Manajemen password & QR token [status|set|reset|qr]', usage: 'password <status|set|reset|qr>' },
       shortcut: { desc: 'Manajemen pintasan peramban [list|block|unblock|remap|reset|test]', usage: 'shortcut <list|block|unblock|remap|reset|test>' },
       project: { desc: 'Manajemen proyek portofolio [list|view|add|edit|delete|order|reset]', usage: 'project <list|view|add|edit|delete|order|reset>' },
+      certificate: { desc: 'Manajemen sertifikasi dan lisensi resmi [list|view]', usage: 'certificate <list|view [id]>' },
       profile: { desc: 'Manajemen data profil [show|set|bio|reset]', usage: 'profile <show|set|bio|reset>' },
       backup: { desc: 'Manajemen cadangan konfigurasi [export|import|reset]', usage: 'backup <export|import|reset>' },
       stats: { desc: 'Menampilkan statistik konten portofolio dan distribusi teknologi', usage: 'stats' },
@@ -643,6 +644,11 @@ export class AdminTerminalEngine {
         this.handleProjectCommand(args);
         break;
 
+      case 'certificate':
+      case 'cert':
+        this.handleCertificateCommand(args);
+        break;
+
       case 'profile':
       case 'prof':
         this.handleProfileCommand(args);
@@ -1191,6 +1197,49 @@ export class AdminTerminalEngine {
         this.printLine(`Sub-perintah "${sub}" tidak dikenal. Gunakan: project <list|view|add|edit|delete|order|reset>`, 'error');
         break;
     }
+  }
+
+  handleCertificateCommand(args) {
+    const sub = (args[0] || 'list').toLowerCase();
+    const certs = this.data.certificates?.items || [];
+
+    if (sub === 'list') {
+      this.printLine('--- ARSIP SERTIFIKASI & KREDENSIAL RESMI ---', 'accent');
+      const headers = ['KODE', 'JUDUL SERTIFIKASI', 'PENERBIT', 'TAHUN', 'STATUS'];
+      const rows = certs.map(c => [c.code, c.title, c.issuer, c.year, c.verificationStatus || 'VERIFIED']);
+      this.printTable(headers, rows);
+      this.printLine(`Total: ${certs.length} kredensial resmi terdaftar. Gunakan: cert view <id>`, 'system');
+      return;
+    }
+
+    if (sub === 'view') {
+      const idOrCode = (args[1] || '').toLowerCase();
+      if (!idOrCode) {
+        this.printLine('Harap tentukan ID atau kode sertifikat. Contoh: cert view cert-01', 'error');
+        return;
+      }
+      const cert = certs.find(c => c.id.toLowerCase() === idOrCode || c.code.toLowerCase().includes(idOrCode));
+      if (!cert) {
+        this.printLine(`Sertifikat "${idOrCode}" tidak ditemukan.`, 'error');
+        return;
+      }
+      this.printLine(`=== [${cert.code}] ${cert.title.toUpperCase()} ===`, 'accent');
+      this.printLine(`Penerbit       : ${cert.issuer}`, 'normal');
+      this.printLine(`Kategori       : ${cert.categoryLabel} (${cert.category})`, 'normal');
+      this.printLine(`Tahun Terbit   : ${cert.year} (${cert.issueDate} - ${cert.expiryDate})`, 'normal');
+      this.printLine(`ID Kredensial  : ${cert.credentialId}`, 'normal');
+      this.printLine(`Status Validasi: ${cert.verificationStatus || 'VERIFIED'}`, 'success');
+      if (cert.credentialUrl) {
+        this.printLine(`Tautan Resmi   : ${cert.credentialUrl}`, 'info');
+      }
+      this.printLine(`Kompetensi     : ${cert.skills.join(', ')}`, 'normal');
+      if (cert.deepDive?.abstract) {
+        this.printLine(`Ringkasan      : ${cert.deepDive.abstract}`, 'system');
+      }
+      return;
+    }
+
+    this.printLine(`Sub-perintah "${sub}" tidak dikenal. Gunakan: certificate <list|view [id]>`, 'error');
   }
 
   handleProfileCommand(args) {

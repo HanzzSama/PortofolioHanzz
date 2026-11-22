@@ -9,8 +9,10 @@ export const translations = {
       "about": "02.ABT",
       "skills": "03.SKL",
       "projects": "04.PRJ",
-      "another": "06.LAB",
-      "github": "05.GIT"
+      "certificates": "05.CRT",
+      "github": "06.GIT",
+      "another": "07.LAB",
+      "weather": "08.ATM"
     },
     "ui": {
       "themeObsidian": "Obsidian",
@@ -651,6 +653,28 @@ export const translations = {
         "license": "Portofolio © 2026 Haidar Rifky Andrianno, alias Hanzz atau HanzzSama. Semarang, Jawa Tengah, Indonesia."
       }
     },
+    "certificates": {
+      "sectionTitle": "Sertifikasi & Kredensial Resmi",
+      "sectionSub": "OFFICIAL CERTIFICATIONS // CREDENTIALS & LICENSES",
+      "headline": "Validasi kompetensi profesional dan lisensi",
+      "description": "Dokumentasi lisensi resmi, pengujian standar industri, dan rekognisi kompetensi bidang teknologi informasi dan desain.",
+      "ui": {
+        "filterAll": "Semua",
+        "filterDev": "Rekayasa Web",
+        "filterDesign": "Desain Antarmuka",
+        "filterCloud": "Cloud & Keamanan",
+        "filterAcademic": "Akademik",
+        "inspect": "Inspeksi Kredensial",
+        "verify": "Validasi Resmi",
+        "verifiedBadge": "TERVERIFIKASI",
+        "issuer": "Penerbit",
+        "validUntil": "Masa Berlaku",
+        "credentialId": "ID Kredensial",
+        "skillsTitle": "Kompetensi Teruji",
+        "overview": "Ringkasan Lisensi",
+        "curriculum": "Silabus & Pengujian"
+      }
+    },
     "github": {
       "sectionTitle": "GIT TELEMETRY & VAULT",
       "sectionSub": "PUBLIC REPOSITORIES // CONTRIBUTION MATRIX",
@@ -867,8 +891,10 @@ export const translations = {
       "about": "02.ABT",
       "skills": "03.SKL",
       "projects": "04.PRJ",
-      "another": "06.LAB",
-      "github": "05.GIT"
+      "certificates": "05.CRT",
+      "github": "06.GIT",
+      "another": "07.LAB",
+      "weather": "08.ATM"
     },
     "ui": {
       "themeObsidian": "Obsidian",
@@ -1509,6 +1535,28 @@ export const translations = {
         "license": "Portfolio © 2026 Haidar Rifky Andrianno, also known as Hanzz or HanzzSama. Semarang, Central Java, Indonesia."
       }
     },
+    "certificates": {
+      "sectionTitle": "Certifications & Credentials",
+      "sectionSub": "OFFICIAL CERTIFICATIONS // CREDENTIALS & LICENSES",
+      "headline": "Professional competency validation and licenses",
+      "description": "Documentation of official licenses, industry examinations, and competency recognition across IT engineering and digital design.",
+      "ui": {
+        "filterAll": "All",
+        "filterDev": "Web Engineering",
+        "filterDesign": "UI/UX Design",
+        "filterCloud": "Cloud & Security",
+        "filterAcademic": "Academic",
+        "inspect": "Inspect Credential",
+        "verify": "Official Verification",
+        "verifiedBadge": "VERIFIED",
+        "issuer": "Issuer",
+        "validUntil": "Validity",
+        "credentialId": "Credential ID",
+        "skillsTitle": "Tested Skills",
+        "overview": "License Overview",
+        "curriculum": "Syllabus & Curriculum"
+      }
+    },
     "github": {
       "sectionTitle": "GIT TELEMETRY & VAULT",
       "sectionSub": "PUBLIC REPOSITORIES // CONTRIBUTION MATRIX",
@@ -1725,8 +1773,10 @@ export const translations = {
       "about": "02.ABT",
       "skills": "03.SKL",
       "projects": "04.PRJ",
-      "another": "06.LAB",
-      "github": "05.GIT"
+      "certificates": "05.CRT",
+      "github": "06.GIT",
+      "another": "07.LAB",
+      "weather": "08.ATM"
     },
     "ui": {
       "themeObsidian": "黑曜石",
@@ -2367,6 +2417,28 @@ export const translations = {
         "license": "作品集 © 2026 Haidar Rifky Andrianno，又名 Hanzz 或 HanzzSama。印度尼西亚中爪哇三宝垄。"
       }
     },
+    "certificates": {
+      "sectionTitle": "认证与官方资质",
+      "sectionSub": "OFFICIAL CERTIFICATIONS // CREDENTIALS & LICENSES",
+      "headline": "专业能力验证与执照档案",
+      "description": "信息技术与数字设计领域的官方资质认证、行业考试验证及权威专业认可档案。",
+      "ui": {
+        "filterAll": "全部",
+        "filterDev": "Web开发",
+        "filterDesign": "UI/UX设计",
+        "filterCloud": "云架构与安全",
+        "filterAcademic": "学术荣誉",
+        "inspect": "检验凭据",
+        "verify": "官方验证",
+        "verifiedBadge": "已认证",
+        "issuer": "颁发机构",
+        "validUntil": "有效期",
+        "credentialId": "凭证编号",
+        "skillsTitle": "考核技能",
+        "overview": "资质概览",
+        "curriculum": "大纲与考核点"
+      }
+    },
     "github": {
       "sectionTitle": "GIT 遥测与仓库库",
       "sectionSub": "公开仓库 // 贡献矩阵",
@@ -2583,8 +2655,10 @@ export const translations = {
       "about": "02.ABT",
       "skills": "03.SKL",
       "projects": "04.PRJ",
-      "another": "06.LAB",
-      "github": "05.GIT"
+      "certificates": "05.CRT",
+      "github": "06.GIT",
+      "another": "07.LAB",
+      "weather": "08.ATM"
     },
     "ui": {
       "themeObsidian": "オブシディアン",
@@ -3225,6 +3299,28 @@ export const translations = {
         "license": "ポートフォリオ © 2026 Haidar Rifky Andrianno（Hanzz／HanzzSama）。インドネシア、中部ジャワ、スマラン。"
       }
     },
+    "certificates": {
+      "sectionTitle": "認定資格・クレデンシャル",
+      "sectionSub": "OFFICIAL CERTIFICATIONS // CREDENTIALS & LICENSES",
+      "headline": "専門的な技術適格性とライセンスの検証",
+      "description": "ITエンジニアリングおよびデジタルデザインにおける公式資格、業界認定試験、公的認定の記録。",
+      "ui": {
+        "filterAll": "すべて",
+        "filterDev": "Web開発",
+        "filterDesign": "UI/UXデザイン",
+        "filterCloud": "クラウド＆セキュリティ",
+        "filterAcademic": "学術認定",
+        "inspect": "詳細を検証",
+        "verify": "公式照会",
+        "verifiedBadge": "認証済み",
+        "issuer": "発行元",
+        "validUntil": "有効期限",
+        "credentialId": "資格ID",
+        "skillsTitle": "修得スキル",
+        "overview": "ライセンス概要",
+        "curriculum": "カリキュラム＆試験項目"
+      }
+    },
     "github": {
       "sectionTitle": "GITテレメトリ＆ヴォールト",
       "sectionSub": "公開リポジトリ // コントリビューションマトリクス",
@@ -3441,8 +3537,10 @@ export const translations = {
       "about": "02.ABT",
       "skills": "03.SKL",
       "projects": "04.PRJ",
-      "another": "06.LAB",
-      "github": "05.GIT"
+      "certificates": "05.CRT",
+      "github": "06.GIT",
+      "another": "07.LAB",
+      "weather": "08.ATM"
     },
     "ui": {
       "themeObsidian": "Obsidian",
@@ -4081,6 +4179,28 @@ export const translations = {
         "gridSystem": "Responsives Layout & Interaktives Design",
         "carbonEstimate": "Optimiert für schnelle Performance & Barrierefreiheit",
         "license": "Portfolio © 2026 Haidar Rifky Andrianno, auch bekannt als Hanzz oder HanzzSama. Semarang, Zentraljava, Indonesien."
+      }
+    },
+    "certificates": {
+      "sectionTitle": "Zertifikate & Kredenziale",
+      "sectionSub": "OFFICIAL CERTIFICATIONS // CREDENTIALS & LICENSES",
+      "headline": "Berufliche Kompetenzvalidierung und Lizenzen",
+      "description": "Dokumentation offizieller Lizenzen, Industriestandard-Prüfungen und anerkannter Qualifikationen in IT und UI/UX-Design.",
+      "ui": {
+        "filterAll": "Alle",
+        "filterDev": "Web-Entwicklung",
+        "filterDesign": "UI/UX-Design",
+        "filterCloud": "Cloud & Sicherheit",
+        "filterAcademic": "Akademisch",
+        "inspect": "Kredenzial prüfen",
+        "verify": "Offizielle Validierung",
+        "verifiedBadge": "VERIFIZIERT",
+        "issuer": "Aussteller",
+        "validUntil": "Gültigkeit",
+        "credentialId": "Nachweis-ID",
+        "skillsTitle": "Geprüfte Kompetenzen",
+        "overview": "Lizenzübersicht",
+        "curriculum": "Lehrplan & Prüfungen"
       }
     },
     "github": {

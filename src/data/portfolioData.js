@@ -674,8 +674,139 @@ export const portfolioData = {
     ]
   },
 
-  github: {
+  certificates: {
     sectionIndex: "05",
+    tag: "CREDENTIALS // 05",
+    sectionTitle: "Sertifikasi & Kredensial Resmi",
+    sectionSub: "OFFICIAL CERTIFICATIONS // CREDENTIALS & LICENSES",
+    headline: "Validasi kompetensi profesional dan lisensi",
+    description: "Dokumentasi lisensi resmi, pengujian standar industri, dan rekognisi kompetensi bidang teknologi informasi dan desain.",
+    ui: {
+      filterAll: "Semua",
+      filterDev: "Rekayasa Web",
+      filterDesign: "Desain Antarmuka",
+      filterCloud: "Cloud & Keamanan",
+      filterAcademic: "Akademik",
+      inspect: "Inspeksi Kredensial",
+      verify: "Validasi Resmi",
+      verifiedBadge: "TERVERIFIKASI",
+      issuer: "Penerbit",
+      validUntil: "Masa Berlaku",
+      credentialId: "ID Kredensial",
+      skillsTitle: "Kompetensi Teruji",
+      overview: "Ringkasan Lisensi",
+      curriculum: "Silabus & Pengujian"
+    },
+    items: [
+      {
+        id: "cert-fullstack-architecture",
+        code: "CRT // 01",
+        title: "Full Stack Web Architecture & Engineering",
+        issuer: "Badan Nasional Sertifikasi Profesi (BNSP) / Dicoding",
+        category: "dev",
+        categoryLabel: "Rekayasa Web",
+        year: "2024",
+        issueDate: "Oktober 2024",
+        expiryDate: "Oktober 2027",
+        credentialId: "BNSP-TIK-77492-2024",
+        credentialUrl: "https://bnsp.go.id",
+        verificationStatus: "VERIFIED // OFFICIAL",
+        image: "./src/assets/certificates/cert-fullstack.png",
+        blueprintPattern: "security-guilloche",
+        skills: ["JavaScript ES6+", "Node.js", "System Architecture", "RESTful API", "PostgreSQL"],
+        deepDive: {
+          abstract: "Validasi komprehensif arsitektur aplikasi web berkinerja tinggi sesuai Standar Kompetensi Kerja Nasional Indonesia (SKKNI).",
+          curriculum: [
+            "Rekayasa kode berbasis modularitas dan pemisahan logika presenter-domain",
+            "Optimasi siklus perenderan dan latensi jaringan di bawah 100ms",
+            "Protokol keamanan pertukaran data dan mitigasi kerentanan OWASP"
+          ],
+          authenticityHash: "SHA256: 9E4F-22B1-78A0-C419-DF80"
+        }
+      },
+      {
+        id: "cert-uiux-design-system",
+        code: "CRT // 02",
+        title: "UI/UX Design Specialist & Design System Architecture",
+        issuer: "Google UX / Figma Certified",
+        category: "design",
+        categoryLabel: "Desain Antarmuka",
+        year: "2024",
+        issueDate: "Juni 2024",
+        expiryDate: "Lifetime",
+        credentialId: "GUX-DESIGN-90812-ID",
+        credentialUrl: "https://coursera.org/verify/professional-cert/google-ux",
+        verificationStatus: "VERIFIED // OFFICIAL",
+        image: "./src/assets/certificates/cert-uiux.png",
+        blueprintPattern: "golden-ratio-grid",
+        skills: ["Figma Tokens", "Design Systems", "Micro-Interactions", "Heuristic Evaluation"],
+        deepDive: {
+          abstract: "Standarisasi perancangan antarmuka pengguna digital, tipografi proporsional, dan arsitektur token desain terintegrasi.",
+          curriculum: [
+            "Penyusunan fondasi desain token multi-platform (Color, Typography, Spacing)",
+            "Riset pengguna empiris dan pengujian kegunaan berbasis metrik kepuasan",
+            "Penerapan aksesibilitas universal WCAG 2.1 AA pada seluruh komponen visual"
+          ],
+          authenticityHash: "SHA256: 4C21-7B89-110E-AA32-EE19"
+        }
+      },
+      {
+        id: "cert-cloud-security",
+        code: "CRT // 03",
+        title: "Cloud Infrastructure & Application Security Associate",
+        issuer: "AWS Academy / Dicoding Cloud Platform",
+        category: "cloud",
+        categoryLabel: "Cloud & Keamanan",
+        year: "2023",
+        issueDate: "Desember 2023",
+        expiryDate: "Desember 2026",
+        credentialId: "AWS-DICODING-33219",
+        credentialUrl: "https://aws.amazon.com/verification",
+        verificationStatus: "VERIFIED // OFFICIAL",
+        image: "./src/assets/certificates/cert-cloud.png",
+        blueprintPattern: "cryptographic-lattice",
+        skills: ["Cloud Deployment", "Linux Automation", "CI/CD Pipeline", "VPC Networking"],
+        deepDive: {
+          abstract: "Implementasi hosting skala produksi, manajemen server Linux tanpa GUI, dan pengamanan endpoint layanan jaringan.",
+          curriculum: [
+            "Konfigurasi server mandiri dengan isolasi proses dan firewall ketat",
+            "Otomatisasi deployment repositori menggunakan runner mandiri",
+            "Pemantauan beban CPU, alokasi memori, dan integritas penyimpanan data"
+          ],
+          authenticityHash: "SHA256: 18B3-EE90-7F44-2281-D990"
+        }
+      },
+      {
+        id: "cert-itesa-academic-honor",
+        code: "CRT // 04",
+        title: "Academic Honor & Applied Computing Recognition",
+        issuer: "ITESA Muhammadiyah Semarang",
+        category: "academic",
+        categoryLabel: "Akademik",
+        year: "2024",
+        issueDate: "Maret 2024",
+        expiryDate: "Lifetime",
+        credentialId: "ITESA-KOMP-2024-0012",
+        credentialUrl: "https://itesa.ac.id",
+        verificationStatus: "VERIFIED // OFFICIAL",
+        image: "./src/assets/certificates/cert-itesa.png",
+        blueprintPattern: "geometric-seal",
+        skills: ["Applied Computing", "Data Analytics", "Algorithm Design", "Information Systems"],
+        deepDive: {
+          abstract: "Pengakuan prestasi akademik dan riset terapan komputasi institusional pada Fakultas Sains dan Bisnis Digital ITESA.",
+          curriculum: [
+            "Pengembangan riset komputasi terapan untuk efisiensi sistem informasi kampus",
+            "Penerapan algoritma optimasi pada simulasi analitik data akademik",
+            "Kolaborasi kelembagaan dalam transformasi infrastruktur digital kampus"
+          ],
+          authenticityHash: "SHA256: 7F12-441A-99BC-0043-ED11"
+        }
+      }
+    ]
+  },
+
+  github: {
+    sectionIndex: "06",
     sectionTitle: "Telemetri dan repositori Git",
     sectionSub: "PUBLIC REPOSITORIES // CONTRIBUTION MATRIX",
     headline: "Repositori terbuka dan kontribusi",
@@ -1036,6 +1167,25 @@ export function getPortfolioData(lang = 'id') {
           description: transRepo.description || repo.description,
           badge: transRepo.badge || repo.badge,
           tag: transRepo.tag || repo.tag
+        };
+      });
+    }
+  }
+
+  if (t.certificates) {
+    localized.certificates = {
+      ...localized.certificates,
+      ...t.certificates,
+      ui: { ...localized.certificates?.ui, ...t.certificates?.ui }
+    };
+    if (t.certificates.items && Array.isArray(t.certificates.items)) {
+      localized.certificates.items = localized.certificates.items.map((cert, idx) => {
+        const transCert = t.certificates.items.find(c => c.id === cert.id) || t.certificates.items[idx];
+        if (!transCert) return cert;
+        return {
+          ...cert,
+          ...transCert,
+          deepDive: transCert.deepDive ? { ...cert.deepDive, ...transCert.deepDive } : cert.deepDive
         };
       });
     }

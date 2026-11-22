@@ -76,16 +76,20 @@ export class ContextMenuEngine {
           <span class="menu-item-index font-mono">04</span>
           <span class="menu-item-text">Arsip Proyek</span>
         </button>
-        <button class="context-menu-item" data-action="nav" data-target="#github" role="menuitem" data-cursor-target>
+        <button class="context-menu-item" data-action="nav" data-target="#certificates" role="menuitem" data-cursor-target>
           <span class="menu-item-index font-mono">05</span>
+          <span class="menu-item-text">Sertifikasi &amp; Lisensi</span>
+        </button>
+        <button class="context-menu-item" data-action="nav" data-target="#github" role="menuitem" data-cursor-target>
+          <span class="menu-item-index font-mono">06</span>
           <span class="menu-item-text">Repositori GitHub</span>
         </button>
         <button class="context-menu-item" data-action="nav" data-target="#lab" role="menuitem" data-cursor-target>
-          <span class="menu-item-index font-mono">06</span>
+          <span class="menu-item-index font-mono">07</span>
           <span class="menu-item-text">3D Kinetic Lab</span>
         </button>
         <button class="context-menu-item" data-action="nav" data-target="#weather" role="menuitem" data-cursor-target>
-          <span class="menu-item-index font-mono">07</span>
+          <span class="menu-item-index font-mono">08</span>
           <span class="menu-item-text">Cuaca &amp; Biosfer</span>
         </button>
       </div>
@@ -230,6 +234,7 @@ export class ContextMenuEngine {
       '#about': cm.navAbout,
       '#skills': cm.navSkills,
       '#projects': cm.navProjects,
+      '#certificates': cm.navCertificates || 'Sertifikasi & Lisensi',
       '#github': cm.navGithub,
       '#lab': cm.navLab,
       '#weather': cm.navWeather
