@@ -3514,8 +3514,15 @@
   .certificates-narrative,
   .github-intro p,
   .another-intro p {
-    font-size: 0.9rem;
-    line-height: 1.6;
+    font-size: 0.85rem;
+    line-height: 1.55;
+  }
+
+  .projects-intro p {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
 
   /* 02. About Section Mobile Balance */
@@ -3552,27 +3559,104 @@
     padding: 0.3rem 0.6rem;
   }
 
-  /* 04. Projects Mobile */
+  /* 04. Projects Mobile — Thumbnail Always on Top, Full-Size, Compact Card */
   .projects-list {
-    gap: 1.5rem;
+    gap: 1.35rem;
   }
 
-  .project-details-panel {
-    padding: 1.25rem;
-  }
-
-  .project-title {
-    font-size: 1.25rem;
-    line-height: 1.25;
-  }
-
-  .project-narrative {
-    font-size: 0.88rem;
-    line-height: 1.6;
+  .project-architectural-card {
+    gap: 0;
   }
 
   .project-blueprint-panel {
-    min-height: 200px;
+    order: -1;
+    padding: 0 !important;
+    min-height: 0 !important;
+    border: none !important;
+    border-bottom: var(--border-hairline) !important;
+  }
+
+  .project-blueprint-panel .blueprint-meta-header,
+  .project-blueprint-panel .blueprint-telemetry-badge,
+  .project-blueprint-panel .reticle-bracket {
+    display: none !important;
+  }
+
+  .project-preview-viewport,
+  .project-blueprint-panel.has-active-image .project-preview-viewport {
+    padding: 0 !important;
+    min-height: 0 !important;
+    max-height: none !important;
+    aspect-ratio: 16 / 9;
+    width: 100%;
+    border: none !important;
+    border-radius: 0 !important;
+    margin: 0 !important;
+  }
+
+  .preview-media-inner {
+    border: none !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+  }
+
+  .project-preview-img {
+    object-fit: cover !important;
+  }
+
+  .project-details-panel {
+    padding: 1rem 1rem 1.15rem !important;
+  }
+
+  .project-card-meta {
+    font-size: 0.64rem;
+    gap: 0.45rem;
+    margin-bottom: 0.35rem;
+  }
+
+  .project-title {
+    font-size: 1.15rem !important;
+    line-height: 1.25;
+    margin-bottom: 0.25rem;
+  }
+
+  .project-subtitle,
+  .project-deliverables {
+    display: none !important;
+  }
+
+  .project-narrative {
+    font-size: 0.84rem !important;
+    line-height: 1.5;
+    margin-bottom: 0.75rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .project-tags-wrap {
+    gap: 0.3rem;
+    margin-bottom: 0.85rem;
+  }
+
+  .project-tech-chip {
+    font-size: 0.62rem;
+    padding: 0.14rem 0.42rem;
+  }
+
+  .project-card-actions {
+    display: flex;
+    gap: 0.5rem;
+    padding-top: 0.75rem;
+  }
+
+  .project-btn-primary,
+  .project-btn-secondary {
+    flex: 1;
+    justify-content: center;
+    padding: 0.48rem 0.65rem;
+    font-size: 0.68rem;
   }
 
   /* 05. Certificates Mobile */
