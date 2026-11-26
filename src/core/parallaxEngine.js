@@ -54,10 +54,49 @@ export class ParallaxEngine {
     this.init();
   }
 
+  isMobileOrReducedMotion() {
+    return (
+      window.innerWidth <= 768 ||
+      Boolean(window.matchMedia?.('(max-width: 768px)')?.matches) ||
+      Boolean(window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches)
+    );
+  }
+
   init() {
-    this.collectLayers();
     this.bindEvents();
+    this.updateProgressBar();
+
+    if (this.isMobileOrReducedMotion()) {
+      this.resetTransforms();
+      return;
+    }
+
+    this.collectLayers();
     this.start();
+  }
+
+  resetTransforms() {
+    if (this.viewport) {
+      this.viewport.style.removeProperty('--camera-pivot-y');
+      this.viewport.style.removeProperty('--camera-pitch');
+      this.viewport.style.removeProperty('--camera-yaw');
+      this.viewport.style.removeProperty('--camera-roll');
+      this.viewport.style.removeProperty('--camera-dolly');
+    }
+
+    const topoPlane = document.querySelector('.welcome-topo-plane');
+    if (topoPlane) {
+      topoPlane.style.removeProperty('--topo-rotate');
+      topoPlane.style.removeProperty('--topo-translate-y');
+      topoPlane.style.transform = '';
+    }
+
+    document.querySelectorAll(
+      '[data-parallax-speed], [data-parallax-slide], [data-parallax-relative], [data-scroll-scale], [data-mouse-parallax], .project-preview-img, .non-image-blueprint-chassis'
+    ).forEach((el) => {
+      el.style.transform = '';
+      el.style.removeProperty('--scroll-scale');
+    });
   }
 
   collectLayers() {
@@ -161,9 +200,17 @@ export class ParallaxEngine {
       }
     });
 
-    // Resize recalculation
+    // Resize recalculation & mobile toggle
     window.addEventListener('resize', () => {
-      this.collectLayers();
+      if (this.isMobileOrReducedMotion()) {
+        this.stop();
+        this.resetTransforms();
+      } else {
+        this.collectLayers();
+        if (!this.isRunning) {
+          this.start();
+        }
+      }
     }, { passive: true });
   }
 
@@ -181,6 +228,12 @@ export class ParallaxEngine {
   }
 
   render(timestamp) {
+    if (this.isMobileOrReducedMotion()) {
+      this.stop();
+      this.resetTransforms();
+      return;
+    }
+
     const now = timestamp || performance.now();
     const dtMs = this.lastFrameTime ? Math.min(50, Math.max(1, now - this.lastFrameTime)) : 16.67;
     this.lastFrameTime = now;
@@ -382,6 +435,10 @@ export class ParallaxEngine {
   }
 
   start() {
+    if (this.isMobileOrReducedMotion()) {
+      this.resetTransforms();
+      return;
+    }
     if (!this.isRunning) {
       this.isRunning = true;
       this.rafId = requestAnimationFrame(() => this.render());
@@ -392,10 +449,16 @@ export class ParallaxEngine {
     this.isRunning = false;
     if (this.rafId) {
       cancelAnimationFrame(this.rafId);
+      this.rafId = null;
     }
   }
 
   refresh() {
+    if (this.isMobileOrReducedMotion()) {
+      this.stop();
+      this.resetTransforms();
+      return;
+    }
     this.collectLayers();
     this.textSliders = this.collectTextSliders();
     this.scrollScaleTargets = this.collectScrollScaleTargets();

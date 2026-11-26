@@ -476,6 +476,16 @@ body::before {
     display: none !important;
   }
 
+  #parallax-viewport {
+    perspective: none !important;
+    transform: none !important;
+    will-change: auto !important;
+  }
+
+  .cinematic-film-vignette {
+    display: none !important;
+  }
+
   .section-watermark-label {
     margin-bottom: 1.25rem;
     padding-bottom: 0.45rem;

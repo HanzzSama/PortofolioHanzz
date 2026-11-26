@@ -3489,6 +3489,21 @@
     display: none !important;
   }
 
+  /* Disable 3D Scroll, Parallax & Scroll-Scale Transforms on Mobile */
+  [data-parallax-speed],
+  [data-parallax-slide],
+  [data-parallax-relative],
+  [data-scroll-scale],
+  [data-mouse-parallax],
+  .welcome-topo-plane,
+  .blueprint-canvas-container[data-parallax-relative],
+  .project-architectural-card[data-scroll-scale],
+  .project-preview-img,
+  .non-image-blueprint-chassis {
+    transform: none !important;
+    will-change: auto !important;
+  }
+
   .about-manifesto-header,
   .projects-intro,
   .skills-intro,
