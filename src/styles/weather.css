@@ -630,6 +630,11 @@
    WEATHER SECTION RESPONSIVE DESIGN (MOBILE & SMALL SCREENS)
    ========================================================================== */
 @media (max-width: 768px) {
+  #weather,
+  .section-weather {
+    display: none !important;
+  }
+
   .weather-stage-grid {
     gap: var(--space-lg);
   }

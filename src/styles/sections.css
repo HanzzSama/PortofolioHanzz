@@ -2945,6 +2945,16 @@
 }
 
 /* ==========================================================================
+   MOBILE SECTION SUPPRESSION (SECTION 06 LAB / MONOLITH SIMULATOR)
+   ========================================================================== */
+@media (max-width: 768px) {
+  #lab,
+  .section-lab {
+    display: none !important;
+  }
+}
+
+/* ==========================================================================
    05. CERTIFICATES & CREDENTIALS VAULT ARCHITECTURE
    ========================================================================== */
 .certificates-section {

@@ -96,6 +96,7 @@ class PortfolioApp {
     this.initContextMenu();
     this.initAdminTrigger();
     this.initGPUOptimizer();
+    this.initResponsiveMobileSections();
   }
 
   initGPUOptimizer() {
@@ -1325,10 +1326,40 @@ class PortfolioApp {
       this.monolithSim.destroy();
       this.monolithSim = null;
     }
+    const isMobile = window.innerWidth <= 768 || Boolean(window.matchMedia?.('(max-width: 768px)')?.matches);
+    if (isMobile) return;
+
     const canvas = document.getElementById('monolith-canvas');
     if (canvas) {
       this.monolithSim = new MonolithSimulator('monolith-canvas');
     }
+  }
+
+  initResponsiveMobileSections() {
+    let resizeTimer = null;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        const isMobile = window.innerWidth <= 768 || Boolean(window.matchMedia?.('(max-width: 768px)')?.matches);
+        if (isMobile) {
+          if (this.monolithSim) {
+            this.monolithSim.destroy();
+            this.monolithSim = null;
+          }
+          if (this.weatherEngine) {
+            this.weatherEngine.destroy();
+            this.weatherEngine = null;
+          }
+        } else {
+          if (!this.monolithSim) {
+            this.initMonolithSimulator();
+          }
+          if (!this.weatherEngine) {
+            this.initWeatherEngine();
+          }
+        }
+      }, 200);
+    }, { passive: true });
   }
 
   initHanzzPet() {
@@ -1392,6 +1423,9 @@ class PortfolioApp {
       this.weatherEngine.destroy();
       this.weatherEngine = null;
     }
+    const isMobile = window.innerWidth <= 768 || Boolean(window.matchMedia?.('(max-width: 768px)')?.matches);
+    if (isMobile) return;
+
     const canvas = document.getElementById('weather-contour-canvas');
     if (canvas) {
       this.weatherEngine = new WeatherContourEngine();

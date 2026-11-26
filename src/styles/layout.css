@@ -953,6 +953,15 @@ body::before {
   color: var(--accent-primary);
 }
 
+@media (max-width: 768px) {
+  .mobile-nav-list li:has(a[href="#lab"]),
+  .mobile-nav-list li:has(a[href="#weather"]),
+  .mobile-nav-link[href="#lab"],
+  .mobile-nav-link[href="#weather"] {
+    display: none !important;
+  }
+}
+
 /* ==========================================================================
    LANGUAGE SWITCHER — ABSTRACT NODE SYSTEM
    ========================================================================== */
